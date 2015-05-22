@@ -18,26 +18,24 @@ Utility to automate certain tasks (automation tool i.e. a Ruby Make e.g. running
 	864000.from_now	# The day in 10 days (ActiveSupport::TimeWithZone object)
 	5.days.ago		# The day 5 days ago (ActiveSupport::TimeWithZone object)
 
-# Application
-
+# Applications
 ## Creation & Configuration
-
 ### Create
 	 new application	# Generates the application structure, including a Gemfile, and runs 'bundle install'
 	 new application --skip-test-unit (aka -T)	# Doesn't embed Test::Unit in the application (in case we want to use another/no test gem)
-		
+
 ### Gemfile
 In ~/Gemfile
 Manifest of required Ruby Gems dependencies
 	gem "name"						# Requires specified gem in the application
 	group :environment do .. end	# Requires specified gem for specified environment
-	
+
 ### Bundle
 	bundle install						# Downloads and installs all the dependencies found in the Gemfile
 	bundle install --without production # Exclude gems in a given group
 	bundle update [gem]					# Updates specific gem from Gemfile configuration
 	bundle check
-	
+
 ### Environment
 In ~/config/environments
 	ENV['RAILS_ENV'] ||= 'development/test/production'
@@ -49,11 +47,11 @@ Loaded once, cached, lighter logs & no debug info (error pages), heavier DB, pre
 ### Server
 	rails s[erver]					# Ctrl+C to stop
 	rails s[erver] -e production 	# Start the server and set the environment to production
-	
+
 ### Initializers
 In ~/config/initializer/*.rb
 Loaded when application starts. Used to set application constants and default values
-	
+
 ### Resource
 Generates Route, Controller class, View directory, Helper class, Assets (JS CSS), Model class & Migration (& tests)
 	rails g resource NAME [field:type]*n	# --no-test-framework
