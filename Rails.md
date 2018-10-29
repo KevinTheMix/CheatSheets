@@ -158,7 +158,7 @@ The following action methods are named by convention
 		def destroy				# Delete one specific object
 		
 		# Defines a private section, whose methods can only be access from within the controller AND they cannot be used as routes actions
-		private					# Here be private utility methods that alleviate the main action methods
+		private					# Here be private utility methods that alleviate the main action methods. Increase indent by 1 by convention to improve visual recognition.
 	end
 
 
@@ -167,19 +167,21 @@ Name e.g. ~/app/views/models/action.html.erb.
 Responsible for formatting the HTML (or any other format) output with the data provided by the controller. Is not concerned with the underlying model.
 Contains HTML body and Ruby code inside ERB tags <% %> for control flow and <%= %> to display last expression .to_s (e.g. instance variables).
 Provides helper methods to format display (e.g. number_to_currency).
+See http://stackoverflow.com/questions/16822775/difference-between-render-and-render-partial-and-yield for usage in yield/content_for and render.
 	
 ### Layout
 Main view file that includes (i.e. '<%= yield %>') the HTML that actions generate (à la C# Master Page).
 Typically holds sections that are common to every page (e.g. header/footer/side bar).
 Including partials e.g. render "layouts/partial" => app/views/layouts/_partial.html.erb.
 This is typically where the Flash messages get displayed since it is available to all pages.
+Layout page can include information specified in the views using the yield + content_for syntax.
 
 ### Partial
 Partials are pieces of view templates that can be reused (rendered) from several locations.
-Use partials to remove duplication or break down large templates into maintainable chunks (i.e. like we do for methods in a code).
+Use partials to remove duplication or break down large templates into maintainable chunks (just like code can be broken up into methods).
 They can contain any code that would belong in a *.html.erb file, including @instance_variables, etc.
 Their file names start with an underscore "app/views/models/{model}s/_partial.rb" unless referred from a view (i.e. render "partial" (extension optional)).
-To increase reusability, use local variables instead of instance variables (specify match in render() e.g. 'render "partial", var: @var').
+To increase reusability, use local variables instead of instance variables (specify match in render() e.g. render "my_partial", var: @var).
 
 ### Helper
 Helpers are available inside view templates. Use the "helper." object to access helpers methods from outside a view (e.g. Rails console).
