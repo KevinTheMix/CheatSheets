@@ -6,6 +6,14 @@ A good text editor.
 
 ## Shortcuts
 
+Opens the Console
+
+    Ctrl + ù
+
+Clones selected tab
+
+    Ctrl + µ
+
 Zen Mode
 
     Ctrl + K, Ctrl + Z
