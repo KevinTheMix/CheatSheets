@@ -35,12 +35,23 @@ Imports classes (including Decorators), functions, styles, json, etc.
 
 ### Decorators
 
-Similar to C# [Attributes], they are classes that belong to a module and get applied to a class.  They must first be imported:
+Similar to C# [Attributes], they are classes that belong to a module and get applied to a class. First, they must be imported:
 
-    import { DecoratorClass } from '@namespace/package';    // Using scoped packages as module name (ex.: '@angular/core' is Angular core-scoped package (i.e. developed by Angular team)).
-    import { DecoratorClass } from 'path';    // Using path (file extension not necessary) as module name
-    @DecoratorClass ({json})     // Declares decorator (json) metadata properties
-    export class TargetClass     // Declares a class, that's usable in another file thanks to 'export' keyword (like C# 'public')
+Using scoped packages as module name (ex.: '@angular/core' is Angular core-scoped package (i.e. developed by Angular team)).
+
+    import { DecoratorClass } from '@namespace/package';
+
+Using path (file extension not necessary) as module name
+
+    import { DecoratorClass } from 'path';
+
+Declares decorator (json) metadata properties
+
+    @DecoratorClass ({json})
+
+Declares a class, that's usable in another file thanks to 'export' keyword (like C# 'public')
+
+    export class TargetClass
 
 Decorators are used to define modules (via decorator 'NgModule'), Components (via decorator 'Component'), Directives (via decorator 'Directive').
 
@@ -114,7 +125,7 @@ They don't have a template, but can be applied to existing elements, using selec
 
 Affect the layout, alter DOM elements.
 
-\*ngIf and \*ngFor are syntactic sugar for outter elements with [ngIf] and [ngFor]
+\*ngIf and \*ngFor are syntactic sugar for a more complex expression with [ngIf] and [ngFor] using outer elements
 
     *ngIf="boolean_expression"	# Removed from DOM if boolean_expression
     *ngIf="property"			# Removed from DOM if undefinedOrNullOrEmpty(property)
