@@ -9,6 +9,42 @@ Starting process of an Angular App is main.ts -> app.module.ts -> bootstrapped c
 
 ## Environment
 
+### NPM
+
+Package manager for JavaScript (not necessarily Node! But shipped with it).
+	
+	node --version
+
+    npm --version
+    npm i(nstall)       # Installs all (missing) packages of the current project referenced in package.json
+    npm i -g            # Installs globally (in the environnement e.g. PATH, etc.)
+                        # See <https://stackoverflow.com/questions/5817874/how-do-i-install-a-module-globally-using-npm>
+    npm i npm           # Updates NPM itself
+    npm i angular2
+    npm i -g @angular/cli	# Install Angular CLI
+    npm ls              	# Lists ALL installed packages including sub-dependencies
+    npm list -g --depth=0   # Lists top-level packages
+    npm update				# Installs all missing package references
+
+### CLI
+
+Command-line interface for Angular. Contains all the entities generation (scaffold) commands.
+
+    ng new koko-app     # Scaffold a new project
+	
+    ng g(enerate)       # Scaffolds something
+    ng g cl(ass)		# Creates a Model class
+    ng g c(omponent)	# Creates a Component class, and imports & declares it in the AppModule
+    ng g s(ervice)		# Creates a Service
+    ng g m(odule)		# Creates a Module
+        --flat			# Puts the file in src/app instead of own folder
+        --module=app	# Also registers module in the "imports" array of AppModule
+
+    ng serve        	# Hosts a project at http://localhost:4200/
+    ng serve -(-)o(pen)	# Hosts a project at http://localhost:4200/ & opens a browser
+
+    ng build --prod
+
 ### Workspace Structure
 
     e2e/					# Test Project
@@ -159,45 +195,3 @@ Cfr Helpers + Data layer
 ### Pipes
 
 Similar to WPF converters & Formatters
-
-## CLI
-
-Offers aliases & 1-line shortcuts for longer commands
-
-### Node
-
-    node --version
-
-### NPM
-
-    npm --version
-    npm i(nstall)       # Installs all missing packages in the current project
-    npm i --c 			# [Obsolete]: Also references the installed packages in package.json (obsolete b/c automatic since version 5.0)
-    npm i -g            # Installs globally (in the environnement e.g. PATH, etc.)
-                        # See https://stackoverflow.com/questions/5817874/how-do-i-install-a-module-globally-using-npm
-    npm i npm           # Updates NPM itself
-    npm i angular2
-    npm i -g @angular/cli	# Install Angular CLI
-    npm ls              	# Lists ALL installed packages including sub-dependencies
-    npm list -g --depth=0   # Lists top-level packages
-    npm update				# Installs all missing package references
-
-### NG
-
-    ng new koko-app     # Scaffold a new project
-    ng g(enerate)       # Scaffolds something
-    ng g cl(ass)		# Creates a Model class
-    ng g c(omponent)	# Creates a Component class, and imports & declares it in the AppModule
-    ng g s(ervice)		# Creates a Service
-    ng g m(odule)		# Creates a Module
-        --flat			# Puts the file in src/app instead of own folder
-        --module=app	# Also registers module in the "imports" array of AppModule
-
-### Serve
-
-    ng serve        	# Hosts a project at http://localhost:4200/
-    ng serve -(-)o(pen)	# Hosts a project at http://localhost:4200/ & opens a browser
-
-### Build
-
-    ng build --prod
