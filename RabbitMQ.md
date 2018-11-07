@@ -14,7 +14,7 @@ Il faut aussi noter que les déclarations sont "idempotentes", càd qu'elles peu
     * Eventuellement ajouter le répertoire des fichiers .bat de contrôle de RabbitMQ à la variable d'environnement PATH Windows
 3. Activer le plugin d'administration HTTP Web
   
-     rabbitmq-plugins enable rabbitmq_management
+    rabbitmq-plugins enable rabbitmq_management
 
     * Le port par défaut du site est 15672 => <http://{serveur}:15672/>
     * Le login par défaut est guest/guest (valide uniquement en localhost)
