@@ -11,13 +11,13 @@ Il faut aussi noter que les déclarations sont "idempotentes", càd qu'elles peu
 
 1. Installer Erlang
 2. Installer le serveur RabbitMQ (Le Host du serveur est le nom ou l'IP de l'ordinateur & le port par défaut du serveur RabbitMQ est 5672)
-..* Eventuellement ajouter le répertoire des fichiers .bat de contrôle de RabbitMQ à la variable d'environnement PATH Windows
+* Eventuellement ajouter le répertoire des fichiers .bat de contrôle de RabbitMQ à la variable d'environnement PATH Windows
 3. Activer le plugin d'administration HTTP Web
   
      rabbitmq-plugins enable rabbitmq_management
-...Le port par défaut du site est 15672 => <http://{serveur}:15672/>
-...Le login par défaut est guest/guest (valide uniquement en localhost)
-...Créer un nouvel utilisateur (pour les accès non localhost)
+*Le port par défaut du site est 15672 => <http://{serveur}:15672/>
+*Le login par défaut est guest/guest (valide uniquement en localhost)
+*Créer un nouvel utilisateur (pour les accès non localhost)
 
 Adding RabbitMQ server .bat administration files to Windows path
 
