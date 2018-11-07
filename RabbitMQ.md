@@ -2,22 +2,22 @@
 
 ## Introduction
 
-RabbitMQ est un logiciel de distribution de message ("message broker") et constitue une impl�mentation open source en Erlang du protocole AQMP.
-Protocole programmable => composants centraux peuvent �tre cr��s ("d�clar�s") au Publisher, au Consumer, ou via outil central d'administration.
-Il faut aussi noter que les d�clarations sont "idempotentes", c�d qu'elles peuvent �tre d�clar�es plusieurs fois sans effets de bords (created once).
-=> La combinaison d'un protocole programmable et d'idempotence fait qu'un composant peut �tre d�clar� � plusieurs endroits. Bien �videmment ils doivent alors respecter la m�me d�claration.
+RabbitMQ est un logiciel de distribution de message ("message broker") et constitue une implémentation open source en Erlang du protocole AQMP.
+Protocole programmable => composants centraux peuvent être créés ("déclarés") au Publisher, au Consumer, ou via outil central d'administration.
+Il faut aussi noter que les déclarations sont "idempotentes", càd qu'elles peuvent être déclarées plusieurs fois sans effets de bords (created once).
+=> La combinaison d'un protocole programmable et d'idempotence fait qu'un composant peut être déclaré à plusieurs endroits. Bien évidemment ils doivent alors respecter la même déclaration.
 
 ## Installation & Environment
 
 1. Installer Erlang
-2. Installer le serveur RabbitMQ (Le Host du serveur est le nom ou l'IP de l'ordinateur & le port par d�faut du serveur RabbitMQ est 5672)
-⋅⋅* Eventuellement ajouter le r�pertoire des fichiers .bat de contr�le de RabbitMQ � la variable d'environnement PATH Windows
+2. Installer le serveur RabbitMQ (Le Host du serveur est le nom ou l'IP de l'ordinateur & le port par défaut du serveur RabbitMQ est 5672)
+..* Eventuellement ajouter le répertoire des fichiers .bat de contrôle de RabbitMQ à la variable d'environnement PATH Windows
 3. Activer le plugin d'administration HTTP Web
   
      rabbitmq-plugins enable rabbitmq_management
-⋅⋅⋅Le port par défaut du site est 15672 => <http://{serveur}:15672/>
-⋅⋅⋅Le login par défaut est guest/guest (valide uniquement en localhost)
-⋅⋅⋅Créer un nouvel utilisateur (pour les accès non localhost)
+...Le port par défaut du site est 15672 => <http://{serveur}:15672/>
+...Le login par défaut est guest/guest (valide uniquement en localhost)
+...Créer un nouvel utilisateur (pour les accès non localhost)
 
 Adding RabbitMQ server .bat administration files to Windows path
 
