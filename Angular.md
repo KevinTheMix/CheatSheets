@@ -3,9 +3,10 @@
 ## Introduction
 
 Angular is a JavaScript framework used to build web application and managing all the plumbing.
-Everything is client-side, where the initial HTML (index.html) page is minimal and nested Components are loaded via lazy-loading.
+Everything is client-side, where the initial HTML (index.html) page & styles are minimal (aka Angular Shell) and easily cache-able, whilst nested Components are loaded via lazy-loading.
 Its source code is written in TypeScript (made by Microsoft), a typed (Classes via decorators, Modules, Strong typing) superset of JavaScript that gets transpiled to JS.
 Starting process of an Angular App is main.ts -> app.module.ts -> bootstrapped component (i.e. app.component.html & app.component.ts).
+Angular is basically modularly organized Typescript using webpack for module/template/styles packaging.
 
 ## Environment
 
@@ -17,6 +18,8 @@ Package manager for JavaScript (not necessarily Node! But shipped with it).
 
     npm --version
     npm i(nstall)       # Installs all (missing) packages of the current project referenced in package.json
+	npm i [package]		# Install a specified package (from public NPM cloud) into node_modules, and references it from package.json
+						# That second part is automatic since version 5.0 (previously with options --c).
     npm i -g            # Installs globally (in the environnement e.g. PATH, etc.)
                         # See <https://stackoverflow.com/questions/5817874/how-do-i-install-a-module-globally-using-npm>
     npm i npm           # Updates NPM itself
