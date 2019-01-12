@@ -64,7 +64,7 @@ This sets the files to be included in the next Commit transaction (aka they beco
 
 Oppositve of Add; Unregister one or all files staged for commit
 
-  git reset [FILE]
+  git reset \[FILE\]
 
 ### Commit
 
