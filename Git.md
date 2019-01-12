@@ -1,10 +1,7 @@
 # Git
 
-## Introduction
-
-Git works by augmenting regular directories into Git repositories
-
-## Glossary
+Git works by augmenting regular directories into Git repositories.
+Only file deltas are stored from commit to commit, so the storage is minimal.
 
 * Repository = Working folder that includes additional files used by Git to index/keep track of files and changes
 * Refs = Branches and tags
@@ -20,6 +17,8 @@ Several configuration files exist:
   git config --global user.email "a@b.c"
   git config --global user.name "Koko"
   git config core.safecrlf warn # Make Linux-Windows line endings non-blocking
+  git config --edit --system
+    helper = manager
 
 On Windows, Command-line parameters must use double " instead of single '
 
