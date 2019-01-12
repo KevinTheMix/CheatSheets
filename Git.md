@@ -11,24 +11,36 @@ Only file deltas are stored from commit to commit, so the storage is minimal.
 On Windows, Command-line parameters must use double " instead of single '.
 Several configuration files exist:
 
-* Global (Git/etc/gitconfig)
-* User (USERDIR/.gitconfig)
-* Repository (REPOSITORY/.git/config)
+* Global = Git/etc/gitconfig
+* User = ~/.gitconfig
+* Repository  = {repo}/.git/config
 
 Commands:
 
   git config --global user.email "a@b.c"
   git config --global user.name "Koko"
   git config core.safecrlf warn # Make Linux-Windows line endings non-blocking
-  git config --edit --system
+  git config --edit --system # Opens Git Configuration file
     helper = manager # Remove this to prevent GIT Credential Manager (see <https://stackoverflow.com/questions/37182847/how-to-disable-git-credential-manager-for-windows#37185202>)
-    [core]
+    \[core\]
       askpass = # To disable the OpenSSH credentials popup too
-  git-credential-manager.exe uninstall
 
-An Alias is a command with parameters (.gitconfig file in $HOME directory)
-  alias = COMMAND
+  C:\Program Files\Git\mingw64\libexec\git-core\git-credential-manager.exe uninstall # Uninstall Git Credential Manager
+
+An Alias is a command with parameters (.gitconfig file in $HOME directory).
+To define an alias, used the following command:
+
+  {alias} = {command}
+
+Example:
+
   hist = log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short
+
+### Git-Credential-Manager-for-Windows
+
+Stores logins in Windows Credential Store.
+
+See [here]<https://github.com/Microsoft/Git-Credential-Manager-for-Windows>.
 
 ## Commands
 
@@ -59,8 +71,9 @@ Oppositve of Add; Unregister one or all files staged for commit
 The Commit itself. All staged files are commited ("snapshot") to the repository
 A Commit messageis expected. If it is not provided in the command line, the default text editor is launched and its result fed as message
 
-  git commit -m "Commit message"
   git commit
+  git commit -m "Commit message"
+  git commit -a # Also commit add first
 
 ### Revert
 
