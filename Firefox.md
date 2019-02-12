@@ -1,5 +1,10 @@
 # Firefox
 
+* Right-click > screenshot page
+* Tools > Options > Privacy & Security > Logins & Passwords >
+ ** "Use Master passwords" pour crypter passwords enregistrés par FF
+ ** "Saved Logins" pour consulter et effacer les passwords enregistrés
+
 ## Configuration
 
 general.smoothScroll
@@ -17,3 +22,8 @@ browser.ctrlTab.recentlyUsedOrder
  ** Except those that use listener parameter 'e'!
 * Can popup JS be logged since it's a special side popup, not a regular web page?
  ** Yes! But in the master Browser console (Ctrl+Shift+J)
+
+## Chrome
+
+* Simuler network speeds (e.g. slow 3g)
+* Augury (debug Angular)

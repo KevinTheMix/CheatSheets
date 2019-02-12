@@ -66,6 +66,7 @@ This sets the files to be included in the next Commit transaction (aka they beco
 Oppositve of Add; Unregister one or all files staged for commit
 
   git reset \[FILE\]
+  git reset --soft HEAD~1 # Cancels the last commit
 
 ### Commit
 
@@ -146,6 +147,7 @@ Checks-out the latest version of a branch
   git checkout BRANCH # E.g. default branch 'git checkout master'
   git checkout BRANCH^ # Second to last commit in the branch
   git checkout BRANCH^ # N-th to last commit in the branch
+  git checkout -b BRANCH # Creates a branch and points to it
 
 Reverts specific file to currently checked-out Commit version
 A file that's been modified must be commited or reverted before we can checkout a version where it was different
@@ -160,11 +162,12 @@ Add a link to remote repository from local repository
   git remote remove NAME
   git remote set-url REMOTE_NAME git@github.com:username/repo.git
   git remote -v # Display dfined remotes of current repo
+  git remote prune origin # Clean remote branches
 
 ### Clone
 
-Downloads entire remote repository into current directory (creates a local repository including all branches)
-Set URL as default 'origin' remote. If 'origin' is a forking repo, add an 'upstream' remote to keep track of forked original
+Downloads entire remote repository into current directory (creates a local repository including all branches).
+Set URL as default 'origin' remote. If 'origin' is a forking repo, add an 'upstream' remote to keep track of forked original.
 
   git clone REMOTE_URL
 
