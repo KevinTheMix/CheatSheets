@@ -1,33 +1,35 @@
-# Introduction
+# MongoDB
 
-# Installation
+## Installation
+
 Installer le serveur MongoDB
-See  https://www.mongodb.com/download-center?jmp=nav#community
+See <https://www.mongodb.com/download-center?jmp=nav#community>
+mongodb-win32-x86_64-2008plus-2.6.12-signed.msi
 
-	mongodb-win32-x86_64-2008plus-2.6.12-signed.msi
+## Commands
 
-# Commands
-Toutes les commandes doivent être évidemment démarrés du dossier où est installé MongoDB, par exemple :
+Toutes les commandes doivent Ãªtre Ã©videmment dÃ©marrÃ©s du dossier oÃ¹ est installÃ© MongoDB, par exemple :
+C:\Program Files\mongodb-2.4.6\bin\
 
-	C:\Program Files\mongodb-2.4.6\bin\
-	
-Avant de pouvoir query la DB, il faut lancer le serveur :
+Avant de pouvoir query la DB, il faut lancer le serveur qui traite les requÃªtes :
 
-	mongod.exe --dbpath <Path to \DATA\ folder>
+  mongod.exe --dbpath <Path to \DATA\ folder>
 
-Backup & Restore :
+### Backup & Restore
 
-	mongodump --out <output_directory> [--db <db_to_backup>] [--collection <collection_to_backup>]
-	mongorestore <input_directory>
-	
-Les commandes suivantes nécessitent qu'un serveur soit lancé :
+  mongodump --out <output_directory> [--db <db_to_backup>] [--collection <collection_to_backup>]
+  mongorestore <input_directory>
 
-	show dbs				# Retourne la liste des DBs sur le serveur
-	show databases			# Retourne la liste de toutes les DBs disponibles
-	use <db>				# Pointe sur une DB
-	
-Les commandes suivantes nécessitent de pointer sur une DB :
+### Select
 
-	show collections		# Retourne les tables (aka collections dans la DB)
-	coll = db.<collection>	# Assigne la table à une variable
-	db.<collection>.find()	# Retourne toutes les lignes de la table
+Les commandes suivantes nï¿½cessitent qu'un serveur soit lancï¿½ :
+
+  show dbs # Retourne la liste des DBs sur le serveur
+  show databases # Retourne la liste de toutes les DBs disponibles
+  use <db> # Pointe sur une DB
+
+Les commandes suivantes nÃ©cessitent de pointer sur une DB :
+
+  show collections # Retourne les tables (aka collections dans la DB)
+  coll = db.<collection> # Assigne la table Ã  une variable
+  db.<collection>.find() # Retourne toutes les lignes de la table
