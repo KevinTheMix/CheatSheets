@@ -21,7 +21,8 @@ Commands:
   git config --global user.name "Koko"
   git config core.safecrlf warn # Make Linux-Windows line endings non-blocking
   git config --edit --system # Opens Git Configuration file
-    helper = manager # Remove this to prevent GIT Credential Manager (see <https://stackoverflow.com/questions/37182847/how-to-disable-git-credential-manager-for-windows#37185202>)
+    \[credential\]
+      helper = manager # Remove this to prevent GIT Credential Manager (see <https://stackoverflow.com/questions/37182847/how-to-disable-git-credential-manager-for-windows#37185202>)
     \[core\]
       askpass = # To disable the OpenSSH credentials popup too
 
