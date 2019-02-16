@@ -1,6 +1,7 @@
 # Windows
 
 Drag&Drop + Shift/Ctrl/Alt = Copy/Move/Shortcut
+Batch rename = Sélectionner plusieurs fichier & renommer pour ajouter ou remplacer un bout de texte.
 
 ## Shortcuts
 
@@ -12,6 +13,10 @@ Middle-click barre des tâches = ouvrir nouvelle fenêtre de l'application
 ## Commands
 
   where [exe] # Displays the path to the exe
-  nslookup
+  nslookup # Lookup a Domain's IP address
+  ipconfig
+    /release
+    /renew
+    /flushdns
 
-Drag & Drop fichier dans fenêtre commande = copier chemin
+Drag & Drop a file in Command Prompt = Copy-Pastes its file path
