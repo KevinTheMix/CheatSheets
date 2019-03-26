@@ -1,10 +1,8 @@
 # Elastic Search
 
-Moteur de recherche "Enterprise" basé sur Lucene.
-Elasticsearch is a JSON based REST API, Distributed, web server build over Lucene
+Document database that is optimized to act as a full-text search engine.
+Elasticsearch is a JSON documents-based search HTTP REST API, Distributed, web server build over Lucene.
 
-Capable de recherche full-text.
-Interface HTTP & documents JSON.
 Ecrit en Java, Open Source (Licence Apache), Client en C#.
 
 ElasticSearch + Logstash + Kibana = Elastic Stack
@@ -12,7 +10,9 @@ ElasticSearch + Logstash + Kibana = Elastic Stack
 Developer-friendly + speed + scalable
 
 Completion suggester
+
 Percolation = filtre les requêtes matchant un document (=> notification nouveau document match...)
+
 Profile API (ms)
 
 ## Apache Lucene
