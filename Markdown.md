@@ -23,7 +23,7 @@ Is it code?
   
     Yes (2 tab == 4 spaces)
     Yes! (4 spaces)
-    
-```
+
+\```
 Code!
-``` 
+\```

@@ -21,7 +21,12 @@ Most of the API is contained in the PresentationFramework DLL that contains the 
 * ContentControl = base class for all controls that have a "Content" property.
 * Content = property of a ContentControl that can be anything. E.g.: the Content of a Textblock is its Text. The Content of a control is rendered at the location of a ControlPresenter.
 * ControlPresenter = element within a ControlTemplate that acts as a placeholder and defines where its content will be displayed. See <https://stackoverflow.com/a/1288006>
-* Dependency Property = a class property augmented with WPF dependency mechanism. This enables many things on which WPF relies, including all bindings and the hiearchical retrieval of properties based on their (string) names - as well as the conversion of their values.
+* Dependency Property = a class property augmented with WPF dependency mechanism.
+ ** This enables many things on which WPF relies, including all data bindings and the hiearchical retrieval of properties based on their (string) names - as well as default values & conversion.
+ ** The containing class inherits from DependencyObject (as do all of WPF UI Controls), which provides the required SetValue() & GetValue() methods.
+ ** DPs are typically encapsulated by CLR properties that provide a shorthand for calling GetValue() & SetValue(). This is purely conventional and optional.
+ ** Note that it is only the _target_ property that needs to be a Dependency Property. The source can be either a dependency property or a CLR property (but still has to invoke PropertyChanged event to benefit from continuous data binding - not only as one-time on creation).
+ ** In practice, unless you are creating your own controls, you will not need to create your own dependency properties. See <https://blog.scottlogic.com/2012/04/05/everything-you-wanted-to-know-about-databinding-in-wpf-silverlight-and-wp7-part-one>
 * Attached Property = uses a static method instead of a Property setter/getter.
 
 ## XAML
@@ -41,27 +46,30 @@ Controls and attributes names are case-sensitive since they have to match their 
 
 ### Property
 
-Can be defined as XML attribute (within the corresponding control) or as child XML element (note the Element.Property notation)
+Can be defined as an XML attribute or a child XML element
 
-	<Element Property="" />										# Property Attribute
-	<Element><Element.Property></Element.Property></Element>	# Property Element
+  \<Element Property="" />
+  \<Element><Element.Property></Element.Property></Element>
 
 ### Content
 
 Content can be defined inside a control or via an attribute.
 
-	<Element></Element>
-	<Element Content="" />
+  \<Element></Element>
+  \<Element Content="" />
 
-	// As child element
-	<Element><Element.Content></Element.Content></Element>
+As child element
 
-	// If the control supports it, this format allows more complex content than plain text (i.e. other controls)
-	// In the case of multiple child controls, we must use a container since the Content property only allows for a single one.
-	<Element><Element.Content><WrapPanel><Control*n></WrapPanel></Element.Content></Element>
+  \<Element><Element.Content></Element.Content></Element>
 
-	// Same result with shorter syntax (without <Element.Content>)
-	<Element><WrapPanel><Control*n></WrapPanel></Element>
+If the control supports it, this format allows more complex content than plain text (i.e. other controls).
+In the case of multiple child controls, we must use a container since the Content property only allows for a single one.
+
+  \<Element><Element.Content><WrapPanel><Control*n></WrapPanel></Element.Content></Element>
+
+Same result with shorter syntax (without <Element.Content>)
+
+  \<Element><WrapPanel><Control*n></WrapPanel></Element>
 
 ## Data Binding
 

@@ -978,7 +978,7 @@ Unit testing
 
 ### File
 	file_spec	# Naming convention for the file containing the unit tests (notice it's *_spec, not *_rspec)
-	
+
 ### Call
 	rspec [FILE] --color	# Add rspec to the environment path for this to work
 	rspec . --color			# Runs all the *_spec.rb file in the current directory (.)
@@ -997,7 +997,7 @@ Definition
 			before do
 				*Initialize state*
 			end
-			
+
 One test
 
 			it "does something" do
