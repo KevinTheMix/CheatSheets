@@ -6,7 +6,7 @@ Batch rename = Sélectionner plusieurs fichier & renommer pour ajouter ou rempla
 ## Shortcuts
 
 Windows + R > mstsc = Remote Desktop
-Windows + Shift+S = Screenshot (Win 10)
+Windows + Shift + S = Screenshot (Win 10)
 Windows + Ctrl + Left/Right = Switch Virtual Desktop (Win 10)
 Middle-click barre des tâches = ouvrir nouvelle fenêtre de l'application
 
