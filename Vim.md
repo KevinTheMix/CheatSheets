@@ -25,6 +25,7 @@ Type text
 Navigate & Manipulate Text
 
 Left/Down/Up/Right
+
     h j k l
 
 Beginning/End
@@ -65,8 +66,9 @@ Search
     /[text]Enter
 
 Previous/Next search
-        N
-        n
+
+    N
+    n
 
 Insert line before/after (switches to Insert mode)
 
@@ -83,26 +85,46 @@ Replaces character at cursor with [c]
     r[c]
 
 Cut/paste in direction [dir]
+
     d[dir] p
 
 Cut/paste until end of line
+
     D[dir] p
 
-Macro
-    [n][cmd] = Runs [cmd]*[n]
-    [n]i[text] = Insert [text]*[n] at cursor
-    . = Repeats previous command
-Save & Exit
+Save
 
-    :w = Save
-    :q = Quit
-    :q! = Quit without saving
+    :w
+
+Quit/Quit without saving
+
+    :q
+    :q!
 
 Help
 
     ** :help
 
+### Macro
+
+Runs [cmd]*[n]
+
+    [n][cmd]
+
+Insert [text]*[n] at cursor
+
+    [n]i[text]
+
+Repeats previous command
+
+    .
+
 ## Visual
 
-    [dir]l = Selects text
-        [cmd] = Do stuff with selected text
+Selects text
+
+    [dir]l
+
+Do stuff with selected text
+
+    [cmd]
