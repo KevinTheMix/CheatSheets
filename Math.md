@@ -1,14 +1,19 @@
 # Math
 
-## Perimeter
+## Perimeter & Area
 
-Perimeter = Sum of sides
-Pi = Radius-to-Perimeter ratio of a circle
-Joined rectangles => 3 x perimeter of one minus 2 x joined side
+* Perimeter = sum of sides, additive in nature.
+  * stays the same if subtract one side and add the other by the same quantity.
+  * Joined rectangles => 3 x perimeter of one minus 2 x joined side
+  * Pi = Radius-to-Perimeter ratio of a circle
 
-[Area of Square is larger than rectangle](https://math.stackexchange.com/a/1082524)
+* Area = product of sides, multiplicative in nature.
+  * stays the same if divide one side and multiply the other by the same quantity.
 
-Perimeter of square is smaller than rectangle if same area
+* Area vs Perimeter
+  * [Area of Square is larger than rectangle](https://math.stackexchange.com/a/1082524)
+  * Perimeter of square is smaller than rectangle if same area:
+  
 With b & c the difference from a such as
 
     a² = (a+b).(a-c)
