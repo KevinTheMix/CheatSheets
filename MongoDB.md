@@ -26,10 +26,10 @@ Les commandes suivantes n�cessitent qu'un serveur soit lanc� :
 
     show dbs # Retourne la liste des DBs sur le serveur
     show databases # Retourne la liste de toutes les DBs disponibles
-    use \<db> # Pointe sur une DB
+    use <db> # Pointe sur une DB
 
 Les commandes suivantes nécessitent de pointer sur une DB :
 
     show collections # Retourne les tables (aka collections dans la DB)
-    coll = db.\<collection> # Assigne la table à une variable
-    db.\<collection>.find() # Retourne toutes les lignes de la table
+    coll = db.<collection> # Assigne la table à une variable
+    db.<collection>.find() # Retourne toutes les lignes de la table

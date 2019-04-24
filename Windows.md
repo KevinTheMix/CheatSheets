@@ -1,22 +1,45 @@
 # Windows
 
-Drag&Drop + Shift/Ctrl/Alt = Copy/Move/Shortcut
-Batch rename = Sélectionner plusieurs fichier & renommer pour ajouter ou remplacer un bout de texte.
+Copy/Move/Shortcut
+
+    Drag&Drop + Shift/Ctrl/Alt
+
+Group renaming
+
+    Multi-select Files > Rename
 
 ## Shortcuts
 
-Windows + R > mstsc = Remote Desktop
-Windows + Shift + S = Screenshot (Win 10)
-Windows + Ctrl + Left/Right = Switch Virtual Desktop (Win 10)
-Middle-click barre des tâches = ouvrir nouvelle fenêtre de l'application
+Remote Desktop
 
-## Commands
+    Windows + R > mstsc
 
-  where [exe] # Displays the path to the exe
-  nslookup # Lookup a Domain's IP address
-  ipconfig
-    /release
-    /renew
-    /flushdns
+Screenshot (Win 10)
 
-Drag & Drop a file in Command Prompt = Copy-Pastes its file path
+  Windows + Shift + S
+
+Switch Virtual Desktop (Win 10)
+
+    Windows + Ctrl + Left/Right
+
+Open new application Window
+
+    Middle-click taskbar App icon
+
+## DOS Commands
+
+Displays the path to the exe
+
+    where [exe]
+
+Lookup a Domain's IP address
+
+    nslookup
+    ipconfig
+      /release
+      /renew
+      /flushdns
+
+Copy-Pastes file path
+
+    Drag & Drop file in Command Prompt

@@ -15,19 +15,19 @@ Most of the API is contained in the PresentationFramework DLL that contains the 
 
 ## Styling & Templating
 
-- DataTemplate = How data is displayed. The data in question is a class instance, which is usually a VM.
-- ControlTemplate = How a GUI visual control (i.e. System.Windows.Controls, e.g. a button or a panel) is displayed.
-- Style = WPF's CSS, but can also applies templates, etc. Basically can be used to change any property of a control.
-- ContentControl = base class for all controls that have a "Content" property.
-- Content = property of a ContentControl that can be anything. E.g.: the Content of a Textblock is its Text. The Content of a control is rendered at the location of a ControlPresenter.
-- ControlPresenter = element within a ControlTemplate that acts as a placeholder and defines where its content will be displayed. See <https://stackoverflow.com/a/1288006>
-- Dependency Property = a class property augmented with WPF dependency mechanism.
-  - This enables many things on which WPF relies, including all data bindings and the hiearchical retrieval of properties based on their (string) names - as well as default values & conversion.
-  - The containing class inherits from DependencyObject (as do all of WPF UI Controls), which provides the required SetValue() & GetValue() methods.
-  - DPs are typically encapsulated by CLR properties that provide a shorthand for calling GetValue() & SetValue(). This is purely conventional and optional.
-  - Note that it is only the _target_ property that needs to be a Dependency Property. The source can be either a dependency property or a CLR property (but still has to invoke PropertyChanged event to benefit from continuous data binding - not only as one-time on creation).
-  - In practice, unless you are creating your own controls, you will not need to create your own dependency properties. See <https://blog.scottlogic.com/2012/04/05/everything-you-wanted-to-know-about-databinding-in-wpf-silverlight-and-wp7-part-one>
-- Attached Property = uses a static method instead of a Property setter/getter.
+* DataTemplate = How data is displayed. The data in question is a class instance, which is usually a VM.
+* ControlTemplate = How a GUI visual control (i.e. System.Windows.Controls, e.g. a button or a panel) is displayed.
+* Style = WPF's CSS, but can also applies templates, etc. Basically can be used to change any property of a control.
+* ContentControl = base class for all controls that have a "Content" property.
+* Content = property of a ContentControl that can be anything. E.g.: the Content of a Textblock is its Text. The Content of a control is rendered at the location of a ControlPresenter.
+* ControlPresenter = element within a ControlTemplate that acts as a placeholder and defines where its content will be displayed. See <https://stackoverflow.com/a/1288006>
+* Dependency Property = a class property augmented with WPF dependency mechanism.
+  * This enables many things on which WPF relies, including all data bindings and the hiearchical retrieval of properties based on their (string) names - as well as default values & conversion.
+  * The containing class inherits from DependencyObject (as do all of WPF UI Controls), which provides the required SetValue() & GetValue() methods.
+  * DPs are typically encapsulated by CLR properties that provide a shorthand for calling GetValue() & SetValue(). This is purely conventional and optional.
+  * Note that it is only the _target_ property that needs to be a Dependency Property. The source can be either a dependency property or a CLR property (but still has to invoke PropertyChanged event to benefit from continuous data binding - not only as one-time on creation).
+  * In practice, unless you are creating your own controls, you will not need to create your own dependency properties. See <https://blog.scottlogic.com/2012/04/05/everything-you-wanted-to-know-about-databinding-in-wpf-silverlight-and-wp7-part-one>
+* Attached Property = uses a static method instead of a Property setter/getter.
 
 ## XAML
 
@@ -48,28 +48,28 @@ Controls and attributes names are case-sensitive since they have to match their 
 
 Can be defined as an XML attribute or a child XML element
 
-  \<Element Property="" />
-  \<Element><Element.Property></Element.Property></Element>
+    <Element Property="" />
+    <Element><Element.Property></Element.Property></Element>
 
 ### Content
 
 Content can be defined inside a control or via an attribute.
 
-  \<Element></Element>
-  \<Element Content="" />
+     <Element></Element>
+     <Element Content="" />
 
 As child element
 
-  \<Element><Element.Content></Element.Content></Element>
+    <Element><Element.Content></Element.Content></Element>
 
 If the control supports it, this format allows more complex content than plain text (i.e. other controls).
 In the case of multiple child controls, we must use a container since the Content property only allows for a single one.
 
-  \<Element><Element.Content><WrapPanel><Control*n></WrapPanel></Element.Content></Element>
+    <Element><Element.Content><WrapPanel><Control*n></WrapPanel></Element.Content></Element>
 
 Same result with shorter syntax (without <Element.Content>)
 
-  \<Element><WrapPanel><Control*n></WrapPanel></Element>
+    <Element><WrapPanel><Control*n></WrapPanel></Element>
 
 ## Data Binding
 
@@ -144,89 +144,89 @@ ContentControls (< Control) can only hold a single child (=> use container e.g. 
 Root level control. ControlContent.
 Can contain the following attributes:
 
-- Icon
-- ResizeMode (Size & Minimize settings)
-- ShownInTaskbar (Tray-like)
-- SizeToContent (Shrink)
-- Topmost (Z-index)
-- WindowStartupLocation (Screen position. If true, uses Top/Left properties)
-- WindowState (Min/Maximized on start)
+* Icon
+* ResizeMode (Size & Minimize settings)
+* ShownInTaskbar (Tray-like)
+* SizeToContent (Shrink)
+* Topmost (Z-index)
+* WindowStartupLocation (Screen position. If true, uses Top/Left properties)
+* WindowState (Min/Maximized on start)
 
 ### Containers
 
-- Canvas = WinForm-like using absolute container coordinates (OK for painting).
-- WrapPanel = Position children relatively, unify size horizontally (default) or vertically
-- StackPanel = Expands children to take all the room. Doesn't scroll. Default Orientation is Vertical
-- DockPanel = Dock children to sides (default Left), precedence by markup, last one fills remaining space (unless .LastChildFill = False)
-- Grid = Table-like grid division of the available space.
-  - Children fill all available space by default (set their Horizontal & Vertical Alignment = Stretch)
-  - Without cell division, stack everything on top of each other.
-  - Col/Row size indication can be in pixels #, auto (fit to content) or n* (share of free space)
-  - .ColumnDefinitions, .RowDefinitions, .Column, .Row, .ColumnSpan, .RowSpan
-  - Use GridSplitter to allow user col/row resizing (.ResizeDirection if can't figure out orientation)
-- UniformGrid # Same with same cell size
+* Canvas = WinForm-like using absolute container coordinates (OK for painting).
+* WrapPanel = Position children relatively, unify size horizontally (default) or vertically
+* StackPanel = Expands children to take all the room. Doesn't scroll. Default Orientation is Vertical
+* DockPanel = Dock children to sides (default Left), precedence by markup, last one fills remaining space (unless .LastChildFill = False)
+* Grid = Table-like grid division of the available space.
+  * Children fill all available space by default (set their Horizontal & Vertical Alignment = Stretch)
+  * Without cell division, stack everything on top of each other.
+  * Col/Row size indication can be in pixels #, auto (fit to content) or n* (share of free space)
+  * .ColumnDefinitions, .RowDefinitions, .Column, .Row, .ColumnSpan, .RowSpan
+  * Use GridSplitter to allow user col/row resizing (.ResizeDirection if can't figure out orientation)
+* UniformGrid # Same with same cell size
 
 ### I/O & co
 
-- Border (.BorderBrush, .BorderThickness)
-- Button
-- RadioButton
-- TextBlock = Multi-line, text only (Text). Not actually a Control (FrameworkElement).
-- Label = Single-line. ContentControl
-  - Essentially paired with another Control. Converted to TextBlock if purely text
-  - Allows mnemonics access keys by targeting a Control and prefixing desired key with '_'
-  - E.g. \<Label Content="Your _Name" Target="{Binding ElementName=tbxName}" />
-  - Target also works with just the element name (without binding)
-  - Use AccessText property if the content is more complex
-- TextBox = Single or multi-line (.AcceptsReturn, .TextWrapping) input text field, with spellchecking functionalities.
-  - Insert a newline using &#x0a; character in Text property
-- CheckBox = ContentControl. Content is what's displayed next to it and clicking anywhere on it toggles CheckBox.
-  - Use .IsThreeState for "Toggle All" (Note: CheckBoxes with .IsThreeState == False are still nullable in code-behind).
-- RadioButton = ContentControl => Plain text as TextBlock, otherwise \<Content> (click anywhere toggles it). Last found IsChecked RadioButton is checked. Group by GroupName.
-- PasswordBox # .PasswordChar, .MaxLength
-- ToolTip = .ToolTipService.ShowDuration, .HasDropShadow , .ShowOnDisabled. See <http://msdn.microsoft.com/en-us/library/system.windows.controls.tooltipservice.aspx>
-- ListBox = .DisplayMemberPath="Name" for non-string objects, indicates attribute to display (overrides .ToString() if also defined)
-- ListView = ListBox with built-in column management (using GridView)
-- DataGrid = Excel-like
-- TreeView = Hierarchy with toggable arrows
+* Border (.BorderBrush, .BorderThickness)
+* Button
+* RadioButton
+* TextBlock = Multi-line, text only (Text). Not actually a Control (FrameworkElement).
+* Label = Single-line. ContentControl
+  * Essentially paired with another Control. Converted to TextBlock if purely text
+  * Allows mnemonics access keys by targeting a Control and prefixing desired key with '_'
+  * E.g. &lt;Label Content="Your _Name" Target="{Binding ElementName=tbxName}" /&gt;
+  * Target also works with just the element name (without binding)
+  * Use AccessText property if the content is more complex
+* TextBox = Single or multi-line (.AcceptsReturn, .TextWrapping) input text field, with spellchecking functionalities.
+  * Insert a newline using &#x0a; character in Text property
+* CheckBox = ContentControl. Content is what's displayed next to it and clicking anywhere on it toggles CheckBox.
+  * Use .IsThreeState for "Toggle All" (Note: CheckBoxes with .IsThreeState == False are still nullable in code-behind).
+* RadioButton = ContentControl => Plain text as TextBlock, otherwise &lt;Content&gt; (click anywhere toggles it). Last found IsChecked RadioButton is checked. Group by GroupName.
+* PasswordBox # .PasswordChar, .MaxLength
+* ToolTip = .ToolTipService.ShowDuration, .HasDropShadow , .ShowOnDisabled. See <http://msdn.microsoft.com/en-us/library/system.windows.controls.tooltipservice.aspx>
+* ListBox = .DisplayMemberPath="Name" for non-string objects, indicates attribute to display (overrides .ToString() if also defined)
+* ListView = ListBox with built-in column management (using GridView)
+* DataGrid = Excel-like
+* TreeView = Hierarchy with toggable arrows
 
 ## Attributes
 
-- Content = the content displayed at the location where the ContentPresenter is defined within a ContentControl.
-- ToolTip (< FrameworkElement)
-- HorizontalAlignment/VerticalAlignment
-- Margin="0,0,0,0"
-- ItemSource
-- TextTrimming
-- TextWrapping
-- TextOptions.TextFormattingMode {Ideal, Display}
-- TextOptions.TextRenderingMode {Auto, Aliased, ClearType, GrayScale}
-- Orientation
-- Parent (Dom-like Hierarchy)
+* Content = the content displayed at the location where the ContentPresenter is defined within a ContentControl.
+* ToolTip (< FrameworkElement)
+* HorizontalAlignment/VerticalAlignment
+* Margin="0,0,0,0"
+* ItemSource
+* TextTrimming
+* TextWrapping
+* TextOptions.TextFormattingMode {Ideal, Display}
+* TextOptions.TextRenderingMode {Auto, Aliased, ClearType, GrayScale}
+* Orientation
+* Parent (Dom-like Hierarchy)
 
 ## Documents
 
-- Inline (HTML-style)
-  - Span (Blank text canvas that can be customized via attributes)
-    - Bold (FontWeight)
-    - Italic (FontStyle)
-    - Underline (TextDecorations)
-  - Run (Span-like that can only contain plain text)
-  - LineBreak
-  - Hyperlink
-  - AnchoredBlock
-  - InlineUIContainer
+* Inline (HTML-style)
+  * Span (Blank text canvas that can be customized via attributes)
+    * Bold (FontWeight)
+    * Italic (FontStyle)
+    * Underline (TextDecorations)
+  * Run (Span-like that can only contain plain text)
+  * LineBreak
+  * Hyperlink
+  * AnchoredBlock
+  * InlineUIContainer
 
 ## Shapes
 
-- Ellipse
-- Rectangle
-  - .Panel.ZIndex
+* Ellipse
+* Rectangle
+  * .Panel.ZIndex
 
 ## Media
 
-- Brushes.{Color}
-- LinearGradientBrush
+* Brushes.{Color}
+* LinearGradientBrush
 
 ## Resources
 
@@ -239,9 +239,9 @@ Dynamic resources are resolved when they are used and can also be created from c
 Different resources with the same name can be defined at different scope levels.
 Example: with Level being either a Control, Window or Application
 
-  <Level.Resources>
-    \<Type x:Key="ID" />*n
-  </Level.Resources>
+    <Level.Resources>
+      <Type x:Key="ID" />*n
+    </Level.Resources>
 
 ### Usage
 
@@ -261,51 +261,51 @@ From Code-Behind, using FindResource() that returns an object
 
 ## Third-Party (NuGet)
 
-- Extended WPF toolkit
+* Extended WPF toolkit
 
 ## Troubleshooting
 
 Debugging WPF can be tricky, because most errors are met during execution rather than at compilation time.
 The following resources and techniques are very valuable to unearth the cause of an issue.
 
-- Visual Studio Output window
-- Visual Studio Live Visual Tree
-- Implementing a hollow DebugConverter
+* Visual Studio Output window
+* Visual Studio Live Visual Tree
+* Implementing a hollow DebugConverter
 
 ## Samples
 
-  <telerik:GridViewBoundColumnBase.HeaderCellStyle>
-      <!-- Provide a template for the header, in order to add a button to toggle the RDVs -->
-      <!-- See https://docs.telerik.com/devtools/wpf/styling-and-appearance/styling-apperance-editing-control-templates -->
-      <Style BasedOn="{StaticResource {x:Type telerik:GridViewHeaderCell}}" TargetType="telerik:GridViewHeaderCell">
-          <Setter Property="Template">
-              <Setter.Value>
-                  <!-- Starts new Template -->
-                  <ControlTemplate TargetType="telerik:GridViewHeaderCell">
-                      <StackPanel Orientation="Horizontal">
-                          <!-- The following ContentPresenter element acts as a placeholder for WPF to know where to display the Content. What content? The one belonging to this control we're styling! -->
-                          <!-- See https://stackoverflow.com/a/1288006 -->
-                          <ContentPresenter Name="HeaderTextPresenter" TextBlock.Foreground="Navy" TextBlock.FontWeight="Bold" TextBlock.FontSize="16">
-                              <ContentPresenter.Style>
-                                  <Style>
-                                      <Setter Property="TextBlock.Foreground" Value="Navy" />
-                                  </Style>
-                              </ContentPresenter.Style>
-                              <ContentPresenter.Resources>
-                                  <Style TargetType="TextBlock">
-                                      <Setter Property="Foreground" Value="Navy" />
-                                  </Style>
-                              </ContentPresenter.Resources>
-                          </ContentPresenter>
-                          <!-- We're inside the (kinda) generic template of a Gridview Header Cell, so to find the Command in our VM and bind to it,
-                          we must go back up the hierarchy to the Window (that is, our UserControl), and target its DataContext specifically, that contains our VM. -->
-                          <!-- See https://stackoverflow.com/questions/5642501/wpf-binding-commands-in-styles-and-or-data-templates-mvvm -->
-                          <!-- See https://stackoverflow.com/questions/34390920/how-to-bind-a-button-command-in-wpf-style -->
-                          <!-- See https://stackoverflow.com/questions/84278/how-do-i-use-wpf-bindings-with-relativesource -->
-                          <Button Command="{Binding DataContext.ToggleRDVsCommand, Mode=OneTime, RelativeSource={RelativeSource AncestorType={x:Type commonControls:UserControlAdv}}}"  Width="10">+</Button>
-                      </StackPanel>
-                  </ControlTemplate>
-              </Setter.Value>
-          </Setter>
-      </Style>
-  </telerik:GridViewBoundColumnBase.HeaderCellStyle>
+    <telerik:GridViewBoundColumnBase.HeaderCellStyle>
+        <!-- Provide a template for the header, in order to add a button to toggle the RDVs -->
+        <!-- See https://docs.telerik.com/devtools/wpf/styling-and-appearance/styling-apperance-editing-control-templates -->
+        <Style BasedOn="{StaticResource {x:Type telerik:GridViewHeaderCell}}" TargetType="telerik:GridViewHeaderCell">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <!-- Starts new Template -->
+                    <ControlTemplate TargetType="telerik:GridViewHeaderCell">
+                        <StackPanel Orientation="Horizontal">
+                            <!-- The following ContentPresenter element acts as a placeholder for WPF to know where to display the Content. What content? The one belonging to this control we're styling! -->
+                            <!-- See https://stackoverflow.com/a/1288006 -->
+                            <ContentPresenter Name="HeaderTextPresenter" TextBlock.Foreground="Navy" TextBlock.FontWeight="Bold" TextBlock.FontSize="16">
+                                <ContentPresenter.Style>
+                                    <Style>
+                                        <Setter Property="TextBlock.Foreground" Value="Navy" />
+                                    </Style>
+                                </ContentPresenter.Style>
+                                <ContentPresenter.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Foreground" Value="Navy" />
+                                    </Style>
+                                </ContentPresenter.Resources>
+                            </ContentPresenter>
+                            <!-- We're inside the (kinda) generic template of a Gridview Header Cell, so to find the Command in our VM and bind to it,
+                            we must go back up the hierarchy to the Window (that is, our UserControl), and target its DataContext specifically, that contains our VM. -->
+                            <!-- See https://stackoverflow.com/questions/5642501/wpf-binding-commands-in-styles-and-or-data-templates-mvvm -->
+                            <!-- See https://stackoverflow.com/questions/34390920/how-to-bind-a-button-command-in-wpf-style -->
+                            <!-- See https://stackoverflow.com/questions/84278/how-do-i-use-wpf-bindings-with-relativesource -->
+                            <Button Command="{Binding DataContext.ToggleRDVsCommand, Mode=OneTime, RelativeSource={RelativeSource AncestorType={x:Type commonControls:UserControlAdv}}}"  Width="10">+</Button>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </telerik:GridViewBoundColumnBase.HeaderCellStyle>
