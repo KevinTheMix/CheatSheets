@@ -6,17 +6,17 @@ Ultimately, the extended stylsheets are interpreted into regular CSS (e.g. all v
 
 ## Variables
 
-  $var = #123456;
+    $var = #123456;
 
 ## Evaluation
 
-  darken([color], 75%)
+    darken([color], 75%)
 
 ## Nesting
 
 Actually interpreted to two separate block definitions (& refers to the parent selector)
 
-  elem { inside{} }
+    elem { inside{} }
 
 equals
 

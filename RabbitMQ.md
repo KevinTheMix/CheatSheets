@@ -191,10 +191,10 @@ Represents an AMQP channel
 If the Queue is declared as **exclusive** & **autodelete**, it will be destroyed when the client closes (**durable** doesn't matter then).
 
     QueueDeclare(queue,		# Nom de la Queue
-		durable,			# Indique la Queue survit un red�marrage du Serveur
-		exclusive,			# Indique que la Queue n'est pas exclusive � ce Client
-		autodelete,			# Indique que la Queue doit �tre effac�e une fois le Client d�connect�
-		arguments)			# Etc.
+        durable,			# Indique la Queue survit un red�marrage du Serveur
+        exclusive,			# Indique que la Queue n'est pas exclusive � ce Client
+        autodelete,			# Indique que la Queue doit �tre effac�e une fois le Client d�connect�
+        arguments)			# Etc.
 
 Register a consumer that own the callback handling message reception.
 

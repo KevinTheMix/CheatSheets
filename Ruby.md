@@ -964,7 +964,7 @@ Namespace the classes & modules of the application under a common name (e.g. App
 
 ## Run
 Command-line
-	
+
 	application
 
 IRB

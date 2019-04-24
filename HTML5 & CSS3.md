@@ -1,19 +1,24 @@
 # HTML5
-	<a target="_blank">	// Opens a new Window (or tab in modern browsers)
+
+    <a target="_blank">	// Opens a new Window (or tab in modern browsers)
 
 ## Accessibility
-	<img alt="meaningful description" />
-	<strong>
-	<em>
+
+    <img alt="meaningful description" />
+    <strong>
+    <em>
 
 ## Characters
-	&copy;
+
+    &copy;
 
 # CSS3
+
 ## Syntax
-	selector {				// Css rule
-		property: value;	// Css declaration
-	}
+
+    selector {            // Css rule
+        property: value;  // Css declaration
+    }
 
 ## Selectors
 	*							// All elements

@@ -55,6 +55,6 @@ See <https://nat.sakimura.org/2011/05/15/dummys-guide-for-the-difference-between
 
 * OAuth 1 uses request cryptographic signature.
 * OAuth 2
- ** Doesn't use signature
-  *** => easier for developers.
-  *** => Requires HTTPS (TLS/SSL) must be used for all exchanges so the token doesn't get compromised.
+  * Doesn't use signature
+    * => easier for developers.
+    * => Requires HTTPS (TLS/SSL) must be used for all exchanges so the token doesn't get compromised.

@@ -1,34 +1,40 @@
-# Introduction
+# Rails
+
 ## Installation
+
 Cygwin file path endline character fix (see https://github.com/sstephenson/execjs/issues/78).
 Coffee script 1.9.0 bug (see http://stackoverflow.com/questions/28241981/rails-4-execjsprogramerror-in-pageswelcome).
 
 ## Command-lines (run from application directory)
+
 ### Generators
-	rails g[enerate]	# Displays all available generators for the application (depends on the Gems e.g. RSpec)
+
+    rails g[enerate]	# Displays all available generators for the application (depends on the Gems e.g. RSpec)
 
 ### Rake
+
 Utility to automate certain tasks (automation tool i.e. a Ruby Make e.g. running all DB migration scripts).
 
-	rake -T		# Displays all tasks
-	rake -T db	# Displays all DB-related tasks
+    rake -T		# Displays all tasks
+    rake -T db	# Displays all DB-related tasks
 
 ## Debugging
-	fail	# Debugging trick to raise an exception and stop the application at a certain point (e.g. in a Controller to look at request parameters)
+
+    fail	# Debugging trick to raise an exception and stop the application at a certain point (e.g. in a Controller to look at request parameters)
 
 ## Augmented API % Ruby (e.g. from ActiveSupport Gem)
-	10.day[s]			# Quantity of seconds in days (864000)
-	10.month[s]			# Quantity of seconds in months
-	10.year[s]			# Quantity of seconds in years
-	864000.from_now	# The day in 10 days (ActiveSupport::TimeWithZone object)
-	5.days.ago		# The day 5 days ago (ActiveSupport::TimeWithZone object)
 
+    10.day[s]			# Quantity of seconds in days (864000)
+    10.month[s]			# Quantity of seconds in months
+    10.year[s]			# Quantity of seconds in years
+    864000.from_now	# The day in 10 days (ActiveSupport::TimeWithZone object)
+    5.days.ago		# The day 5 days ago (ActiveSupport::TimeWithZone object)
 
 # Applications
 ## Creation & Configuration
 ### Create
-	 rails new {application}	# Generates the application structure, including a Gemfile, and runs 'bundle install'
-	 rails new {application} --skip-test-unit (aka -T)	# Doesn't embed Test::Unit in the application (in case we want to use another/no test gem)
+    rails new {application}	# Generates the application structure, including a Gemfile, and runs 'bundle install'
+    rails new {application} --skip-test-unit (aka -T)	# Doesn't embed Test::Unit in the application (in case we want to use another/no test gem)
 
 ### Gemfile
 In ~/Gemfile.
@@ -240,7 +246,7 @@ Second parameter is an URL or a model instance (e.g. @model => auto use class_pa
 	# Put the following lines in a custom initializer (e.g. config/initializers/time_formats.rb)
 	Time::DATE_FORMATS[:default] = "%B %d, %Y at %I:%M %p"
 	Date::DATE_FORMATS[:default] = "%Y"	# Same goes for dates
-	
+
 #### Image
 	image_tag({image})		# Creates a HTML <img> tag ({image} refers to an image in the app/assets/images directory)
 
@@ -253,7 +259,7 @@ Assets reside in one of three directories (app/assets, lib/assets & vendor/asset
 
 Regardless of their physical location, they are accessible in the browser via a common URL under the '[website]/assets/*' path.
 In production, the processed assets are stored at their final destination in the public/assets/ directory from where they are referenced statically
-	
+
 #### Stylesheets
 Stylesheet manifest (app/stylesheets/application.css) file
 Aggregates all the styles found in the required files. By default: require_self (this file) and require_tree . (the current directory and subdirectories)
@@ -262,7 +268,6 @@ SCSS (& SASS) stylesheets files are interpreted into regular CSS. They extend th
 The interpreted and concatenated result can be viewed in the browser in the single generated stylesheet file ({website}/assets/application.css)
 In production, the resulting single stylsheet is minified and a MD5 fingerprint is added for browser caching
 Stylesheets can include partials (@import "partial";). Not that the partial file doesn't have a ".css" in its extension (e.g. "_partial.scss")
-
 
 ## Model
 ### Database
@@ -275,7 +280,7 @@ Application environment database configuration file (config/database.yml)
 	db/test.sqlite3
 	db/production.sqlite3
 
-### DDL		
+### DDL
 #### Generate
 Model name is singular. No spaces between '{field}:' and '{type}' or it will create 2 string fields instead
 Fields of type 'date' should end with "_on" and of type 'datetime' should end with "_at"
@@ -295,7 +300,7 @@ Name of the migration should end with "To{Model}s" so that the framework knows o
 Generates a db/migrate/yyyyMMddhhmmss_do_stuff_to_{model}s.rb migration file
 
 	rails g[enerate] migration DoStuffTo{Model}s [{field}:{type} ]*
-		
+
 #### Model class
 Class name e.g. ~/app/models/{model}.rb is singular
 No variables/attributes are defined in Model class; ActiveRecord extracts its structure dynamically from corresponding DB table schema
