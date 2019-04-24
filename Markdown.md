@@ -1,6 +1,10 @@
 Markdown
 =
 
+Choose a style of headers & lists and stick to it (cannot mix * and - for instance).
+Also note that tab input chars in Visual Studio Code depends on the initial scan of the file.
+=> delete some tab chars, close & reopen to be able to use the Tab key to input 4 spaces.
+
 There's no deying that an effective document
 -
 
