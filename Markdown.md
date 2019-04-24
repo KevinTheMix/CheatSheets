@@ -1,5 +1,8 @@
-There's no deying that an effective document
+Markdown
 =
+
+There's no deying that an effective document
+-
 
 Has to breakdown titles
 -
@@ -29,3 +32,5 @@ Is it code?
 \```
 Code!
 \```
+
+See <https://guides.github.com/features/mastering-markdown/>

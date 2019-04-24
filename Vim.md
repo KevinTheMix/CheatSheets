@@ -29,6 +29,7 @@ Left/Down/Up/Right
     h j k l
 
 Beginning/End
+
     b e
 
 Next word
