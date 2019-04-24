@@ -10,8 +10,8 @@ The Database Context holds the collections corresponding to the DB tables in the
 * 1 to N: HasMany(p => p.Courses).WithRequired(c => c.Professor).HasForeignKey(c => c.ProfessorId)
 * N to 1: HasRequired(c => c.Professor).WithMany(p => p.Courses).HasForeignKey(c => c.ProfessorId)
 * N to N: HasMany(s => s.Course).WithMany(c => c.Student).Map(sc => Left & Right)
- ** See <https://www.entityframeworktutorial.net/code-first/configure-many-to-many-relationship-in-code-first.aspx>
- ** Alternatively using an association table going 1 to N both ways allows more control over the association (additional technical columns, etc.).
+  * See <https://www.entityframeworktutorial.net/code-first/configure-many-to-many-relationship-in-code-first.aspx>
+  * Alternatively using an association table going 1 to N both ways allows more control over the association (additional technical columns, etc.).
 
 ## Expression
 

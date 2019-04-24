@@ -7,25 +7,25 @@
 ## SQL
 
 * DDL = Data Definition Language
- ** CREATE
- ** ALTER
- ** TRUNCATE = Remove all records & unallocate space
- ** RENAME
- ** COMMENT
- ** DROP
+  * CREATE
+  * ALTER
+  * TRUNCATE = Remove all records & unallocate space
+  * RENAME
+  * COMMENT
+  * DROP
 * DML = Data Manipulation Language
- ** INSERT
- ** SELECT
- ** UPDATE
- ** DELETE
+  * INSERT
+  * SELECT
+  * UPDATE
+  * DELETE
 * DCL = Data Control Language
- ** GRANT
- ** REVOKE
+  * GRANT
+  * REVOKE
 * TCL = Transaction Control Language
- ** COMMIT
- ** ROLLBACK
- ** SAVEPOINT
- ** SET TRANSACTION
+  * COMMIT
+  * ROLLBACK
+  * SAVEPOINT
+  * SET TRANSACTION
 * See <https://www.geeksforgeeks.org/sql-ddl-dml-dcl-tcl-commands/>
 
 Multiple Inserted rows in one query
