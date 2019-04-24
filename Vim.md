@@ -4,9 +4,17 @@
 
 ## Modes
 
-    i = Switch to Insert
-    Esc = Switch to Normal
-    v = Switch to Visual
+Switch to Insert
+
+    i
+
+Switch to Normal
+
+    Esc
+
+Switch to Visual
+
+    v
 
 ## Insert
 
@@ -14,28 +22,76 @@ Type text
 
 ## Normal
 
-### Navigate & Manipulate Text
+Navigate & Manipulate Text
 
-    h j k l = Left/Down/Up/Right
-    b e = Beginning/End
-    w = Next word
-    f[c] = Find character [c]
-    0 = Beginning of line
-    $ = End of line
-    \# * = Previous/Next occurence of the word at cursor
-    gg G = Beginning/End of file
-    [n]G = Go to line [n]
-    /[text]Enter = Search
-        N n = Previous/Next search
-    O o = Insert line before/after (switches to Insert mode)
-    x X = Deletes character before/after cursor (à la backspace/delete)
-    r[c] = Replaces character at cursor with [c]
-    d[dir] p = Cut/paste in direction [dir]
-    D[dir] p = Cut/paste until end of line
-    Macro
-        [n][cmd] = Runs [cmd]*[n]
-        [n]i[text] = Insert [text]*[n] at cursor
-        . = Repeats previous command
+Left/Down/Up/Right
+    h j k l
+
+Beginning/End
+    b e
+
+Next word
+
+    w
+
+Find character [c]
+
+    f[c]
+
+Beginning of line
+
+    0
+
+End of line
+
+    $
+
+Previous/Next occurence of the word at cursor
+  
+    \#
+    *
+
+Beginning/End of file
+
+    gg
+    G
+
+Go to line [n]
+
+    [n]G
+
+Search
+
+    /[text]Enter
+
+Previous/Next search
+        N
+        n
+
+Insert line before/after (switches to Insert mode)
+
+    O
+    o
+
+Deletes character before/after cursor (à la backspace/delete)
+
+    x
+    X
+
+Replaces character at cursor with [c]
+
+    r[c]
+
+Cut/paste in direction [dir]
+    d[dir] p
+
+Cut/paste until end of line
+    D[dir] p
+
+Macro
+    [n][cmd] = Runs [cmd]*[n]
+    [n]i[text] = Insert [text]*[n] at cursor
+    . = Repeats previous command
 Save & Exit
 
     :w = Save
