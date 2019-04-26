@@ -4,7 +4,8 @@ Asynchronous programming is not parallel.
 See <https://stackoverflow.com/questions/37419572/if-async-await-doesnt-create-any-additional-threads-then-how-does-it-make-appl>
 
 The code is actually run synchronously going deep down the callstack for each Task started.
-Going down the hierarchy, we should arrive at a an asynchronous fire & forget treatment that is given back control via an event mechanism.
+Going down the hierarchy, we should arrive at a low-level asynchronous operation, such as a Windows I/O call.
+_In Windows, all I/O is asynchronous. Synchronous APIs are just a convenient abstraction_(See <https://stackoverflow.com/a/12484535>).
 
 Then it successively give control back up the callstack, synchronously, to each calling method as an *await* is encountered in its callee.
 Going up the hierarchy of async methods, we should always arrive either:
@@ -15,7 +16,9 @@ Going up the hierarchy of async methods, we should always arrive either:
 
 ## UI Thread
 
-UI frameworks like WinForms, WPF, and Silverlight all place a restriction on which threads are able to access UI controls, namely that the control can only be accessed from the thread that created it. See <https://devblogs.microsoft.com/pfxteam/await-and-ui-and-deadlocks-oh-my/>
+UI frameworks like WinForms, WPF, and Silverlight all place a restriction on which threads are able to access UI controls, namely that the control can only be accessed from the thread that created it.
+This is called [thread affinity](https://dailydotnettips.com/what-is-synchronizationcontext-all-about/).
+See <https://devblogs.microsoft.com/pfxteam/await-and-ui-and-deadlocks-oh-my/>
 
 It's not a special thread, just the one dedicated to react to UI events (by reading a message loop infinitely) and repaint stuff accordingly.
 
@@ -65,3 +68,8 @@ It can also be useful when gradually converting an application from synchronous 
 
 Be aware that it will not actually be called if the task completes before the await mechanic intervenes.
 Be careful not to use it in methods that require the context i.e. if the remaining code needs the UI thread e.g. to update some control value.
+
+## Troubleshooting
+
+Deadlocks occur when a blocking call, such as a Task.Wait() or a Task.Result is made instead of a clean async/await, so that the UI thread cannot be resumed and is stuck, and thus the called async operation can never resume in that stuck captured context.
+See <http://blog.stephencleary.com/2012/07/dont-block-on-async-code.html>

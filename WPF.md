@@ -80,22 +80,22 @@ The WPF engine simply parses that string to make things happen dynamically.
 
 Default binds to the current data context:
 
-  {Binding}
+    {Binding}
 
 Specific property in current data context ("Path=" is default property of Binding):
 
-  {Binding NameOfProperty}
-  {Binding Path=NameOfProperty}
+    {Binding NameOfProperty}
+    {Binding Path=NameOfProperty}
 
 Binds to (the Attribute i.e. Dependency Property of) another XAML UI element:
 
-  {Binding NameOfAttribute, ElementName=Element}
+    {Binding NameOfAttribute, ElementName=Element}
 
 Using CLR type:
 
-  xmlns:system="clr-namespace:System;assembly=mscorlib"
-  ...
-  Source={x:Static system:DateTime.Now}
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    ..
+    Source={x:Static system:DateTime.Now}
 
 ### Data Context
 
@@ -113,15 +113,15 @@ TextBox.Text's Default is LostFocus => set to PropertyChanged to react to each k
 Type conversion Binding, e.g. "Yes"/"No" to true/false.
 See <http://stackoverflow.com/questions/505397/built-in-wpf-ivalueconverters> for built-in ones.
   
-  class MyConverter {Convert(){}, ConvertBack(){}}
-
-  Converter={StaticResource MyConverter}
+    class MyConverter {Convert(){}, ConvertBack(){}}
+    ..
+    Converter={StaticResource MyConverter}
 
 ### StringFormat
 
 Similar to Converters, but just affect the display. Accepts prefix/postfix.
 
-  StringFormat=ABC{0:format}XYZ
+    StringFormat=ABC{0:format}XYZ
 
 Without prefix, add curly braces to avoid confusion with Markup Extensions.
 
@@ -130,7 +130,7 @@ Without prefix, add curly braces to avoid confusion with Markup Extensions.
 See .ToString("format"): <http://msdn.microsoft.com/en-us/library/dwhawy9k.aspx>
 See DateTime formatting <http://msdn.microsoft.com/en-us/library/az4se3k1.aspx>
 
-  ConverterCulture='ja-JP'
+    ConverterCulture='ja-JP'
 
 ## Components
 
@@ -250,14 +250,14 @@ The resource is found in the immediate container, or the search goes up the tree
 
 Using a markup extension.
 
-  {StaticResource ID}
-  {DynamicResource ID}
+    {StaticResource ID}
+    {DynamicResource ID}
 
 From Code-Behind, using FindResource() that returns an object
 
-  this.ctrl.FindResource("") = A Control in this window
-  this.FindResource("") = This Window
-  Application.Current.FindResource("") = Application
+    this.ctrl.FindResource("") = A Control in this window
+    this.FindResource("") = This Window
+    Application.Current.FindResource("") = Application
 
 ## Third-Party (NuGet)
 
