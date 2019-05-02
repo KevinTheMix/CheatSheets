@@ -19,8 +19,11 @@ Most of the API is contained in the PresentationFramework DLL that contains the 
 * ControlTemplate = How a GUI visual control (i.e. System.Windows.Controls, e.g. a button or a panel) is displayed.
 * Style = WPF's CSS, but can also applies templates, etc. Basically can be used to change any property of a control.
 * ContentControl = base class for all controls that have a "Content" property.
-* Content = property of a ContentControl that can be anything. E.g.: the Content of a Textblock is its Text. The Content of a control is rendered at the location of a ControlPresenter.
-* ControlPresenter = element within a ControlTemplate that acts as a placeholder and defines where its content will be displayed. See <https://stackoverflow.com/a/1288006>
+* Content = property of a ContentControl that can be anything.
+  * E.g.: the Content of a Textblock is its Text.
+  * The Content of a control is rendered at the location of the ControlPresenter within its ControlTemplate.
+* ControlPresenter = element within a ControlTemplate that acts as a placeholder and defines where the content of the templated control will be displayed.
+  * See <https://stackoverflow.com/a/1288006>
 * Dependency Property = a class property augmented with WPF dependency mechanism.
   * This enables many things on which WPF relies, including all data bindings and the hiearchical retrieval of properties based on their (string) names - as well as default values & conversion.
   * The containing class inherits from DependencyObject (as do all of WPF UI Controls), which provides the required SetValue() & GetValue() methods.
@@ -28,6 +31,13 @@ Most of the API is contained in the PresentationFramework DLL that contains the 
   * Note that it is only the _target_ property that needs to be a Dependency Property. The source can be either a dependency property or a CLR property (but still has to invoke PropertyChanged event to benefit from continuous data binding - not only as one-time on creation).
   * In practice, unless you are creating your own controls, you will not need to create your own dependency properties. See <https://blog.scottlogic.com/2012/04/05/everything-you-wanted-to-know-about-databinding-in-wpf-silverlight-and-wp7-part-one>
 * Attached Property = uses a static method instead of a Property setter/getter.
+
+Within a Template, there's one more level to go up to reach the DataContext:
+
+* using specific Element
+    ElementName=[Element], Path=DataContext.[Property]
+* going back to root DataContext:
+    <Element [Property]="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.[Property]}">
 
 ## XAML
 
@@ -38,7 +48,10 @@ Usually used as prefix-less root, so no need to prefix all framework elements
 XAML language namespace (System.Windows.Markup, XAML parser/parser directives). Usually given 'x' prefix.
 
 See <http://schemas.microsoft.com/winfx/2006/xaml/presentation>
+
 See <http://schemas.microsoft.com/winfx/2006/xaml/>
+
+Don't specify Assembly if the namespace is located in the local assembly.
 
 ### Element
 
@@ -82,7 +95,7 @@ Default binds to the current data context:
 
     {Binding}
 
-Specific property in current data context ("Path=" is default property of Binding):
+A specific public property (not a variable!) in current data context ("Path=" is default property of Binding):
 
     {Binding NameOfProperty}
     {Binding Path=NameOfProperty}
@@ -96,6 +109,10 @@ Using CLR type:
     xmlns:system="clr-namespace:System;assembly=mscorlib"
     ..
     Source={x:Static system:DateTime.Now}
+
+Use **RelativeSource** to refer to an element relative to the one in which the binding is called.
+Can even bind to Self e.g. to display its current Width as Text.
+Default **RelativeSource** attribute is *Mode* (whose values are *Self*, *FindAncestor*, *PreviousData*, *TemplatedParent*).
 
 ### Data Context
 
@@ -111,11 +128,18 @@ TextBox.Text's Default is LostFocus => set to PropertyChanged to react to each k
 ### Converters
 
 Type conversion Binding, e.g. "Yes"/"No" to true/false.
+Converters use a StaticResource (not a string).
 See <http://stackoverflow.com/questions/505397/built-in-wpf-ivalueconverters> for built-in ones.
   
-    class MyConverter {Convert(){}, ConvertBack(){}}
+    class KokoConverter : IValueConverter {Convert(){}, ConvertBack(){}}
     ..
-    Converter={StaticResource MyConverter}
+    Converter={StaticResource KokoConverter}
+
+#### Type Converters
+
+Those are the converters that WPF uses to parse (case insensitive) strings into the types expected by the properties to which those values are assigned.
+
+    KokoTypeConverter : TypeConverter
 
 ### StringFormat
 
@@ -125,12 +149,13 @@ Similar to Converters, but just affect the display. Accepts prefix/postfix.
 
 Without prefix, add curly braces to avoid confusion with Markup Extensions.
 
-  StringFormat={}{0:format}
+    StringFormat={}{0:format}
 
-See .ToString("format"): <http://msdn.microsoft.com/en-us/library/dwhawy9k.aspx>
-See DateTime formatting <http://msdn.microsoft.com/en-us/library/az4se3k1.aspx>
-
-    ConverterCulture='ja-JP'
+* [Numeric Format](http://msdn.microsoft.com/en-us/library/dwhawy9k.aspx)
+* [Date and Time Format](http://msdn.microsoft.com/en-us/library/az4se3k1.aspx)
+* [DateTimeOffset.ToString](https://docs.microsoft.com/en-us/dotnet/api/system.datetimeoffset.tostring?view=netframework-4.8)
+* [DateTime Predefined Formats](https://stackoverflow.com/a/5046460)
+  * Dependent on culture => use ConverterCulture='ja-JP' in Binding.
 
 ## Components
 
@@ -309,3 +334,22 @@ The following resources and techniques are very valuable to unearth the cause of
             </Setter>
         </Style>
     </telerik:GridViewBoundColumnBase.HeaderCellStyle>
+
+### Markup Extension
+
+    x:Key       # E.g. define and then refers to a resource in the XAML (Dictionary Key)
+    x:Name      # Defines a name for a control that can be accessed from Code-behind or binded in XAML via ElementName
+    x:Static    # Referes to static data (e.g. SystemColors Enum value)
+    x:Type      # Equivalent to C# typeof. Used in ControlTemplate.TargetType
+
+Will replace the default template of all controls of type [Type] to be displayed using the new template:
+<https://msdn.microsoft.com/en-us/library/system.windows.controls.controltemplate.targettype%28v=vs.110%29.aspx>
+<https://stackoverflow.com/a/13559167>
+
+    <ControlTemplate x:Key="[TemplateName]" TargetType="{x:Type [Type]}">
+    <ControlTemplate x:Key="[TemplateName]" TargetType="[Type]">
+  
+Unless the template is referred to explicitly by x:Key.
+Applying the template to a specific control:
+
+    <Element Template="{StaticResource [TemplateName]}" />
