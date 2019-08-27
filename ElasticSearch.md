@@ -1,38 +1,58 @@
-# Elastic Search
+# Elasticsearch
 
-Document database that is optimized to act as a full-text search engine.
+Elasticsearch is a JSON based REST API, Distributed, web server build over Lucene
 Elasticsearch is a JSON documents-based search HTTP REST API, Distributed, web server build over Lucene.
-
+Moteur de recherche "Enterprise" multi-tenants basé sur Lucene.
+Interface HTTP & documents JSON.
+Capable de recherche full-text.
+Document database that is optimized to act as a full-text search engine.
 Ecrit en Java, Open Source (Licence Apache), Client en C#.
+Différence avec Lucene = <https://stackoverflow.com/questions/27793721/what-is-the-difference-between-lucene-and-elasticsearch>
 
-ElasticSearch + Logstash + Kibana = Elastic Stack
-
-Developer-friendly + speed + scalable
+* Developer-friendly
+* speed
+* scalable
 
 Completion suggester
-
 Percolation = filtre les requêtes matchant un document (=> notification nouveau document match...)
-
 Profile API (ms)
 
-## Apache Lucene
+## Elastic Stack
 
-Bibliothèque Java (càd DLL) de recherche d'information, données textuelles.
+Formerly _ELK stack_
+Suite of applications for searching, logging and visualizing data.
 
-Ecrit en Java, Free & Open Source (Licence Apache), Client en C#.
-Full-text indexing & Searching => moteurs de recherche.
-Fuzzy search ~ Edit distance (Levenstein).
-Système de recommandation.
-Archi basée sur document (PDF, HTML, Word, Mind map, etc.) contenant des champs de texte.
-Utilise
+* ElasticSearch
+* Logstash
+* Kibana = Elastic Stack
 
-* Index inversé (<https://fr.wikipedia.org/wiki/Index_invers%C3%A9>)
-* *NEW* BKD Tree pour recherche de nombres via Points (<https://en.wikipedia.org/wiki/K-D-B-tree#BKD_tree>)
-* k-d(imension) tree = space partitioning, range search & nearest neighbour search
-* B tree = Nodes avec plusieurs valeurs dans certaine range (=> less balancing but more storage), Read/Write optimized, DB indexes & searches
+## API
 
-<https://en.wikipedia.org/wiki/Search_engine_indexing>
+### Indexes
 
-kaokejiis oae mma'o kke nceoka je minaoepoostomm siivnanfqop
-il dnus bampt dronsg mawnrov soubramq ilozwqmpo
-wefgoinro
+Create
+
+    PUT http://127.0.0.1:9200/customer?pretty
+
+Get
+
+    GET http://127.0.0.1:9200/_cat/indices?v
+
+Delete
+
+    DELETE http://127.0.0.1:9200/customer?pretty
+
+### Documents
+
+Create & Update
+
+    PUT http://127.0.0.1:9200/customer/_doc/1?pretty { "name":"Koko Kontan" } # Créé l'Index si il n'existe pas encore.
+
+Get
+
+    GET http://127.0.0.1:9200/customer/_doc/1?pretty
+
+Search
+
+    GET http://127.0.0.1:9200/customer/_search?q=*
+    GET http://127.0.0.1:9200/customer/_search { "query": {"match_all" : {} }
