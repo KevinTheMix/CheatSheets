@@ -22,15 +22,8 @@ Most of the API is contained in the PresentationFramework DLL that contains the 
 * Content = property of a ContentControl that can be anything.
   * E.g.: the Content of a Textblock is its Text.
   * The Content of a control is rendered at the location of the ControlPresenter within its ControlTemplate.
-* ControlPresenter = element within a ControlTemplate that acts as a placeholder and defines where the content of the templated control will be displayed.
+* ContentPresenter = element within a ControlTemplate that acts as a placeholder and defines where the content of the templated control will be displayed.
   * See <https://stackoverflow.com/a/1288006>
-* Dependency Property = a class property augmented with WPF dependency mechanism.
-  * This enables many things on which WPF relies, including all data bindings and the hiearchical retrieval of properties based on their (string) names - as well as default values & conversion.
-  * The containing class inherits from DependencyObject (as do all of WPF UI Controls), which provides the required SetValue() & GetValue() methods.
-  * DPs are typically encapsulated by CLR properties that provide a shorthand for calling GetValue() & SetValue(). This is purely conventional and optional.
-  * Note that it is only the _target_ property that needs to be a Dependency Property. The source can be either a dependency property or a CLR property (but still has to invoke PropertyChanged event to benefit from continuous data binding - not only as one-time on creation).
-  * In practice, unless you are creating your own controls, you will not need to create your own dependency properties. See <https://blog.scottlogic.com/2012/04/05/everything-you-wanted-to-know-about-databinding-in-wpf-silverlight-and-wp7-part-one>
-* Attached Property = uses a static method instead of a Property setter/getter.
 
 Within a Template, there's one more level to go up to reach the DataContext:
 
@@ -84,6 +77,25 @@ Same result with shorter syntax (without <Element.Content>)
 
     <Element><WrapPanel><Control*n></WrapPanel></Element>
 
+### Markup Extension
+
+    x:Key       # E.g. define and then refers to a resource in the XAML (Dictionary Key)
+    x:Name      # Defines a name for a control that can be accessed from Code-behind or binded in XAML via ElementName
+    x:Static    # Referes to static data (e.g. SystemColors Enum value)
+    x:Type      # Equivalent to C# typeof. Used in ControlTemplate.TargetType
+
+Will replace the default template of all controls of type [Type] to be displayed using the new template:
+<https://msdn.microsoft.com/en-us/library/system.windows.controls.controltemplate.targettype%28v=vs.110%29.aspx>
+<https://stackoverflow.com/a/13559167>
+
+    <ControlTemplate x:Key="[TemplateName]" TargetType="{x:Type [Type]}">
+    <ControlTemplate x:Key="[TemplateName]" TargetType="[Type]">
+  
+Unless the template is referred to explicitly by x:Key.
+Applying the template to a specific control:
+
+    <Element Template="{StaticResource [TemplateName]}" />
+
 ## Data Binding
 
 Any {...} in XAML is called markup extensions.
@@ -113,6 +125,22 @@ Using CLR type:
 Use **RelativeSource** to refer to an element relative to the one in which the binding is called.
 Can even bind to Self e.g. to display its current Width as Text.
 Default **RelativeSource** attribute is *Mode* (whose values are *Self*, *FindAncestor*, *PreviousData*, *TemplatedParent*).
+
+### Dependency Property
+
+Binding in WPF relies on Dependency Properties, which is a class property augmented with WPF dependency mechanism.
+
+This enables many things on which WPF relies, including all data bindings and the hiearchical retrieval of properties based on their (string) names - as well as default values & conversion.
+
+The containing class inherits from DependencyObject (as do all of WPF UI Controls), which provides the required SetValue() & GetValue() methods.
+
+DPs are typically encapsulated by CLR properties that provide a shorthand for calling GetValue() & SetValue(). This is purely conventional and optional.
+
+Note that it is only the _target_ property that needs to be a Dependency Property. The source can be either a dependency property or a CLR property (but still has to invoke PropertyChanged event to benefit from continuous data binding - not only as one-time on creation/initialization).
+
+In practice, unless you are creating your own controls, you will not need to create your own dependency properties. See <https://blog.scottlogic.com/2012/04/05/everything-you-wanted-to-know-about-databinding-in-wpf-silverlight-and-wp7-part-one>
+
+An **Attached Property** is a similar construct and uses a static method instead of a Property setter/getter, so that it can be called from other classes statically.
 
 ### Data Context
 
@@ -228,6 +256,8 @@ Can contain the following attributes:
 * TextOptions.TextRenderingMode {Auto, Aliased, ClearType, GrayScale}
 * Orientation
 * Parent (Dom-like Hierarchy)
+* DisplayMemberPath = Attribute of the bound row to display for that cell (the whole row = the entire item (in a collection))
+* IsReadonlyBinding (Telerik Grid) = Specify at the grid level which (boolean) attribute of the row item indicates if the row is read-only
 
 ## Documents
 
@@ -284,10 +314,6 @@ From Code-Behind, using FindResource() that returns an object
     this.FindResource("") = This Window
     Application.Current.FindResource("") = Application
 
-## Third-Party (NuGet)
-
-* Extended WPF toolkit
-
 ## Troubleshooting
 
 Debugging WPF can be tricky, because most errors are met during execution rather than at compilation time.
@@ -297,7 +323,15 @@ The following resources and techniques are very valuable to unearth the cause of
 * Visual Studio Live Visual Tree
 * Implementing a hollow DebugConverter
 
-## Samples
+## Third-Party (NuGet)
+
+* Extended WPF toolkit
+
+### Telerik
+
+* GridViewDataColumn can be edited
+* GridViewBoundColumnBase are read-only (kinda one-way binding)
+* GridViewCheckBoxColumn are checkboxes, but aligned left on edit
 
     <telerik:GridViewBoundColumnBase.HeaderCellStyle>
         <!-- Provide a template for the header, in order to add a button to toggle the RDVs -->
@@ -335,21 +369,9 @@ The following resources and techniques are very valuable to unearth the cause of
         </Style>
     </telerik:GridViewBoundColumnBase.HeaderCellStyle>
 
-### Markup Extension
+Telerik Watermark box on edit:
 
-    x:Key       # E.g. define and then refers to a resource in the XAML (Dictionary Key)
-    x:Name      # Defines a name for a control that can be accessed from Code-behind or binded in XAML via ElementName
-    x:Static    # Referes to static data (e.g. SystemColors Enum value)
-    x:Type      # Equivalent to C# typeof. Used in ControlTemplate.TargetType
-
-Will replace the default template of all controls of type [Type] to be displayed using the new template:
-<https://msdn.microsoft.com/en-us/library/system.windows.controls.controltemplate.targettype%28v=vs.110%29.aspx>
-<https://stackoverflow.com/a/13559167>
-
-    <ControlTemplate x:Key="[TemplateName]" TargetType="{x:Type [Type]}">
-    <ControlTemplate x:Key="[TemplateName]" TargetType="[Type]">
-  
-Unless the template is referred to explicitly by x:Key.
-Applying the template to a specific control:
-
-    <Element Template="{StaticResource [TemplateName]}" />
+    <telerik:GridViewBoundColumnBase Header="{Binding CommonResources.MCodeIndication}" DataMemberBinding="{Binding MCodeIndication, UpdateSourceTrigger=PropertyChanged}" ColumnGroupName="SelectionFields">
+      <telerik:GridViewBoundColumnBase.CellEditTemplate>
+          &lt;DataTemplate>
+              <telerik:RadWatermarkTextBox Text="{Binding MCodeIndication, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
