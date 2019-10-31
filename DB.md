@@ -32,33 +32,47 @@ Use different schemas for two tables with same name in same DB (when you want fe
 
 ### DDL
 
-* Renaming a table
+Renaming a table
+
     EXEC sp_rename 'Setting.DE400ImportFormat', 'Setting.ExportColumnFormat'
     GO
-* Renaming a constraint
+
+Renaming a constraint
+
     EXEC sp_rename 'Setting.[PK_Setting.DE400ImportFormat]', 'PK_Setting.ExportColumnFormat'
-  * "_When renaming a constraint, the schema to which the constraint belongs must be specified._" (see <https://stackoverflow.com/a/8712921>).
+
+"_When renaming a constraint, the schema to which the constraint belongs must be specified._" (see <https://stackoverflow.com/a/8712921>).
 
 ### DML
 
 #### SELECT
 
-* Check if exists
+Check if exists
+
     IF EXISTS (SELECT TOP 1 1 FROM [Table])
-* Use Variable in a LIKE
+
+Use Variable in a LIKE
+
     SELECT * FROM Table WHERE a LIKE @a
-* Use Variables in a IN
+
+Use Variables in a IN
+
     SELECT * FROM Table WHERE a IN (@a, @b)
 
 Subqueries can follow these keywords:
 
-* SELECT
+SELECT
+
     SELECT a, (SELECT b FROM B WHERE B.fkey = A.Id)
     FROM A
-* FROM
+
+FROM
+
     SELECT tag
     FROM (SELECT {expression} AS tag FROM A) AS AA GROUP BY tag
-* WHERE
+
+WHERE
+
     SELECT a
     FROM A
     WHERE A.count > (SELECT COUNT(*) FROM A)
@@ -74,16 +88,13 @@ Multiple Inserted rows in one query
 
 #### UPDATE
 
-<<<<<<< HEAD
-Cannot be used to update several tables at once.
-See <https://stackoverflow.com/a/36153756>.
-=======
-    IF EXISTS (SELECT TOP 1 1 FROM [Table])
+Cannot be used to update several tables at once. See <https://stackoverflow.com/a/36153756>.
 
 ## Indexes
 
-table-scanning = Browsing entire table (O(n)), when there's no index
+table-scanning = Browsing entire table (O(n)) sequentially, when there's no index
 To see all the indexes on a particular table execute “sp_helpindex” stored procedure
+
     EXECUTE sp_helpindex {table_name}
 
 * Clustered Index = impacte l'ordre dont les données d'une table sont stockées physiquement, selon la/les colonnes choisies
@@ -99,4 +110,3 @@ To see all the indexes on a particular table execute “sp_helpindex” stored p
 * Composite Index = multiple columns
 
 SQL Fragmentation = <https://www.mssqltips.com/sqlservertip/4331/sql-server-index-fragmentation-overview/>
->>>>>>> e6068e6a9d48afb0626f35cadfb4f54b05a91ea8
