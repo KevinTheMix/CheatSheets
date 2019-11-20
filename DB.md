@@ -11,6 +11,7 @@ Use different schemas for two tables with same name in same DB (when you want fe
   * ALTER
   * TRUNCATE = Remove all records & unallocate space
     * Note this is DDL! Unlike DELETE
+      * Doesn't use transaction log => doesn't work if another table (even empty) references it
     * The auto-incremented value of the ID column is also reset
   * RENAME
   * COMMENT
@@ -89,6 +90,10 @@ Multiple Inserted rows in one query
 #### UPDATE
 
 Cannot be used to update several tables at once. See <https://stackoverflow.com/a/36153756>.
+
+#### DELETE
+
+* [Delete from multiple tables](https://stackoverflow.com/a/809892)
 
 ## Indexes
 

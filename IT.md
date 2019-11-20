@@ -2,7 +2,7 @@
 
 ## Algo
 
-* Don't recalculate x in algo while {while() {array[i*x +y]}} => add x each iteration
+* Don't recalculate x in algo while {while() {array[i*x +y]}} => add x each iteration instead
 
 ## Try
 
