@@ -1,44 +1,43 @@
 # Visual Studio Code
 
-## Introduction
-
 A good text editor.
 
-## Shortcuts
+## Commands
 
-    Ctrl + ù                    # Opens the Console
-    Ctrl + µ                    # Clones selected tab
-    Ctrl + K, Ctrl + Z          # Zen Mode
-    Ctrl + K, Ctrl + T          # Select Theme
-    Alt + Shift + F             # Tidy
-    Alt + Shift + Left/Right    # Selected nested
-    Alt + Shift + Up/Down       # Duplicates line
-    Ctrl + Shift + V            # Preview Markdown
-    Ctrl+K V                    # Preview Markdown Side-by-side
+* Autosave = `File > Auto Save`
+* Open folder in terminal = `Right-click folder > Open in Terminal`
+* Toggle side-bar = `Ctrl + B`
+* Multi-line selection = `Select some text > Ctrl + D (x n)`
+* Opens the Console = `Ctrl + J` or `Ctrl + ù`
+* Clones selected tab = `Ctrl + µ`
+* Zen Mode = `Ctrl + K, Z`
+* Select Theme = `Ctrl + K, Ctrl + T`
+* Tidy = `Alt + Shift + F`
+* Selected nested = `Alt + Shift + Left/Right`
+* Duplicates line = `Alt + Shift + Up/Down`
+* Preview Markdown = `Ctrl + Shift + V`
+* Preview Markdown Side-by-side = `Ctrl+K, V`
+* Command = `Ctrl + Shift + P`
+  * `create new term`
+
+See <https://code.visualstudio.com/docs/getstarted/keybindings>
 
 ## Settings
 
-* User (Global)
-  * %APPDATA%\Code\User\settings.json
-* Workspace
-* Folder
+* Definition (see <https://developer.hyvor.com/vscode-editing-settings-json>)
+  * User (Global)
+    * %APPDATA%\Code\User\settings.json
+  * Workspace
+  * Folder
+* [Tabs vs Spaces](https://stackoverflow.com/a/29972553)
+* [Setting by Filetype](https://code.visualstudio.com/docs/getstarted/settings#_language-specific-editor-settings)
 
-See <https://developer.hyvor.com/vscode-editing-settings-json>
+`"[plaintext]": { "editor.insertSpaces": false }`   # Note that .txt files are referenced as "plaintext" filetype.
 
-### Tabs
+## Extensions
 
-* [Don't change tabs to spaces](https://stackoverflow.com/a/29972553)
-
-### Filetype Setting
-
-[Setting for one filetype](https://code.visualstudio.com/docs/getstarted/settings#_language-specific-editor-settings)
-
-E.g.:
-
-    {
-        "[plaintext]": {
-            "editor.insertSpaces": false
-        }
-    }
-
-Note that .txt files are referenced as "plaintext" filetype.
+* [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint)
+* [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur)
+* [Vue VSCode Snippets](https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-snippets)
+  * `vdata` = Vue data snippet
+  * `vmethod` = Vue methods snippet
