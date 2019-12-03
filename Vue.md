@@ -1,9 +1,9 @@
 # Vue.js
 
 Progressive, open-source web framework JavaScript library.
-In actuality, a large block of JavaScript code run before your own code, providing it with context.
-Collaborative tool that allows app segmentation into small versatile units called components.
-Packs a render engine, turning data models and components into HTML + JS.
+In practice, it consists of a large block of JavaScript code executed before our own code, providing it with context.
+Collaborative in nature as it allows app segmentation into small versatile units called components.
+Packs a render engine, turning data models and components into HTML & JS.
 
 ## Features
 
@@ -13,7 +13,7 @@ Packs a render engine, turning data models and components into HTML + JS.
 * Simple
   * Easy to understand & maintain
   * Uses familiar Directives (like Angular or Knockout)
-  * Build step can be omitted
+  * Build step can be omitted (in which case .vue files & component hierarchy cannot used)
 * Popular (> 150k stars on [Github](https://github.com/vuejs/vue))
 * Works with existing modern (jQuery, Angular, React) or legacy applications
   * Well-suited for surgical fixes & adding features
@@ -45,9 +45,9 @@ Packs a render engine, turning data models and components into HTML + JS.
 * Angular is much more complex.
 * Angular's library is much larger.
 * Angular also uses if/for directives.
-* Angular relies on TypeScript, which must also be mastered.
+* Angular requires TypeScript, which must therefore also learnt.
 * Angular uses its own Modules structure, on top of standard JS modules.
-* Angular is a full-fledged framework suited for large-scale apps, cannot be used to replace a small part of an existing application.
+* Angular is a full-fledged framework suited for large-scale apps, and cannot be used to replace a small part of an existing application.
 
 ### Drawbacks
 
@@ -61,7 +61,7 @@ Packs a render engine, turning data models and components into HTML + JS.
 ### Installation
 
 * [CDN](https://vuejs.org/v2/guide/installation.html)
-  * Development, with debug info in Console
+  * Development version, that outputs debug info in Console
 
     ```html
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -84,7 +84,7 @@ Packs a render engine, turning data models and components into HTML + JS.
   * `npm install vue.js`
   * `npm install -g @vue/cli`
   * `npm i(nstall)` = install all the dependencies in the local _node\_modules_ folder
-  * `npm run build` = build & publish code for production
+  * `npm run build` = create a production build
   * `npm run serve` = build & serve the app
     * Watches the served files for changes, and update the view accordingly in real-time
 
@@ -101,13 +101,15 @@ Packs a render engine, turning data models and components into HTML + JS.
   * Provides simple tools to add elements to the solution, collaboratively
 * **Vue Devtools** = Browser extension
   * Debug & manipulate the data model in real time (add/remove objects and set properties)
-* Visual Studio Code Extensions
-  * [**Vetur**](https://marketplace.visualstudio.com/items?itemName=octref.vetur)
-  * [**Vue VSCode Snippets**](https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-snippets)
-    * `vdata`
-    * `vcomputed`
-    * `vmethod`
-    * `vwatcher`
+* [**Vetur**](https://marketplace.visualstudio.com/items?itemName=octref.vetur) = Visual Studio Code Extension for linting, syntax-highlighting, emmet, etc.
+* [**Vue VSCode Snippets**](https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-snippets) = Visual Studio Code Extension for snippets
+  * `vbase` generates a component template & script sections
+  * `vdata`
+  * `vcomputed`
+  * `vmethod`
+  * `vwatcher`
+  * `vprops`
+  * `vmixin-use`
 
 #### Vue-CLI
 
@@ -123,14 +125,14 @@ Packs a render engine, turning data models and components into HTML + JS.
 
 * **/src/**
   * **app.vue** = main App component
-  * **main.js** = constructs the Vue instance and mount the main App component into the HTML shell
+  * **main.js** = constructs the Vue instance, and mounts the main App component into the HTML shell
   * **/components/** = contains child .vue component files
     * **component.vue** = child component
 * **/public/** = Contains the HTML _shell_ of the application
 * **/dist/** = The compiled result of an `npm run build` that is sent to production
   * Contains a minified _index.html_ file
 
-#### Vue File (.vue)
+#### Vue Files (.vue)
 
 Contains HTML, CSS & JS code, typically in a single file.
 
@@ -149,9 +151,9 @@ Composed of three sections:
   * Use application-wide style by referencing css files in /design/
   * Use inline styling to define styles scoped only to this component and its children (via _scoped_ keyword)
 
-## Framework
+## Components
 
-### Directives
+### Template Directives
 
 * **v-bind**
   * Binds data from model to any element attribute
@@ -196,8 +198,25 @@ Composed of three sections:
   * The element remains in the DOM, but its inline style is set to display:none when hidden
   * `v-show="expession"`
 
-### Model
+### Script Sections
 
+* **Import**
+  * Import components
+    * `import Component from @file/@library`
+    * `import Heroes from '@/components/heroes`
+  * Import methods from libraries
+    * `import { method } from library`
+    * `import { format } from date-fns`
+  * Import mixins from files
+    * `import { mixin } from './file'`
+    * `import { mymyx } from './my-mixins'`
+* **Export**
+  * Declares all the name, data, methods & other sections of the Component
+  * [_default_ keyword](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export#Description)
+* **Name**
+* **Components**
+  * `components: { a, b, c }`
+  * Must first be imported (see above)
 * **Data**
   * `data() { return {}; }`
   * The data() function returns an object holding all the properties that will be added to Vue's reactivity system.
@@ -208,7 +227,7 @@ Composed of three sections:
   * Use a cached value that gets updated when either of its dependent properties change.
   * Similar to C# read-only arrow (=>) properties in the sense that it doesn't have its own value, however a setter can actually also be defined, typically to break down the received value into the underlying data properties.
     * `get() {...} set(value) {...}`
-    * E.g. a property _fullName_ returning a concat of first & last name, and can be used to set them (via split)
+    * E.g. a property _fullName_ returning a concat of first & last name, and can be used to set them (via string split)
 * **Methods**
   * `methods: {}`
 * **Lifecycle Hooks**
@@ -225,8 +244,70 @@ Composed of three sections:
   11. _Component/Data gets disposed_
   12. `destroyed()`
 * **Watchers**
-  * `watch: { 'dataProperty.property': { immediate: true, deep: false, handler(newValue, oldValue) {...} }`
+  * `watch: { dataProperty: { immediate: true, deep: false, handler(newValue, oldValue) {...} }`
   * _deep_ lets us watch nested properties
+  * Use quotes for dotted property (i.e. `'dataObject.property'`)
 * **Filters**
-  * Defines some methods that transform bounded data (not unlike WPF Converters)
-  * `filters: { method: function(value) {...} }`
+  * Defines methods that transform bounded data (not unlike WPF Converters)
+  * Definition `filters: { filterName: function(value) {...} }`
+  * Application `{{ dataProperty | filterName }}`
+  * Can be defined globally (must come before the _Vue_ instance)
+* **Props**
+  * Input properties provided by a Parent
+* **Mixins**
+  * Distribute reusable functionality across components (e.g. a lifecycle hooks logger)
+  * In mixin file: `export const mymix = {...}` # e.g. data, methods, computeds, lifecycle hooks, watches
+  * In component: import them + add a `mixins: [mymix],` section
+  * Conflicting sections merge strategy
+    * Methods, Components & Computed: precedence to local component
+    * Data: merged superset, precedence to local component data
+    * Watch & Hooks: both are run, mixin's run first
+
+### Component Communication
+
+#### Parent to Child
+
+The Parent embeds the Child with v-bind (:) and a reference to the Component:
+
+* Template
+  * `<Component :child-property="parentProperty" />` # Dynamic
+  * `<Component child-property="a string" />` # Static
+  * Child property written in kebab-case
+* Script
+  * `import Component from '@/components/component'`
+  * `components: { Component },`
+
+The Child declares its input properties with type, default value, required (false by default), validator:
+Type can be String, Number, Boolean, Array, Object, Function, Promise
+
+  ```javascript
+  props: {
+    result: {
+      type: String,
+      default: () => {},
+      required: true,
+      validator: function(value) {
+        return ['success', 'warning', 'danger'].indexOf(value) !== -1
+      }
+    },
+  },
+  ```
+
+We should never modify the property incoming from the Parent, which is immutable.
+Instead, we can clone it (shallow or deep as required), and manipulate that value.
+This is important in Vue, because we want the data to flow one-directionally: top-down.
+
+#### Child to Parent
+
+The Child emits an  event with an arbitrary name (using Vue's $emit() function), optionally passing it parameters.
+
+`this.$emit('save', localHero);`
+
+The Parent register a handler for the event, just like for standard events.
+
+`<Component @save="saveHero">`
+
+Note that no parameter is specified in the template.
+The signature of the handler however receives the parameter.
+
+`saveHero(hero) {...}`

@@ -4,21 +4,26 @@ A good text editor.
 
 ## Commands
 
+* Move opened file view = Drag & Drop
 * Autosave = `File > Auto Save`
 * Open folder in terminal = `Right-click folder > Open in Terminal`
 * Toggle side-bar = `Ctrl + B`
-* Multi-line selection = `Select some text > Ctrl + D (x n)`
+* Multi-line
+  * Select All Occurrences of Find Match = `Select some text > Ctrl + Shift + L`
+  * Add Selection To Next Find Match = `Select some text > Ctrl + D (x n)`
 * Opens the Console = `Ctrl + J` or `Ctrl + ù`
 * Clones selected tab = `Ctrl + µ`
 * Zen Mode = `Ctrl + K, Z`
 * Select Theme = `Ctrl + K, Ctrl + T`
-* Tidy = `Alt + Shift + F`
 * Selected nested = `Alt + Shift + Left/Right`
 * Duplicates line = `Alt + Shift + Up/Down`
+* Command = `Ctrl + Shift + P` or `F1`
+  * `create new term`
+  * `Format Document`
+* Tidy = `Alt + Shift + F`
+* Tasklist = `Ctrl + Shift + T`
 * Preview Markdown = `Ctrl + Shift + V`
 * Preview Markdown Side-by-side = `Ctrl+K, V`
-* Command = `Ctrl + Shift + P`
-  * `create new term`
 
 See <https://code.visualstudio.com/docs/getstarted/keybindings>
 
