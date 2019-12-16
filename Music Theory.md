@@ -158,10 +158,9 @@ Examples:
 * Musique microtonale
   * Divide in smaller intervals => more than 12 notes in one octave
   * Arabic = 24 notes (quarter-notes)
-* See [Science étonnante](https://www.youtube.com/watch?v=cTYvCpLRwao)
+* See [Science étonnante - Les mathématiques de la musique](https://www.youtube.com/watch?v=cTYvCpLRwao)
 
 ## References
 
-* [Science étonnante - Les mathématiques de la musique](https://www.youtube.com/watch?v=cTYvCpLRwao)
 * [Musique Theory Distilled](https://www.youtube.com/watch?v=mdEcLQ_RQPY)
 * [Andrew Huang](https://www.youtube.com/watch?v=rgaTLrZGlk0)

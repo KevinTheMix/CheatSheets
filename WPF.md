@@ -327,6 +327,14 @@ The following resources and techniques are very valuable to unearth the cause of
 
 * Extended WPF toolkit
 
+## Snippets
+
+    <ObjectDataProvider x:Key="LimitEqTypeEnum" MethodName="GetValues" ObjectType="{x:Type system:Enum}">
+      <ObjectDataProvider.MethodParameters>
+        <x:Type TypeName="domain:LimitEqType"/>
+      </ObjectDataProvider.MethodParameters>
+    </ObjectDataProvider>
+
 ### Telerik
 
 * GridViewDataColumn can be edited
