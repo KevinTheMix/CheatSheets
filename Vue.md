@@ -87,6 +87,7 @@ Packs a render engine, turning data models and components into HTML & JS.
   * `npm run build` = create a production build
   * `npm run serve` = build & serve the app
     * Watches the served files for changes, and update the view accordingly in real-time
+    * This command is actually an alias as defined in package.json to a cmd (`vue-cli-service serve`) located in _node\_modules/.bin_ (see <https://cli.vuejs.org/guide/cli-service.html>)
 
 ### Ecosystem
 
@@ -226,6 +227,7 @@ Composed of three sections:
 * **Data**
   * `data() { return {}; }`
   * The data() function returns an object holding all the properties that will be added to Vue's reactivity system.
+  * Note that it is a function, note an object, so that multiple instances can can maintain an independent copy of the returned data object. 
   * When the values of those properties change, the component reacts (real-time binding).
 * **Computed**
   * `computed: {}`
@@ -301,7 +303,7 @@ Type can be String, Number, Boolean, Array, Object, Function, Promise
 
 We should never modify the property incoming from the Parent, which is immutable.
 Instead, we can clone it (shallow or deep as required), and manipulate that value.
-This is important in Vue, because we want the data to flow one-directionally: top-down.
+This is important in Vue, because we want the data to flow one-directionally, top-down.
 
 #### Child to Parent
 
@@ -317,3 +319,32 @@ Note that no parameter is specified in the template.
 The signature of the handler however receives the parameter.
 
 `saveHero(hero) {...}`
+
+#### Slots
+
+Slot are elements present in a child Component that acts as a placeholder for a content provided in the Parent.
+It is a similar construct to WPF's ContentPresenters that mark a location where Content will be rendered.
+Example:
+
+    Hello <slot></slot>    # Child template
+    <child>World!</child>  # Parent template
+
+The Child itself can prepare a default content to use when the Parent provides none:
+Example:
+
+    Hello <slot>World!</slot>    # Child template
+
+Slots can be named with the _name_ attribute in the Child, and referencing it with a **v-slot**:_name_ directive in the Parent.
+The default name is just that: _default_, which can also be referenced explicitely.
+Example:
+
+    Hello <slot name="koko"></slot>    # Child template
+    <child v-slot:koko>World!</child>  # Parent template
+
+Scoped slots can be used when we want the content defined in the Parent to make use of data only available in the Child.
+Therefore it is a mechanism to let the Child pass its data to the Parent, that then gets injected back to the Child!
+To implement this, the Child must v-bind the data by specifying an arbitrary name.
+The Parent can then use the **v-slot** (with _default_ name) attribute syntax and specify a name for the data context it receives.
+The Child property can now be accessed in the content via ```{parentDataContextName}.{childArbitraryName}```
+
+See <https://vuejs.org/v2/guide/components-slots.html>

@@ -1,4 +1,4 @@
-# JS
+# JavaScript
 
 * \`Template string with ${variable}\`
 * `...object` = spreads out the properties of an object. Used for shallow cloning.

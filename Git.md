@@ -144,6 +144,7 @@ Checks-out all files of specific Commit and switches to detached HEAD state
 
 Checks-out the latest version of a branch
 
+    git checkout . # Current branch (see <https://stackoverflow.com/a/14075772>)
     git checkout BRANCH # E.g. default branch 'git checkout master'
     git checkout BRANCH^ # Second to last commit in the branch
     git checkout BRANCH^ # N-th to last commit in the branch
