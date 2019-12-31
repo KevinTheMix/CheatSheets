@@ -322,29 +322,44 @@ The signature of the handler however receives the parameter.
 
 #### Slots
 
-Slot are elements present in a child Component that acts as a placeholder for a content provided in the Parent.
+[Slots](https://vuejs.org/v2/guide/components-slots.html) a mechanic that allows a Child component to set a placeholder for some content provided by the Parent.
 It is a similar construct to WPF's ContentPresenters that mark a location where Content will be rendered.
 Example:
 
-    Hello <slot></slot>    # Child template
-    <child>World!</child>  # Parent template
-
-The Child itself can prepare a default content to use when the Parent provides none:
-Example:
-
-    Hello <slot>World!</slot>    # Child template
+    Hello <slot></slot>                         # Child template
+    <child><template>World!</template></child>  # Parent template
 
 Slots can be named with the _name_ attribute in the Child, and referencing it with a **v-slot**:_name_ directive in the Parent.
-The default name is just that: _default_, which can also be referenced explicitely.
+The default name when no name is provided is just that: _default_, which can also be referenced explicitely.
+Any content not wrapped in a ```<template>``` using v-slot is assumed to be for the default slot.
 Example:
 
     Hello <slot name="koko"></slot>    # Child template
     <child v-slot:koko>World!</child>  # Parent template
 
+The Child itself can prepare a default (fallback) content to use when the Parent provides none:
+Example:
+
+    Hello <slot>World!</slot>    # Child template
+
 Scoped slots can be used when we want the content defined in the Parent to make use of data only available in the Child.
 Therefore it is a mechanism to let the Child pass its data to the Parent, that then gets injected back to the Child!
 To implement this, the Child must v-bind the data by specifying an arbitrary name.
-The Parent can then use the **v-slot** (with _default_ name) attribute syntax and specify a name for the data context it receives.
-The Child property can now be accessed in the content via ```{parentDataContextName}.{childArbitraryName}```
+The Parent can then use the **v-slot** attribute syntax and specify a name for the object holding all the props it receives (similar to the notion of a WPF DataContext).
+The Child property can then be accessed in the content via ```{holdingObjectName}.{childArbitraryName}```
+Example:
+    
+    <slot v-bind:childProp="childVarOrprop"></slot>                             # Child template
+    <child><template v-slot:default="obj">{{obj.childProp}}</template></child> # Parent template
 
-See <https://vuejs.org/v2/guide/components-slots.html>
+When only the default slot is provided content (no other named slots), the component’s tags can be used as the slot’s template.
+
+    <child v-slot:default="obj">{{obj.childProp}}</child>  # Parent template
+
+Note that for named slots, the **v-slot**:_name_ attribute can be shorthanded into #name.
+Example:
+
+    <child #koko>World!</child>  # Parent template
+
+
+Read on about scoped slots datacontext...: <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Object_destructuring>
