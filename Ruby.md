@@ -255,8 +255,10 @@ The intrisical value of symbols is their identity (their name): a symbol equals 
 	a,b = t			# a=1 b=2 (parenthesis optional e.g. (a,b) = t)
 	a,b,c,d = t		# a=1 b=2 c=3 d=nil
 	t[1,2] = [3,2]	# [1,3,2]
+
 ### Splat
-Expands an Array into a list of arguments or a list of arguments into an Array.
+
+Expands an Array into a list of arguments or a list of arguments into an Array (not unlike the C# _params_ keyword).
 A method parameter with a splat absorbs the remaining arguments as an Array => we can loop on it
 
 	t = [3,4]

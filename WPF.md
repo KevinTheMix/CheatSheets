@@ -17,13 +17,13 @@ Most of the API is contained in the PresentationFramework DLL that contains the 
 
 * DataTemplate = How data is displayed. The data in question is a class instance, which is usually a VM.
 * ControlTemplate = How a GUI visual control (i.e. System.Windows.Controls, e.g. a button or a panel) is displayed.
-* Style = WPF's CSS, but can also applies templates, etc. Basically can be used to change any property of a control.
 * ContentControl = base class for all controls that have a "Content" property.
 * Content = property of a ContentControl that can be anything.
   * E.g.: the Content of a Textblock is its Text.
   * The Content of a control is rendered at the location of the ControlPresenter within its ControlTemplate.
 * ContentPresenter = element within a ControlTemplate that acts as a placeholder and defines where the content of the templated control will be displayed.
   * See <https://stackoverflow.com/a/1288006>
+* Style = WPF's CSS, but can also applies templates, etc. Basically can be used to change any property of a control.
 
 Within a Template, there's one more level to go up to reach the DataContext:
 
@@ -326,6 +326,14 @@ The following resources and techniques are very valuable to unearth the cause of
 ## Third-Party (NuGet)
 
 * Extended WPF toolkit
+
+## Snippets
+
+    <ObjectDataProvider x:Key="LimitEqTypeEnum" MethodName="GetValues" ObjectType="{x:Type system:Enum}">
+      <ObjectDataProvider.MethodParameters>
+        <x:Type TypeName="domain:LimitEqType"/>
+      </ObjectDataProvider.MethodParameters>
+    </ObjectDataProvider>
 
 ### Telerik
 

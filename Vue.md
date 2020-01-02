@@ -87,9 +87,16 @@ Packs a render engine, turning data models and components into HTML & JS.
   * `npm run build` = create a production build
   * `npm run serve` = build & serve the app
     * Watches the served files for changes, and update the view accordingly in real-time
+    * This command is actually an alias as defined in package.json to a cmd (`vue-cli-service serve`) located in _node\_modules/.bin_ (see <https://cli.vuejs.org/guide/cli-service.html>)
 
 ### Ecosystem
 
+* [**Vue.js**](https://vuejs.org/v2/api/)
+  * [Class-based](https://alligator.io/vuejs/typescript-class-components/), as opposed to standard Vue.js
+* [**Vuetify.js**](https://vuetifyjs.com/en/components/date-pickers)
+  * [Material Design](https://en.wikipedia.org/wiki/Material_Design)
+* [**VeeValidate**](https://logaretm.github.io/vee-validate/)
+* [**Vue I18n**](https://kazupon.github.io/vue-i18n/guide/formatting.html#named-formatting)
 * **Nuxt** = Universal Rendering
   * Makes the App-to-plain-HTML rendering on the server side instead of the client
 * **Vuex** = State Management
@@ -220,6 +227,7 @@ Composed of three sections:
 * **Data**
   * `data() { return {}; }`
   * The data() function returns an object holding all the properties that will be added to Vue's reactivity system.
+  * Note that it is a function, note an object, so that multiple instances can can maintain an independent copy of the returned data object. 
   * When the values of those properties change, the component reacts (real-time binding).
 * **Computed**
   * `computed: {}`
@@ -295,7 +303,7 @@ Type can be String, Number, Boolean, Array, Object, Function, Promise
 
 We should never modify the property incoming from the Parent, which is immutable.
 Instead, we can clone it (shallow or deep as required), and manipulate that value.
-This is important in Vue, because we want the data to flow one-directionally: top-down.
+This is important in Vue, because we want the data to flow one-directionally, top-down.
 
 #### Child to Parent
 
@@ -311,3 +319,47 @@ Note that no parameter is specified in the template.
 The signature of the handler however receives the parameter.
 
 `saveHero(hero) {...}`
+
+#### Slots
+
+[Slots](https://vuejs.org/v2/guide/components-slots.html) a mechanic that allows a Child component to set a placeholder for some content provided by the Parent.
+It is a similar construct to WPF's ContentPresenters that mark a location where Content will be rendered.
+Example:
+
+    Hello <slot></slot>                         # Child template
+    <child><template>World!</template></child>  # Parent template
+
+Slots can be named with the _name_ attribute in the Child, and referencing it with a **v-slot**:_name_ directive in the Parent.
+The default name when no name is provided is just that: _default_, which can also be referenced explicitely.
+Any content not wrapped in a ```<template>``` using v-slot is assumed to be for the default slot.
+Example:
+
+    Hello <slot name="koko"></slot>    # Child template
+    <child v-slot:koko>World!</child>  # Parent template
+
+The Child itself can prepare a default (fallback) content to use when the Parent provides none:
+Example:
+
+    Hello <slot>World!</slot>    # Child template
+
+Scoped slots can be used when we want the content defined in the Parent to make use of data only available in the Child.
+Therefore it is a mechanism to let the Child pass its data to the Parent, that then gets injected back to the Child!
+To implement this, the Child must v-bind the data by specifying an arbitrary name.
+The Parent can then use the **v-slot** attribute syntax and specify a name for the object holding all the props it receives (similar to the notion of a WPF DataContext).
+The Child property can then be accessed in the content via ```{holdingObjectName}.{childArbitraryName}```
+Example:
+    
+    <slot v-bind:childProp="childVarOrprop"></slot>                             # Child template
+    <child><template v-slot:default="obj">{{obj.childProp}}</template></child> # Parent template
+
+When only the default slot is provided content (no other named slots), the component’s tags can be used as the slot’s template.
+
+    <child v-slot:default="obj">{{obj.childProp}}</child>  # Parent template
+
+Note that for named slots, the **v-slot**:_name_ attribute can be shorthanded into #name.
+Example:
+
+    <child #koko>World!</child>  # Parent template
+
+
+Read on about scoped slots datacontext...: <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Object_destructuring>

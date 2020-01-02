@@ -6,6 +6,10 @@
 
 ## Vulnerabilities
 
+### SQL Injection
+
+See <https://www.youtube.com/watch?v=ciNHn38EyRc>
+
 ### XSS
 
 Stands for Cross-Site Scripting.
@@ -65,7 +69,7 @@ Example: this technique was used recently to auto-"Like" pages on Facebook by vi
 ### RFI
 
 Used to bypass same website policy.
-File inclusion not filtered, can run anyt.hing even PHP.
+File inclusion not filtered, can run anything even PHP.
 Via URL parameters:
 
     index.php?page=http://www.google.com

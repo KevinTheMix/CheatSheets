@@ -164,3 +164,9 @@ Useful tool to test web service APIs: <C:\Program Files (x86)\Microsoft Visual S
 * AppSettings> must be 1st section in App/Web.config.
 * Sometimes, must RE-build dependant projects of projects whose resources have been modified.
 * Missing Method setter => Old DLL to re-deploy <http://stackoverflow.com/questions/12745985/c-method-not-found-exception-setter-missing>.
+
+## Misc
+
+Private properties
+
+    public ILimits<SimpleOverrideValue> Limits { get; private set; }

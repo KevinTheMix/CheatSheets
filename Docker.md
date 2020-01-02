@@ -77,7 +77,7 @@ On the other hand, VMs provide better isolation.
 
 The name of the base image on the repository (which is Dockerhub by default).
 
-  FROM {parent_image}
+  `FROM {parent_image}`
 
 Set the working directory.
 

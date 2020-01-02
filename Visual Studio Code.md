@@ -2,17 +2,41 @@
 
 A good text editor.
 
+## Settings
+
+* [Scopes](https://developer.hyvor.com/vscode-editing-settings-json)
+  * By user (Global)
+    * %APPDATA%\Code\User\settings.json
+  * By workspace
+  * By folder
+* [Setting by Filetype](https://code.visualstudio.com/docs/getstarted/settings#_language-specific-editor-settings)
+* [Tabs vs Spaces](https://stackoverflow.com/a/29972553)
+
+`"[plaintext]": { "editor.insertSpaces": false }`   # Note that .txt files are referenced as "plaintext" filetype.
+
 ## Commands
 
-* Move opened file view = Drag & Drop
+See <https://code.visualstudio.com/docs/getstarted/keybindings>
+
+### Menu
+
 * Autosave = `File > Auto Save`
 * Open folder in terminal = `Right-click folder > Open in Terminal`
+
+### Mouse
+
+* Move opened file view = `Drag & Drop Tab`
+
+### Keyboards
+
+* Seach = `Ctrl + Shift + F`
 * Toggle side-bar = `Ctrl + B`
 * Multi-line
   * Select All Occurrences of Find Match = `Select some text > Ctrl + Shift + L`
   * Add Selection To Next Find Match = `Select some text > Ctrl + D (x n)`
-* Opens the Console = `Ctrl + J` or `Ctrl + ù`
-* Clones selected tab = `Ctrl + µ`
+* New Terminal = `Ctrl + Shift + ù`
+* Toggle Terminal = `Ctrl + ù` or `Ctrl + J`
+* Clones selected tab or Split Terminal = `Ctrl + µ`
 * Zen Mode = `Ctrl + K, Z`
 * Select Theme = `Ctrl + K, Ctrl + T`
 * Selected nested = `Alt + Shift + Left/Right`
@@ -24,20 +48,6 @@ A good text editor.
 * Tasklist = `Ctrl + Shift + T`
 * Preview Markdown = `Ctrl + Shift + V`
 * Preview Markdown Side-by-side = `Ctrl+K, V`
-
-See <https://code.visualstudio.com/docs/getstarted/keybindings>
-
-## Settings
-
-* Definition (see <https://developer.hyvor.com/vscode-editing-settings-json>)
-  * User (Global)
-    * %APPDATA%\Code\User\settings.json
-  * Workspace
-  * Folder
-* [Tabs vs Spaces](https://stackoverflow.com/a/29972553)
-* [Setting by Filetype](https://code.visualstudio.com/docs/getstarted/settings#_language-specific-editor-settings)
-
-`"[plaintext]": { "editor.insertSpaces": false }`   # Note that .txt files are referenced as "plaintext" filetype.
 
 ## Extensions
 
