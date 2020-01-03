@@ -148,8 +148,8 @@ virtual folder stored in the host's memory (not persisted).
 * Repository = collection of related Images under common Tag.
 * Tag = label used to identify the specific platform (OS) and version (e.g. .NET version) of an Image when several of those are available.
 * Compose = CLI tool using YAML for defining & running multi-container applications (from several Images) => a single command (***docker compose***) creates several containers on the Docker host.
-* Cluster = collection of Docker hosts exposed as one. Used by orchestration for scaling (see Kubernetes, Azure Fabric Service, Docker Swarm, Mesosphere).
-* Orchestrator = manages the lifecycle and locations of various Containers, with error control & restart capabilities.
+* Cluster = collection of Docker hosts exposed as one. Used by orchestration for scaling.
+* Orchestrator = manages the lifecycle and locations of various Containers, with error control & restart capabilities. E.g. Azure Fabric Service, Docker Swarm, Kubernetes, Mesosphere.
 
 ## Docker Commands
 

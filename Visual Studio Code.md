@@ -44,7 +44,7 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 * Command = `Ctrl + Shift + P` or `F1`
   * `create new term`
   * `Format Document`
-* Tidy = `Alt + Shift + F`
+* Format/Tidy = `Alt + Shift + F`
 * Tasklist = `Ctrl + Shift + T`
 * Preview Markdown = `Ctrl + Shift + V`
 * Preview Markdown Side-by-side = `Ctrl+K, V`

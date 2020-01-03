@@ -161,11 +161,10 @@
     @u = (3, 4); @t = (1, 2, @u);   # Aplatissement. @t == (1, 2 ,3, 4)
 
 [List flattening](http://blogs.perl.org/users/aristotle/2017/11/perl5-refs-flattening.html).
-This is akin to the splat operator (```*``` in Ruby, ```...``` in Javascript), except in reverse: in Perl, splatting is the default and the ```\``` operator prevents it.
+This is akin to the ```params``` [params operator](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/params) in C#, ```*``` [splat operator](https://www.freecodecamp.org/news/rubys-splat-and-double-splat-operators-ceb753329a78/) in Ruby, ```...``` [spread operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) in Javascript, except in reverse: in Perl, splatting is the default and the ```\``` operator prevents it.
 
     my @x = (1, 2, 3, 4);
     my @y = (\@x, \@x); // @y => ([1, 2, 3, 4], [1, 2, 3, 4])
-
 
 ## Loops
 
