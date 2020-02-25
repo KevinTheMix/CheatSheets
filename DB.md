@@ -78,6 +78,8 @@ WHERE
     FROM A
     WHERE A.count > (SELECT COUNT(*) FROM A)
 
+    WHERE Date BETWEEN '2014-09-13' AND '2014-09-15'
+
 See [Derived Tables](https://logicalread.com/when-to-apply-sql-server-derived-tables-mc03/#.XNFNnnduKUk)
 Also see [CTE](https://stackoverflow.com/a/13383844), which allows a single pre-prepared computation to be used in multiple places of the subsequent query.
 

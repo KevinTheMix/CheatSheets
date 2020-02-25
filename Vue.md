@@ -21,7 +21,7 @@ Packs a render engine, turning data models and components into HTML & JS.
   * Small apps can be set up very quickly
   * High performance even with order of magnitudes more data
   * Subsequent conversion to full-scale app is straightforward
-* Reactivty
+* [Reactivty](https://vuejs.org/v2/guide/reactivity.html)
   * Updates DOM automatically in response to data model change (doesn't require a call to Render as React does)
   * Virtual DOM (like React): existing GUI elements are reused to mitigate the cost associated with rendering new stuff
   * Changes are batched for performance
@@ -142,8 +142,10 @@ Scaffolding & build
 
 #### TypeScript
 
-[TypeScript Support](https://vuejs.org/v2/guide/typescript.html)
-[TypeScript class components](https://alligator.io/vuejs/typescript-class-components/), as opposed to standard Vue.js
+* [Vue.js TypeScript Support](https://vuejs.org/v2/guide/typescript.html) is native
+* Requires [TypeScript class components](https://github.com/vuejs/vue-class-component) for class-style Vue Components ([more info](https://alligator.io/vuejs/typescript-class-components/))
+* Also requires [Vue Property Decorator](https://github.com/kaorun343/vue-property-decorator) for inlining properties declaration using its `@Prop` directive
+  * This package depends on the above, and re-exposes some of its features (@Component) so that a single _import_ statement is required
 
 ### Solution Elements
 
@@ -179,6 +181,8 @@ Composed of three sections:
 
 ## Components
 
+"_(...) all Vue components are also Vue instances, and so accept the same options object (except for a few root-specific options)._" ([see](https://stackoverflow.com/a/48537543)).
+
 ### Template Directives
 
 * **v-bind**
@@ -190,12 +194,15 @@ Composed of three sections:
     * `:disabled`
     * `:class="{className: data-property-based-condition}"`
     * `:style="{...}"`
-* **v-text**
-  * Binds element's (whole) textContent
-  * `v-text="property"`
+    * Inline value: `property="text value"`
 * **interpolation**
   * Binds element's (whole OR partial) textContent
   * `{{ property }}`
+* **v-text**
+  * Binds element's (whole) textContent
+  * `v-text="property"`
+* [**v-html**](https://vuejs.org/v2/api/#v-html)
+  * Similar to **v-text**; sets the inner HTML of the element.
 * **v-on**
   * Eventing (method name parentheses are optional)
   * `v-on:event="method-name()"`
@@ -206,7 +213,7 @@ Composed of three sections:
     * `@keyup.esc` or `@keyup.8` using any [ASCII code](http://www.asciitable.com/)
 * **v-model**
   * Binds two-way from/to input/textarea/select elements
-  * `v-model`
+  * `v-model="property"`
 * **v-for**
   * Iterator: repeats the HTML content for each item in the list
   * `:key` attribute designates a unique identifier field to let Vue identify each row uniquely
@@ -274,6 +281,7 @@ Composed of three sections:
 * **Watchers**
   * Performs some treatment in response to the change of a given property.
   * `watch: { dataProperty: { immediate: true, deep: false, handler(newValue, oldValue) {...} }`
+  * `immediate: true` launches the watcher immediately, as the Component gets created
   * `deep: true` lets us watch nested properties
   * Use quotes for dotted property (i.e. `'dataObject.property'`)
 * **Filters**
@@ -299,15 +307,15 @@ Composed of three sections:
 
 #### Parent to Child
 
-The Parent embeds the Child with v-bind (:) and a reference to the Component:
+The Parent first references the Child, embeds its tag in its template, and v-bind (:) its properties:
 
 * Template
-  * `<Component :child-property="parentProperty" />` # Dynamic
-  * `<Component child-property="a string" />` # Static
-  * Child property written in kebab-case
+  * `<Child :child-property="parentProperty" />` # Dynamic
+  * `<Child child-property="a string" />` # Static
+  * Child property written in _kebab-case_
 * Script
-  * `import Component from '@/components/component'`
-  * `components: { Component },`
+  * `import Child from '@/components/child'` or `import Child from './Child.vue';`
+  * `components: { Child },`
 
 The Child declares its input properties with type, default value, required (false by default), validator:
 Type can be String, Number, Boolean, Array, Object, Function, Promise
@@ -330,6 +338,10 @@ This is important in Vue, because we want the data to flow one-directionally, to
 
 To be able to manipulate and modify the property coming from the Parent in the Child, we need to create a copy (hence a new object) first.
 If the property is a simple object with one-level deep properties, we can shallow clone, using the [spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) into another object (i.e. `{ ...original }`), otherwise deep clone it using a library like [Lodash](https://lodash.com/docs/4.17.15#cloneDeep) (or our own implementation).
+
+In order to call the child's method from the parent, the parent first needs to obtain a reference to a Child's instance.
+This can accomplish with regular JS/jQuery element selection, or via the `ref="koko"` attribute.
+From then on, the parent can access the reference via `this.$refs.koko as Child`, then call the methods that are accessible through it.
 
 #### Child to Parent
 
@@ -368,7 +380,7 @@ Example:
   <!-- Child template -->
   Hello <slot name="koko"></slot>
   <!-- Parent template -->
-  <child v-slot:koko>World!</child>
+  <child><template v-slot:koko>World!</template></child>
   ```
 
 The Child itself can prepare a default (fallback) content to use when the Parent provides none:
@@ -380,7 +392,7 @@ Example:
   ```
 
 Scoped slots can be used when we want the content defined in the Parent to make use of data only available in the Child.
-Therefore it is a mechanism to let the Child pass its data to the Parent, that then gets injected back to the Child!
+Therefore it is a mechanism to let the Child pass its data to the Parent via binding, that then gets injected back to the Child via templating.
 To implement this, the Child must v-bind the data by specifying an arbitrary name.
 The Parent can then use the **v-slot** attribute syntax and specify a name for the object holding all the props it receives (similar to the notion of a WPF DataContext, or simply the _data() { return {}}_ section).
 The Child property can then be accessed in the content via `{holdingObjectName}.{childArbitraryName}`
@@ -388,9 +400,9 @@ Example:
 
   ```html
   <!-- Child template -->
-  <slot v-bind:childProp="childVarOrprop"></slot>
+  <slot v-bind:child4parentProp="childLocalVar"></slot>
   <!-- Parent template -->
-  <child><template v-slot:default="obj">{{obj.childProp}}</template></child>
+  <child><template v-slot:default="obj">{{obj.child2parentProp}}</template></child>
   ```
 
 When only the default slot is provided content (no other named slots), the component’s tags can be used as the slot’s template.
