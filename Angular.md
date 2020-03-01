@@ -12,7 +12,7 @@ Angular is basically modularly organized Typescript using webpack for module/tem
 
 ### NPM
 
-Package manager for JavaScript (not necessarily Node! But shipped with it).
+Package manager for JavaScript (we could use another one however NPM is shipped with Node).
 
     node --version
 
@@ -122,7 +122,7 @@ Component = directive on a class (hence it becomes a component class) + view (HT
     import { Component } from '@angular/core';
     @Component({                        # Component Metadata Properties
         selector: 'app',                # Locates a named HTML element, where the content of the following provided template will be lazy-loaded.
-        template: '<h1>abc</h1>'        # Applies the given explicit template
+        template: '<h1>abc</h1>'        # Applies the given inline template
         templateUrl: './component.html' # Applies the given referenced template
         styles: [css]                   # Array of CSS style codes. Use ES2015 backticks '`' to write the content on multiple lines.
         styleUrls: [paths]              # Array of paths to CSS stylesheets

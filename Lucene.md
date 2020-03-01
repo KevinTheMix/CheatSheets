@@ -54,7 +54,7 @@ See <https://www.javacodegeeks.com/2015/09/advanced-lucene-query-examples.html>
 
 ## Multi-lingual
 
-Analyzer => liste de stop words + query normalization
+Analyzer => liste de [stop words](https://en.wikipedia.org/wiki/Stop_words) + query normalization
 
 ## NRT
 

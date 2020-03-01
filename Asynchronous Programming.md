@@ -16,7 +16,7 @@ Going up the hierarchy of async methods, we should always arrive either:
 
 ## UI Thread
 
-UI frameworks like WinForms, WPF, and Silverlight all place a restriction on which threads are able to access UI controls, namely that the control can only be accessed from the thread that created it.
+Frameworks such as WinForms, WPF, and Silverlight all place a restriction on which threads are able to access UI controls, namely that the control can only be accessed from the thread that created it.
 This is called [thread affinity](https://dailydotnettips.com/what-is-synchronizationcontext-all-about/).
 See <https://devblogs.microsoft.com/pfxteam/await-and-ui-and-deadlocks-oh-my/>
 
@@ -51,6 +51,11 @@ See <https://devblogs.microsoft.com/pfxteam/await-and-ui-and-deadlocks-oh-my/>
 
 ## Synchronization Context
 
+Unlike Console applications who use a threadpool as SynchronizationContext, GUIs  employ a single thread as SynchronizationContext.
+This can cause unexpected deadlock issues with the same code that would actually work in a (console) unit test.
+If a (synchronous) blocking call is made in an above method, it will prevent the method below that finishes its await statement to ever complete, because the above context itself is waiting for the method to finish (to clarify: the await statement is finished, but not the entire method, i.e. its closing curly brace, that the above method is waiting for).
+See <https://msdn.microsoft.com/en-us/magazine/jj991977.aspx>
+
 Access to the currently running thread.
 Can be saved, and used to send/post messages.
 The context of two methods are independant, i.e. the captured context can be configured using ConfigureAwait() in the callee, and the caller won't get effected.
@@ -68,6 +73,8 @@ It can also be useful when gradually converting an application from synchronous 
 
 Be aware that it will not actually be called if the task completes before the await mechanic intervenes.
 Be careful not to use it in methods that require the context i.e. if the remaining code needs the UI thread e.g. to update some control value.
+
+See <https://medium.com/bynder-tech/c-why-you-should-use-configureawait-false-in-your-library-code-d7837dce3d7f>
 
 ## Troubleshooting
 

@@ -6,6 +6,10 @@
 
 ## Vulnerabilities
 
+### SQL Injection
+
+See <https://www.youtube.com/watch?v=ciNHn38EyRc>
+
 ### XSS
 
 Stands for Cross-Site Scripting.
@@ -14,13 +18,16 @@ Caused by a lack of sanitization of URLs or input fields.
 Accounts for 84% of all security vulnerabilities.
 See <https://en.wikipedia.org/wiki/Cross-site_scripting>
 
+There exists two types of XSS vulnerabilities: Persistent and Non-Persistent.
+
 #### Non-Persistent (reflected)
 
-Include a malicious script in the URL of a legit website that displays the input as-is (e.g. the results of a search engine "You searched: javascript:alert('oh no')") and send it to the victim.
+Craft a URL containing a malicious script to a legit website that displays the URL parameter as-is on the page.
+The victim browses the linked page containing the script, which is run when he lands on the page.
 
-The victim clicks the link containing the script, which is run when he lands on the page.
+E.g. the results of a lousy search engine "You searched: javascript:alert('oh no')") and send that URL to the victim.
 
-URL-based => can be done by GET or POST.
+URL-based => can be performed either by GET or POST.
 
 Examples (different ways to bypass input sanitization):
 
@@ -50,6 +57,8 @@ Examples (different ways to bypass input sanitization):
 Inject malicious code (via an input field) saved and displayed as-is on a page of a legit website.
 When victims load the page, the script is run.
 
+E.g. a website that allows to edit user profiles, where malicious scripts can be entered, that will be run when someone browser that user profile's page.
+
 ### XSRF
 
 Stands for Cross-Site Request Forgery.
@@ -60,7 +69,7 @@ Example: this technique was used recently to auto-"Like" pages on Facebook by vi
 ### RFI
 
 Used to bypass same website policy.
-File inclusion not filtered, can run anyt.hing even PHP.
+File inclusion not filtered, can run anything even PHP.
 Via URL parameters:
 
     index.php?page=http://www.google.com

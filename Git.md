@@ -71,7 +71,8 @@ Oppositve of Add; Unregister one or all files staged for commit
 ### Commit
 
 The Commit itself. All staged files are commited ("snapshot") to the repository
-A Commit messageis expected. If it is not provided in the command line, the default text editor is launched and its result fed as message
+A Commit message is expected.
+If it is not provided in the command line, the default text editor is launched and its result fed as message
 
     git commit
     git commit -m "Commit message"
@@ -144,6 +145,7 @@ Checks-out all files of specific Commit and switches to detached HEAD state
 
 Checks-out the latest version of a branch
 
+    git checkout . # Current branch (see <https://stackoverflow.com/a/14075772>)
     git checkout BRANCH # E.g. default branch 'git checkout master'
     git checkout BRANCH^ # Second to last commit in the branch
     git checkout BRANCH^ # N-th to last commit in the branch
