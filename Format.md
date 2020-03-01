@@ -1,6 +1,21 @@
 # Format
 
+* Windows Update
 * Ninite.com
+  * MSE
+  * Firefox
+    * Ad Block (uBlock Origin)
+    * Hoxx VPN Proxy
+    * Kee - Password Manager
+  * KeePass 2
+  * FileZilla
+  * 7-Zip
+  * Sumatra PDF
+  * Visual Studio Code
+* Visual Studio
+* FL Studio (Presets & VSTs)
+* Audacity
+* MS Office
 
 ## Phone
 

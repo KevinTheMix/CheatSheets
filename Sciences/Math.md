@@ -52,3 +52,7 @@ Expressions = 2ax+b
 * ...
   * y2-y1/x2-x1
   * Advantages = built from points
+
+## Trigonometry
+
+Tangeante = sin/cos = y/x = slope = ratio of expansion of height over width = length of tangeant to trigo circle )| or )\

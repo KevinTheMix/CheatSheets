@@ -16,6 +16,7 @@ Most of the API is contained in the PresentationFramework DLL that contains the 
 ## Styling & Templating
 
 * DataTemplate = How data is displayed. The data in question is a class instance, which is usually a VM.
+  * Don't specify an x:Key if the template is to be applied to all instances of the x:Type.
 * ControlTemplate = How a GUI visual control (i.e. System.Windows.Controls, e.g. a button or a panel) is displayed.
 * Style = WPF's CSS, but can also applies templates, etc. Basically can be used to change any property of a control.
 * ContentControl = base class for all controls that have a "Content" property.
