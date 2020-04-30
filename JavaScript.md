@@ -1,11 +1,11 @@
 # JavaScript
 
-* \`Template string with ${variable}\`
+* `horse${horses.length}` template literal string interpolation
+  * Advanced functional templating, passing template to a function that has access to the consecutive parameters (basically implementing a custom C# _String.Format()_ method) `function plural(s, count) { return ${s[0]}{count > 1 ? 's' : '' }; }` and `plural'horse${horses.length}'` (_but with backticks instead of single quotes_)
 * `{ ...object }` = spreads out the properties of an object. Used for shallow cloning.
-* `${variable}` = string interpolation
 * `if(variable)` = check if undefined
 * `variable ? variable.property : ""` = check if unefined into ternary operator
-* `aray.push`
+* Trailing (_dangling_) commas are useful to reduce the number of lines that change when git commit (the previous last row remains the same)
 
 ## Eco-system
 
@@ -67,26 +67,56 @@
 
 ### Arrays
 
+* `array.shift()` pops the first element of an array and return it
+* `array.unshift()` adds items to the beginning
+* `array.push()`
 * [splice()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice)
   * `var removed_items = array.splice(index, howmany, item1, ....., itemX)`
+* `array.slice(start, end)`
 * [unshift()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift)
+* `array.reduce((accu, next) => acc + cur)` aggregate/accumulate
+* `array.map(item => item * 1.1)` select
+* `array.filter(item => item > 100)` where
 
 ### Asynchronous Programming
 
-Asynchronous method called without an await are fire & forget (unlike C#, where it would run synchronously, hence be blocking ). The await make the call blocking.
+* `Promise.resolve(value)`
+* `const ts = Promise.all([t1, t2, t3])`
+  * `for (const t of await ts) { }`
+
+`async` forces a function to return a promise
+`await` blocks the code. Note that without it, the code is fire & forget (unlike C#, where it would run synchronously, hence be blocking).
+
+Using consecutive `await`s prevents silly stairway code with too many `then()`.
 
 ### Quirks
 
+* [Destructuring Objects](https://wesbos.com/destructuring-objects/)
+  * `{ a, b, c } = obj;` can be used to explode an object's properties as method parameters (or assigning them as a const in the first line), so we don't have to repeat the _obj_ root whenever we access its property (i.e. `a` instead of `obj.a`)
 * [Spread Syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax): `...`
   * [Destructuring Assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
-  * [Destructuring Objects](https://wesbos.com/destructuring-objects/)
   * [TypeScript Variable Declaration](https://www.typescriptlang.org/docs/handbook/variable-declarations.html)).
   * Used to shallow-clone by putting it back into another object: `{ ...original }`.
-* [Computed property Name](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get): `[METHOD_NAME]()`
+  * Can be used to create a new object comining two others: `const koko = { ...a, ...b }`
+  * Can be used to shortcut multiple array push/unshift/splice to one-line e.g. `a = [...a, '1', '2', '3' ]`
+* [Immediately invoked function expression](https://en.wikipedia.org/wiki/Immediately_invoked_function_expression)
+* [Computed property Name](https://tylermcginnis.com/computed-property-names/)
+  * Allows expressions to be computed as the name of a property (à la dictionary index key).
+  * Uses `{ a, b, c }` to create a new objet from variables or `[]` to use a string as a key, which becomes the property.
+  * Also see [Get](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get)
+* Logging
+  * `console.log({ a, b, c })` using computed property names
+  * `console.log('%c Hellow', 'color: red')` using CSS style
+  * `console.table([a, b, c])` if objects have the same properties
+  * `console.time('myTimer')` then later `console.timeEnd('myTimer')`
+  * `console.trace('hello')` displays call stack trace infos
+  * See [Fireship JS Pro Times](https://www.youtube.com/watch?v=Mus_vwhTCq0)
 
 ## Modules
 
-There are two different types of export, named and default. You can have multiple named exports per module but only one default export.
+There are two different types of export, named and default.
+You can have multiple named exports per module but only one default export.
+The default export can be imported via a shorter syntax (no curly braces).
 See <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export#Description>
 
 `export default { }`
