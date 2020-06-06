@@ -29,6 +29,7 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 
 ### Keyboards
 
+* Go to Tab {n} = `Alt + {n}`
 * Seach = `Ctrl + Shift + F`
 * Toggle side-bar = `Ctrl + B`
 * Multi-line
