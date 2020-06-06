@@ -18,62 +18,63 @@ Most of the API is contained in the PresentationFramework DLL that contains the 
 * DataTemplate = How data is displayed. The data in question is a class instance, which is usually a VM.
   * Don't specify an x:Key if the template is to be applied to all instances of the x:Type.
 * ControlTemplate = How a GUI visual control (i.e. System.Windows.Controls, e.g. a button or a panel) is displayed.
-* ContentControl = base class for all controls that have a "Content" property.
+  * [ContentPresenter](https://stackoverflow.com/a/1288006) = element within a **ControlTemplate** that acts as a placeholder and defines where the actual **Content** of the templated control will be displayed.
 * Content = property of a ContentControl that can be anything.
   * E.g.: the Content of a Textblock is its Text.
-  * The Content of a control is rendered at the location of the ControlPresenter within its ControlTemplate.
-* ContentPresenter = element within a ControlTemplate that acts as a placeholder and defines where the content of the templated control will be displayed.
-  * See <https://stackoverflow.com/a/1288006>
-* Style = WPF's CSS, but can also applies templates, etc. Basically can be used to change any property of a control.
+  * The Content of a control is rendered at the location of the **ControlPresenter** within its **ControlTemplate**.
+* ContentControl = base class for all controls that have a **Content** property.
+  * ContentTemplate = sets the **DataTemplate** of a **ContentControl**
+* [ItemsControl](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.itemscontrol?view=netcore-3.1)
+  * Base class for all collection-type controls that have **Items** (read) and **ItemsSource** (write) properties.
+    * E.g. ComboBox, ListBox, DataGrid, TabControl (but not panels).
+  * The base ItemsControl class has no default visual appareance and must be provided layouting templates.
+  * A **Template** (i.e. **ControlTemplate**) must be provided, containing an **ItemsPresenter**, where the Items will get displayed.
+  * An **ItemsPanel** (i.e. **ItemsPanelTemplate**) must be provided to be used by the **ItemsPresenter** (StackPanel is the default for the base class).
+  * An **ItemTemplate** (i.e. **DataTemplate**) must be provided to display each individual items.
+* [TemplateBinding](https://stackoverflow.com/a/10597807) = (read-only) binds a template's property to one of the actual control's properties.
+* Style = WPF's CSS, but can also apply templates, etc. Basically can be used to change any property of a control.
 
-Within a Template, there's one more level to go up to reach the DataContext:
+Within a Template, there's one more level to go up through to reach the DataContext:
 
-* using specific Element `ElementName=[Element], Path=DataContext.[Property]`
-* going back to root DataContext: `<Element [Property]="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.[Property]}">`
+* Using a specific Element: `ElementName=[Element], Path=DataContext.[Property]`
+* Going back to root DataContext: `<Element [Property]="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.[Property]}">`
+
+* Using the proxy technique:
+  * `<commonResources:BindingProxy x:Key="dataContextProxy" Data="{Binding}" />`
+  * `<element ItemsSource="{Binding Data.MyProperty, Source={StaticResource dataContextProxy}}">`
+
+Note that it's possible to extract the XAML code of a Control using Visual Studio Designer!
+Right-Click on the Control > Edit Template > Edit a Copy…
+See <https://docs.telerik.com/devtools/wpf/styling-and-appearance/styling-apperance-editing-control-templates#extracting-control-templates-using-visual-studio>
+
+This can be useful for Telerik controls (when their source code isn't installed locally), provided we first find out the actual standalone class.
+E.g. GridViewCheckBoxColumn uses a GridViewCheckBox when in view mode and the standard CheckBox control as its editor
+([Source](https://docs.telerik.com/devtools/wpf/controls/radgridview/styles-and-templates/columns-styling-checkboxcolumn)).
 
 ## XAML
 
-### Namespace
-
-WPF XML namespace (System.Windows, System.Windows.Controls, etc.)
-Usually used as prefix-less root, so no need to prefix all framework elements
-XAML language namespace (System.Windows.Markup, XAML parser/parser directives). Usually given 'x' prefix.
-
-See <http://schemas.microsoft.com/winfx/2006/xaml/presentation>
-See <http://schemas.microsoft.com/winfx/2006/xaml/>
-
-Don't specify Assembly if the namespace is located in the local assembly.
-
-### Element
-
-Controls and attributes names are case-sensitive since they have to match their framework types.
-
-### Property
-
-Can be defined as an XML attribute or a child XML element
-
-* `<Element Property="" />`
-* `<Element><Element.Property></Element.Property></Element>`
-
-### Content
-
-Content can be defined inside a control or via an attribute.
-
-* `<Element></Element>`
-* `<Element Content="" />`
-
-As child element
-
-* `<Element><Element.Content></Element.Content></Element>`
-
-If the control supports it, this format allows more complex content than plain text (i.e. other controls).
-In the case of multiple child controls, we must use a container since the Content property only allows for a single one.
-
-* `<Element><Element.Content><WrapPanel><Control*n></WrapPanel></Element.Content></Element>`
-
-Same result with shorter syntax (without <Element.Content>)
-
-* `<Element><WrapPanel><Control*n></WrapPanel></Element>`
+* Namespace
+  * WPF XML namespace (System.Windows, System.Windows.Controls, etc.)
+  * Usually used as prefix-less root, so no need to prefix all framework elements
+  * XAML language namespace (System.Windows.Markup, XAML parser/parser directives). Usually given 'x' prefix.
+  * See <http://schemas.microsoft.com/winfx/2006/xaml/presentation>
+  * See <http://schemas.microsoft.com/winfx/2006/xaml/>
+  * No need to specify Assembly if the namespace is located in the local assembly.
+* Element
+  * Controls and attributes names are case-sensitive since they have to match their framework types (classes).
+* Property
+  * Can be defined as an XML attribute or a child XML element
+    * `<Element Property="" />`
+    * `<Element><Element.Property></Element.Property></Element>`
+* Content
+  * Content can be set as an attribute inside a control element, or as a child element (implicitly or explicitely).
+    * `<Element Content="" />`
+    * `<Element></Element>`
+    * `<Element><Element.Content></Element.Content></Element>`
+  * If the control supports it, this format allows more complex content than plain text (i.e. other controls).
+  * In the case of multiple child controls, we must use a container since the Content property only allows for a single one.
+    * `<Element><Element.Content><WrapPanel><Control*n></WrapPanel></Element.Content></Element>`
+    * `<Element><WrapPanel><Control*n></WrapPanel></Element>` (same result as above with a shorter syntax - without &lt;Element.Content&gt;)
 
 ### Markup Extension
 
@@ -94,16 +95,16 @@ Applying the template to a specific control: `<Element Template="{StaticResource
 
 ## Data Binding
 
-Any {...} in XAML is called markup extensions.
-The most used is the XAML extension for data binding: {Binding ...}.
-Note that the entire Bindings markup are surrounded with quotes i.e. Property="{Binding ...}" so it's kinda similar to interpolation.
+Any `{...}` in XAML is called markup extensions.
+The most used is the XAML extension for data binding: `{Binding ...}`.
+Note how the entire Bindings markup are surrounded with quotes i.e. `Property="{Binding ...}"` so it's kinda similar to interpolation.
 The WPF engine simply parses that string to make things happen dynamically.
 
 Default binds to the current data context:
 
 * `{Binding}`
 
-A specific public property (not a variable!) in current data context ("Path=" is default property of Binding):
+A specific **public property** (not a variable!) in current data context ("Path=" is default property of Binding):
 
 * `{Binding NameOfProperty}`
 * `{Binding Path=NameOfProperty}`
@@ -152,8 +153,9 @@ TextBox.Text's Default is LostFocus => set to PropertyChanged to react to each k
 ### Converters
 
 Type conversion Binding, e.g. "Yes"/"No" to true/false.
-Converters use a StaticResource (not a string).
-See <http://stackoverflow.com/questions/505397/built-in-wpf-ivalueconverters> for built-in ones.
+Converters must be pre-declared as StaticResources (not a string).
+
+[Built-in Converters](http://stackoverflow.com/questions/505397/built-in-wpf-ivalueconverters).
   
 ```C#
 class KokoConverter : IValueConverter {Convert(){}, ConvertBack(){}}
@@ -296,10 +298,10 @@ Resources are data (e.g. text, objects, or even hierarchies of Controls) that be
 They allow to define items once and using them several times in different places (e.g. styles or templates)
 
 Static resources are resolved only once when the XAML is loaded and further changes are dismissed.
-Dynamic resources are resolved when they are used and can also be created from code-behind.
+Dynamic resources are resolved (computed) whenever they are used and can also be created from code-behind.
 
 Different resources with the same name can be defined at different scope levels.
-Example: with Level being either a Control, Window or Application
+Example: with _Level_ being either a Control, Window or Application
 
 ```XML
 <Level.Resources>

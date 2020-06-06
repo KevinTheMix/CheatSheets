@@ -53,8 +53,9 @@ Sets up the current directory as a GIT repository
 
 ### Add
 
-Once a folder is setup to become a repository, the files witin can be registered into the repository index
-This sets the files to be included in the next Commit transaction (aka they become staged)
+Adds (aka Stages) all or specific files to be included in the next commit.
+This enables modularity on what will get commited or not in the next commit transaction.
+See <https://githowto.com/staging_and_committing>
 
     git add {FILE}
     git add . # All the files in the current directory and its subdirectories
@@ -63,7 +64,7 @@ This sets the files to be included in the next Commit transaction (aka they beco
 
 ### Reset
 
-Oppositve of Add; Unregister one or all files staged for commit
+Opposite of Add; Unregister one or all files staged for commit
 
     git reset \[FILE\]
     git reset --soft HEAD~1 # Cancels the last commit
