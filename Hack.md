@@ -59,7 +59,7 @@ When victims load the page, the script is run.
 
 E.g. a website that allows to edit user profiles, where malicious scripts can be entered, that will be run when someone browser that user profile's page.
 
-### XSRF
+### CSRF/XSRF
 
 Stands for Cross-Site Request Forgery.
 Directs a victim to a legit website (e.g. his bank) where he's currently logged on, via a (sometimes hidden) forged URL (sent e.g. in an e-mail) crafted so that it accomplishes something immediately (e.g. wire money away).
