@@ -68,7 +68,7 @@ See <https://en.wikipedia.org/wiki/OAuth>
 * Protected Resource = an API the User has access to on its own (e.g. Spotify), and the Client App requests access to.
 * User
   * In OAuth, this is the owner of the resource
-* Authorization Server = handles authorization requests and is trusted by all partis involved.
+* Authorization Server = handles authorization requests and is trusted by all parties involved.
   * Must use TLS to guarantee underlying channel security
   * Provides two separated endpoints:
     * A **Authorization endpoint** i.e. a webpage that the CA forwards the User to (with all necessary parameters) to authenticate and come back with a Grant
