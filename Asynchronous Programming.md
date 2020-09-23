@@ -10,6 +10,7 @@ _In Windows, all I/O is asynchronous. Synchronous APIs are just a convenient abs
 Then it successively give control back up the callstack, synchronously, to each calling method as an *await* is encountered in its callee.
 Going up the hierarchy of async methods, we should always arrive either:
 
+* at the UI thread
 * at a high-level Task.Run() used to fire & forget a Task running on a background thread e.g. loading some data
 * at a well-devised blocking call, doing something else in between task creation & waiting
 * at an event callback, that we can make async to make the async chain mechanism work

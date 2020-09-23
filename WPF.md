@@ -18,7 +18,7 @@ Most of the API is contained in the PresentationFramework DLL that contains the 
 * DataTemplate = How data is displayed. The data in question is a class instance, which is usually a VM.
   * Don't specify an x:Key if the template is to be applied to all instances of the x:Type.
 * ControlTemplate = How a GUI visual control (i.e. System.Windows.Controls, e.g. a button or a panel) is displayed.
-  * [ContentPresenter](https://stackoverflow.com/a/1288006) = element within a **ControlTemplate** that acts as a placeholder and defines where the actualy **Content** of the templated control will be displayed.
+  * [ContentPresenter](https://stackoverflow.com/a/1288006) = element within a **ControlTemplate** that acts as a placeholder and defines where the actual **Content** of the templated control will be displayed.
 * Content = property of a ContentControl that can be anything.
   * E.g.: the Content of a Textblock is its Text.
   * The Content of a control is rendered at the location of the **ControlPresenter** within its **ControlTemplate**.
@@ -38,6 +38,7 @@ Within a Template, there's one more level to go up through to reach the DataCont
 
 * Using a specific Element: `ElementName=[Element], Path=DataContext.[Property]`
 * Going back to root DataContext: `<Element [Property]="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.[Property]}">`
+
 * Using the proxy technique:
   * `<commonResources:BindingProxy x:Key="dataContextProxy" Data="{Binding}" />`
   * `<element ItemsSource="{Binding Data.MyProperty, Source={StaticResource dataContextProxy}}">`
@@ -59,7 +60,6 @@ E.g. GridViewCheckBoxColumn uses a GridViewCheckBox when in view mode and the st
   * See <http://schemas.microsoft.com/winfx/2006/xaml/presentation>
   * See <http://schemas.microsoft.com/winfx/2006/xaml/>
   * No need to specify Assembly if the namespace is located in the local assembly.
-
 * Element
   * Controls and attributes names are case-sensitive since they have to match their framework types (classes).
 * Property
@@ -67,33 +67,31 @@ E.g. GridViewCheckBoxColumn uses a GridViewCheckBox when in view mode and the st
     * `<Element Property="" />`
     * `<Element><Element.Property></Element.Property></Element>`
 * Content
-  * Content can be defined via an attribute, implicitly or explicitely.
+  * Content can be set as an attribute inside a control element, or as a child element (implicitly or explicitely).
     * `<Element Content="" />`
     * `<Element></Element>`
     * `<Element><Element.Content></Element.Content></Element>`
   * If the control supports it, this format allows more complex content than plain text (i.e. other controls).
   * In the case of multiple child controls, we must use a container since the Content property only allows for a single one.
     * `<Element><Element.Content><WrapPanel><Control*n></WrapPanel></Element.Content></Element>`
-    * `<Element><WrapPanel><Control*n></WrapPanel></Element>` (same as above with shorter syntax)
+    * `<Element><WrapPanel><Control*n></WrapPanel></Element>` (same result as above with a shorter syntax - without &lt;Element.Content&gt;)
 
 ### Markup Extension
 
-    x:Key       # E.g. define and then refers to a resource in the XAML (Dictionary Key)
-    x:Name      # Defines a name for a control that can be accessed from Code-behind or binded in XAML via ElementName
-    x:Static    # Referes to static data (e.g. SystemColors Enum value)
-    x:Type      # Equivalent to C# typeof. Used in ControlTemplate.TargetType
+* `x:Key` = E.g. define and then refers to a resource in the XAML (Dictionary Key)
+* `x:Name` = Defines a name for a control that can be accessed from Code-behind or binded in XAML via ElementName
+* `x:Static` = Referes to static data (e.g. SystemColors Enum value)
+* `x:Type` = Equivalent to C# typeof. Used in ControlTemplate.TargetType
 
 Will replace the default template of all controls of type [Type] to be displayed using the new template:
 <https://msdn.microsoft.com/en-us/library/system.windows.controls.controltemplate.targettype%28v=vs.110%29.aspx>
 <https://stackoverflow.com/a/13559167>
 
-    <ControlTemplate x:Key="[TemplateName]" TargetType="{x:Type [Type]}">
-    <ControlTemplate x:Key="[TemplateName]" TargetType="[Type]">
+* `<ControlTemplate x:Key="[TemplateName]" TargetType="{x:Type [Type]}">`
+* `<ControlTemplate x:Key="[TemplateName]" TargetType="[Type]">`
   
 Unless the template is referred to explicitly by x:Key.
-Applying the template to a specific control:
-
-    <Element Template="{StaticResource [TemplateName]}" />
+Applying the template to a specific control: `<Element Template="{StaticResource [TemplateName]}" />`
 
 ## Data Binding
 
@@ -104,22 +102,22 @@ The WPF engine simply parses that string to make things happen dynamically.
 
 Default binds to the current data context:
 
-    {Binding}
+* `{Binding}`
 
 A specific **public property** (not a variable!) in current data context ("Path=" is default property of Binding):
 
-    {Binding NameOfProperty}
-    {Binding Path=NameOfProperty}
+* `{Binding NameOfProperty}`
+* `{Binding Path=NameOfProperty}`
 
 Binds to (the Attribute i.e. Dependency Property of) another XAML UI element:
 
-    {Binding NameOfAttribute, ElementName=Element}
+`{Binding NameOfAttribute, ElementName=Element}`
 
 Using CLR type:
 
-    xmlns:system="clr-namespace:System;assembly=mscorlib"
-    ..
-    Source={x:Static system:DateTime.Now}
+* `xmlns:system="clr-namespace:System;assembly=mscorlib"`
+* ..
+* `Source={x:Static system:DateTime.Now}`
 
 Use **RelativeSource** to refer to an element relative to the one in which the binding is called.
 Can even bind to Self e.g. to display its current Width as Text.
@@ -159,25 +157,32 @@ Converters must be pre-declared as StaticResources (not a string).
 
 [Built-in Converters](http://stackoverflow.com/questions/505397/built-in-wpf-ivalueconverters).
   
-    class KokoConverter : IValueConverter {Convert(){}, ConvertBack(){}}
-    ..
-    Converter={StaticResource KokoConverter}
+```C#
+class KokoConverter : IValueConverter {Convert(){}, ConvertBack(){}}
+..
+Converter={StaticResource KokoConverter}
+```
+
+#### ConverterParameter
+
+ConverterParameterss are _not_ DependencyProperties, and they cannot be bound.
+Multiple parameters can be provided, in a concatenated fashion: <https://stackoverflow.com/a/11325510>
 
 #### Type Converters
 
 Those are the converters that WPF uses to parse (case insensitive) strings into the types expected by the properties to which those values are assigned.
 
-    KokoTypeConverter : TypeConverter
+`KokoTypeConverter : TypeConverter`
 
 ### StringFormat
 
 Similar to Converters, but just affect the display. Accepts prefix/postfix.
 
-    StringFormat=ABC{0:format}XYZ
+`StringFormat=ABC{0:format}XYZ`
 
 Without prefix, add curly braces to avoid confusion with Markup Extensions.
 
-    StringFormat={}{0:format}
+`StringFormat={}{0:format}`
 
 * [Numeric Format](http://msdn.microsoft.com/en-us/library/dwhawy9k.aspx)
 * [Date and Time Format](http://msdn.microsoft.com/en-us/library/az4se3k1.aspx)
@@ -199,6 +204,8 @@ Can contain the following attributes:
 
 * Icon
 * ResizeMode (Size & Minimize settings)
+  * `Height="{Binding SystemParameters.PrimaryScreenHeight}"`
+  * `Width="{Binding SystemParameters.PrimaryScreenWidth}">`
 * ShownInTaskbar (Tray-like)
 * SizeToContent (Shrink)
 * Topmost (Z-index)
@@ -218,6 +225,8 @@ Can contain the following attributes:
   * .ColumnDefinitions, .RowDefinitions, .Column, .Row, .ColumnSpan, .RowSpan
   * Use GridSplitter to allow user col/row resizing (.ResizeDirection if can't figure out orientation)
 * UniformGrid # Same with same cell size
+
+* [Resize to Window](https://stackoverflow.com/a/43785428)
 
 ### I/O & co
 
@@ -294,9 +303,11 @@ Dynamic resources are resolved (computed) whenever they are used and can also be
 Different resources with the same name can be defined at different scope levels.
 Example: with _Level_ being either a Control, Window or Application
 
-    <Level.Resources>
-      <Type x:Key="ID" />*n
-    </Level.Resources>
+```XML
+<Level.Resources>
+  <Type x:Key="ID" />*n
+</Level.Resources>
+```
 
 ### Usage
 
@@ -305,14 +316,14 @@ The resource is found in the immediate container, or the search goes up the tree
 
 Using a markup extension.
 
-    {StaticResource ID}
-    {DynamicResource ID}
+* `{StaticResource ID}`
+* `{DynamicResource ID}`
 
 From Code-Behind, using FindResource() that returns an object
 
-    this.ctrl.FindResource("") = A Control in this window
-    this.FindResource("") = This Window
-    Application.Current.FindResource("") = Application
+* `this.ctrl.FindResource("")` = A Control in this window
+* `this.FindResource("")` = This Window
+* `Application.Current.FindResource("")` = Application
 
 ## Troubleshooting
 
@@ -329,11 +340,13 @@ The following resources and techniques are very valuable to unearth the cause of
 
 ## Snippets
 
-    <ObjectDataProvider x:Key="LimitEqTypeEnum" MethodName="GetValues" ObjectType="{x:Type system:Enum}">
-      <ObjectDataProvider.MethodParameters>
-        <x:Type TypeName="domain:LimitEqType"/>
-      </ObjectDataProvider.MethodParameters>
-    </ObjectDataProvider>
+```XML
+<ObjectDataProvider x:Key="LimitEqTypeEnum" MethodName="GetValues" ObjectType="{x:Type system:Enum}">
+    <ObjectDataProvider.MethodParameters>
+    <x:Type TypeName="domain:LimitEqType"/>
+    </ObjectDataProvider.MethodParameters>
+</ObjectDataProvider>
+```
 
 ### Telerik
 
@@ -341,45 +354,49 @@ The following resources and techniques are very valuable to unearth the cause of
 * GridViewBoundColumnBase are read-only (kinda one-way binding)
 * GridViewCheckBoxColumn are checkboxes, but aligned left on edit
 
-    <telerik:GridViewBoundColumnBase.HeaderCellStyle>
-        <!-- Provide a template for the header, in order to add a button to toggle the RDVs -->
-        <!-- See https://docs.telerik.com/devtools/wpf/styling-and-appearance/styling-apperance-editing-control-templates -->
-        <Style BasedOn="{StaticResource {x:Type telerik:GridViewHeaderCell}}" TargetType="telerik:GridViewHeaderCell">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <!-- Starts new Template -->
-                    <ControlTemplate TargetType="telerik:GridViewHeaderCell">
-                        <StackPanel Orientation="Horizontal">
-                            <!-- The following ContentPresenter element acts as a placeholder for WPF to know where to display the Content. What content? The one belonging to this control we're styling! -->
-                            <!-- See https://stackoverflow.com/a/1288006 -->
-                            <ContentPresenter Name="HeaderTextPresenter" TextBlock.Foreground="Navy" TextBlock.FontWeight="Bold" TextBlock.FontSize="16">
-                                <ContentPresenter.Style>
-                                    <Style>
-                                        <Setter Property="TextBlock.Foreground" Value="Navy" />
-                                    </Style>
-                                </ContentPresenter.Style>
-                                <ContentPresenter.Resources>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="Foreground" Value="Navy" />
-                                    </Style>
-                                </ContentPresenter.Resources>
-                            </ContentPresenter>
-                            <!-- We're inside the (kinda) generic template of a Gridview Header Cell, so to find the Command in our VM and bind to it,
-                            we must go back up the hierarchy to the Window (that is, our UserControl), and target its DataContext specifically, that contains our VM. -->
-                            <!-- See https://stackoverflow.com/questions/5642501/wpf-binding-commands-in-styles-and-or-data-templates-mvvm -->
-                            <!-- See https://stackoverflow.com/questions/34390920/how-to-bind-a-button-command-in-wpf-style -->
-                            <!-- See https://stackoverflow.com/questions/84278/how-do-i-use-wpf-bindings-with-relativesource -->
-                            <Button Command="{Binding DataContext.ToggleRDVsCommand, Mode=OneTime, RelativeSource={RelativeSource AncestorType={x:Type commonControls:UserControlAdv}}}"  Width="10">+</Button>
-                        </StackPanel>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </telerik:GridViewBoundColumnBase.HeaderCellStyle>
+```XML
+<telerik:GridViewBoundColumnBase.HeaderCellStyle>
+    <!-- Provide a template for the header, in order to add a button to toggle the RDVs -->
+    <!-- See https://docs.telerik.com/devtools/wpf/styling-and-appearance/styling-apperance-editing-control-templates -->
+    <Style BasedOn="{StaticResource {x:Type telerik:GridViewHeaderCell}}" TargetType="telerik:GridViewHeaderCell">
+        <Setter Property="Template">
+            <Setter.Value>
+                <!-- Starts new Template -->
+                <ControlTemplate TargetType="telerik:GridViewHeaderCell">
+                    <StackPanel Orientation="Horizontal">
+                        <!-- The following ContentPresenter element acts as a placeholder for WPF to know where to display the Content. What content? The one belonging to this control we're styling! -->
+                        <!-- See https://stackoverflow.com/a/1288006 -->
+                        <ContentPresenter Name="HeaderTextPresenter" TextBlock.Foreground="Navy" TextBlock.FontWeight="Bold" TextBlock.FontSize="16">
+                            <ContentPresenter.Style>
+                                <Style>
+                                    <Setter Property="TextBlock.Foreground" Value="Navy" />
+                                </Style>
+                            </ContentPresenter.Style>
+                            <ContentPresenter.Resources>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="Navy" />
+                                </Style>
+                            </ContentPresenter.Resources>
+                        </ContentPresenter>
+                        <!-- We're inside the (kinda) generic template of a Gridview Header Cell, so to find the Command in our VM and bind to it,
+                        we must go back up the hierarchy to the Window (that is, our UserControl), and target its DataContext specifically, that contains our VM. -->
+                        <!-- See https://stackoverflow.com/questions/5642501/wpf-binding-commands-in-styles-and-or-data-templates-mvvm -->
+                        <!-- See https://stackoverflow.com/questions/34390920/how-to-bind-a-button-command-in-wpf-style -->
+                        <!-- See https://stackoverflow.com/questions/84278/how-do-i-use-wpf-bindings-with-relativesource -->
+                        <Button Command="{Binding DataContext.ToggleRDVsCommand, Mode=OneTime, RelativeSource={RelativeSource AncestorType={x:Type commonControls:UserControlAdv}}}"  Width="10">+</Button>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</telerik:GridViewBoundColumnBase.HeaderCellStyle>
+```
 
 Telerik Watermark box on edit:
 
-    <telerik:GridViewBoundColumnBase Header="{Binding CommonResources.MCodeIndication}" DataMemberBinding="{Binding MCodeIndication, UpdateSourceTrigger=PropertyChanged}" ColumnGroupName="SelectionFields">
-      <telerik:GridViewBoundColumnBase.CellEditTemplate>
-          &lt;DataTemplate>
-              <telerik:RadWatermarkTextBox Text="{Binding MCodeIndication, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
+```XML
+<telerik:GridViewBoundColumnBase Header="{Binding CommonResources.MCodeIndication}" DataMemberBinding="{Binding MCodeIndication, UpdateSourceTrigger=PropertyChanged}" ColumnGroupName="SelectionFields">
+    <telerik:GridViewBoundColumnBase.CellEditTemplate>
+        &lt;DataTemplate>
+            <telerik:RadWatermarkTextBox Text="{Binding MCodeIndication, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
+```
