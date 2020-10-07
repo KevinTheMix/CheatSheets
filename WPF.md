@@ -1,28 +1,42 @@
 # WPF
 
-Stands for Windows Presentation Foundation.
+Windows Presentation Foundation.
+Most of the API is contained in the PresentationFramework DLL that contains the System.Windows namespaces.
 
 Follows the previous Windows Forms (WinForm) technology.
-Unlike WinForm, it's not based on Windows API but built from sratch.
-All controls act as containers and can be nested inside each other => modularity of design
-
-Combination of XAML for markup and any code-behind .NET language.
-XAML stands for eXtensible Application Markup Language and is MS' variant of XML for designing GUIs.
+Unlike WinForm, it's not based on Windows API but built from scratch.
 In WinForms, the GUI was defined in the same language as the code-behind and usually maintained through the IDE.
-Now the GUI can be easily edited as HTML-like text.
+WPF uses a combination of XAML for markup and any choice of .NET language as code-behind.
+Now the GUI XAML can be easily edited as HTML-like text.
 
-Most of the API is contained in the PresentationFramework DLL that contains the System.Windows namespaces.
+All controls act as containers and can be nested inside each other => modularity of design.
 
 ## Styling & Templating
 
-* DataTemplate = How data is displayed. The data in question is a class instance, which is usually a VM.
-  * Don't specify an x:Key if the template is to be applied to all instances of the x:Type.
-* ControlTemplate = How a GUI visual control (i.e. System.Windows.Controls, e.g. a button or a panel) is displayed.
+* [Lookless Controls](https://www.codeproject.com/Articles/1056014/WPF-Lookless-Controls)
+  * A .cs class inheriting from _Control_, but doesn't have an associated XAML file (so kinda code-behind only).
+  * Although called lookless, a default visual template gets automatically generated for it upon creation (in _Themes/Generic.xaml_), which can be easily modified or overriden.
+  * It is better than a regular UserControl because the visual representation is fully separate from its logic.
+  * Should be used when the UserControl is to be widely reused (<https://stackoverflow.com/a/2637830> & <https://stackoverflow.com/a/3334780>)
+* DataContext
+  * The object containing all the properties bound to the GUI.
+  * Can be bound directly from the XAML if there's a public constructor (see <https://stackoverflow.com/a/2637830>)
+    * `<UserControl.DataContext><local:KokoViewModel /></UserControl.DataContext>`
+* [DataTemplate](https://wpftutorial.net/DataTemplates.html)
+  * How data gets displayed.
+  * The data in question is a class instance, which is usually a VM
+    * `<DataTemplate DataType="{x:Type local:KokoViewModel}"><local:KokoView /></DataTemplate>`
+  * The default DataTemplate is simply a TextBlock, that displays the `ToString()` of the data class.
+  * Within a DataTemplate, the DataContext is set the data object itself.
+  * _Note: don't specify an x:Key if the template is to be applied to all instances of the x:Type._
+* [ControlTemplate](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/themes/how-to-create-apply-template?view=netdesktop-5.0&redirectedfrom=MSDN)
+  * Provides full customization over how a GUI visual control (i.e. System.Windows.Controls, e.g. a button or a panel) gets displayed, beyond what the basic properties (e.g. _Background_, _FontFamily_) permit.
   * [ContentPresenter](https://stackoverflow.com/a/1288006) = element within a **ControlTemplate** that acts as a placeholder and defines where the actual **Content** of the templated control will be displayed.
-* Content = property of a ContentControl that can be anything.
-  * E.g.: the Content of a Textblock is its Text.
+* Content
+  * The "main" property of a ContentControl and whose nature (type) depend on the type of Control e.g. the Content of a Textblock is its Text.
   * The Content of a control is rendered at the location of the **ControlPresenter** within its **ControlTemplate**.
-* ContentControl = base class for all controls that have a **Content** property.
+* ContentControl
+  * Base class for all controls that have a **Content** property.
   * ContentTemplate = sets the **DataTemplate** of a **ContentControl**
 * [ItemsControl](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.itemscontrol?view=netcore-3.1)
   * Base class for all collection-type controls that have **Items** (read) and **ItemsSource** (write) properties.
@@ -31,27 +45,29 @@ Most of the API is contained in the PresentationFramework DLL that contains the 
   * A **Template** (i.e. **ControlTemplate**) must be provided, containing an **ItemsPresenter**, where the Items will get displayed.
   * An **ItemsPanel** (i.e. **ItemsPanelTemplate**) must be provided to be used by the **ItemsPresenter** (StackPanel is the default for the base class).
   * An **ItemTemplate** (i.e. **DataTemplate**) must be provided to display each individual items.
-* [TemplateBinding](https://stackoverflow.com/a/10597807) = (read-only) binds a template's property to one of the actual control's properties.
-* Style = WPF's CSS, but can also apply templates, etc. Basically can be used to change any property of a control.
+* [TemplateBinding](https://stackoverflow.com/a/10597807)
+  * (one-way, aka read-only) binds a template's property to one of the actual control's properties.
+  * Shortcut for `{Binding Koko, RelativeSource={RelativeSource TemplatedParent}`, which allows two-way binding in a ControlTemplate
+  * [RelativeSource](https://stackoverflow.com/a/84317)
+  * [FindAncestor](https://stackoverflow.com/a/605695)
+    * `Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type local:KokoButton}}"`
+* [Style](https://docs.microsoft.com/en-us/dotnet/api/system.windows.frameworkelement.style?view=netcore-3.1)
+  * Basically WPF's CSS that can be used to change any property of a control, including its template.
+    * Note that _ControlTemplate_s can also be defined as (static) resources and referenced to as _Template_ from the Control itself, without using Styles.
+  * Can be used to set a given property for all controls of the same type, e.g. set all Button's Background to Green, globally.
 
 Within a Template, there's one more level to go up through to reach the DataContext:
 
 * Using a specific Element: `ElementName=[Element], Path=DataContext.[Property]`
 * Going back to root DataContext: `<Element [Property]="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.[Property]}">`
 
-* Using the proxy technique:
+* Using the DataContext proxy technique:
   * `<commonResources:BindingProxy x:Key="dataContextProxy" Data="{Binding}" />`
   * `<element ItemsSource="{Binding Data.MyProperty, Source={StaticResource dataContextProxy}}">`
 
-Note that it's possible to extract the XAML code of a Control using Visual Studio Designer!
-Right-Click on the Control > Edit Template > Edit a Copy…
-See <https://docs.telerik.com/devtools/wpf/styling-and-appearance/styling-apperance-editing-control-templates#extracting-control-templates-using-visual-studio>
-
-This can be useful for Telerik controls (when their source code isn't installed locally), provided we first find out the actual standalone class.
-E.g. GridViewCheckBoxColumn uses a GridViewCheckBox when in view mode and the standard CheckBox control as its editor
-([Source](https://docs.telerik.com/devtools/wpf/controls/radgridview/styles-and-templates/columns-styling-checkboxcolumn)).
-
 ## XAML
+
+**eXtensible Application Markup Language** and is MS' variant of XML for designing GUIs.
 
 * Namespace
   * WPF XML namespace (System.Windows, System.Windows.Controls, etc.)
@@ -400,3 +416,11 @@ Telerik Watermark box on edit:
         &lt;DataTemplate>
             <telerik:RadWatermarkTextBox Text="{Binding MCodeIndication, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch"/>
 ```
+
+Note that it's possible to extract the XAML code of a Control using Visual Studio Designer!
+Right-Click on the Control > Edit Template > Edit a Copy…
+See <https://docs.telerik.com/devtools/wpf/styling-and-appearance/styling-apperance-editing-control-templates#extracting-control-templates-using-visual-studio>
+
+This can be useful for Telerik controls (when their source code isn't installed locally), provided we first find out the actual standalone class.
+E.g. GridViewCheckBoxColumn uses a GridViewCheckBox when in view mode and the standard CheckBox control as its editor
+([Source](https://docs.telerik.com/devtools/wpf/controls/radgridview/styles-and-templates/columns-styling-checkboxcolumn)).

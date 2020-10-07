@@ -6,26 +6,27 @@
 
 ## Windows 7+
 
-* Copy/Move/Shortcut = `Drag&Drop + Shift/Ctrl/Alt`
-* Group renaming = `Multi-select Files > Rename`
-* Remote Desktop = `Windows + R > mstsc`
-* Open new application Window = `Middle-click taskbar`
+* `Ctrl + Alt + Up/Down/Left/Right Arrow` = Rotate Screen
+* `Drag&Drop + Shift/Ctrl/Alt` = Copy/Move/Shortcut
+* `Multi-select Files > Rename` = Group renaming
+* `Windows + R > mstsc` = Remote Desktop
+* `Middle-click taskbar` = Open new application Window
 
 ## Windows 10
 
-* Switch Virtual Desktop = `Windows + Ctrl + L/R`
-* Screenshot = `Win + Shift + S`
-* Settings = `Win + i`
-* Change language = `Win + Space`
-* Scroll = `2 fingers`
-* Win + Tab = `3 fingers up`
-* Alt + Tab = `3 fingers L/R`
-* Minimize everything = `3/4 fingers down`
-* Cycle virtual desktop = `4 fingers left/right`
+* `Windows + Ctrl + L/R` = Switch Virtual Desktop
+* `Win + Shift + S` = Screenshot
+* `Win + i` = Settings
+* `Win + Space` = Change language
+* `2 fingers` = Scroll
+* `3 fingers up` = Win + Tab
+* `3 fingers L/R` = Alt + Tab
+* `3/4 fingers down` = Minimize everything
+* `4 fingers left/right` = Cycle virtual desktop
 
 ## DOS Commands
 
-* Displays .exe filepath = `where {exe}`
-* Lookup Domain IP Address = `nslookup`
-* IP tools = `ipconfig /{release|renew|flushdns}`
-* Pastes file path = `Drag & Drop file`
+* `where {exe}` = Displays .exe filepath
+* `nslookup` = Lookup Domain IP Address
+* `ipconfig /{release|renew|flushdns}` = IP tools
+* `Drag & Drop file` = Pastes file path

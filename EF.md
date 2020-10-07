@@ -2,7 +2,7 @@
 
 ## Database Context
 
-It is a class inheriting from DbContext where the Fluent API is used to describe the DB data structure (in conjonction with data annotations attributes placed on the domain model classes & properties).
+It is a class inheriting from DbContext where EF's [Fluent API](https://docs.microsoft.com/en-us/ef/ef6/modeling/code-first/fluent/types-and-properties) is used to describe the DB data structure (in conjonction with data annotations attributes placed on the domain model classes & properties) and ultimately map the tables (fields) to entities (attributes).
 The Database Context holds the collections corresponding to the DB tables in the form of Properties of type DbSet&lt;T&gt;.
 
 ## Data Mapping

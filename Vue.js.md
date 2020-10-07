@@ -21,7 +21,7 @@ Packs a render engine, turning data models and components into HTML & JS.
   * Small apps can be set up very quickly
   * High performance even with order of magnitudes more data
   * Subsequent conversion to full-scale app is straightforward
-* [Reactivty](https://vuejs.org/v2/guide/reactivity.html)
+* [Reactivity](https://vuejs.org/v2/guide/reactivity.html)
   * Updates DOM automatically in response to data model change (doesn't require a call to Render as React does)
   * Virtual DOM (like React): existing GUI elements are reused to mitigate the cost associated with rendering new stuff
   * Changes are batched for performance
@@ -52,7 +52,7 @@ Packs a render engine, turning data models and components into HTML & JS.
 ### Drawbacks
 
 * Basic prototyping is easy, but building a complex app requires knowledge & integration of its ecosystem, and might not be appropriate for entreprise-scale applications
-* Reactivity can be tricky for more complex types beyong numbers & strings
+* Reactivity can be tricky for more complex types beyond numbers & strings
 * .vue file type is not widely used & known by developers
 * Relatively new & untested compared to React & Angular
 
@@ -98,23 +98,23 @@ Packs a render engine, turning data models and components into HTML & JS.
 
 ### Ecosystem
 
-* [**Vue API**](https://vuejs.org/v2/api/)
-* [**Vue CLI**](https://cli.vuejs.org/) = Scaffolding & building command-line tools
-* [**Vue Router**](https://router.vuejs.org/)
-* [**Vuex**](https://vuex.vuejs.org/) = State Management (similar to Flux or Redux). Makes apps with massive state manageable
+* [Vue API](https://vuejs.org/v2/api/)
+* [Vue CLI](https://cli.vuejs.org/) = Scaffolding & building command-line tools
+* [Vue Router](https://router.vuejs.org/)
+* [Vuex](https://vuex.vuejs.org/) = State Management (similar to Flux or Redux). Makes apps with massive state manageable
   * Provides simple tools to add elements to the solution, collaboratively
-* [**Vuetify.js**](https://vuetifyjs.com/en/components/date-pickers) = [Material Design](https://en.wikipedia.org/wiki/Material_Design)
-* [**VeeValidate**](https://logaretm.github.io/vee-validate/)
-* [**Vue I18n**](https://kazupon.github.io/vue-i18n/guide/formatting.html#named-formatting)
-* [**Nuxt**](https://nuxtjs.org/) = Universal Rendering
+* [Vuetify.js](https://vuetifyjs.com/en/components/date-pickers) = [Material Design](https://en.wikipedia.org/wiki/Material_Design)
+* [VeeValidate](https://logaretm.github.io/vee-validate/)
+* [Vue I18n](https://kazupon.github.io/vue-i18n/guide/formatting.html#named-formatting)
+* [Nuxt](https://nuxtjs.org/) = Universal Rendering
   * Makes the App-to-plain-HTML rendering on the server side instead of the client
-* [**Vuetify**](https://vuetifyjs.com) = Component Framework (à la Angular Material)
-  * Collection of turnkey Material GUI components for standard controls (buttons, lists, etc.)
-* [**Vue Devtools**](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/) = Browser extension
+* [Vuetify](https://vuetifyjs.com) = Component Framework (à la Angular Material)
+  * Collection of turnkey Material GUI components for standard controls (buttons, lists, date pickers, etc.)
+* [Vue Devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/) = Browser extension
   * Debug & manipulate the data model in real time (add/remove objects and set properties)
   * Inspect: Model, Vuex, Events, Routing & Performance
-* [**Vetur**](https://marketplace.visualstudio.com/items?itemName=octref.vetur) = Visual Studio Code Extension for linting, syntax-highlighting, emmet, etc.
-* [**Vue VSCode Snippets**](https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-snippets) = Visual Studio Code Extension for snippets
+* [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur) = Visual Studio Code Extension for linting, syntax-highlighting, emmet, etc.
+* [Vue VSCode Snippets](https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-snippets) = Visual Studio Code Extension for snippets
   * `vbase` generates a component template & script sections
   * `vdata`
   * `vcomputed`
@@ -253,7 +253,7 @@ Composed of three sections:
 * **Data**
   * `data() { return {}; }`
   * The data() function returns an object holding all the properties that will be added to Vue's reactivity system.
-  * Note that it is a function, note an object, so that multiple instances can can maintain an independent copy of the returned data object. 
+  * Note that it is a function, not an object, so that multiple instances can maintain an independent copy of the returned data object.
   * When the values of those properties change, the component reacts (real-time binding).
 * **Computed**
   * `computed: {}`
@@ -362,7 +362,6 @@ The signature of the handler however receives the parameter.
 
 [Slots](https://vuejs.org/v2/guide/components-slots.html) a mechanic that allows a Child component to set a placeholder for some content provided by the Parent.
 It is a similar construct to WPF's ContentPresenters that mark a location where Content will be rendered.
-Example:
 
   ```html
   <!-- Child template -->
@@ -374,7 +373,6 @@ Example:
 Slots can be named with the _name_ attribute in the Child, and referencing it with a **v-slot**:_name_ directive in the Parent.
 The default name when no name is provided is just that: _default_, which can also be referenced explicitely.
 Any content not wrapped in a ```<template>``` using v-slot is assumed to be for the default slot.
-Example:
 
   ```html
   <!-- Child template -->
@@ -384,41 +382,43 @@ Example:
   ```
 
 The Child itself can prepare a default (fallback) content to use when the Parent provides none:
-Example:
 
   ```html
   <!-- Child template -->
   Hello <slot>World!</slot>
   ```
 
-Scoped slots can be used when we want the content defined in the Parent to make use of data only available in the Child.
+**Scoped slots** can be used when we want the content defined in the Parent to make use of data only available in the Child.
 Therefore it is a mechanism to let the Child pass its data to the Parent via binding, that then gets injected back to the Child via templating.
 To implement this, the Child must v-bind the data by specifying an arbitrary name.
-The Parent can then use the **v-slot** attribute syntax and specify a name for the object holding all the props it receives (similar to the notion of a WPF DataContext, or simply the _data() { return {}}_ section).
+The Parent can then use the **v-slot** attribute syntax and specify a name for the object holding all the props it receives (similar to the notion of a WPF DataContext, as well as the way the `data() { return {}}` section method holds its properties).
 The Child property can then be accessed in the content via `{holdingObjectName}.{childArbitraryName}`
-Example:
 
   ```html
   <!-- Child template -->
-  <slot v-bind:child4parentProp="childLocalVar"></slot>
+  <slot v-bind:child2parentProperty="childLocalVariable"></slot>
+  <slot child2parentProperty="Hello from child"></slot><!-- Using static binding -->
+  <slot v-bind="item"></slot>
   <!-- Parent template -->
-  <child><template v-slot:default="obj">{{obj.child2parentProp}}</template></child>
+  <child><template v-slot:default="props">{{props.child2parentProperty}}</template></child>
+  <child><template scope="item">{{item.property}}</template></child>
   ```
 
 When only the default slot is provided content (no other named slots), the component’s tags can be used as the slot’s template.
 
   ```html
   <!-- Parent template -->
-    <child v-slot:default="obj">{{obj.childProp}}</child>
+    <child v-slot:default="props">{{props.child2parentProperty}}</child>
   ```
 
-Note that for named slots, the **v-slot**:_name_ attribute can be shorthanded into #name.
-Example:
+Note that for named slots, the **v-slot**:_name_ attribute can be shorthanded into just _#name_.
 
   ```html
   <!-- Parent template -->
   <child #koko>World!</child>
   ```
+
+Scoped slots can be used e.g. to pass back up (via binding) a list item of a collection (originating from the Parent) looped on in the Child, so that the Parent can specify the template of the list item so that the Child can be reused with different designs. See <https://vuejsdevelopers.com/2017/10/02/vue-js-scoped-slots/>
 
 Read on about scoped slots datacontext...: <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Object_destructuring>
 

@@ -48,46 +48,70 @@ C# Is good.
   * `DateTime.ToString("T")` => 12:34:56 (only if T is the only character in the string format parameter, otherwise it is considered a literal character 'T')
 * Enum
   * `enum MyEnum : byte {A, B, C};` = Specify the underlying type (byte, sbyte, short, ushort, int, uint, long, ulong)
-* System.String
-  * Methods (`CompareTo()`, `MeasureString()` returns the size of a string in pixels, `ToString("0000")` displays a number on 4 positions with 0 filling)
-* Arrays
-  * `string[] s = new string[3];`
-  * `string[] s = {"bleu", "rouge", "vert"};`
-  * `string [][] s = new string[2,3]`
-  * `string [,] s = new string[2,2];`
-  * Array static method (`Clear()`, `Reverse()`, `Sort()`)
+
+### System.String
+
+* `CompareTo()`
+* `Graphics.MeasureString()` returns the size of a string in pixels in a given Font
+* `ToString("0000")` displays a number on 4 positions with 0 filling)
+
+### Collections
+
 * [Collections](http://geekswithblogs.net/BlackRabbitCoder/archive/2011/06/16/c.net-fundamentals-choosing-the-right-collection-class.aspx)
-  * Associative
-    * `Dictionary<TKey,TValue>`         # Hash. O(1)
-    * `SortedDictionary<TKey,TValue>`   # Binary tree (O(log(n)) and sorted Items)
-    * `SortedList<TKey,TValue>`         # Sorted array (O(n) and sorted Items but little than SD if more faster lookups for little insert/delete)
-  * Non-Associative
-    * `List<T>`         # Contiguous array
-    * `LinkedList<T>`   # Doubly-linked list
-    * `HashSet<T>`      # Unordered collection. Unique items => see Dictionary<TValue,TValue> (Hash)
-    * `SortedSet<T>`    # Orderered collection. Unique items => see SortedDictionary<TValue,TValue> (Binary tree)
-    * `Stack<T>`        # LIFO
-    * `Queue<T>`        # FIFO
-  * Original
-    * `ArrayList`   # Use List\<T>
-    * `HashTable`   # Use Dictionary<TKey,TValue>
-    * `SortedList`  # Use SortedList\<T>
-    * `Stack`       # Use Stack\<T>
-      * Methods (Push(), Pop(), Peek(), Clear(), CopyTo(), ToArray(), Contains(), GetEnumerator())
-      * The initial capacity is the starting capacity of the new stack. Once current capacity is reached, the capacity is doubled. The default initial capacity is 10. Stack is not thread-safe.
-    * `Queue`       # Use Queue\<T>
-  * Binding & Events
-    * `ObservableCollection<Type>`
-  * Concurrent (Thread-safe collections)
-    * `ConcurrentDictionary`    # Dictionary
-    * `ConcurrentQueue`         # FIFO
-    * `ConcurrentStack`         # LIFO
-    * `ConcurrentBag`           # Unordered collection
-    * `BlockingCollection`      # Producer-Consumer
+* Associative
+  * `Dictionary<TKey,TValue>`         # Hash. O(1)
+  * `SortedDictionary<TKey,TValue>`   # Binary tree (O(log(n)) and sorted Items)
+  * `SortedList<TKey,TValue>`         # Sorted array (O(n) and sorted Items but little than SD if more faster lookups for little insert/delete)
+* Non-Associative
+  * `List<T>`         # Contiguous array
+  * `LinkedList<T>`   # Doubly-linked list
+  * `HashSet<T>`      # Unordered collection. Unique items => see Dictionary<TValue,TValue> (Hash)
+  * `SortedSet<T>`    # Orderered collection. Unique items => see SortedDictionary<TValue,TValue> (Binary tree)
+  * `Stack<T>`        # LIFO
+  * `Queue<T>`        # FIFO
+* Original
+  * `ArrayList`   # Use List\<T>
+  * `HashTable`   # Use Dictionary<TKey,TValue>
+  * `SortedList`  # Use SortedList\<T>
+  * `Stack`       # Use Stack\<T>
+    * Methods (Push(), Pop(), Peek(), Clear(), CopyTo(), ToArray(), Contains(), GetEnumerator())
+    * The initial capacity is the starting capacity of the new stack. Once current capacity is reached, the capacity is doubled. The default initial capacity is 10. Stack is not thread-safe.
+  * `Queue`       # Use Queue\<T>
+* Binding & Events
+  * `ObservableCollection<Type>`
+* Concurrent (Thread-safe collections)
+  * `ConcurrentDictionary`    # Dictionary
+  * `ConcurrentQueue`         # FIFO
+  * `ConcurrentStack`         # LIFO
+  * `ConcurrentBag`           # Unordered collection
+  * `BlockingCollection`      # Producer-Consumer
 
-## Enumerable & LINQ
+#### Arrays
 
-Enumerable.Any() is better than Enumerable.Count() > 0, because the latter has to count the full collection, whilst the former returns true ASAP.
+* `string[] s = new string[3];`
+* `string[] s = {"bleu", "rouge", "vert"};`
+* `string [][] s = new string[2,3]`
+* `string [,] s = new string[2,2];`
+* Array static method (`Clear()`, `Reverse()`, `Sort()`)
+
+## Libraries
+
+### File System
+
+```C#
+if (!Directory.Exists(chemin_grande))
+  Directory.CreateDirectory(chemin_grande);
+
+File.Copy(fichier_distant[i], chemin_grande + nom_nouveau_fichier,false);
+File.AppendAllText("");
+
+System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+```
+
+### Enumerable & LINQ
+
+* Enumerable.Any() is better than Enumerable.Count() > 0, because the latter has to count the full collection, whilst the former returns true ASAP.
+* Use Enumerable.Empty&lt;T&gt; for a default non-null instance.
 
 ## WCF
 
@@ -107,4 +131,4 @@ Useful tool to test web service APIs: <C:\Program Files (x86)\Microsoft Visual S
 
 Private Setter properties => acts as a private variable (can only be set within), but publicily read-only.
 
-    public ILimits<SimpleOverrideValue> Limits { get; private set; }
+`public ILimits<SimpleOverrideValue> Limits { get; private set; }`
