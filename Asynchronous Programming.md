@@ -54,8 +54,8 @@ See <https://devblogs.microsoft.com/pfxteam/await-and-ui-and-deadlocks-oh-my/>
 
 Unlike Console applications who use a threadpool as SynchronizationContext, GUIs  employ a single thread as SynchronizationContext.
 This can cause unexpected deadlock issues with the same code that would actually work in a (console) unit test.
-If a (synchronous) blocking call is made in an above method, it will prevent the method below that finishes its await statement to ever complete, because the above context itself is waiting for the method to finish (to clarify: the await statement is finished, but not the entire method, i.e. its closing curly brace, that the above method is waiting for).
-See <https://msdn.microsoft.com/en-us/magazine/jj991977.aspx>
+If a (synchronous) blocking call is made in an above method, it will prevent the method below that finishes its await statement to ever complete, because the above context itself is waiting for the method to finish.
+To clarify, look at the first exemple of the [following link](https://msdn.microsoft.com/en-us/magazine/jj991977.aspx): the await statement in the child method will eventually complete but that method itself will require the current thread to resume from there and fully return. Problem: in a GUI environment, that thread is the single UI thread that's been stopped by a blocking call in the parent method. Therefore the execution pointer will get stuck between the end of the await and the closing curly brace in the child method.
 
 Access to the currently running thread.
 Can be saved, and used to send/post messages.
