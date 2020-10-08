@@ -207,3 +207,7 @@ Pull Request # A request for integrating the changes of a forking repo into the 
 It's good practice to include a README file in each repository, whose content will be displayed on the repo page
 Such a file can have different file extensions; only one is chosen by priority (README.md > README > README.txt)
 README.md uses Markdown syntax language (text format editing à la wiki)
+
+## Troubleshooting
+
+* Temporarily disable SSL certificates: `git config http.sslVerify false`
