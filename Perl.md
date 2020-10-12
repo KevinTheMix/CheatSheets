@@ -2,7 +2,7 @@
 
     perldoc # Manual page (q to exit)
 
-    #!/usr/bin/perl -w  # Must be the first line of the file. See "which perl" shell command for Perl local installation directory.
+    #!/usr/bin/perl -w  # Must be the first line of the file. See `which perl` shell command for Perl local installation directory.
     "./script.pl"       # Run
     "perl script.pl"    # Run (also makes shebang line unnecessary)
 
@@ -136,29 +136,31 @@
 
 ## Arrays & Lists
 
+    ```Perl
     @t                  # Can coexist with a scalar named $t even after assignation. $t[] will properly be distinguished from $t.
     $#t                 # Last index
     scalar(@t) == size  # Also $size = @t. Note @t = 5 === t[0] = 5;
     $t[-1] = $t[$#t]    # Last element
     if index > size, item value == undef
     $t[1000] = 8;       # Assigns specific index. This enlarges the array => scalar(@t) now worth 1001 and missing elements are all undef
-
+    
     exists($t[index]) == check item exists in tab (index within range)
     defined($t[index]) == check item value is undef (item can exists)
-
-    ($a,$b) = (1,2);    # Cette instruction affecte une valeur � chacune des variables de la liste de gauche : $a re�oit 1 et $b re�oit 2.
-    ($a,$b) = (1,2,3);  # Les m�mes affectations sont effectu�es ici, la valeur 3 n'�tant d'aucune utilit�.
-    ($a,$b) = (1);      # L'affectation � $a de la valeur 1 est effectu�e et $b est mis � undef (son ancienne valeur est perdue).
-    ($a,$b) = @t;       # Les variables cit�es � gauche re�oivent les premi�res valeurs du tableau @t : $a en re�oit le premier �l�ment ou undef si @t est vide ; $b re�oit le deuxi�me �l�ment ou undef si @t il ne contient qu'un �l�ment.
-    @t = (1,2);         # Cette instruction r�initialise le tableau @t (dont les anciennes valeurs sont toutes perdues, y compris celles d'indice diff�rent de 0 et 1) en lui affectant les valeurs de droite : on obtient donc un tableau � deux �l�ments.
+    
+    ($a,$b) = (1,2);    # Cette instruction affecte une valeur à chacune des variables de la liste de gauche : $a reçoit 1 et $b reçoit 2.
+    ($a,$b) = (1,2,3);  # Les mêmes affectations sont effectuées ici, la valeur 3 n'étant d'aucune utilité.
+    ($a,$b) = (1);      # L'affectation à $a de la valeur 1 est effectuée et $b est mis à undef (son ancienne valeur est perdue).
+    ($a,$b) = @t;       # Les variables citées à gauche reçoivent les premières valeurs du tableau @t : $a en reçoit le premier élément ou undef si @t est vide ; $b reçoit le deuxième élément ou undef si @t il ne     contient qu'un élément.
+    @t = (1,2);         # Cette instruction réinitialise le tableau @t (dont les anciennes valeurs sont toutes perdues, y compris celles d'indice diffèrent de 0 et 1) en lui affectant les valeurs de droite : on obtient     donc un tableau à deux éléments.
     @t = (1..10);
     @t = (2..$n);
-    ($a,$b) = Fonction();   # Nous verrons un peu plus loin comment �crire une fonction, et comment lui faire renvoyer une liste : ici l'affectation se fait dans les m�mes conditions que pour les trois premiers cas.
-    ($a,$b) = ($b,$a);      # Cette instruction est la plus savoureuse : on peut �changer deux variables Perl sans avoir � en utiliser une troisi�me � (Ai-je d�j� dit que Perl s'occupe lui-m�me de la m�moire ?)
-
+    ($a,$b) = Fonction();   # Nous verrons un peu plus loin comment écrire une fonction, et comment lui faire renvoyer une liste : ici l'affectation se fait dans les mêmes conditions que pour les trois premiers cas.
+    ($a,$b) = ($b,$a);      # Cette instruction est la plus savoureuse : on peut échanger deux variables Perl sans avoir à en utiliser une troisième � (Ai-je déjà dit que Perl s'occupe lui-même de la mémoire ?)
+    
     ($a,@t) = @s;           # Absorbtion. $a = $s[1] et @t = le reste de @s
     (@t, @u, $val) = @s;    # Absorbtion par @t de @s => tout ce qui suit est vide () et undef
     @u = (3, 4); @t = (1, 2, @u);   # Aplatissement. @t == (1, 2 ,3, 4)
+    ```
 
 [List flattening](http://blogs.perl.org/users/aristotle/2017/11/perl5-refs-flattening.html).
 This is akin to the ```params``` [params operator](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/params) in C#, ```*``` [splat operator](https://www.freecodecamp.org/news/rubys-splat-and-double-splat-operators-ceb753329a78/) in Ruby, ```...``` [spread operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) in Javascript, except in reverse: in Perl, splatting is the default and the ```\``` operator prevents it.
@@ -180,6 +182,7 @@ This is akin to the ```params``` [params operator](https://docs.microsoft.com/en
 
 ## Arrays & Lists (2)
 
+    ```Perl
     unshift (@tableau, 1, 2, 3) $elem = shift (@tableau)    # Changes @tableau. Also shift @tableau with no ()
     push (@tableau, 4, 5, 6)    $elem = pop (@tableau)      # Changes @tableau
     @rev = reverse (@tableau)                               # @tableau not modified
@@ -189,6 +192,7 @@ This is akin to the ```params``` [params operator](https://docs.microsoft.com/en
     $string = join("separator", @tableau);
     @liste = split(/separator regex/, "phrase contenant le separateur");
     ($a, $b) = split(...)       # Also possible since it's a list of scalars
+    ```
 
 ## Sort
 
@@ -223,6 +227,7 @@ Comparison result <0 if $a has to precede $b
 
 ## Hash
 
+    ```Perl
     (key => value)  # All scalars. Value cannot be an array.
 
     my %h;
@@ -244,14 +249,17 @@ Comparison result <0 if $a has to precede $b
     @t = %h     # List to hashtable, 2 by 2, in any order
     => == ','   # Forces left side as string e.g. toto => 'titi'
     %h = reverse(%h);   # Duplicate values undetermined
+    ```
 
 ## Slices
 
+    ```Perl
     @t[1,3] == ($t[1],$t[3])    # Note the '@' since splice is a list.
     (function())[1,3];          # Only selected elements from the returned list
 
     @h{'key1', 'key3'} == ($h{key1}, $h{key2})      # Note it's always a list '@' and not '%'!
     @t = qw(..); my %h; @h{@t} = (); @t = keys %h;  # Easy word duplicate deletion
+    ```
 
 ## Files
 
@@ -308,7 +316,7 @@ Values
 ### Binary
 
     $c = getc(HANDLE);
-    $sizeRead = read(HANDLE, $buffer, $sizeToRead);	# $sizeRead == $siteToRead if no problem
+    $sizeRead = read(HANDLE, $buffer, $sizeToRead); # $sizeRead == $siteToRead if no problem
     print/printf "0101110";
 
 ## Regex =~ !~
@@ -524,7 +532,7 @@ Once the reference has been blessed, i.e. associated with a package, Perl knows 
 
 Le nom de la classe est suivi d'une flèche, du nom de la méthode et des éventuels arguments entre parenth�ses.
 N'écrivez pas Vehicule::getNbVehicules() car le nom de la classe n'est pas transmis et surtout car les m�canismes d'h�ritage ne sont pas mis en �uvre.
-S'il est possible d'écrire Velo->getNbVehicules(), il n'est pas permis d'écrire Velo::getNbVehicules(). 
+S'il est possible d'écrire Velo->getNbVehicules(), il n'est pas permis d'écrire Velo::getNbVehicules().
 
 ### Composition
 

@@ -51,8 +51,8 @@ C# Is good.
 
 ### System.String
 
-* `CompareTo()`
-* `Graphics.MeasureString()` returns the size of a string in pixels in a given Font
+* `CompareTo()` retrns an integer
+* `Graphics.MeasureString(String, Font)` returns the size of a string in pixels in a given Font
 * `ToString("0000")` displays a number on 4 positions with 0 filling)
 
 ### Collections

@@ -30,7 +30,7 @@ Create custom Password Generator using the following character sets
 * Alphanumeric
 * _ (Underline)
 * Brackets
-* Special Characters or %!&@#~$* or !&@#~$* or #$
+* Special Characters or `%!&@#~$*` or `!&@#~$*` or `#$`
 
 ### Timed One-Time Password (TOTP)
 
