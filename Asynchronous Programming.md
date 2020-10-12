@@ -1,19 +1,19 @@
 # Asynchronous Programming
 
-Asynchronous programming is not parallel.
-See <https://stackoverflow.com/questions/37419572/if-async-await-doesnt-create-any-additional-threads-then-how-does-it-make-appl>
+Contrary to popular beliefe, [asynchronous programming is not parallel](https://stackoverflow.com/questions/37419572/if-async-await-doesnt-create-any-additional-threads-then-how-does-it-make-appl).
 
-The code is actually run synchronously going deep down the callstack for each Task started.
-Going down the hierarchy, we should arrive at a low-level asynchronous operation, such as a Windows I/O call.
-_In Windows, all I/O is asynchronous. Synchronous APIs are just a convenient abstraction_(See <https://stackoverflow.com/a/12484535>).
+The code is actually run synchronously as it goes through each async methods down the callstack.
+Going down that callstack hierarchy, we always arrive at some kind of low-level asynchronous operation, usually handled by a library, such as a Windows I/O call, some DB data fetching, or a service call.
+_Note that in Windows, all I/O is asynchronous; synchronous APIs are just a convenient abstraction_(See <https://stackoverflow.com/a/12484535>).
 
-Then it successively give control back up the callstack, synchronously, to each calling method as an *await* is encountered in its callee.
+As a each child method encounters an _await_ call, the control is given back to its parent method up the callstack, **synchronously** as well.
+
 Going up the hierarchy of async methods, we should always arrive either:
 
 * at the UI thread
-* at a high-level Task.Run() used to fire & forget a Task running on a background thread e.g. loading some data
-* at a well-devised blocking call, doing something else in between task creation & waiting
-* at an event callback, that we can make async to make the async chain mechanism work
+* at a high-level Task.Run() used to fire & forget a Task performing on a background thread without needing to read the result.
+* at a (well-devised) blocking call, doing something else in between task creation & waiting.
+* at an event callback, that can be marked async to complete the async chain.
 
 ## UI Thread
 
