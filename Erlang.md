@@ -1,7 +1,7 @@
 # Erlang
 
 Erlang is a functional programming language written in C, Prolog & itself and intended primarily for telecom applications & companies.
-It has therefore very high capabilities in concurrency & multi-threading and on the other hand lacks integrated support of concepts such as strings.
+It has very high capabilities in concurrency & multi-threading and on the other hand lacks integrated support of concepts such as strings.
 
 ## Environment & Installation
 
@@ -9,21 +9,21 @@ Download exe and/or sources from Erlang.org
 
 ### Shell
 
-* werl = Windows Erlang Emulator shell. Based on Emacs text editor
-* {Ctrl}+A = Go to start of line
-* {Ctrl}+E = Go to end of line
-* {Ctrl}+G = User switch command
-* c [job_number] = Connects to given shell. Connects to current shell if no number specified
-* h = Lists commands
-* i = Stop code but keep shell
-* j = Lists shell instances
-* k [job_number] = Terminate shell & code. Kills current shell if no number specified
+* `werl` = Windows Erlang Emulator shell. Based on Emacs text editor
+* `Ctrl + A` = Go to start of line
+* `Ctrl + E` = Go to end of line
+* `Ctrl + G` = User switch command
+* `c {job_number} = Connects to given shell. Connects to current shell if no number specified
+* `h` = Lists commands
+* `i` = Stop code but keep shell
+* `j` = Lists shell instances
+* `k {job_number}` = Terminate shell & code. Kills current shell if no number specified
 
-* li {Tab} = Displays modiles matchin li*, e.g. "lib", "lists"
-* lists: {Tab} = Displays the methods within module lists
+* `li + Tab` = Displays modules matchin li*, e.g. "lib", "lists"
+* `lists: Tab` = Displays the methods within module lists
 
-* help(). = Displays shell functions
-* q() = Quit. Aka init:stop()
+* `help().` = Displays shell functions
+* `q()` = Quit. Aka init:stop()
 
 ### Special & Environment variables
 
@@ -43,11 +43,11 @@ Built-in functions are usually functions that are not implemented in Erlang (but
 
 Each statement ends with a dot '.'
 
-* [statement].[whitespace] = Executes statement
+* `{statement}. ` = (Note the trailing whitespace) Executes statement
 
 Statements can be separated by commas, in which case only the last one is shown
 
-* [s1],[s2],[s3]. = Executes all statements, show last one only
+* `[s1],[s2],[s3].` = Executes all statements, show last one only
 
 ### Variables
 

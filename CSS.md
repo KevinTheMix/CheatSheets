@@ -95,9 +95,10 @@ el[att*=val] {} /* All <el>s with att="%val%" */
 ## SASS
 
 [Difference between SASS & SCSS](https://responsivedesign.is/articles/difference-between-sass-and-scss/)
+[Difference between SASS & SCSS](https://stackoverflow.com/a/5732683)
 
 Stands for Syntactically Awesome Style Sheets
-Augments regular CSS syntax with programming concepts (e.g. variables, OO, nesting)
+Augments regular CSS syntax with programming concepts (e.g. variables, OO, nesting, Mixins).
 Ultimately, the extended stylsheets are interpreted into regular CSS (e.g. all variables are replaced, unnest, evaluated expressions end up as values)
 
 ### Variables
@@ -113,6 +114,10 @@ Ultimately, the extended stylsheets are interpreted into regular CSS (e.g. all v
 Actually interpreted to two separate block definitions (& refers to the parent selector)
 
 `elem { inside { } }` equals `elem {}` + `elem inside {}`
+
+### [Mixins](https://responsivedesign.is/articles/helpful-sass-mixins/)
+
+(todo)
 
 ## SCSS
 

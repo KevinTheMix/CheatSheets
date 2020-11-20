@@ -4,7 +4,8 @@ Contrary to popular beliefe, [asynchronous programming is not parallel](https://
 
 The code is actually run synchronously as it goes through each async methods down the callstack.
 Going down that callstack hierarchy, we always arrive at some kind of low-level asynchronous operation, usually handled by a library, such as a Windows I/O call, some DB data fetching, or a service call.
-_Note that in Windows, all I/O is asynchronous; synchronous APIs are just a convenient abstraction_(See <https://stackoverflow.com/a/12484535>).
+_Note that in Windows, all I/O is asynchronous; synchronous APIs are just a convenient abstraction_.
+(See <https://stackoverflow.com/a/12484535>).
 
 As a each child method encounters an _await_ call, the control is given back to its parent method up the callstack, **synchronously** as well.
 
