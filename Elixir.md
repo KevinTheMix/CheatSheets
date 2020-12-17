@@ -3,27 +3,31 @@
 Dynamic functional general-purpose programming language that runs on Erlang BEAM virtual machine.
 Possesses the same qualities as Erlang: concurrency & communication, scalability, failure management.
 
-## Immutability
-
-In Elixir, data is immutable, which means it is never updated, but rather duplicated.
-That enforces the fact that existing data never gets altered, and when changes are requested, a new copy is made.
-
-That feature enables peace of mind for concurrency...
-Makes data reuse super safe, and therefore memory usage super efficient, since it is safely reusable (e.g. the compositional nature of list data structures).
-
 ## Environment
 
 ### Installation
 
 TODO.
 
-## Syntax
+## Features
+
+### Immutability
+
+In Elixir, data is immutable, which means, a memory location once allocated is never subsequently updated.
+Therefore, something that points to the same place will always get the same value.
+Note that unlike in Erlang or Haskell where reassigning (or rather pattern-matching) existing variables raises an error, variables in Elixir **can** be _rebinded_ to a new value.
+
+That characteristic makes data reuse super safe, especially in a concurrent setting.
+It also makes memory usage more efficient, since multiple parts of an application can use a single piece data, staving off duplication.
+E.g. the compositional nature of lists (data structure), that can chain existing sublists in order to make new combined ones.
 
 ### Pattern Matching
 
 =	# Actually not an assignation, but a pattern matching operation!
 	# If the left side is a variable that currently contains no value, it will indeed get assigned.
 _ 	# Disregard the corresponding pattern matched value. Is actually a (forever unbound) variable.
+
+## Syntax
 
 ### API
 
@@ -63,7 +67,7 @@ Unicode strings are supported natively e.g. `byte_size("€")` returns 3, while 
 Strings are actually binaries e.g. `"€" <> <<0>>` returns `<<226, 130, 172, 0>>`.
 
 ```Elixir
-<<65, 66, 67>>		# Binary data
+<<65, 66, 67>>		# Binary data representing "ABC"
 <<0>>				# String termination character
 "Hello" <> "koko"	# String concatenation
 "Hello #{koko} ~"	# String interpolation
@@ -72,7 +76,7 @@ String.length()
 
 ### Tuples
 
-Tuples are a set of associated values passed together, and are frequently used in functions and pattern-matching.
+Tuples are ordered collections of associated (but hybrid) values, frequently returned together, enabling pattern-matching.
 E.g. the function that reads file returns either `{:ok, content}` or `{:error, reason}`.
 
 elem(tuple, i)	# Gets the (0-based) _i_th value in a tuple.

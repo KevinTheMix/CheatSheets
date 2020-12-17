@@ -5,6 +5,27 @@
 * Use different schemas for two tables with same name in same DB (when you want fewer DBs).
 * Queries can be performed between tables in different DBs (but on the same server) e.g. JOIN.
 * [DDL, DML, DCL, TCL](https://www.geeksforgeeks.org/sql-ddl-dml-dcl-tcl-commands/)
+* [Partitions](https://www.sqlshack.com/sql-partition-by-clause-overview/) = "cartesian" GROUP BY, with numbering, sorting & comulative aggregation.
+* [Temporary tables](https://www.red-gate.com/simple-talk/sql/t-sql-programming/temporary-tables-in-sql-server/)
+  * Temporary tables
+    * `#Temp` = local (session) temporary table
+    * `##Temp` = global temporary table
+    * 'Temp' but really stored physically within _TempDB_
+  * `@table` = table variable (e.g. `DECLARE @table AS TABLE (Id INT NOT NULL PRIMARY KEY)`)
+    * These variables are dropped automatically (see <https://stackoverflow.com/a/5653535>)
+  * See <https://stackoverflow.com/a/12190754>
+* Functions
+  * Table-valued Function = user-defined functoin that returns a table-type data
+* Stored Procedure
+  * Output parameter = parameter that can be populated via a SET or SELECT
+    * `CREATE PROCEDURE (@Output bigint = {default_value_if_missing} OUTPUT) AS BEGIN SELECT @Output = ... / SET @Output = ...`
+      * [Default value](https://stackoverflow.com/a/13376799) isn't initialization
+    * `EXEC @Output = @Var OUTPUT`
+    * An output parameter is actually passed bi-directionally => we cannot simply test `IF @Output IS NULL` after the first `SELECT @Output = ..` assignation, because it might still hold a past value.
+* `GO` = separates statments and immediately runs whatever precedes it when hit, and consider the subsequent lines as part of a new scope
+  * Mandatory in some situations, e.g. placing the definition of a SP mid-file, whereas it has to be the only statement in a file (scope).
+* `;` = separate statements. Mandatory in CTE when they're not the first statement in the scope.
+  * See <https://stackoverflow.com/questions/2853403/sql-server-update-group-by#comment82532249_6984780>
 
 ## DDL
 
@@ -85,3 +106,32 @@ SQL Fragmentation = <https://www.mssqltips.com/sqlservertip/4331/sql-server-inde
 ### Composite Index
 
 Multiple columns.
+
+## API
+
+```SQL
+cast(@number AS float)
+convert(type, @value) -- e.g. CONVERT(DATETIME2(0), '2020-03-29 02:00:01.0000000 +01:00')
+round(@number, precision, mustTruncate) -- round by default
+```
+
+### Dates
+
+```SQL
+-- Types
+date -- Just the date part.
+time -- Just the time part.
+datetime -- 1753 through 9999 with max precision of 3 1/3 milliseconds.
+datetime2(fractional_seconds_precision) -- 0001 through 9999, and can be precise down to 100ns.
+
+-- Methods
+datefromparts(@year, @month, @day) -- Last day of month == also the number of days in that month.
+dateadd(interval, number, @date)
+datepart(interval, @date) -- interval = year, quarter, month, dayofyear, day, week, weekday, hour, minute, second, millisecond, tzoffset (in minutes)
+year(@date) -- Year
+month(@date) -- Month
+day(@date) -- Day
+
+-- Operators
+@date at time zone 'Central European Standard Time' -- https://docs.microsoft.com/en-us/sql/t-sql/queries/at-time-zone-transact-sql?view=sql-server-ver15
+```
