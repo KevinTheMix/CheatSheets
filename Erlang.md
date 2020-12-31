@@ -13,7 +13,7 @@ Download exe and/or sources from Erlang.org
 * `Ctrl + A` = Go to start of line
 * `Ctrl + E` = Go to end of line
 * `Ctrl + G` = User switch command
-* `c {job_number} = Connects to given shell. Connects to current shell if no number specified
+* `c {job_number}` = Connects to given shell. Connects to current shell if no number specified
 * `h` = Lists commands
 * `i` = Stop code but keep shell
 * `j` = Lists shell instances

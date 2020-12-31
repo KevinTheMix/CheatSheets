@@ -28,7 +28,7 @@ Commands:
 
     C:\Program Files\Git\mingw64\libexec\git-core\git-credential-manager.exe uninstall # Uninstall Git Credential Manager
 
-An Alias is a command with parameters (.gitconfig file in $HOME directory).
+An Alias is a shortened command with parameters (.gitconfig file in $HOME directory).
 To define an alias, used the following command:
 
     {alias} = {command}

@@ -1,6 +1,6 @@
 # Elasticsearch
 
-Elasticsearch is a JSON based REST API, Distributed, web server build over Lucene
+Elasticsearch is a JSON based REST API, Distributed, web server build over Lucene.
 Elasticsearch is a JSON documents-based search HTTP REST API, Distributed, web server build over Lucene.
 Moteur de recherche "Enterprise" multi-tenants basé sur Lucene.
 Interface HTTP & documents JSON.
