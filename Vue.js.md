@@ -418,7 +418,10 @@ Note that for named slots, the **v-slot**:_name_ attribute can be shorthanded in
   <child #koko>World!</child>
   ```
 
-Scoped slots can be used e.g. to pass back up (via binding) a list item of a collection (originating from the Parent) looped on in the Child, so that the Parent can specify the template of the list item so that the Child can be reused with different designs. See <https://vuejsdevelopers.com/2017/10/02/vue-js-scoped-slots/>
+An usage example of scoped slots can be a Child component passing (via binding) each list item of a list (originating from the Parent) getting looped on.
+See <https://vuejsdevelopers.com/2017/10/02/vue-js-scoped-slots/>
+The Parent can then specify  a template for that list item aka for collection items.
+Thus, the same Child component can be reused with different designs as provided by the Parent.
 
 Read on about scoped slots datacontext...: <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Object_destructuring>
 

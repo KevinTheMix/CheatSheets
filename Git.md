@@ -38,9 +38,12 @@ On Windows, Command-line parameters must use double " instead of single ' quotes
 
 ### Config Sections
 
+An Alias is a command with parameters shortened to a single term (.gitconfig file in $HOME directory).
+To define an alias, used the following command:
+
 * [alias](https://githowto.com/aliases)
-  * `{abbr} = {long_command_with_parameters}`
-  * `hist = log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short`
+  * Format: `{abbr} = {long_command_with_parameters}`
+  * Example: `hist = log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short`
 * [user]
   * email
   * name
@@ -55,13 +58,10 @@ On Windows, Command-line parameters must use double " instead of single ' quotes
 * .gitattributes = (binary/textual) merging strategy per file type
 * .gitignore = tracking strategy per file type
 
-### Windows Git Credential Manager
+### [Windows Git Credential Manager](https://github.com/Microsoft/Git-Credential-Manager-for-Windows)
 
-Stores logins in Windows Credential Store.
-
-Uninstall Git Credential Manager = `C:\Program Files\Git\mingw64\libexec\git-core\git-credential-manager.exe uninstall`
-
-See [here]<https://github.com/Microsoft/Git-Credential-Manager-for-Windows>.
+* Stores logins in Windows Credential Store.
+* Uninstall = `C:\Program Files\Git\mingw64\libexec\git-core\git-credential-manager.exe uninstall`
 
 ## API
 

@@ -1,18 +1,18 @@
-# Firefox
+# Browsers
+
+## Firefox
 
 * Right-click > screenshot page
 * Tools > Options > Privacy & Security > Logins & Passwords >
   * "Use Master passwords" pour crypter passwords enregistrés par FF
   * "Saved Logins" pour consulter et effacer les passwords enregistrés
 
-## Configuration
+### Configuration
 
 * general.smoothScroll
 * browser.ctrlTab.recentlyUsedOrder
 
-## Extensions
-
-### Q & A
+### Extensions
 
 * Is IIFE necessary for content scripts to work?
   * No! It's just for context-scoping.

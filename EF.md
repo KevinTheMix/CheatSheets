@@ -25,83 +25,9 @@ Cyclical references should be avoided by design (by making references unidirecti
 
 ### Model Builder
 
-Holdes global mapping configuration.
+Holds global mapping configuration.
 
 * Handling weirdly (i.e. wrongly) typed/formatted DB fields with a smart mapping scheme: <https://stackoverflow.com/a/19377226>
   * Create a private field
   * Create a public field that translates inbound values into the private field. In this example, it has the same name as the DB field, so it kinda "replaces" the private property.
   * The private field gets mapped to the DB field via the EF model builder, by name (à la reflection, so it works even though it's private).
-
-## Expression
-
-Expressions are a way to represent an operation in the form of data (a tree) instead of IL code (like a method).
-This gives flexibility because the tree can be traversed in various ways, by different implementations of the Visitor Pattern.
-It is the Provider that performs the visit of the Expression tree, when its Execute() method is launched.
-In the case of EntityFramework, the Provider visits the tree to produces a SQL query, that is passed to the SQL Server where it gets executed.
-
-## LINQ
-
-Linq defines extension methods on two types of objects: IEnumerable&lt;T&gt; or on IQueryable&lt;T&gt; objects.
-Note that whilst both use deferred execution, IEnumerable Query Operators take in delegate Function&lt;&gt; whereas IQueryable Query Operators take in Expressions as parameters.
-The beauty of it is that they both work using similar code because lambda expressions are converted either into delegates or expression trees depending on the context.
-See <https://stackoverflow.com/a/671425> for LINQ internals
-See <https://stackoverflow.com/a/28513685> for Linq IEnumerable/IQueryable symmetry
-
-For IEnumerable objects, chained Linq query operators construct a specialized IEnumerable instance (called Select/Where/etc. -Iterator) via polymorhpism containing a nested hierarchy of functions. Each successive call adds a level on top holding a reference to the level below.
-For IQueryable obejcts, chained Linq query operators construct an IQueryable instance. Each successive call adds an Expression on top, keeping the same Provider.
-See <https://stackoverflow.com/a/2433386> for different IEnumerable or IQueryable parameters
-
-IQueryable inherits from IEnumerable.
-Both Query Providers and Expressions are properties specific to IQueryable.
-See <https://stackoverflow.com/a/252857> for IQueryable specific properties (Expression & Provider)
-The **AsQueryable()** method casts an Enumerable to a Queryable
-See <https://stackoverflow.com/a/252789> for all possible conversions from/to IEnumerable
-
-IEnumerable executes in memory, wheres IQueryable executes (& filters) on the DB server.
-See <https://stackoverflow.com/a/2876655> for Linq to SQL performance thanks to DB execution thanks to Expression SQL translation
-Same <https://www.quora.com/What-is-the-main-difference-between-IEnumerable-and-IQueryable-in-c>
-
-### Query Operators
-
-See <https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/standard-query-operators-overview>
-
-## IQueryable
-
-DbContext's DbSet&lt;T&gt;'s inherit from IQueryable.
-
-An IQueryable is a class that contains:
-
-* the resulting Expression tree
-* the type of elements (T in IQueryable&lt;T&gt;)
-* the Provider that produces the successive IQueryable and will run the final Expression
-
-    public interface IQueryable : IEnumerable
-    {
-        Expression Expression { get; }
-        Type ElementType { get; }
-        IQueryProvider Provider { get; }
-    }
-
-See <https://blogs.msdn.microsoft.com/mattwar/2007/07/30/linq-building-an-iqueryable-provider-part-i/>
-
-## IQueryProvider
-
-The Provider is a factory of IQueryable based on a given Expression.
-It is also the visitor that can execute a given Expression.
-The fact that the Provider is a separate object from the IQueryable means that we can use polymorphism and different visitors with varying execution results.
-
-    public interface IQueryProvider
-    {
-        IQueryable CreateQuery(Expression expression);
-        IQueryable<TElement> CreateQuery<TElement>(Expression expression);
-        object Execute(Expression expression);
-        TResult Execute<TResult>(Expression expression);
-    }
-
-Query Operators such as Where(), etc. call the Provider.CreateQuery() to return an IQueryable containing the Expression now augmented with the treatment of the current operator, while maintaining a reference to that Provider, whose Execute() will be called in the end.
-
-See <https://blogs.msdn.microsoft.com/mattwar/2007/07/31/linq-building-an-iqueryable-provider-part-ii/>
-
-## Projections
-
-See <https://benjii.me/2018/01/expression-projection-magic-entity-framework-core/>
