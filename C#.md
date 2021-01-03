@@ -132,3 +132,10 @@ Useful tool to test web service APIs: <C:\Program Files (x86)\Microsoft Visual S
 Private Setter properties => acts as a private variable (can only be set within), but publicily read-only.
 
 `public ILimits<SimpleOverrideValue> Limits { get; private set; }`
+
+### [.NET Hidden Gems & Quirks](https://github.com/faniereynders/aspnetcore-hidden-gems)
+
+* IStartupFilter
+* Startup{Environment} & Configure{Environment}Service
+* Kestrel implements IServer (StarAsync() & StopAsync()), and we can implement our own IServer.
+* Custom conventions = Specify suffix, routes, etc. by namespace

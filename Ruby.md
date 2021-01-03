@@ -1,7 +1,5 @@
 # Ruby
 
-## Introduction
-
 Ruby in written in C and thus allows the inclusion of C libraries. There exists implementations in other languages
 
 ## Environment & Installation
@@ -126,12 +124,6 @@ The intrisical value of symbols is their identity (their name): a symbol equals 
 
 ```Ruby
 :sym << :sym2   # Error
-```
-
-#### Methods
-
-```Ruby
-.between?
 ```
 
 ### Number
@@ -581,73 +573,46 @@ Lambda
 
 ## Methods
 
-### Messages & Receivers
+Variables declared outside of a method are inaccessible to it. The only exceptions are globals ($LOAD_PATH) and instance variables (@member and @@static_member)
+Methods have to be defined prior to behind used i.e. above in the code
 
-Everything in Ruby is an objet and calling a method on an object means sending a message to that object (i.e. 'instance.send(:method)')
+Methods that take parameters by reference don't exist in Ruby. Closest thing is destructive instance .method!() that modify an instance object
+Actually, a method such as swap() is unnecessary in Ruby: `a,b = b,a`.
 
-	object.method(..)	# Receiver == object and Message == method name and parameters
+Everything in Ruby is an objet and calling a method on an object means sending a message to that object (i.e. 'instance.send(:method)').
+Example: in `object.method(..)`, the Receiver is the object, and the Message corresponds to the method name and parameters.
 
 Every method is Ruby has a receiver, even if implicit (in which case we need to look at the context to determine what it is)
 In an instance method it's the instance, and in a class method it's the Class itself
 => we can drop the 'self.' and 'Class.' prefixes when calling other methods with same receiver
 
-### References
-
-Methods that take parameters by reference don't exist in Ruby. Closest thing is destructive instance .method!() that modify an instance object
-Actually, a method such as swap() is unnecessary in Ruby: a,b = b,a
-
-### Scope
-
-Variables declared outside of a method are inaccessible to it. The only exceptions are globals ($LOAD_PATH) and instance variables (@member and @@static_member)
-Methods have to be defined prior to behind used i.e. above in the code
-
-### Definition
+Definition
 
 ```Ruby
-def f .. end		# () are optional
-def f param .. end	# () are optional but prefered in method definition
-def f(param) .. end
-def f(param = "default") .. end
-
-## On an existing instance
+# Standalone
+def f .. end        # () are optional
+def f p .. end      # () are optional but prefered in method definition
+def f(p) .. end
+def f(p = "default") .. end
+define_method(:name)# Using reflection to create an instance method on the receiver (see <http://apidock.com/ruby/Module/define_method>)
+# Convention for Destructive (aka bang!) & Predicate ('!' and '?' are part of their name)
+def f!(p) .. end    # Destructive method (modifies the caller object in place)
+def f?(p) .. end    # Predicate method (returns true/false)
+## Instance/Class
 def Class.method .. end
 def instance.method .. end
 class << Class; def method .. end; end
 class << instance; def method .. end; end
+# Returns
+return expr
+expr        # When no return keyword is present, the value of the last statement is returned (cfr Perl)
 ```
 
-By reflection (see http://apidock.com/ruby/Module/define_method)
-
-	define_method(:name)	# Creates instance method on the receiver
-
-Convention for destructive (bang!) and predicate methods. Note that the ! and ? are part of their name
-
-	def f!	# Destructive method (modifies the caller object in place)
-	def f?	# Predicate method (returns true/false)
-
-### Accessibility
-
-Public (default) can be accessed from any object (e.g. instance.public_method)
-Protected can only be accessed from within object (from instance methods, not Class methods) and subclasses (e.g. self.protected_method)
-Private is like protected but the method cannot have an explicit receiver (not even 'self.')
-These keywords have no effect on Class methods (they remain public)
-
-At definition
-
-		private
-		def f; end
-		def g; end
-
-Afterwards
-
-		def f; end
-		private :f
-
-### Call
+Call
 
 ```Ruby
 f           # () are optional
-f()	
+f()
 f param     # () are optional
 f(param)
 ## By reflection
@@ -655,10 +620,27 @@ method(:f).call
 object.send(:f, params) # object. can be self.
 ```
 
-### Returns
+### Accessibility
 
-	return expr
-	expr		# When no return keyword is present, the value of the last statement is returned (cfr Perl)
+Public (default) can be accessed from any object (e.g. instance.public_method)
+Protected can only be accessed from within object (from instance methods, not Class methods) and subclasses (e.g. self.protected_method)
+Private is like protected but the method cannot have an explicit receiver (not even 'self.')
+These keywords have _no effect_ on Class methods (they remain public)
+
+Defining multiple methods with a given accessibility:
+
+```Ruby
+private
+def f; end
+def g; end
+```
+
+Setting the accessibility of a previously defined method:
+
+```Ruby
+def f; end
+private :f
+```
 
 ## Class # State (instance variables) + Behavior (instance methods)
 

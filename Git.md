@@ -4,46 +4,66 @@ Git works by augmenting regular directories into Git repositories.
 Only file deltas are stored from commit to commit, so the storage is minimal.
 
 * Repository = Working folder that includes additional files used by Git to index/keep track of files and changes
-* Refs = Branches and tags
+* Refs = Branches and tags (`.\.git\refs\`)
 
-## Config
+## Configuration
 
-On Windows, Command-line parameters must use double " instead of single '.
-Several configuration files exist:
+### Configuration Scopes
 
-* Global = Git/etc/gitconfig
-* User = ~/.gitconfig
-* Repository  = {repo}/.git/config
+Several scopes of configuration are defined:
 
-Commands:
+* `--system` = System
+* `--global` = User
+* _none_ = current Repository
 
-    git config --global user.email "a@b.c"
-    git config --global user.name "Koko"
-    git config core.safecrlf warn # Make Linux-Windows line endings non-blocking
-    git config --edit --system # Opens Git Configuration file
-      \[credential\]
-        helper = manager # Remove this to prevent GIT Credential Manager (see <https://stackoverflow.com/questions/37182847/how-to-disable-git-credential-manager-for-windows#37185202>)
-      \[core\]
-        askpass = # To disable the OpenSSH credentials popup too
+And their corresponding file location:
 
-    C:\Program Files\Git\mingw64\libexec\git-core\git-credential-manager.exe uninstall # Uninstall Git Credential Manager
+* System = `C:\Program Files\Git\mingw64\etc\gitconfig`
+  * attr = `C:\Program Files\Git\mingw64\etc\gitattributes`
+* User/Global = `~\.gitconfig`
+* Repository = `.\.git\config`
 
-An Alias is a command with parameters (.gitconfig file in $HOME directory).
-To define an alias, used the following command:
+### CLI
 
-    {alias} = {command}
+On Windows, Command-line parameters must use double " instead of single ' quotes.
 
-Example:
+* `git config`
+* `git config --{modifier} {section}.{parameter} {value}`
+* `git config --edit` = opens the (targeted) configuration file
+* `git config --edit --system`
+* `git config --global user.email "a@b.c"`
+* `git config --global user.name "Koko"`
+* `git config core.safecrlf warn` = make Linux-Windows line endings non-blocking
+* `git config --global alias.co checkout` = alias
 
-    hist = log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short
+### Config Sections
 
-### Git-Credential-Manager-for-Windows
+* [alias](https://githowto.com/aliases)
+  * `{abbr} = {long_command_with_parameters}`
+  * `hist = log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short`
+* [user]
+  * email
+  * name
+* [credential]
+  * `helper = manager` = remove this to prevent GIT Credential Manager (see <https://stackoverflow.com/a/37185202/3559724>)
+* [core]
+  * `askpass =` = disables the OpenSSH credentials popup too
+
+#### Configuration Files
+
+* .gitconfig = configuration sections
+* .gitattributes = (binary/textual) merging strategy per file type
+* .gitignore = tracking strategy per file type
+
+### Windows Git Credential Manager
 
 Stores logins in Windows Credential Store.
 
+Uninstall Git Credential Manager = `C:\Program Files\Git\mingw64\libexec\git-core\git-credential-manager.exe uninstall`
+
 See [here]<https://github.com/Microsoft/Git-Credential-Manager-for-Windows>.
 
-## Commands
+## API
 
 ### Init
 

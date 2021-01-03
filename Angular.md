@@ -1,7 +1,5 @@
 # Angular
 
-## Introduction
-
 Angular is a JavaScript framework used to build web application and managing all the plumbing.
 Everything is client-side, where the initial HTML (index.html) page & styles are minimal (aka Angular Shell) and easily cache-able, whilst nested Components are loaded via lazy-loading.
 Its source code is written in TypeScript (made by Microsoft), a typed (Classes via decorators, Modules, Strong typing) superset of JavaScript that gets transpiled to JS.
@@ -66,7 +64,7 @@ Command-line interface for Angular. Contains all the entities generation (scaffo
     README.md
     tsconfig.json       # Options (behaviours)
 
-## Structure
+## Application
 
 ### Imports
 
@@ -198,3 +196,45 @@ Cfr Helpers + Data layer
 ### Pipes
 
 Similar to WPF converters & Formatters
+
+## TODO
+
+### Service Calls
+
+```js
+ngOnInit() {
+    // Place l'appel de service dans le ngOnInit plutôt que dans le constructeur.
+    // Car le constructeur est réservé pour les initialisations super simples.
+    this.loadHeroes();
+}
+
+ngOnInit(): void {
+    this.heroes$ = this.searchTerms.pipe(
+      // wait 300ms after each keystroke before considering the term
+      debounceTime(300),
+
+      // ignore new term if same as previous term
+      distinctUntilChanged(),
+
+      // switch to new search observable each time the term changes
+      // SwitchMap conserve l'ordre des requêtes envoyées (càd celles qui ont passés les filtres ci-dessus),
+      // et va se charger de discarder le résultat des + anciennes pour ne conserver que celui de la dernière.
+      // See https://angular.io/tutorial/toh-pt6#chaining-rxjs-operators
+      switchMap((term: string) => this.heroService.searchHeroes(term)),
+    );
+  }
+```
+
+### Nested Index
+
+./comp-a/index.ts
+./comp-a/a.ts
+./comp-b/index.ts
+./comp-b/b.ts
+
+=> ./index.ts contains
+
+```js
+export * from './comp-a/index';
+export * from './comp-b/index';
+```

@@ -1,6 +1,10 @@
 # Asynchronous Programming
 
-Contrary to popular beliefe, [asynchronous programming is not parallel](https://stackoverflow.com/questions/37419572/if-async-await-doesnt-create-any-additional-threads-then-how-does-it-make-appl).
+The main goal of asynchronous programming is making (graphical) interfaces more responsive which time consuming operations are being performed.
+This is achieved by breaking the synchronicity of the main flow into a fire, forget & callback mechanism.
+
+Contrary to popular belief, [asynchronous programming is not parallel](https://stackoverflow.com/questions/37419572/if-async-await-doesnt-create-any-additional-threads-then-how-does-it-make-appl).
+It is the ability of a program to give control back up along its calling methods stack.
 
 The code is actually run synchronously as it goes through each async methods down the callstack.
 Going down that callstack hierarchy, we always arrive at some kind of low-level asynchronous operation, usually handled by a library, such as a Windows I/O call, some DB data fetching, or a service call.
@@ -81,3 +85,12 @@ See <https://medium.com/bynder-tech/c-why-you-should-use-configureawait-false-in
 
 Deadlocks occur when a blocking call, such as a Task.Wait() or a Task.Result is made instead of a clean async/await, so that the UI thread cannot be resumed and is stuck, and thus the called async operation can never resume in that stuck captured context.
 See <http://blog.stephencleary.com/2012/07/dont-block-on-async-code.html>
+
+### Asynchronous Debugging
+
+* procdump -ma {pid}
+* sysinternals
+* windbg
+
+* <https://labs.criteo.com/>
+* <https://medium.com/@kevingosse>

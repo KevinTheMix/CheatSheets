@@ -9,7 +9,9 @@
 
 ## Windows 7+
 
-* `Ctrl + Alt + Up/Down/Left/Right Arrow` = Rotate Screen
+* `Ctrl + Arrow` = Move in cursor in folder while keep current files selection
+  * `Space` = Add file to selection
+* `Ctrl + Alt + Arrow` = Rotate Screen
 * `Drag&Drop + Shift/Ctrl/Alt` = Copy/Move/Shortcut
 * `Multi-select Files > Rename` = Group renaming
 * `Windows + R > mstsc` = Remote Desktop
@@ -17,7 +19,7 @@
 
 ## Windows 10
 
-* `Windows + Ctrl + L/R` = Switch Virtual Desktop
+* `Windows + Ctrl + Left/Right` = Switch Virtual Desktop
 * `Win + Shift + S` = Screenshot
 * `Win + i` = Settings
 * `Win + Space` = Change language

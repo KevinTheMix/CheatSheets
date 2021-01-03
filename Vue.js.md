@@ -283,7 +283,7 @@ Composed of three sections:
   * `watch: { dataProperty: { immediate: true, deep: false, handler(newValue, oldValue) {...} }`
   * `immediate: true` launches the watcher immediately, as the Component gets created
   * `deep: true` lets us watch nested properties
-  * Use quotes for dotted property (i.e. `'dataObject.property'`)
+  * Use quotes for dotted subproperty (i.e. `'dataObject.property'`)
 * **Filters**
   * Defines methods that transform bounded data (not unlike WPF Converters)
   * Definition `filters: { filterName: function(value) {...} }`

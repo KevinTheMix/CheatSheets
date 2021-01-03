@@ -1,5 +1,7 @@
 # Microservices Architecture
 
+<https://docs.microsoft.com/en-us/dotnet/architecture/microservices/>
+
 ## Corrections
 
 32 Most is part of the previous url
@@ -66,3 +68,4 @@ Add new WSs to an existing mono-application, by focusing on replaceability, and 
 
 ## 5. Development Process
 
+TODO

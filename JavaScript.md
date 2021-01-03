@@ -1,5 +1,6 @@
 # JavaScript
 
+* `document.write(html)` = old-school way to add HTML dynamically on a page
 * `horse${horses.length}` template literal string interpolation
   * Advanced functional templating, passing template to a function that has access to the consecutive parameters (basically implementing a custom C# _String.Format()_ method) `function plural(s, count) { return ${s[0]}{count > 1 ? 's' : '' }; }` and `plural'horse${horses.length}'` (_but with backticks instead of single quotes_)
 * `{ ...object }` = spreads out the properties of an object. Used for shallow cloning.

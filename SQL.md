@@ -5,6 +5,8 @@
 * Use different schemas for two tables with same name in same DB (when you want fewer DBs).
 * Queries can be performed between tables in different DBs (but on the same server) e.g. JOIN.
 * [DDL, DML, DCL, TCL](https://www.geeksforgeeks.org/sql-ddl-dml-dcl-tcl-commands/)
+* [Table Variable](https://docs.microsoft.com/en-us/sql/t-sql/language-elements/declare-local-variable-transact-sql?view=sql-server-ver15#c-declaring-a-variable-of-type-table)
+* [Temporary Table](https://docs.microsoft.com/en-us/sql/t-sql/statements/create-table-transact-sql?view=sql-server-ver15#temporary-tables)
 
 ## DDL
 
