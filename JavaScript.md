@@ -8,16 +8,19 @@
 * `variable ? variable.property : ""` = check if unefined into ternary operator
 * Trailing (_dangling_) commas are useful to reduce the number of lines that change when git commit (the previous last row remains the same)
 
-## Eco-system
-
-### Third-party Libraries
+## Libraries
 
 * [Lodash](https://lodash.com/) = extends the JavaScript language (deep cloning, debouncing, etc.)
 * [date-fns](https://date-fns.org/) = Date manipulation
 * [Axios](https://github.com/axios/axios) = HTTP & JSON API calls
 * [JSON Server](https://github.com/typicode/json-server) = Fake backend REST API
 
-#### [ag-Grid](https://www.ag-grid.com/javascript-grid-cell-editing/)
+### jQuery
+
+* [scrollTop()](https://api.jquery.com/scrolltop/) = gets/sets vertical position of the scroll bar
+* [offset()](https://api.jquery.com/offset/) = gets/sets the relative coordinates
+
+### [ag-Grid](https://www.ag-grid.com/javascript-grid-cell-editing/)
 
 * [Rendering Flow](https://www.ag-grid.com/javascript-grid-rendering-flow/)
   * Field = Direct value.
@@ -37,7 +40,7 @@
   * cellClassRules = an object containing CSS rules to apply to a cell according to a boolean expression using its value.
   * cellStyle = function that returns the complete inline style of a cell based on its value.
 
-#### [NPM](https://www.npmjs.com)
+### [NPM](https://www.npmjs.com)
 
 * Requires Node/NPM, preferably LTS (Long-Term Support) version (minimum 8.9+).
   * `npm i(nstall)` = install all the dependencies found in _packages.json_ into the local _node\_modules_ folder.
