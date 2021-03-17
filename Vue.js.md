@@ -115,6 +115,7 @@ Packs a render engine, turning data models and components into HTML & JS.
   * Inspect: Model, Vuex, Events, Routing & Performance
 * [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur) = Visual Studio Code Extension for linting, syntax-highlighting, emmet, etc.
 * [Vue VSCode Snippets](https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-snippets) = Visual Studio Code Extension for snippets
+  * Depends on Vetur (=> installs it automatically)
   * `vbase` generates a component template & script sections
   * `vdata`
   * `vcomputed`

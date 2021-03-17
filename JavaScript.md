@@ -1,5 +1,8 @@
 # JavaScript
 
+* `var!.property` = non-null assertion operator
+  * tells the compiler that the preceding expression is not null/undefined (see <https://stackoverflow.com/a/42274019>)
+* `!!var` = true if var is not null (see <https://stackoverflow.com/a/7452731>)
 * `document.write(html)` = old-school way to add HTML dynamically on a page
 * `horse${horses.length}` template literal string interpolation
   * Advanced functional templating, passing template to a function that has access to the consecutive parameters (basically implementing a custom C# _String.Format()_ method) `function plural(s, count) { return ${s[0]}{count > 1 ? 's' : '' }; }` and `plural'horse${horses.length}'` (_but with backticks instead of single quotes_)

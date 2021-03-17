@@ -27,3 +27,7 @@
 
 * Simuler network speeds (e.g. slow 3g)
 * Augury (debug Angular)
+
+## Edge (Chromium)
+
+* Error _Correlation failed_ = edge://flags/ > Cookies without SameSite must be secure > Disabled

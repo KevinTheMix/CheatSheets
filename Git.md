@@ -232,3 +232,4 @@ README.md uses Markdown syntax language (text format editing à la wiki)
 
 * Temporarily disable SSL certificates: `git config http.sslVerify false` or `git config --global http.sslVerify false`
 * `git fetch --prune` = Fetch, and also re-sync remote branches (removes those that no longer exist)
+  * Alternatively: `git remote prune origin`
