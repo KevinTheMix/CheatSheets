@@ -13,3 +13,5 @@ E.g.: we create an implementation of an object containing methods that consist o
 
 Hijacking certain methods in the business logic and replace their implementation so that we control their behavior.
 E.g.: we mock a method that makes calls to the DB so it returns arbitrary values instead.
+
+Mock dependencies, not the actual classes under test (see <https://stackoverflow.com/a/2277068>).

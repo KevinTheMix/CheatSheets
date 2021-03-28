@@ -15,6 +15,13 @@ The user is free to install new one herself manually.
 
 Certificates are used in SSL (for HTTPS), and SAML authentication (to represent the logged user).
 
+2021 insights:
+
+* Certificates can be used to encrypt/decrypt information, such as a client's secret key in a Visual Studio appSettings.json.
+* A website can register itself to an authority (Verisign & co), then provide a certificate to requesting browsers, proving it is trusted. That certificate is only valid for that particular website (address) => cannot be used from another website. As long as the client browser itself is not corrupted, communication is safe.
+* HTTPS: the browser (which trusts the CA registering a website's certificate) generates a new secret key and encodes it using the website public key (found in its certificate); only the website will be able to decrypt it via its private key. A secure connection is established that way.
+* For HTTPS, any public-private key cryptography system would work to create a secure channel really. Though using certificates specifically enables relying on a chain of trust. See <https://www.youtube.com/watch?v=T4Df5_cojAs>
+
 ## Architecture
 
 Uses asymmetrical key signing:
