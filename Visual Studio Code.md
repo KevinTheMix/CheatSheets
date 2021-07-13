@@ -2,7 +2,13 @@
 
 A good text editor.
 
-## Settings
+## Tips
+
+* Each Breadcrumbs fragment is fully browsable, seamlessly between file system hierarchy & document (Markdown, Json, etc.) section
+
+## Environment
+
+### Settings
 
 * [Scopes](https://developer.hyvor.com/vscode-editing-settings-json)
   * By user (Global)
@@ -52,6 +58,10 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 
 ## Extensions
 
+* Prettify JSON (F1 > Prettify)
+* TSLint
+* TSLint Vue
+* [Winter is Coming](https://github.com/johnpapa/vscode-winteriscoming)
 * [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint)
 * [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur)
 * [Vue VSCode Snippets](https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-snippets)

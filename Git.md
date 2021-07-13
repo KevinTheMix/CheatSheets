@@ -27,14 +27,14 @@ And their corresponding file location:
 
 On Windows, Command-line parameters must use double " instead of single ' quotes.
 
-* `git config`
-* `git config --{modifier} {section}.{parameter} {value}`
-* `git config --edit` = opens the (targeted) configuration file
-* `git config --edit --system`
-* `git config --global user.email "a@b.c"`
-* `git config --global user.name "Koko"`
-* `git config core.safecrlf warn` = make Linux-Windows line endings non-blocking
-* `git config --global alias.co checkout` = alias
+    git config
+    git config --{modifier} {section}.{parameter} {value}
+    git config --edit # opens the (targeted) configuration file
+    git config --edit --system
+    git config --global user.email "a@b.c"
+    git config --global user.name "Koko"
+    git config core.safecrlf warn # make Linux-Windows line endings non-blocking
+    git config --global alias.co checkout # alias
 
 ### Config Sections
 

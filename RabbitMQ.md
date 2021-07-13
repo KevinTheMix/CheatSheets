@@ -42,7 +42,10 @@ See _C:\Program Files\RabbitMQ Server\rabbitmq\_server-3.6.0\plugins_
   * Plugin including a HTTP-based Web administration API (see <http://localhost:15672/>) & Command line rabbitmqadmin
   * Note: durable queues can only be deleted using those APIs
 * [rabbitmq_shovel](https://www.rabbitmq.com/shovel.html)
-  * Used to move messages from one queue to another
+  * Used to move messages from one queue or exchange to another
+  * Can be performed manually, or automatically (aka _dynamic shovels_)
+  * Works across virtual hosts (see <https://stackoverflow.com/a/43232061>)
+* [_rabbitmq_federation_](https://www.rabbitmq.com/federation.html)
 
 ## AMQP
 
