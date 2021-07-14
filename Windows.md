@@ -6,6 +6,7 @@
 * Bypass company firewall (2014.04)
   * Remote desktop to home computer
   * SSH Tunnel + Proxy Socks via Putty (Laurent D'Havé & Frédéric Branger)
+    * <https://securitymusings.com/article/462/how-to-set-up-a-socks-proxy-using-putty-ssh>
 
 ## Windows 7+
 
