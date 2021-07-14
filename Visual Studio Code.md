@@ -42,13 +42,16 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 * Select Theme = `Ctrl + K, Ctrl + T`
 * Selected nested = `Alt + Shift + Left/Right`
 * Duplicates line = `Alt + Shift + Up/Down`
-* Command = `Ctrl + Shift + P` or `F1`
+* Command Palette = `Ctrl + Shift + P` or `F1` or `View > Command Palette`
   * `create new term`
   * `Format Document`
+  * `View: Toggle Minimap`
 * Format/Tidy = `Alt + Shift + F`
 * Tasklist = `Ctrl + Shift + T`
 * Preview Markdown = `Ctrl + Shift + V`
 * Preview Markdown Side-by-side = `Ctrl+K, V`
+* Toggle Minimap = `View > Show Minimap` or Command Palette `View: Toggle Minimap`
+* Toggle Word Wrap = `View > Toggle Word Wrap` or `Alt + Z`
 
 ## Extensions
 

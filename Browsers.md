@@ -6,6 +6,10 @@
 * Tools > Options > Privacy & Security > Logins & Passwords >
   * "Use Master passwords" pour crypter passwords enregistrés par FF
   * "Saved Logins" pour consulter et effacer les passwords enregistrés
+* `Alt + Left` = `Backspace` (_note: this must be manually re-enabled after it was changed in Firefox 86 to prevent loss of input data_) = Go backward
+* `Alt + Right` = `Shift + Backspace` = Go forward
+* `F6` = `Alt + D` = `Ctrl + L` = Go to address bar
+* `F7` = Toggle Caret Browsing (displays text cursor that is usually hidden)
 
 ### Configuration
 

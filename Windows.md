@@ -16,6 +16,7 @@
 * `Multi-select Files > Rename` = Group renaming
 * `Windows + R > mstsc` = Remote Desktop
 * `Middle-click taskbar` = Open new application Window
+* `Ctrl + Mouse wheel` (in a folder window) = Cycle through window views
 
 ## Windows 10
 
@@ -29,7 +30,7 @@
 * `3/4 fingers down` = Minimize everything
 * `4 fingers left/right` = Cycle virtual desktop
 
-## DOS
+## DOS & Utils
 
 * Display
   * `echo koko`
@@ -44,6 +45,8 @@
 * Network
   * `ipconfig /{release|renew|flushdns}` = IP tools
   * `nslookup` = Lookup Domain IP Address
+* Checksum
+  * `CertUtil -hashfile {file} [MD5|SHA256]` = generates checksum for given file using provided algorithm
 
 ### [netsh](https://en.wikipedia.org/wiki/Netsh)
 
@@ -67,17 +70,3 @@
 5. `net start spooler`
 6. go to printer and faxes window and hit F5 to refresh
 7. bam all stuck jobs are gone
-
-## PowerShell
-
-Ping long-running avec TimeStamp
-
-```PowerShell
-ping.exe -t rtlbruadrep01|Foreach{"{0} - {1}" -f (Get-Date),$_} | Select-String -pattern "temps(<1ms|=1 ms)" -notMatch > "D:\ADREP01.log"
-ping.exe -t 192.168.35.42|Foreach{"{0} - {1}" -f (Get-Date),$_} | Select-String -pattern "temps(<1ms|=[1-3] ms)" -notMatch
-```
-
-See <https://stackoverflow.com/questions/24906268/ping-with-timestamp>
-See <https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/select-string?view=powershell-6>
-See <https://stackoverflow.com/questions/18183939/powershell-select-string-pattern-notmatch>
-See <https://stackoverflow.com/questions/37297041/powershell-or-operator-in-select-string>
