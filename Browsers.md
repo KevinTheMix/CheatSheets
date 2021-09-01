@@ -7,8 +7,9 @@
   * "Use Master passwords" pour crypter passwords enregistrés par FF
   * "Saved Logins" pour consulter et effacer les passwords enregistrés
 * `Alt + Left` = `Backspace` (_note: this must be manually re-enabled after it was changed in Firefox 86 to prevent loss of input data_) = Go backward
-* `Alt + Right` = `Shift + Backspace` = Go forward
-* `F6` = `Alt + D` = `Ctrl + L` = Go to address bar
+* `Alt + Left/Right` or `Alt + Scroll Back/Forward` = Browse navigation history back/forward
+* `(Shift +) Backspace` = Scroll (back)
+* `F6` or `Alt + D` or `Ctrl + L` = Go to address bar
 * `F7` = Toggle Caret Browsing (displays text cursor that is usually hidden)
 
 ### Configuration
@@ -26,6 +27,10 @@
   * Except those that use listener parameter 'e'!
 * Can popup JS be logged since it's a special side popup, not a regular web page?
   * Yes! But in the master Browser console (Ctrl+Shift+J)
+
+### Troubleshooting
+
+* [Drag&Drop URLs to Windows not working](https://support.mozilla.org/en-US/kb/windows-administrator-launcher-process-error-fix)
 
 ## Chrome
 
