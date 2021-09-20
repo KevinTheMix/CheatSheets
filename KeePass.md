@@ -12,7 +12,7 @@ Saves its data in a .kdbx file, that can be published to the cloud, as long as i
   * Requires KeePassRPC plugin (the extension is a simple client that connects to KeePass and performs DOM manipulation).
   * Used to Generate, Save and auto-Fill passwords.
 * KeePassRPC = Used to communicate with the FireFox extension
-* KeeOtp = 2FA for KeePass (not native)
+* KeeOtp2 = 2FA for KeePass (not native)
   * Websites (Hotmail, Google, Facebook, etc.) with 2FA capabilities either use a phone, a QR code or a key. It is that key that can be used to generate a OTP.
 
 ## Apps
