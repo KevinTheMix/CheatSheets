@@ -8,6 +8,7 @@
 * `$A1` = Freeze a column's reference when copy-pasting a cell horizontally
 * `A$1` = Freeze a row's reference when when copy-pasting a cell vertically
 * `Shift + F11` = Add new sheet
+* Regional Settings for comma/dot separator = _File > Options > Advanced > Editing Options > (Uncheck) Use System Separater_
 
 ## Development
 

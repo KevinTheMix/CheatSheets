@@ -2,10 +2,11 @@
 
 ## Tips
 
+* Check if other values in a group by are homogen/different: <https://stackoverflow.com/a/54298186>
 * Use different schemas for two tables with same name in same DB (when you want fewer DBs).
 * Queries can be performed between tables in different DBs (but on the same server) e.g. JOIN.
 * [DDL, DML, DCL, TCL](https://www.geeksforgeeks.org/sql-ddl-dml-dcl-tcl-commands/)
-* [Partitions](https://www.sqlshack.com/sql-partition-by-clause-overview/) = "cartesian" GROUP BY, with numbering, sorting & comulative aggregation.
+* [Partitions](https://www.sqlshack.com/sql-partition-by-clause-overview/) = "cartesian" GROUP BY, with numbering, sorting & cumulative aggregation.
 * [Temporary tables](https://www.red-gate.com/simple-talk/sql/t-sql-programming/temporary-tables-in-sql-server/)
   * [Temporary Table](https://docs.microsoft.com/en-us/sql/t-sql/statements/create-table-transact-sql?view=sql-server-ver15#temporary-tables)
     * `#Temp` = local (session) temporary table
@@ -61,6 +62,7 @@ Data Manipulation Language
   * `SELECT {a} FROM {A} WHERE {A}.count > (SELECT COUNT(*) FROM {A})` = Nested WHERE
   * `SELECT {new} FROM (SELECT {expression} AS {new} FROM {A}) AS {New} GROUP BY {new}` = Nested FROM
     * Uses a [Derived Table](https://logicalread.com/when-to-apply-sql-server-derived-tables-mc03/#.XNFNnnduKUk) to precompute a column to use both in the SELECT and GROUP BY clauses.
+  * `SELECT MAX(c1) AS Min FROM (VALUES ('a', 1), ('b', 2), ('ab', 3)) t1 (c1, c2) -- 'b'` = Select from inline values
 * **UPDATE**
   * Cannot update several tables at once. See <https://stackoverflow.com/a/36153756>.
 * **DELETE**
@@ -118,6 +120,13 @@ cast(@number AS float)
 convert(type, @value) -- e.g. CONVERT(DATETIME2(0), '2020-03-29 02:00:01.0000000 +01:00')
 round(@number, precision, mustTruncate) -- round by default
 ```
+
+### Numbers
+
+* _float_ vs _decimal_
+  * Float stores an approximate value and decimal stores an exact value. In summary, exact values like money should use decimal, and approximate values like scientific measurements should use float. When multiplying a non integer and dividing by that same number, decimals lose precision while floats do not.
+  * Comparing _float_s leads to unexpected results, because the number displayed in the cell isn't the actual underlying real value (see <https://stackoverflow.com/questions/16149966>)
+    * => use decimal instead of float if equivalences must be established (except blurrier inequalities/ranges)
 
 ### Dates
 

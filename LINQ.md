@@ -2,14 +2,26 @@
 
 Stands for Language Integrated Query.
 
+* LINQ to Objects (L2O) = regular LINQ on IEnumerable, without intermediate provider/api e.g. LINQ to SQL/XML
+  * See <https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/linq-to-objects#:~:text=The%20term%20%22LINQ%20to%20Objects,Dictionary.>
+* LINQ to XML = XML
+* LINQ to SQL = SQL Server only ORM
+* LINQ to Entities = multiple database backends ORM
+* LINQ to DataSets = running LINQ on DataTable/DataSet (old ADO.NET 2.0 predating Microsoft ORM's)
+  * See <https://stackoverflow.com/a/2443847>
+
 LINQ defines extension methods on two types of objects: IEnumerable&lt;T&gt; or on IQueryable&lt;T&gt; objects.
 Note that whilst both use deferred execution, IEnumerable Query Operators take in delegate Function&lt;&gt; whereas IQueryable Query Operators take in Expressions as parameters.
 The beauty of it is that they both work using similar code because lambda expressions are converted either into delegates or expression trees depending on the context.
 See <https://stackoverflow.com/a/671425> for LINQ internals
 See <https://stackoverflow.com/a/28513685> for LINQ IEnumerable/IQueryable symmetry
 
-For IEnumerable objects, chained LINQ query operators construct a specialized IEnumerable instance (called Select/Where/etc. -Iterator) via polymorhpism containing a nested hierarchy of functions. Each successive call adds a level on top holding a reference to the level below.
-For IQueryable obejcts, chained LINQ query operators construct an IQueryable instance. Each successive call adds an Expression on top, keeping the same Provider.
+* [AsEnumerable() vs AsQueryable()](https://stackoverflow.com/a/17996264)
+  * `AsEnumerable()` can be used instead of `ToList()` when deferred execution is to be preserved (e.g. when manipulating a IQueryable returned from EF - see link above)
+  * `AsEnumerable()` can also be applied on an IGrouping (resulting from some kind of `GroupBy(…).First(…)`)
+
+For IEnumerable objects, chained LINQ query operators construct a specialized IEnumerable instance (called _Select_/_Where_/etc. _-Iterator_) via polymorhpism containing a nested hierarchy of functions. Each successive call adds a level on top holding a reference to the level below.
+For IQueryable objects, chained LINQ query operators construct an IQueryable instance. Each successive call adds an Expression on top, keeping the same Provider.
 See <https://stackoverflow.com/a/2433386> for different IEnumerable or IQueryable parameters
 
 IQueryable inherits from IEnumerable.
@@ -65,7 +77,6 @@ public interface IQueryProvider
 }
 ```
 
-
 ### IQueryable
 
 DbContext's DbSet&lt;T&gt;'s inherit from IQueryable.
@@ -84,5 +95,10 @@ public interface IQueryable : IEnumerable
     IQueryProvider Provider { get; }
 }
 ```
+
+#### [DbFunctions](https://docs.microsoft.com/en-us/dotnet/api/system.data.entity.dbfunctions?view=entity-framework-6.2.0)
+
+This class contains DateTime/Numbers/String manipulation methods to be executed on (IQueryable) DbContext entities.
+They are executed as CLR code at the DB-level -- not in memory!
 
 ## Links

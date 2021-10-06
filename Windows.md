@@ -15,9 +15,11 @@
 * `Ctrl + Alt + Arrow` = Rotate Screen
 * `Drag&Drop + Shift/Ctrl/Alt` = Copy/Move/Shortcut
 * `Multi-select Files > Rename` = Group renaming
-* `Windows + R > mstsc` = Remote Desktop
 * `Middle-click taskbar` = Open new application Window
 * `Ctrl + Mouse wheel` (in a folder window) = Cycle through window views
+* `Windows + R > mstsc` = Remote Desktop
+* `Windows + Left/Right` = Move Window around desktop
+* `Windows + Shift + Left/Right` = Send Window to other screen
 
 ## Windows 10
 
