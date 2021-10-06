@@ -21,6 +21,13 @@
 * `Windows + Left/Right` = Move Window around desktop
 * `Windows + Shift + Left/Right` = Send Window to other screen
 
+### GUI Config Commands (Win + R)
+
+* `mstsc` = Remote Desktop
+* `winver` = view Windows version
+* `services` = Component services, Event viewer, Windows Services
+  * `services.msc` = Windows services
+
 ## Windows 10
 
 * `Windows + Ctrl + Left/Right` = Switch Virtual Desktop
@@ -35,14 +42,25 @@
 
 ## DOS & Utils
 
+* [cmd.exe](https://en.wikipedia.org/wiki/Cmd.exe#Windows_NT_family)
 * Display
   * `echo koko`
+  * `@echo [on|off]` = turns prompt on/off
   * `date`
   * `time`
   * `pause`
   * `cls`
+* Control
+  * `goto {label}` goes to `:{label}`
+  * `set {VAR}` = assignment
+  * `setlocal`
+  * `for %%i in ({pattern}) do {statement using %%i}`
+    * pattern can be fixed words e.g. `(Debug Release)`
+    * pattern can be a matching expression e.g. `(*.json)`
+  * `if {condition} {statement}`
+    * condition can be `exist {path}`
 * IO
-  * `where {exe}` = Displays .exe filepath
+  * `where {exe1} {exe2}` = Displays .exes' filepath
   * `format c:`
   * Drag & Drop file = Pastes file path
 * Network

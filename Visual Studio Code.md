@@ -5,6 +5,8 @@ A good text editor.
 ## Tips
 
 * Each Breadcrumbs fragment is fully browsable, seamlessly between file system hierarchy & document (Markdown, Json, etc.) section
+* Code comparison updates in real-time
+* New files must first be saved for certain shortcuts to become available based on their extension (e.g. Markdown tidying)
 
 ## Environment
 
@@ -24,40 +26,38 @@ A good text editor.
 
 See <https://code.visualstudio.com/docs/getstarted/keybindings>
 
-### Menu
+### Menus & Mouse
 
-* Autosave = `File > Auto Save`
-* Open folder in terminal = `Right-click folder > Open in Terminal`
-
-### Mouse
-
-* Move opened file view = `Drag & Drop Tab`
+* _File > Auto Save_ = Autosave
+* _Right-click folder > Open in Terminal_ = Open folder in terminal
+* _Drag & Drop Tab_ = Move opened file view
 
 ### Keyboards
 
-* Go to Tab {n} = `Alt + {n}`
-* Seach = `Ctrl + Shift + F`
-* Toggle side-bar = `Ctrl + B`
+* `Alt + {n}` = Go to Tab {n}
+* `Ctrl + Shift + F` = Search
+* `Ctrl + B` = Toggle side-bar
 * Multi-line
-  * Select All Occurrences of Find Match = `Select some text > Ctrl + Shift + L`
-  * Add Selection To Next Find Match = `Select some text > Ctrl + D (x n)`
-* New Terminal = `Ctrl + Shift + ù`
-* Toggle Terminal = `Ctrl + ù` or `Ctrl + J`
-* Clones selected tab or Split Terminal = `Ctrl + µ`
-* Zen Mode = `Ctrl + K, Z`
-* Select Theme = `Ctrl + K, Ctrl + T`
-* Selected nested = `Alt + Shift + Left/Right`
-* Duplicates line = `Alt + Shift + Up/Down`
-* Command Palette = `Ctrl + Shift + P` or `F1` or `View > Command Palette`
+  * Select some text > `Ctrl + Shift + L` = Select All Occurrences of Find Match
+  * Select some text > `Ctrl + D (x n)` = Add Selection To Next Find Match
+* `Ctrl + Shift + ù` = New Terminal
+* `Ctrl + ù` or `Ctrl + J` = Toggle Terminal
+* `Ctrl + µ` = Clones selected tab or Split Terminal
+* `Ctrl + K, Z` = Zen Mode
+* `Ctrl + K, Ctrl + T` = Select Theme
+* `Alt + Shift + Left/Right` = Shrink/Expand selection
+* `Alt + Shift + Up/Down` = Duplicates line
+* `Ctrl + Shift + P` or `F1` or _View > Command Palette_ = Command Palette
   * `create new term`
   * `Format Document`
   * `View: Toggle Minimap`
-* Format/Tidy = `Alt + Shift + F`
-* Tasklist = `Ctrl + Shift + T`
-* Preview Markdown = `Ctrl + Shift + V`
-* Preview Markdown Side-by-side = `Ctrl+K, V`
-* Toggle Minimap = `View > Show Minimap` or Command Palette `View: Toggle Minimap`
-* Toggle Word Wrap = `View > Toggle Word Wrap` or `Alt + Z`
+* `Alt + Shift + F` = Format/Tidy
+* `Ctrl + Shift + T` = Tasklist
+* `Ctrl + Shift + V` = Preview Markdown
+* `Ctrl+K, V` = Preview Markdown Side-by-side
+* `View > Show Minimap` or _Command Palette_ > `View: Toggle Minimap` = Toggle Minimap
+* `View > Toggle Word Wrap` or `Alt + Z` = Toggle Word Wrap
+* `Ctrl + L` = Select current paragraph & move next
 
 ## Extensions
 

@@ -233,3 +233,6 @@ README.md uses Markdown syntax language (text format editing à la wiki)
 * Temporarily disable SSL certificates: `git config http.sslVerify false` or `git config --global http.sslVerify false`
 * `git fetch --prune` = Fetch, and also re-sync remote branches (removes those that no longer exist)
   * Alternatively: `git remote prune origin`
+* Authentication error: _could not create ssl/tls secure channel_
+  * Fix by enabling TLS 1.2 (disabled by default on Windows 7)
+    * [This worked](https://support.captureone.com/hc/en-us/articles/360014239757--Could-not-create-SSL-TLS-secure-channel-activation-error-on-Windows-7)
