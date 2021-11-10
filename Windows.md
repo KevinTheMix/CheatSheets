@@ -40,6 +40,11 @@
 * `3/4 fingers down` = Minimize everything
 * `4 fingers left/right` = Cycle virtual desktop
 
+## Windows Commands (Win + R)
+
+* `shell:startup`
+* `shell:appsfolder`
+
 ## DOS & Utils
 
 * [cmd.exe](https://en.wikipedia.org/wiki/Cmd.exe#Windows_NT_family)

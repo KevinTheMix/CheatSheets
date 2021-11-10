@@ -2,7 +2,11 @@
 
 ## Tips
 
-* Check if other values in a group by are homogen/different: <https://stackoverflow.com/a/54298186>
+* Write dangerous queries inside a transaction, and commit it only after everything went smooothly
+  * <https://twitter.com/SkaveRat/status/1455525986850721800?s=20>
+* Check if other values in a group by are homogen/different: <https://stackoverflow.com/questions/39922045>
+  * `COUNT(DISTINCT {field})`
+  * `COUNT(CASE WHEN {condition} THEN {expression} END)`
 * Use different schemas for two tables with same name in same DB (when you want fewer DBs).
 * Queries can be performed between tables in different DBs (but on the same server) e.g. JOIN.
 * [DDL, DML, DCL, TCL](https://www.geeksforgeeks.org/sql-ddl-dml-dcl-tcl-commands/)
