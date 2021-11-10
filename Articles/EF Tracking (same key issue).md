@@ -26,7 +26,7 @@ In our case, we discovered that there was two distinct situations that produced 
 
 This situation occurs when instances of sub-properties of an (aggregate root) entity diverge due to mismanaging their identity resolution. Indeed, when the entity (or entities) gets loaded, its sub-properties will all get instantiated as distinct objects, even if some of those are really the same entity (i.e. same Type and ID). Schematized:
 
-![Navigation properties instance mismatch](entitiessubproperties.png "Navigation properties instances mismatch")
+![Navigation properties instance mismatch](entitiessubproperties.png "Tooltip?")
 
 That has no drawback as long as we don't write them back in DB. Unfortunately, that is exactly what happens: when saving the root entity, the `DbSet<TEntity>.Update(entity)` method is called, and two separate instances of the same entity are found to exist as sub-properties (actually sub-sub-properties in our particular configuration) and EF raises an error.
 
