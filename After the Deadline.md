@@ -17,47 +17,23 @@ Grammar & spellcheck Java HTTP server, which can be queried via regular HTTP GET
   * <https://www.filepuma.com/download/java_runtime_environment_64bit_8.0.1210.13-13997/>
 * Comes packaged with the following Java libraries:
   * **Sleep** = scripting language
-  * **Moconti** = Sleep application server
+  * **Moconti** = _Sleep_-based application server
 
 ## Files
 
 ### _run-french.bat_
 
-launches the Java HTTP server
+launches the Java HTTP server with French language configuration
 
 ```cmd
 @echo off
 REM
 REM startup script for AtD web service
 REM
-
 java -server -Datd.lang=fr -Dfile.encoding=UTF-8 -Dsleep.pattern_cache_size=8192 -Dbind.interface=127.0.0.1 -Dserver.port=1049 -Xmx3840M -XX:+AggressiveHeap -XX:+UseParallelGC -Dsleep.classpath=./lib:./service/code -Dsleep.debug=24 -classpath "./lib/*" httpd.Moconti atdconfig.sl
 ```
 
-### *compare_fr.txt*
-
-used to check configuration vs low-mem (below)
-
-```sh
-java
--server
--Dsleep.pattern_cache_size=8192
--Dbind.interface=127.0.0.1
--Dserver.port=1051
--Xmx1968M
--XX:+AggressiveHeap
--XX:+UseParallelGC
--Dsleep.classpath=$ATD_HOME/lib:$ATD_HOME/service/code
--Dsleep.debug=24
--classpath $ATD_HOME/lib/sleep.jar:$PRODUCTION/moconti/moconti.jar:$ATD_HOME/lib/* httpd.Moconti atdconfig.sl
-
--Datd.lang=fr
--Dfile.encoding=UTF-8
-```
-
-### *compare_run.txt*
-
-low-mem
+Java command in exploded form:
 
 ```sh
 java
@@ -68,11 +44,12 @@ java
 -Xmx3840M
 -XX:+AggressiveHeap
 -XX:+UseParallelGC
--Dsleep.classpath=$ATD_HOME/lib:$ATD_HOME/service/code
+-Dsleep.classpath=./lib:./service/code
 -Dsleep.debug=24
--classpath "$ATD_HOME/lib/*" httpd.Moconti atdconfig.sl
+-classpath "./lib/*" httpd.Moconti atdconfig.sl
 
--Datd.lowmem=true
+-Datd.lang=fr
+-Dfile.encoding=UTF-8
 ```
 
 ### _lang/lib/create.bat_
@@ -111,6 +88,8 @@ java -Dfile.encoding=UTF-8 -Xmx2536M -XX:NewSize=512M -jar lib/sleep.jar utils/b
 ```
 
 ### _buildall.sh_
+
+Comment out all unnecessary languages:
 
 ```sh
 #./lang/de/build.sh >build.de.log
