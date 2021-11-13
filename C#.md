@@ -2,6 +2,8 @@
 
 C# Is good.
 
+`typeof(T)` vs `obj.GetType()` = compile time vs runtime type
+
 ## Keywords
 
 * `new` = Redefines a method in a child class. See <https://msdn.microsoft.com/en-us/library/ms173153.aspx>
@@ -112,6 +114,12 @@ System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
 * Enumerable.Any() is better than Enumerable.Count() > 0, because the latter has to count the full collection, whilst the former returns true ASAP.
 * Use Enumerable.Empty&lt;T&gt; for a default non-null instance.
+* `GroupBy()` vs `ToLookup()`
+  * `GroupBy()` is a (deferred) _IQueryable_
+  * `ToLookup()` enumerates immediately (not deferred)
+* `ToDictionary()` vs `ToLookup()`
+  * `ToDictionary()` is a 1:1 map (one key -> one value)
+  * `ToLookup()` is a 1:n map (one key -> n values), and accessing via a key that does not exist simply returns an empty sequence
 
 ## WCF
 

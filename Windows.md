@@ -22,6 +22,9 @@
 * `Multi-select Files > Rename` = Group renaming
 * `Middle-click taskbar` = Open new application Window
 * `Ctrl + Mouse wheel` (in a folder window) = Cycle through window views
+* `Windows + R > mstsc` = Remote Desktop
+* `Windows + Left/Right` = Move Window around desktop
+* `Windows + Shift + Left/Right` = Send Window to other screen
 * _Drag file to application tab in Start Menu_ = Pin the file to that Program tab
 
 ### GUI Config Commands (Win + R)
@@ -42,6 +45,11 @@
 * `3 fingers L/R` = Alt + Tab
 * `3/4 fingers down` = Minimize everything
 * `4 fingers left/right` = Cycle virtual desktop
+
+## Windows Commands (Win + R)
+
+* `shell:startup`
+* `shell:appsfolder`
 
 ## DOS & Utils
 

@@ -35,26 +35,26 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 ### Keyboards
 
 * `Alt + {n}` = Go to Tab {n}
-* `Ctrl + Shift + F` = Search
-* `Ctrl + B` = Toggle side-bar
+* `Alt + Shift + F` = Format/Tidy (e.g. HTML)
+* `Alt + Shift + Left/Right` = Shrink/Expand selection
+* `Alt + Shift + Up/Down` = Duplicates line
 * Multi-line
   * Select some text > `Ctrl + Shift + L` = Select All Occurrences of Find Match
   * Select some text > `Ctrl + D (x n)` = Add Selection To Next Find Match
-* `Ctrl + Shift + ù` = New Terminal
+* `Ctrl + B` = Toggle side-bar
 * `Ctrl + ù` or `Ctrl + J` = Toggle Terminal
 * `Ctrl + µ` = Clones selected tab or Split Terminal
+* `Ctrl + K, V` = Preview Markdown Side-by-side
 * `Ctrl + K, Z` = Zen Mode
 * `Ctrl + K, Ctrl + T` = Select Theme
-* `Alt + Shift + Left/Right` = Shrink/Expand selection
-* `Alt + Shift + Up/Down` = Duplicates line
+* `Ctrl + Shift + F` = Search
+* `Ctrl + Shift + T` = Tasklist
+* `Ctrl + Shift + V` = Preview Markdown
+* `Ctrl + Shift + ù` = New Terminal
 * `Ctrl + Shift + P` or `F1` or _View > Command Palette_ = Command Palette
   * `create new term`
   * `Format Document`
   * `View: Toggle Minimap`
-* `Alt + Shift + F` = Format/Tidy
-* `Ctrl + Shift + T` = Tasklist
-* `Ctrl + Shift + V` = Preview Markdown
-* `Ctrl+K, V` = Preview Markdown Side-by-side
 * `View > Show Minimap` or _Command Palette_ > `View: Toggle Minimap` = Toggle Minimap
 * `View > Toggle Word Wrap` or `Alt + Z` = Toggle Word Wrap
 * `Ctrl + L` = Select current paragraph & move next

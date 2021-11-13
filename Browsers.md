@@ -1,5 +1,7 @@
 # Browsers
 
+* Remove saved search = Highlight in address bar, then `Shift + Del`
+
 ## Firefox
 
 * Right-click > screenshot page
@@ -35,6 +37,7 @@
 ## Chrome
 
 * Simuler network speeds (e.g. slow 3g)
+  * Edge Chromium = F12 > Settings > Throttling
 * Augury (debug Angular)
 
 ## Edge (Chromium)

@@ -390,65 +390,75 @@ var.respond_to? :each   # Array check (Enumerable)
 
 #### Operators
 
-	not and/&& or/|| 	# and/&& and or/|| can be used for short-circuit evaluation (A || B => if A is true, B won't be run, same for A && B if A is false)
-		var ||= SomeClass.new()	# Create if not exists
-	==	# Equality operator /.==()/
-		(1..5) == (1..5)	# true
-		(1..5) == (1..10)	# false
-	===	# Subsumption operator (a === b means "is b part of the set described by a?"). General object goes left, specific goes right
-		# Order of operators matters because of object to which operator belongs (e.g. Fixnum#=== cannot take a Range but Range#=== can take a Fixnum)
-		(1..5) === 1		# true
-		(1..5) === 10		# false
-		(1..5) === "koko"	# false
-		Integer === 42          # => true
-		Integer === "fourtytwo" # => false
-		/ell/ === "Hello"   # => true
-		/ell/ === "Foobar"  # => false
-		/ell/ === :hello	# => true
-		"Hello" === /ell/   # => false!
-		Object === Array	# true
+```Ruby
+not and/&& or/|| # and/&& and or/|| can be used for short-circuit evaluation (A || B => if A is true, B won't be run, same for A && B if A is false)
+    var ||= SomeClass.new() # Create if not exists
+== # Equality operator /.==()/
+    (1..5) == (1..5)    # true
+    (1..5) == (1..10)   # false
+=== # Subsumption operator (a === b means "is b part of the set described by a?"). General object goes left, specific goes right
+    # Order of operators matters because of object to which operator belongs (e.g. Fixnum#=== cannot take a Range but Range#=== can take a Fixnum)
+    (1..5) === 1        # true
+    (1..5) === 10       # false
+    (1..5) === "koko"   # false
+    Integer === 42          # => true
+    Integer === "fourtytwo" # => false
+    /ell/ === "Hello"   # => true
+    /ell/ === "Foobar"  # => false
+    /ell/ === :hello    # => true
+    "Hello" === /ell/   # => false!
+    Object === Array    # true
+```
 
 #### If
 
-	if condition
-		unless condition
-		elsif	# As many as needed
-		else	# Can only be one
-	end
+```Ruby
+if condition
+    unless condition
+    elsif   # As many as needed
+    else    # Can only be one
+end
 
-	statement if condition	# Statement modifier
-	statement if condition unless condition
+statement if condition # Statement modifier
+statement if condition unless condition
 
-	var = if condition statement else statement end	# if returns the value of the last statement in matching branch, nil otherwise
+var = if condition statement else statement end # if returns the value of the last statement in matching branch, nil otherwise
+```
 
 #### Case
 
-	case expr
-		when 1	# Internally, compares 1 === expr
-		when 2..5
-		when 'exit','quit'
-		when /pattern/
-	end
+```Ruby
+case expr
+    when 1 # Internally, compares 1 === expr
+    when 2..5
+    when 'exit','quit'
+    when /pattern/
+end
+```
 
-#### Loops	# Iterators are methods that can can traverse a collection e.g. an Array
+#### Loops # Iterators are methods that can can traverse a collection e.g. an Array
 
 Most iterators are implemented internally using these basic methods
-In the following statements, .. is NOT a block and the optional [do] is a reserved word (See http://www.tutorialspoint.com/ruby/ruby_loops.htm)
+In the following statements, .. is NOT a block and the optional [do] is a reserved word (See <http://www.tutorialspoint.com/ruby/ruby_loops.htm>)
 Difference between each and for is scoping: local variables exist outside for loop. This is because for doesn't use a block => the variable is not local
 
-	while condition [do] .. end
-	until condition [do] .. end
-	for i in 0...size [do] .. end	# i exists after the for loop
+```Ruby
+while condition [do] .. end
+until condition [do] .. end
+for i in 0...size [do] .. end # i exists after the for loop
 
-	next if condition	# Jumps to next iteration
-	break if condition	# Exits the loop
+next if condition   # Jumps to next iteration
+break if condition  # Exits the loop
+```
 
 The following methods return an Enumerator when no block is provided (see following section)
 
-	loop do .. end
-	number.times {|index|}		# index starts at 0. Returns number itself (-> self) or nil in case of break
-	start.upto(end) {|index|}	# index starts at start -> end (Works with Strings)
-	start.downto(end) {|index|} # index starts at start -> end (Works with Strings)
+```Ruby
+loop do .. end
+number.times {|index|}      # index starts at 0. Returns number itself (-> self) or nil in case of break
+start.upto(end) {|index|}   # index starts at start -> end (Works with Strings)
+start.downto(end) {|index|} # index starts at start -> end (Works with Strings)
+```
 
 #### Exceptions
 
@@ -530,26 +540,30 @@ enum = array.map    # Block is not specified here
 enum.each{...}      # Will actually do .map() using the code in the {...} block
 
 enumerator.peek
-enumerator.next			# Returns next object and moves internal position forward
-enumerator.next_values	# Returns next object as an array and moves internal position forward
+enumerator.next         # Returns next object and moves internal position forward
+enumerator.next_values  # Returns next object as an array and moves internal position forward
 enumerator.with_index(offset){|param,index| ..}
 enumerator.with_object(){|param,object| ..}
 ```
 
 ### Procs
 
-	# Everything in Ruby is an Object, except Blocks, that can only be used once by the method they apply to.
-	# Procs are Objects that fill that gap; they are reusable chunks of block-like code that can be used as block and also as methods
-	# Used as a block, they can therefore be saved in variables for reuse. They can also be called just like a method by applying .call() to them
+Everything in Ruby is an Object, except Blocks, that can only be used once by the method they apply to.
+Procs are Objects that fill that gap; they are reusable chunks of block-like code that can be used as block and also as methods
+Used as a block, they can therefore be saved in variables for reuse. They can also be called just like a method by applying .call() to them
 
 #### '&'
 
-	# Apply the '&' operator to a Proc to pass it to a method as a block (note: it is actually passed as a method parameter)
-	double = Proc.new {|n| n*2}	# Defines a Proc
-	def f n; puts yield n; end 	# Defines a Method that takes one parameter
-	f (5, &double)				# Proc-block is passed as a method parameter
-	# Other uses of '&' include meta-manipulating a block from within a method, e.g. displaying its parameters
-	# See <http://ablogaboutcode.com/2012/01/04/the-ampersand-operator-in-ruby/>
+Apply the '&' operator to a Proc to pass it to a method as a block (note: it is actually passed as a method parameter)
+
+```Ruby
+double = Proc.new {|n| n*2} # Defines a Proc
+def f n; puts yield n; end  # Defines a Method that takes one parameter
+f (5, &double)              # Proc-block is passed as a method parameter
+```
+
+Other uses of '&' include meta-manipulating a block from within a method, e.g. displaying its parameters
+See <http://ablogaboutcode.com/2012/01/04/the-ampersand-operator-in-ruby/>
 
 #### to_proc()
 
@@ -562,7 +576,7 @@ The to_proc() method of the 'Symbol' class invokes its own instance (a :symbol) 
 I.e. block_parameter.send(:name) where :name is a method that exists for block_parameter
 See <http://benjamintan.io/blog/2015/03/16/how-does-symbol-to_proc-work/>
 
-	words.map &:length	# Symbol#to_proc invokes .length() for each String in the 'words' Array
+`words.map &:length` (Symbol#to_proc invokes .length() for each String in the 'words' Array)
 
 ### Lambda
 
@@ -646,35 +660,47 @@ private :f
 
 ### File
 
-	class_name.rb 	# Corresponding filename should be lowercase w/ underscores
+```Ruby
+class_name.rb # Corresponding filename should be lowercase w/ underscores
+```
 
 ### Definition
 
-	class ClassName	# Class name is a (capitalized) Constant in CamelCase by convention
-	end
+```Ruby
+class ClassName # Class name is a (capitalized) Constant in CamelCase by convention
+end
+```
 
 ### Initialize
 
-Constructor-like method that defines the instance variables and initializes their state. Invoked by Class.new() after calling allocate()
-initialize is a private instance method defined in an ancestor of all Classes => instance.respond_to?("initialize", true) == always true
+[new, allocate & initialize](https://www.oreilly.com/library/view/the-ruby-programming/9780596516178/ch07s04.html)
 
-	def initialize
-	def initialize(param)
-	def initialize(param = "default")
-		@instance_variable = param
-	end
+Constructor-like method that defines the instance variables and initializes their state.
+Invoked by Class.new() after calling allocate().
+
+`initialize()` is a private instance method defined in an ancestor of all Classes => `instance.respond_to?("initialize", true)` is always true
+
+```Ruby
+def initialize
+def initialize(param)
+def initialize(param = "default")
+    @instance_variable = param
+end
+```
 
 ### Constants
 
-	CONSTANT	# Accessed outside the class using Class::CONSTANT (:: is the scope-resolution operator)
+```Ruby
+CONSTANT # Accessed outside the class using Class::CONSTANT (:: is the scope-resolution operator)
+```
 
 ### Instance Variable
 
 Look what 'self' refers to when a variable is used to identifies its nature (Class or Instance)
 If it appears outside an instance method, it's a _class-level_ instance variable (initialized the first time the class is loaded)
-See http://stackoverflow.com/questions/6043618/ruby-initialize-vs-class-body
+See <http://stackoverflow.com/questions/6043618/ruby-initialize-vs-class-body>
 Class-level instance variables are useful to define class variables that are independant in subclasses (unlike @@class_variables who are changed globally)
-See http://www.railstips.org/blog/archives/2006/11/18/class-and-instance-variables-in-ruby/
+See <http://www.railstips.org/blog/archives/2006/11/18/class-and-instance-variables-in-ruby/>
 
 	@instance_variable
 
@@ -700,9 +726,11 @@ Accessor ease the task of writing readers/writers manually
 attr_* are actually method calls creating attributes that get/set @instance_variables with the same name (given by Symbol or String)
 See http://stackoverflow.com/questions/4370960/what-is-attr-accessor-in-ruby
 
-	attr_reader :name		# Reader
-	attr_writer "name"		# Writer
-	attr_accessor (:name)	# Reader & writer
+```Ruby
+attr_reader :name # Reader
+attr_writer "name" # Writer
+attr_accessor (:name) # Reader & writer
+```
 
 ### Instance method
 
@@ -756,36 +784,36 @@ instance = Class.new
 instance = Class.new()
 instance = Class.new(param)
 instance = Class.new param
-instance.@member	# Forbidden
-Class.method	# Class method
+instance.@member    # Forbidden
+Class.method        # Class method
 
-s = "abc"				# ?
-s = String "abc"		# ?
-s = String ("abc")		# ?
-s = String.new "abc"	# Constructor
-s = String.new ("abc")	# Constructor
+s = "abc"               # ?
+s = String "abc"        # ?
+s = String ("abc")      # ?
+s = String.new "abc"    # Constructor
+s = String.new ("abc")  # Constructor
 
-MyClass.freeze		# Prevents further changes to the class
-MyClass.allocate	# Creates a new object without calling the initialize method
+MyClass.freeze      # Prevents further changes to the class
+MyClass.allocate    # Creates a new object without calling the initialize method
 ```
 
 ### Reflection
 
 ```Ruby
-Class.class					# Class (the class of a Class is Class)
-Class.superclass			# Parent class
-Class.ancestors				# Array of all the parent classes
-Class.instance_methods		# Instance methods
-Class.methods				# Static methods
-Class.instance_variables	# Class instance variable (Class members)
-Class.class_variables		# Static members
-Class.constants				# Nested classes
+Class.class                 # Class (the class of a Class is Class)
+Class.superclass            # Parent class
+Class.ancestors             # Array of all the parent classes
+Class.instance_methods      # Instance methods
+Class.methods               # Static methods
+Class.instance_variables    # Class instance variable (Class members)
+Class.class_variables       # Static members
+Class.constants             # Nested classes
 
-instance.class				# The class of the instance
-instance.methods			# The methods of the instance
-instance.instance_variables	# Instance instance variables (Members specific to one instance e.g. initialized in .initialize())
-instance.kind_of?(Class)	# See .is_a?
-instance.is_a?(Class)		# true if instance is a Class or inherits from it
+instance.class              # The class of the instance
+instance.methods            # The methods of the instance
+instance.instance_variables # Instance instance variables (Members specific to one instance e.g. initialized in .initialize())
+instance.kind_of?(Class)    # See .is_a?
+instance.is_a?(Class)       # true if instance is a Class or inherits from it
 instance.instance_of?(Class)# true if instance is a Class (only direct Class, false if ancestor)
 instance.respond_to?(:method, true/false) # true if instance has method (1st parameter can be String, 2nd true to include protected/private methods)
 ```
@@ -906,10 +934,12 @@ if __FILE__ == $0	# Used to put some usage example code inside a class/module fi
 
 ### Call
 
-	Module.method 		# Module method
-	Module::method 		# Module method via scope-resolution operator '::'
-						# Actualy also works for Class methods and Instance methods (e.g. Class::method and instance::method)
-	Module::CONSTANT	# Constant (only) via scope-resolution operator '::'
+```Ruby
+Module.method       # Module method
+Module::method      # Module method via scope-resolution operator '::'
+                    # Actualy also works for Class methods and Instance methods (e.g. Class::method and instance::method)
+Module::CONSTANT    # Constant (only) via scope-resolution operator '::'
+```
 
 ### Mixins (-Able behaviors)
 
@@ -923,27 +953,33 @@ Comes between class and parent class in ancestor hierarchy e.g. Array > Enumerab
 
 #### Module
 
-	module Able
-		CONSTANT
-		def instance_method .. end
-	end
+```Ruby
+module Able
+    CONSTANT
+    def instance_method .. end
+end
+```
 
 #### Inclusion
 
-	class Class
-		include Able
-	end
-	Class::CONSTANT
-	Class.new.instance_method
+```Ruby
+class Class
+    include Able
+end
+Class::CONSTANT
+Class.new.instance_method
+```
 
-#### Reflection
+#### Module Reflection
 
-	Class.class				# Class
-	Class.superclass		# Object
-	Class.ancestors			# [Class, Able, Object, ..]
-	Class.included_modules	# [Able, Kernel]
-	Class.include? module	# true/false
-	Class < module			# true/false
+```Ruby
+Class.class             # Class
+Class.superclass        # Object
+Class.ancestors         # [Class, Able, Object, ..]
+Class.included_modules  # [Able, Kernel]
+Class.include? module   # true/false
+Class < module          # true/false
+```
 
 ### Extend
 
@@ -972,7 +1008,7 @@ Command line parameters as an Array
 
 ### Definition
 
-	ruby ./script.rb parameter	# No need for quotes around parameter
+`ruby ./script.rb parameter` (no need for quotes around parameter)
 
 ### Call
 
@@ -982,11 +1018,13 @@ Command line parameters as an Array
 
 #### Open
 
-	file = File::open("filename.txt", [mode])	# Default mode is 'r' (r,r+,w,w+,a,a+,b,t)
-		while(line = file.gets)		# Read (.gets() returns nil if EOF reached)
-		file.each_line {|line| ..}	# Read
-		file << "content"} 			# Write
-	file.close
+```Ruby
+file = File::open("filename.txt", [mode]) # Default mode is 'r' (r,r+,w,w+,a,a+,b,t)
+    while(line = file.gets)     # Read (.gets() returns nil if EOF reached)
+    file.each_line {|line| ..}  # Read
+    file << "content"}          # Write
+file.close
+```
 
 Better construct to avoid forgetting closing a file: use a block and the file is closed at the end
 
@@ -1008,7 +1046,6 @@ Better construct to avoid forgetting closing a file: use a block and the file is
 
 	Dir::["path_with_files_pattern"]	# Array of names of matching files in the given directory
 	Dir::[]("path_with_files_pattern")	# Just like with hashes, [] is a class operator => can use it as a method
-
 
 ## Regex
 

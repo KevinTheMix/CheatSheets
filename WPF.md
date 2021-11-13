@@ -346,7 +346,7 @@ From Code-Behind, using FindResource() that returns an object
 Debugging WPF can be tricky, because most errors are met during execution rather than at compilation time.
 The following resources and techniques are very valuable to unearth the cause of an issue.
 
-* Visual Studio Output window
+* Visual Studio Output window: check the _Output_ Console from time to time to track Binding/DI errors
 * Visual Studio Live Visual Tree
 * Implementing a hollow DebugConverter
 
