@@ -1,5 +1,10 @@
 # Windows
 
+* [NTFS links](https://en.wikipedia.org/wiki/NTFS_links)
+  * Hard links = two _index_ entries point to the same physical file
+  * Junction points = hard link for a folder
+  * Symbolic link = Windows shortcut = a physical file whose content is the path of another file
+
 ## Hacks
 
 * Create a file called con.txt: <https://www.reddit.com/r/todayilearned/comments/a0zht/til_that_you_cant_create_a_file_in_windows_called/c0fcr5n/>
@@ -20,6 +25,7 @@
 * `Windows + R > mstsc` = Remote Desktop
 * `Windows + Left/Right` = Move Window around desktop
 * `Windows + Shift + Left/Right` = Send Window to other screen
+* _Drag file to application tab in Start Menu_ = Pin the file to that Program tab
 
 ### GUI Config Commands (Win + R)
 
