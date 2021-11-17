@@ -1,16 +1,16 @@
 # EF Tracking (same key issue)
 
-## Problem Statement
+## Problem(s) Statement
 
 In certain circumstances, EF complains with the following _InvalidOperationException_:
 
-> The instance of entity type 'CMU' cannot be tracked because another instance with the same key value for {'CMUId'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+> The instance of entity type '{type}' cannot be tracked because another instance with the same key value for '{ID}' is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
 
 This is an issue related to something called _identity resolution_, which is how EF manages to keep track of multiple references to the same entity instance.
 
 In past versions of EF, distinct references of the same instances were kept track of, which prevented facing a situation where multiple instances of the same entity coexisted, but starting with EF Core 3, that behavior was altered for entities loaded via `AsNoTracking()` for performance reasons. The rationale is well explained on this page: [EF Core 3.0 breaking changes](https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-3.x/breaking-changes#notrackingresolution).
 
-As the following comment on the `Microsoft.EntityFrameworkCore.DbSet<TEntity>.Update(entity)` EF Core method indicates, calling that method kickstarts tracking for the given entity and all its sub-properties, recursively, which is when the distinct instances of the same entity are suddenly discovered by EF, and an error is raised:
+As the following comment on the `Microsoft.EntityFrameworkCore.DbSet<TEntity>.Update(entity)` EF Core method indicates, calling that very method kickstarts tracking for the given entity and all its sub-properties, recursively, which is when the distinct instances of the same entity are suddenly discovered by EF, and an error is raised:
 
 ```C#
 ...
@@ -26,7 +26,7 @@ In our case, we discovered that there was two distinct situations that produced 
 
 This situation occurs when instances of sub-properties of an (aggregate root) entity diverge due to mismanaging their identity resolution. Indeed, when the entity (or entities) gets loaded, its sub-properties will all get instantiated as distinct objects, even if some of those are really the same entity (i.e. same Type and ID). Schematized:
 
-![Image: Navigation properties instance mismatch](entitiessubproperties.png "Tooltip: Navigation properties instance mismatch")
+![Alt: Navigation properties instance mismatch](entitiessubproperties.png "Tooltip: Navigation properties instance mismatch")
 
 That has no drawback as long as we don't write them back in DB. Unfortunately, that is exactly what happens: when saving the root entity, the `DbSet<TEntity>.Update(entity)` method is called, and two separate instances of the same entity are found to exist as sub-properties (actually sub-sub-properties in our particular configuration) and EF raises an error.
 

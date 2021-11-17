@@ -305,7 +305,7 @@ Values
 
 ### Write
 
-    print (HANDLE "..");    # No ',' after HANLDE
+    print (HANDLE "..");    # No ',' after HANDLE
     printf (HANDLE "format", $i);
 
 ### Close
