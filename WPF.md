@@ -200,10 +200,13 @@ Without prefix, add curly braces to avoid confusion with Markup Extensions.
 
 `StringFormat={}{0:format}`
 
-* [Numeric Format](http://msdn.microsoft.com/en-us/library/dwhawy9k.aspx)
-* [Date and Time Format](http://msdn.microsoft.com/en-us/library/az4se3k1.aspx)
+* [Numeric format](http://msdn.microsoft.com/en-us/library/dwhawy9k.aspx)
+  * [Decimal format](https://stackoverflow.com/a/18362876)
+  * `#` = number or nothing
+  * `0` = number or zero
+* [Date and Time format](http://msdn.microsoft.com/en-us/library/az4se3k1.aspx)
 * [DateTimeOffset.ToString](https://docs.microsoft.com/en-us/dotnet/api/system.datetimeoffset.tostring?view=netframework-4.8)
-* [DateTime Predefined Formats](https://stackoverflow.com/a/5046460)
+* [DateTime predefined formats](https://stackoverflow.com/a/5046460)
   * Dependent on culture => use ConverterCulture='ja-JP' in Binding.
 
 ## Components

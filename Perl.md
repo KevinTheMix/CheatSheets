@@ -1,265 +1,301 @@
 # Perl
 
-    perldoc # Manual page (q to exit)
+* `` `command` `` = execute the given shell command
 
-    #!/usr/bin/perl -w  # Must be the first line of the file. See `which perl` shell command for Perl local installation directory.
-    "./script.pl"       # Run
-    "perl script.pl"    # Run (also makes shebang line unnecessary)
+```perl
+perldoc # Manual page (q to exit)
 
-    $ = scalaire (scalar())
-    @ = tableau
-    % = hash
-    my $var         # Declaration or re-declaration (which makes new local variable scope)
-    my ($a, $b);    # Multideclaration. my $a, $b; incorrect (cfr Erlang tuple)
+#!/usr/bin/perl -w  # Must be the first line of the file. See `which perl` shell command for Perl local installation directory.
+"./script.pl"       # Run
+"perl script.pl"    # Run (also makes shebang line unnecessary)
 
-    undef
-    defined()
+$ = scalaire (scalar())
+@ = tableau
+% = hash
+my $var         # Declaration or re-declaration (which makes new local variable scope)
+my ($a, $b);    # Multideclaration. my $a, $b; incorrect (cfr Erlang tuple)
+
+undef
+defined()
+```
 
 ## {}
 
-    {Instruction block}
+`{Instruction block}`
 
 ## String
 
-    "${var}stuff"   # As variable name delimiters within a string
+`"${var}stuff"   # As variable name delimiters within a string`
 
 ### Print Method
 
-    @{[expression]} # Expression can be a variable or function or calculation e.g. @{[$var + 1]}
+`@{[expression]} # Expression can be a variable or function or calculation e.g. @{[$var + 1]}`
 
 ### Hashtables
 
-    $hashtable{key}             # Value
-    @h{key1, key2}              # Slice
-    $href = {key => 'val'}      # Reference declaration
-    %{$href->{key}}             # Reference
-    $$href{key}; $href->{key};  # Reference value
+```perl
+$hashtable{key}             # Value
+@h{key1, key2}              # Slice
+$href = {key => 'val'}      # Reference declaration
+%{$href->{key}}             # Reference
+$$href{key}; $href->{key};  # Reference value
+```
 
 ### Array reference
 
-    @{$subtref->[]} # {} delimit reference for @
+`@{$subtref->[]} # {} delimit reference for @`
 
 ### Other
 
-    sort() grep() map() {criteria}
+`sort() grep() map() {criteria}`
 
 ### Regex quantifier
 
-    {1,3}
+`{1,3}`
 
 ## Pragma (Preprocessor)
 
-    use strict;
-    use constant NAME => value;
-    use constant PI => 4 * atan2(1, 1);
-    use constant DEBUG => 0;    # instruction if DEBUG;
+```perl
+use strict;
+use constant NAME => value;
+use constant PI => 4 * atan2(1, 1);
+use constant DEBUG => 0;    # instruction if DEBUG;
+```
 
 ## Global
 
-    %ENV $ENV{PATH} $ENV{HOME}
-    @0      # Nom du programme (e.g. main.pl)
-    @_      # Function parameters
-    @ARGV   # Program arguments
-    $ARGV   # Name of current file being read
-    $.      # Last read file line number
-    $!      # errno
-    $_      # chomp + foreach + grep + map + =~ (bind)
-    $a $b   # sort({} @liste);
+```perl
+%ENV $ENV{PATH} $ENV{HOME}
+@0      # Nom du programme (e.g. main.pl)
+@_      # Function parameters
+@ARGV   # Program arguments
+$ARGV   # Name of current file being read
+$.      # Last read file line number
+$!      # errno
+$_      # chomp + foreach + grep + map + =~ (bind)
+$a $b   # sort({} @liste);
+```
 
 ## Scalars
 
-    scalar(@t)
-    int(10/3);
-    ++
-    **
-    x   # Following a scalar: copy-paste the preceding scalar x number of times.
-    chr($int) <-> ord($char)
-    hex('0xabc') -> 0xabc
+```perl
+scalar(@t)
+int(10/3);
+++
+**
+x   # Following a scalar: copy-paste the preceding scalar x number of times.
+chr($int) <-> ord($char)
+hex('0xabc') -> 0xabc
+```
 
 ### Strings
 
-    ""                  # Parses $ @
-    ''                  # As-is => '\n' will not be a end line char.
-    q(Koko est kontan); # As-is, similar to '...' but now we can use ' inside
+```perl
+""                  # Parses $ @
+''                  # As-is => '\n' will not be a end line char.
+q(Koko est kontan); # As-is, similar to '...' but now we can use ' inside
 
-    uc() & ucfirst()    # Uppercase string & first character
+uc() & ucfirst()    # Uppercase string & first character
 
-    substr()        # L-Value
-    length()
-    chop (LastChar) # Cfr pop(@liste)
-    chomp (TrimEnd) # Chomps $_ if no argument provided
-    reverse()
-    index($s, $substring, $startpos)/rindex()
-    print()
-    say()           # print() with \n
-    printf(format, variables)   # see "man 3 printf"
-    sprintf()       # printf() into string
-    quotemeta()     # Escapes '\' special characters
+substr()        # L-Value
+length()
+chop (LastChar) # Cfr pop(@liste)
+chomp (TrimEnd) # Chomps $_ if no argument provided
+reverse()
+index($s, $substring, $startpos)/rindex()
+print()
+say()           # print() with \n
+printf(format, variables)   # see "man 3 printf"
+sprintf()       # printf() into string
+quotemeta()     # Escapes '\' special characters
 
-    qq[...]         # Quotes. Similar to "..." for when ... contains quotes characters.
+qq[...]         # Quotes. Similar to "..." for when ... contains quotes characters.
+```
 
 ## Conditions
 
-    if(cond) {expr}
-    expr if(cond);
-    elseif
-    unless
+```perl
+if(cond) {expr}
+expr if(cond);
+elseif
+unless
+```
 
 ### true
 
-    1
-    "ok"
-    null
+```perl
+1
+"ok"
+null
+```
 
 ### false
 
-    0, "0", '0'
-    "", ''
-    undef
-    [Empty Array]   # => while(@tableau)
+```perl
+0, "0", '0'
+"", ''
+undef
+[Empty Array]   # => while(@tableau)
+```
 
 ### Equality
 
-    ==
-    eq  # Used to compare Strings, because == compares only 1st letters
+```perl
+==
+eq  # Used to compare Strings, because == compares only 1st letters
+```
 
 ### Inequality
 
-    !=
-    ne  # Same, don't use !=
+```perl
+!=
+ne  # Same, don't use !=
 
-    <   lt
-    >   gt
-    <!  le
-    >=  ge
-    <=> cmp # Sorting respectively by numerical and lexical
+<   lt
+>   gt
+<!  le
+>=  ge
+<=> cmp # Sorting respectively by numerical and lexical
+```
 
 ## Arrays & Lists
 
-    ```Perl
-    @t                  # Can coexist with a scalar named $t even after assignation. $t[] will properly be distinguished from $t.
-    $#t                 # Last index
-    scalar(@t) == size  # Also $size = @t. Note @t = 5 === t[0] = 5;
-    $t[-1] = $t[$#t]    # Last element
-    if index > size, item value == undef
-    $t[1000] = 8;       # Assigns specific index. This enlarges the array => scalar(@t) now worth 1001 and missing elements are all undef
-    
-    exists($t[index]) == check item exists in tab (index within range)
-    defined($t[index]) == check item value is undef (item can exists)
-    
-    ($a,$b) = (1,2);    # Cette instruction affecte une valeur à chacune des variables de la liste de gauche : $a reçoit 1 et $b reçoit 2.
-    ($a,$b) = (1,2,3);  # Les mêmes affectations sont effectuées ici, la valeur 3 n'étant d'aucune utilité.
-    ($a,$b) = (1);      # L'affectation à $a de la valeur 1 est effectuée et $b est mis à undef (son ancienne valeur est perdue).
-    ($a,$b) = @t;       # Les variables citées à gauche reçoivent les premières valeurs du tableau @t : $a en reçoit le premier élément ou undef si @t est vide ; $b reçoit le deuxième élément ou undef si @t il ne     contient qu'un élément.
-    @t = (1,2);         # Cette instruction réinitialise le tableau @t (dont les anciennes valeurs sont toutes perdues, y compris celles d'indice diffèrent de 0 et 1) en lui affectant les valeurs de droite : on obtient     donc un tableau à deux éléments.
-    @t = (1..10);
-    @t = (2..$n);
-    ($a,$b) = Fonction();   # Nous verrons un peu plus loin comment écrire une fonction, et comment lui faire renvoyer une liste : ici l'affectation se fait dans les mêmes conditions que pour les trois premiers cas.
-    ($a,$b) = ($b,$a);      # Cette instruction est la plus savoureuse : on peut échanger deux variables Perl sans avoir à en utiliser une troisième � (Ai-je déjà dit que Perl s'occupe lui-même de la mémoire ?)
-    
-    ($a,@t) = @s;           # Absorbtion. $a = $s[1] et @t = le reste de @s
-    (@t, @u, $val) = @s;    # Absorbtion par @t de @s => tout ce qui suit est vide () et undef
-    @u = (3, 4); @t = (1, 2, @u);   # Aplatissement. @t == (1, 2 ,3, 4)
-    ```
+```Perl
+@t                  # Can coexist with a scalar named $t even after assignation. $t[] will properly be distinguished from $t.
+$#t                 # Last index
+scalar(@t) == size  # Also $size = @t. Note @t = 5 === t[0] = 5;
+$t[-1] = $t[$#t]    # Last element
+if index > size, item value == undef
+$t[1000] = 8;       # Assigns specific index. This enlarges the array => scalar(@t) now worth 1001 and missing elements are all undef
+
+exists($t[index]) == check item exists in tab (index within range)
+defined($t[index]) == check item value is undef (item can exists)
+
+($a,$b) = (1,2);    # Cette instruction affecte une valeur à chacune des variables de la liste de gauche : $a reçoit 1 et $b reçoit 2.
+($a,$b) = (1,2,3);  # Les mêmes affectations sont effectuées ici, la valeur 3 n'étant d'aucune utilité.
+($a,$b) = (1);      # L'affectation à $a de la valeur 1 est effectuée et $b est mis à undef (son ancienne valeur est perdue).
+($a,$b) = @t;       # Les variables citées à gauche reçoivent les premières valeurs du tableau @t : $a en reçoit le premier élément ou undef si @t est vide ; $b reçoit le deuxième élément ou undef si @t il ne     contient qu'un élément.
+@t = (1,2);         # Cette instruction réinitialise le tableau @t (dont les anciennes valeurs sont toutes perdues, y compris celles d'indice diffèrent de 0 et 1) en lui affectant les valeurs de droite : on obtient     donc un tableau à deux éléments.
+@t = (1..10);
+@t = (2..$n);
+($a,$b) = Fonction();   # Nous verrons un peu plus loin comment écrire une fonction, et comment lui faire renvoyer une liste : ici l'affectation se fait dans les mêmes conditions que pour les trois premiers cas.
+($a,$b) = ($b,$a);      # Cette instruction est la plus savoureuse : on peut échanger deux variables Perl sans avoir à en utiliser une troisième � (Ai-je déjà dit que Perl s'occupe lui-même de la mémoire ?)
+
+($a,@t) = @s;           # Absorbtion. $a = $s[1] et @t = le reste de @s
+(@t, @u, $val) = @s;    # Absorbtion par @t de @s => tout ce qui suit est vide () et undef
+@u = (3, 4); @t = (1, 2, @u);   # Aplatissement. @t == (1, 2 ,3, 4)
+```
 
 [List flattening](http://blogs.perl.org/users/aristotle/2017/11/perl5-refs-flattening.html).
 This is akin to the ```params``` [params operator](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/params) in C#, ```*``` [splat operator](https://www.freecodecamp.org/news/rubys-splat-and-double-splat-operators-ceb753329a78/) in Ruby, ```...``` [spread operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) in Javascript, except in reverse: in Perl, splatting is the default and the ```\``` operator prevents it.
 
-    my @x = (1, 2, 3, 4);
-    my @y = (\@x, \@x); // @y => ([1, 2, 3, 4], [1, 2, 3, 4])
+```perl
+my @x = (1, 2, 3, 4);
+my @y = (\@x, \@x); // @y => ([1, 2, 3, 4], [1, 2, 3, 4])
+```
 
 ## Loops
 
-    for(;;) while(){} instruction while(); do{} while() until()
-    next (continue) last (break) redo (goto start)
+```perl
+for(;;) while(){} instruction while(); do{} while() until()
+next (continue) last (break) redo (goto start)
 
-    foreach my $var (1, 'a', @u) {} # Aplatissement
-    foreach my $var (@liste) {}
-    foreach (@liste) {$_}
+foreach my $var (1, 'a', @u) {} # Aplatissement
+foreach my $var (@liste) {}
+foreach (@liste) {$_}
 
-    die("Usage: $0 <n> <n>\n")  if( !defined( $ARGV[1] ) );
-    foreach my $i (1..$ARGV[0]) { foreach my $j (1..$ARGV[1]) { printf( "%4d", $i*$j ); } print "\n"; }
+die("Usage: $0 <n> <n>\n")  if( !defined( $ARGV[1] ) );
+foreach my $i (1..$ARGV[0]) { foreach my $j (1..$ARGV[1]) { printf( "%4d", $i*$j ); } print "\n"; }
+```
 
 ## Arrays & Lists (2)
 
-    ```Perl
-    unshift (@tableau, 1, 2, 3) $elem = shift (@tableau)    # Changes @tableau. Also shift @tableau with no ()
-    push (@tableau, 4, 5, 6)    $elem = pop (@tableau)      # Changes @tableau
-    @rev = reverse (@tableau)                               # @tableau not modified
-    splice (@tableau, $offset, [$length], [@list])          # $offset can be negative
+```Perl
+unshift (@tableau, 1, 2, 3) $elem = shift (@tableau)    # Changes @tableau. Also shift @tableau with no ()
+push (@tableau, 4, 5, 6)    $elem = pop (@tableau)      # Changes @tableau
+@rev = reverse (@tableau)                               # @tableau not modified
+splice (@tableau, $offset, [$length], [@list])          # $offset can be negative
 
-    @liste = qw (Une phrase);   # qw means _Quote word_. No quotes around [Une phrase]. Also qw/blahblah/;
-    $string = join("separator", @tableau);
-    @liste = split(/separator regex/, "phrase contenant le separateur");
-    ($a, $b) = split(...)       # Also possible since it's a list of scalars
-    ```
+@liste = qw (Une phrase);   # qw means _Quote word_. No quotes around [Une phrase]. Also qw/blahblah/;
+$string = join("separator", @tableau);
+@liste = split(/separator regex/, "phrase contenant le separateur");
+($a, $b) = split(...)       # Also possible since it's a list of scalars
+```
 
 ## Sort
 
 Comparison result <0 if $a has to precede $b
 
-    @triee = sort( {$a cmp $b} @liste );   # cmp is also the default when no {} is specified. $a & $b special variables. @liste not modified
-    @triee = sort( {length($b) <=> length($a) or $a cmp $b} @liste );
+```perl
+@triee = sort( {$a cmp $b} @liste );   # cmp is also the default when no {} is specified. $a & $b special variables. @liste not modified
+@triee = sort( {length($b) <=> length($a) or $a cmp $b} @liste );
+```
 
 ### Grep
 
-    @selected = grep {$_ criteria} @liste;   # No () or ','. @liste not modified unless assign $_ = something
-    @selected = grep ('/regex/, @liste);
-    $nb = grep {..} @liste;   # Number of elements retained
+```perl
+@selected = grep {$_ criteria} @liste;   # No () or ','. @liste not modified unless assign $_ = something
+@selected = grep ('/regex/, @liste);
+$nb = grep {..} @liste;   # Number of elements retained
+```
 
 ### Map
 
-    @treated = map ({last $_ expression} @liste);    # No ','. @liste not modified unless assign $_ = something. E.g. map({$_*=4}@t);
+`@treated = map ({last $_ expression} @liste);    # No ','. @liste not modified unless assign $_ = something. E.g. map({$_*=4}@t);`
 
 ## Fonctions
 
 ### Declaration
 
-    sub maJolieFonction { my ($x, $y, $z) = @_;  return $z; }   # Copie local de @_ sinon modifie param�tres
-    my ($x, @t) = @_;   # Absorption into @t
-    my ($x) = @_;       # Only one. Must have () or will be assigned the size of @_
-    my $x = shift;      # shift takes in @_ by default
+```perl
+sub maJolieFonction { my ($x, $y, $z) = @_;  return $z; }   # Copie local de @_ sinon modifie param�tres
+my ($x, @t) = @_;   # Absorption into @t
+my ($x) = @_;       # Only one. Must have () or will be assigned the size of @_
+my $x = shift;      # shift takes in @_ by default
+```
 
 ### Call
 
-    function($param); or function $param;
-    $val = maJolieFonction(1, 2, 3);   # Also @liste =  fonction(..); or ($i, $j) = fonction(..);
+```perl
+function($param); or function $param;
+$val = maJolieFonction(1, 2, 3);   # Also @liste =  fonction(..); or ($i, $j) = fonction(..);
+```
 
 ## Hash
 
-    ```Perl
-    (key => value)  # All scalars. Value cannot be an array.
+```Perl
+(key => value)  # All scalars. Value cannot be an array.
 
-    my %h;
-    my %h = ();
-    my %h = ("I" => "Kevin", "You" => "Friend", "One" => "123");    # Key quotes can be omitted (thx to string context given =>)
-    $value = $h{You};   # Add '' or "" if key is not alpha_numeric
+my %h;
+my %h = ();
+my %h = ("I" => "Kevin", "You" => "Friend", "One" => "123");    # Key quotes can be omitted (thx to string context given =>)
+$value = $h{You};   # Add '' or "" if key is not alpha_numeric
 
-    my @keys = keys(%h);    # All keys in any order
-    my @vals = values(%h);  # Values in same order that keys() returns the keys, provided %h not changed
-    foreach my $key (@keys) {$val = $h{$key}}
-    foreach my $val (@vals) {}
-    while (my ($key, $val) = each (%h) ) {}
+my @keys = keys(%h);    # All keys in any order
+my @vals = values(%h);  # Values in same order that keys() returns the keys, provided %h not changed
+foreach my $key (@keys) {$val = $h{$key}}
+foreach my $val (@vals) {}
+while (my ($key, $val) = each (%h) ) {}
 
-    exists($h{key})
-    delete ( $h{key} );
-    if ( %h eq 0 )  # scalar(%h) vaut used/total ou vaut 0 si vide
+exists($h{key})
+delete ( $h{key} );
+if ( %h eq 0 )  # scalar(%h) vaut used/total ou vaut 0 si vide
 
-    %h = @t     # Hashtable to list, 2 by 2, fills uneven with undef, last duplicate stands
-    @t = %h     # List to hashtable, 2 by 2, in any order
-    => == ','   # Forces left side as string e.g. toto => 'titi'
-    %h = reverse(%h);   # Duplicate values undetermined
-    ```
+%h = @t     # Hashtable to list, 2 by 2, fills uneven with undef, last duplicate stands
+@t = %h     # List to hashtable, 2 by 2, in any order
+=> == ','   # Forces left side as string e.g. toto => 'titi'
+%h = reverse(%h);   # Duplicate values undetermined
+```
 
 ## Slices
 
-    ```Perl
-    @t[1,3] == ($t[1],$t[3])    # Note the '@' since splice is a list.
-    (function())[1,3];          # Only selected elements from the returned list
+```Perl
+@t[1,3] == ($t[1],$t[3])    # Note the '@' since splice is a list.
+(function())[1,3];          # Only selected elements from the returned list
 
-    @h{'key1', 'key3'} == ($h{key1}, $h{key2})      # Note it's always a list '@' and not '%'!
-    @t = qw(..); my %h; @h{@t} = (); @t = keys %h;  # Easy word duplicate deletion
-    ```
+@h{'key1', 'key3'} == ($h{key1}, $h{key2})      # Note it's always a list '@' and not '%'!
+@t = qw(..); my %h; @h{@t} = (); @t = keys %h;  # Easy word duplicate deletion
+```
 
 ## Files
 
@@ -267,15 +303,17 @@ Comparison result <0 if $a has to precede $b
 
 Bool (0/1)
 
-    -e # exist
-    -f # file
-    -d # directory
-    -l # softlink
-    -r # read
-    -w # write
-    -x # exectute
-    -o # OP
-    -z # empty
+```perl
+-e # exist
+-f # file
+-d # directory
+-l # softlink
+-r # read
+-w # write
+-x # exectute
+-o # OP
+-z # empty
+```
 
 Values
 

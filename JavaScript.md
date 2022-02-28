@@ -74,7 +74,8 @@
 
 ### Arrays
 
-* `array.shift()` pops the first element of an array and return it
+* `[item]` = turns an item into an array
+* `array.shift()` pops the first element of an array and returns it
 * `array.unshift()` adds items to the beginning
 * `array.push()`
 * [splice()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice)

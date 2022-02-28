@@ -46,10 +46,22 @@ C# Is good.
 
 * Environment
   * Static Methods & Properties (`Environment.GetFolderPath()`, `Environment.SpecialFolder.LocalApplicationData`)
-* [DateTime Format](https://docs.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings)
-  * `DateTime.ToString("T")` => 12:34:56 (only if T is the only character in the string format parameter, otherwise it is considered a literal character 'T')
 * Enum
   * `enum MyEnum : byte {A, B, C};` = Specify the underlying type (byte, sbyte, short, ushort, int, uint, long, ulong)
+
+### Dates
+
+```C#
+TimeZoneInfo.IsAmbiguous(DateTime date)
+TimeZoneInfo.IsDaylightSavingTime(DateTime date)
+date/dto.ToLocalTime()
+date/dto.ToUniversal()
+date/dto.ToUTC()
+new DateTimeOffset(date, offset)
+```
+
+* [DateTime Format](https://docs.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings)
+  * `DateTime.ToString("T")` => 12:34:56 (only if T is the only character in the string format parameter, otherwise it is considered a literal character 'T')
 
 ### System.String
 

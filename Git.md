@@ -27,14 +27,17 @@ And their corresponding file location:
 
 On Windows, Command-line parameters must use double " instead of single ' quotes.
 
-    git config
-    git config --{modifier} {section}.{parameter} {value}
-    git config --edit # opens the (targeted) configuration file
-    git config --edit --system
-    git config --global user.email "a@b.c"
-    git config --global user.name "Koko"
-    git config core.safecrlf warn # make Linux-Windows line endings non-blocking
-    git config --global alias.co checkout # alias
+```cmd
+git config
+git config --{modifier} {section}.{parameter} {value}
+git config --edit # opens the (targeted) configuration file
+git config --edit --system
+git config --list --global  # --list aka -l
+git config --global user.email "a@b.c"
+git config --global user.name "Koko"
+git config core.safecrlf warn # make Linux-Windows line endings non-blocking
+git config --global alias.co checkout # alias
+```
 
 ### Config Sections
 
@@ -69,7 +72,7 @@ To define an alias, used the following command:
 
 Sets up the current directory as a GIT repository
 
-    git init
+`git init`
 
 ### Add
 
@@ -77,17 +80,21 @@ Adds (aka Stages) all or specific files to be included in the next commit.
 This enables modularity on what will get commited or not in the next commit transaction.
 See <https://githowto.com/staging_and_committing>
 
-    git add {FILE}
-    git add . # All the files in the current directory and its subdirectories
-    git add '*.txt' # All the files in the current directory and its subdirectories matching the pattern
-    git add -i # Add interactively
+```cmd
+git add {FILE}
+git add . # All the files in the current directory and its subdirectories
+git add '*.txt' # All the files in the current directory and its subdirectories matching the pattern
+git add -i # Add interactively
+```
 
 ### Reset
 
 Opposite of Add; Unregister one or all files staged for commit
 
-    git reset \[FILE\]
-    git reset --soft HEAD~1 # Cancels the last commit
+```cmd
+git reset \[FILE\]
+git reset --soft HEAD~1 # Cancels the last commit
+```
 
 ### Commit
 
@@ -95,62 +102,72 @@ The Commit itself. All staged files are commited ("snapshot") to the repository
 A Commit message is expected.
 If it is not provided in the command line, the default text editor is launched and its result fed as message
 
-    git commit
-    git commit -m "Commit message"
-    git commit -a # Also commit add first
+```cmd
+git commit
+git commit -m "Commit message"
+git commit -a # Also commit add first
+```
 
 ### Revert
 
 Opposit of commit; cancel a Commit transaction
 
-    git revert HEAD # Reverts very last commit
-    git revert HASH # Reverts specific commit
+```cmd
+git revert HEAD # Reverts very last commit
+git revert HASH # Reverts specific commit
+```
 
 ### Status
 
 Status of the repository (OK, staged files, modifications not yet staged, etc.)
 
-    git status
+`git status`
 
 ### Branch
 
 Lists all branches
 
-    git branch
+`git branch`
 
 Name a commit branch
 
-    git branch NAME HASH
+`git branch NAME HASH`
 
 ### Tag
 
-    git tag TAG # Gives a name to currently checked-out Commit from which it'll be referrable
-    git tag # Lists existing tags
+```cmd
+git tag TAG # Gives a name to currently checked-out Commit from which it'll be referrable
+git tag # Lists existing tags
+```
 
 ### Log
 
 Lists commits in anti-chronological order
 
-    git log # Lists commits up to currently checked-out
-    git log BRANCH # Lists commits up to provided commit
-    git log TAG # Lists commits up to provided commit
+```cmd
+git log # Lists commits up to currently checked-out
+git log BRANCH # Lists commits up to provided commit
+git log TAG # Lists commits up to provided commit
+```
 
 #### Options (see 'man git-log' or 'git log --help')
 
-    --pretty=oneline # Compact view
-    --pretty=format:'' # %(ad = Author Date | an = Author | cd = Date | d = Branch | h = Hash | s = Comment)
-                       # Using %d format, indicates where HEAD points, branchs names & Commit tags
-    --max-count=10 # Limit
-    --since="5 minutes ago" # After
-    --until="5 minutes ago" # Before
-    --date=short # Date format
-    --author="Name"
-    --graph # Draw Ascii tree of commits 
-    --all # Includes all Commits, not just the ancestors of currently checked-out
+```cmd
+--pretty=oneline # Compact view
+--pretty=format:'' # %(ad = Author Date | an = Author | cd = Date | d = Branch | h = Hash | s = Comment)
+                   # Using %d format, indicates where HEAD points, branchs names & Commit tags
+--max-count=10 # Limit
+--since="5 minutes ago" # After
+--until="5 minutes ago" # Before
+--date=short # Date format
+--author="Name"
+--graph # Draw Ascii tree of commits 
+--all # Includes all Commits, not just the ancestors of currently checked-out
+```
 
 #### Visual GUI log visualizer
 
-    gitk
+`gitk`
 
 ### Checkout
 
@@ -159,57 +176,65 @@ The currently checked out version is indicated by HEAD in the logs
 
 Checks-out all files of specific Commit and switches to detached HEAD state
 
+```cmd
     git checkout HASH
     git checkout TAG
     git checkout TAG^ # Commit before the one given by its tag (aka TAG^1). On windows, use ~ instead of ^
     git checkout TAG^n # N-th Commit before the one given by its tag
+```
 
 Checks-out the latest version of a branch
 
-    git checkout . # Current branch (see <https://stackoverflow.com/a/14075772>)
-    git checkout BRANCH # E.g. default branch 'git checkout master'
-    git checkout BRANCH^ # Second to last commit in the branch
-    git checkout BRANCH^ # N-th to last commit in the branch
-    git checkout -b BRANCH # Creates a branch and points to it
+```cmd
+git checkout . # Current branch (see <https://stackoverflow.com/a/14075772>)
+git checkout BRANCH # E.g. default branch 'git checkout master'
+git checkout BRANCH^ # Second to last commit in the branch
+git checkout BRANCH^ # N-th to last commit in the branch
+git checkout -b BRANCH # Creates a branch and points to it
+```
 
 Reverts specific file to currently checked-out Commit version
 A file that's been modified must be commited or reverted before we can checkout a version where it was different
 
-    git checkout FILE
+`git checkout FILE`
 
 ### Remote
 
 Add a link to remote repository from local repository
 
-    git remote add REMOTE_NAME REMOTE_URL # (REMOTE_NAME e.g. 'origin' or 'upstream')
-    git remote remove NAME
-    git remote set-url REMOTE_NAME git@github.com:username/repo.git
-    git remote -v # Display dfined remotes of current repo
-    git remote prune origin # Clean remote branches
+```cmd
+git remote add REMOTE_NAME REMOTE_URL # (REMOTE_NAME e.g. 'origin' or 'upstream')
+git remote remove NAME
+git remote set-url REMOTE_NAME git@github.com:username/repo.git
+git remote -v # Display dfined remotes of current repo
+git remote prune origin # Clean remote branches
+```
 
 ### Clone
 
 Downloads entire remote repository into current directory (creates a local repository including all branches).
 Set URL as default 'origin' remote. If 'origin' is a forking repo, add an 'upstream' remote to keep track of forked original.
 
-    git clone REMOTE_URL
+`git clone REMOTE_URL`
 
 ### Push
 
 Upload local repository onto remote existing repository
 
-    git push REMOTE_NAME BRANCH
+`git push REMOTE_NAME BRANCH`
 
 ### Pull
 
 Pull is a combination of fetch and merge
 
-    git pull NAME BRANCH
+`git pull NAME BRANCH`
 
 ### Fetch/Merge
 
+```cmd
     git fetch # Downloads/updates from remote repository into local repository
     git merge FETCH_HEAD # Joins development histories
+```
 
 ## Github
 
