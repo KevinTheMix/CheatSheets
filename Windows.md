@@ -27,13 +27,6 @@
 * `Windows + Shift + Left/Right` = Send Window to other screen
 * _Drag file to application tab in Start Menu_ = Pin the file to that Program tab
 
-### GUI Config Commands (Win + R)
-
-* `mstsc` = Remote Desktop
-* `winver` = view Windows version
-* `services` = Component services, Event viewer, Windows Services
-  * `services.msc` = Windows services
-
 ## Windows 10
 
 * `Windows + Ctrl + Left/Right` = Switch Virtual Desktop
@@ -46,8 +39,13 @@
 * `3/4 fingers down` = Minimize everything
 * `4 fingers left/right` = Cycle virtual desktop
 
-## Windows Commands (Win + R)
+### GUI Tools & Commands (Win + R)
 
+* `mstsc.exe` = Remote Desktop
+* `winver.exe` = view Windows version
+* `services` = Component services, Event viewer, Windows Services
+  * `services.msc` = Windows services
+* `certmgr.msc` = Certificates manager
 * `shell:startup`
 * `shell:appsfolder`
 
