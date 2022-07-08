@@ -11,7 +11,7 @@
 * `$` = cell coordinate _freeze_ when copy-pasting
   * _$A1_ = Freeze a column's reference when copy-pasting a cell horizontally
   * _A$1_ = Freeze a row's reference when when copy-pasting a cell vertically
-  * `F4` = cycle through dollar freezing combinations
+  * `F4` = cycle through column/row dollar freezing combinations in current formula
 * `Shift + F11` = Add new sheet
 * `Ctrl + Up/Down` = go to top/bottom of current column
   * Add `Shift` to select range
@@ -20,8 +20,11 @@
 * `Ctrl + B/D` = Copy down topmost cell into selected cells below
   * Actual key depends on installed language (_**B**as_/_**D**own_)
   * Also via the _Home_ menu, the down arrow icon under the _Sum_ sign
-* `F4` = applies _$_ to column/row while typing a formula
 * Regional Settings for comma/dot separator = _File > Options > Advanced > Editing Options > (Uncheck) Use System Separater_
+* `Ctrl + T` = Format as Table
+  * Tables references (Charts, formulas, pivot) are automatically updated as the table's data is changed
+* Select Column/Row > Right Click > Hide/Unhide
+* (Un)Group = `Shift + Alt + Left/Right` or _Data > Outline > Group_
 
 ## Development
 
