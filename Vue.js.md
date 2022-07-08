@@ -103,7 +103,7 @@ Packs a render engine, turning data models and components into HTML & JS.
 * [Vue Router](https://router.vuejs.org/)
 * [Vuex](https://vuex.vuejs.org/) = State Management (similar to Flux or Redux). Makes apps with massive state manageable
   * Provides simple tools to add elements to the solution, collaboratively
-* [Vuetify.js](https://vuetifyjs.com/en/components/date-pickers) = [Material Design](https://en.wikipedia.org/wiki/Material_Design)
+* [Vuetify.js](https://vuetifyjs.com) = UI [Material Design](https://en.wikipedia.org/wiki/Material_Design) components (date pickers & co)
 * [VeeValidate](https://logaretm.github.io/vee-validate/)
 * [Vue I18n](https://kazupon.github.io/vue-i18n/guide/formatting.html#named-formatting)
 * [Nuxt](https://nuxtjs.org/) = Universal Rendering

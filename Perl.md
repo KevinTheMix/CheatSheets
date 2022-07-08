@@ -502,6 +502,8 @@ Create a local variable in a function and return its adress => local variable de
 
 ## Modules (CPAN)
 
+* [Tree-Simple](https://metacpan.org/pod/Tree::Simple) (2015.01)
+
 ### Definition
 
     Package Directory::Module;  # Name of module name mustn't be the same as file (use Filename; then Module::Member).

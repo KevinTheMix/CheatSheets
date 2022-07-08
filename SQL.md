@@ -4,13 +4,57 @@
 
 * Write dangerous queries inside a transaction, and commit it only after everything went smooothly
   * <https://twitter.com/SkaveRat/status/1455525986850721800?s=20>
+* Use different schemas for two tables with same name in same DB (when you want fewer DBs).
+* Queries can be performed between tables in different DBs (but on the same server) e.g. JOIN.
 * Check if other values in a group by are homogen/different: <https://stackoverflow.com/questions/39922045>
   * `COUNT(DISTINCT {field})`
   * `COUNT(CASE WHEN {condition} THEN {expression} END)`
-* Use different schemas for two tables with same name in same DB (when you want fewer DBs).
-* Queries can be performed between tables in different DBs (but on the same server) e.g. JOIN.
-* [DDL, DML, DCL, TCL](https://www.geeksforgeeks.org/sql-ddl-dml-dcl-tcl-commands/)
 * [Partitions](https://www.sqlshack.com/sql-partition-by-clause-overview/) = "cartesian" GROUP BY, with numbering, sorting & cumulative aggregation.
+
+## [DDL, DML, DCL, TCL](https://www.geeksforgeeks.org/sql-ddl-dml-dcl-tcl-commands/)
+
+### DDL (Data Definition Language)
+
+* `CREATE`, `ALTER`, `COMMENT`, `DROP`
+* `TRUNCATE`
+  * Remove all records, unallocate space and resets auto-incremented IDs (basically DROP & re-CREATE a TABLE).
+  * DDL operation (unlike DML DELETE) => doesn't use transaction log => won't work if any other (even empty) table references it
+* `RENAME`
+  * Rename Table = `EXEC sp_rename 'Setting.DE400ImportFormat', 'Setting.ExportColumnFormat' GO`
+  * Rename Constraint = `EXEC sp_rename 'Setting.[PK_Setting.DE400ImportFormat]', 'PK_Setting.ExportColumnFormat'`
+    * "_When renaming a constraint, the schema to which the constraint belongs must be specified._" (see <https://stackoverflow.com/a/8712921>).
+
+### DML (Data Manipulation Language)
+
+* `INSERT`
+  * Inserts multiple rows in one query = `INSERT INTO {Table} ({Col1}, {Col2}, ...) VALUES ({Val1}, {Val2},...),({Val3}, {Val4},...)`
+* `SELECT`
+  * `IF EXISTS (SELECT TOP 1 1 FROM {A})` = Check if exists
+  * `SELECT * FROM {A} WHERE {a} LIKE @var` = Use Variable in a LIKE
+  * `SELECT * FROM {A} WHERE {a} IN (@var1, @var2)` = Use Variables in a IN
+  * `SELECT {a}, (SELECT {b} FROM {B} WHERE {B}.fkey = {A}.Id) FROM {A}` = Nested SELECT
+  * `SELECT {a} FROM {A} WHERE {A}.count > (SELECT COUNT(*) FROM {A})` = Nested WHERE
+  * `SELECT {new} FROM (SELECT {expression} AS {new} FROM {A}) AS {New} GROUP BY {new}` = Nested FROM
+    * Uses a [Derived Table](https://logicalread.com/when-to-apply-sql-server-derived-tables-mc03/#.XNFNnnduKUk) to precompute a column to use both in the SELECT and GROUP BY clauses.
+  * `SELECT MAX(c1) AS Min FROM (VALUES ('a', 1), ('b', 2), ('ab', 3)) t1 (c1, c2) -- 'b'` = Select from inline values
+* `UPDATE`
+  * Cannot update several tables at once. See <https://stackoverflow.com/a/36153756>.
+* `DELETE`
+  * [Delete from multiple tables](https://stackoverflow.com/a/809892)
+* [CTE](https://stackoverflow.com/a/13383844)
+  * Allows a single pre-prepared computation to be used in multiple places of the subsequent query (any DML clause).
+  * Enables recursion.
+
+### DCL (Data Control Language)
+
+* `GRANT`, `REVOKE`
+
+### TCL (Transaction Control Language)
+
+* `COMMIT`, `ROLLBACK`, `SAVEPOINT`, `SET TRANSACTION`
+
+## Entities
+
 * [Temporary tables](https://www.red-gate.com/simple-talk/sql/t-sql-programming/temporary-tables-in-sql-server/)
   * [Temporary Table](https://docs.microsoft.com/en-us/sql/t-sql/statements/create-table-transact-sql?view=sql-server-ver15#temporary-tables)
     * `#Temp` = local (session) temporary table
@@ -28,70 +72,8 @@
       * [Default value](https://stackoverflow.com/a/13376799) isn't initialization
     * `EXEC @Output = @Var OUTPUT`
     * An output parameter is actually passed bi-directionally => we cannot simply test `IF @Output IS NULL` after a `SELECT @Output = ..` assignation to determine if the assignation worked, because if it failed, the output parameter then still holds the value that it was provided as input.
-* `GO` = separates statments and immediately runs whatever precedes it when hit, and consider the subsequent lines as part of a new scope
-  * Mandatory in some situations, e.g. placing the definition of a SP mid-file, whereas it has to be the only statement in a file (scope).
-* `;` = separate statements. Mandatory in CTE when they're not the first statement in the scope.
-  * See <https://stackoverflow.com/questions/2853403/sql-server-update-group-by#comment82532249_6984780>
-* Ternary operator
-  * `CASE WHEN .. THEN .. ELSE .. END`
-  * `IIF(condition, then, else)`
 
-## DDL
-
-Data Definition Language
-
-* **CREATE**
-* **ALTER**
-* **TRUNCATE**
-  * Remove all records, unallocate space and resets auto-incremented IDs (basically DROP & re-CREATE a TABLE).
-  * DDL operation (unlike DML DELETE) => doesn't use transaction log => won't work if any other (even empty) table references it
-* **COMMENT**
-* **DROP**
-* **RENAME**
-  * Rename Table = `EXEC sp_rename 'Setting.DE400ImportFormat', 'Setting.ExportColumnFormat' GO`
-  * Rename Constraint = `EXEC sp_rename 'Setting.[PK_Setting.DE400ImportFormat]', 'PK_Setting.ExportColumnFormat'`
-    * "_When renaming a constraint, the schema to which the constraint belongs must be specified._" (see <https://stackoverflow.com/a/8712921>).
-
-## DML
-
-Data Manipulation Language
-
-* **INSERT**
-  * Inserts multiple rows in one query = `INSERT INTO {Table} ({Col1}, {Col2}, ...) VALUES ({Val1}, {Val2},...),({Val3}, {Val4},...)`
-* **SELECT**
-  * `IF EXISTS (SELECT TOP 1 1 FROM {A})` = Check if exists
-  * `SELECT * FROM {A} WHERE {a} LIKE @var` = Use Variable in a LIKE
-  * `SELECT * FROM {A} WHERE {a} IN (@var1, @var2)` = Use Variables in a IN
-  * `SELECT {a}, (SELECT {b} FROM {B} WHERE {B}.fkey = {A}.Id) FROM {A}` = Nested SELECT
-  * `SELECT {a} FROM {A} WHERE {A}.count > (SELECT COUNT(*) FROM {A})` = Nested WHERE
-  * `SELECT {new} FROM (SELECT {expression} AS {new} FROM {A}) AS {New} GROUP BY {new}` = Nested FROM
-    * Uses a [Derived Table](https://logicalread.com/when-to-apply-sql-server-derived-tables-mc03/#.XNFNnnduKUk) to precompute a column to use both in the SELECT and GROUP BY clauses.
-  * `SELECT MAX(c1) AS Min FROM (VALUES ('a', 1), ('b', 2), ('ab', 3)) t1 (c1, c2) -- 'b'` = Select from inline values
-* **UPDATE**
-  * Cannot update several tables at once. See <https://stackoverflow.com/a/36153756>.
-* **DELETE**
-  * [Delete from multiple tables](https://stackoverflow.com/a/809892)
-* [CTE](https://stackoverflow.com/a/13383844)
-  * Allows a single pre-prepared computation to be used in multiple places of the subsequent query (any DML clause).
-  * Enables recursion.
-
-## DCL
-
-Data Control Language
-
-* **GRANT**
-* **REVOKE**
-
-## TCL
-
-Transaction Control Language
-
-* **COMMIT**
-* **ROLLBACK**
-* **SAVEPOINT**
-* **SET TRANSACTION**
-
-## Indexes
+### Indexes
 
 To see all the indexes on a particular table execute “sp_helpindex” stored procedure: `EXECUTE sp_helpindex {table_name}`.
 Without Indexes, we must resort to Table-scanning, which is browsing the entire table sequentially (O(n)).
@@ -124,6 +106,14 @@ cast(@number AS float)
 convert(type, @value) -- e.g. CONVERT(DATETIME2(0), '2020-03-29 02:00:01.0000000 +01:00')
 round(@number, precision, mustTruncate) -- round by default
 ```
+
+* `GO` = separates statments and immediately runs whatever precedes it when hit, and consider the subsequent lines as part of a new scope
+  * Mandatory in some situations, e.g. placing the definition of a SP mid-file, whereas it has to be the only statement in a file (scope).
+* `;` = separate statements. Mandatory in CTE when they're not the first statement in the scope.
+  * See <https://stackoverflow.com/questions/2853403/sql-server-update-group-by#comment82532249_6984780>
+* Ternary operator
+  * `CASE WHEN .. THEN .. ELSE .. END`
+  * `IIF(condition, then, else)`
 
 ### Numbers
 

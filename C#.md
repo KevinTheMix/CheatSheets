@@ -31,6 +31,7 @@ C# Is good.
   * `delegate void Handler(object sender, Args e);`
   * The type can also be used purely as a method reference (pointer): `Handler handler = new Handler(this.MethodWithHandlerParameters); handler(this, args);`
 * `event` = Defines an event, based on a delegate type.
+  * `event EventHandler<KokoEventArgs> KokoDone;`
   * `event Handler StuffHappens;`                     // Uses delegate defined above as handler => a method reacting to the event needs to implement the handler signature.
   * `event Action<string> StuffBeingDoneSomething;`   // Action is a delegate predefined by the framework for a method without return type. Function is a method with input/output.
   * Handler registration: `this.control.StuffHappens += new Handler(this.MethodWithHandlerParameters);`. The += operator is _multicast_ delegate => we can register as many handlers as we want.

@@ -52,6 +52,7 @@ services.AddDbContextPool<DataAccess.DatabaseContext>(optionsBuilder =>
         .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTrackingWithIdentityResolution);
 });
 ```
+
 In order to use that EF Core 5.0 method in our .NET Core 3.1/.NET Standard 2.0 solution, we had to upgrade a few projects to .NET Standard 2.1 to abide by the correct [EF Core version compatibility](https://docs.microsoft.com/en-us/ef/core/miscellaneous/platforms). See [Troubleshooting](https://tfs.belgrid.net/EliaCollection/AdeMar/_wiki/wikis/Definition%20of%20Done/231/EF-Tracking-same-key-issue?anchor=troubleshooting) section below for some information on the errors we encountered. Note that these issues will resolve automatically as we move to .NET 5.0.
 
 ### DbContext Sharing Resolution
@@ -104,6 +105,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
 #endif
 ```
+
 However it is not compatible with DbContext pooling, therefore should only be used locally for debugging, and in conjonction with the following code in _Startup.cs_ that disables DbContext pooling:
 
 ```C#
