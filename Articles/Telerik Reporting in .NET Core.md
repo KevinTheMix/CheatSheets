@@ -1,6 +1,5 @@
 # Telerik Reporting in .NET Core
 
-
 ## Problem Statement
 
 Prior to .NET Core (and .NET Standard), a reporting tool embedded within Visual Studio provided by Telerik called [Visual Studio Report Designer](https://docs.telerik.com/reporting/ui-report-designer) could by used to design reports, which were then saved as regular .cs (or .vb) files.
@@ -25,6 +24,7 @@ All that is left, is be able to somehow connect the controller methods that hand
 Where exactly to bridge the report DataSource to a BL?
 
 Well, luckily, that's where this configuration object injected into the Telerik base Controller comes into play:
+
 ```C#
 public ReportsController(IReportServiceConfiguration reportServiceConfiguration)
     : base(reportServiceConfiguration)
@@ -36,19 +36,24 @@ public ReportsController(IReportServiceConfiguration reportServiceConfiguration)
 Indeed, in _Startup.cs_, that object's properties are fully parameterized:
 
 ```C#
+// Configure dependencies for Telerik ReportsController.
 services.TryAddSingleton<IReportServiceConfiguration>(sp =>
     new ReportServiceConfiguration
     {
         ReportingEngineConfiguration = Configuration,
-        HostAppId = "Auction",
+        HostAppId = "Auction",  // "AuctionReporting"
         Storage = new FileStorage(),
-        ReportSourceResolver = new BidReportSourceResolver(sp.GetService<IReportBL>()),
+        //ReportSourceResolver = new UriReportSourceResolver(System.IO.Path.Combine(sp.GetService<IWebHostEnvironment>().ContentRootPath, "Reporting//Reports")),
+        ReportSourceResolver = new KokoReportSourceResolver(sp.GetService<IReportBL>()),
     });
 ```
+
 The most interesting property being the last one: **ReportSourceResolver**, to which a custom resolver can be provided, which implements the following interface:
+
 ```C#
 ReportSource Resolve(string report, OperationOrigin operationOrigin, IDictionary<string, object> currentParameterValues);
 ```
+
 which returns a **ReportSource** from a report name.
 
 * A ReportSource is basically an instance of report, filled with data.
@@ -85,9 +90,16 @@ As stated above, it is not necessary to know the actual API exposed by the contr
 4. POST /facade/Reports/clients/{clientID}/instances/{instanceID}/documents `{"format":"HTML5Interactive","deviceInfo":{"enableSearch":true,"ContentOnly":true,"UseSVG":true,"BasePath":"http://localhost:57615/api/reports"},"useCache":true}` => f7982894d843c5090a43c5
 5. GET /facade/Reports/clients/35cdc78732b/instances/45a0b2213ef/documents/b977d1127fad62261a12b6/pages/1
 
+* POST Parameters   ResolveReportParameters = 0
+* POST Instance     CreateReportInstance = 1
+* POST Documents    GenerateReportDocument = 2
+
 ## Troubleshooting
 
 * JSON-related error
   * Add _Microsoft.AspNetCore.Mvc.NewtonsoftJson_ Nuget package
-  * Append **.AddNewtonsoftJson()** method in _Startup.cs_ e.g. `services.AddControllers().AddNewtonsoftJson();`
+  * In _Startup.cs_, append **.AddNewtonsoftJson()** method:
+    * `services.AddControllers().AddNewtonsoftJson();` or
+    * `services.AddRazorPages().AddNewtonsoftJson();`
+    * (`services.Configure<IISServerOptions>(options => { options.AllowSynchronousIO = true; });` - found in the code at the same location; might be completely irrelevant)
   * See <https://docs.telerik.com/reporting/knowledge-base/jsonresult-serializersettings-must-be-an-instance-of-type-systemtextjson-jsonserializeroptions>

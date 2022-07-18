@@ -38,6 +38,8 @@
 * `3 fingers L/R` = Alt + Tab
 * `3/4 fingers down` = Minimize everything
 * `4 fingers left/right` = Cycle virtual desktop
+* `wmic path softwareLicensingService get OA3xOriginalProductKey` = Get CD Key
+  * Also under _Computer\HKEY\_LOCAL\_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform_
 
 ### GUI Tools & Commands (Win + R)
 

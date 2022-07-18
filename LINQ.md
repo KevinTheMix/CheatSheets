@@ -12,7 +12,8 @@ Stands for Language Integrated Query.
 
 LINQ defines extension methods on two types of objects: IEnumerable&lt;T&gt; or on IQueryable&lt;T&gt; objects.
 Note that whilst both use deferred execution, IEnumerable Query Operators take in delegate Function&lt;&gt; whereas IQueryable Query Operators take in Expressions as parameters.
-The beauty of it is that they both work using similar code because lambda expressions are converted either into delegates or expression trees depending on the context.
+The beauty of it is that they both work using similar code because **lambda expressions are converted either into delegates or expression trees depending on the context**.
+For instance, in this example at <https://benjii.me/2018/01/expression-projection-magic-entity-framework-core/#reusing-projections>, the _Projection_ property is of type `Expression<Func<a,b>>`, but it would compile just as well with the same exact body if its type was changed to simply `Func<a,b>`
 See <https://stackoverflow.com/a/671425> for LINQ internals
 See <https://stackoverflow.com/a/28513685> for LINQ IEnumerable/IQueryable symmetry
 
@@ -27,7 +28,9 @@ See <https://stackoverflow.com/a/2433386> for different IEnumerable or IQueryabl
 IQueryable inherits from IEnumerable.
 Both Query Providers and Expressions are properties specific to IQueryable.
 See <https://stackoverflow.com/a/252857> for IQueryable specific properties (Expression & Provider)
+
 The **AsQueryable()** method casts an Enumerable to a Queryable
+This helps the compiler figure out that the runtime instance is the more complex IQueryable (e.g. a _SelectEnumerableIterator_ or something), not just what he currently considers a simple IEnumerable. See <https://benjii.me/2018/01/expression-projection-magic-entity-framework-core/#nested-projections>
 See <https://stackoverflow.com/a/252789> for all possible conversions from/to IEnumerable
 
 IEnumerable executes in memory, wheres IQueryable executes (& filters) on the DB server.
@@ -102,3 +105,5 @@ This class contains DateTime/Numbers/String manipulation methods to be executed 
 They are executed as CLR code at the DB-level -- not in memory!
 
 ## Links
+
+* [LinqExpander](https://github.com/lukemcgregor/LinqExpander/)
