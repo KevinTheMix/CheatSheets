@@ -8,7 +8,7 @@ Features:
 * Tailored for UI creation
   * Async-await
   * Isolate-based concurrency
-  * Null safety
+  * Null/Type Safety
   * Spread operator
 * Hot reload
 * Fast for all platforms

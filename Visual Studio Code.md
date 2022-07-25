@@ -61,7 +61,9 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 
 ## Snippets
 
-* `!` in an HTML file = scaffold a basic HTML page
+* In a HTML file
+  * `!` = scaffold a basic HTML page
+  * `scr` = script element
 
 ## Extensions
 
