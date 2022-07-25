@@ -45,11 +45,11 @@
 
 * `mstsc.exe` = Remote Desktop
 * `winver.exe` = view Windows version
-* `services` = Component services, Event viewer, Windows Services
+* `services` = component services, Event viewer, Windows Services
   * `services.msc` = Windows services
 * `certmgr.msc` = Certificates manager
-* `shell:startup`
-* `shell:appsfolder`
+* `shell:startup` = applications at Windows start
+* `shell:appsfolder` (Windows 10)
 
 ## DOS & Utils
 

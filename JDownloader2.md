@@ -1,13 +1,22 @@
 # JDownloader2
 
-## Filename Trim
+## Settings
 
-Settings > Settings > Packagizer
+### Basic Authentication
 
-* Uncheck Rule "Predifined rule: Create Subfolders by Packagename"
-* Create Rule "Trim audio files"
+1. Add
+2. `http://`
+3. `https://www.{site}.com` (or just `{site}.com` I guess)
+4. Username
+5. Password
+6. Check _Always_ checkbox
+
+### Packagizer
+
+* Uncheck Rule _Predifined rule: Create Subfolders by Packagename_
+* Create Rule _Trim audio files_
   * File Name = `(.*) \(\d+kbit\w+\)\.(m4a|ogg|opus)` & enable Regex
-  * Filename = <jd:orgfilename:1>.<jd:orgfilename:2>
-* Create Rule "Trim video files"
+  * Filename = `<jd:orgfilename:1>.<jd:orgfilename:2>`
+* Create Rule _Trim video files_
   * File Name = `(.*) \(\d+p_\d+fps_(?:AV1|H264)-\d+kbit_AAC\)\.(mp4)` & enable Regex
-  * Filename = <jd:orgfilename:1>.<jd:orgfilename:2>
+  * Filename = `<jd:orgfilename:1>.<jd:orgfilename:2>`

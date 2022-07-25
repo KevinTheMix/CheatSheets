@@ -59,6 +59,10 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 * `View > Toggle Word Wrap` or `Alt + Z` = Toggle Word Wrap
 * `Ctrl + L` = Select current paragraph & move next
 
+## Snippets
+
+* `!` in an HTML file = scaffold a basic HTML page
+
 ## Extensions
 
 * Prettify JSON (F1 > Prettify)

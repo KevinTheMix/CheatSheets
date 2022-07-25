@@ -1,0 +1,9 @@
+# [Node.js](https://nodejs.org)
+
+A back-end JavaScript runtime environment (built on Chrome's V8 JavaScript engine) that executes JavaScript code outside a web browser.
+
+It can be used a JS-based event-friendly REST API server, or more commonly for its (server-side) front-end building functionalities (see _lscho_'s answer [here](https://developpaper.com/question/what-is-vue-js-why-install-it-in-nodejs/)), such as NPM, Webpack - both of which are written in JS and thus necessitate a runtime to run in -, etc.
+
+## Environment
+
+* Node Version Manager = used to retrieve a specific version of Node

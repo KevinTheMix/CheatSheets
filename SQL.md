@@ -10,6 +10,7 @@
   * `COUNT(DISTINCT {field})`
   * `COUNT(CASE WHEN {condition} THEN {expression} END)`
 * [Partitions](https://www.sqlshack.com/sql-partition-by-clause-overview/) = "cartesian" GROUP BY, with numbering, sorting & cumulative aggregation.
+* `LEN(Koko)` does not account for trailing whitespaces (see <https://stackoverflow.com/a/2025587>)
 
 ## [DDL, DML, DCL, TCL](https://www.geeksforgeeks.org/sql-ddl-dml-dcl-tcl-commands/)
 

@@ -154,6 +154,8 @@ Private Setter properties => acts as a private variable (can only be set within)
 
 `public ILimits<SimpleOverrideValue> Limits { get; private set; }`
 
+* [Boxing/unboxing](https://stackoverflow.com/a/2111905) = basically polymorphism for antiquated structures (that require _object_ s)
+
 ### [.NET Hidden Gems & Quirks](https://github.com/faniereynders/aspnetcore-hidden-gems)
 
 * IStartupFilter

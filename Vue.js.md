@@ -13,7 +13,7 @@ Packs a render engine, turning data models and components into HTML & JS.
 * Simple
   * Easy to understand & maintain
   * Uses familiar Directives (like Angular or Knockout)
-  * Build step can be omitted (in which case .vue files & component hierarchy cannot used)
+  * Build step can even be omitted (in which case [SFC](https://vuejs.org/guide/scaling-up/sfc.html) aka _.vue_ files & component composition can of course not be used, only plain html/js/css with calls to Vue library)
 * Popular (> 150k stars on [Github](https://github.com/vuejs/vue))
 * Works with existing modern (jQuery, Angular, React) or legacy applications
   * Well-suited for surgical fixes & adding features
@@ -89,7 +89,7 @@ Packs a render engine, turning data models and components into HTML & JS.
   * `npm install vue.js`
   * `npm install -g @vue/cli`
   * `npm i(nstall)` = install all the dependencies in the local _node\_modules_ folder
-  * `npm run build` = create a production build
+  * `npm run build` = create a [production build](https://stackoverflow.com/a/48614507)
   * `npm run serve` = build & serve the app
     * Watches the served files for changes, and update the view accordingly in real-time
     * This command is actually an alias as defined in _package.json_ to a cmd (`vue-cli-service serve`) located in _node\_modules/.bin_ (see <https://cli.vuejs.org/guide/cli-service.html>)
@@ -106,6 +106,7 @@ Packs a render engine, turning data models and components into HTML & JS.
 * [Vuetify.js](https://vuetifyjs.com) = UI [Material Design](https://en.wikipedia.org/wiki/Material_Design) components (date pickers & co)
 * [VeeValidate](https://logaretm.github.io/vee-validate/)
 * [Vue I18n](https://kazupon.github.io/vue-i18n/guide/formatting.html#named-formatting)
+  * <https://medium.com/@vinaymahamuni/internationalization-in-vue-js-86cd7870c68d>
 * [Nuxt](https://nuxtjs.org/) = Universal Rendering
   * Makes the App-to-plain-HTML rendering on the server side instead of the client
 * [Vuetify](https://vuetifyjs.com) = Component Framework (à la Angular Material)
@@ -516,3 +517,19 @@ This modification will in turn refresh the _computed_ properties/methods of the 
       * Via _methods_ section declaration, via the Vuex _mapActions()_ method (requires `import { mapActions } from 'vuex';`)
         * `...mapActions(['updateHeroAction'])`
 5. Use Browser Vue extension **Vuex** to inspect _mutations_, _state_ & _getters_.
+
+## Samples
+
+### Vuetify DatePicker
+
+```js
+<v-menu v-model="menu" :close-on-content-click="false" transition="scale-transition" offset-y max-width="290px" min-width="290px">
+  <template v-slot:activator="{ on }">
+    <v-text-field v-model="localDate" :label="$t('validAtPickerResx.label')" :hint="$t('validAtPickerResx.hint', { format: format })"
+      persistent-hint prepend-icon="event" @change="onLocalDateChanged" @blur="resetLocalDate" v-on="on">
+    </v-text-field>
+  </template>
+  <v-date-picker v-model="isoDate" no-title @input="menu = false">
+  </v-date-picker>
+</v-menu>
+```
