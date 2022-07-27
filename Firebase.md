@@ -37,4 +37,6 @@ Use _firestore.rules_ file configures DB access authorization, using Common Expr
 
 ## TODO
 
+[Firebase: What's new in Firebase](https://www.youtube.com/watch?v=i0VNBvCqpgI)
 [Fireship: Firebase - Back to the Basics](https://www.youtube.com/watch?v=q5J5ho7YUhA)
+[Fireship: Flutter Firebase Setup for Power Users](https://www.youtube.com/watch?v=Mx24wiPilHg)
