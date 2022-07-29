@@ -104,9 +104,12 @@ Using consecutive `await`s prevents silly stairway code with too many `then()`.
 * [Spread Syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax): `...`
   * [Destructuring Assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
   * [TypeScript Variable Declaration](https://www.typescriptlang.org/docs/handbook/variable-declarations.html)).
-  * Used to shallow-clone by putting it back into another object: `{ ...original }`.
-  * Can be used to create a new object comining two others: `const koko = { ...a, ...b }`
+  * Can be used to shallow-clone by putting it back into another object: `{ ...original }` or `array2 = [...array1]`
+  * Can be used to create a new object combining two others: `const koko = { ...a, ...b }` or `[...array1,...array2]`
   * Can be used to shortcut multiple array push/unshift/splice to one-line e.g. `a = [...a, '1', '2', '3' ]`
+  * See <https://www.geeksforgeeks.org/javascript-spread-operator/>
+  * [Rest parameter](https://www.geeksforgeeks.org/javascript-rest-operator/) = `f(...parameters)`, turns a list of parameters into an array
+    * [Destructuring Function Arguments](https://www.samanthaming.com/tidbits/20-destructuring-function-arguments/)
 * [Immediately invoked function expression](https://en.wikipedia.org/wiki/Immediately_invoked_function_expression)
 * [Computed property Name](https://tylermcginnis.com/computed-property-names/)
   * Allows expressions to be computed as the name of a property (à la dictionary index key).

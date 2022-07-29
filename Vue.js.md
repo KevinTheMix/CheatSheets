@@ -471,7 +471,7 @@ It consists of **Actions**, **Mutations**, **State** and **Getters**.
 Actions has a 1-to-N relationship with Mutations.
 Actions are concerned with performing some BL (WS or DB access), then "commiting" (which means notifying) one or more Mutations.
 Mutations are only concerned with refreshing the _state_, which may entail some array manipulation and what not.
-(This is somewhat reminding of the C# event handler construct (`protected override OnX()`).)
+(This is somewhat reminding of the C# event handler construct (`protected override OnX()`) because it does something very simple with zero logic)
 This modification will in turn refresh the _computed_ properties/methods of the Components using the state, and their view will get updated in accordance.
 [Why are Mutations separated from Actions?](https://stackoverflow.com/a/39303713)
 
