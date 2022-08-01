@@ -1,5 +1,7 @@
 # VeraCrypt
 
+Note: it's cleaner to remove all Partitions/Volume (in Windows Disk Manager) from the HDD, so it does not appear in Windows.
+
 ## USB Key Device
 
 * Add favorite volume = _Favorites_ > _Add Mounted Volume to Favorites..._

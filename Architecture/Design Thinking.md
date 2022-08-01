@@ -4,7 +4,7 @@
 
 A problem statement identifies the gap between the current state (i.e. the problem) and the desired state (i.e. the goal) of a process or product.
 
-* Within the design context, you can think of the user problem as an unmet need. 
+* Within the design context, you can think of the user problem as an unmet need.
 * By designing a solution that meets this need, you can satisfy the user and ensure a pleasant user experience
 
 ## Next Steps: Understand Problem Space
@@ -17,7 +17,7 @@ Get the team into the same room and get assumptions, expectations & ideas out of
 
 * Understand real constraints on the project
 * Understand what their assumptions & expectations of the project
-  * It is important to question assumptions and set the expectation that the project will be guided by the discovered real needs of the users. 
+  * It is important to question assumptions and set the expectation that the project will be guided by the discovered real needs of the users.
 
 ### Understand your audiences
 
@@ -35,7 +35,7 @@ Get the team into the same room and get assumptions, expectations & ideas out of
   * Base this on data and confident assumptions.
   * Keep this implementation-agnostic. You are not trying to design how your users will use your product, but to document how they naturally approach completing their goals.
 
-### Identify unknowns (assumptions and open questions) for prioritized use cases 
+### Identify unknowns (assumptions and open questions) for prioritized use cases
 
 * Do they require answers?
 * When will answers be necessary?
@@ -47,7 +47,7 @@ Get the team into the same room and get assumptions, expectations & ideas out of
   * Is it that users met their goals?
   * Is it that users feel satisfied?
   * Or is it something else?
-* Identify what can be measured to indicate success as you have defined it 
+* Identify what can be measured to indicate success as you have defined it
 * You don’t have to determine at this time how to gather the metrics, but it is important to know at this stage what will determine whether the product or service was successful, from a user experience perspective. When you are ready for that, however, consider if there are existing metrics, or combination of metrics, in your organization that are a good indicator of success.
 
 ### Get buy in

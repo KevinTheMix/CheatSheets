@@ -6,38 +6,24 @@ Saves its data in a .kdbx file, that can be published to the cloud, as long as i
 [Why](https://www.youtube.com/watch?v=7U-RbOKanYs)
 [Master Password](https://www.youtube.com/watch?v=3NjQ9b3pgIg)
 
-## Plugins
+## Environment
+
+### Setup
+
+* Custom Password Generator using the following character sets
+  * Alphanumeric
+  * _ (Underline)
+  * Brackets
+  * Special Characters or `%!&@#~$*` or `!&@#~$*` or `#$`
+
+### Plugins
 
 * Kee = FireFox Extension
   * Requires KeePassRPC plugin (the extension is a simple client that connects to KeePass and performs DOM manipulation).
   * Used to Generate, Save and auto-Fill passwords.
 * KeePassRPC = Used to communicate with the FireFox extension
-* KeeOtp2 = 2FA for KeePass (not native)
-  * Websites (Hotmail, Google, Facebook, etc.) with 2FA capabilities either use a phone, a QR code or a key. It is that key that can be used to generate a OTP.
-
-## Apps
-
-* Keepass2Android & Keepass2Android Offline
-  * Just needs an access to a .kdbx file (local, web, ftp, DropBox, etc.)
-  * Handles OTP natively.
-
-## Setup
-
-### Password Generator
-
-Create custom Password Generator using the following character sets
-
-* Alphanumeric
-* _ (Underline)
-* Brackets
-* Special Characters or `%!&@#~$*` or `!&@#~$*` or `#$`
-
-### Timed One-Time Password (TOTP)
-
-1. Install KeeOtp plugin
-2. Find 2FA generation key on website (might be a step further than QR Code or Phone)
-3. Enter the key in KeePass entry (save recovery codes if provided).
-4. Generate TOTP (Ctrl + T)
-
-On the Keepass2Android Android App, TOTP are native.
-See <http://nidkil.me/2014/12/10/adding-two-factor-authentication-to-keepass-keepass2android/>.
+* KeeOtp2 = 2FA Timed One-Time Password (TOTP) for KeePass
+  * Not built-in on the desktop program (but it is on the _Keepass2Android_/_Keepass2Android Offline_ app)
+  * Websites (Hotmail, Google, Facebook, etc.) offer 2FA via phone/QR code/**key**
+    * Use that key to initialize TOTP generator for that site (might be a step further hidden than Phone/QR Code)
+    * Also save the associated recovery codes if provided (in the same KeePass entry for the site)

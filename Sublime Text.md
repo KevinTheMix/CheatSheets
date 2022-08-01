@@ -14,16 +14,16 @@ Set shortcut in
 
 ## Shortcuts
 
-    Ctrl + B            # Build
-    Ctrl + G            # Go to Line
-    Ctrl + K, Ctrl + B  # Toggle Folders
-    Ctrl + P            # Open file in folders or opened documents (smart)
-    Ctrl + Enter        # Go to next line without carrying the end of the line
-    Alt + Shift + 1     # Single Column
-    Alt + Shift + 2     # Dual Column
-    {HTML tag}, TAB     # Fills in the HTML tag
-    <{HTML tag}, TAB    # Fills in the HTML tag
-    {term} + Enter      # Autocompletes (cycling & smart)
+* `Ctrl + B` = Build
+* `Ctrl + G` = Go to Line
+* `Ctrl + K, Ctrl + B` = Toggle Folders
+* `Ctrl + P` = Open file in folders or opened documents (smart)
+* `Ctrl + Enter` = Go to next line without carrying the end of the line
+* `Alt + Shift + 1` = Single Column
+* `Alt + Shift + 2` = Dual Column
+* `{HTML tag}, TAB` = Fills in the HTML tag
+* `<{HTML tag}, TAB` = Fills in the HTML tag
+* `{term} + Enter` = Autocompletes (cycling & smart)
 
 ### Extensions
 

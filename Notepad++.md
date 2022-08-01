@@ -17,7 +17,7 @@
 
 ## Plugins
 
-* FingerText = key macros
-* Explorer = project directory hierarchy
-* JSTool
-* Compare
+* **FingerText** = key macros
+* **Explorer** = project directory hierarchy
+* **JSTool**
+* **Compare**

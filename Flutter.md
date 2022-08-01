@@ -54,25 +54,26 @@ It builds on top of the Dart platform, adding libraries of UI design features an
 
 * Kotlin = Google preferred language for Android app developers since 2019 (replacing Java)
   * Compiles to JVM, or JavaScript for IOS support
-* Dart = programming language developed by Google for client web & mobile apps development
+* Dart = programming language developed by Google for fast client multi-platform (web & mobile) apps development with QoL features such as Hot Reload
 * Gradle = build automation tool supporting Java, Kotlin, C/C++ & JavaScript
 * **Widget** = immutable (declarative) description of part of a UI (layout component or behavior: center, pad, rotate)
-  * Widgets (not Elements) hold properties with actual values. Their tree is built (in memory) based on the source code static config
-  * All Widgets are _@immutable_, hence state in stateful widgets is managed via an external mutable state instead
+  * All Widgets are _@immutable_, so either they manage only _final_ data, or the changing data is outsourced in a dedicated mutable **State**
+  * Widgets (or State), **not Elements**, hold properties with actual values
   * [Stateless Widget](https://www.youtube.com/watch?v=wE7khGHVkYY) = immmutable widget w/ _final_ properties & _const_ constructor
     * All visual elements such as buttons, texts are stateless widgets
   * [Stateful Widget](https://www.youtube.com/watch?v=AqCMFXEmf3w) = associated with a companion class called State, holding changing data
   * [Inherited Widget](https://www.youtube.com/watch?v=Zbm3hjPjQMk) = DYI DI via _context_
+    * Access Tree top-ish data (`@override updateShouldNotify()`)
+    * Use this to pass DB or service instances down the widget hierarchy
     * Can define `of()` method in the parent to allow shortcut in children
     * _Theme_, _MediaQuery_ are examples of Inherited Widgets, accessible to all children in their hierarchy
       * E.g. `Theme.of(context).primaryColor`
-    * Use this to pass DB or service instances down the widget hierarchy
 * **Property** = actual value held in a widget e.g. the _text_ property of a **RichText** widget
 * **Element** = instantiation of a Widget at a particular location in the _Element Tree_
   * Elements are very simple, holding just the type of the widget, a reference to child Elements, source Widget and potential State
-  * While widgets are immutable, Elements are like their mutable counterpart and mounted by Flutter to form the Element Tree
   * This is basically what pilots the lifecycle of widgets, and updates the UI
-  * The Element Tree is built by Flutter based on the configuration the developer declared as the Widget Tree
+  * While widgets are immutable, Elements are like their mutable counterpart and mounted by Flutter to form the Element Tree
+  * The Element Tree is built and handled all by Flutter (based on the Widget Tree), and typically never by the developer
 * **RenderObject** = object in the RenderTree that renders & paints the UI (handles size, layout, painting)
 * [Keys](https://medium.com/flutter/keys-what-are-they-good-for-13cb51742e7d)
   * A way to keep track of States uniquement for Stateful Widgets, useful when adding/reordering widgets on the screen
@@ -83,32 +84,6 @@ It builds on top of the Dart platform, adding libraries of UI design features an
       * **PageStorageKey** stores a user scroll location, so we can resume it when going back to the Widget
   * **GlobalKey** allow Widgets to change parents without losing State, or access information about another Widget, both anyhere in the Tree
 
-### Ecosystem
-
-* [Official Dart & Flutter package repository](https://pub.dev/)
-
-## Architecture
-
-* [Platform Channels](https://docs.flutter.dev/development/platform-integration/platform-channels)
-  * A way to write platform-specific code and call platform-specific APIs
-* [Flutter: How Flutter renders Widgets](https://www.youtube.com/watch?v=996ZgFRENMs) (Configure, Lifecycle & Paint!)
-* [Fireship: React Native vs Flutter](https://youtu.be/X8ipUgXH6jw?t=162)
-  * **React Native** = native UI components for each platform, linked to JS code through a bridge
-  * **Flutter** = native pixel painting (via Skia, a Google 2D painting library) à la Unity
-* [Aashish Vichare: Flutter Widgets lifecycle](https://medium.com/nerd-for-tech/flutter-widgets-lifecycle-widget-tree-and-element-tree-ac41ab1918da)
-* [Didier Boelens: Flutter internals](https://www.didierboelens.com/2019/09/flutter-internals/) ("there is no Widget Tree"? may be incorrect/wrong)
-* [JediPixels: Widget Tree & Element Tree](https://www.youtube.com/watch?v=4W8eN_6mO2E)
-
-* [Awesome Flutter](https://github.com/Solido/awesome-flutter) = index of Flutter resources
-* [Flutter Best Practices to Follow in 2022](https://aglowiditsolutions.com/blog/flutter-best-practices/)
-
-### State Management
-
-* [BLoC Pattern](https://www.flutterclutter.dev/flutter/basics/what-is-the-bloc-pattern/2021/2084/)
-* [Flutter state management for minimalists](https://suragch.medium.com/flutter-state-management-for-minimalists-4c71a2f2f0c1)
-  * [get_it](https://pub.dev/packages/get_it) = simple Service Locator
-* [Flutter Redux](https://blog.logrocket.com/flutter-redux-complete-tutorial-with-examples/) = DI for data using InheritedWidgets
-
 ## API
 
 * `StreamBuilder` = subscribe to streams (à la events?)
@@ -117,40 +92,46 @@ It builds on top of the Dart platform, adding libraries of UI design features an
 
 * `void initState()` = one-time init
 * `setState(() {})`
-  * [Why it takes in an anonymous method](https://iiro.dev/set-state/) = it performs a handful of `assert()`s first, but mainly marks the Element dirty
+  * [Why an anonymous method](https://iiro.dev/set-state/) = it performs a handful of `assert()`s first, but mainly marks the Element dirty
 * `void dispose()` = widget removed from UI
 
-* ``
+* [Colors](https://api.flutter.dev/flutter/material/Colors-class.html) e.g. `Colors.green[400]`
 
 ### Widgets
 
 * [Scaffold](https://api.flutter.dev/flutter/material/Scaffold-class.html) = basic Material layout with a set of more elaborate widgets (e.g. an Add button that floats at the bottom right, or top/bottom menu bars) ready to use
+* [AppBar](https://api.flutter.dev/flutter/material/AppBar-class.html) = top menu (_leading_, _title_, _actions_, _bottom_)
+* **Builder** (not to be confused with the usual _builder_ property) = a widget used to access an (InheritedWidget) ancestor's BuildContext
+* **GridView** = grid layout; usually via `GridView.count()` constructor (_crossAxisCount_, _mainAxisSpacing_, _crossAxisSpacing_)
+* **CustomScrollView** = custom scroll via _slivers_ (**SliverAppBar**, **SliverList**, **SliverGrid**, `center: key`)
+
+[Flutter Widgets of the Week](https://www.youtube.com/watch?v=lkF0TQJO0bA&list=PLjxrf2q8roU23XGwz3Km7sQZFTdB996iG&index=129):
 
 1. **SafeArea** = checks MediaQuery to ensure we get a neat uncut rectangle on the screen. Synergizes with a **Scaffold**'s _body_
-2.
-3.
-4.
-5.
-6.
-7.
-8.
-9.
-10.
-11.
-12.
-13.
-14.
-15.
-16.
-17.
-18.
-19.
-20. **FittedBox** = Wrap child in layouting box with _fit_ (`BoxFit.{value=contain|fitWidth|fill|none}`), _alignment_
-21. **LayoutBuilder** = make adaptative layout based on target parent size constraints via _builder_
+2. **Expanded** = expands a child widget to take up all available space in its parent
+3. **Wrap** = "word wrap" children (_direction_, _alignment_ _spacing_, _runSpaching_); good for buttons & chips
+4. **AnimatedContainer** = implicit linear interpolation (_color_, _shadow_, a bunch of layout options, etc., and _curve_ & _duration_)
+5. **Opacity** & **AnimatedOpacity** = alpha (0 is like CSS' `invisiblility: hidden`)
+6. **FutureBuilder** = display something while loading a future's result and something else when it's done
+7. **FadeTransition** = opacity animation via animationController (clean it up in dispose())
+8. **FloatActionButton** (FAB) = Scaffold stacked button; use _floatingActionButtonLocation_ to embed in _bottomNavigationBar_
+9. **PageView** = swipable pages via PageController (_initialPage_, _scrollDirection_)
+10. **Table** = simpler fixed grid layout (_defaultVerticalAlignment_, _defaultColumnWidth_, _columnWidths_, _border_ )
+11. **SliverAppBar** = scrollable top menu that shrinks, fades, shows image (_expandedHeight_, _flexibeSpace_, _floating_, _pinned_)
+12. **SliverList** & **SliverGrid** = container scrolling (_delegate_: `Sliver[Child|Builder]ListDelegate`). Use `.count()` or `.extent()` ctors
+13. **FadeInImage** = placeholder for images (_placeholder_ from directory/memory, _fadeInDuration_, _fadeInCurve_, **transparent_image** package)
+14. **StreamBuilder** = async events handler (_initialData_, _stream_, `builder: (context, snapshot)` with snapshot.hasError)
+15. **InheritedModel**`<T>` = more granular **InheritedWidget** but on specific fields (via _aspect_), `@override updateShouldNotifyDependent()`
+16. **ClipRRect** = (R for) Rounded corners rectangle (_child_, _borderRadius_, _clipBehavior_), similar to **ClipOval**, **ClipPath**
+17. **Hero** = morphing animation between navigation routes (_child_, _tag_)
+18. **CustomPaint** = low-level paint calls (_size_, _painter_)
+19. **Tooltip** = accessibility-friendly alt text (_child_, _message_, _verticalOffset_, _height_), some Widgets have a _tooltip_ property
+20. **FittedBox** = make larger child fit its parent (_fit_ = `BoxFit.{value=contain|fitWidth|fill|none}`, _alignment_)
+21. **LayoutBuilder** = provide `build()` method with Widget size, useful to make adaptative layout (_builder_) e.g. different # of rows/cols
 22.
 23.
 24.
-25.
+25. **Align** = position a child within its parent (top/bottom/left/right, or specific _double_ value). See **AlignmentTween**
 26.
 27.
 28.
@@ -180,9 +161,18 @@ It builds on top of the Dart platform, adding libraries of UI design features an
 52.
 53. **ListTile** = Material specification-following List Item up to 3 lines (_title_, _subtitle_, _isThreeLine_), _dense_, `tap`, `onLongPress`
 
+### Packages
+
+[Official Dart & Flutter package repository](https://pub.dev/)
+
+* **transparent_image** (see **FadeInImage**)
+
 ## Tutorials
 
-* <https://dartpad.dev> aka <https://dartpad.dartlang.org>
+* [Didier Boelens: Flutter internals](https://www.didierboelens.com/2019/09/flutter-internals/) ("there is no Widget Tree"? may be incorrect/wrong)
+* [Fireship: React Native vs Flutter](https://youtu.be/X8ipUgXH6jw?t=162)
+  * **React Native** = native UI components for each platform, linked to JS code through a bridge
+  * **Flutter** = native pixel painting (via Skia, a Google 2D painting library) à la Unity
 * [Fireship: 12 Minute Flutter Bootcamp](https://www.youtube.com/watch?v=1xipg02Wu8s)
   * Layout
     * Container (single child, à la `<div>`)
@@ -208,6 +198,7 @@ It builds on top of the Dart platform, adding libraries of UI design features an
     * Also used for navigating between "screens", i.e. widgets!
   * Navigation = works like a stack (à la browser history)
   * Animation, using the **Hero** widget which performs transition "morphing" between widgets
+* [Flutter: How Flutter renders Widgets](https://www.youtube.com/watch?v=996ZgFRENMs) (Configure, Lifecycle & Paint!)
 * [Flutter: Building your first Flutter Widget](https://www.youtube.com/watch?v=W1pNjxmNHNQ)
   * **RawMaterialButton** (_fillColor_, _splashColor_)
   * **Row**'s _mainAxisSize_ (`MainAxisSize.min`)
@@ -222,3 +213,36 @@ It builds on top of the Dart platform, adding libraries of UI design features an
   * **TextEditingController** = controller for an editable input text field (i.e. a **TextFormField**)
   * The _const_ keyword in front of the constructor is very important, making rendering more efficient by skipping most of the rebuild
   * **Navigator** & routes/pages via `push()` & `pop()`
+  * Linear progress bar with color Animations
+
+## TODO
+
+* Animations
+  * [Introduction to animations](https://docs.flutter.dev/development/ui/animations)
+  * [Animations tutorial](https://docs.flutter.dev/development/ui/animations/tutorial)
+  * [Implicit animations](https://docs.flutter.dev/codelabs/implicit-animations)
+  * [Staggered animations](https://docs.flutter.dev/development/ui/animations/staggered-animations)
+  * [animations library](https://api.flutter.dev/flutter/animation/animation-library.html)
+* DB & Storage
+  * [Persistence](https://docs.flutter.dev/cookbook/persistence)
+    * [Persist data with SQLite](https://docs.flutter.dev/cookbook/persistence/sqlite)
+    * [Read and write files](https://docs.flutter.dev/cookbook/persistence/reading-writing-files) = (_path\_provider_)
+    * [Store key-value data on disk](https://docs.flutter.dev/cookbook/persistence/key-value) = (_shared\_preferences_)
+  * [Saving data to Local Storage in Fluter](https://medium.com/kick-start-fluttering/saving-data-to-local-storage-in-flutter-e20d973d88fa)
+* Bloc & Archi
+  * [bloc](https://pub.dev/packages/flutter_bloc) = BLoC (Business Logic Component) design pattern
+  * [BLoC Pattern](https://www.flutterclutter.dev/flutter/basics/what-is-the-bloc-pattern/2021/2084/)
+  * [Flutter state management for minimalists](https://suragch.medium.com/flutter-state-management-for-minimalists-4c71a2f2f0c1)
+    * [get_it](https://pub.dev/packages/get_it) = simple Service Locator
+  * [Aglowid: Flutter Best Practices to Follow in 2022](https://aglowiditsolutions.com/blog/flutter-best-practices/)
+  * [Conner Aldrich: Code Organization](https://medium.com/flutter-community/flutter-code-organization-revised-b09ad5cef7f6)
+* Provider
+  * [provider](https://pub.dev/packages/provider)
+  * [Enrico Ori: A simple guide for Provider](https://medium.com/theotherdev-s/starting-with-flutter-a-simple-guide-for-provider-401b25957989)
+* [Platform Channels](https://docs.flutter.dev/development/platform-integration/platform-channels)
+  * A way to write platform-specific code and call platform-specific APIs
+* [Aashish Vichare: Flutter Widgets lifecycle](https://medium.com/nerd-for-tech/flutter-widgets-lifecycle-widget-tree-and-element-tree-ac41ab1918da)
+* [JediPixels: Widget Tree & Element Tree](https://www.youtube.com/watch?v=4W8eN_6mO2E)
+* [Flutter Redux](https://blog.logrocket.com/flutter-redux-complete-tutorial-with-examples/) = DI for data using InheritedWidgets
+* [Awesome Flutter](https://github.com/Solido/awesome-flutter) = index of Flutter resources
+* [Romain Rastel: What are Dart mixins?](https://medium.com/flutter-community/dart-what-are-mixins-3a72344011f3)

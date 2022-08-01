@@ -15,6 +15,7 @@
   * CloudFlare
 * SaaS = Software as a Service aka Software on demand. Subscription-based web app
 * IaaS = Infrastructure as a Service. A cloud-based VM to setup & install apps on
+* BaaS = Backend as a Service (e.g. FireBase)
 * PaaS = Platform as a Service. A (DB/.NET/Java) platform space/repo on which to deploy such apps
 * DigitalOcean = cloud IaaS/PaaS platform
   * Droplet = a VM
