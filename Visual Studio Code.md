@@ -67,12 +67,17 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 
 ## Extensions
 
+* carbon-now-sh = copies code snippets for public/sharing
 * Prettify JSON (F1 > Prettify)
-* TSLint
-* TSLint Vue
-* [Winter is Coming](https://github.com/johnpapa/vscode-winteriscoming)
 * [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint)
-* [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur)
-* [Vue VSCode Snippets](https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-snippets)
-  * `vdata` = Vue data snippet
-  * `vmethod` = Vue methods snippet
+* Flutter (also installs Dart extension)
+* Vue & JS
+  * TSLint
+  * TSLint Vue
+  * [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur) = Vue tooling for VS Code
+  * [Vue VSCode Snippets](https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-snippets)
+    * `vdata` = Vue data snippet
+    * `vmethod` = Vue methods snippet
+* Themes
+  * [Winter is Coming](https://github.com/johnpapa/vscode-winteriscoming)
+  * Material Icon Theme = file icons

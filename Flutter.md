@@ -2,57 +2,18 @@
 
 An open-source UI framework created by Google, to develop cross-platform applications from a single codebase.
 
-It builds on top of the Dart platform, adding libraries of UI design features and widgets - notably Material components.
+It builds on top of the Dart language & adds a set of UI building blocks called widgets, based on (Google) Material & (Apple) Cupertino design.
+The **Flutter SDK** is the part of the framework responsible with compiling the single Dart codebase to different target platforms.
 
-## Environment
+Flutter does not simply translate its widgets to their native iOS/Android counterparts the way other frameworks do (e.g. React Native).
+Flutter **does** compile to native(machine code) apps, but it **does not** use native UI components (aka Platform Primitives).
+Instead, Flutter draws pixels on the target device using its own low-level rendering engine, à la _Unity_.
+It is therefore way more free & flexible than other frameworks, while also highly performant (close to native code).
+For instance, Flutter is capable of advanced 2D/3D transform animations à la PowerPoint transitions (see **Transform** widget).
 
-### Install
+## Lingo
 
-* [Android Studio](https://developer.android.com/studio/)
-  * Install under _Tools > SDK Manager > SDK Tools_:
-    * [Android SDK Command-line Tools](https://developer.android.com/studio/intro/update#sdk-manager)
-    * Google/Samsung USB Driver (must be then installed manually)
-  * (Flutter extension if using as IDE)
-* [Flutter](https://flutter.dev/docs/get-started/install/windows)
-* (PowerShell 5.1 (via _Windows Management Framework 5.1_))
-  * Actually gets installed along with Visual Studio
-* Visual Studio
-* Visual Studio Code
-  * PowerShell extension
-  * Flutter extension
-* (Any browser, but Chrome is apparently required to actually _Debug_, via its devtools protocol)
-
-### CLI
-
-* `flutter --version`
-* `flutter doctor` (Tip: use PowerShell to get Unicode support)
-* `flutter doctor --android-licenses`
-* `flutter devices`
-* `flutter create kokoapp`
-* `flutter run` = F5
-* `flutter run -d {device}` = Run to chosen device
-  * `flutter run -d web-server` (works in any browser <https://stackoverflow.com/a/71518488>)
-* `flutter format {filename}` = Format document
-* `flutter pub {add} {package}` = manages the _pubspec.yaml_ file which contains assets & dependencies, downloaded from <pub.dev>
-* `flutter pub get` = pulls the package into the project & generates _pubspec.lock_
-
-### Visual Sudio Code
-
-* `Ctrl + ;` = `Ctrl + Shift + R` = Refactor
-  * Convert Stateless to Stateful
-* `Ctrl + Alt + D` = _Dart: Open DevTools_
-* `Ctrl + Space` = Intellisense
-* `Shift + Alt + F` = (Right-Click >) Format document
-
-#### Snippets
-
-* `st` = widget
-* `stle` = Statless Widget
-* `stfu` = Stateful widget
-
-### Lingo
-
-* Kotlin = Google preferred language for Android app developers since 2019 (replacing Java)
+* Kotlin = Google preferred language for Android app developers since 2019 (replacing Java), designed & developde by JetBrains
   * Compiles to JVM, or JavaScript for IOS support
 * Dart = programming language developed by Google for fast client multi-platform (web & mobile) apps development with QoL features such as Hot Reload
 * Gradle = build automation tool supporting Java, Kotlin, C/C++ & JavaScript
@@ -83,38 +44,115 @@ It builds on top of the Dart platform, adding libraries of UI design features an
     * **ValueKey** bases off a single value (e.g. TODO item task's text) which is unique amongst its siblings
       * **PageStorageKey** stores a user scroll location, so we can resume it when going back to the Widget
   * **GlobalKey** allow Widgets to change parents without losing State, or access information about another Widget, both anyhere in the Tree
+* **Packages**/**Modules** = Dart code **only**; can use plugins (and still qualify as a package); they're published to <https://pub.dev>
+* **Plugin** = native code (Kotlin/JS/Swift) features [wrapped as Dart](https://stackoverflow.com/a/63154273/3559724)
+
+## Environment
+
+### Install
+
+* [Android Studio](https://developer.android.com/studio/)
+  * Install the following under _Tools > SDK Manager > SDK Tools_:
+    * [Android SDK Command-line Tools](https://developer.android.com/studio/intro/update#sdk-manager)
+    * Google/Samsung USB Driver (those get downloaded and must be then installed manually)
+  * (Flutter extension if using as IDE)
+* [Flutter](https://flutter.dev/docs/get-started/install/windows)
+* (PowerShell 5.1 (via _Windows Management Framework 5.1_))
+  * Also gets installed along with Visual Studio
+* Visual Studio
+* Visual Studio Code
+  * PowerShell extension
+  * Flutter extension
+  * Material Icon Theme
+* (Any browser, but Chrome is required for its devtools protocol to use the (otherwise hidden) _Debug_ tab)
+
+### CLI
+
+* `flutter --version`
+* `flutter doctor` (Tip: use PowerShell to get Unicode support)
+* `flutter doctor --android-licenses`
+* `flutter devices`
+* `flutter create kokoapp`
+* `flutter run` = F5
+* `flutter run -d {device}` = Run to chosen device
+  * `flutter run -d web-server` (works in any browser <https://stackoverflow.com/a/71518488>)
+* `flutter format {filename}` = Format document
+* `flutter pub {add} {package}` = manages the _pubspec.yaml_ file, which contains assets & dependencies, downloaded from <pub.dev>
+* `flutter pub get` = explicitely pulls packages into the project & generates _pubspec.lock_ (implied with `flutter run`)
+  * `flutter packages get` = [alias for the above](https://stackoverflow.com/a/61038022/3559724)
+
+### Folder Structure
+
+* _.idea/_ = Android Studio (built on JetBrains' IntelliJ **IDEA**) configuration
+* _.vscode/_ = Visual Studio configuration (zoom level, etc.)
+* _android/_ = complete (passive) Android project used by Flutter (we don't need to change it)
+* _build/_ = compile output generated by the Flutter SDK
+* _ios/_ = same as Android
+* _lib_ = source files (everything is a library in Dart)
+* _test_ = automated tests
+* _.gitignore_ = Git
+* _.metadata_ = managed by Flutter SDK; version ID
+* _.packages_ = managed by Flutter SDK
+* _{project\_name}.iml_ = managed by Flutter SDK; project dependencies
+* _analysis\_opions.yaml_ = Dart linter
+* _pubspec.lock_ = required; generated automatically based on the _pubspec.yaml_
+* _pubspec.yaml_ = project imported 3rd-party dependencies, fonts, images
+* _README.md_ = Git/doc
+
+### Visual Studio Code
+
+* `Ctrl + ;` = `Ctrl + Shift + R` = Refactor
+  * Convert Stateless to Stateful
+* `Ctrl + Alt + D` = _Dart: Open DevTools_
+* `Ctrl + Space` = Intellisense
+* `Shift + Alt + F` = (Right-Click >) Format document
+
+#### Snippets
+
+* `st` = widget
+* `stle` = Statless Widget
+* `stfu` = Stateful widget
 
 ## API
 
-* `StreamBuilder` = subscribe to streams (à la events?)
-
-* `runApp(...)` = takes in a widget and inflate it to the screen size
+* `runApp(...)` = takes in the instance of a widget and inflate it to the screen size (calls its `build()` method, etc.)
 
 * `void initState()` = one-time init
 * `setState(() {})`
   * [Why an anonymous method](https://iiro.dev/set-state/) = it performs a handful of `assert()`s first, but mainly marks the Element dirty
 * `void dispose()` = widget removed from UI
 
+* `List.generate(n, (index) { ... });` can be used to generate widgets
+
 * [Colors](https://api.flutter.dev/flutter/material/Colors-class.html) e.g. `Colors.green[400]`
 
-### Widgets
+* `toStringDeep()` = Returns a string representation of this node and its descendants
+
+* Adaptative Design
+  * `MediaQuery.of(context).orientation` (device), OrientationBuilder (parent widget) or LayoutBuilder (parent widget, not just its orientation)
+  * `final isMobile = MediaQuery.of(context).size.shortestSide < 600` = is phone or tablet?
+  * `Theme.of(context).platform == TargetPlatform.iOS ? CupertinoButton(…) : ElevatedButton(…)` = Apple vs Google button style
+
+### Widgets (& Classes)
 
 * [Scaffold](https://api.flutter.dev/flutter/material/Scaffold-class.html) = basic Material layout with a set of more elaborate widgets (e.g. an Add button that floats at the bottom right, or top/bottom menu bars) ready to use
 * [AppBar](https://api.flutter.dev/flutter/material/AppBar-class.html) = top menu (_leading_, _title_, _actions_, _bottom_)
 * **Builder** (not to be confused with the usual _builder_ property) = a widget used to access an (InheritedWidget) ancestor's BuildContext
 * **GridView** = grid layout; usually via `GridView.count()` constructor (_crossAxisCount_, _mainAxisSpacing_, _crossAxisSpacing_)
 * **CustomScrollView** = custom scroll via _slivers_ (**SliverAppBar**, **SliverList**, **SliverGrid**, `center: key`)
+* [ElevatedButton](https://api.flutter.dev/flutter/material/ElevatedButton-class.html)
+* NeverScrollableScrollPhysics = prevents ListView scrolling when the user drags
 
 [Flutter Widgets of the Week](https://www.youtube.com/watch?v=lkF0TQJO0bA&list=PLjxrf2q8roU23XGwz3Km7sQZFTdB996iG&index=129):
 
-1. **SafeArea** = checks MediaQuery to ensure we get a neat uncut rectangle on the screen. Synergizes with a **Scaffold**'s _body_
+1. **SafeArea** = checks MediaQuery to ensure we get a neat uncut rectangle on the screen.
 2. **Expanded** = expands a child widget to take up all available space in its parent
 3. **Wrap** = "word wrap" children (_direction_, _alignment_ _spacing_, _runSpaching_); good for buttons & chips
-4. **AnimatedContainer** = implicit linear interpolation (_color_, _shadow_, a bunch of layout options, etc., and _curve_ & _duration_)
+4. **AnimatedContainer** = implicit (i.e. built-in) animations via linear interpolation (_color_, _shadow_, layouts, _curve_ & _duration_)
 5. **Opacity** & **AnimatedOpacity** = alpha (0 is like CSS' `invisiblility: hidden`)
 6. **FutureBuilder** = display something while loading a future's result and something else when it's done
 7. **FadeTransition** = opacity animation via animationController (clean it up in dispose())
-8. **FloatActionButton** (FAB) = Scaffold stacked button; use _floatingActionButtonLocation_ to embed in _bottomNavigationBar_
+8. **FloatActionButton** (aka **FAB**) = Scaffold stacked button; use _floatingActionButtonLocation_ to embed in _bottomNavigationBar_
 9. **PageView** = swipable pages via PageController (_initialPage_, _scrollDirection_)
 10. **Table** = simpler fixed grid layout (_defaultVerticalAlignment_, _defaultColumnWidth_, _columnWidths_, _border_ )
 11. **SliverAppBar** = scrollable top menu that shrinks, fades, shows image (_expandedHeight_, _flexibeSpace_, _floating_, _pinned_)
@@ -128,20 +166,20 @@ It builds on top of the Dart platform, adding libraries of UI design features an
 19. **Tooltip** = accessibility-friendly alt text (_child_, _message_, _verticalOffset_, _height_), some Widgets have a _tooltip_ property
 20. **FittedBox** = make larger child fit its parent (_fit_ = `BoxFit.{value=contain|fitWidth|fill|none}`, _alignment_)
 21. **LayoutBuilder** = provide `build()` method with Widget size, useful to make adaptative layout (_builder_) e.g. different # of rows/cols
-22.
-23.
-24.
-25. **Align** = position a child within its parent (top/bottom/left/right, or specific _double_ value). See **AlignmentTween**
-26.
-27.
-28.
-29. **SizedBox** = exact dimensions (_width_ & _height_, `double.infinity` means max, `SizedBox.expand()` means double infinity), even empty for spacing
+22. **AbsorbPointer** = protects any number of sub-widgets from touch events (_absorbing_, _ignoringSemantics_ = also ignored by screen readers)
+23. **Transform** = custom (PowerPoint-like) animations (`.rotate()`, `scale()`, `translate()`, or 4x4 custom matrix)
+24. **BackdropFilter** & ImageFilter class = image blur/rotate/skew/stretch effects (`blur()`, `matrix()`), use with parent **Stack** & _fill_
+25. **Align** = position a child within its parent (_t/b/r/l_, or specific _double_ value) à la HTML relative position. See **AlignmentTween**
+26. **Positioned** = position children within a **Stack** (_t/b/r/l/heigh/width_, `fill()`) à la HTML absolute position
+27. **AnimatedBuilder** = explicit (i.e. coded by the developer) animation using Tweens (provide _child_ to optimize rendering)
+28. **Dismissible** = left/right swipable items (_child_, _key_, (secondary)_background_, _direction_ , `onDismissed()` to remove underlying item)
+29. **SizedBox** = specific size (_width_ & _height_, `double.infinity` == max, `SizedBox.expand()` == 2 x max), use empty for spacing
 30.
 31.
 32.
 33.
 34. **MediaQuery** = Object used to retrieve info about screen size, orientation, text scaling
-35.
+35. **Spacer** = add custom spaces within Column/Row beyond their simple _mainAxisAligment_ (_flex_ distributes available space)
 36.
 37.
 38.
@@ -190,6 +228,7 @@ It builds on top of the Dart platform, adding libraries of UI design features an
     * Stack (z-axis overlays)
     * **Positioned** & **Align** = à la HTML _absolute_ & _relative_
     * Scaffold
+      * **AppBar** at the top
       * **FloatingActionButton** with _onPressed()_ event
       * **BottomNavigationBar** with BottomNavigationBar items
       * **Drawer** on the left
@@ -223,26 +262,56 @@ It builds on top of the Dart platform, adding libraries of UI design features an
   * [Implicit animations](https://docs.flutter.dev/codelabs/implicit-animations)
   * [Staggered animations](https://docs.flutter.dev/development/ui/animations/staggered-animations)
   * [animations library](https://api.flutter.dev/flutter/animation/animation-library.html)
+  * [Perspective on Flutter](https://medium.com/flutter/perspective-on-flutter-6f832f4d912e) via **Transform** widget
+
 * DB & Storage
   * [Persistence](https://docs.flutter.dev/cookbook/persistence)
     * [Persist data with SQLite](https://docs.flutter.dev/cookbook/persistence/sqlite)
     * [Read and write files](https://docs.flutter.dev/cookbook/persistence/reading-writing-files) = (_path\_provider_)
     * [Store key-value data on disk](https://docs.flutter.dev/cookbook/persistence/key-value) = (_shared\_preferences_)
   * [Saving data to Local Storage in Fluter](https://medium.com/kick-start-fluttering/saving-data-to-local-storage-in-flutter-e20d973d88fa)
-* Bloc & Archi
+
+* Bloc
   * [bloc](https://pub.dev/packages/flutter_bloc) = BLoC (Business Logic Component) design pattern
   * [BLoC Pattern](https://www.flutterclutter.dev/flutter/basics/what-is-the-bloc-pattern/2021/2084/)
+
+* State Management
   * [Flutter state management for minimalists](https://suragch.medium.com/flutter-state-management-for-minimalists-4c71a2f2f0c1)
     * [get_it](https://pub.dev/packages/get_it) = simple Service Locator
-  * [Aglowid: Flutter Best Practices to Follow in 2022](https://aglowiditsolutions.com/blog/flutter-best-practices/)
-  * [Conner Aldrich: Code Organization](https://medium.com/flutter-community/flutter-code-organization-revised-b09ad5cef7f6)
+  * [Flutter Redux](https://blog.logrocket.com/flutter-redux-complete-tutorial-with-examples/) = DI for data using InheritedWidgets
+
 * Provider
   * [provider](https://pub.dev/packages/provider)
   * [Enrico Ori: A simple guide for Provider](https://medium.com/theotherdev-s/starting-with-flutter-a-simple-guide-for-provider-401b25957989)
+
+* Archi
+  * [Conner Aldrich: Code Organization](https://medium.com/flutter-community/flutter-code-organization-revised-b09ad5cef7f6)
+  * [Aglowid: Flutter Best Practices to Follow in 2022](https://aglowiditsolutions.com/blog/flutter-best-practices/)
+
 * [Platform Channels](https://docs.flutter.dev/development/platform-integration/platform-channels)
   * A way to write platform-specific code and call platform-specific APIs
+
 * [Aashish Vichare: Flutter Widgets lifecycle](https://medium.com/nerd-for-tech/flutter-widgets-lifecycle-widget-tree-and-element-tree-ac41ab1918da)
 * [JediPixels: Widget Tree & Element Tree](https://www.youtube.com/watch?v=4W8eN_6mO2E)
-* [Flutter Redux](https://blog.logrocket.com/flutter-redux-complete-tutorial-with-examples/) = DI for data using InheritedWidgets
+
 * [Awesome Flutter](https://github.com/Solido/awesome-flutter) = index of Flutter resources
+  * [Ins and Outs of Flutter Web by Nash](https://github.com/Solido/awesome-flutter)
+  * [https://medium.com/@diegoveloper](https://medium.com/@diegoveloper)
+    * [Communication between Widgets](https://medium.com/flutter-community/flutter-communication-between-widgets-f5590230df1e)
+  * [Awesome Flutter tips & tricks](https://github.com/erluxman/awesomefluttertips/)
+  * [Todo List built with Flutter](https://github.com/lesnitsky/todolist_flutter)
+
 * [Romain Rastel: What are Dart mixins?](https://medium.com/flutter-community/dart-what-are-mixins-3a72344011f3)
+
+* [MediaQuery in Flutter](https://medium.com/flutter-community/mediaquery-in-flutter-4317d3fe3612)
+
+## Code samples
+
+Simplest possible running apps (assuming `import 'package:flutter/material.dart';`):
+
+```dart
+void main() => runApp(const MaterialApp());
+void main() => runApp(const Text('Koko', textDirection: TextDirection.ltr));  // Text direction is required here (or in an ancestor).
+// Does not work with SafeArea or Scaffold, because those require MediaQuery access, which is usually initialized by an enclosing MaterialApp.
+// That is checked beforehand via debugCheckHasMediaQuery(), which raises an error since the MediaQuery wasn't initialized in an ancestor.
+```

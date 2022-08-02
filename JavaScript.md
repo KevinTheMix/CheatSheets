@@ -85,6 +85,10 @@
 * `array.reduce((accu, next) => acc + cur)` aggregate/accumulate
 * `array.map(item => item * 1.1)` select
 * `array.filter(item => item > 100)` where
+* [Conditionally add items](https://codeburst.io/3-ways-to-initialize-an-array-with-conditional-elements-in-javascript-c95397615a7e)
+  * `const myArray = ['a', 'b', 'c', 'd', ... condition ? ['e'] : []];`
+  * `const myArray = ['a', 'b', 'c', 'd', condition ? 'e' : null].filter(Boolean);`
+  * `const myArray = ['a', 'b', 'c', 'd']; condition && myArray.push('e');` (append only)
 
 ### Asynchronous Programming
 

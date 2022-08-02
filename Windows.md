@@ -55,12 +55,12 @@
 
 * [cmd.exe](https://en.wikipedia.org/wiki/Cmd.exe#Windows_NT_family)
 * Display
+  * `cls` = clear screen
   * `echo koko`
   * `@echo [on|off]` = turns prompt on/off
   * `date`
   * `time`
   * `pause`
-  * `cls`
 * Control
   * `goto {label}` goes to `:{label}`
   * `set {VAR}` = assignment
