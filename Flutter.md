@@ -32,9 +32,10 @@ For instance, Flutter is capable of advanced 2D/3D transform animations à la Po
 * **Property** = actual value held in a widget e.g. the _text_ property of a **RichText** widget
 * **Element** = instantiation of a Widget at a particular location in the _Element Tree_
   * Elements are very simple, holding just the type of the widget, a reference to child Elements, source Widget and potential State
-  * This is basically what pilots the lifecycle of widgets, and updates the UI
+  * You can think of them as an DB association table, because they hold practically no data and mostly point to other stuff (Widget & State)
+  * This (and their tree) is what Flutter uses to pilot the lifecycle of widgets, and update/redraw the UI
   * While widgets are immutable, Elements are like their mutable counterpart and mounted by Flutter to form the Element Tree
-  * The Element Tree is built and handled all by Flutter (based on the Widget Tree), and typically never by the developer
+  * The Element Tree is built and handled all by Flutter (based on the Widget Tree), and never by the developer
 * **RenderObject** = object in the RenderTree that renders & paints the UI (handles size, layout, painting)
 * [Keys](https://medium.com/flutter/keys-what-are-they-good-for-13cb51742e7d)
   * A way to keep track of States uniquement for Stateful Widgets, useful when adding/reordering widgets on the screen
@@ -46,6 +47,7 @@ For instance, Flutter is capable of advanced 2D/3D transform animations à la Po
   * **GlobalKey** allow Widgets to change parents without losing State, or access information about another Widget, both anyhere in the Tree
 * **Packages**/**Modules** = Dart code **only**; can use plugins (and still qualify as a package); they're published to <https://pub.dev>
 * **Plugin** = native code (Kotlin/JS/Swift) features [wrapped as Dart](https://stackoverflow.com/a/63154273/3559724)
+* Slivers = different parts of a scrollable area that can each react appropriately to the same scroll
 
 ## Environment
 
@@ -106,6 +108,7 @@ For instance, Flutter is capable of advanced 2D/3D transform animations à la Po
 * `Ctrl + Alt + D` = _Dart: Open DevTools_
 * `Ctrl + Space` = Intellisense
 * `Shift + Alt + F` = (Right-Click >) Format document
+  * Append a comma to each closing parenthesis to take advantage of Format Document provided by Flutter extension
 
 #### Snippets
 
@@ -115,6 +118,7 @@ For instance, Flutter is capable of advanced 2D/3D transform animations à la Po
 
 ## API
 
+* `FlutterLogo(size: 200)` = built-in Flutter logo
 * `runApp(...)` = takes in the instance of a widget and inflate it to the screen size (calls its `build()` method, etc.)
 
 * `void initState()` = one-time init
@@ -133,9 +137,12 @@ For instance, Flutter is capable of advanced 2D/3D transform animations à la Po
   * `final isMobile = MediaQuery.of(context).size.shortestSide < 600` = is phone or tablet?
   * `Theme.of(context).platform == TargetPlatform.iOS ? CupertinoButton(…) : ElevatedButton(…)` = Apple vs Google button style
 
+* `@override` = explicitely but optionally declare that a method overrides a parent method. The Dart analyzer warns us if there is no matching parent
+
 ### Widgets (& Classes)
 
 * [Scaffold](https://api.flutter.dev/flutter/material/Scaffold-class.html) = basic Material layout with a set of more elaborate widgets (e.g. an Add button that floats at the bottom right, or top/bottom menu bars) ready to use
+* PreferredSizeWidget = base interface for widget that have an ideal size when unconstrained, such as **AppBar**
 * [AppBar](https://api.flutter.dev/flutter/material/AppBar-class.html) = top menu (_leading_, _title_, _actions_, _bottom_)
 * **Builder** (not to be confused with the usual _builder_ property) = a widget used to access an (InheritedWidget) ancestor's BuildContext
 * **GridView** = grid layout; usually via `GridView.count()` constructor (_crossAxisCount_, _mainAxisSpacing_, _crossAxisSpacing_)
@@ -155,38 +162,38 @@ For instance, Flutter is capable of advanced 2D/3D transform animations à la Po
 8. **FloatActionButton** (aka **FAB**) = Scaffold stacked button; use _floatingActionButtonLocation_ to embed in _bottomNavigationBar_
 9. **PageView** = swipable pages via PageController (_initialPage_, _scrollDirection_)
 10. **Table** = simpler fixed grid layout (_defaultVerticalAlignment_, _defaultColumnWidth_, _columnWidths_, _border_ )
-11. **SliverAppBar** = scrollable top menu that shrinks, fades, shows image (_expandedHeight_, _flexibeSpace_, _floating_, _pinned_)
+11. **SliverAppBar** = scroll-reactive top menu using **CustomScrollView** (_expandedHeight_, _flexibleSpace_, _floating_, _pinned_)
 12. **SliverList** & **SliverGrid** = container scrolling (_delegate_: `Sliver[Child|Builder]ListDelegate`). Use `.count()` or `.extent()` ctors
 13. **FadeInImage** = placeholder for images (_placeholder_ from directory/memory, _fadeInDuration_, _fadeInCurve_, **transparent_image** package)
 14. **StreamBuilder** = async events handler (_initialData_, _stream_, `builder: (context, snapshot)` with snapshot.hasError)
 15. **InheritedModel**`<T>` = more granular **InheritedWidget** but on specific fields (via _aspect_), `@override updateShouldNotifyDependent()`
 16. **ClipRRect** = (R for) Rounded corners rectangle (_child_, _borderRadius_, _clipBehavior_), similar to **ClipOval**, **ClipPath**
 17. **Hero** = morphing animation between navigation routes (_child_, _tag_)
-18. **CustomPaint** = low-level paint calls (_size_, _painter_)
+18. **CustomPaint** = low-level paint calls (_size_, _painter_); surrounds with `FittedBox(SizedBox(width: image.width.toDouble(), height:…))`
 19. **Tooltip** = accessibility-friendly alt text (_child_, _message_, _verticalOffset_, _height_), some Widgets have a _tooltip_ property
-20. **FittedBox** = make larger child fit its parent (_fit_ = `BoxFit.{value=contain|fitWidth|fill|none}`, _alignment_)
+20. **FittedBox** = make child's original size fit smaller parent (_fit_ = `BoxFit.{value=contain|fitWidth|fill|none}`, _alignment_)
 21. **LayoutBuilder** = provide `build()` method with Widget size, useful to make adaptative layout (_builder_) e.g. different # of rows/cols
 22. **AbsorbPointer** = protects any number of sub-widgets from touch events (_absorbing_, _ignoringSemantics_ = also ignored by screen readers)
-23. **Transform** = custom (PowerPoint-like) animations (`.rotate()`, `scale()`, `translate()`, or 4x4 custom matrix)
+23. **Transform** = custom (PowerPoint-like) transitions (`.rotate()` with _angle_, `scale()`, `translate()`, or 4x4 custom matrix)
 24. **BackdropFilter** & ImageFilter class = image blur/rotate/skew/stretch effects (`blur()`, `matrix()`), use with parent **Stack** & _fill_
 25. **Align** = position a child within its parent (_t/b/r/l_, or specific _double_ value) à la HTML relative position. See **AlignmentTween**
 26. **Positioned** = position children within a **Stack** (_t/b/r/l/heigh/width_, `fill()`) à la HTML absolute position
 27. **AnimatedBuilder** = explicit (i.e. coded by the developer) animation using Tweens (provide _child_ to optimize rendering)
-28. **Dismissible** = left/right swipable items (_child_, _key_, (secondary)_background_, _direction_ , `onDismissed()` to remove underlying item)
+28. **Dismissible** = left/right swipable items (_key_, (secondary)_background_, _direction_ , `onDismissed()` to remove underlying item)
 29. **SizedBox** = specific size (_width_ & _height_, `double.infinity` == max, `SizedBox.expand()` == 2 x max), use empty for spacing
-30.
-31.
-32.
-33.
+30. **ValueNotifier** & **ValueListenableBuilder** = Observer pattern replacing `setState()` (set optional _child_ to const subtree for performance)
+31. **Draggable\<T>** (_data_, _child(WhenDragging)_, _feedback_) & **DragTarget\<T>** (_builder_, _onWillAccept_, _onAccept_, _onLeave_)
+32. **AnimatedList** = (`itemBuilder: (context, index, animation) {…}`, _initialItemCount_ if not empty, `AnimatedListState.insert/removeItem()`)
+33. **Flexible** = give child widgets a percentage of the available space within their parent **Column**/**Row** (_flex_, _fit_)
 34. **MediaQuery** = Object used to retrieve info about screen size, orientation, text scaling
 35. **Spacer** = add custom spaces within Column/Row beyond their simple _mainAxisAligment_ (_flex_ distributes available space)
-36.
-37.
-38.
-39.
-40.
-41.
-42.
+36. **InheritedWidget** = sharing data between ancestors/descendants via the **BuildContext**
+37. **AnimatedIcon** = (`icon: AnimatedIcon.play_pause, progress: myAnimation`, `myAnimation.forward/reverse()`)
+38. **AspectRatio** = preserve box ratio (_aspectRatio_ as `width/height` for readibility, _child_), incompatible w/ **Expanded** (**Align** between)
+39. **LimitedBox** = give child default size constraints when its unbounded parent (**ListView**/**Column**/**Row**) didn't (_maxHeight/Width_)
+40. **Placeholder** = temporary stand-in while building the UI (use _fallbackHeight/Width_ inside unbounded parent, _color_, _strokWidth_)
+41. **RichText** = multiple styles per line (`text: TextSpan(style: …, children: <TextSpan>[…]`) for when standard **Text** is not enough
+42. **ReordableListView** = drag & drop list items (_children_, `onReorder: (old, new) {setState(() {…}`, optional _header_); use with **ListTile**
 43.
 44.
 45.
@@ -197,7 +204,8 @@ For instance, Flutter is capable of advanced 2D/3D transform animations à la Po
 50.
 51.
 52.
-53. **ListTile** = Material specification-following List Item up to 3 lines (_title_, _subtitle_, _isThreeLine_), _dense_, `tap`, `onLongPress`
+53. **ListTile** = Material specification-following List Item (up to 3 lines _title_/_subtitle_/_isThreeLine_, _dense_, `tap`, `onLongPress`)
+54. **Container** = wraps child widget w/ some color/decoration/shape/m/p/size (_aligment_ will fit parent, _constraints_, _transform_)
 
 ### Packages
 
@@ -279,10 +287,9 @@ For instance, Flutter is capable of advanced 2D/3D transform animations à la Po
   * [Flutter state management for minimalists](https://suragch.medium.com/flutter-state-management-for-minimalists-4c71a2f2f0c1)
     * [get_it](https://pub.dev/packages/get_it) = simple Service Locator
   * [Flutter Redux](https://blog.logrocket.com/flutter-redux-complete-tutorial-with-examples/) = DI for data using InheritedWidgets
-
-* Provider
-  * [provider](https://pub.dev/packages/provider)
-  * [Enrico Ori: A simple guide for Provider](https://medium.com/theotherdev-s/starting-with-flutter-a-simple-guide-for-provider-401b25957989)
+  * Provider
+    * [provider](https://pub.dev/packages/provider)
+    * [Enrico Ori: A simple guide for Provider](https://medium.com/theotherdev-s/starting-with-flutter-a-simple-guide-for-provider-401b25957989)
 
 * Archi
   * [Conner Aldrich: Code Organization](https://medium.com/flutter-community/flutter-code-organization-revised-b09ad5cef7f6)
@@ -302,8 +309,9 @@ For instance, Flutter is capable of advanced 2D/3D transform animations à la Po
   * [Todo List built with Flutter](https://github.com/lesnitsky/todolist_flutter)
 
 * [Romain Rastel: What are Dart mixins?](https://medium.com/flutter-community/dart-what-are-mixins-3a72344011f3)
-
+* [Splash screen](https://blog.logrocket.com/make-splash-screen-flutter/)
 * [MediaQuery in Flutter](https://medium.com/flutter-community/mediaquery-in-flutter-4317d3fe3612)
+* [PWA with Flutter](https://www.fullstacklabs.co/blog/pwa-with-flutter)
 
 ## Code samples
 
@@ -311,6 +319,7 @@ Simplest possible running apps (assuming `import 'package:flutter/material.dart'
 
 ```dart
 void main() => runApp(const MaterialApp());
+void main() => runApp(const MaterialApp(home: Text('Koko')));
 void main() => runApp(const Text('Koko', textDirection: TextDirection.ltr));  // Text direction is required here (or in an ancestor).
 // Does not work with SafeArea or Scaffold, because those require MediaQuery access, which is usually initialized by an enclosing MaterialApp.
 // That is checked beforehand via debugCheckHasMediaQuery(), which raises an error since the MediaQuery wasn't initialized in an ancestor.

@@ -15,10 +15,13 @@ Features:
 
 ## Environment
 
-* [DartPad](https://dartpad.dev) or [DartPad](https://dartpad.dartlang.org)
+* [DartPad](https://dartpad.dev)
+* [DartPad](https://dartpad.github.io/)
+* [DartPad](https://dartpad.dartlang.org)
 
 ## Syntax
 
+* `value!.method()` = `!` takes the expression on the left and casts it to its underlying non-nullable type
 * `var` = type is (statically) infered from right-side value (it is **not** dynamic). This is the prefered way of initializing variables.
 * `ìnt` & `double` inherit from `num`
 * `'$koko'` or `'${array[i]}'` = string interpolation
@@ -42,11 +45,18 @@ Features:
   * [Future tutorial](https://medium.com/flutter-community/a-guide-to-using-futures-in-flutter-for-beginners-ebeddfbfb967)
 * Stream = async data/events/feed `Stream<int> count() async* { int i=1; while(true) yield i++; }`
 
-### Arrays
+### Collections
 
+[Arrays are called Lists](https://stackoverflow.com/a/64273912/3559724), i.e. ordered sequences of objects, with lots of built-in methods.
+
+* `['a', 'b', 'c']` = Dart infers the type
+* `<String>['a', 'b', 'c']` = with explicit generic type
+* `<String>[]` = with explicit generic type now mandatory since there are no items yet to infer from
 * `[if (condition) Item(...), b, c]` = add item conditionally
 * _collection_ library has lots of built-in helper methods for array manipulation
   * [IterableExtension\<T>](https://api.flutter.dev/flutter/package-collection_collection/IterableExtension.html)
+* `List.generate(count, (i) => i);`
+* `list.elementAt(i)` == `list[i]`
 
 ### Functions
 
@@ -57,9 +67,17 @@ Features:
   * `function(a, {b, c})` = optional [named parameters](https://dart.dev/guides/language/language-tour#named-parameters)
     * In Flutter: _@required_ = forces optional named parameter (so it's not positional, but still required)
 
-* `koko(() {...});` = named function taking in an anonymous function as argument (à la .NET _Action_)
-* Unlike C#, Dart has [first-class functions](https://livebook.manning.com/book/dart-in-action/chapter-4)
-  * `void update(EmailUser user) {...}; list.forEach(update);`
+* Dart has [first-class functions](https://livebook.manning.com/book/dart-in-action/chapter-4), i.e. functions (pointers) as parameters
+  * Unlike in C#, we thus don't need delegates and `Action<T>`
+  * That means we can pass a function name directly as argument, or define a function on the spot using lambda/anonymous notation
+  * E.g. `f(() {...});` = named function taking in an anonymous function as argument (notice there is no `=>`)
+* Lambda style
+  * `(a) => a`
+  * `(a) => { return a; }`
+  * [=> is syntaxic sugar](https://stackoverflow.com/a/15804303/3559724)
+* Anonymous function style
+  * `(a) { return a; }`
+  * `(a) { return a; } ()` executes it immediately e.g. `var koko = (ko) {return ko+ko;} ('ko');`
 
 ### Classes
 
