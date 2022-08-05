@@ -21,8 +21,12 @@ For instance, Flutter is capable of advanced 2D/3D transform animations à la Po
   * All Widgets are _@immutable_, so either they manage only _final_ data, or the changing data is outsourced in a dedicated mutable **State**
   * Widgets (or State), **not Elements**, hold properties with actual values
   * [Stateless Widget](https://www.youtube.com/watch?v=wE7khGHVkYY) = immmutable widget w/ _final_ properties & _const_ constructor
+    * Those get rebuilt (aka replaced) when the input data from their parent changes (which is e.g. never when the whole tree is _stateless_)
     * All visual elements such as buttons, texts are stateless widgets
   * [Stateful Widget](https://www.youtube.com/watch?v=AqCMFXEmf3w) = associated with a companion class called State, holding changing data
+    * Those get rebuilt (aka replaced) when the input data from their parent changes, as well as when their internal (associated) State changes
+    * The associated State however is persistent, and survives widget tree rebuilds
+    * This time, the `build()` method is in the State, and is called each time `setState()` is called
   * [Inherited Widget](https://www.youtube.com/watch?v=Zbm3hjPjQMk) = DYI DI via _context_
     * Access Tree top-ish data (`@override updateShouldNotify()`)
     * Use this to pass DB or service instances down the widget hierarchy
@@ -109,6 +113,7 @@ For instance, Flutter is capable of advanced 2D/3D transform animations à la Po
 * `Ctrl + Space` = Intellisense
 * `Shift + Alt + F` = (Right-Click >) Format document
   * Append a comma to each closing parenthesis to take advantage of Format Document provided by Flutter extension
+* `Ctrl + Click` = `F12` = Go to definition
 
 #### Snippets
 
@@ -138,6 +143,15 @@ For instance, Flutter is capable of advanced 2D/3D transform animations à la Po
   * `Theme.of(context).platform == TargetPlatform.iOS ? CupertinoButton(…) : ElevatedButton(…)` = Apple vs Google button style
 
 * `@override` = explicitely but optionally declare that a method overrides a parent method. The Dart analyzer warns us if there is no matching parent
+
+* `Widget build(BuildContext context) {…}` is a method and can begin with additional statements (such as declarations)
+
+### Enums & Values
+
+* Colors.blue
+* Curves.easeInOut
+* Duration(seconds: 1)
+* EdgeInsets.all()
 
 ### Widgets (& Classes)
 
@@ -183,29 +197,31 @@ For instance, Flutter is capable of advanced 2D/3D transform animations à la Po
 29. **SizedBox** = specific size (_width_ & _height_, `double.infinity` == max, `SizedBox.expand()` == 2 x max), use empty for spacing
 30. **ValueNotifier** & **ValueListenableBuilder** = Observer pattern replacing `setState()` (set optional _child_ to const subtree for performance)
 31. **Draggable\<T>** (_data_, _child(WhenDragging)_, _feedback_) & **DragTarget\<T>** (_builder_, _onWillAccept_, _onAccept_, _onLeave_)
-32. **AnimatedList** = (`itemBuilder: (context, index, animation) {…}`, _initialItemCount_ if not empty, `AnimatedListState.insert/removeItem()`)
+32. **AnimatedList** = `itemBuilder: (context, index, animation) {…}`, _initialItemCount_ if not empty, `AnimatedListState.insert/removeItem()`
 33. **Flexible** = give child widgets a percentage of the available space within their parent **Column**/**Row** (_flex_, _fit_)
 34. **MediaQuery** = Object used to retrieve info about screen size, orientation, text scaling
 35. **Spacer** = add custom spaces within Column/Row beyond their simple _mainAxisAligment_ (_flex_ distributes available space)
 36. **InheritedWidget** = sharing data between ancestors/descendants via the **BuildContext**
 37. **AnimatedIcon** = (`icon: AnimatedIcon.play_pause, progress: myAnimation`, `myAnimation.forward/reverse()`)
-38. **AspectRatio** = preserve box ratio (_aspectRatio_ as `width/height` for readibility, _child_), incompatible w/ **Expanded** (**Align** between)
+38. **AspectRatio** = preserve box ratio (_aspectRatio_ as `width/height` for readability, _child_), incompatible w/ **Expanded** (**Align** between)
 39. **LimitedBox** = give child default size constraints when its unbounded parent (**ListView**/**Column**/**Row**) didn't (_maxHeight/Width_)
 40. **Placeholder** = temporary stand-in while building the UI (use _fallbackHeight/Width_ inside unbounded parent, _color_, _strokWidth_)
 41. **RichText** = multiple styles per line (`text: TextSpan(style: …, children: <TextSpan>[…]`) for when standard **Text** is not enough
-42. **ReordableListView** = drag & drop list items (_children_, `onReorder: (old, new) {setState(() {…}`, optional _header_); use with **ListTile**
-43.
-44.
-45.
-46.
-47.
-48.
+42. **ReordableListView** = drag & drop list items (_children_, `onReorder: (old, new) {setState()}`, optional _header_); use with **ListTile**
+43. **AnimatedSwitcher** = child transition animation (_duration_, set _child_ in `setState()`, _transitionBuilder_); use keys if same type
+44. **AnimatedPositioned** = animated **Positioned** reacting to properties change; useful to implement custom slider
+45. **AnimatedPadding** = animated **Padding** reacting to properties change (_curve_, _duration_, set _padding_ variable via `setState()`)
+46. **IndexedStack** = **Stack** showing one of several _children_ widgets at a time (set _index_ variable via `setState()`)
+47. **Semantics** = provide child Widget with (lots of) meta-information, improving accessibility
+48. **ConstrainedBox** = minimum & maximum height/width
 49.
 50.
 51.
 52.
 53. **ListTile** = Material specification-following List Item (up to 3 lines _title_/_subtitle_/_isThreeLine_, _dense_, `tap`, `onLongPress`)
 54. **Container** = wraps child widget w/ some color/decoration/shape/m/p/size (_aligment_ will fit parent, _constraints_, _transform_)
+
+#### Animations
 
 ### Packages
 
@@ -271,6 +287,8 @@ For instance, Flutter is capable of advanced 2D/3D transform animations à la Po
   * [Staggered animations](https://docs.flutter.dev/development/ui/animations/staggered-animations)
   * [animations library](https://api.flutter.dev/flutter/animation/animation-library.html)
   * [Perspective on Flutter](https://medium.com/flutter/perspective-on-flutter-6f832f4d912e) via **Transform** widget
+  * [ScaleTransition](https://api.flutter.dev/flutter/widgets/ScaleTransition-class.html)
+  * RotationTransition
 
 * DB & Storage
   * [Persistence](https://docs.flutter.dev/cookbook/persistence)
@@ -312,6 +330,8 @@ For instance, Flutter is capable of advanced 2D/3D transform animations à la Po
 * [Splash screen](https://blog.logrocket.com/make-splash-screen-flutter/)
 * [MediaQuery in Flutter](https://medium.com/flutter-community/mediaquery-in-flutter-4317d3fe3612)
 * [PWA with Flutter](https://www.fullstacklabs.co/blog/pwa-with-flutter)
+
+* [Display a snackbar](https://docs.flutter.dev/cookbook/design/snackbars)
 
 ## Code samples
 
