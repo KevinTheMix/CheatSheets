@@ -2,7 +2,7 @@
 
 Superset of JavaScript, transpiled to JavaScript by **tsc** the TypeScript compiler.
 
-## [tsconfig.json](https://medium.com/jspoint/typescript-compilation-the-typescript-compiler-4cb15f7244bc)
+## tsconfig.json
 
 A [JSON5](https://json5.org/) configuration file the TypeScript compiler uses to determine which & where files to compile.
 

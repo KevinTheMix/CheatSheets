@@ -85,7 +85,7 @@ In Dart, arrays are List objects, so most people just call them _lists_.
 * `<int>[]` = with explicit generic type now mandatory since there are no items yet to infer from
   * For casting however, we need to use `List<Type>` instead
 * `[1, 2.34, 'text', ['nested', 5]]` = mixed types list are also valid
-* `List.generate(count, (i) => i);`
+* `List.generate(count, (index) => … );` = uses generator function to generate _count_ items
 * `List<T>.from(iterable)` = constructs a List of T from an Iterable
 * **Collection if** = add item conditionally (e.g. `[if (condition) Item(...), b, c]`)
 * **Collection for** = add items using a loop (e.g. `[for (var i in integers) '$i'`] = turns a list of int into Strings)
