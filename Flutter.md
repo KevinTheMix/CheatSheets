@@ -269,16 +269,16 @@ For instance, Flutter is capable of advanced 2D/3D transform animations à la Po
 67. **Drawer** = **Scaffold**'s _(end)drawer_ (of **DrawHeader**, **ListView** & **ListTile**), open via `Scaffold.of(context).openEndDrawer()`
 68. **SnackBar** = pop-up a temporary (widget) message, open via `Scaffold.of(context).showSnackBar()` (use a **Builder** to pass it _context_)
 69. **ListWheelScrollView** = price-is-right 3D list (_itemExtent_, _diameterRatio_, _offAxisFraction_, _userMagnifier_ & _magnification_)
-70. a
+70.
 71.
 72.
 73.
 74.
 75.
 76.
-77
+77.
 78.
-79.
+79. a
 
 ### Packages
 
@@ -294,23 +294,23 @@ For instance, Flutter is capable of advanced 2D/3D transform animations à la Po
 1. **Package:async** = additions to Dart's built-in _async_ (**StreamGroup** `.merge()`, **AsyncCache** time-cacheing, **StreamQueue**)
 2. **url_launcher** = open external URL/e-mail/phone number/SMS/any app with special URL handlers (e.g. YouTube). Use `canLaunch()` first
 3. **package:sqflite** = save structured data locally in SQLite DB (CRUD, or `raw()`). Enable foreign keys explicitely if they are needed
-4. 
-5. 
-6. 
-7. 
-8. 
-9. 
-10. 
-11. 
-12. 
-13. 
-14. 
-15. 
+4.
+5.
+6.
+7.
+8.
+9.
+10.
+11.
+12.
+13.
+14.
+15.
 16. [**path_provider**](https://pub.dev/packages/path_provider) = find commonly used locations on the filesystem for different devices
-17. 
-18. 
-19. 
-20. 
+17.
+18.
+19.
+20.
 21. a
 
 ## Tutorials
