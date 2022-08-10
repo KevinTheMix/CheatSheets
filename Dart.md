@@ -8,7 +8,7 @@ Features:
 * Tailored for UI creation
   * Async-await
   * Isolate-based concurrency
-  * Null/Type Safety
+  * Null/Type Safety (e.g. cannot assign _null_ to an Object unless explicitely defined as _nullable_ i.e `Koko?`)
   * Spread operator
 * Hot reload
 * Fast for all platforms
@@ -31,14 +31,18 @@ Features:
 
 ### Keywords, Types & [Operators](https://dart.dev/guides/language/language-tour#operators)
 
+* `static` = can be applied to class methods (i.e. to be called like `Class.method()`)
 * `const` = value fixed once and for all at declaration time and from the compiler standpoint
-  * Inside a class, const fields must be static (not that even in C#, [const always implies static](https://stackoverflow.com/a/2628435/3559724))
+  * Inside a class, const fields must also be market `static`
+    * (note that even in C#, [const always implies static](https://stackoverflow.com/a/2628435/3559724))
 * `final` (à la C# _readonly_) = assigned once, either at declaration, or in constructor's initiliazation list (**not its body**)
 * `late` = declare a non-nullable variable w/o initialization & fix static warnings that it can be _null_ (when you know it won't be)
 * `var` = type is (statically) infered from right-side value (it is **not** dynamic). This is the prefered way of initializing variables.
 * [dynamic](https://www.w3schools.io/languages/dart-dynamic-type/)
   * Default type when none is specified
   * Type can be ignored in most situations (method return value, method parameters, etc.)
+
+* `external` = [separates function declaration and body](https://stackoverflow.com/a/24929907/3559724)
 
 * `collection is Map` = check
 * `object as Map` = cast
@@ -146,9 +150,10 @@ Key-value object. Both Key & Value can be any type. Keys are unique (not values)
     * As implicit default is _null_, the type of optional (named) parameters must be nullable, or they must be provided a (non-null) default value
 
 * Dart has [first-class functions](https://livebook.manning.com/book/dart-in-action/chapter-4), i.e. functions (pointers) as parameters
-  * Unlike in C#, we thus don't need delegates and `Action<T>`
   * That means we can pass a function name directly as argument, or define a function on the spot using lambda/anonymous notation
   * E.g. `f(() {...});` = named function taking in an anonymous function as argument
+  * Like C#'s `Action<T>` & `Funct<T>`, we have `VoidCallback` and `Function`
+  * Like C#'s `delegate`, we have [typedef](https://www.tutorialspoint.com/dart_programming/dart_programming_typedef.htm)
 * Anonymous Functions
   * `(a) { return a; }` or
   * `(a) { return a; } ()` executes it immediately e.g. `var koko = (ko) { return ko+ko; } ('ko');`
