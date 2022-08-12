@@ -91,7 +91,7 @@ In Dart, arrays are List objects, so most people just call them _lists_.
 * `[1, 2.34, 'text', ['nested', 5]]` = mixed types list are also valid
 * `List.generate(count, (index) => … );` = uses generator function to generate _count_ items
 * `List<T>.from(iterable)` = constructs a List of T from an Iterable
-* **Collection if** = add item conditionally (e.g. `[if (condition) Item(...), b, c]`)
+* **Collection if** = add item conditionally (e.g. `[if (condition) Item(…), b, c]`)
 * **Collection for** = add items using a loop (e.g. `[for (var i in integers) '$i'`] = turns a list of int into Strings)
 * `list.add(item)`
 * `list.remove(item)` (remove by value)
@@ -170,7 +170,7 @@ Key-value object. Both Key & Value can be any type. Keys are unique (not values)
   * `ClassName(p1) : this.p1 = p1;` = with initializer (properties marked _final_ **must** be initialized here, not in the constructor's body)
   * `ClassName(this.p1, this.p2);` = without body, matching properties (specifying _this_ prefix, and name/type must match)
   * `new` is optional (in Dart 2)
-  * Constructors overload does not exist (same as for functions) => use differently named constructors e.g. `KokoClass.second(...)`
+  * Constructors overload does not exist (same as for functions) => use differently named constructors e.g. `KokoClass.second(…)`
     * `Animal._();` makes the constructor private => can only insantiate via (an)other named constructor(s)
     * Factory = `factory Animal() { return another Animal() constructor here }`, used for caching (singleton) or polymorphism (return subclasses)
   * [Constructors](https://www.freecodecamp.org/news/constructors-in-dart/)
