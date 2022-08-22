@@ -39,6 +39,7 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 * `Alt + Shift + Left/Right` = Shrink/Expand selection
 * `Alt + Shift + Up/Down` = Duplicates line
 * Multi-line
+  * `Alt + Click` or `Alt + Double-Click` or `Alt + Drag` = add cursors at clicked/selected locations
   * Select some text > `Ctrl + Shift + L` = Select All Occurrences of Find Match
   * Select some text > `Ctrl + D (x n)` = Add Selection To Next Find Match
 * `Ctrl + B` = Toggle side-bar

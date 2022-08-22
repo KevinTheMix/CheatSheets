@@ -259,5 +259,9 @@ README.md uses Markdown syntax language (text format editing à la wiki)
 * `git fetch --prune` = Fetch, and also re-sync remote branches (removes those that no longer exist)
   * Alternatively: `git remote prune origin`
 * Authentication error: _could not create ssl/tls secure channel_
-  * Fix by enabling TLS 1.2 (disabled by default on Windows 7)
-    * [This worked](https://support.captureone.com/hc/en-us/articles/360014239757--Could-not-create-SSL-TLS-secure-channel-activation-error-on-Windows-7)
+  * Fix by enabling TLS 1.2 (disabled by default on Windows 7) ([This worked](https://support.captureone.com/hc/en-us/articles/360014239757--Could-not-create-SSL-TLS-secure-channel-activation-error-on-Windows-7)
+    * Go to `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols`
+    * Right-click on **Protocols** folder, `New > Key`, and rename the freshly created folder to _TLS 1.2_
+    * Create a new **Key** under that folder, name that subfolder _Client_
+    * Create a new **DWORD (32-bit) Value** under that subfolder, set its **Name** to _DisabledByDefault_ (**Data** must be 0)
+    * (Restart computer if necessary; note: optional)

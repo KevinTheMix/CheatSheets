@@ -9,6 +9,7 @@ C# Is good.
 * `new` = Redefines a method in a child class. See <https://msdn.microsoft.com/en-us/library/ms173153.aspx>
 * `override` = Overrides a method in a child class. You cannot override non-virtual methods.
 * `virtual` = Marks a method in a parent class to be overriden in a child class. Methods are non-virtual by default. See <https://msdn.microsoft.com/en-us/library/9fkccyh4.aspx>
+  * In C++, `virtual` avoids the multiple inheritance [dreaded diamond](https://www.cs.technion.ac.il/users/yechiel/c++-faq/mi-diamond.html)
 * `constant` = Can only be initialized at declaration (=> static compile time)
 * `readonly` = Can only be initialized at declaration AND in constructors (=> at runtime)
 * `static readonly` = Runtime constant (Can only be set at declaration or in static constructors)

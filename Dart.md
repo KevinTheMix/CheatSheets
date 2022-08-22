@@ -1,6 +1,7 @@
 # Dart
 
 OO programming language developed by Google and designed for (mobile/web) client development.
+Dart draws its inspiration from the major languages (C#, Java, JavaScript).
 
 Features:
 
@@ -20,8 +21,11 @@ Features:
 * [DartPad](https://dartpad.dartlang.org)
 
 * [Libraries and visibility](https://dart.dev/guides/language/language-tour#libraries-and-visibility)
-  * Every Dart file is a library (meaning it can get _import_-ed in another file), even if it doesn’t use any library directive explicitely
+  * Every Dart file is a library (meaning it can get `import`-ed in another file), even if it doesn’t use any library directive explicitely
   * Identifiers that start with an underscore (_) are visible only inside the file/library
+  * [_as_ vs _show_](https://stackoverflow.com/a/19723473/3559724)
+    * `as` = naming the whole library
+    * `show` (& `hide`) = picking/accessing a specific object within that library
 
 ## Syntax
 
@@ -35,13 +39,15 @@ Features:
 * `const` = value fixed once and for all at declaration time and from the compiler standpoint
   * Inside a class, const fields must also be market `static`
     * (note that even in C#, [const always implies static](https://stackoverflow.com/a/2628435/3559724))
-* `final` (à la C# _readonly_) = assigned once, either at declaration, or in constructor's initiliazation list (**not its body**)
+* `final` (à la C# `readonly`) = assigned once, either at declaration, or in constructor's initiliazation list (**not its body**)
 * `late` = declare a non-nullable variable w/o initialization & fix static warnings that it can be _null_ (when you know it won't be)
 * `var` = type is (statically) infered from right-side value (it is **not** dynamic). This is the prefered way of initializing variables.
 * [dynamic](https://www.w3schools.io/languages/dart-dynamic-type/)
   * Default type when none is specified
   * Type can be ignored in most situations (method return value, method parameters, etc.)
 
+* `covariant` = explicit polymorphism (see <https://stackoverflow.com/a/71237734/3559724>)
+  * [Why _covariant_ with no _@override_](https://stackoverflow.com/a/65961499/3559724)
 * `external` = [separates function declaration and body](https://stackoverflow.com/a/24929907/3559724)
 
 * `collection is Map` = check
@@ -49,7 +55,7 @@ Features:
 
 * [Punctuation operators](https://medium.com/@habib23me/the-dots-and-question-marks-of-darts-bccfc759d129)
   * `a!` = casts _a_ to its underlying non-nullable type
-  * `a?.b` = returns _null_ if a is null (equivalent to `a == null ? null : a.b`)
+  * `a?.b` = returns `null` if a is null (equivalent to `a == null ? null : a.b`)
   * `a ?? b` = returns _a_ if not null; _b_ otherwise
   * `a ??= b` = assigns _b_ only if _a_ was null
   * `..` and `?..` = [cascade notation](https://dart.dev/guides/language/language-tour#cascade-notation)
@@ -61,6 +67,7 @@ Features:
 
 * `ìnt` & `double` inherit from `num`
 * `~/` = forces division integer result
+* `double.tryParse(num) != null` = [Check if number](https://stackoverflow.com/a/24085491/3559724)
 
 ### Strings
 
@@ -69,11 +76,16 @@ Features:
 * `'abc'.characters` (property) = string as characters list
 * Unicode support using _characters.dart_ package (Runes and grapheme cllusters)
 * `#symbol` (not a String, but I'll just leave this here for now)
+* [IsNullOrEmpty](https://stackoverflow.com/a/52948927/3559724) = `s?.isEmpty ?? true` or simply `s == null || s.isEmpty`
+* Formatting
+  * `NumberFormat('###.00').format(num)` = _"123.00"_
+  * `num.ToStringAsFixed(2)` = _"123.00"_
+  * `DateFormat.yMMMd().add_Hm().format(dateText)` = _"Aug 12, 2022 16:20_
+  * `DateFormat('y.MM.dd).add_Hm().format(dateText)` = _"2022.08.12 16:20"_
 
-### Collections
+### [Collections](https://api.flutter.dev/flutter/dart-collection/dart-collection-library.html)
 
-* _collection_ library has lots of built-in helper methods for array manipulation
-  * [IterableExtension\<T>](https://api.flutter.dev/flutter/package-collection_collection/IterableExtension.html)
+* `collection.isEmpty|isNotEmpty`
 * `collection.length`
 * `...` (spread operator) or `...?` (null-aware spread operator)
 * `const {collection_literal}` = define a compile-time constant collection
@@ -90,21 +102,25 @@ In Dart, arrays are List objects, so most people just call them _lists_.
   * For casting however, we need to use `List<Type>` instead
 * `[1, 2.34, 'text', ['nested', 5]]` = mixed types list are also valid
 * `List.generate(count, (index) => … );` = uses generator function to generate _count_ items
+  * `reversed` = reverse list
 * `List<T>.from(iterable)` = constructs a List of T from an Iterable
-* **Collection if** = add item conditionally (e.g. `[if (condition) Item(…), b, c]`)
+* **Collection if** = add item conditionally (e.g. `[if (condition) Item(…), b, c]`), **Note: don't use curly braces in this syntax**
 * **Collection for** = add items using a loop (e.g. `[for (var i in integers) '$i'`] = turns a list of int into Strings)
 * `list.add(item)`
-* `list.remove(item)` (remove by value)
+* `list.remove(item)` = remove by reference
+* `list.removeAt(index)` = remove by index
+* `list.removeWhere(bool Function)` = remove by condition
 * `list.elementAt(i)` == `list[i]`
 * `list.first` & `list.last` (properties)
 * `list.forEach((i) => print(i));` or simply `list.forEach(print);`
 * `for(var item in list) …`
 * `list.map((item) => …)` = C# Linq `Select()`; can be used to create one Widget for each list item
   * Returns an `Iterable<T>`, so append `toList()` to evaluate it immediately and turn into a non-lazy List
-* `list.reduce((accu, next) => accu + next)` = à la C# Aggregate()
+* `list.reduce((accu, next) => accu + next)` = reduces a collection to a single value (à la C# `Aggregate()`)
+  * `list.reduce(math.min/max)`
 * `list.fold<int>(start, (accu, next) => accu + next)` = [same as reduce but can return any type](https://stackoverflow.com/a/20491946/3559724)
 * `list.any((item) => …)`
-* Add/removing from the list will not work if it was set as a _const_ literal, as in, the value was _const_, not the variable
+* Add/removing from the list will not work if it was set as a _const_ literal (as in, the value was _const_, not the variable)
   * Note that you cannot add to a _const_ list either e.g. `const list = []`
   * E.g. cannot add to list after `var list = const []` (which is basically useless), however _list_ can be reassigned since it's not _const_
 
@@ -129,7 +145,7 @@ Key-value object. Both Key & Value can be any type. Keys are unique (not values)
 (Can be used as a kind of ad-hoc "anonymous" class, with the keys acting as properties).
 
 * `var map = {};` = map of type `Map<dynamic, dynamic>`
-* `var map = { 'a' => 1, 'b' => 2 }` = create a new Map using type inference
+* `var map = { 'a' : 1, 'b' : 2 }` = create a new Map using type inference
 * `var map = Map<String, int>()` = create a new Map with explicit types
 * `map['c'] = 3` = add a value
 * `map['c']` = access a value
@@ -163,8 +179,6 @@ Key-value object. Both Key & Value can be any type. Keys are unique (not values)
 
 ### Classes
 
-* Inheritance = `class Koko extends KokoParent`
-* `_` prefixed properties are private
 * Constructors
   * `ClassName(p1, p2) { this.p1 = p1; this.p2 = p2; }` = with body
   * `ClassName(p1) : this.p1 = p1;` = with initializer (properties marked _final_ **must** be initialized here, not in the constructor's body)
@@ -175,16 +189,53 @@ Key-value object. Both Key & Value can be any type. Keys are unique (not values)
     * Factory = `factory Animal() { return another Animal() constructor here }`, used for caching (singleton) or polymorphism (return subclasses)
   * [Constructors](https://www.freecodecamp.org/news/constructors-in-dart/)
   * [Exploring Dart Constructors](https://medium.flutterdevs.com/exploring-dart-constructors-345398a0e4c5)
+* `_` prefixed fields are private
 * Getters & Setters
   * `get height { return this._height}`
   * `get height => _height`
   * `set height(value) => _height = value`
-* [mixins](https://medium.com/flutter-community/dart-what-are-mixins-3a72344011f3) = multiple (behavioral) inheritance
-  * Definition = like any regular class (make it _abstract_ to prevent instanciation) or `mixin KokoMixin`
-  * Usage = `class Koko with KokoMixin`
+
+#### Inheritance & Mixins
+
+An [implicit interface](https://dart.dev/guides/language/language-tour#implicit-interfaces) is defined along with each class.
+A child class can either _extend_ a parent class or _implement_ a parent's implicit interface (thus inheriting **no** concrete implementation).
+There is no syntax for declaring explicit interfaces, but _implementing_ an [abstract class](https://stackoverflow.com/a/20791334/3559724) is close.
+Multiple inheritance is not permitted: every class (except for `Object`) has exactly **one** superclass.
+
+* `extends` = class inheritance eg `class Koko extends KokoParent` (use `super` to access base fields/methods)
+* `implements` = interface inheritance eg `class Koko implements KokoParent` (**must** `@override` all the parent fields/methods)
+* `with` = mixin eg `mixin KokoMixin {…}`, then `class Koko with KokoMixin {…}`
+  * Mixins are basically (multiple) behavioral inheritance
+  * any class without a constructor can be a mixin eg `class ConstructorlessClass {void fun() {…}}` (make it _abstract_ to prevent instanciation)
+  * mixed-in methods can be overriden eg `mixin KokoMixin {void fun() {…}}`, then `class Koko with KokoMixin {@override fun() {…}}`
+  * it is possible to combine extension with mixins eg `class AB extends Parent with A, B {}`
+* [extends vs with vs implements](https://www.geeksforgeeks.org/dart-extends-vs-with-vs-implements/)
 
 ## Guidelines
 
 * [Effective Dart style](https://dart.dev/guides/language/effective-dart/style)
 
-## Resources
+## Code Samples
+
+Mixins (adapted from [Romain Rastel: What are mixins?](https://medium.com/flutter-community/dart-what-are-mixins-3a72344011f3)):
+
+```dart
+class A { String getMessage() => 'A'; }
+class B {   String getMessage() => 'B'; }
+class Parent {   String getMessage() => 'P'; }
+
+// Exploded form of `class AB extends P with A, B {}`
+class PA = Parent with A;
+class PAB = PA with B;
+class AB extends PAB {}
+
+// Exploded form of `class BA extends P with B, A {}`
+class PB = Parent with B;
+class PBA = PB with A;
+class BA extends PBA {}
+
+void main() {
+  print(AB().getMessage()); // "B"
+  print(BA().getMessage()); // "A"
+}
+```

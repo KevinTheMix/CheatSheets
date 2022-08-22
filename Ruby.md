@@ -993,10 +993,11 @@ Note that the extended methods in the module are defined without '.self', otherw
 
 #### Extend Definition
 
-	class Class
-		extend Module
-	Class.extend Module		# Alternate syntax
-	instance.extend Module 	# Only that particular instance will gain all the methods from Module
+```ruby
+class Class extend Module
+Class.extend Module     # Alternate syntax
+instance.extend Module  # Only that particular instance will gain all the methods from Module
+```
 
 ## IO
 
