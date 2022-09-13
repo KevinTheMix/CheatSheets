@@ -14,6 +14,11 @@ Features:
 * Hot reload
 * Fast for all platforms
 
+Don't forget:
+
+* Prefix private members with undescore `_`
+* Immutable variables as _final_
+
 ## Environment
 
 * [DartPad](https://dartpad.dev)
@@ -24,14 +29,21 @@ Features:
   * Every Dart file is a library (meaning it can get `import`-ed in another file), even if it doesn’t use any library directive explicitely
   * Identifiers that start with an underscore (_) are visible only inside the file/library
   * [_as_ vs _show_](https://stackoverflow.com/a/19723473/3559724)
-    * `as` = naming the whole library
-    * `show` (& `hide`) = picking/accessing a specific object within that library
+    * `as` = specifying an (arbitrary) local scope name to the whole library
+    * `show` (& `hide`) = picking/accessing a specific (existing) object within that library
 
 ## Syntax
 
 * [Future](https://dart-tutorial.com/asynchronous-programming/future-in-dart/)
   * [Future tutorial](https://medium.com/flutter-community/a-guide-to-using-futures-in-flutter-for-beginners-ebeddfbfb967)
+  * `await Future` vs `Future.then()` [are different](https://stackoverflow.com/a/54515559/3559724) (former is blocking; latter is a callback)
+  * `then(…)` also returns a Future (=> chainable eg `Future.then(…).then(…)`)
+  * `then(…)` always takes in an argument (even when the Future returns nothing eg `then((_) => …)`)
+  * `then(…)` can be appended after `catchError(…)`, in which case the latter should handle the error and return some valid value
+    * Some explicit generic typing on a previous `then<T>()` may be required in that scenario (see <https://github.com/dart-lang/sdk/issues/42363>)
+  * `catchError((e) => …, test: condition)` = applies error handling treatment (if the optional condition is met)
 * Stream = async data/events/feed `Stream<int> count() async* { int i=1; while(true) yield i++; }`
+* `assert(condition)` = development-only checks (not executed in production)
 
 ### Keywords, Types & [Operators](https://dart.dev/guides/language/language-tour#operators)
 
@@ -57,31 +69,45 @@ Features:
   * `a!` = casts _a_ to its underlying non-nullable type
   * `a?.b` = returns `null` if a is null (equivalent to `a == null ? null : a.b`)
   * `a ?? b` = returns _a_ if not null; _b_ otherwise
-  * `a ??= b` = assigns _b_ only if _a_ was null
+  * `a ??= b` = assigns _b_ only if _a_ was null (shorter than `if (a != null) a = b`)
   * `..` and `?..` = [cascade notation](https://dart.dev/guides/language/language-tour#cascade-notation)
-    * Create an object and immediately chain methods/properties then returning it à la Visual Basic .NET's `With...End With`
+    * Create an object and immediately chain methods/properties then returning it à la Visual Basic .NET's `With (…) End With`
     * E.g. `return List<int>.from(items)..add(Item());`
   * `...` = spread operator (see collections section below)
+
+* `switch(…) { case value: …; }` = does not require a _default_ case
+
+* `async` keyword comes between function head & body eg `function(…) async { … }`
+  * We can use `.then(…)` to callback futures instead
+
+* `#koko` = [Symbol](https://dart.dev/guides/language/language-tour#symbols)
 
 ### Numbers
 
 * `ìnt` & `double` inherit from `num`
 * `~/` = forces division integer result
 * `double.tryParse(num) != null` = [Check if number](https://stackoverflow.com/a/24085491/3559724)
+* `floor()`, `celing()` & `round()` = useful to turn a **double** into the closest **int**
 
 ### Strings
 
-* `'$koko'` or `'${array[i]}'` = string interpolation
-* `'abc'.substring(start, [end])`
-* `'abc'.characters` (property) = string as characters list
-* Unicode support using _characters.dart_ package (Runes and grapheme cllusters)
-* `#symbol` (not a String, but I'll just leave this here for now)
+[Single vs Double quotes](https://stackoverflow.com/a/54014914/3559724)
+They're identical with the added benefit that nesting them can make it easier to work with inner quotes (eg `"This is a 'great' example"`).
+
+* `r'C:\System'` = raw string (escapes automatically `\` and prevents interpolation, à la C# `@"C:\System"`)
+  * `'C:\\System` alternatively with manual escaping
+* `'$koko'` or `'${longer.expression[i]}'` = interpolation
+* `String s = 'a' 'b'    'c'` = concatenation (result: `'abc'`)
+* `s.startsWith()`
+* `s.substring(start, [end])`
+* `s.characters` (property) = string as characters list
+* Unicode support using _characters.dart_ package (Runes and grapheme clusters)
 * [IsNullOrEmpty](https://stackoverflow.com/a/52948927/3559724) = `s?.isEmpty ?? true` or simply `s == null || s.isEmpty`
 * Formatting
   * `NumberFormat('###.00').format(num)` = _"123.00"_
-  * `num.ToStringAsFixed(2)` = _"123.00"_
+  * `num.toStringAsFixed(2)` = _"123.00"_
   * `DateFormat.yMMMd().add_Hm().format(dateText)` = _"Aug 12, 2022 16:20_
-  * `DateFormat('y.MM.dd).add_Hm().format(dateText)` = _"2022.08.12 16:20"_
+  * `DateFormat('y.MM.dd').add_Hm().format(dateText)` = _"2022.08.12 16:20"_
 
 ### [Collections](https://api.flutter.dev/flutter/dart-collection/dart-collection-library.html)
 
@@ -89,6 +115,9 @@ Features:
 * `collection.length`
 * `...` (spread operator) or `...?` (null-aware spread operator)
 * `const {collection_literal}` = define a compile-time constant collection
+* `first()` & `single()`
+* `firstWhere()` & `singleWhere()`
+* `any(condition)`
 
 #### [Lists](https://dart.dev/guides/language/language-tour#lists)
 
@@ -97,6 +126,10 @@ In Dart, arrays are List objects, so most people just call them _lists_.
 [Arrays in other languages are called Lists in Dart](https://stackoverflow.com/a/64273912/3559724).
 
 * `[1, 2, 3]` = Dart infers the type
+* `[...list]` = shallow-clone an array
+  * Can be used to add items eg `[...list, item]`
+  * Can be used to concatenate lists eg `[...a, ...b]`
+  * [Spread operator actually shallow or deep?](https://stackoverflow.com/q/61421873/3559724>)
 * `<int>[1, 2, 3]` = with explicit generic type
 * `<int>[]` = with explicit generic type now mandatory since there are no items yet to infer from
   * For casting however, we need to use `List<Type>` instead
@@ -107,15 +140,19 @@ In Dart, arrays are List objects, so most people just call them _lists_.
 * **Collection if** = add item conditionally (e.g. `[if (condition) Item(…), b, c]`), **Note: don't use curly braces in this syntax**
 * **Collection for** = add items using a loop (e.g. `[for (var i in integers) '$i'`] = turns a list of int into Strings)
 * `list.add(item)`
+* `list.insert(index, item)` eg `list.insert(0, item)` to add at the beginning (unlike `add()`)
 * `list.remove(item)` = remove by reference
 * `list.removeAt(index)` = remove by index
-* `list.removeWhere(bool Function)` = remove by condition
+* `list.removeWhere(bool Function)` = conditionally remove from instance (ie in place!)
 * `list.elementAt(i)` == `list[i]`
+* `list.indexOf(element)` = index by element
+* `list.indexWhere(condition)` = index by condition
 * `list.first` & `list.last` (properties)
 * `list.forEach((i) => print(i));` or simply `list.forEach(print);`
 * `for(var item in list) …`
 * `list.map((item) => …)` = C# Linq `Select()`; can be used to create one Widget for each list item
   * Returns an `Iterable<T>`, so append `toList()` to evaluate it immediately and turn into a non-lazy List
+  * [Map with index](https://channaly.medium.com/map-with-index-in-dart-flutter-6e6665850ea8)
 * `list.reduce((accu, next) => accu + next)` = reduces a collection to a single value (à la C# `Aggregate()`)
   * `list.reduce(math.min/max)`
 * `list.fold<int>(start, (accu, next) => accu + next)` = [same as reduce but can return any type](https://stackoverflow.com/a/20491946/3559724)
@@ -154,6 +191,10 @@ Key-value object. Both Key & Value can be any type. Keys are unique (not values)
 * `map.values.elementAt(index)` = access a value by index (or using an [extension method](https://stackoverflow.com/a/60521753/3559724))
 * `map.forEach((key, value) {…})` (or using _for-in_: `for (var key in map.keys) { … map[key] … }`)
 * `map.map((key, value) {…})` = returns new key-value **Map** (not a List)
+* `map.containsKey(key)`
+* `map.remove(key)`
+* `map.putIfAbsent(key, () => value)`
+* `map.update(key, (oldValue) => newValue)`
 
 ### Functions
 
@@ -167,7 +208,7 @@ Key-value object. Both Key & Value can be any type. Keys are unique (not values)
 
 * Dart has [first-class functions](https://livebook.manning.com/book/dart-in-action/chapter-4), i.e. functions (pointers) as parameters
   * That means we can pass a function name directly as argument, or define a function on the spot using lambda/anonymous notation
-  * E.g. `f(() {...});` = named function taking in an anonymous function as argument
+  * E.g. `f(() {…});` = named function taking in an anonymous function as argument
   * Like C#'s `Action<T>` & `Funct<T>`, we have `VoidCallback` and `Function`
   * Like C#'s `delegate`, we have [typedef](https://www.tutorialspoint.com/dart_programming/dart_programming_typedef.htm)
 * Anonymous Functions
@@ -199,17 +240,22 @@ Key-value object. Both Key & Value can be any type. Keys are unique (not values)
 
 An [implicit interface](https://dart.dev/guides/language/language-tour#implicit-interfaces) is defined along with each class.
 A child class can either _extend_ a parent class or _implement_ a parent's implicit interface (thus inheriting **no** concrete implementation).
-There is no syntax for declaring explicit interfaces, but _implementing_ an [abstract class](https://stackoverflow.com/a/20791334/3559724) is close.
+There is no syntax for declaring explicit interfaces, but _implement_-ing an [abstract class](https://stackoverflow.com/a/20791334/3559724) is close.
 Multiple inheritance is not permitted: every class (except for `Object`) has exactly **one** superclass.
 
 * `extends` = class inheritance eg `class Koko extends KokoParent` (use `super` to access base fields/methods)
 * `implements` = interface inheritance eg `class Koko implements KokoParent` (**must** `@override` all the parent fields/methods)
 * `with` = mixin eg `mixin KokoMixin {…}`, then `class Koko with KokoMixin {…}`
-  * Mixins are basically (multiple) behavioral inheritance
+  * Mixins are basically (multiple) behavioral inheritance, or utility/toolboxes, constrasting with logical inheritance relationship
   * any class without a constructor can be a mixin eg `class ConstructorlessClass {void fun() {…}}` (make it _abstract_ to prevent instanciation)
   * mixed-in methods can be overriden eg `mixin KokoMixin {void fun() {…}}`, then `class Koko with KokoMixin {@override fun() {…}}`
   * it is possible to combine extension with mixins eg `class AB extends Parent with A, B {}`
 * [extends vs with vs implements](https://www.geeksforgeeks.org/dart-extends-vs-with-vs-implements/)
+
+## Libraries
+
+* _dart:math_ * `Random().nextInt(n)`
+* _dart:convert_ = JSON encode/decode
 
 ## Guidelines
 
@@ -220,12 +266,12 @@ Multiple inheritance is not permitted: every class (except for `Object`) has exa
 Mixins (adapted from [Romain Rastel: What are mixins?](https://medium.com/flutter-community/dart-what-are-mixins-3a72344011f3)):
 
 ```dart
-class A { String getMessage() => 'A'; }
-class B {   String getMessage() => 'B'; }
-class Parent {   String getMessage() => 'P'; }
+class A       { String getMessage() => 'A'; }
+class B       { String getMessage() => 'B'; }
+class Parent  { String getMessage() => 'P'; }
 
 // Exploded form of `class AB extends P with A, B {}`
-class PA = Parent with A;
+class PA = P arent with A;
 class PAB = PA with B;
 class AB extends PAB {}
 

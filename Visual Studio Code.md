@@ -8,6 +8,8 @@ A good text editor.
 * Code comparison updates in real-time
 * New files must first be saved for certain shortcuts to become available based on their extension (e.g. Markdown tidying)
 
+* [Fireship: 25 VS Code Productivity Tips](https://www.youtube.com/watch?v=ifTF3ags0XI)
+
 ## Environment
 
 ### Settings
@@ -35,20 +37,27 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 ### Keyboards
 
 * `Alt + {n}` = Go to Tab {n}
+* `Alt + Click` or `Alt + Double-Click` or `Alt + Drag` = add cursors at clicked/selected locations
 * `Alt + Shift + F` = Format/Tidy (e.g. HTML)
 * `Alt + Shift + Left/Right` = Shrink/Expand selection
 * `Alt + Shift + Up/Down` = Duplicates line
-* Multi-line
-  * `Alt + Click` or `Alt + Double-Click` or `Alt + Drag` = add cursors at clicked/selected locations
-  * Select some text > `Ctrl + Shift + L` = Select All Occurrences of Find Match
-  * Select some text > `Ctrl + D (x n)` = Add Selection To Next Find Match
-* `Ctrl + B` = Toggle side-bar
 * `Ctrl + ù` or `Ctrl + J` = Toggle Terminal
 * `Ctrl + µ` = Clones selected tab or Split Terminal
+* `Ctrl + /` = toggle comments
+* `Ctrl + B` = Toggle side-bar
+* `Ctrl + D`\* = select word at current cursor position (\* then add next matching selection to multi-selection)
 * `Ctrl + K, V` = Preview Markdown Side-by-side
 * `Ctrl + K, Z` = Zen Mode
 * `Ctrl + K, Ctrl + T` = Select Theme
+* `Ctrl + L` = Select current paragraph & move next
+* `Ctrl + P` = search files
+  * Type `:` to go to line
+  * Type `>` to access Command Palette from here
+  * Type `#` to search global symbols (classes, properties, methods, etc.), works with camelCase initials search
+  * Type `@` to search local blocks
+* `Ctrl + Shift + .` = local blocks
 * `Ctrl + Shift + F` = Search
+* `Ctrl + Shift + L` = multi-select all identical selections
 * `Ctrl + Shift + T` = Tasklist
 * `Ctrl + Shift + V` = Preview Markdown
 * `Ctrl + Shift + ù` = New Terminal
@@ -58,7 +67,10 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
   * `View: Toggle Minimap`
 * `View > Show Minimap` or _Command Palette_ > `View: Toggle Minimap` = Toggle Minimap
 * `View > Toggle Word Wrap` or `Alt + Z` = Toggle Word Wrap
-* `Ctrl + L` = Select current paragraph & move next
+
+#### Terminal
+
+* `Ctrl + Left/Right` = works!
 
 ## Snippets
 
@@ -68,17 +80,28 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 
 ## Extensions
 
-* carbon-now-sh = copies code snippets for public/sharing
-* Prettify JSON (F1 > Prettify)
+* **Add jsdoc comments**
+* **Auto Rename Tag**
+* **Awesome Flutter Snippets**
+* **Better Comments** = colorize comments (eg `!` is red, `TODO` is orange, `// //` is greyed out)
+* **carbon-now-sh** = copies code snippets for public/sharing
+* **Dart** (installed with Flutter)
+* **Flutter**
+* **GitLens — Git supercharged** = improve VS Code git functionalities
 * [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint)
-* Flutter (also installs Dart extension)
+* **Material Icon Theme** = file icons
+* **PowerShell**
+* **Prettify JSON** (F1 > Prettify)
+* **Quokka** = JavaScript and TypeScript playground in your editor
+* **Remote - Containers_-** = open a folder inside a Docker container
+* **Remote Repositories** = contribute to Github repositories from within VS Code without typing git commands
+* **Remote - SSH**
+* **Paste JSON as Code** = generate models based on JSON for a series of languages
+* [Winter is Coming](https://github.com/johnpapa/vscode-winteriscoming) = theme
 * Vue & JS
-  * TSLint
-  * TSLint Vue
+  * **TSLint**
+  * **TSLint Vue**
   * [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur) = Vue tooling for VS Code
   * [Vue VSCode Snippets](https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-snippets)
     * `vdata` = Vue data snippet
     * `vmethod` = Vue methods snippet
-* Themes
-  * [Winter is Coming](https://github.com/johnpapa/vscode-winteriscoming)
-  * Material Icon Theme = file icons

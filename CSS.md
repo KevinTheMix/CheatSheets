@@ -131,6 +131,10 @@ center {
   * `border-[top/right/left/bottom]-width`
 * `border-radius: {#}{unit}` =radius of circle; if above 50% of box size (i.e. its diameter), is full circle.
 
+## [Animations](https://www.w3schools.com/css/css3_animations.asp)
+
+* `@keyframes koko_animation { 0% { color: white; } 10% { color: green; } 50% { color: red; } }` = animate then goes back to element initial color
+
 ## Methods
 
 * [repeat()](https://developer.mozilla.org/en-US/docs/Web/CSS/repeat)

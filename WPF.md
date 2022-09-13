@@ -139,6 +139,9 @@ Use **RelativeSource** to refer to an element relative to the one in which the b
 Can even bind to Self e.g. to display its current Width as Text.
 Default **RelativeSource** attribute is _Mode_ (whose values are _Self_, _FindAncestor_, _PreviousData_, _TemplatedParent_).
 
+* [BindingMode Enum](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.bindingmode?view=windowsdesktop-6.0)
+  * Default, OneTime, OneWay, OneWayToSource, TwoWay
+
 ### Dependency Property
 
 Binding in WPF relies on Dependency Properties, which is a class property augmented with WPF dependency mechanism.

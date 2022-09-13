@@ -1,5 +1,7 @@
 # SQL
 
+* [Database normalization](https://phoenixnap.com/kb/database-normalization)
+
 ## Tips
 
 * Write dangerous queries inside a transaction, and commit it only after everything went smooothly
