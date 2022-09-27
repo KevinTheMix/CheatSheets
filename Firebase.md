@@ -22,6 +22,10 @@ It is also very cheap for starting applications until they grow an active userba
 * `firebase emulators:start` = run emulator in a dev/mock environment
 * `firebase deploy` = push code to the cloud and allocate infrastructure to scale up/down
 
+## Tools
+
+* Firebase Cloud Messaging = push messages to apps
+
 ## API
 
 * Get user
@@ -29,10 +33,13 @@ It is also very cheap for starting applications until they grow an active userba
 * React to DB changes in real-time
   * `onSnapshot(boatRef, snapshot => { const boat = snapshot.data(); } );`
 
-## Firestore
+## Databases
 
-A realtime document DB.
+* Realtime Database = historical all-JSON DB
+* Cloud Firestore = newer more structured document-based DB
+* [Cloud Firestore vs Realtime Database](https://stackoverflow.com/a/46549816/3559724)
 
+Subscribe to real-time changes via Streams.
 Use _firestore.rules_ file configures DB access authorization, using Common Expression Language.
 
 ## TODO
@@ -40,3 +47,8 @@ Use _firestore.rules_ file configures DB access authorization, using Common Expr
 [Firebase: What's new in Firebase](https://www.youtube.com/watch?v=i0VNBvCqpgI)
 [Fireship: Firebase - Back to the Basics](https://www.youtube.com/watch?v=q5J5ho7YUhA)
 [Fireship: Flutter Firebase Setup for Power Users](https://www.youtube.com/watch?v=Mx24wiPilHg)
+
+* [Realtime Database triggers](https://firebase.google.com/docs/functions/database-events)
+* [Keeping track of IDs](https://stackoverflow.com/a/15250474/3559724)
+* [Understand Firebase Realtime Database Security Rules](https://firebase.google.com/docs/database/security/)
+* [Add Firebase to your Flutter app](https://firebase.google.com/docs/flutter/setup)

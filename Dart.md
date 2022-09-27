@@ -34,33 +34,24 @@ Don't forget:
 
 ## Syntax
 
-* [Future](https://dart-tutorial.com/asynchronous-programming/future-in-dart/)
-  * [Future tutorial](https://medium.com/flutter-community/a-guide-to-using-futures-in-flutter-for-beginners-ebeddfbfb967)
-  * `await Future` vs `Future.then()` [are different](https://stackoverflow.com/a/54515559/3559724) (former is blocking; latter is a callback)
-  * `then(…)` also returns a Future (=> chainable eg `Future.then(…).then(…)`)
-  * `then(…)` always takes in an argument (even when the Future returns nothing eg `then((_) => …)`)
-  * `then(…)` can be appended after `catchError(…)`, in which case the latter should handle the error and return some valid value
-    * Some explicit generic typing on a previous `then<T>()` may be required in that scenario (see <https://github.com/dart-lang/sdk/issues/42363>)
-  * `catchError((e) => …, test: condition)` = applies error handling treatment (if the optional condition is met)
-* Stream = async data/events/feed `Stream<int> count() async* { int i=1; while(true) yield i++; }`
-* `assert(condition)` = development-only checks (not executed in production)
-
 ### Keywords, Types & [Operators](https://dart.dev/guides/language/language-tour#operators)
 
 * `static` = can be applied to class methods (i.e. to be called like `Class.method()`)
-* `const` = value fixed once and for all at declaration time and from the compiler standpoint
+* `const` = value fixed once and for all at declaration compile time
   * Inside a class, const fields must also be market `static`
-    * (note that even in C#, [const always implies static](https://stackoverflow.com/a/2628435/3559724))
+    * (side-note that even in C#, [const always implies static](https://stackoverflow.com/a/2628435/3559724))
 * `final` (à la C# `readonly`) = assigned once, either at declaration, or in constructor's initiliazation list (**not its body**)
 * `late` = declare a non-nullable variable w/o initialization & fix static warnings that it can be _null_ (when you know it won't be)
 * `var` = type is (statically) infered from right-side value (it is **not** dynamic). This is the prefered way of initializing variables.
-* [dynamic](https://www.w3schools.io/languages/dart-dynamic-type/)
-  * Default type when none is specified
-  * Type can be ignored in most situations (method return value, method parameters, etc.)
+* `dynamic` = [dynamic](https://www.w3schools.io/languages/dart-dynamic-type/)
+  * _default_ type when none is specified
+  * [dynamic vs Object](https://stackoverflow.com/a/31295855/3559724)
 
 * `covariant` = explicit polymorphism (see <https://stackoverflow.com/a/71237734/3559724>)
   * [Why _covariant_ with no _@override_](https://stackoverflow.com/a/65961499/3559724)
 * `external` = [separates function declaration and body](https://stackoverflow.com/a/24929907/3559724)
+
+* `_` prefixed fields are internal (_to the library (ie the entire file), not the particular class_)
 
 * `collection is Map` = check
 * `object as Map` = cast
@@ -77,17 +68,81 @@ Don't forget:
 
 * `switch(…) { case value: …; }` = does not require a _default_ case
 
-* `async` keyword comes between function head & body eg `function(…) async { … }`
-  * We can use `.then(…)` to callback futures instead
-
 * `#koko` = [Symbol](https://dart.dev/guides/language/language-tour#symbols)
+
+### Futures & Streams
+
+* [async vs async*](https://stackoverflow.com/a/60036568/3559724)
+  * `async` (with `await`) = Future; keyword comes between function head & body eg `function(…) async { … }`
+  * `async*` (with `await for` & `yield`) = Stream; asynchronous generator function
+  * `sync*` also exists, and is related to Iterable functions containing a `yield` statement, which produce values one-by-one, _on-demand_
+  * `yield*` allows to yield an entire Iterable (ie its values one a time); see [Generator Functions](https://www.youtube.com/watch?v=TF-TBsgIErY)
+
+#### [Future](https://dart-tutorial.com/asynchronous-programming/future-in-dart/)
+
+`async-await` [is the recommended choice as it improves readability](https://dart.dev/guides/language/effective-dart/usage#prefer-asyncawait-over-using-raw-futures), but cannot be used in some scenarii (cannot make some methods async such as initState or [constructors](https://www.reddit.com/r/dartlang/comments/a4da0q/when_to_use_await_vs_then/ebevh52/), we cast multiple requests at the same time and want them to run together instead of blocking on each one, although we can use [Future.wait](https://stackoverflow.com/a/42176121/3559724) for that scenario).
+
+* [Future for beginners](https://medium.com/flutter-community/a-guide-to-using-futures-in-flutter-for-beginners-ebeddfbfb967)
+* `async-await Future` vs `Future.then()` [are different](https://stackoverflow.com/a/54515559/3559724) (former is blocking; latter is a callback)
+* `then(…)` also returns a Future (=> chainable eg `Future.then(…).then(…)`)
+* `then(…)`'s callback always takes in an argument (even when the Future returns nothing eg `then((_) => …)`)
+* `then(…)`'s callback can be a named function eg `then(print)`
+* `then(…)` can be appended _after_ `catchError(…)`, in which case it acts as a _finally_ block
+  * Some explicit generic typing on a previous `then<T>()` may be required in that scenario (see <https://github.com/dart-lang/sdk/issues/42363>)
+* `catchError((error) => …, test: {condition})` = applies error handling function (if the optional condition is met)
+* `onError<E>((error, stackTrace) => …, test: {condition})` = error of type _E_ ([more precisely typed](https://stackoverflow.com/a/69467957))
+* To handle errors with `await`, wrap the code in a _try-catch_ block (see <https://stackoverflow.com/a/61701836>)
+  * Side-node on _try-catch_: use `rethrow` to .. rethrow the original error (probably preserving its callstack more efficiently)
+* `Future.delayed(duration).then(…)` = runs `then()` callback after _duration_ time (which can be zero but will still make the code async)
+  * Similar to C#'s `Task.Delay(ms)`
+
+```dart
+void main() {
+  var future = Future(() => 'Future');  // Future<String>
+  var value2 = Future.value(123);       // Future<int>, creates a future already completed with value
+  var value1 = Future.value();          // Future<dynamic>, same
+  var nothin = Future(() {});           // Future<Null>
+     
+  print('First');
+  
+  // This print comes last, since that Future's declaration was last.
+  nothin.then((_) => print('Future returns nothing, but then() always has a parameter - even if void'));
+  
+  future
+    .then<String>((s) { print(s); throw 'error'; }) // We need to indicate (generic) type here, so following on|catchError knows what to return!
+    .onError<String>((error, stackTrace) { print(error); return 'handled'; })
+    .catchError((error) { print(error); return 'caught'; })
+    .then((s) { print(s); }
+  );
+  
+  print('Second');  
+}
+```
+
+#### Stream
+
+Streams is async data/events/feed.
+Streams are (async) like Futures but for Iterables, where values are produced to be consumed but not all are available from the start.
+
+* `Stream<int> count() async* { int i=1; while(true) yield i++; }`
+* `assert(condition)` = development-only checks (not executed in production)
+* `async*` + `yield await` = produces one value (awaited from a Future) to be returned by the Stream
+* `listen((_) => …)` = consumes a value and runs a provided callback on each
+* `where(…)`
+* `map(…)`
+* `foreach(…)`
 
 ### Numbers
 
-* `ìnt` & `double` inherit from `num`
-* `~/` = forces division integer result
-* `double.tryParse(num) != null` = [Check if number](https://stackoverflow.com/a/24085491/3559724)
-* `floor()`, `celing()` & `round()` = useful to turn a **double** into the closest **int**
+* **num**
+  * _int_ & _double_ inherit from _num_
+  * `toDouble()`
+* **double**
+  * `floor()`, `ceil()` & `round()` = useful to turn a **double** into the closest **int**
+  * `floorToDouble()`, `ceilToDouble()` & `roundToDouble()` similarly
+  * `double.tryParse(num) != null` = [Check if number](https://stackoverflow.com/a/24085491/3559724)
+* [Operators](https://dart.dev/guides/language/language-tour#operators)
+  * `~/` = forces division integer result
 
 ### Strings
 
@@ -108,6 +163,7 @@ They're identical with the added benefit that nesting them can make it easier to
   * `num.toStringAsFixed(2)` = _"123.00"_
   * `DateFormat.yMMMd().add_Hm().format(dateText)` = _"Aug 12, 2022 16:20_
   * `DateFormat('y.MM.dd').add_Hm().format(dateText)` = _"2022.08.12 16:20"_
+* `padLeft(int width)` = <https://api.dart.dev/stable/1.21.0/dart-core/String/padLeft.html>
 
 ### [Collections](https://api.flutter.dev/flutter/dart-collection/dart-collection-library.html)
 
@@ -118,6 +174,23 @@ They're identical with the added benefit that nesting them can make it easier to
 * `first()` & `single()`
 * `firstWhere()` & `singleWhere()`
 * `any(condition)`
+* `contains(item)` = find item by reference (address)
+
+* `Iterable<T>` is an interface whose inheriting classes must expose an `Iterator<T> iterator` property
+  * Lists & Maps are examples of such classes (they do have an _iterator_ property)
+  * Those classes instances can then be used in `for (… in …)` constructs
+
+```dart
+abstract class Iterator<E> {
+  bool moveNext();
+  E get current;
+}
+
+class … extends Iterable<…> {
+  …
+  Iterator<…> get iterator => …;
+}
+```
 
 #### [Lists](https://dart.dev/guides/language/language-tour#lists)
 
@@ -145,7 +218,7 @@ In Dart, arrays are List objects, so most people just call them _lists_.
 * `list.removeAt(index)` = remove by index
 * `list.removeWhere(bool Function)` = conditionally remove from instance (ie in place!)
 * `list.elementAt(i)` == `list[i]`
-* `list.indexOf(element)` = index by element
+* `list.indexOf(item)` = index by reference
 * `list.indexWhere(condition)` = index by condition
 * `list.first` & `list.last` (properties)
 * `list.forEach((i) => print(i));` or simply `list.forEach(print);`
@@ -226,11 +299,12 @@ Key-value object. Both Key & Value can be any type. Keys are unique (not values)
   * `ClassName(this.p1, this.p2);` = without body, matching properties (specifying _this_ prefix, and name/type must match)
   * `new` is optional (in Dart 2)
   * Constructors overload does not exist (same as for functions) => use differently named constructors e.g. `KokoClass.second(…)`
-    * `Animal._();` makes the constructor private => can only insantiate via (an)other named constructor(s)
-    * Factory = `factory Animal() { return another Animal() constructor here }`, used for caching (singleton) or polymorphism (return subclasses)
+    * `Animal._();` makes the constructor private => can only instantiate via (an)other named constructor(s)
+    * [Factory](https://dart.dev/guides/language/language-tour#factory-constructors) = static constructor
+      * can be used for caching (singleton returning single static instance) or polymorphism (via switch-case-return subclasses)
+      * eg `factory Animal() { return single/different Animal(s) here }`
   * [Constructors](https://www.freecodecamp.org/news/constructors-in-dart/)
   * [Exploring Dart Constructors](https://medium.flutterdevs.com/exploring-dart-constructors-345398a0e4c5)
-* `_` prefixed fields are private
 * Getters & Setters
   * `get height { return this._height}`
   * `get height => _height`
@@ -252,7 +326,7 @@ Multiple inheritance is not permitted: every class (except for `Object`) has exa
   * it is possible to combine extension with mixins eg `class AB extends Parent with A, B {}`
 * [extends vs with vs implements](https://www.geeksforgeeks.org/dart-extends-vs-with-vs-implements/)
 
-## Libraries
+## Libraries & [Packages](https://pub.dev/)
 
 * _dart:math_ * `Random().nextInt(n)`
 * _dart:convert_ = JSON encode/decode

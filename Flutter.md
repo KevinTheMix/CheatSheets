@@ -9,15 +9,17 @@ Flutter does not simply translate its widgets to their native iOS/Android counte
 Flutter **does** compile to native(machine code) apps, but it **does not** use native UI components (aka Platform Primitives).
 Instead, Flutter draws pixels on the target device using its own low-level rendering engine named _Skia_, à la _Unity_.
 It is therefore way more free & flexible than other frameworks, while also highly performant (close to native code).
-For instance, Flutter is capable of advanced 2D/3D morhp/transform animations à la PowerPoint transitions (see **Transform** widget).
+For instance, Flutter is capable of advanced 2D/3D morph/transform animations à la PowerPoint transitions (see **Transform** widget).
 
 Flutter uses a [declarative style](https://docs.flutter.dev/get-started/flutter-for/declarative), which alleviates the need of the developer to manage UI transitions (à la old WinForm for instance); indeed, she only needs to manage the state (and call `setState()`), and the framework will handle all the UI updating through re-build()'s. Old immutable instances get discarded for new ones, while the RenderObjects persist.
 
 ## Lingo
 
-* Kotlin = Google preferred language for Android app developers since 2019 (replacing Java), designed & developde by JetBrains
+* **Kotlin** = Google preferred language for Android app developers since 2019 (replacing Java), designed & developde by JetBrains
   * Compiles to JVM, or JavaScript for IOS support
-* Dart = programming language developed by Google for fast client multi-platform (web & mobile) apps development with QoL features such as Hot Reload
+* **Dart** = prog language developed by Google for fast client multi-platform apps development with QoL features such as Hot Reload
+* **Skia** = rendering engine (à la Unity) that allows Flutter to draw at the pixel level, both on mobile devices and the web (via **CanvasKit**)
+* [CanvasKit](https://skia.org/docs/user/modules/canvaskit/) = WebAssembly for rendering Skia Graphics API to HTML canvas & SVG
 * Gradle = build automation tool supporting Java, Kotlin, C/C++ & JavaScript
 * **Widget** = immutable (declarative) description of part of a UI (layout component or behavior: center, pad, rotate)
   * All Widgets are @`immutable`, holding only `final` data, so any mutating data has to be outsourced into a dedicated mutable **State**
@@ -92,19 +94,29 @@ Flutter uses a [declarative style](https://docs.flutter.dev/get-started/flutter-
 ### [CLI](https://docs.flutter.dev/reference/flutter-cli)
 
 * `flutter --version`
-* `flutter doctor` (Tip: use PowerShell to get Unicode support)
+* `flutter doctor -v(erbose)` (Tip: use PowerShell to get Unicode support)
 * `flutter doctor --android-licenses`
 * `flutter devices` = list all connected devices
 * `flutter create kokoapp`
-* `flutter run` = F5
-  * `flutter run -d(evice-id) {device}` = Run to chosen device
-  * `flutter run -d web-server` (works in any browser <https://stackoverflow.com/a/71518488>)
-  * `flutter run release --apk`
-  * `flutter run --profile` (physical devices only) = display additional performance metrics banner
-  * [Fix "Parameter format not correct"](https://stackoverflow.com/a/69519005/3559724)
+* `flutter create .`  = add web support to existing app (see <https://docs.flutter.dev/get-started/web#add-web-support-to-an-existing-app>)
 * `flutter build`
   * `flutter build appbundle`
   * `flutter build apk --split-per-abi`
+  * `flutter build web` = [Build for web deployment](https://docs.flutter.dev/deployment/web)
+  * `flutter build web --web-renderer [html|canvaskit]` = [Web Renderers](https://docs.flutter.dev/development/platform-integration/web/renderers)
+  * `flutter build web --base-href {path}` = [HTML \<base> href](https://www.w3schools.com/Tags/att_base_href.asp)
+  * Troubleshooting
+    * set `<base href>` manually to _./_ to deploy in a (non-root) subfolder
+    * replace the index.html each time, as it contains a unique service worker version ID
+    * run `flutter clean` then rebuild if flutter.js is not regenerated each time
+* `flutter run` = F5
+  * `flutter run release --apk`
+  * `flutter run -d(evice-id) {device}` = Run to chosen device
+    * `flutter run -d chrome`
+    * `flutter run -d web-server` (works in any browser <https://stackoverflow.com/a/71518488>)
+  * `flutter run -d web-server --web-renderer [html|canvaskit]` = same as build
+  * `flutter run -d {device} --profile` (physical devices only) = display additional performance metrics banner
+  * [Fix "Parameter format not correct"](https://stackoverflow.com/a/69519005/3559724)
 * `flutter install` = install app to attached device
 * `flutter clean` = clear build & packages cache (very useful before archiving/zipping an app source code)
 * `flutter format {filename}` = Format document
@@ -112,7 +124,9 @@ Flutter uses a [declarative style](https://docs.flutter.dev/get-started/flutter-
   * E.g. [Install intl](https://stackoverflow.com/a/51706630/3559724)
 * `flutter pub get` = explicitely pulls packages into the project & generates _pubspec.lock_ (implied with `flutter run`)
   * `flutter packages get` = [alias for the above](https://stackoverflow.com/a/61038022/3559724)
-* [Upgrade and clean cache](https://stackoverflow.com/a/64515721/3559724)
+* `flutter pub cache repair`
+* `flutter upgrade` = install latest Flutter version
+  * [Upgrade and clean cache](https://stackoverflow.com/a/64515721/3559724)
 
 ### Folder Structure
 
@@ -140,24 +154,26 @@ Clean repositories:
 
 ### Visual Studio Code
 
-* `Ctrl + ,` = _File > Preferences_ > _Settings_
-* `Ctrl + Space` = Intellisense
-* Terminal area
-  * _PROBLEMS_ tab contains list of compile issues
-  * _DEBUG CONSOLE_ contains list of runtime issues
-* _Settings > Editor > Guides: Bracket Pairs_ = set parentheses matching coloured line guides (previously an extension, now built-in)
 * Don't forget you can auto-complete via camelCase initials (eg `sichsc + Tab` => **SingleChildScrollView**)
 
-* (`Ctrl + Shift + P` > ) _Flutter:_
-  * _Toggle Debug Painting_ = show/hide dashed layout wireframes
 * (`Ctrl + Shift + P` > ) _Dart:_
   * _Open DevTools_ = `Ctrl + Alt + D`
+* (`Ctrl + Shift + P` > ) _Flutter:_
+  * _Toggle Debug Painting_ = show/hide dashed layout wireframes
+
+* `Ctrl + ,` = _File > Preferences_ > _Settings_
+  * _Settings > Editor > Guides: Bracket Pairs_ = set parentheses matching coloured line guides (previously an extension, now built-in)
 * `Ctrl + ;` = Quick Fix… (also displays _Refactor_ options)
+* `Ctrl + Space` = Intellisense
 * `Ctrl + Shift + R` = Refactor
-  * Convert Stateless to Stateful
 * `Shift + Alt + F` = (Right-Click >) Format document (provided by Flutter extension)
   * Append a comma to each closing parenthesis to take advantage of this command
 * `Ctrl + Click` = `F12` = Go to definition
+
+* Terminal area
+  * _PROBLEMS_ tab contains list of compile issues
+  * _DEBUG CONSOLE_ contains list of runtime issues
+  * `Right-Click` > _Clear Console_
 
 #### Snippets
 
@@ -166,6 +182,8 @@ Clean repositories:
 * `stfu` = Stateful widget
 
 ## API
+
+* Use two fingers to scroll lists & co will make it faster (useful tip to detect apps written in Flutter)
 
 * `runApp(…)` = takes in the instance of a widget and inflate it to the screen size (calls its `build()` method, etc.)
 * `MateriapApp(debugShowCheckedModeBanner: false)` = [remove debug banner](https://stackoverflow.com/a/48893964/3559724)
@@ -206,9 +224,9 @@ Clean repositories:
 
 * [Flutter: Rendering](https://www.youtube.com/watch?v=54yoCqkew6g)
 
-* Lists & Grids = ListView, DataTable, Table, GridView
+* Lists & Grids = ListView, DataTable, Table, GridView, ListTile, GridTile (with GridTileBar as _header_ or _footer_)
   * **GridView** = grid layout; usually via `GridView.count()` constructor (_crossAxisCount_, _mainAxisSpacing_, _crossAxisSpacing_)
-* Wrappers = Container, Column & Row, Stack, FittedBox, SizedBox, LimitedBox, ConstrainedBox, UnconstrainedBox, OverflowBox
+* Wrappers = Container, Column & Row, Stack, FittedBox, SizedBox, LimitedBox, ConstrainedBox, UnconstrainedBox, OverflowBox, Wrap
   * **Container** has no `createRenderObject()` method; it is a wrapper for other layout widgets ~ its properties (see its `build()` source code)
   * **Column**/**Row** (inheriting from **Flex**)
     * They are flex spaces, giving unbounded constraints to all their children to let them choose their space (& usually asking them to shrinkWrap)
@@ -263,6 +281,10 @@ Clean repositories:
   * Solution: it could be advantageously replaced with the leaner **SizedBox** widget, which also has the benefit of a _const_ constructor
   * See <https://www.flutteroverflow.dev/sized-box-for-whitespace/>
 
+* Faint border lines above/below some widgets
+  * **DrawerHeader** = set **Divider** color (to _transparent_) or width (to _0_) via (global/local) themeing
+  * **Material/Card** = set the _shape_'s _side_'s `color` (to _transparent_) or `width` (to _0_)
+
 ### Themeing & Adaptative Design
 
 * `Theme.of(context).textTheme.headline4`
@@ -283,6 +305,7 @@ Clean repositories:
 * [Colors](https://api.flutter.dev/flutter/material/Colors-class.html) e.g. `Colors.green[400]`
   * `Color.fromRGBO(r, g, b, opacity)` where _opacity_ is a **double** between _0.0_ and _1.0_
   * `Color.fromARGB(alpha, r, g, b)` where _alpha_ is an **int** between _0_ and _255_
+  * `withOpacity(0.0 - 1.0)`
 * Buttons
   * `ElevatedButton.styleFrom(primary: Colors.green, onPrimary: Colors.yellow)`
   * `ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.red))`
@@ -293,7 +316,9 @@ Clean repositories:
   * `import 'dart:io' show Platform;` then `Platform.isAndroid`
   * `.adaptive()` method on some widgets (eg `Switch.adaptive()`)
 
-### [Animations](https://docs.flutter.dev/development/ui/animations) & Transitions
+### [Animations](https://api.flutter.dev/flutter/animation/animation-library.html) & Transitions
+
+[Introduction to Animations](https://docs.flutter.dev/development/ui/animations):
 
 1. [Implicit Animations](https://www.youtube.com/watch?v=IVTjpW3W33s)
 2. [TweenAnimationBuilder](https://www.youtube.com/watch?v=6KiPEqzJIKQ) = create tweens in a static final variable outside of `build()`
@@ -304,28 +329,31 @@ Clean repositories:
 * [How to choose which Flutter Animation?](https://www.youtube.com/watch?v=GXIJJkq_H8g)
   * [Rive](https://pub.dev/packages/rive)
   * [LottieFiles](https://pub.dev/packages/lottie)
-* [Animations done right](https://www.youtube.com/watch?v=wnARLByOtKA)
-  * [Source Code](https://github.com/mjohnsullivan/dashcast/tree/flutterEurope), with sin waves
+* [Animations done right](https://www.youtube.com/watch?v=wnARLByOtKA) = self-made sound-wave-looking sin animation
 
 * Implicit = performed automatically when a property updates (via setState()), non-repeating, continuous, single
-  * **AnimatedContainer** = implicit animation via linear interpolation
-    * `transform: Matrix4.identity()..translate()..multiply()`
-  * **AnimatedAlign** = alignment update transition
-  * **AnimatedCrossFade** = fade transition (_first/secondChild_, _duration_, _crossFadeState_, _abcCurve_), use _layoutBuilder_ for custom
-  * **AnimatedList** = ListViews with visual feedback on adding/removing item
-  * **AnimatedOpacity** = opacity animation (_curve_, _duration_, _opacity_ via `setState()`)
-  * **AnimatedPadding** = padding animation (_curve_, _duration_, _padding_ via `setState()`)
-  * **AnimatedPositioned** = animated **Positioned** reacting to properties change; useful to implement custom slider
-  * **AnimatedSlide** = offset update transition
+  * **AnimatedCrossFade** = A/B fade transition (_crossFadeState_), use custom _layoutBuilder_ to avoid layout jumps
+  * **AnimatedList** = ListViews with built-in visual feedback on adding/removing item
+  * **ImplicitlyAnimatedWidget** = base class for the following widgets:
+    * **AnimatedAlign** = alignment update transition
+    * **AnimatedContainer** = implicit animation via linear interpolation (`transform: Matrix4.identity()..translate()..multiply()`)
+    * **AnimatedSlide** = offset update transition
+    * **AnimatedOpacity** = opacity animation (_curve_, _duration_, _opacity_ via `setState()`)
+    * **AnimatedPadding** = padding animation (_curve_, _duration_, _padding_ via `setState()`)
+    * **AnimatedPositioned** = animated **Positioned** reacting to properties change; useful to implement custom slider
+    * **AnimatedPhysicalModel** = animated _borderRadius_, _color_ & _elevation_
   * **TweenAnimationBuilder\<T>** = custom implicit animation (_tween_, _duration_, _builder_, _curve_, _onEnd_), pass _child_ for performance
-    * Can be used for _continuous_ (ie pulsating) repeating animations using its `onEnd` callback (to target new end value)
+    * It always chases its _tween_'s end point, which can be adjusted (if set to a state variable) as the animation is playing
+    * That means it can be somehow controlled, or at least its end target, via state
+    * Can be used for _continuous_ (ie pulsating) repeating animations using its `onEnd` callback set the end point to the start value and back
 * Explicit = has to be started/piloted manually; requires a **AnimationController** (and its proper disposable within a StatefulWidget's State)
-  * **AnimatedBuilder** = custom explicit (i.e. coded by the developer) animation using Tweens (provide _child_ to optimize rendering)
-    **AnimatedIcon** = (`icon: AnimatedIcon.play_pause, progress: _controller`, `myAnimation.forward/reverse()`)
-  * **AnimatedWidget** = abstract and base class for **Foo-Transition**s; can be inherited to create custom animation/transitions
-  * **AnimationController** = manual pilot engaged (`vsync: this`, `(reverse)Duration`, `isCompleted|Dismissed`, `value`)
+  * **AnimatedBuilder** = full-custom explicit (i.e. coded by the developer) animation using Tweens (provide _child_ to optimize rendering)
+    **AnimatedIcon** = (`icon: AnimatedIcon.play_pause, progress: _controller`)
+  * **AnimatedWidget** = abstract base class for built-in & custom **Foo-Transition**s, with a single _listenable_ property
+    * Can be extended, in which case its _listenable_ property expects an animation, which is typically an **AnimationController**
+  * **AnimationController** = animation pilot/player (`vsync: this`, `(reverse)Duration`, `isCompleted|Dismissed`, `value`)
     * The containing widget must mixin **(Single)TickerProviderStateMixin** to allow for `vsync: this` (see Deep Dive about tickers)
-    * `addStatusListener()`, `forward()`, `fling()`, `repeat()`, `reverse()`, `dispose()`
+    * `add(Status)Listener()`, `forward()`, `fling()`, `repeat()`, `reverse()`, `dispose()`, `animateTo(double value)` similar to TweenAB's end
     * Listeners don't actually have to use its `value` (but it makes sense that they do); they're just getting refreshed while it's 'playing'
   * **Foo-Transition**, where Foo = Size, Fade, Align, Scale, DecoratedBox, DefaultTextStyle, Positioned, Slide, Rotation
 * Transitions
@@ -338,16 +366,19 @@ Clean repositories:
 * `Color.lerp()`
   * Use [colors linear interpolation](https://stackoverflow.com/a/66385071/3559724) between tabs transitions (via **TabController**'s _offset_)
 * Curves = `easeIn|Out`, `elasticIn|Out`, `linear`
+* Clips = wraps a _child_ widget to only show its parts covered by built-in (**ClipOval**, **ClipRRect**) shape or custom (**ClipPath**) path
+  * **ClipOval** = auto-adaptative circle/oval cutting (_clipper_ `extends CustomClipper<Rect>`), can be animated for fun effects
+  * **ClipRRect** (**R**ounded) = rounded rectangle (_child_, _borderRadius_, _clipBehavior_)
+  * **ClipPath** = create own (svg-like) shape (`clipper: KokoClipper()` where `class KokoClipper extends CustomClipper<Path>`)
+    * [Example](https://stackoverflow.com/a/70820679) basic
+    * [Example](https://stackoverflow.com/a/69476516) using `quadraticBezierTo(…)`
 
 * TODO:
   * [Animations tutorial](https://docs.flutter.dev/development/ui/animations/tutorial)
   * [Implicit animations](https://docs.flutter.dev/codelabs/implicit-animations)
   * [Staggered animations](https://docs.flutter.dev/development/ui/animations/staggered-animations)
-  * [animations library](https://api.flutter.dev/flutter/animation/animation-library.html)
   * [Perspective on Flutter](https://medium.com/flutter/perspective-on-flutter-6f832f4d912e) via **Transform** widget
-  * [ScaleTransition](https://api.flutter.dev/flutter/widgets/ScaleTransition-class.html)
   * [Hero Animations](https://docs.flutter.dev/development/ui/animations/hero-animations)
-  * RotationTransition
 
 ### [Widgets](https://docs.flutter.dev/development/ui/widgets) (& Classes)
 
@@ -495,33 +526,33 @@ Clean repositories:
 *
 *
 
-### [Packages](https://docs.flutter.dev/development/packages-and-plugins/using-packages)
+### [Packages](https://pub.dev/)
+
+[Using packages](https://docs.flutter.dev/development/packages-and-plugins/using-packages)
+[Community Packages](https://pub.dev/publishers/fluttercommunity.dev/packages)
 
   At a minimum, a Dart package is a directory containing a pubspec file.
   A plugin is a type of package—the full designation is _plugin package_, which is generally shortened to plugin.
   A plugin package is a special kind of package that makes platform functionality available to the app. Plugin packages can be written for Android (using Kotlin or Java), iOS (using Swift or Objective-C), web, macOS, Windows, Linux, or any combination thereof. For example, a plugin might provide Flutter apps with the ability to use a device’s camera.
 
-* [Official Dart & Flutter package repository](https://pub.dev/)
-  * [intl](https://pub.dev/packages/intl) = Dates & Numbers (& Bidi) formatting methods
-* [Community Packages](https://pub.dev/publishers/fluttercommunity.dev/packages)
-  * [get_it](https://pub.dev/packages/get_it) (aka **GetIt**) = DI container / service locator
-  * [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons)
-
+* [animated_clipper](https://pub.dev/packages/animated_clipper) = clip transitions for interactive buttons & co
+* [bloc](https://pub.dev/packages/bloc) = [BLoC pattern](https://www.didierboelens.com/2018/08/reactive-programming-streams-bloc/)
+* [clippy_flutter](https://pub.dev/packages/clippy_flutter) = collection of clip shapes (arrows, rhombus)
+* [flutter_custom_clippers](https://pub.dev/packages/flutter_custom_clippers) = collection of clip shapes (wave, panels)
+* [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons)
+* [get_it](https://pub.dev/packages/get_it) (aka **GetIt**) = DI container / service locator
 * [GetX](https://chornthorn.github.io/getx-docs/) = DI, Navigation, State Management all-in-one framework (à la WPF Prism)
-
-* **transparent_image** (see **FadeInImage**)
-
+* [go_router](https://pub.dev/packages/go_router)
+* [motion](https://pub.dev/packages/motion) = gyroscope-based effect
 * [provider](https://pub.dev/packages/provider) = easier, more reusable **InheritedWidget**
   * [create vs value](https://stackoverflow.com/a/61861315/3559724); use _value_ inside `Grid|ListView.builder`
-* [bloc](https://pub.dev/packages/bloc) = [BLoC pattern](https://www.didierboelens.com/2018/08/reactive-programming-streams-bloc/)
-* [go_router](https://pub.dev/packages/go_router)
-
 * [shimmer](https://pub.dev/packages/shimmer) = pulsating UI loading effect
-* [motion](https://pub.dev/packages/motion) = gyroscope-based effect
+* **transparent_image** (see **FadeInImage**)
 
 #### [Flutter: Package of the Week](https://www.youtube.com/watch?v=r0tHiCjW2w0&list=PLjxrf2q8roU1quF6ny8oFHJ2gBdrYN_AK&index=21)
 
 * [cached_network_image](https://docs.flutter.dev/cookbook/images/cached-images)
+* [intl](https://pub.dev/packages/intl) = Dates & Numbers (& Bidi) formatting methods
 
 * **async**= additions to Dart's built-in _async_ (`StreamGroup.merge()`, `AsyncCache<T>()` time-based cacheing, **StreamQueue**)
 * **url_launcher** = open external URL/e-mail/phone number/SMS/any app with special URL handlers (e.g. YouTube). Check `canLaunch()` first
@@ -598,6 +629,7 @@ Clean repositories:
   * The _const_ keyword in front of the constructor is very important, making rendering more efficient by skipping most of the rebuild
   * **Navigator** & routes/pages via `push()` & `pop()`
   * Linear progress bar with color Animations
+  * Debugging
 
 * [How Flutter renders Widgets](https://www.youtube.com/watch?v=996ZgFRENMs) (Configure, Lifecycle & Paint!)
 * [Building your first Flutter Widget](https://www.youtube.com/watch?v=W1pNjxmNHNQ)
@@ -628,13 +660,17 @@ Clean repositories:
 
   * [Splash screen](https://blog.logrocket.com/make-splash-screen-flutter/)
 
+* [Material Design 3](https://m3.material.io/)
+  * [Material Typography](https://m3.material.io/styles/typography/fonts)
+
 * Themeing
+  * [AppBar customization](https://www.geeksforgeeks.org/flutter-appbar-widget/)
+  * [Reddit: ThemeData is a mess](https://www.reddit.com/r/FlutterDev/comments/xjlman/themedata_is_a_mess/)
   * Dark theme(ing)
   * Colors
     * Find synergetic [Color palettes](https://coolors.co/palettes/trending)
     * [Material.io - Picking colors](https://material.io/design/color/the-color-system.html#tools-for-picking-colors) (cyan, teal)
   * Fonts
-    * [Material Typography](https://m3.material.io/styles/typography/fonts)
     * [Google Fonts](https://fonts.google.com/)
   * Icons, Images
     * **AnimatedIcon** = like Icons.abc, but animated (`icon: AnimatedIcon.play_pause, progress: myAnimation`, `myAnimation.forward/reverse()`)
@@ -654,6 +690,7 @@ Clean repositories:
   * [Saving data to Local Storage in Fluter](https://medium.com/kick-start-fluttering/saving-data-to-local-storage-in-flutter-e20d973d88fa)
   * [Fireship: Flutter Provider - Advanced Firebase Data Management](https://www.youtube.com/watch?v=vFxk_KJCqgk) (_dispose StreamSubscription_)
   * [Robert Brunhage: Flutter Firebase Authentication - The Clean Way](https://www.youtube.com/watch?v=oJ5Vrya3wCQ)
+  * [Add Firebase to your Flutter app](https://firebase.google.com/docs/flutter/setup)
 
 * State Management
   * [Ephemeral vs App states](https://docs.flutter.dev/development/data-and-backend/state-mgmt/ephemeral-vs-app)
@@ -709,6 +746,8 @@ Clean repositories:
 * [Flutter Search Bar](https://www.geeksforgeeks.org/flutter-search-bar/)
 
 * [Optimizing](https://www.youtube.com/watch?v=vVg9It7cOfY)
+
+* [Web: URL strategy & removing '#'](https://stackoverflow.com/a/67148421)
 
 ## Code samples
 

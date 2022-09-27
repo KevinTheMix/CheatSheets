@@ -6,6 +6,8 @@ C# Is good.
 
 ## Keywords
 
+* `dynamic` = disable compile-time type checking
+  * Usually a code smell, but can be used for rapid prototyping of objects with common members, w/o coding a full-fledged polymorphic solution
 * `new` = Redefines a method in a child class. See <https://msdn.microsoft.com/en-us/library/ms173153.aspx>
 * `override` = Overrides a method in a child class. You cannot override non-virtual methods.
 * `virtual` = Marks a method in a parent class to be overriden in a child class. Methods are non-virtual by default. See <https://msdn.microsoft.com/en-us/library/9fkccyh4.aspx>

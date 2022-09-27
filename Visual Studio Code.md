@@ -34,28 +34,34 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 * _Right-click folder > Open in Terminal_ = Open folder in terminal
 * _Drag & Drop Tab_ = Move opened file view
 
-### Keyboards
+### [Keyboards shortcuts](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf)
 
 * `Alt + {n}` = Go to Tab {n}
+* `Alt + Left/Right` = Go back/forward
 * `Alt + Click` or `Alt + Double-Click` or `Alt + Drag` = add cursors at clicked/selected locations
 * `Alt + Shift + F` = Format/Tidy (e.g. HTML)
 * `Alt + Shift + Left/Right` = Shrink/Expand selection
-* `Alt + Shift + Up/Down` = Duplicates line
+* `Alt + Shift + Up/Down` = Copy line up/down
 * `Ctrl + ù` or `Ctrl + J` = Toggle Terminal
 * `Ctrl + µ` = Clones selected tab or Split Terminal
 * `Ctrl + /` = toggle comments
 * `Ctrl + B` = Toggle side-bar
 * `Ctrl + D`\* = select word at current cursor position (\* then add next matching selection to multi-selection)
+* `Ctrl + K, Ctrl + O` = Open Folder
+* `Ctrl + K, Ctrl + R` = Open URL to Keyboard Shortcuts PDF
+* `Ctrl + K, Ctrl + S` = Keyboard shortcuts
+* `Ctrl + K, Ctrl + T` = Select Theme
+* `Ctrl + K, R` = Reveal in File Explorer
 * `Ctrl + K, V` = Preview Markdown Side-by-side
 * `Ctrl + K, Z` = Zen Mode
-* `Ctrl + K, Ctrl + T` = Select Theme
 * `Ctrl + L` = Select current paragraph & move next
-* `Ctrl + P` = search files
+* `Ctrl + P` = Search files
   * Type `:` to go to line
   * Type `>` to access Command Palette from here
   * Type `#` to search global symbols (classes, properties, methods, etc.), works with camelCase initials search
   * Type `@` to search local blocks
 * `Ctrl + Shift + .` = local blocks
+* `Ctrl + Shift + Enter` = Insert line above
 * `Ctrl + Shift + F` = Search
 * `Ctrl + Shift + L` = multi-select all identical selections
 * `Ctrl + Shift + T` = Tasklist
@@ -77,6 +83,7 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 * In a HTML file
   * `!` = scaffold a basic HTML page
   * `scr` = script element
+* `camelCase initials + Tab` => intellisense fills the rest ( both for class type names & instance naming)
 
 ## Extensions
 

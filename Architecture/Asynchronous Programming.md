@@ -11,7 +11,7 @@ Going down that callstack hierarchy, we always arrive at some kind of low-level 
 _Note that in Windows, all I/O is asynchronous; synchronous APIs are just a convenient abstraction_.
 (See <https://stackoverflow.com/a/12484535>).
 
-As a each child method encounters an _await_ call, the control is given back to its parent method up the callstack, **synchronously** as well.
+As a each child method encounters an `await` call, the control is given back to its parent method up the callstack, **synchronously** as well.
 
 Going up the hierarchy of async methods, we should always arrive either:
 
@@ -20,9 +20,19 @@ Going up the hierarchy of async methods, we should always arrive either:
 * at a (well-devised) blocking call, doing something else in between task creation & waiting.
 * at an event callback, that can be marked async to complete the async chain.
 
+## API
+
+* `Task.Delay(0)` = [not actually asynchronous](https://stackoverflow.com/a/33407181/3559724) as it resolves immediately
+* `Task.Yield()`
+
 ## UI Thread
 
+In Winform, the thread on which the first form is created is known as the UI thread.
+Subsequent changes to controls can only be performed using the same thread that created them.
+See [What does SynchronizationContext do?](https://stackoverflow.com/a/18098557/3559724)
+
 Frameworks such as WinForms, WPF, and Silverlight all place a restriction on which threads are able to access UI controls, namely that the control can only be accessed from the thread that created it.
+
 This is called [thread affinity](https://dailydotnettips.com/what-is-synchronizationcontext-all-about/).
 See <https://devblogs.microsoft.com/pfxteam/await-and-ui-and-deadlocks-oh-my/>
 
@@ -30,14 +40,14 @@ It's not a special thread, just the one dedicated to react to UI events (by read
 
 ## async/await
 
-The *async* & *await* keywords abstract much of the complexity of giving control up one level at an await and later resuming **synchronously**.
+The `async` & `await` keywords abstract much of the complexity of giving control up one level at an await and later resuming **synchronously**.
 The promise that some result is going to arrive is encapsulated in the Task instance itself, that was returned long ago when the Task was created (but not completed).
 See <https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/#BKMK_WhatHappensUnderstandinganAsyncMethod>
 
 A special case is if the operation is already completed (or is extremely fast), then the await will not "pause" the method; it will continue executing immediately.
 See <https://stackoverflow.com/questions/18445279/multiple-awaits-in-a-single-method>
 
-When encountering an *await*, **if and only if the task isn't completed yet**, the current context (i.e. thread) is captured so it can be resumed when the task completes.
+When encountering an `await`, **if and only if the task isn't completed yet**, the current context (i.e. thread) is captured so it can be resumed when the task completes.
 When Task completes, the captured context is restored, and the remaining code is executed within that context.
 This can cause an issue if that context is the UI thread, and that it is using a blocking call to this async method: the method cannot resume in that blocked thread.
 
@@ -60,6 +70,7 @@ See <https://devblogs.microsoft.com/pfxteam/await-and-ui-and-deadlocks-oh-my/>
 Unlike Console applications who use a threadpool as SynchronizationContext, GUIs  employ a single thread as SynchronizationContext.
 This can cause unexpected deadlock issues with the same code that would actually work in a (console) unit test.
 If a (synchronous) blocking call is made in an above method, it will prevent the method below that finishes its await statement to ever complete, because the above context itself is waiting for the method to finish.
+
 To clarify, look at the first exemple of the [following link](https://msdn.microsoft.com/en-us/magazine/jj991977.aspx): the await statement in the child method will eventually complete but that method itself will require the current thread to resume from there and fully return. Problem: in a GUI environment, that thread is the single UI thread that's been stopped by a blocking call in the parent method. Therefore the execution pointer will get stuck between the end of the await and the closing curly brace in the child method.
 
 Access to the currently running thread.
@@ -72,7 +83,9 @@ This method is used to prevent the remaining code after an await to be run withi
 
 Using the following instruction, the thread pool (i.e. another random thread) will be used instead of the original calling thread:
 
-  ConfigureAwait(continueOnCapturedContext: false);
+```C#
+ConfigureAwait(continueOnCapturedContext: false);
+```
 
 This can be useful so that code doesn't block it or worse: cause a deadlock.
 It can also be useful when gradually converting an application from synchronous to asynchronous.
@@ -84,8 +97,9 @@ See <https://medium.com/bynder-tech/c-why-you-should-use-configureawait-false-in
 
 ## Troubleshooting
 
-Deadlocks occur when a blocking call, such as a Task.Wait() or a Task.Result is made instead of a clean async/await, so that the UI thread cannot be resumed and is stuck, and thus the called async operation can never resume in that stuck captured context.
-See <http://blog.stephencleary.com/2012/07/dont-block-on-async-code.html>
+* Deadlocks occur when a blocking call, such as a Task.Wait() or a Task.Result is made instead of a clean async/await, so that the UI thread cannot be resumed and is stuck, and thus the called async operation can never resume in that stuck captured context.
+  * See <http://blog.stephencleary.com/2012/07/dont-block-on-async-code.html>
+* Never define `async void` methods, unless [subscribing to events](https://stackoverflow.com/a/38241969/3559724)
 
 ### Asynchronous Debugging
 
