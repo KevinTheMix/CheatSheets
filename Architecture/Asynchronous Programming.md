@@ -24,6 +24,9 @@ Going up the hierarchy of async methods, we should always arrive either:
 
 * `Task.Delay(0)` = [not actually asynchronous](https://stackoverflow.com/a/33407181/3559724) as it resolves immediately
 * `Task.Yield()`
+* `Thread.Start()`
+* `Thread.Sleep(0)`
+* `Thread.Join()`
 
 ## UI Thread
 

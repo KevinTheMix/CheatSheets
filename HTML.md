@@ -1,5 +1,10 @@
 # HTML
 
+* [Web Storage](https://stackoverflow.com/a/37105645/3559724) = Local (persistent per same origin) & Session (tab) Storage
+* [Indexed Database API](https://www.freecodecamp.org/news/a-quick-but-complete-guide-to-indexeddb-25f030425501/) = NoSQL DB of JSON
+
+## Language
+
 * Script Defer e.g. `<script src={path} defer></script>` = downloads script while parsing the page and runs it when the page is ready
 * `<a target="_blank">` = open link a new Window (or tab in modern browsers)
 * Accessibility
@@ -10,7 +15,7 @@
   * `&nbsp;` = Non-breaking Space
   * `&copy;` = Copyright
 
-## Tables
+### Tables
 
 * `<table>`
   * `<table border="{#}>` (_Deprecated_)

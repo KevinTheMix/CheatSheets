@@ -11,8 +11,12 @@
 * Check if other values in a group by are homogen/different: <https://stackoverflow.com/questions/39922045>
   * `COUNT(DISTINCT {field})`
   * `COUNT(CASE WHEN {condition} THEN {expression} END)`
-* [Partitions](https://www.sqlshack.com/sql-partition-by-clause-overview/) = "cartesian" GROUP BY, with numbering, sorting & cumulative aggregation.
+  * Use [Partitions](#partitions)
 * `LEN(Koko)` does not account for trailing whitespaces (see <https://stackoverflow.com/a/2025587>)
+* Use [ApaxSQL Generate](https://www.apexsql.com/sql-tools-generate/) to generate random sample data for new tables
+* `UNION` = removes duplicates
+* `UNION ALL` = allows duplicates
+* [Graphs, edges, nodes, matches](https://learn.microsoft.com/en-us/sql/t-sql/queries/match-sql-graph) (requires SQL Server 2017+)
 
 ## [DDL, DML, DCL, TCL](https://www.geeksforgeeks.org/sql-ddl-dml-dcl-tcl-commands/)
 
@@ -40,6 +44,7 @@
   * `SELECT {new} FROM (SELECT {expression} AS {new} FROM {A}) AS {New} GROUP BY {new}` = Nested FROM
     * Uses a [Derived Table](https://logicalread.com/when-to-apply-sql-server-derived-tables-mc03/#.XNFNnnduKUk) to precompute a column to use both in the SELECT and GROUP BY clauses.
   * `SELECT MAX(c1) AS Min FROM (VALUES ('a', 1), ('b', 2), ('ab', 3)) t1 (c1, c2) -- 'b'` = Select from inline values
+  * **WITH TIES** = returns extra tied values in a _TOP_-limited query eg `SELECT TOP 5  WITH TIES * FROM Table` may return more than 5 values
 * `UPDATE`
   * Cannot update several tables at once. See <https://stackoverflow.com/a/36153756>.
 * `DELETE`
@@ -47,6 +52,7 @@
 * [CTE](https://stackoverflow.com/a/13383844)
   * Allows a single pre-prepared computation to be used in multiple places of the subsequent query (any DML clause).
   * Enables recursion.
+* `NOT` keyword can be used to invert a condition eg ` SELECT * FROM Customers WHERE NOT Country='Germany'; `
 
 ### DCL (Data Control Language)
 
@@ -71,7 +77,7 @@
   * Table-valued Function = user-defined function that returns a table-type data
 * Stored Procedure
   * Output parameter = parameter that can be populated via a SET or SELECT
-    * `CREATE PROCEDURE (@Output bigint = {default_value_if_missing} OUTPUT) AS BEGIN SELECT @Output = ... / SET @Output = ...`
+    * `CREATE PROCEDURE (@Output bigint = {default_value_if_missing} OUTPUT) AS BEGIN SELECT|SET @Output = ...`
       * [Default value](https://stackoverflow.com/a/13376799) isn't initialization
     * `EXEC @Output = @Var OUTPUT`
     * An output parameter is actually passed bi-directionally => we cannot simply test `IF @Output IS NULL` after a `SELECT @Output = ..` assignation to determine if the assignation worked, because if it failed, the output parameter then still holds the value that it was provided as input.
@@ -122,7 +128,7 @@ round(@number, precision, mustTruncate) -- round by default
 
 * _float_ vs _decimal_
   * Float stores an approximate value and decimal stores an exact value. In summary, exact values like money should use decimal, and approximate values like scientific measurements should use float. When multiplying a non integer and dividing by that same number, decimals lose precision while floats do not.
-  * Comparing _float_s leads to unexpected results, because the number displayed in the cell isn't the actual underlying real value (see <https://stackoverflow.com/questions/16149966>)
+  * Comparing _float_'s leads to unexpected results, because the number displayed in the cell isn't the actual underlying real value (see <https://stackoverflow.com/questions/16149966>)
     * => use decimal instead of float if equivalences must be established (except blurrier inequalities/ranges)
 
 ### Dates
@@ -135,14 +141,33 @@ datetime -- 1753 through 9999 with max precision of 3 1/3 milliseconds.
 datetime2(fractional_seconds_precision) -- 0001 through 9999, and can be precise down to 100ns.
 
 -- Methods
-datefromparts(@year, @month, @day) -- Last day of month == also the number of days in that month.
-dateadd(interval, number, @date)
-datepart(interval, @date) -- interval = year, quarter, month, dayofyear, day, week, weekday, hour, minute, second, millisecond, tzoffset (in minutes)
+datefromparts(@year, @month, @day)
+-- interval = year, quarter, month, dayofyear, day, week, weekday, hour, minute, second, millisecond, tzoffset (in minutes)
+dateadd({interval}, {number}, @date)
+datepart({interval}, @date)
 year(@date)     -- Year
 month(@date)    -- Month
 day(@date)      -- Day
-eomonth(@date)  -- last day of the @date's month
+eomonth(@date)  -- last day of the @date's month == also the number of days in that month.
 
 -- Operators
 @date at time zone 'Central European Standard Time' -- https://docs.microsoft.com/en-us/sql/t-sql/queries/at-time-zone-transact-sql?view=sql-server-ver15
+```
+
+### Partitions
+
+[Partitions](https://www.sqlshack.com/sql-partition-by-clause-overview/) are partial GROUP BY, with row numbering, sorting & min/max/average/sum aggregation possibilities.
+
+They can be used to detect/delete duplicates - by partitioning on some fields, ordering on others (eg timestamp), and deleting all rows with index higher than one, eg:
+
+```sql
+-- 2) Delete Availabilities (& their Datas) with duplicate Server & Date (& possibly CreatedOn) - keep only (one of) the last CreatedOn.
+WITH DuplicateHardwareAvailbilities (Row, Id, HardwareServerId, Date, CreatedOn) AS (
+  SELECT ROW_NUMBER() OVER (PARTITION BY HardwareServerId, Date ORDER BY CreatedOn DESC) AS Row, Id, HardwareServerId, Date, CreatedOn FROM app.HardwareAvailability
+)
+SELECT * INTO #AvailabilitiesToDelete FROM DuplicateHardwareAvailbilities WHERE Row > 1
+DELETE FROM app.HardwareData WHERE HardwareAvailabilityId IN (SELECT Id FROM #AvailabilitiesToDelete)
+DELETE FROM app.HardwareAvailability WHERE Id IN (SELECT Id FROM #AvailabilitiesToDelete)
+DROP TABLE #AvailabilitiesToDelete
+GO
 ```

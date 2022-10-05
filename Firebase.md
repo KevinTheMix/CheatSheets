@@ -49,6 +49,7 @@ Use _firestore.rules_ file configures DB access authorization, using Common Expr
 [Fireship: Flutter Firebase Setup for Power Users](https://www.youtube.com/watch?v=Mx24wiPilHg)
 
 * [Realtime Database triggers](https://firebase.google.com/docs/functions/database-events)
+* [Firebase Security Rules](https://firebase.google.com/docs/database/security/get-started)
 * [Keeping track of IDs](https://stackoverflow.com/a/15250474/3559724)
 * [Understand Firebase Realtime Database Security Rules](https://firebase.google.com/docs/database/security/)
 * [Add Firebase to your Flutter app](https://firebase.google.com/docs/flutter/setup)

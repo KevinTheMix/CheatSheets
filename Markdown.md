@@ -38,3 +38,5 @@ Code!
 \```
 
 See <https://guides.github.com/features/mastering-markdown/>
+
+[Local anchors](https://stackoverflow.com/a/56779004/3559724) = jump to header

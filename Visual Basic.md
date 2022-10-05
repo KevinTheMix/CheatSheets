@@ -2,3 +2,5 @@
 
 Double-Click Form = _Load
 Shift + F2 = Go to definition
+
+* `With (…) End With`

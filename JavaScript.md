@@ -74,13 +74,16 @@
 
 ### Arrays
 
+[Array is an abstraction](https://stackoverflow.com/a/43857048/3559724) with actual implementation (and resizing/hole-filling) up to particular engine.
+
 * `[item]` = turns an item into an array
 * `array.shift()` pops the first element of an array and returns it
 * `array.unshift()` adds items to the beginning
 * `array.push()`
 * [splice()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice)
   * `var removed_items = array.splice(index, howmany, item1, ....., itemX)`
-* `array.slice(start, end)`
+* `array.slice(start, end)` = returns new array with the values from _start_ to _end_
+* `array.splice(start, remove_count, ...add_items)` = add/remove elements to this array
 * [unshift()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift)
 * `array.reduce((accu, next) => acc + cur)` aggregate/accumulate
 * `array.map(item => item * 1.1)` select

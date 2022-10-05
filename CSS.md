@@ -133,7 +133,10 @@ center {
 
 ## [Animations](https://www.w3schools.com/css/css3_animations.asp)
 
-* `@keyframes koko_animation { 0% { color: white; } 10% { color: green; } 50% { color: red; } }` = animate then goes back to element initial color
+```css
+.koko { animation: appear 5s }
+@keyframes appear { 0% { color: white; } 10% { color: green; } 50% { color: red; } }  /* tween/transitions */
+```
 
 ## Methods
 

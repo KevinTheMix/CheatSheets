@@ -32,6 +32,9 @@ Don't forget:
     * `as` = specifying an (arbitrary) local scope name to the whole library
     * `show` (& `hide`) = picking/accessing a specific (existing) object within that library
 
+* [dart:ffi](https://dart.dev/guides/libraries/c-interop) = call to native C APIs
+  * [Foreign function interface](https://en.wikipedia.org/wiki/Foreign_function_interface)
+
 ## Syntax
 
 ### Keywords, Types & [Operators](https://dart.dev/guides/language/language-tour#operators)
@@ -62,7 +65,7 @@ Don't forget:
   * `a ?? b` = returns _a_ if not null; _b_ otherwise
   * `a ??= b` = assigns _b_ only if _a_ was null (shorter than `if (a != null) a = b`)
   * `..` and `?..` = [cascade notation](https://dart.dev/guides/language/language-tour#cascade-notation)
-    * Create an object and immediately chain methods/properties then returning it à la Visual Basic .NET's `With (…) End With`
+    * Applies a mutating function on an object, and return that object
     * E.g. `return List<int>.from(items)..add(Item());`
   * `...` = spread operator (see collections section below)
 
@@ -70,12 +73,16 @@ Don't forget:
 
 * `#koko` = [Symbol](https://dart.dev/guides/language/language-tour#symbols)
 
+* `try {…} catch(e) {…}`
+* `try {…} on KokoException on catch(e) {…} catch(e) {…}` = catch specific exception type (then last generic catch all)
+
 ### Futures & Streams
 
 * [async vs async*](https://stackoverflow.com/a/60036568/3559724)
   * `async` (with `await`) = Future; keyword comes between function head & body eg `function(…) async { … }`
   * `async*` (with `await for` & `yield`) = Stream; asynchronous generator function
-  * `sync*` also exists, and is related to Iterable functions containing a `yield` statement, which produce values one-by-one, _on-demand_
+  * `sync*` (with `yield`)  is related to synchronous genertors, ie `Iterable<T>` functions
+  * `yield` statement is for immediately available, produced one-by-one values _on-demand_
   * `yield*` allows to yield an entire Iterable (ie its values one a time); see [Generator Functions](https://www.youtube.com/watch?v=TF-TBsgIErY)
 
 #### [Future](https://dart-tutorial.com/asynchronous-programming/future-in-dart/)
@@ -164,6 +171,11 @@ They're identical with the added benefit that nesting them can make it easier to
   * `DateFormat.yMMMd().add_Hm().format(dateText)` = _"Aug 12, 2022 16:20_
   * `DateFormat('y.MM.dd').add_Hm().format(dateText)` = _"2022.08.12 16:20"_
 * `padLeft(int width)` = <https://api.dart.dev/stable/1.21.0/dart-core/String/padLeft.html>
+
+### Dates & Durations
+
+* `date.difference(date)` = **Duration**
+* `inSeconds`
 
 ### [Collections](https://api.flutter.dev/flutter/dart-collection/dart-collection-library.html)
 

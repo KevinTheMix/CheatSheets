@@ -1,6 +1,6 @@
 # [OAuth 2.0](https://app.pluralsight.com/library/courses/oauth-2-getting-started/table-of-contents)
 
-In short: Standard for access delegation using tokens.
+In short: **O**pen **Auth**orization standard for access delegation using tokens.
 In long: OAuth 2.0 is an API **Authorization** framework built for HTTP APIs, which provides **Scoped** (i.e. partial) access to an API, via **delegation** (the app dialogs with the API on behalf of the user) - not _impersonation_.
 
 ## Context

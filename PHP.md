@@ -10,7 +10,8 @@ Dynamic typing server-side scripting language, written in C & C++.
 
 ### Apache
 
-Config file httpd.conf is in C:\Program Files\WAMP\bin\apache\Apache2.4.4\conf
+Config file httpd.conf is in _C:\Program Files\WAMP\bin\apache\Apache2.4.4\conf_
+
 Improper config can be found in Windows Event Viewer
 
 * `DocumentRoot` = Server web directory (default: www)
@@ -63,6 +64,9 @@ $t = array('a' => '1', 2 => '2');
 
 $t[] = 'a';      // Add to array (auto-vivifies it first if doesn't exist)
 $t['key'] = 'a'; // Add to array using non-default indice
+
+count($t);      // Number of elements.
+sizeof($t);     // Number of elements.
 
 each    // Returns an array with two items (key,value) and advances cursor
         // See http://stackoverflow.com/a/3304932

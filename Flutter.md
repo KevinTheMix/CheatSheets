@@ -98,7 +98,9 @@ Flutter uses a [declarative style](https://docs.flutter.dev/get-started/flutter-
 * `flutter doctor --android-licenses`
 * `flutter devices` = list all connected devices
 * `flutter create kokoapp`
-* `flutter create .`  = add web support to existing app (see <https://docs.flutter.dev/get-started/web#add-web-support-to-an-existing-app>)
+* `flutter create .` = add web support to existing app (see <https://docs.flutter.dev/get-started/web#add-web-support-to-an-existing-app>)
+* `flutter analyze` = inspect code and display all infos/warnings/errors
+* `flutter test` = run tests
 * `flutter build`
   * `flutter build appbundle`
   * `flutter build apk --split-per-abi`
@@ -110,6 +112,7 @@ Flutter uses a [declarative style](https://docs.flutter.dev/get-started/flutter-
     * replace the index.html each time, as it contains a unique service worker version ID
     * run `flutter clean` then rebuild if flutter.js is not regenerated each time
 * `flutter run` = F5
+  * `flutter run --release`
   * `flutter run release --apk`
   * `flutter run -d(evice-id) {device}` = Run to chosen device
     * `flutter run -d chrome`
@@ -205,6 +208,10 @@ Clean repositories:
   * [How to use InputFormatters](https://stackoverflow.com/a/50123743/3559724)
 
 * It's possible to create widgets in variables, then we can access their properties (eg height) down the tree, or add them conditionally in several places
+
+* [What does WidgetsFlutterBinding.ensureInitialized() do?](https://stackoverflow.com/a/63873689/3559724)
+
+* [Background computation isolate](https://docs.flutter.dev/cookbook/networking/background-parsing) = `compute()` returns a Future
 
 ### [Libraries](https://api.flutter.dev/index.html)
 
@@ -337,7 +344,7 @@ Clean repositories:
   * **ImplicitlyAnimatedWidget** = base class for the following widgets:
     * **AnimatedAlign** = alignment update transition
     * **AnimatedContainer** = implicit animation via linear interpolation (`transform: Matrix4.identity()..translate()..multiply()`)
-    * **AnimatedSlide** = offset update transition
+    * **AnimatedSlide** = offset transition
     * **AnimatedOpacity** = opacity animation (_curve_, _duration_, _opacity_ via `setState()`)
     * **AnimatedPadding** = padding animation (_curve_, _duration_, _padding_ via `setState()`)
     * **AnimatedPositioned** = animated **Positioned** reacting to properties change; useful to implement custom slider
@@ -348,13 +355,15 @@ Clean repositories:
     * Can be used for _continuous_ (ie pulsating) repeating animations using its `onEnd` callback set the end point to the start value and back
 * Explicit = has to be started/piloted manually; requires a **AnimationController** (and its proper disposable within a StatefulWidget's State)
   * **AnimatedBuilder** = full-custom explicit (i.e. coded by the developer) animation using Tweens (provide _child_ to optimize rendering)
+    * Set its _child_ property to an inert widget to more efficiently rebuilding only the parts that animated
     **AnimatedIcon** = (`icon: AnimatedIcon.play_pause, progress: _controller`)
   * **AnimatedWidget** = abstract base class for built-in & custom **Foo-Transition**s, with a single _listenable_ property
     * Can be extended, in which case its _listenable_ property expects an animation, which is typically an **AnimationController**
   * **AnimationController** = animation pilot/player (`vsync: this`, `(reverse)Duration`, `isCompleted|Dismissed`, `value`)
     * The containing widget must mixin **(Single)TickerProviderStateMixin** to allow for `vsync: this` (see Deep Dive about tickers)
     * `add(Status)Listener()`, `forward()`, `fling()`, `repeat()`, `reverse()`, `dispose()`, `animateTo(double value)` similar to TweenAB's end
-    * Listeners don't actually have to use its `value` (but it makes sense that they do); they're just getting refreshed while it's 'playing'
+    * It's possible to use controllers without AnimatedBuilder by using a Listener that setState()s a state variable (though it less efficient)
+    * Listening widgets don't _actually_ have to use the controller's `value` (but makes sense they do); they just get refreshed while it's playing
   * **Foo-Transition**, where Foo = Size, Fade, Align, Scale, DecoratedBox, DefaultTextStyle, Positioned, Slide, Rotation
 * Transitions
   * **AnimatedSwitcher** = child transition animation (_duration_, _child_ via `setState()`, _transitionBuilder_); use keys if same type
@@ -365,7 +374,10 @@ Clean repositories:
 
 * `Color.lerp()`
   * Use [colors linear interpolation](https://stackoverflow.com/a/66385071/3559724) between tabs transitions (via **TabController**'s _offset_)
-* Curves = `easeIn|Out`, `elasticIn|Out`, `linear`
+* Curves
+  * **CurvedAnimation** = wraps a controller with a curve `CurvedAnimation(parent: _controller, curve: Curves.bounceIn)`
+    * Can be used in places where an **AnimationController** is expected eg `tween.animation(…)`
+  * `easeIn|Out`, `elasticIn|Out`, `linear`
 * Clips = wraps a _child_ widget to only show its parts covered by built-in (**ClipOval**, **ClipRRect**) shape or custom (**ClipPath**) path
   * **ClipOval** = auto-adaptative circle/oval cutting (_clipper_ `extends CustomClipper<Rect>`), can be animated for fun effects
   * **ClipRRect** (**R**ounded) = rounded rectangle (_child_, _borderRadius_, _clipBehavior_)
@@ -524,7 +536,7 @@ Clean repositories:
 *
 *
 *
-*
+* a
 
 ### [Packages](https://pub.dev/)
 
@@ -535,8 +547,11 @@ Clean repositories:
   A plugin is a type of package—the full designation is _plugin package_, which is generally shortened to plugin.
   A plugin package is a special kind of package that makes platform functionality available to the app. Plugin packages can be written for Android (using Kotlin or Java), iOS (using Swift or Objective-C), web, macOS, Windows, Linux, or any combination thereof. For example, a plugin might provide Flutter apps with the ability to use a device’s camera.
 
+Hot Reload/Restart are not enough to reload platform dependencies, therefore call `flutter run` (or _F5_ equivalent) after adding a package.
+
 * [animated_clipper](https://pub.dev/packages/animated_clipper) = clip transitions for interactive buttons & co
-* [bloc](https://pub.dev/packages/bloc) = [BLoC pattern](https://www.didierboelens.com/2018/08/reactive-programming-streams-bloc/)
+* [bloc](https://pub.dev/packages/bloc)
+* [flutter_bloc](https://pub.dev/packages/flutter_bloc)
 * [clippy_flutter](https://pub.dev/packages/clippy_flutter) = collection of clip shapes (arrows, rhombus)
 * [flutter_custom_clippers](https://pub.dev/packages/flutter_custom_clippers) = collection of clip shapes (wave, panels)
 * [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons)
@@ -548,6 +563,9 @@ Clean repositories:
   * [create vs value](https://stackoverflow.com/a/61861315/3559724); use _value_ inside `Grid|ListView.builder`
 * [shimmer](https://pub.dev/packages/shimmer) = pulsating UI loading effect
 * **transparent_image** (see **FadeInImage**)
+* [uuid](https://pub.dev/packages/uuid) = generate UUIDs
+* [graphql_flutter](https://pub.dev/packages/graphql_flutter)
+* [shared_preferences](https://pub.dev/packages/shared_preferences)
 
 #### [Flutter: Package of the Week](https://www.youtube.com/watch?v=r0tHiCjW2w0&list=PLjxrf2q8roU1quF6ny8oFHJ2gBdrYN_AK&index=21)
 
@@ -651,13 +669,19 @@ Clean repositories:
     * [Display a snackbar](https://docs.flutter.dev/cookbook/design/snackbars)
   * [Forms](https://docs.flutter.dev/cookbook/forms)
     * [Build a Form with validation](https://docs.flutter.dev/cookbook/forms/validation)
-  * [Navigation](https://docs.flutter.dev/cookbook/navigation)
   
-* [Navigator class](https://api.flutter.dev/flutter/widgets/Navigator-class.html)
-* [MaterialApp.router](https://api.flutter.dev/flutter/material/MaterialApp/MaterialApp.router.html)
-  * \+ [go_router](https://pub.dev/packages/go_router) package
-* [Navigator 2.0](https://medium.com/flutter/learning-flutters-new-navigation-and-routing-system-7c9068155ade)
-
+* Routing
+  * [Navigation](https://docs.flutter.dev/cookbook/navigation)
+  * [Navigator class](https://api.flutter.dev/flutter/widgets/Navigator-class.html)
+  * [MaterialApp.router](https://api.flutter.dev/flutter/material/MaterialApp/MaterialApp.router.html)
+    * \+ [go_router](https://pub.dev/packages/go_router) package
+  * [Navigator 2.0](https://medium.com/flutter/learning-flutters-new-navigation-and-routing-system-7c9068155ade)
+  * [Timbergus](https://stackoverflow.com/a/58089444/3559724)
+    * Don't forget to manage the nav stack soundly so it's not messy (make sure & test this)
+      * Eg after login, remove login.php from stack?
+    * [Eric Seidel - runApp twice](https://stackoverflow.com/a/44379895/3559724)
+    * [Collin Jackson - Preventing initial load stuttering](https://stackoverflow.com/a/44379991/3559724)
+  * [Rémi Rousselet - Authenticated routes](https://stackoverflow.com/a/47810160/3559724)
   * [Splash screen](https://blog.logrocket.com/make-splash-screen-flutter/)
 
 * [Material Design 3](https://m3.material.io/)
@@ -691,6 +715,8 @@ Clean repositories:
   * [Fireship: Flutter Provider - Advanced Firebase Data Management](https://www.youtube.com/watch?v=vFxk_KJCqgk) (_dispose StreamSubscription_)
   * [Robert Brunhage: Flutter Firebase Authentication - The Clean Way](https://www.youtube.com/watch?v=oJ5Vrya3wCQ)
   * [Add Firebase to your Flutter app](https://firebase.google.com/docs/flutter/setup)
+  * [Isar Database](https://isar.dev/)
+  * [ObjectBox Sync](https://sync.objectbox.io/)
 
 * State Management
   * [Ephemeral vs App states](https://docs.flutter.dev/development/data-and-backend/state-mgmt/ephemeral-vs-app)
@@ -699,9 +725,12 @@ Clean repositories:
   * [Flutter state management for minimalists](https://suragch.medium.com/flutter-state-management-for-minimalists-4c71a2f2f0c1)
     * [get_it](https://pub.dev/packages/get_it) = simple Service Locator
   * [Flutter Redux](https://blog.logrocket.com/flutter-redux-complete-tutorial-with-examples/) = DI for data using InheritedWidgets
-  * Bloc
-    * [bloc](https://pub.dev/packages/flutter_bloc) = BLoC (Business Logic Component) design pattern
-    * [BLoC Pattern](https://www.flutterclutter.dev/flutter/basics/what-is-the-bloc-pattern/2021/2084/)
+  * Bloc (Business Logic Component)
+    * [What is the BLoC pattern?](https://www.flutterclutter.dev/flutter/basics/what-is-the-bloc-pattern/2021/2084/)
+    * [Streams, Bloc and Reactive Programming](https://www.didierboelens.com/2018/08/reactive-programming-streams-bloc/)
+    * [bloc](https://pub.dev/packages/flutter_bloc)
+    * [bloc](https://pub.dev/packages/bloc)
+    * [Bloc Login tutorial](https://bloclibrary.dev/#/flutterlogintutorial)
   * Provider
     * [provider](https://pub.dev/packages/provider)
     * [Enrico Ori: A simple guide for Provider](https://medium.com/theotherdev-s/starting-with-flutter-a-simple-guide-for-provider-401b25957989)
@@ -748,6 +777,10 @@ Clean repositories:
 * [Optimizing](https://www.youtube.com/watch?v=vVg9It7cOfY)
 
 * [Web: URL strategy & removing '#'](https://stackoverflow.com/a/67148421)
+
+* [Offline first](https://medium.com/flutter-community/offline-first-with-flutter-be1e8335d976)
+
+* [Serializing JSON via code generation](https://docs.flutter.dev/development/data-and-backend/json#serializing-json-using-code-generation-libraries)
 
 ## Code samples
 
