@@ -3,6 +3,8 @@
 
 Dynamic typing server-side scripting language, written in C & C++.
 
+Originally stood for **Personal Home Page**, it now stands for (the recursive) **PHP: Hypertext Preprocessor**.
+
 ## Environment
 
 * LAMP = Linux Apache MySQL PHP
@@ -18,22 +20,20 @@ Improper config can be found in Windows Event Viewer
 
 ## API
 
-```PHP
-echo        # Prints on screen. No return value. Can take multiple parameters. Little faster than print.
-print       # Prints on screen. Return value 1 => usable as expression. Take one parameter. Slower than echo.
-die         # See exit()
-exit        # Outputs message & exits script
+* `echo()` = prints on screen, no return value, can take multiple parameters, a little faster than print
+* `print()` = prints on screen, return value _1_ => usable as expression, takes one parameter, slower than echo
+* `die()` = see `exit()`
+* `exit(message)` = outputs message & exits script
 
-gettype     # Gets variable type as string
-empty       # True if null, unset, false, 0, "0", empty string
-isset       # True if variable is set and is not null
-is_null     # True if variable is null
-var_dump    # Raw view of variable
+* `gettype($var)` = gets variable type as string
+* `empty($var)` = true if: _null_, _false_, _0_, _"0"_, _""_, unset (not set at all)
+* `isset($var)` = true if variable is set and is not null
+* `is_null` = true if variable is null
+* `var_dump` = Raw view of variable
 
 list        # Tuple-like lvalue. Kinda opposite of array()
             # list($vat1, , $var3) = $t;
             # while(list($key, $value) = each($t))
-```
 
 ## Syntax & Types
 

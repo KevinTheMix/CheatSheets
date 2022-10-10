@@ -83,6 +83,7 @@ Note that custom ROMs only include the system image.
   * Circumventable via microG DroidGuard Helper
 * [Rooting](https://www.androidcentral.com/root)
   * Systemless Rooting = lighter rooting that does not require modifying system or boot partition
+* [ARM](https://www.androidcentral.com/what-arm-cpu) (Acorn RISC Machine) = English company selling low-power processor architecture used in mobiles
 
 ### [Android SDK Platform Tools](https://developer.android.com/studio/releases/platform-tools) (contains ADB, fastboot, systrace)
 

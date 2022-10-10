@@ -2,7 +2,7 @@
 
 An open-source UI framework created by Google, to develop cross-platform applications from a single codebase.
 
-It builds on top of the Dart language & adds a set of UI building blocks called widgets, based on (Google) Material & (Apple) Cupertino design.
+It builds on top of the Dart language (Flutter is to Dart like WPF to C#) & adds a set of UI building blocks called widgets, based on (Google) Material & (Apple) Cupertino design.
 The **Flutter SDK** is the part of the framework responsible with compiling the single Dart codebase to different target platforms.
 
 Flutter does not simply translate its widgets to their native iOS/Android counterparts the way other frameworks do (e.g. React Native).
@@ -18,7 +18,7 @@ Flutter uses a [declarative style](https://docs.flutter.dev/get-started/flutter-
 * **Kotlin** = Google preferred language for Android app developers since 2019 (replacing Java), designed & developde by JetBrains
   * Compiles to JVM, or JavaScript for IOS support
 * **Dart** = prog language developed by Google for fast client multi-platform apps development with QoL features such as Hot Reload
-* **Skia** = rendering engine (à la Unity) that allows Flutter to draw at the pixel level, both on mobile devices and the web (via **CanvasKit**)
+* **Skia** = rendering engine (à la Unity) written in C++ that enables Flutter to draw at pixel-level, both on mobile & web (via **CanvasKit**)
 * [CanvasKit](https://skia.org/docs/user/modules/canvaskit/) = WebAssembly for rendering Skia Graphics API to HTML canvas & SVG
 * Gradle = build automation tool supporting Java, Kotlin, C/C++ & JavaScript
 * **Widget** = immutable (declarative) description of part of a UI (layout component or behavior: center, pad, rotate)
@@ -41,7 +41,7 @@ Flutter uses a [declarative style](https://docs.flutter.dev/get-started/flutter-
       * E.g. `Theme.of(context).primaryColor`
     * Use this to pass DB or service instances down the widget hierarchy
     * For more complex scenarios, use an integrated State Management solution instead
-* **State** = objects associated with stateful widgets (and actually linked from physically from their associated Elements)
+* **State** = objects associated with stateful widgets (actually linked **from** their associated Elements)
   * States survive tree rebuilds (eg a few parts of the screen gets updated), but not navigating to a whole different page, which replaces subtrees
 * **Property** = actual value held in a widget e.g. the _text_ property of a **RichText** widget
 * **Element** = instantiation of a Widget at a particular location in the _Element Tree_
@@ -70,8 +70,12 @@ Flutter uses a [declarative style](https://docs.flutter.dev/get-started/flutter-
   * Tight constraints = constraints defined as a single point (i.e. min == max), e.g. the app root widget **must** fit the whole screen exactly
 * [Shrink-wrap](https://flutteragency.com/what-does-the-shrink-wrap-property-does/) = force a widget to pre-calculate its total size ~ its items
 * _Lifting state up_ = moving state data up one level to broaden its access; basic solution to fix state sharing between multiple widgets
+* Scrim = the greyed out area behind when a modal element is shown (dialog, drawer). Clicking on it sometimes removes the modal element
 
 ## Environment
+
+* [Mohit Joshi - What’s New In Flutter 3.3](https://medium.flutterdevs.com/flutter-3-3-whats-new-in-flutter-e0f02172acc9)
+  * [SelectionArea](https://api.flutter.dev/flutter/material/SelectionArea-class.html)
 
 ### Install
 
@@ -93,17 +97,25 @@ Flutter uses a [declarative style](https://docs.flutter.dev/get-started/flutter-
 
 ### [CLI](https://docs.flutter.dev/reference/flutter-cli)
 
+Use command with options long names or short names, eg:
+
+* `flutter -t skeleton`
+* `flutter --template=skeleton`
+
 * `flutter --version`
 * `flutter doctor -v(erbose)` (Tip: use PowerShell to get Unicode support)
 * `flutter doctor --android-licenses`
 * `flutter devices` = list all connected devices
 * `flutter create kokoapp`
 * `flutter create .` = add web support to existing app (see <https://docs.flutter.dev/get-started/web#add-web-support-to-an-existing-app>)
+  * `flutter create --sample=widgets.SingleChildScrollView.1 mysample` = create new app from existing sample code
+  * `flutter create -t(emplate)=skeleton` = generate a List View / Detail View app that follows community best practices
 * `flutter analyze` = inspect code and display all infos/warnings/errors
 * `flutter test` = run tests
 * `flutter build`
   * `flutter build appbundle`
   * `flutter build apk --split-per-abi`
+  * `flutter build ios`
   * `flutter build web` = [Build for web deployment](https://docs.flutter.dev/deployment/web)
   * `flutter build web --web-renderer [html|canvaskit]` = [Web Renderers](https://docs.flutter.dev/development/platform-integration/web/renderers)
   * `flutter build web --base-href {path}` = [HTML \<base> href](https://www.w3schools.com/Tags/att_base_href.asp)
@@ -190,7 +202,6 @@ Clean repositories:
 
 * `runApp(…)` = takes in the instance of a widget and inflate it to the screen size (calls its `build()` method, etc.)
 * `MateriapApp(debugShowCheckedModeBanner: false)` = [remove debug banner](https://stackoverflow.com/a/48893964/3559724)
-* `Scaffold(resizeToAvoidBottomInset: false` = [fix virtual keyboard overflow](https://stackoverflow.com/a/57441971/3559724)
 
 * Lifecycle
   * `mounted` = after creating state and before initState(), until dispose() gets called
@@ -212,6 +223,8 @@ Clean repositories:
 * [What does WidgetsFlutterBinding.ensureInitialized() do?](https://stackoverflow.com/a/63873689/3559724)
 
 * [Background computation isolate](https://docs.flutter.dev/cookbook/networking/background-parsing) = `compute()` returns a Future
+
+* **MaterialPageRoute** _fullScreenDialog_ = 'X' close button instead of back arrow (and slightly different transition animation)
 
 ### [Libraries](https://api.flutter.dev/index.html)
 
@@ -258,7 +271,7 @@ Clean repositories:
   * The solution to this error is to be specific as possible in the intended layout and the bounds given to the ListView
   * => wrap the ListView in either flex-space-sharing-friendly **Expanded**/**Flexible**, or a **SizedBox** with a pre-fixed height
   * [shrinkWrap](https://api.flutter.dev/flutter/widgets/ScrollView/shrinkWrap.html) fixes the error, but do not use it with **Nested ListViews**
-    * _shrinkWrap_ forces (sub-)lists to render upfront instead of lazily
+    * _shrinkWrap_ forces (sub-)lists to render upfront instead of lazily, which is costly performance-wise
     * Watch [Decoding Flutter: ShrinkWrap vs Slivers](https://www.youtube.com/watch?v=LUqDNnv_dh0)
     * => to handle nested lists, replace them instead with a **CustomScrollView** with **SliverList** children
 
@@ -274,6 +287,7 @@ Clean repositories:
 * Virtual keyboard causing yellow/black pattern
   * When the keyboard comes up, it adds some height padding at the bottom of the screen with the goal of keeping the target input field in view. But if the height is fixed and there no scrollable parent wraps the input field, this just pushes that padding outside the view
   * => Set **Scaffold**'s _resizeToAvoidBottomInset_ property to _false_ (and possibly wrap some areas with **SingleChildScrollView**)
+  * `Scaffold(resizeToAvoidBottomInset: false` = [fix virtual keyboard overflow](https://stackoverflow.com/a/57441971/3559724)
 
 * _Incorrect use of ParentDataWidget Error in Flutter_
   * **Flexible**, **Expanded**, **Positioned** & **TableCell** each require a specific type of parent (namely: Column, Row, Flex, Stack, Table)
@@ -354,6 +368,7 @@ Clean repositories:
     * That means it can be somehow controlled, or at least its end target, via state
     * Can be used for _continuous_ (ie pulsating) repeating animations using its `onEnd` callback set the end point to the start value and back
 * Explicit = has to be started/piloted manually; requires a **AnimationController** (and its proper disposable within a StatefulWidget's State)
+  * **Animation\<T>** = anything of type _T_ (double, Color, Size) that changes over time
   * **AnimatedBuilder** = full-custom explicit (i.e. coded by the developer) animation using Tweens (provide _child_ to optimize rendering)
     * Set its _child_ property to an inert widget to more efficiently rebuilding only the parts that animated
     **AnimatedIcon** = (`icon: AnimatedIcon.play_pause, progress: _controller`)
@@ -401,6 +416,8 @@ Clean repositories:
 * [WidgetsApp](https://api.flutter.dev/flutter/widgets/WidgetsApp-class.html) = wraps a number of base functionality widgets (i.e. MediaQuery)
 * [MaterialApp](https://api.flutter.dev/flutter/material/MaterialApp-class.html) = builds Material design on top of the base **WidgetsApp**
 * [Scaffold](https://api.flutter.dev/flutter/material/Scaffold-class.html) = basic Material design layout with a set of pre-configured widgets
+  * It's possible to use a Drawer without a Scaffold, in which case it's not modal (see <https://material.io/components/navigation-drawer/flutter>)
+  * `drawerEdgeDragWidth`
 * [AppBar](https://api.flutter.dev/flutter/material/AppBar-class.html) = top menu (_leading_, _title_, _actions_, _bottom_)
 
 * [Material](https://api.flutter.dev/flutter/material/Material-class.html)
@@ -493,7 +510,7 @@ Clean repositories:
 * **TweenAnimationBuilder** = custom implicit animation (_duration_, _builder_, _curbe_, _onEnd_), pass _child_ for performance
 * **Image** = image (_fit_, _colorBlendMode_, _semanticLAbel_) via asset (sizes in _pubspec.yaml_), network (_loadingBuilder_), file, memory
 * **DefaultTabController**, **TabBar**, **TabBarView** = tabbed widgets
-* **Drawer** = **Scaffold** `(end)drawer:` (`child:` List of **DrawHeader** & **ListTile**s), open via `Scaffold.of(context).open(End)Drawer()`
+* **Drawer** = **Scaffold** `(end)drawer:` (`child:` col of **DrawerHeader** & **ListTile**s), open via `Scaffold.of(context).open(End)Drawer()`
 * **SnackBar** = pop-up a temporary (widget) message, open via `Scaffold.of(context).showSnackBar()` (use a **Builder** to pass it _context_)
 * **ListWheelScrollView** = price-is-right 3D carousel list (_itemExtent_, _diameterRatio_, _offAxisFraction_, _userMagnifier_ & _magnification_)
 * **ShaderMask** = apply color/gradient/image masks (`shaderCallback(bounds) => abcGradient().createShader(bounds)`)
@@ -547,7 +564,7 @@ Clean repositories:
   A plugin is a type of package—the full designation is _plugin package_, which is generally shortened to plugin.
   A plugin package is a special kind of package that makes platform functionality available to the app. Plugin packages can be written for Android (using Kotlin or Java), iOS (using Swift or Objective-C), web, macOS, Windows, Linux, or any combination thereof. For example, a plugin might provide Flutter apps with the ability to use a device’s camera.
 
-Hot Reload/Restart are not enough to reload platform dependencies, therefore call `flutter run` (or _F5_ equivalent) after adding a package.
+Hot Reload/Restart are not enough to reload plugins with platform native device features => `flutter run` (or _F5_ equivalent) after adding.
 
 * [animated_clipper](https://pub.dev/packages/animated_clipper) = clip transitions for interactive buttons & co
 * [bloc](https://pub.dev/packages/bloc)
@@ -566,6 +583,7 @@ Hot Reload/Restart are not enough to reload platform dependencies, therefore cal
 * [uuid](https://pub.dev/packages/uuid) = generate UUIDs
 * [graphql_flutter](https://pub.dev/packages/graphql_flutter)
 * [shared_preferences](https://pub.dev/packages/shared_preferences)
+* [path](https://pub.dev/packages/path) = helper to combine/construct paths
 
 #### [Flutter: Package of the Week](https://www.youtube.com/watch?v=r0tHiCjW2w0&list=PLjxrf2q8roU1quF6ny8oFHJ2gBdrYN_AK&index=21)
 
@@ -597,6 +615,7 @@ Hot Reload/Restart are not enough to reload platform dependencies, therefore cal
 ## Tutorials
 
 * [@Robert Brunhage](https://www.youtube.com/c/RobertBrunhage)
+  * [Flutter Folder Structure and Packages](https://www.youtube.com/watch?v=yJRpuTP156o) = structure (type, layer, feature) & packaging (from git!)
 * [@FilledStacks](https://www.youtube.com/c/FilledStacks)
 
 * [Fireship: React Native vs Flutter](https://youtu.be/X8ipUgXH6jw?t=162)
@@ -781,6 +800,12 @@ Hot Reload/Restart are not enough to reload platform dependencies, therefore cal
 * [Offline first](https://medium.com/flutter-community/offline-first-with-flutter-be1e8335d976)
 
 * [Serializing JSON via code generation](https://docs.flutter.dev/development/data-and-backend/json#serializing-json-using-code-generation-libraries)
+
+* Google Play (store)
+  * [Update or unpublish your app](https://support.google.com/googleplay/android-developer/answer/9859350?hl=en)
+  * [Content ratings](https://support.google.com/googleplay/android-developer/answer/9859655)
+
+* What does `ListView.builder`'s _itemExtent_ do?
 
 ## Code samples
 

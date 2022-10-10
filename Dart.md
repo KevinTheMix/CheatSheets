@@ -1,7 +1,7 @@
 # Dart
 
 OO programming language developed by Google and designed for (mobile/web) client development.
-Dart draws its inspiration from the major languages (C#, Java, JavaScript).
+Dart draws its inspiration from major and familiar languages (C#, Java, JavaScript).
 
 Features:
 
@@ -13,6 +13,10 @@ Features:
   * Spread operator
 * Hot reload
 * Fast for all platforms
+* Supports both AOT & JIT compiling
+  * JIT allows developers to very efficiently make changes and quickly see immediate results
+  * AOT (pre-compiling) allows released code to still be highly efficient
+  * See [Why Flutter uses Dart](https://hackernoon.com/why-flutter-uses-dart-dd635a054ebf)
 
 Don't forget:
 
@@ -148,6 +152,8 @@ Streams are (async) like Futures but for Iterables, where values are produced to
   * `floor()`, `ceil()` & `round()` = useful to turn a **double** into the closest **int**
   * `floorToDouble()`, `ceilToDouble()` & `roundToDouble()` similarly
   * `double.tryParse(num) != null` = [Check if number](https://stackoverflow.com/a/24085491/3559724)
+* **int**
+  * `i.isOdd`, `i.isEven`
 * [Operators](https://dart.dev/guides/language/language-tour#operators)
   * `~/` = forces division integer result
 
@@ -171,6 +177,7 @@ They're identical with the added benefit that nesting them can make it easier to
   * `DateFormat.yMMMd().add_Hm().format(dateText)` = _"Aug 12, 2022 16:20_
   * `DateFormat('y.MM.dd').add_Hm().format(dateText)` = _"2022.08.12 16:20"_
 * `padLeft(int width)` = <https://api.dart.dev/stable/1.21.0/dart-core/String/padLeft.html>
+* **StringBuffer** `write()`, `writeln()`, `writeAll()`, `clear()`, _isEmpty_, _length_
 
 ### Dates & Durations
 
@@ -220,7 +227,7 @@ In Dart, arrays are List objects, so most people just call them _lists_.
   * For casting however, we need to use `List<Type>` instead
 * `[1, 2.34, 'text', ['nested', 5]]` = mixed types list are also valid
 * `List.generate(count, (index) => … );` = uses generator function to generate _count_ items
-  * `reversed` = reverse list
+  * `reversed` = reverse list (can be used to reverse Strings in one statement ie `s.split('').reversed.join()`)
 * `List<T>.from(iterable)` = constructs a List of T from an Iterable
 * **Collection if** = add item conditionally (e.g. `[if (condition) Item(…), b, c]`), **Note: don't use curly braces in this syntax**
 * **Collection for** = add items using a loop (e.g. `[for (var i in integers) '$i'`] = turns a list of int into Strings)

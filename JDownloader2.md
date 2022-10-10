@@ -2,6 +2,10 @@
 
 ## Settings
 
+### Account Manager
+
+For registered websites (eg Instagram, etc.)
+
 ### Basic Authentication
 
 1. Add
@@ -10,6 +14,10 @@
 4. Username
 5. Password
 6. Check _Always_ checkbox
+
+### Plugins
+
+* _rtbf.be_
 
 ### Packagizer
 

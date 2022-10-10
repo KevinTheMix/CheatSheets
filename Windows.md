@@ -4,6 +4,7 @@
   * Hard links = two _index_ entries point to the same physical file
   * Junction points = hard link for a folder
   * Symbolic link = Windows shortcut = a physical file whose content is the path of another file
+* Type `explorer .` in any terminal to open its current path as window
 
 ## Hacks
 

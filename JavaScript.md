@@ -10,6 +10,13 @@
 * `if(variable)` = check if undefined
 * `variable ? variable.property : ""` = check if unefined into ternary operator
 * Trailing (_dangling_) commas are useful to reduce the number of lines that change when git commit (the previous last row remains the same)
+* [window.navigator](https://www.w3schools.com/js/js_window_navigator.asp) = get browser name & co
+* [window.screen](https://www.w3schools.com/js/js_window_screen.asp) = screen size & co
+* `document.location.href` = go to local page or external url
+* `history.go(-1)` = go to history
+* `window.confirm(message)` = return true/false ~ choice
+* [document.body.contentEditable](https://www.w3schools.com/jsref/prop_html_contenteditable.asp) = make one element editable
+* [document.designMode](https://developer.mozilla.org/fr/docs/Web/API/Document/designMode) = make whole document editable
 
 ## Libraries
 
@@ -20,16 +27,16 @@
 
 ### jQuery
 
-* [scrollTop()](https://api.jquery.com/scrolltop/) = gets/sets vertical position of the scroll bar
+* [scrollTop()](https://api.jquery.com/scrolltop/) = gets/sets vertical position of the scroll bar (also: `scrollLeft`)
 * [offset()](https://api.jquery.com/offset/) = gets/sets the relative coordinates
 
 ### [ag-Grid](https://www.ag-grid.com/javascript-grid-cell-editing/)
 
 * [Rendering Flow](https://www.ag-grid.com/javascript-grid-rendering-flow/)
   * Field = Direct value.
-  * Value Getter = Calculate displayed value based on anything e.g. multiple fields. Replaces direct field value.
-  * Value Formatter = WPF's Converter e.g. parsing a date or formatting numbers.
-  * [Cell Renderer](https://www.ag-grid.com/javascript-grid-cell-rendering/) = controls inner HTML.
+  * Value Getter = Calculate displayed value based on anything e.g. multiple fields. Replaces direct field value
+  * Value Formatter = WPF's Converter e.g. parsing a date or formatting numbers
+  * [Cell Renderer](https://www.ag-grid.com/javascript-grid-cell-rendering/) = controls inner HTML
     * [Cell Renderer Class](https://www.ag-grid.com/javascript-grid-cell-rendering-components/)
     * [Many Renderers, One Column](https://www.ag-grid.com/javascript-grid-cell-rendering/#many-renderers-one-column)
 * [Input Flow](https://www.ag-grid.com/javascript-grid-editing-flow/)
@@ -71,6 +78,19 @@
 `if(condition) statement;`
 `try {block} catch(error) {error_treatment}`
 `throw Error(text);`
+
+### Events
+
+* `onpaste`
+* `ondragstart`
+* `onKeyUp`
+* `onKeyDown`
+* `onKeyPress`
+
+### Strings
+
+* `s.indexOf('look')`
+* `s.substring(start, count)`
 
 ### Arrays
 

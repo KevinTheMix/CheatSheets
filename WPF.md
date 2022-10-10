@@ -152,7 +152,7 @@ The containing class inherits from DependencyObject (as do all of WPF UI Control
 
 DPs are typically encapsulated by CLR properties that provide a shorthand for calling GetValue() & SetValue(). This is purely conventional and optional.
 
-Note that it is only the _target_ property that needs to be a Dependency Property. The source can be either a dependency property or a CLR property (but still has to invoke PropertyChanged event to benefit from continuous data binding - not only as one-time on creation/initialization).
+Note that it is only the _target_ property (ie the receiver, on the left of the XAML assign) that needs to be a Dependency Property (eg `<element dep_prop={Binding clr_prop}`). The source can be either a dependency property or a CLR property (but still has to invoke PropertyChanged event to benefit from continuous data binding - not only as one-time on creation/initialization).
 
 In practice, unless you are creating your own controls, you will not need to create your own dependency properties. See <https://blog.scottlogic.com/2012/04/05/everything-you-wanted-to-know-about-databinding-in-wpf-silverlight-and-wp7-part-one>
 
