@@ -1,6 +1,9 @@
 # PowerShell
 
-Long-running _ping_ with timeStamps
+## Code Samples
+
+* Open prompt as admin = `Start-Process powershell -Verb runAs`
+* Long-running _ping_ with timeStamps:
 
 ```PowerShell
 ping.exe -t rtlbruadrep01|Foreach{"{0} - {1}" -f (Get-Date),$_} | Select-String -pattern "temps(<1ms|=1 ms)" -notMatch > "D:\ADREP01.log"

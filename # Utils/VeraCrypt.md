@@ -8,4 +8,4 @@ Note: it's cleaner to remove all Partitions/Volume (in Windows Disk Manager) fro
   * Check _Mount selected volume when its host device gets connected_
   * Check _Open Explorer Window for selected volume when successfully mounted_
 * [How to prevent Windows _format disk_ popup](https://superuser.com/a/49385)
-  * _Disk Management_ > _Change Drive Letter and Paths..._ > _Remove_
+  * Windows _Disk Management_ > _Change Drive Letter and Paths..._ > _Remove_

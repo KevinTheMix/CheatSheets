@@ -36,7 +36,7 @@ Don't forget:
     * `as` = specifying an (arbitrary) local scope name to the whole library
     * `show` (& `hide`) = picking/accessing a specific (existing) object within that library
 
-* [dart:ffi](https://dart.dev/guides/libraries/c-interop) = call to native C APIs
+* [dart:ffi](https://dart.dev/guides/libraries/c-interop) = call to native APIs (C, Swift, Objective-C)
   * [Foreign function interface](https://en.wikipedia.org/wiki/Foreign_function_interface)
 
 ## Syntax
@@ -344,6 +344,10 @@ Multiple inheritance is not permitted: every class (except for `Object`) has exa
   * mixed-in methods can be overriden eg `mixin KokoMixin {void fun() {…}}`, then `class Koko with KokoMixin {@override fun() {…}}`
   * it is possible to combine extension with mixins eg `class AB extends Parent with A, B {}`
 * [extends vs with vs implements](https://www.geeksforgeeks.org/dart-extends-vs-with-vs-implements/)
+* A member in a child class can override a parent member of different nature with same name
+  * eg a [property overriding a getter](https://flutterfromdotnet.hashnode.dev/flutter-first-impressions)
+* `constructor({required super.property})` = shorthand to pass on a named parameter to  _super_ constructor (e.g. an **InheritedWidget**'s _child_)
+* `@override` = actually optional; lets Dart analyzer issue a warning if forgotten or unexpected
 
 ## Libraries & [Packages](https://pub.dev/)
 
@@ -356,7 +360,7 @@ Multiple inheritance is not permitted: every class (except for `Object`) has exa
 
 ## Code Samples
 
-Mixins (adapted from [Romain Rastel: What are mixins?](https://medium.com/flutter-community/dart-what-are-mixins-3a72344011f3)):
+Mixins:
 
 ```dart
 class A       { String getMessage() => 'A'; }
@@ -378,3 +382,6 @@ void main() {
   print(BA().getMessage()); // "A"
 }
 ```
+
+Adapted from [Romain Rastel: What are mixins?](https://medium.com/flutter-community/dart-what-are-mixins-3a72344011f3).
+Related: [Multiple inheritance diamond problem](https://en.wikipedia.org/wiki/Multiple_inheritance#The_diamond_problem).

@@ -5,6 +5,7 @@
   * Junction points = hard link for a folder
   * Symbolic link = Windows shortcut = a physical file whose content is the path of another file
 * Type `explorer .` in any terminal to open its current path as window
+* Edit _hosts_ file in _C:\Windows\System32\drivers\etc_ with admin privilege, then run `ipconfig /flushdns`
 
 ## Hacks
 

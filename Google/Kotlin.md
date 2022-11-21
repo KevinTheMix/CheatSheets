@@ -2,6 +2,10 @@
 
 <https://kotlinlang.org/docs/basic-syntax.html>
 
+## Lingo
+
+* [Activity](https://developer.android.com/reference/kotlin/android/app/Activity)
+
 ## Types
 
 Obtain a variable's type as String using reflection:
