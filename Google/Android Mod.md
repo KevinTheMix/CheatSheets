@@ -23,7 +23,8 @@
 * [LineageOS](https://lineageos.org/) = Android OS forked from CyanogenMod
   * [Google apps on LineageOS](https://wiki.lineageos.org/gapps.html)
   * [How to Google apps on LineageOS](https://askinglot.com/how-do-i-install-google-apps-on-lineage-os)
-* [/e/ Foundation](https://e.foundation/) = Android OS, packed with migroG
+* [/e/ Foundation](https://e.foundation/)
+  * /e/ ROM = fork of Android OS (in particular LineageOS), packed with migroG
   * [Find Apps](https://doc.e.foundation/apps#do-the-phones-with-eos--support-fingerprint-banking-apps-and-android-auto)
   * [Request App](https://doc.e.foundation/apps#what-should-you-do--if-you-dont-find-an-app-you-would-like-to-use-in-the-e-app--installer)
   * <https://www.reddit.com/r/degoogle/comments/gepao6/stock_android_vs_lineageos_with_google_service/>

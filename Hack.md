@@ -25,7 +25,7 @@ There exists two types of XSS vulnerabilities: Persistent and Non-Persistent.
 Craft a URL containing a malicious script to a legit website that displays the URL parameter as-is on the page.
 The victim browses the linked page containing the script, which is run when he lands on the page.
 
-E.g. the results of a lousy search engine "You searched: javascript:alert('oh no')") and send that URL to the victim.
+E.g. the results of a lousy search engine `You searched: javascript:alert('oh no')`) and send that URL to the victim.
 
 URL-based => can be performed either by GET or POST.
 
