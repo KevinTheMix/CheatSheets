@@ -1,6 +1,6 @@
 # SQL
 
-* [Database normalization](https://phoenixnap.com/kb/database-normalization)
+* [MySQL INFORMATION_SCHEMA](https://dev.mysql.com/doc/refman/8.0/en/information-schema.html) = DB/table/column names, types & privileges
 
 ## Tips
 
@@ -17,34 +17,40 @@
 * `UNION` = removes duplicates
 * `UNION ALL` = allows duplicates
 * [Graphs, edges, nodes, matches](https://learn.microsoft.com/en-us/sql/t-sql/queries/match-sql-graph) (requires SQL Server 2017+)
+* [Error handling](https://www.sqlshack.com/how-to-implement-error-handling-in-sql-server/)
+* [Write meta-comment description on tables](https://stackoverflow.com/a/9018619)
 
 ## [DDL, DML, DCL, TCL](https://www.geeksforgeeks.org/sql-ddl-dml-dcl-tcl-commands/)
 
 ### DDL (Data Definition Language)
 
-* `CREATE`, `ALTER`, `COMMENT`, `DROP`
+* `CREATE`, `ALTER`, `DROP`(, `COMMENT ON`)
 * `TRUNCATE`
   * Remove all records, unallocate space and resets auto-incremented IDs (basically DROP & re-CREATE a TABLE).
   * DDL operation (unlike DML DELETE) => doesn't use transaction log => won't work if any other (even empty) table references it
 * `RENAME`
   * Rename Table = `EXEC sp_rename 'Setting.DE400ImportFormat', 'Setting.ExportColumnFormat' GO`
   * Rename Constraint = `EXEC sp_rename 'Setting.[PK_Setting.DE400ImportFormat]', 'PK_Setting.ExportColumnFormat'`
-    * "_When renaming a constraint, the schema to which the constraint belongs must be specified._" (see <https://stackoverflow.com/a/8712921>).
+    * _When renaming a constraint, the schema to which the constraint belongs must be specified._ (see <https://stackoverflow.com/a/8712921>).
+* [CREATE TYPE](https://learn.microsoft.com/fr-fr/sql/t-sql/statements/create-type-transact-sql) = create a new type à la C# class
+  * [CREATE DOMAIN](https://stackoverflow.com/a/53142713) = creating a subtype à la C# inherited class, with additional constraints
 
 ### DML (Data Manipulation Language)
 
 * `INSERT`
   * Inserts multiple rows in one query = `INSERT INTO {Table} ({Col1}, {Col2}, ...) VALUES ({Val1}, {Val2},...),({Val3}, {Val4},...)`
 * `SELECT`
-  * `IF EXISTS (SELECT TOP 1 1 FROM {A})` = Check if exists
+  * `[IF/WHERE] [NOT] EXISTS (SELECT TOP 1 1 FROM {A})` = Check if SELECT returned something (note: SELECT always returns a table not a scalar, ie a 'set of values')
   * `SELECT * FROM {A} WHERE {a} LIKE @var` = Use Variable in a LIKE
   * `SELECT * FROM {A} WHERE {a} IN (@var1, @var2)` = Use Variables in a IN
+  * `SELECT * FROM Employe WHERE EmpNo IN (SELECT DptMgr FROM Deprtment)` = IN nested select
   * `SELECT {a}, (SELECT {b} FROM {B} WHERE {B}.fkey = {A}.Id) FROM {A}` = Nested SELECT
   * `SELECT {a} FROM {A} WHERE {A}.count > (SELECT COUNT(*) FROM {A})` = Nested WHERE
   * `SELECT {new} FROM (SELECT {expression} AS {new} FROM {A}) AS {New} GROUP BY {new}` = Nested FROM
     * Uses a [Derived Table](https://logicalread.com/when-to-apply-sql-server-derived-tables-mc03/#.XNFNnnduKUk) to precompute a column to use both in the SELECT and GROUP BY clauses.
   * `SELECT MAX(c1) AS Min FROM (VALUES ('a', 1), ('b', 2), ('ab', 3)) t1 (c1, c2) -- 'b'` = Select from inline values
   * **WITH TIES** = returns extra tied values in a _TOP_-limited query eg `SELECT TOP 5  WITH TIES * FROM Table` may return more than 5 values
+  * **ANY** (aka **SOME**) & **ALL** = cfr Linq
 * `UPDATE`
   * Cannot update several tables at once. See <https://stackoverflow.com/a/36153756>.
 * `DELETE`
@@ -56,11 +62,26 @@
 
 ### DCL (Data Control Language)
 
+* Granular permissions
+  * Reading but not writing ("readonly")
+  * Writing but not reading ("mailbox")
 * `GRANT`, `REVOKE`
+  * `WITH GRANT OPTION` = propagate granting permission
 
 ### TCL (Transaction Control Language)
 
+Transaction = segment of code where incoherence/inconsistence is locally permitted
+Integrity constraints will be tested at the next commit, and no longer for every action
+
 * `COMMIT`, `ROLLBACK`, `SAVEPOINT`, `SET TRANSACTION`
+* Commits & rollbacks only apply to DML
+  * => When a DDL instruction is found in the source, the DML that precedes gets committed
+
+## [Database normalization](https://phoenixnap.com/kb/database-normalization)
+
+1. No repetitive attributes, Primary Key
+2. non-key attributes cannot depend on part of a key
+3. 2 + no functional dependency between non-key attributes
 
 ## Entities
 
@@ -82,10 +103,17 @@
     * `EXEC @Output = @Var OUTPUT`
     * An output parameter is actually passed bi-directionally => we cannot simply test `IF @Output IS NULL` after a `SELECT @Output = ..` assignation to determine if the assignation worked, because if it failed, the output parameter then still holds the value that it was provided as input.
 
-### Indexes
+### Indexes & Keys
+
+Primary & candidate keys
+UNIQUE constraint = index
 
 To see all the indexes on a particular table execute “sp_helpindex” stored procedure: `EXECUTE sp_helpindex {table_name}`.
-Without Indexes, we must resort to Table-scanning, which is browsing the entire table sequentially (O(n)).
+
+Indexes enable dichotomical Log(n) searches, as opposed to sequential O(n) table-scanning.
+Indexes (and primary keys) should apply to shortest & stablest fields so browsing them is efficient
+Indexes boost performance gains for sufficiently large tables (reads get faster, but inserts get slower)
+
 SQL Fragmentation = <https://www.mssqltips.com/sqlservertip/4331/sql-server-index-fragmentation-overview/>
 
 ### Clustered Index

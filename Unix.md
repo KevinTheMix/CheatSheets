@@ -8,6 +8,10 @@
 * _PATH_ = path
 * _PS1_ = prompt
   * `PS1 = \u \h \W \DATE` = sets prompt to _user machine currentfolder date_ (previous prompt can be saved in a variable and restored)
+  * `PS1 = '[$LOGNAME / $UID: $$: ´PWD´ date + % ]>'` or `$(PWD)` or `$PWD`
+  * `PS1 = "'$$'"`
+  * `PS1 = '$$'`
+  * `PS1 = "\$\$"`
 * _TERM_ = ?
 * _$$_ = process number
 
@@ -19,38 +23,48 @@
 * [`cat`](https://en.wikipedia.org/wiki/Cat_(Unix)) (con**cat**enate) = read file content & write it to standard output
   * `cat >newfile.txt` = create a new file _newfile.txt_ in edit mode; press `CTRL+D` to finish
   * `cat koko1 koko2` = concatenate two text files and display the result in the terminal
-* `chmod` = change access rights
-* `chown` = change owner
 * `cd` = change directory
-  * `cd {nothing}` = go to user directory
+  * `cd {nothing}` = `cd ~` = go to user directory
+* `chmod` = change access rights
+* `chown {user} {file}` = change owner
 * `cp` = copy
 * `date` = system date
 * `DATE`
-* `du` = file properties (size, ..)
+* `du {file}` = disk usage (`-h(uman-readable)` = adds unit (_K, M, G_))
 * `echo abc` = outputs _abc_
 * `exit` = close session
+* `find` = find file
+  * `find /-name {filename}`
+  * `find /home '???*.c'`
+* `fsck` = File System Consistency Check
 * `grep` = match lines using regular expression patterns
 * `less` = displays page by page
+* `ln [-s] {file1} {file2}` = hard or soft (aka symbolic, via `-s` option) links
 * `ls` = liste folder content
   * `ls /` = lists root files
   * `ls -a` = all
+  * `ls -i` = inodes number
   * `ls -l` = long
   * `ls abc*` = lists files starting with _abc_
 * `man`
   * `man {command}` = help on _command_ e.g. `man who`
   * `man man` = help on help
-* `mkdir` = make directory
+* `mkdir` = make directory (`-p /a/b/c` = creates folders in hierarchy if they don't exist)
+* `(un)mount {path eg /dev/floppy}` = (un)mount
 * `mv` = change name
+* `od` = (octal) dumping aka display file content in DUMP format (`-tx1` for hexadecimal)
 * `passwd` = change password
+* `ps -al` = lists processes (-a=all, -l=long listing)
 * `pwd` = current directory name
 * `touch` = change file access & modification times
 * `rm` = remove (delete)
+  * `rm {dir} -rf` = delete directory without confirmation
 * `rmdir` = remove directory
 * `sed` (**s**tream **ed**itor) = parse and transform text
   * `sed s` = substitute e.g. `echo Sunday | sed 's/day/night/'` outputs _Sunnight_
-* `uname`
-  * `uname -a`
-  * `uname -n`
+* `stat {file}` = file inode information
+* `uname` = display system information (`-a`=all, `-n`=system (host) name)
+* `which {command}` = display the location of an executable
 * `who` = who am I
   * `who -q`
   * `who -z`

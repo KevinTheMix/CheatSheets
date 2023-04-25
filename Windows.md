@@ -6,6 +6,7 @@
   * Symbolic link = Windows shortcut = a physical file whose content is the path of another file
 * Type `explorer .` in any terminal to open its current path as window
 * Edit _hosts_ file in _C:\Windows\System32\drivers\etc_ with admin privilege, then run `ipconfig /flushdns`
+* Search by file size = `size: > 2GB AND < 3GB` (or `size:` and select listed proposition)
 
 ## Hacks
 
@@ -15,9 +16,11 @@
   * SSH Tunnel + Proxy Socks via Putty (Laurent D'Havé & Frédéric Branger)
     * <https://securitymusings.com/article/462/how-to-set-up-a-socks-proxy-using-putty-ssh>
 * [Removing "This Copy of Windows Is Not Genuine"](https://appuals.com/removing-this-copy-of-windows-is-not-genuine/)
+* Hide zip in an image file = `copy /b image.png + archive.zip result.png` (result image must be same format as input)
 
 ## Windows 7+
 
+* `Ctrl + Esc` = switch between windows in the order that they were opened (1 2 3 1 2 3)
 * `Ctrl + Arrow` = Move in cursor in folder while keep current files selection
   * `Space` = Add file to selection
 * `Ctrl + Alt + Arrow` = Rotate Screen
@@ -59,11 +62,13 @@
 * [cmd.exe](https://en.wikipedia.org/wiki/Cmd.exe#Windows_NT_family)
 * Display
   * `cls` = clear screen
+  * `date`
   * `echo koko`
   * `@echo [on|off]` = turns prompt on/off
-  * `date`
-  * `time`
   * `pause`
+  * `time`
+  * `where {pattern}` = display location of file that matches search pattern
+  * `whoami`
 * Control
   * `goto {label}` goes to `:{label}`
   * `set {VAR}` = assignment

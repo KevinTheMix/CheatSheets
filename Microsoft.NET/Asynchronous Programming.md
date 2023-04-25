@@ -74,7 +74,7 @@ Unlike Console applications who use a threadpool as SynchronizationContext, GUIs
 This can cause unexpected deadlock issues with the same code that would actually work in a (console) unit test.
 If a (synchronous) blocking call is made in an above method, it will prevent the method below that finishes its await statement to ever complete, because the above context itself is waiting for the method to finish.
 
-To clarify, look at the first exemple of the [following link](https://msdn.microsoft.com/en-us/magazine/jj991977.aspx): the await statement in the child method will eventually complete but that method itself will require the current thread to resume from there and fully return. Problem: in a GUI environment, that thread is the single UI thread that's been stopped by a blocking call in the parent method. Therefore the execution pointer will get stuck between the end of the await and the closing curly brace in the child method.
+To clarify, look at the deadlock exemple of the [following link](https://msdn.microsoft.com/en-us/magazine/jj991977.aspx): the await statement in the child method will eventually complete but that method itself will require the current thread to resume from there and fully return. Problem: in a GUI environment, that thread is the single UI thread that's been stopped by a blocking call in the parent method. Therefore the execution pointer will get stuck between the end of the await and the closing curly brace in the child method.
 
 Access to the currently running thread.
 Can be saved, and used to send/post messages.
@@ -112,3 +112,33 @@ See <https://medium.com/bynder-tech/c-why-you-should-use-configureawait-false-in
 
 * <https://labs.criteo.com/>
 * <https://medium.com/@kevingosse>
+
+### Code Sample
+
+```C#
+async MySync()
+{
+  await task.Delay(1000); // 3) after 1s, resume in the captured context
+}
+
+void Test()
+{
+  Task t = MySync();  // 1)
+  t.Wait();           // 2) waiting…, context is captured and will be resumed when task completes
+                      // cfr t.Result, it is synchronous thread waiting, UI doesn't get back control
+}
+// 4) Dead lock! Because the captured context has a synchronous thread waiting. This is because GUIs have SynchronizationContext with only 1 thread.
+```
+
+The deadlock issue is only a problem for GUIs (whose Sync context uses a single thread).
+`task.Wait()` or `task.Result` is blocking and makes the call synchronous.
+`await` is non-blocking and uses the async mechanism.
+
+When the `await` statement is finished, the _MySync()_ method still has to return. Even though there are in fact no statements left to execute, it requires CPU time to get to the closing `}` and return. As it uses the `async` mechanism, it will try to do just that using the captured context of the calling method, which is blocked! Both method are therefore stuck.
+
+Not using `.Wait()` also makes the call synchronous, but the compiler `:(` (complains)
+Another issue is the error handling that's more complexe with aggregate exceptions.
+`ConfigureAwait`
+
+Rappel : avec `async`, toute la chaîne d'appels doit être async, jusqu'à une méthode qui se moque d'une valeur de retour, càd un event handler ou main ou Domain.
+Addendum 2023 : ou un `Task.Run()`, ou une méthode d'API REST. De l'autre côté au bas niveau, on a par ex. un appel de service (réseau), une interruption hardware, etc.

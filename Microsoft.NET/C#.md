@@ -2,7 +2,8 @@
 
 C# Is good.
 
-`typeof(T)` vs `obj.GetType()` = compile time vs runtime type
+* `typeof(T)` vs `obj.GetType()` = compile time vs runtime type
+* `Convert.ToByte(string? value, int fromBase)` = convert a string to an equivalent 8-bt unsigned integer in the given base (2, 8, 10, 16)
 
 ## Keywords
 
@@ -16,7 +17,7 @@ C# Is good.
 * `readonly` = Can only be initialized at declaration AND in constructors (=> at runtime)
 * `static readonly` = Runtime constant (Can only be set at declaration or in static constructors)
 * `static constructor` = Initializes static data or do something only once. Run once before the first instance is constructed. See <https://msdn.microsoft.com/en-us/library/k9x6w0hc.aspx>
-* `sealed` = Disable further inheritance of a class or overriding of a method
+* `sealed` = Disable further inheritance of a class or overriding of a method (eg for Singleton classes)
 * `unsafe` = Required on sections that use pointers in C#. Also must set compiler to run in unsafe mode.
 * `ref/out` = Method parameter passing by reference. ref needs the parameter to be initialized beforehand. # Also useful for reference types (see <http://stackoverflow.com/questions/961717/what-is-the-use-of-ref-for-reference-type-variables-in-c>)
 * `abstract` = Interface like, but the class can contain methods that are implemented (non-abstract). The class must be abstract if it contains one abstract member. Abstract members must be overriden in children. See <https://msdn.microsoft.com/en-us/library/sf985hc5.aspx>, <http://stackoverflow.com/questions/747517/interfaces-vs-abstract-classes>, <http://forums.asp.net/t/1411490.aspx?Can+the+C+Abstract+Methods+have+Implementation+>
@@ -41,13 +42,18 @@ C# Is good.
   * The handler method is declared preferably as **protected virtual**, and accepts the firing object (emitter) as first parameter.
   * Firing the event: `if(this.StuffHappens != null) this.StuffHappens(this, args);`
 
-### Operators
+## Operators
 
 * `??`  # Null coalescing operator
 * `.?`  # Safe navigation operator
+* `&` and ``&&` can actually [both be used to join boolean expressions in condition](https://stackoverflow.com/a/4163509/3559724)
+  * `&` can be used both for integer type operands for bitwise-AND, and for boolean operands logical-and, which is the same (eg `011` & `101` = `001`)
+  * `&&` only operates on boolean operands, with the added property of short-circuiting upon the first _false_ statement
 
 ## Types
 
+* `byte` aka `System.Byte` = 8 bits unsigned (0 to 255), basically the shortest integer longer than a boolean bit
+* `short` aka `System.Int16` = 16 bits integer (-32,768 to 32,767)
 * Environment
   * Static Methods & Properties (`Environment.GetFolderPath()`, `Environment.SpecialFolder.LocalApplicationData`)
 * Enum

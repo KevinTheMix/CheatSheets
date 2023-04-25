@@ -1,6 +1,8 @@
-# LINQ
+# LINQ (Language Integrated Query)
 
-Stands for Language Integrated Query.
+* Remove duplicates = `people.GroupBy(p => p.Name).Select(g => g.First()).ToList()` (same logic as SQL partitions!)
+
+## Explanation
 
 * LINQ to Objects (L2O) = regular LINQ on IEnumerable, without intermediate provider/api e.g. LINQ to SQL/XML
   * See <https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/linq-to-objects#:~:text=The%20term%20%22LINQ%20to%20Objects,Dictionary.>

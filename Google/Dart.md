@@ -166,6 +166,7 @@ They're identical with the added benefit that nesting them can make it easier to
   * `'C:\\System` alternatively with manual escaping
 * `'$koko'` or `'${longer.expression[i]}'` = interpolation
 * `String s = 'a' 'b'    'c'` = concatenation (result: `'abc'`)
+* `'ko' * 4` = `'kokokoko'` = string multiplication
 * `s.startsWith()`
 * `s.substring(start, [end])`
 * `s.characters` (property) = string as characters list

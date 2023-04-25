@@ -7,6 +7,9 @@
   * It's actually a memory location that gets overriden every time one of its members get assigned
   * It occupes as much memory as its largest member
 * `sizeof(variable)` = returns the number of bytes occupied by variable
+* 0123 = octal number
+* 0x12 = hexadecimal number
+* `friend` = in a class, grants an another class/external function access to private/protected members
 
 ## I/O
 

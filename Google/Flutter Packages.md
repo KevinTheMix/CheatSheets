@@ -1,5 +1,7 @@
 # Flutter Packages
 
+* [stemmer](https://pub.dev/packages/stemmer) = reduces word to their base form
+
 ## [Framework Libraries](https://api.flutter.dev/index.html)
 
 * [collection](https://api.flutter.dev/flutter/package-collection_collection/package-collection_collection-library.html) = array manipulation
@@ -19,7 +21,12 @@ Hot Reload/Restart are not enough to reload plugins with platform native device 
 * [Flutter Favorite program](https://docs.flutter.dev/development/packages-and-plugins/favorites)
   * [Flutter Favorite](https://pub.dev/packages?q=is%3Aflutter-favorite) packages
 
-* [@fluttercommunity.dev](https://pub.dev/publishers/fluttercommunity.dev/packages)
+* [dart.dev](https://pub.dev/publishers/dart.dev/packages)
+  * [crypto](https://pub.dev/packages/crypto)
+  * [grpc](https://pub.dev/packages/grpc)
+  * [http](https://pub.dev/packages/http)
+  * [logging](https://pub.dev/packages/logging)
+  * [path](https://pub.dev/packages/path) = helper to combine/construct paths
 * [Flutter team plugins](https://github.com/flutter/plugins#plugins)
   * camera
   * espresso
@@ -37,6 +44,7 @@ Hot Reload/Restart are not enough to reload plugins with platform native device 
   * url_launcher
   * video_player
   * webview_flutter
+* [@fluttercommunity.dev](https://pub.dev/publishers/fluttercommunity.dev/packages)
 
 * [flutter_hooks](https://pub.dev/packages/flutter_hooks) = reuse lifecycle-embedded logic (eg _AnimationController_)
 * [go_router](https://pub.dev/packages/go_router) = routing across multiple platform (maintained by official Flutter team)
@@ -44,6 +52,7 @@ Hot Reload/Restart are not enough to reload plugins with platform native device 
 * [freezed](https://pub.dev/packages/freezed) = codegen for model classes (with JSON mapping), written by @Remi Rousselet
 * [RxDart](https://pub.dev/packages/rxdart) = reactive programming
 * [FlutterGen](https://pub.dev/packages/flutter_gen) = access assets programmatically instead of path strings
+* [undo](https://pub.dev/packages/undo)
 
 ### DI & State Management
 
@@ -51,7 +60,7 @@ Hot Reload/Restart are not enough to reload plugins with platform native device 
   * [GetX website](https://chornthorn.github.io/getx-docs/)
 * [get_it](https://pub.dev/packages/get_it) (aka **GetIt**) = simple DI container / service locator
 * [bloc](https://pub.dev/packages/bloc)
-* [flutter_bloc](https://pub.dev/packages/flutter_bloc)
+* [flutter_bloc](https://pub.dev/packages/flutter_bloc) (also <https://bloclibrary.dev/#/flutterbloccoreconcepts>)
 * [provider](https://pub.dev/packages/provider) = state management using InheritedWidget, written by @Remi Rousselet
   * [create vs value](https://stackoverflow.com/a/61861315/3559724); use _value_ inside `Grid|ListView.builder`
 * [riverpod](https://pub.dev/packages/flutter_riverpod) = compile-safe state management using global variable, written by @Remi Rousselet
@@ -60,7 +69,6 @@ Hot Reload/Restart are not enough to reload plugins with platform native device 
 ### DB & I/O
 
 * [graphql_flutter](https://pub.dev/packages/graphql_flutter)
-* [path](https://pub.dev/packages/path) = helper to combine/construct paths
 * [shared_preferences](https://pub.dev/packages/shared_preferences)
 * [get_storage](https://pub.dev/packages/get_storage) = key-value in memory storage wit disk backup, alternative to **shared_preferences**
 
@@ -69,6 +77,7 @@ Hot Reload/Restart are not enough to reload plugins with platform native device 
   * [Hive](https://pub.dev/packages/hive) = key-value NoSQL DB (written in Dart)
 * [ObjectBox](https://objectbox.io/) = high-performance Offline-First NoSQL DB with integrated Data Sync; no Web support
   * [ObjectBox Sync](https://sync.objectbox.io/)
+* [Drift](https://drift.simonbinder.eu/) (previously _Moor_)= offline-first persistence
 
 ### Animations, Graphism, Sounds & Themes
 
@@ -103,6 +112,7 @@ Hot Reload/Restart are not enough to reload plugins with platform native device 
 
 * [cached_network_image](https://docs.flutter.dev/cookbook/images/cached-images)
 * [intl](https://pub.dev/packages/intl) = Dates & Numbers (& Bidi) formatting methods
+* [in_app_purchase](https://pub.dev/packages/in_app_purchase)
 
 * **async**= additions to Dart's built-in _async_ (`StreamGroup.merge()`, `AsyncCache<T>()` time-based cacheing, **StreamQueue**)
 * **url_launcher** = open external URL/e-mail/phone number/SMS/any app with special URL handlers (e.g. YouTube). Check `canLaunch()` first

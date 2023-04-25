@@ -65,6 +65,8 @@ Within a Template, there's one more level to go up through to reach the DataCont
   * `<commonResources:BindingProxy x:Key="dataContextProxy" Data="{Binding}" />`
   * `<element ItemsSource="{Binding Data.MyProperty, Source={StaticResource dataContextProxy}}">`
 
+* [What exactly does FrameworkElement.DefaultStyleKeyProperty.OverrideMetadata do?](https://social.msdn.microsoft.com/Forums/vstudio/en-US/9df46c62-3715-4e16-8ef6-538068c28eb6/what-exactly-does-frameworkelementdefaultstylekeypropertyoverridemetadata-do?forum=wpf)
+
 ## XAML
 
 **eXtensible Application Markup Language** and is MS' variant of XML for designing GUIs.
@@ -369,3 +371,5 @@ The following resources and techniques are very valuable to unearth the cause of
     </ObjectDataProvider.MethodParameters>
 </ObjectDataProvider>
 ```
+
+* [Using DataTemplates & ContentPresenter to display something different depending on the type of a property](https://stackoverflow.com/a/5011728/3559724)

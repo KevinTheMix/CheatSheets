@@ -14,11 +14,12 @@ TODO.
 ### Immutability
 
 In Elixir, data is immutable, which means, a memory location once allocated is never subsequently updated.
-Therefore, something that points to the same place will always get the same value.
+Therefore, something that points to the same place will always keeps the same value.
 Note that unlike in Erlang or Haskell where reassigning (or rather pattern-matching) existing variables raises an error, variables in Elixir **can** be _rebinded_ to a new value.
 
 That characteristic makes data reuse super safe, especially in a concurrent setting.
 It also makes memory usage more efficient, since multiple parts of an application can use a single piece data, staving off duplication.
+
 E.g. the compositional nature of lists (data structure), that can chain existing sublists in order to make new combined ones.
 
 ### Pattern Matching

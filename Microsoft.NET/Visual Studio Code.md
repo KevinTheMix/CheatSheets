@@ -21,8 +21,9 @@ A good text editor.
   * By folder
 * [Setting by Filetype](https://code.visualstudio.com/docs/getstarted/settings#_language-specific-editor-settings)
 * [Tabs vs Spaces](https://stackoverflow.com/a/29972553)
-
-`"[plaintext]": { "editor.insertSpaces": false }`   # Note that .txt files are referenced as "plaintext" filetype.
+  * `"[plaintext]": { "editor.insertSpaces": false }`   # Note that .txt files are referenced as "plaintext" filetype.
+* [Editor sticky scroll](https://code.visualstudio.com/updates/v1_70#_editor-sticky-scroll)
+* [Set keyboard shortcut for](https://stackoverflow.com/a/41688564/3559724) for lower/uppercase
 
 ## Commands
 
@@ -42,6 +43,7 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 * `Alt + Shift + F` = Format/Tidy (e.g. HTML)
 * `Alt + Shift + Left/Right` = Shrink/Expand selection
 * `Alt + Shift + Up/Down` = Copy line up/down
+* `Ctrl + ,` = Settings (also via gear icon at the bottom-left or via File > Preferences > Settings)
 * `Ctrl + ù` or `Ctrl + J` = Toggle Terminal
 * `Ctrl + µ` = Clones selected tab or Split Terminal
 * `Ctrl + /` = toggle comments
@@ -60,6 +62,7 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
   * Type `>` to access Command Palette from here
   * Type `#` to search global symbols (classes, properties, methods, etc.), works with camelCase initials search
   * Type `@` to search local blocks
+* `Ctrl + R` = Open recent
 * `Ctrl + Shift + .` = local blocks
 * `Ctrl + Shift + Enter` = Insert line above
 * `Ctrl + Shift + F` = Search
