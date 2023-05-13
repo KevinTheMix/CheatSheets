@@ -17,6 +17,7 @@
     * <https://securitymusings.com/article/462/how-to-set-up-a-socks-proxy-using-putty-ssh>
 * [Removing "This Copy of Windows Is Not Genuine"](https://appuals.com/removing-this-copy-of-windows-is-not-genuine/)
 * Hide zip in an image file = `copy /b image.png + archive.zip result.png` (result image must be same format as input)
+* Combine image & mp3 = `copy image.png /b + song.mp3 combined.png`
 
 ## Windows 7+
 

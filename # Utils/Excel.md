@@ -30,6 +30,8 @@
 * `Ctrl + E` = Flash Fill (fill based on pattern eg other columns bodies based on 1st column & column header)
 * `Ctrl + F` = Search
   * Search in _Values_ = search displayed values (otherwise hidden by underlying formulas)
+* `Ctrl + G` = Go To
+  * Go to Special allows quick selection of cells on blanks, errors, etc.
 * `Ctrl + T` = Format as Table
   * Tables references (Charts, formulas, pivot) are automatically updated as the table's data is changed
 
