@@ -59,6 +59,8 @@ Look for Arrow+File icon that allows to Drag & Drop cloning settings
   * `P` = Draw
   * `B` = Paint
   * `C` = Slice a Pattern (_note: this clones the pattern and shifts start/stop times_)
+  * `Alt + R` = Piano roll - randomizer; allows randomizing the Levels (Pan, Vel, etc.) so it sounds more human
+  * `Alt + S` = Piano roll - strumizer; allows controlling strum strength so it sounds more human
   * `Alt + T` = Name selected timeline section (e.g. "Chorus", "Verse")
     * Those can be moved be grabbing them from their left side
   * `Alt + Drag` = Fine moving patterns

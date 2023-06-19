@@ -66,9 +66,13 @@
 
 ### Restoring Stock Image (without TWRP)
 
-The .zip package containing the _bat_ files, stock ROM & _bootloader & radio_ images must first be opened manually (into the _platform-tools_ folder).
+The .zip package containing the root _bat_ files, stock ROM & _bootloader & radio_ images must first be unzipped manually.
+Move that content right into the _platform-tools_ folder that contains **adb** & **fastboot** exes, at the same level as those.
+
+Finally, reboot the device into bootloader (`adb reboot bootloader`), make sure fastboot sees it (`fastboot devices`), then simply run _flash-all.bat_ which will sequentially flash all the stock images onto the devices, starting with the stock bootloader.
 
 * <https://www.droidwin.com/uninstall-twrp-restore-stock-recovery-android/>
 * <https://doc.e.foundation/pages/revert_samsung_to_stock_on_windows>
 * [Samsung Galaxy Nexus images](https://developers.google.com/android/images#yakju)
 * [LG Nexus 5 images](https://developers.google.com/android/images#hammerhead)
+* [How to Boot into Recovery Mode on NOKIA 1 Plus](https://www.youtube.com/watch?v=KJzetyZ17Xg)

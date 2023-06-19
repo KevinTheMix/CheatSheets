@@ -13,13 +13,15 @@
     * Low-level interface used to flash images on a partition via `fastboot` commands
     * Responsible for bringing up the kernel, or launches recovery mode, etc.
     * Responsible for the base layer of security (prevents _system_ change), and unlocking the bootloader erases all previous data
-  * Recovery = Side menu that can be started from bootloader for disk/partition management (wipe/format)
+  * Recovery = side menu that can be started from bootloader for disk/partition management (wipe/format)
     * Enter recovery mode by first entering the bootloader, selecting _Recovery mode_
     * [How to enter it](https://www.reddit.com/r/Nexus5/comments/2akpco/rooted_nexus_5_but_cant_boot_into_recovery/)
     * Pre-menu of stock recovery mode looks like a lying Android logo with a **red triangle and exclamation mark**
       * From there, hold Power and pressing Volume Up **once**
 * [Android Studio](https://developer.android.com/studio/) = full Android development SDK, for building apps on Android devices
-  * includes Android SDK Platform Tools
+  * includes **Android SDK Platform Tools** (which are also available as standalone tools)
+* [Android SDK Platform Tools](https://developer.android.com/tools/releases/platform-tools) = primarily **adb** & **fastboot** exe (see dedicated section below)
+  * Can be installed via Android Studio's SDK Manager (default path `C:\Users\Kalex\AppData\Local\Android\Sdk\platform-tools`)
 * Architecture/Platform = _arm_ or _arm64_ (less commonly _x86_ or _x86\_64_) - see [Open GApps](https://opengapps.org/)
 * OTA Updates = Over-the-air updates, the upgrades to the current OS
 * Sideloading = installing an image onto the phone directly from a file located on the PC
@@ -90,19 +92,21 @@ Note that custom ROMs only include the system image.
 
 ### [Android SDK Platform Tools](https://developer.android.com/studio/releases/platform-tools) (contains ADB, fastboot, systrace)
 
-* In device manager, phones appear with different names depending on device power status
-  * Powered-on phone appears as _Galaxy Nexus_
-  * Powered-off phone appears as _Android 1.0_
+* In device manager, phones appear with different names depending on device power & (USB debugging session) autorization status
+  * Powered-on & authorized phone appears as _Galaxy Nexus_
+  * Powered-off or connection not yet accepted (on the device) phone appears as _Android 1.0_
 * [How to install ADB and fastboot](https://doc.e.foundation/pages/install-adb-windows)
   * Developer mode must be enabled on the device (by clicking build number 7 times), as well as USB Debugging in developer settings
 * [ADB](https://developer.android.com/studio/command-line/adb) (aka Android Debug Bridge) = CLI to interact with a (**powered-on**) device
-  * `adb devices` = display connected devices IDs
+  * `adb devices [-l]` = display connected devices IDs (option: with device information)
   * `adb reboot bootloader` = reboot into the bootloader (alternatively, (re)starting the device while holding Volume Down, then Power)
   * `adb reboot recovery` = reboot into the recovery (alternatively, starting while holding Volume Down, then Power until a menu, then select _RECOVERY_)
   * `adb sideload`
 * [Fastboot](http://adbcommand.com/fastboot) = interact with the bootloader (of a **powered-off** device)
-  * `fastboot devices [-l]` = display current devices (option: with device paths).
-  * `fastboot oem unlock` = unlock bootloader (**warning: this erases all previous data**)
+  * `fastboot devices [-l]` = display current devices (option: with device information)
+  * `fastboot oem unlock` = unlocks the bootloader (**warning: this erases all previous data**), which enables installing a new (custom) OS
+    * The _LOCK STATE_ is displayed on the bootloader (lying Android robot) screen
+  * `fastboot oem lock` = lock bootloader (**Warning: only lock the bootloader when a Stock OS image is installed, as the last step**)
   * `fastboot reboot` = reboot into the OS
   * `fastboot reboot-bootloader` = reboot into the bootloader
   * `fastboot reboot-recovery` = reboot into the recovery mode (warning: may not work, worse: replace TWRP with the Stock recovery)
@@ -113,8 +117,7 @@ Note that custom ROMs only include the system image.
     * recovery = stock or TWRP
     * system = the actual Android system
     * vendor = for newer phones
-  * `fastboot update`
-  * `fastboot oem lock` = lock bootloader (**Warning: only lock the bootloader when a Stock OS image is installed, as the last step**)
+  * `fastboot -w update` = wipes the device's data, flash & install new firmware
   * [Flashboot Stock to unbrick](https://www.droidwin.com/flash-stock-firmware-via-fastboot-commands/)
 * Stock ROM contains `flash-all.bat`, which includes the following commands to automate reinstalling stock Android:
   * `fastboot flash bootloader bootloader-maguro-primemd04.img` = install stock bootloader

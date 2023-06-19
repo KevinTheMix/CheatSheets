@@ -68,3 +68,7 @@ Les commandes suivantes nécessitent de pointer sur une DB :
     show collections # Retourne les tables (aka collections dans la DB)
     coll = db.<collection> # Assigne la table à une variable
     db.<collection>.find() # Retourne toutes les lignes de la table
+
+## TODO
+
+* [$eq(aggregation)](https://www.mongodb.com/docs/manual/reference/operator/aggregation/eq/#mongodb-expression-exp.-eq)

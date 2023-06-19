@@ -39,6 +39,13 @@ Don't forget:
 * [dart:ffi](https://dart.dev/guides/libraries/c-interop) = call to native APIs (C, Swift, Objective-C)
   * [Foreign function interface](https://en.wikipedia.org/wiki/Foreign_function_interface)
 
+### CLI
+
+* `dart analyze` = code static analyzer that identifies issues
+* `dart fix` = automatically applies fixes for issues such as:
+  * those revealed by the static analyzer that have an associated automated solution
+  * depreciated APIs that can be auto-migrated to their newest counterpart
+
 ## Syntax
 
 ### Keywords, Types & [Operators](https://dart.dev/guides/language/language-tour#operators)
@@ -79,69 +86,6 @@ Don't forget:
 
 * `try {…} catch(e) {…}`
 * `try {…} on KokoException on catch(e) {…} catch(e) {…}` = catch specific exception type (then last generic catch all)
-
-### Futures & Streams
-
-* [async vs async*](https://stackoverflow.com/a/60036568/3559724)
-  * `async` (with `await`) = Future; keyword comes between function head & body eg `function(…) async { … }`
-  * `async*` (with `await for` & `yield`) = Stream; asynchronous generator function
-  * `sync*` (with `yield`)  is related to synchronous genertors, ie `Iterable<T>` functions
-  * `yield` statement is for immediately available, produced one-by-one values _on-demand_
-  * `yield*` allows to yield an entire Iterable (ie its values one a time); see [Generator Functions](https://www.youtube.com/watch?v=TF-TBsgIErY)
-
-#### [Future](https://dart-tutorial.com/asynchronous-programming/future-in-dart/)
-
-`async-await` [is the recommended choice as it improves readability](https://dart.dev/guides/language/effective-dart/usage#prefer-asyncawait-over-using-raw-futures), but cannot be used in some scenarii (cannot make some methods async such as initState or [constructors](https://www.reddit.com/r/dartlang/comments/a4da0q/when_to_use_await_vs_then/ebevh52/), we cast multiple requests at the same time and want them to run together instead of blocking on each one, although we can use [Future.wait](https://stackoverflow.com/a/42176121/3559724) for that scenario).
-
-* [Future for beginners](https://medium.com/flutter-community/a-guide-to-using-futures-in-flutter-for-beginners-ebeddfbfb967)
-* `async-await Future` vs `Future.then()` [are different](https://stackoverflow.com/a/54515559/3559724) (former is blocking; latter is a callback)
-* `then(…)` also returns a Future (=> chainable eg `Future.then(…).then(…)`)
-* `then(…)`'s callback always takes in an argument (even when the Future returns nothing eg `then((_) => …)`)
-* `then(…)`'s callback can be a named function eg `then(print)`
-* `then(…)` can be appended _after_ `catchError(…)`, in which case it acts as a _finally_ block
-  * Some explicit generic typing on a previous `then<T>()` may be required in that scenario (see <https://github.com/dart-lang/sdk/issues/42363>)
-* `catchError((error) => …, test: {condition})` = applies error handling function (if the optional condition is met)
-* `onError<E>((error, stackTrace) => …, test: {condition})` = error of type _E_ ([more precisely typed](https://stackoverflow.com/a/69467957))
-* To handle errors with `await`, wrap the code in a _try-catch_ block (see <https://stackoverflow.com/a/61701836>)
-  * Side-node on _try-catch_: use `rethrow` to .. rethrow the original error (probably preserving its callstack more efficiently)
-* `Future.delayed(duration).then(…)` = runs `then()` callback after _duration_ time (which can be zero but will still make the code async)
-  * Similar to C#'s `Task.Delay(ms)`
-
-```dart
-void main() {
-  var future = Future(() => 'Future');  // Future<String>
-  var value2 = Future.value(123);       // Future<int>, creates a future already completed with value
-  var value1 = Future.value();          // Future<dynamic>, same
-  var nothin = Future(() {});           // Future<Null>
-     
-  print('First');
-  
-  // This print comes last, since that Future's declaration was last.
-  nothin.then((_) => print('Future returns nothing, but then() always has a parameter - even if void'));
-  
-  future
-    .then<String>((s) { print(s); throw 'error'; }) // We need to indicate (generic) type here, so following on|catchError knows what to return!
-    .onError<String>((error, stackTrace) { print(error); return 'handled'; })
-    .catchError((error) { print(error); return 'caught'; })
-    .then((s) { print(s); }
-  );
-  
-  print('Second');  
-}
-```
-
-#### Stream
-
-Streams is async data/events/feed.
-Streams are (async) like Futures but for Iterables, where values are produced to be consumed but not all are available from the start.
-
-* `Stream<int> count() async* { int i=1; while(true) yield i++; }`
-* `assert(condition)` = development-only checks (not executed in production)
-* `async*` + `yield await` = produces one value (awaited from a Future) to be returned by the Stream
-* `listen((_) => …)` = consumes a value and runs a provided callback on each
-* `where(…)`
-* `map(…)`
-* `foreach(…)`
 
 ### Numbers
 
@@ -187,6 +131,8 @@ They're identical with the added benefit that nesting them can make it easier to
 
 ### [Collections](https://api.flutter.dev/flutter/dart-collection/dart-collection-library.html)
 
+Map, Set, Queue, List, LinkedList.
+
 * `collection.isEmpty|isNotEmpty`
 * `collection.length`
 * `...` (spread operator) or `...?` (null-aware spread operator)
@@ -195,17 +141,20 @@ They're identical with the added benefit that nesting them can make it easier to
 * `firstWhere()` & `singleWhere()`
 * `any(condition)`
 * `contains(item)` = find item by reference (address)
-
-* `Iterable<T>` is an interface whose inheriting classes must expose an `Iterator<T> iterator` property
-  * Lists & Maps are examples of such classes (they do have an _iterator_ property)
-  * Those classes instances can then be used in `for (… in …)` constructs
+* [Iterable&lt;E&gt;](https://api.dart.dev/stable/3.0.1/dart-core/Iterable-class.html)
+  * collection of values/elements that can be accessed sequentially, via its [iterator](https://api.dart.dev/stable/3.0.1/dart-core/Iterable/iterator.html) getter
+  * base class for Lists & co
+* [Iterator&lt;E&gt;](https://api.dart.dev/stable/3.0.1/dart-core/Iterator-class.html) is an interface exposing an `Iterator<E> iterator` property for getting items, one at a time, from an object
+  * Implementing classes instances can be used in `for (… in …)` constructs
 
 ```dart
+// Iterator<E>
 abstract class Iterator<E> {
   bool moveNext();
   E get current;
 }
 
+// Iterable<E>
 class … extends Iterable<…> {
   …
   Iterator<…> get iterator => …;
@@ -219,6 +168,7 @@ In Dart, arrays are List objects, so most people just call them _lists_.
 [Arrays in other languages are called Lists in Dart](https://stackoverflow.com/a/64273912/3559724).
 
 * `[1, 2, 3]` = Dart infers the type
+* `[a, b, c][index]` = pick an item among many according to some selection index (eg menu selecting a screen, see NavigationBar Material 3 widget)
 * `[...list]` = shallow-clone an array
   * Can be used to add items eg `[...list, item]`
   * Can be used to concatenate lists eg `[...a, ...b]`
@@ -227,8 +177,9 @@ In Dart, arrays are List objects, so most people just call them _lists_.
 * `<int>[]` = with explicit generic type now mandatory since there are no items yet to infer from
   * For casting however, we need to use `List<Type>` instead
 * `[1, 2.34, 'text', ['nested', 5]]` = mixed types list are also valid
+* `list.reversed` = `Iterable<E>` property, basically the reverse of _iterator_
+  * can be used to reverse Strings in a single statement ie `s.split('').reversed.join()`
 * `List.generate(count, (index) => … );` = uses generator function to generate _count_ items
-  * `reversed` = reverse list (can be used to reverse Strings in one statement ie `s.split('').reversed.join()`)
 * `List<T>.from(iterable)` = constructs a List of T from an Iterable
 * **Collection if** = add item conditionally (e.g. `[if (condition) Item(…), b, c]`), **Note: don't use curly braces in this syntax**
 * **Collection for** = add items using a loop (e.g. `[for (var i in integers) '$i'`] = turns a list of int into Strings)
@@ -349,6 +300,69 @@ Multiple inheritance is not permitted: every class (except for `Object`) has exa
   * eg a [property overriding a getter](https://flutterfromdotnet.hashnode.dev/flutter-first-impressions)
 * `constructor({required super.property})` = shorthand to pass on a named parameter to  _super_ constructor (e.g. an **InheritedWidget**'s _child_)
 * `@override` = actually optional; lets Dart analyzer issue a warning if forgotten or unexpected
+
+### Futures & Streams
+
+* [async vs async*](https://stackoverflow.com/a/60036568/3559724)
+  * `async` (with `await`) = Future; keyword comes between function head & body eg `function(…) async { … }`
+  * `async*` (with `await for` & `yield`) = Stream; asynchronous generator function
+  * `sync*` (with `yield`)  is related to synchronous genertors, ie `Iterable<T>` functions
+  * `yield` statement is for immediately available, produced one-by-one values _on-demand_
+  * `yield*` allows to yield an entire Iterable (ie its values one a time); see [Generator Functions](https://www.youtube.com/watch?v=TF-TBsgIErY)
+
+#### [Future](https://dart-tutorial.com/asynchronous-programming/future-in-dart/)
+
+`async-await` [is the recommended choice as it improves readability](https://dart.dev/guides/language/effective-dart/usage#prefer-asyncawait-over-using-raw-futures), but cannot be used in some scenarii (cannot make some methods async such as initState or [constructors](https://www.reddit.com/r/dartlang/comments/a4da0q/when_to_use_await_vs_then/ebevh52/), we cast multiple requests at the same time and want them to run together instead of blocking on each one, although we can use [Future.wait](https://stackoverflow.com/a/42176121/3559724) for that scenario).
+
+* [Future for beginners](https://medium.com/flutter-community/a-guide-to-using-futures-in-flutter-for-beginners-ebeddfbfb967)
+* `async-await Future` vs `Future.then()` [are different](https://stackoverflow.com/a/54515559/3559724) (former is blocking; latter is a callback)
+* `then(…)` also returns a Future (=> chainable eg `Future.then(…).then(…)`)
+* `then(…)`'s callback always takes in an argument (even when the Future returns nothing eg `then((_) => …)`)
+* `then(…)`'s callback can be a named function eg `then(print)`
+* `then(…)` can be appended _after_ `catchError(…)`, in which case it acts as a _finally_ block
+  * Some explicit generic typing on a previous `then<T>()` may be required in that scenario (see <https://github.com/dart-lang/sdk/issues/42363>)
+* `catchError((error) => …, test: {condition})` = applies error handling function (if the optional condition is met)
+* `onError<E>((error, stackTrace) => …, test: {condition})` = error of type _E_ ([more precisely typed](https://stackoverflow.com/a/69467957))
+* To handle errors with `await`, wrap the code in a _try-catch_ block (see <https://stackoverflow.com/a/61701836>)
+  * Side-node on _try-catch_: use `rethrow` to .. rethrow the original error (probably preserving its callstack more efficiently)
+* `Future.delayed(duration).then(…)` = runs `then()` callback after _duration_ time (which can be zero but will still make the code async)
+  * Similar to C#'s `Task.Delay(ms)`
+
+```dart
+void main() {
+  var future = Future(() => 'Future');  // Future<String>
+  var value2 = Future.value(123);       // Future<int>, creates a future already completed with value
+  var value1 = Future.value();          // Future<dynamic>, same
+  var nothin = Future(() {});           // Future<Null>
+     
+  print('First');
+  
+  // This print comes last, since that Future's declaration was last.
+  nothin.then((_) => print('Future returns nothing, but then() always has a parameter - even if void'));
+  
+  future
+    .then<String>((s) { print(s); throw 'error'; }) // We need to indicate (generic) type here, so following on|catchError knows what to return!
+    .onError<String>((error, stackTrace) { print(error); return 'handled'; })
+    .catchError((error) { print(error); return 'caught'; })
+    .then((s) { print(s); }
+  );
+  
+  print('Second');  
+}
+```
+
+#### Stream
+
+Streams is async data/events/feed.
+Streams are (async) like Futures but for Iterables, where values are produced to be consumed but not all are available from the start.
+
+* `Stream<int> count() async* { int i=1; while(true) yield i++; }`
+* `assert(condition)` = development-only checks (not executed in production)
+* `async*` + `yield await` = produces one value (awaited from a Future) to be returned by the Stream
+* `listen((_) => …)` = consumes a value and runs a provided callback on each
+* `where(…)`
+* `map(…)`
+* `foreach(…)`
 
 ## Libraries & [Packages](https://pub.dev/)
 

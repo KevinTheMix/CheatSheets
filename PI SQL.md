@@ -1,5 +1,7 @@
 # PI SQL
 
+* [PI AF SDK](https://docs.aveva.com/bundle/af-sdk/page/html/overview.htm)
+
 ## Extended Properties
 
 Enter these additional parameters when launching connection to a DB (PIAF, PIAF2, etc.)
