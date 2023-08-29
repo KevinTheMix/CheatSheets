@@ -41,10 +41,13 @@ Don't forget:
 
 ### CLI
 
+* `dart --version`
 * `dart analyze` = code static analyzer that identifies issues
 * `dart fix` = automatically applies fixes for issues such as:
   * those revealed by the static analyzer that have an associated automated solution
   * depreciated APIs that can be auto-migrated to their newest counterpart
+* `dart compile exe {source}.dart`
+* `dart run {source}.dart`
 
 ## Syntax
 
@@ -74,7 +77,7 @@ Don't forget:
   * `a!` = casts _a_ to its underlying non-nullable type
   * `a?.b` = returns `null` if a is null (equivalent to `a == null ? null : a.b`)
   * `a ?? b` = returns _a_ if not null; _b_ otherwise
-  * `a ??= b` = assigns _b_ only if _a_ was null (shorter than `if (a != null) a = b`)
+  * `a ??= b` = assigns _b_ only if _a_ was null (shorthand for `if (a != null) a = b`)
   * `..` and `?..` = [cascade notation](https://dart.dev/guides/language/language-tour#cascade-notation)
     * Applies a mutating function on an object, and return that object
     * E.g. `return List<int>.from(items)..add(Item());`
@@ -92,12 +95,12 @@ Don't forget:
 * **num**
   * _int_ & _double_ inherit from _num_
   * `toDouble()`
+* **int**
+  * `i.isOdd`, `i.isEven`
 * **double**
   * `floor()`, `ceil()` & `round()` = useful to turn a **double** into the closest **int**
   * `floorToDouble()`, `ceilToDouble()` & `roundToDouble()` similarly
   * `double.tryParse(num) != null` = [Check if number](https://stackoverflow.com/a/24085491/3559724)
-* **int**
-  * `i.isOdd`, `i.isEven`
 * [Operators](https://dart.dev/guides/language/language-tour#operators)
   * `~/` = forces division integer result
 
@@ -106,7 +109,7 @@ Don't forget:
 [Single vs Double quotes](https://stackoverflow.com/a/54014914/3559724)
 They're identical with the added benefit that nesting them can make it easier to work with inner quotes (eg `"This is a 'great' example"`).
 
-* `r'C:\System'` = raw string (escapes automatically `\` and prevents interpolation, à la C# `@"C:\System"`)
+* `r'C:\System'` or `r"C:\System"` = raw string (escapes automatically `\` and prevents interpolation, à la C# `@"C:\System"`)
   * `'C:\\System` alternatively with manual escaping
 * `'$koko'` or `'${longer.expression[i]}'` = interpolation
 * `String s = 'a' 'b'    'c'` = concatenation (result: `'abc'`)
@@ -182,7 +185,7 @@ In Dart, arrays are List objects, so most people just call them _lists_.
 * `List.generate(count, (index) => … );` = uses generator function to generate _count_ items
 * `List<T>.from(iterable)` = constructs a List of T from an Iterable
 * **Collection if** = add item conditionally (e.g. `[if (condition) Item(…), b, c]`), **Note: don't use curly braces in this syntax**
-* **Collection for** = add items using a loop (e.g. `[for (var i in integers) '$i'`] = turns a list of int into Strings)
+* **Collection for** = add items using a loop (e.g. `[for (var i in integers) '$i']` = turns a list of int into a list of Strings)
 * `list.add(item)`
 * `list.insert(index, item)` eg `list.insert(0, item)` to add at the beginning (unlike `add()`)
 * `list.remove(item)` = remove by reference
@@ -201,9 +204,9 @@ In Dart, arrays are List objects, so most people just call them _lists_.
   * `list.reduce(math.min/max)`
 * `list.fold<int>(start, (accu, next) => accu + next)` = [same as reduce but can return any type](https://stackoverflow.com/a/20491946/3559724)
 * `list.any((item) => …)`
-* Add/removing from the list will not work if it was set as a _const_ literal (as in, the value was _const_, not the variable)
-  * Note that you cannot add to a _const_ list either e.g. `const list = []`
+* Add/removing from the list will not work if it was set as a _const_ literal (as in, the rvalue was _const_, not the left variable)
   * E.g. cannot add to list after `var list = const []` (which is basically useless), however _list_ can be reassigned since it's not _const_
+  * Note that you cannot add to a _const_ list either e.g. `const list = []`
 
 #### [Sets](https://dart.dev/guides/libraries/library-tour#sets)
 
@@ -247,7 +250,8 @@ Key-value object. Both Key & Value can be any type. Keys are unique (not values)
   * `function(a, b)`  = required positional parameters
   * `function(a, [b])` = optional positional parameters
   * `function(a, {b, c})` = optional [named parameters](https://dart.dev/guides/language/language-tour#named-parameters)
-    * _required_ ([replaces _@required_ annotation](https://stackoverflow.com/a/63048076/3559724)) = force otherwise optional named parameter
+    * _required_ = force otherwise optional named parameter (see <https://stackoverflow.com/a/63048076/3559724>)
+    * _required_ null-safety keyword vs older `@required` meta annotation as of Dart 2.12 (see <https://stackoverflow.com/a/67642421/3559724>)
     * As implicit default is _null_, the type of optional (named) parameters must be nullable, or they must be provided a (non-null) default value
 
 * Dart has [first-class functions](https://livebook.manning.com/book/dart-in-action/chapter-4), i.e. functions (pointers) as parameters

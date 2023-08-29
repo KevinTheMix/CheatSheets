@@ -25,7 +25,7 @@ el[att^=val] {} /* All <el>s with att="val%" */
 el[att$=val] {} /* All <el>s with att="%val" */
 el[att*=val] {} /* All <el>s with att="%val%" */
 :x {}
-:nth-child(odd)
+:nth-child(odd) {} /* e.g. p:nth-child(5n) applies to each 5*nth child that is also a paragraph
 ::y {}
 #id {} /* Unique ID */
 style=""

@@ -52,7 +52,7 @@
 ## Code
 
 * `Console.ReadKey()` = Pause
-* [Comments XML](https://docs.microsoft.com/en-us/dotnet/csharp/codedoc)
+* [XML Comments](https://docs.microsoft.com/en-us/dotnet/csharp/codedoc)
   * `<see cref="Koko">` = Class reference =
   * `<see href="http://www.koko.com">` = external link (URL)
   * Line Break = `<para/>` or `<para>...</para>`
@@ -75,6 +75,11 @@
 * `switch`
 * _typing camelCase initials_ => intellisense fills the rest
   * E.g. Type _bup_ (of type `BidUnavailabilityPeriod`) => VS suggest _bidUnavailabilityPeriod_
+
+## Tools > Options
+
+* Projects and Solutions
+  * _Track Active Item in Solution Explorer_ = keep current file highlighted in Solution Exporer
 
 ## Extensions
 

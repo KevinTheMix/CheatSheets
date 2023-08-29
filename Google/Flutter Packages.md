@@ -15,6 +15,12 @@ At a minimum, a Dart package is a directory containing a pubspec file.
 A plugin is a type of package; the full designation is _plugin package_, which is generally shortened to _plugin_.
 A plugin package is a special kind of package that makes platform functionality available to the app. Plugin packages can be written for Android (using Kotlin or Java), iOS (using Swift or Objective-C), web, macOS, Windows, Linux, or any combination thereof. For example, a plugin might provide Flutter apps with the ability to use a device’s camera.
 
+**Pub** is actually the name of a package manager, which takes care of fetching packages and package versioning information.
+Its CLI can be summoned either via `dart pub {pub_command}` or `flutter pub {pub_command}`
+
+The tags (in blue) listed under the package name & version indicate which SDK & platform the package necessitates/targets.
+Lots of packages require the full Flutter SDK, but a few require only the Dart SDK.
+
 Hot Reload/Restart are not enough to reload plugins with platform native device features => `flutter run` (or _F5_ equivalent) after adding.
 
 * [Using packages](https://docs.flutter.dev/development/packages-and-plugins/using-packages)
