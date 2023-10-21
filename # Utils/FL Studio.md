@@ -1,6 +1,11 @@
 # FL Studio
 
 * [FL Studio Reference Manual](https://www.image-line.com/support/flstudio_online_manual/html/title.htm)
+* More layers are not always the answer. Focus on fewer, quality sounds!
+* Hi-Pass Filters are your friend for removing excess low end
+* Finish as much music as you can. You'll improve the quickest this way.
+* Velocity will help humanize drums, pianos, other real instruments.
+* Judge your quality by looking back at how far you've come
 
 ## TODO
 
@@ -12,11 +17,11 @@
 
 ## Glossary
 
-* Channel = source of sound (synth, kick, keyboard, guitar) produced by audio sampling or VST generator.
+* Channel = source of sound (synth, kick, keyboard, guitar) produced by audio sampling or VST generator
 * Pattern = group of Channels playing notes that can then be added to the Playlist
 * Playlist = full song
-* Track = either an horizontal line of pattern(s) in the Playlist, or a Mixer slot.
-* VST = Virtual Instrument / Plugin
+* Track = either an horizontal line of pattern(s) in the Playlist, or a Mixer slot
+* VST (Virtual Sound Technology) = Virtual Instrument / Plugin
 
 ## Settings
 
@@ -48,6 +53,7 @@ Look for Arrow+File icon that allows to Drag & Drop cloning settings
   * `F7` = Piano roll
   * `F8` = Plugin picker
   * `F9` = Mixer
+  * `F11` = Song info
   * `R`= Record
   * `Alt + F8` = Object browser
   * `Ctrl + F8` = Pattern/Channel picker
@@ -92,7 +98,7 @@ Look for Arrow+File icon that allows to Drag & Drop cloning settings
 * Channel rack
   * `Alt + Up/Down` = Move a channel Up/Down
   * `Ctrl + C/V` = Copy channel notes to another channel (also in different Pattern)
-  * `Ctrl + Click` = Play one note of Channel
+  * `Ctrl + Click` = listen preview (source: comment on In The Mix's Template video)
   * `Shift + Click` = Rename/color/icon channel
   * `Right-click Channel > Panio roll` = Piano Roll
   * `Right-click Channel > Cut itself` = Fix overlapping 808 notes (and other samples)
@@ -101,7 +107,7 @@ Look for Arrow+File icon that allows to Drag & Drop cloning settings
     * A new _Audio_ group is automatically created when an (Edison) Audio recording gets added to Playlist.
 * Mixer
   * `Ctrl + L` = Add selected Rack Channel Track to Mixer Track
-  * `Alt + Left/Right` = Move mixer track
+  * `Alt + Left/Right` or `Shift + Mouse  wheel` = Move mixer track left/right
   * `Left-Click Track plug icon` = Disable effects for Mixer Track
   * `Right-Click Effects` = Effect picker
   * Use the built-in EQ (by track) in the Mixer itself

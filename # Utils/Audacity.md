@@ -5,14 +5,7 @@
   * _Effect > Noise Removal and Repair > Noise Gate…_ (Gate threshold ~ -60dB, Level reduction = -100dB)
   * _Edit > Audio Clips > Detach at Silences_ to auto-cut clips
 
-* `Alt + ,` = Previous Clip
-* `Alt + .` = Next Clip
-* `Ctrl + B` = Edit Label at Selection
-* `Ctrl + D` = duplicate
-* `Ctrl + P` = (_Edit >_) Preferences
-  * Keyboard (shortcuts) => set _Split_ = `S`
-* `Ctrl + Shift + L` = Export Multiple
-  * Split files based on Labels
+## Menus
 
 * Edit
   * Audio Clips
@@ -28,3 +21,16 @@
     * Amplify…
     * Compressor…
   * Special > Truncate Silence…
+
+## Shortcuts
+
+* `Alt + ,` = Previous Clip
+* `Alt + .` = Next Clip
+* `(Shift +) Tab` = Previous/Next Element on current timeline
+* `Ctrl + B` = Edit Label at Selection
+* `Ctrl + D` = duplicate
+* `Ctrl + P` = (_Edit >_) Preferences
+  * _Keyboard_ (shortcuts) => set _Split_ = `S`
+  * _Import / Export_ > _Show Metadata Tags editor before export_
+* `Ctrl + Shift + L` = Export Multiple
+  * Split files based on Labels
