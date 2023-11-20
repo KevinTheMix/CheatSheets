@@ -65,8 +65,6 @@ Look for Arrow+File icon that allows to Drag & Drop cloning settings
   * `P` = Draw
   * `B` = Paint
   * `C` = Slice a Pattern (_note: this clones the pattern and shifts start/stop times_)
-  * `Alt + R` = Piano roll - randomizer; allows randomizing the Levels (Pan, Vel, etc.) so it sounds more human
-  * `Alt + S` = Piano roll - strumizer; allows controlling strum strength so it sounds more human
   * `Alt + T` = Name selected timeline section (e.g. "Chorus", "Verse")
     * Those can be moved be grabbing them from their left side
   * `Alt + Drag` = Fine moving patterns
@@ -91,7 +89,11 @@ Look for Arrow+File icon that allows to Drag & Drop cloning settings
 * Piano Roll
   * `Ctrl + Up/Down` = Move selected note by one octave
   * `Shift + Up/Down` = Move selected note by one half-tone
+  * `Ctrl + B` = Clone-append selection
   * `Alt + Q` = Quantize (same as `Arrow > Tools > Quantize`)
+  * `Alt + R` = Piano roll - randomizer; allows randomizing the Levels (Pan, Vel, etc.) so it sounds more human
+  * `Alt + S` = Piano roll - strumizer; allows controlling strum strength so it sounds more human
+  * `Alt + Y` = Piano roll - score flipper (inverser)
   * `Ctrl + Q` = Quick quantize
   * `Shift + Q` = Quick quantize start times
   * `Arrow > H(elpers) > S(cale highlighting)`
@@ -108,6 +110,7 @@ Look for Arrow+File icon that allows to Drag & Drop cloning settings
 * Mixer
   * `Ctrl + L` = Add selected Rack Channel Track to Mixer Track
   * `Alt + Left/Right` or `Shift + Mouse  wheel` = Move mixer track left/right
+  * `Alt + R` = Rendering 1 mixer track
   * `Left-Click Track plug icon` = Disable effects for Mixer Track
   * `Right-Click Effects` = Effect picker
   * Use the built-in EQ (by track) in the Mixer itself

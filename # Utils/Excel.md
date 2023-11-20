@@ -34,6 +34,7 @@
   * Go to Special allows quick selection of cells on blanks, errors, etc.
 * `Ctrl + T` = Format as Table
   * Tables references (Charts, formulas, pivot) are automatically updated as the table's data is changed
+* `Ctrl + V, Ctrl, V` = copy values
 
 * `Shift + Alt + Left/Right` (or _Data > Outline > Group_) = Group/Ungroup
 * `Shift + F11` = Add new sheet

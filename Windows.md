@@ -10,6 +10,9 @@
 
 ## Hacks
 
+* Create invisible/hidden folder
+  * Name it " " (No-Break Space, CharMap U+00A0, Alt+255 or Alt+0160)
+  * Change folder icon to one of the blank ones
 * Create a file called con.txt: <https://www.reddit.com/r/todayilearned/comments/a0zht/til_that_you_cant_create_a_file_in_windows_called/c0fcr5n/>
 * Bypass company firewall (2014.04)
   * Remote desktop to home computer
