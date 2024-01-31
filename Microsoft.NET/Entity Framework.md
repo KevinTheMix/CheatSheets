@@ -1,9 +1,18 @@
-# EF
+# Entity Framework
+
+## Glossary
+
+* **DbContext** = combines the Unit Of Work & Repository patterns
+* **ObjectContext** = represents a connection between the CLR & the DB (for CRUD operations)
+* **DbFunctions** = CLR (DateTime/Numbers/String manipulation) methods to be executed on (`IQueryable`) `DbContext` or `ObjectContext` entities (Linq to Entities queries)
+  * They are executed as **CLR code at the DB-level, not in memory**
+* **ORM (Object-Relational Mapping)** = technique for converting data between a relational DB and the heap of an OO programming language
+* `DbSet<T>` = a `DbContext` property that inherits from `IQueryable<T>`
 
 ## Database Context
 
 It is a class inheriting from DbContext where EF's [Fluent API](https://docs.microsoft.com/en-us/ef/ef6/modeling/code-first/fluent/types-and-properties) is used to describe the DB data structure (in conjonction with data annotations attributes placed on the domain model classes & properties) and ultimately map the tables (fields) to entities (attributes).
-The Database Context holds the collections corresponding to the DB tables in the form of Properties of type DbSet&lt;T&gt;.
+The Database Context holds the collections corresponding to the DB tables in the form of Properties of type `DbSet<T>`.
 
 ## Data Mapping
 
@@ -31,3 +40,7 @@ Holds global mapping configuration.
   * Create a private field
   * Create a public field that translates inbound values into the private field. In this example, it has the same name as the DB field, so it kinda "replaces" the private property.
   * The private field gets mapped to the DB field via the EF model builder, by name (à la reflection, so it works even though it's private).
+
+## API
+
+* `DbFunctions.TruncateTime(DateTime)` = return the date part of a DateTime

@@ -1,267 +1,124 @@
 # Git
 
-Git works by augmenting regular directories into Git repositories.
-Only file deltas are stored from commit to commit, so the storage is minimal.
-
-* Repository = Working folder that includes additional files used by Git to index/keep track of files and changes
-* Refs = Branches and tags (`.\.git\refs\`)
-
-## Configuration
-
-### Configuration Scopes
-
-Several scopes of configuration are defined:
-
-* `--system` = System
-* `--global` = User
-* _none_ = current Repository
-
-And their corresponding file location:
-
-* System = `C:\Program Files\Git\mingw64\etc\gitconfig`
-  * attr = `C:\Program Files\Git\mingw64\etc\gitattributes`
-* User/Global = `~\.gitconfig`
-* Repository = `.\.git\config`
-
-### CLI
-
-On Windows, Command-line parameters must use double " instead of single ' quotes.
-
-```cmd
-git config
-git config --{modifier} {section}.{parameter} {value}
-git config --edit # opens the (targeted) configuration file
-git config --edit --system
-git config --list --global  # --list aka -l
-git config --global user.email "a@b.c"
-git config --global user.name "Koko"
-git config core.safecrlf warn # make Linux-Windows line endings non-blocking
-git config --global alias.co checkout # alias
-```
-
-### Config Sections
-
-An Alias is a command with parameters shortened to a single term (.gitconfig file in $HOME directory).
-To define an alias, used the following command:
-
-* [alias](https://githowto.com/aliases)
-  * Format: `{abbr} = {long_command_with_parameters}`
-  * Example: `hist = log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short`
-* [user]
-  * email
-  * name
-* [credential]
-  * `helper = manager` = remove this to prevent GIT Credential Manager (see <https://stackoverflow.com/a/37185202/3559724>)
-* [core]
-  * `askpass =` = disables the OpenSSH credentials popup too
-
-#### Configuration Files
-
-* .gitconfig = configuration sections
-* .gitattributes = (binary/textual) merging strategy per file type
-* .gitignore = tracking strategy per file type
-
-### [Windows Git Credential Manager](https://github.com/Microsoft/Git-Credential-Manager-for-Windows)
-
-* Stores logins in Windows Credential Store.
-* Uninstall = `C:\Program Files\Git\mingw64\libexec\git-core\git-credential-manager.exe uninstall`
-
-## API
-
-### Init
-
-Sets up the current directory as a GIT repository
-
-`git init`
-
-### Add
-
-Adds (aka Stages) all or specific files to be included in the next commit.
-This enables modularity on what will get commited or not in the next commit transaction.
-See <https://githowto.com/staging_and_committing>
-
-```cmd
-git add {FILE}
-git add . # All the files in the current directory and its subdirectories
-git add '*.txt' # All the files in the current directory and its subdirectories matching the pattern
-git add -i # Add interactively
-```
-
-### Reset
-
-Opposite of Add; Unregister one or all files staged for commit
-
-```cmd
-git reset \[FILE\]
-git reset --soft HEAD~1 # Cancels the last commit
-```
-
-### Commit
-
-The Commit itself. All staged files are commited ("snapshot") to the repository
-A Commit message is expected.
-If it is not provided in the command line, the default text editor is launched and its result fed as message
-
-```cmd
-git commit
-git commit -m "Commit message"
-git commit -a # Also commit add first
-```
-
-### Revert
-
-Opposit of commit; cancel a Commit transaction
-
-```cmd
-git revert HEAD # Reverts very last commit
-git revert HASH # Reverts specific commit
-```
-
-### Status
-
-Status of the repository (OK, staged files, modifications not yet staged, etc.)
-
-`git status`
-
-### Branch
-
-Lists all branches
-
-`git branch`
-
-Name a commit branch
-
-`git branch NAME HASH`
-
-### Tag
-
-```cmd
-git tag TAG # Gives a name to currently checked-out Commit from which it'll be referrable
-git tag # Lists existing tags
-```
-
-### Log
-
-Lists commits in anti-chronological order
-
-```cmd
-git log # Lists commits up to currently checked-out
-git log BRANCH # Lists commits up to provided commit
-git log TAG # Lists commits up to provided commit
-```
-
-#### Options (see 'man git-log' or 'git log --help')
-
-```cmd
---pretty=oneline # Compact view
---pretty=format:'' # %(ad = Author Date | an = Author | cd = Date | d = Branch | h = Hash | s = Comment)
-                   # Using %d format, indicates where HEAD points, branchs names & Commit tags
---max-count=10 # Limit
---since="5 minutes ago" # After
---until="5 minutes ago" # Before
---date=short # Date format
---author="Name"
---graph # Draw Ascii tree of commits 
---all # Includes all Commits, not just the ancestors of currently checked-out
-```
-
-#### Visual GUI log visualizer
-
-`gitk`
-
-### Checkout
-
-Replaces files in the working directory with repository Branch/Commit version
-The currently checked out version is indicated by HEAD in the logs
-
-Checks-out all files of specific Commit and switches to detached HEAD state
-
-```cmd
-    git checkout HASH
-    git checkout TAG
-    git checkout TAG^ # Commit before the one given by its tag (aka TAG^1). On windows, use ~ instead of ^
-    git checkout TAG^n # N-th Commit before the one given by its tag
-```
-
-Checks-out the latest version of a branch
-
-```cmd
-git checkout . # Current branch (see <https://stackoverflow.com/a/14075772>)
-git checkout BRANCH # E.g. default branch 'git checkout master'
-git checkout BRANCH^ # Second to last commit in the branch
-git checkout BRANCH^ # N-th to last commit in the branch
-git checkout -b BRANCH # Creates a branch and points to it
-```
-
-Reverts specific file to currently checked-out Commit version
-A file that's been modified must be commited or reverted before we can checkout a version where it was different
-
-`git checkout FILE`
-
-### Remote
-
-Add a link to remote repository from local repository
-
-```cmd
-git remote add REMOTE_NAME REMOTE_URL # (REMOTE_NAME e.g. 'origin' or 'upstream')
-git remote remove NAME
-git remote set-url REMOTE_NAME git@github.com:username/repo.git
-git remote -v # Display dfined remotes of current repo
-git remote prune origin # Clean remote branches
-```
-
-### Clone
-
-Downloads entire remote repository into current directory (creates a local repository including all branches).
-Set URL as default 'origin' remote. If 'origin' is a forking repo, add an 'upstream' remote to keep track of forked original.
-
-`git clone REMOTE_URL`
-
-### Push
-
-Upload local repository onto remote existing repository
-
-`git push REMOTE_NAME BRANCH`
-
-### Pull
-
-Pull is a combination of fetch and merge
-
-`git pull NAME BRANCH`
-
-### Fetch/Merge
-
-```cmd
-    git fetch # Downloads/updates from remote repository into local repository
-    git merge FETCH_HEAD # Joins development histories
-```
-
-## Github
-
-Fork # Copy of an existing project to own user account
-Pull Request # A request for integrating the changes of a forking repo into the forked original
-
-### How to upload a local repo to GitHub
-
-1. Create the repo on GitHub using the website interface (or API)
-2. Add a remote using the URL provided by GitHub on creation (e.g. 'git remote add origin <https://github.com/User/repo.git>')
-3. Push the local repo onto the remote repo (e.g. 'git push origin master')
-
-### README
-
-It's good practice to include a README file in each repository, whose content will be displayed on the repo page
-Such a file can have different file extensions; only one is chosen by priority (README.md > README > README.txt)
-README.md uses Markdown syntax language (text format editing à la wiki)
-
-## Troubleshooting
-
-* Temporarily disable SSL certificates: `git config http.sslVerify false` or `git config --global http.sslVerify false`
-* `git fetch --prune` = Fetch, and also re-sync remote branches (removes those that no longer exist)
-  * Alternatively: `git remote prune origin`
-* Authentication error: _could not create ssl/tls secure channel_
-  * Fix by enabling TLS 1.2 (disabled by default on Windows 7) ([This worked](https://support.captureone.com/hc/en-us/articles/360014239757--Could-not-create-SSL-TLS-secure-channel-activation-error-on-Windows-7)
-    * Go to `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols`
-    * Right-click on **Protocols** folder, `New > Key`, and rename the freshly created folder to _TLS 1.2_
-    * Create a new **Key** under that folder, name that subfolder _Client_
-    * Create a new **DWORD (32-bit) Value** under that subfolder, set its **Name** to _DisabledByDefault_ (**Data** must be 0)
-    * (Restart computer if necessary; note: optional)
+Git is a version control system for tracking files changes and coordinating work with speed, storage & data integrity in mind.
+Git employs a three-tiered architecture composed of a **Working Directory**, a **Staging Area**, and a **Repository** (aka HEAD).
+Contrary to earlier client-server VCS architectures, Git is distributed and does not require ongoing sync with a central online entity.
+It also is self-contained as each cloned repo contains the full versions history (in hidden `./.git/` folder) as a sequence of change deltas (keeping storage minimal).
+
+## Quick Tips
+
+* Use trailing (_dangling_) commas at the end of source code lines (even with no follow-up) in order to reduce the number of lines marked as modified
+* A local repo (for personal projects) provides version control by itself without the need of any associated remote repos
+
+## Glossary
+
+* [Alias](https://githowto.com/aliases) = single term shorthand for a (possibly long) command **with** parameters (eg `hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short`)
+* **Branch** = a reference pointing to the _latest commit in that branch_
+  * A branch is _not_ a chain of commits; even though commits can be said to be _on_ a branch, branches play no role in a commits (self-sufficient) chain/history
+  * It's true that a branch can be made to point to an earlier commit (via `reset`), but that just means that the earlier commit becomes the latest one for that branch
+  * Creating a branch equates creating a new pointer to the current commit (multiple branches can point to the same commit, notably in the case of a branch creation)
+  * **Tip of a branch** = the specific (latest) commit that the branch points to
+* **Cache** = another term for the staging area
+* **Cherry picking** = applying specific commits from one branch to another, actually creating new commits (à la copy-paste, with different hashes) since a new parallel commit history also has to exist
+* **Commit** = fundamental building blocks of a Git repository recording a snapshot of a project at a specific point in time
+  * **Commit hash** = human-friendly identity/name of a commit (short version usually first 7 characters of longer 40 characters version)
+  * **Detached/Orphaned commits** (in the case of a detached HEAD) don't belong to any branch (usually transitorily until next branch checkout)
+  * Each commit holds a reference to its parent commit (or multiple parents in the case of a merge commit), forming a chain that constitutes the history of the project
+* **Configuration files**
+  * _.gitconfig_ (User), _C:/Program Files/Git/etc/gitconfig_ (System), _./git/config_ (Local) = configuration sections
+  * _.gitattributes_ = (binary/textual) merging and [line ending](https://stackoverflow.com/a/10855862/3559724) stragtegies per file type
+  * _.gitignore_ = tracking strategy per file type
+* **HEAD** = a special reference to either a branch or a specific commit (then said in a **detached HEAD** state), ie what's opened in the editor minus any new unstaged changes
+  * Unlike other refs, HEAD is saved in the `./.git/HEAD` file, which contains either a symbolic reference to a branch (eg `ref: refs/heads/main`) or a specific commit's hash
+* **Index** = another term for the staging area
+* `origin` = default remote repository name, an alias for a URL from which a local repo was cloned and to which it will be pushed
+  * Multiple other remotes can be added to a same (local) repo, each with a different name (eg `upstream`, `github`, `bitbucket`)
+* **Rebasing** = modifies the commit history of a branch to maintain a cleaner, more linear project history ("I want my branch to start from this commit instead")
+  * A typical use case is when working on a feature branch, switching to main, pulling latest remote changes from origin, then rebasing the feature branch from the updated main to integrate those latest changes
+  * Don't rebase commits that have already been pushed to shared repo (use merging instead); rebase only local/unshared branches
+* **Repository** = a regular folder augmented into a self-contained version-controlled directory that tracks changes to (some/all of its) files over time
+* **Reference** (or just **ref(s)**) = label/pointer to specific commits (ie aliases for commit hashes), saved as files (in the `./.git/refs/` directory)
+  * Branches (`refs/heads/{branch}`), Tags (`refs/tags/{tag}`), remote branches (`refs/remotes/{remote}`) are all (types of) references
+* **Reflog** (for **Reference Log**) = a history of all reference (HEAD, branch, tag) modifications, as a safety net to potentially recover lost commits & branches changes by restoring those saved states
+* **Remote (repository)** = a (nonmandatory) repo hosted on a separate/centralized/shared server, required for some commands (cloning, fetching, pull, pushing)
+* [Resetting](https://stackoverflow.com/a/50022436/3559724) = unstaging (_soft_) and uncommitting (_mixed_) and removing changes (_hard_)
+* **Scope** = one of three levels where configuration parameters can be defined (System in _Program Files_, User in _~_, Local in  _._)
+* [Staging (area)](https://githowto.com/staging_and_committing) (aka **Index** or **Cache**) = logical space/list of files registered for the next commit
+  * Modified files are not automatically all registered; they have to be deliberately _staged_ (thus enabling granular control over committed files)
+* **Tag** = reference to a specific commit in the history (generally for significant milestones or release; note that tags can have the same name as a branch)
+  * **Lightweight Tags** are simple references to specific commits whereas **Annotated Tags** include additional metadata (notably a mandatory message, plus a creation date & tagger's name/email)
+* **Work(ing) tree** (aka **Working Directory**) = filesystem directory where the project resides, containing both tracked & untracked files
+
+filesystem directory where the currently opened project resides, represents project state of latest or currently checked commit (and any modifications)
+
+## API/CLI
+
+* `git config --{scope}` = where _scope_ is `--system` (Global), `--global` (User), `--local` or _nothing_ (Local)
+* `git config --{scope} --edit` = open target config file in default editor (itself defined at User scope under _core.editor_ parameter)
+* `git config --{scope} --l(ist)` = list the aggregated config parameters at a given scope
+* `git config --{scope} {section}.{parameter} {value}` = directly set given parameter
+  * Eg `git config --system credential.helper = manager(-core)` = remove this line to [avoid opening Credential Manager](https://stackoverflow.com/a/37185202/3559724)
+  * Eg `git config --global core.askpass =` (as-is) = disables the OpenSSH credentials popup
+  * Eg `git config --global core.safecrlf warn` = makes files with mixed Linux/Windows line endings non-blocking
+  * Eg `git config --global http.sslVerify false` = (ideally temporarily) disable SSL certificates
+  * Eg `git config --global user.email "a@b.c"` = set user email
+  * Eg `git config --global user.name "Koko"` = set user name
+
+* `git status` = information about the working tree state (staged changes, unstaged changes, untracked files)
+* `git log` = lists commits history in anti-chronological order
+* `git log {branch}` = lists commits history for that branch (if a tag has same name, use full branch namespace eg `refs/heads/{branch}`)
+* `git log {tag}` = lists commits history for that tag (if tag has same name as a branch, Git complains and displays tag commits history)
+
+* `git init` = sets up the current directory as a Git repository
+* `git add` = stages one (`git add {file}`, _case sensitive_), several (`git add {*pattern*}`), or all (`git add .`) to be included in the next commit
+  * Note that it's possible to keep some files in the Git repo untracked/ignored if they're never added
+* `git add -i` = stages interactively (via CLI)
+
+* `git branch` = lists all branches (with current branch highlighted)
+* `git branch {branch}` = creates a new branch
+* `git branch {branch} {commit}` = creates a new branch pointing to a specific commit
+* `git checkout {branch}` = moves HEAD to latest commit of branch
+* `git checkout {commit}` = detaches HEAD, makes it point directly to specific commit
+* `git checkout HEAD` = reverts working directory content back to last commit state (**warning**: discards any changes)
+* `git commit` = when a message is not provided, the default text editor is launched and its result fed as message
+* `git commit -m "{message}"`
+* `git commit -a` = stages all (already/previously) tracked files then commit ine one go
+* `git reset {file}` = unstages one or several files (opposite of `add`), removing them from the staging area, thereby excluding them from the next commit
+* `git reset ({commit}) --soft` = uncommits (changes are left staged)
+* `git reset ({commit}) --mixed` = uncommits & unstages changes (left in the working tree)
+* `git reset ({commit}) --hard` = uncommits & unstages & delete changes (**warning**: nothing left)
+* `git reset --soft HEAD~1` = cancels the last commit (`HEAD~1` means commit one step before, or parent commit)
+* `git reset --hard HEAD@{1}` = reverts repo to state before most recent changes (eg a commit/branch switch/reset, where `HEAD@{1}` is a reflog reference)
+
+* `git restore {file}` = restores a file to its last commit content (**warning**: if the changes were not staged beforehand, then the file content is immediately replaced with t)
+
+
+* `git restore {file} --staged` = unstages file (similar to `git reset {file}`)
+* `git revert HEAD` = cancels very last commit
+* `git revert {commit}` = cancels specific commit
+* `git rm {file}` = deletes a (tracked) file (both from Git & physically on disk) at the next commit
+* `git rm {file} --cached` = un-tracks a file at next commit
+* `git rm {directory} --r` = deletes a a directory at next commit
+* `git tag (-l(ist))` = lists all tags
+* `git tag -n` = lists tags with messages
+* `git tag {tag}` = creates a new lightweight tag at the latest commit (eg a version/release name `git tag v1.0.0`) with an optional message (`-m {message}`)
+* `git tag {tag} -a -m "{message}` = creates an annotated tag with a (required) message
+* `git tag {tag} -d` = deletes tag
+
+* `git remote` = lists all the remote repos names associated with local repo
+* `git remote -v` = lists all remote repositories names & URLs associated with local repo
+* `git remote add {name} {url}` = adds a remote repository reference to this local repo (saved as dedicated sections in `./.git/config`)
+* `git remote remove {name}` = removes remote repo (note that `origin` can also be removed)
+* `git remote prune {name}` = removes branches that no longer exist on the remote repo
+* `git remote show {name}` = detailed information about remote repo
+
+* `git fetch` = fetches changes from the remote repository (`origin`)
+* `git push` = pushes changes to the remote repository (`origin`)
+* `git push origin {tag}` = shares local tag with remote repo (eg `git push origin v1.0.0`)
+* `git pull origin main`
+
+## Extensions
+
+* [Git Credential Manager (GCM)](https://github.com/git-ecosystem/git-credential-manager) = provides 2FA capabilities to Git's simple 1FA authentication (mandatory for GitHub & co)
+  * Stores logins in Windows Credential Store
+  * Replaces the older [Git Credential Manager for Windows](https://github.com/Microsoft/Git-Credential-Manager-for-Windows)

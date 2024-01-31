@@ -1,35 +1,37 @@
 # Android Mod
 
+* [How to Update to latest on any phone](https://medium.com/@manume/how-to-install-the-latest-android-version-on-any-phone-or-tablet-dbc810599ca4)
+
 ## Ecosystem
 
 * [Complete Guide to Flashing](https://android.gadgethacks.com/how-to/complete-guide-flashing-factory-images-android-using-fastboot-0175277/)
-* [Magisk](https://magisk.me/) = Systemless rooting
-* [TWRP](https://twrp.me/) (aka TeamWin Recovery Project) = custom recovery tool (boot menu, Nandroid Backup, ROM flashing in _zip_ format)
-  * [How to install](https://www.xda-developers.com/how-to-install-twrp/)
-  * [Here's why the Stock recovery appears even after TWRP was flashed](https://android.stackexchange.com/a/167039)
-    * Solution is to enter Recovery mode from the bootloader directly after flashing TWRP without rebooting
-* NANDroid Backup = 1 to 1 perfect copy of system and apps (not personal data e.g. music, photos, etc.)
-* [Universal ADB Drivers](https://adb.clockworkmod.com/)
-* [migroG](https://microg.org/) = Google Mobile Services open alternative
-* [Open GApps](https://opengapps.org/?api=7.1&variant=nano) = Google apps open alternative
-  * Several variants are available (e.g. pico is a light version while stock is full)
-* MindTheGapps = Google apps open alternative
-* Stores
-  * [F-Droid](https://f-droid.org) = Google Play open alternative
-  * [Aurora Store](https://aurora-store.en.uptodown.com/android) = Google Play open alternative
-  * [APKPure](https://apkpure.com/)
 * [CyanogenMod](https://cyanogenmodroms.com/) = Android OS
-* [GrapheneOS](https://grapheneos.org/) = Android OS for Google Pixel phones
-* [LineageOS](https://lineageos.org/) = Android OS forked from CyanogenMod
-  * [Google apps on LineageOS](https://wiki.lineageos.org/gapps.html)
-  * [How to Google apps on LineageOS](https://askinglot.com/how-do-i-install-google-apps-on-lineage-os)
 * [/e/ Foundation](https://e.foundation/)
   * /e/ ROM = fork of Android OS (in particular LineageOS), packed with migroG
   * [Find Apps](https://doc.e.foundation/apps#do-the-phones-with-eos--support-fingerprint-banking-apps-and-android-auto)
   * [Request App](https://doc.e.foundation/apps#what-should-you-do--if-you-dont-find-an-app-you-would-like-to-use-in-the-e-app--installer)
   * <https://www.reddit.com/r/degoogle/comments/gepao6/stock_android_vs_lineageos_with_google_service/>
-* MIUI = Android ROM developed by Xiaomi for its smartphones
+* [GrapheneOS](https://grapheneos.org/) = Android OS for Google Pixel phones
 * [Heimdall](https://www.glassechidna.com.au/heimdall/) = cross-platform open-source tool suite to flash firmware (ROMs) onto Samsung devices
+* [LineageOS](https://lineageos.org/) = Android OS forked from CyanogenMod
+  * [Google apps on LineageOS](https://wiki.lineageos.org/gapps.html)
+  * [How to Google apps on LineageOS](https://askinglot.com/how-do-i-install-google-apps-on-lineage-os)
+* [Magisk](https://magisk.me/) = Systemless rooting
+* [migroG](https://microg.org/) = Google Mobile Services open alternative
+* MindTheGapps = Google apps open alternative
+* MIUI = Android ROM developed by Xiaomi for its smartphones
+* NANDroid Backup = 1 to 1 perfect copy of system and apps (not personal data e.g. music, photos, etc.)
+* [Open GApps](https://opengapps.org/?api=7.1&variant=nano) = Google apps open alternative
+  * Several variants are available (e.g. pico is a light version while stock is full)
+* Stores
+  * [F-Droid](https://f-droid.org) = open-source apps store (Google Play alternative)
+  * [Aurora Store](https://aurora-store.en.uptodown.com/android) = Google Play open alternative
+  * [APKPure](https://apkpure.com) = free APKs store
+* [TWRP](https://twrp.me/) (aka TeamWin Recovery Project) = custom recovery tool (boot menu, Nandroid Backup, ROM flashing in _zip_ format)
+  * [How to install](https://www.xda-developers.com/how-to-install-twrp/)
+  * [Here's why the Stock recovery appears even after TWRP was flashed](https://android.stackexchange.com/a/167039)
+    * Solution is to enter Recovery mode from the bootloader directly after flashing TWRP without rebooting
+* [Universal ADB Drivers](https://adb.clockworkmod.com/)
 
 ## Rooting Guide
 

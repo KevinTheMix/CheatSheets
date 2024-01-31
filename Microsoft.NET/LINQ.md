@@ -1,111 +1,80 @@
 # LINQ (Language Integrated Query)
 
-* Remove duplicates = `people.GroupBy(p => p.Name).Select(g => g.First()).ToList()` (same logic as SQL partitions!)
+Linq is a library (`System.Linq`) that provides a series of (mostly) extensions methods (called **query operators**) that apply to sequences.
 
-## Explanation
+There are two main classes in the `System.Linq` namespace: `Enumerable` & `Queryable`.
+`Enumerable` methods take in a _delegate_ and returns an **iterator** (inheriting from `IEnumerable<T>`) holding a reference to the previous **iterator** in the Linq chain if there is one.
+`Enumerable` methods execute in memory.
+`Queryable` methods take in an **expression** and returns an object (inheriting from `IQueryable<T>`) holding the updated expression tree, whose runtime type depends on the data source and **provider** used.
+`Queryable` methods construct expressions representing instructions as data structure rather than code and can be later be translated into SQL query **to be executed on the DB server**.
+Both `Enumerable` & `Queryable` methods are _deferred_, meaning they are never run immediately but only when a result is needed (eg a `ToList()` or a _foreach_ statement).
 
-* LINQ to Objects (L2O) = regular LINQ on IEnumerable, without intermediate provider/api e.g. LINQ to SQL/XML
-  * See <https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/linq-to-objects#:~:text=The%20term%20%22LINQ%20to%20Objects,Dictionary.>
-* LINQ to XML = XML
-* LINQ to SQL = SQL Server only ORM
-* LINQ to Entities = multiple database backends ORM
-* LINQ to DataSets = running LINQ on DataTable/DataSet (old ADO.NET 2.0 predating Microsoft ORM's)
-  * See <https://stackoverflow.com/a/2443847>
+The beauty of Linq is that the same **lambda expression is converted into either a delegate or an expression tree depending on the context**.
+For instance, in this example at <https://benjii.me/2018/01/expression-projection-magic-entity-framework-core/#reusing-projections>, the _Projection_ property is of type `Expression<Func<a,b>>` (an expression) but it would compile just as well with the same exact body (returning a lambda) if its type was changed to simply `Func<a,b>` (a delegate).
 
-LINQ defines extension methods on two types of objects: IEnumerable&lt;T&gt; or on IQueryable&lt;T&gt; objects.
-Note that whilst both use deferred execution, IEnumerable Query Operators take in delegate Function&lt;&gt; whereas IQueryable Query Operators take in Expressions as parameters.
-The beauty of it is that they both work using similar code because **lambda expressions are converted either into delegates or expression trees depending on the context**.
-For instance, in this example at <https://benjii.me/2018/01/expression-projection-magic-entity-framework-core/#reusing-projections>, the _Projection_ property is of type `Expression<Func<a,b>>`, but it would compile just as well with the same exact body if its type was changed to simply `Func<a,b>`
-See <https://stackoverflow.com/a/671425> for LINQ internals
-See <https://stackoverflow.com/a/28513685> for LINQ IEnumerable/IQueryable symmetry
+## Glossary
 
-* [AsEnumerable() vs AsQueryable()](https://stackoverflow.com/a/17996264)
-  * `AsEnumerable()` can be used instead of `ToList()` when deferred execution is to be preserved (e.g. when manipulating a IQueryable returned from EF - see link above)
-  * `AsEnumerable()` can also be applied on an IGrouping (resulting from some kind of `GroupBy(…).First(…)`)
-
-For IEnumerable objects, chained LINQ query operators construct a specialized IEnumerable instance (called _Select_/_Where_/etc. _-Iterator_) via polymorhpism containing a nested hierarchy of functions. Each successive call adds a level on top holding a reference to the level below.
-For IQueryable objects, chained LINQ query operators construct an IQueryable instance. Each successive call adds an Expression on top, keeping the same Provider.
-See <https://stackoverflow.com/a/2433386> for different IEnumerable or IQueryable parameters
-
-IQueryable inherits from IEnumerable.
-Both Query Providers and Expressions are properties specific to IQueryable.
-See <https://stackoverflow.com/a/252857> for IQueryable specific properties (Expression & Provider)
-
-The **AsQueryable()** method casts an Enumerable to a Queryable
-This helps the compiler figure out that the runtime instance is the more complex IQueryable (e.g. a _SelectEnumerableIterator_ or something), not just what he currently considers a simple IEnumerable. See <https://benjii.me/2018/01/expression-projection-magic-entity-framework-core/#nested-projections>
-See <https://stackoverflow.com/a/252789> for all possible conversions from/to IEnumerable
-
-IEnumerable executes in memory, wheres IQueryable executes (& filters) on the DB server.
-See <https://stackoverflow.com/a/2876655> for LINQ to SQL performance thanks to DB execution thanks to Expression SQL translation
-Same <https://www.quora.com/What-is-the-main-difference-between-IEnumerable-and-IQueryable-in-c>
-
-[How LINQ works internally](https://stackoverflow.com/a/671425)
-[Jon Skeet Edulinq](https://codeblog.jonskeet.uk/category/edulinq/)
-[Difference between a Function and a Lambda](https://softwareengineering.stackexchange.com/a/130731)
-[Difference between Lambdas and Delegates](https://stackoverflow.com/questions/73227/)
-[Lambda Expressions vs Anonymous Methods](https://docs.microsoft.com/fr-be/archive/blogs/ericlippert/lambda-expressions-vs-anonymous-methods-part-one)
-
-## Components
-
-### Expression (Tree)
-
-Expressions are a way to represent an operation in the form of data (a tree) instead of IL code (like a method).
-This gives flexibility because the tree can be traversed in various ways, by different implementations of the Visitor Pattern.
-It is the Provider that performs the visit of the Expression tree, when its Execute() method is launched.
-In the case of EntityFramework, the Provider visits the tree to produces a SQL query, that is passed to the SQL Server where it gets executed.
-
-[Projection](https://benjii.me/2018/01/expression-projection-magic-entity-framework-core/)
-[Expression Trees](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/expression-trees/)
-
-### Query Operators
-
-[Standard Query Operators Overview](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/standard-query-operators-overview)
-
-Query Operators such as Where(), etc. call the Provider.CreateQuery() to return an IQueryable containing the Expression now augmented with the treatment of the current operator, while maintaining a reference to that Provider, whose Execute() will be called in the end.
-
-### [Provider](https://stackoverflow.com/a/1568054)
-
-[Part 1](https://blogs.msdn.microsoft.com/mattwar/2007/07/30/linq-building-an-iqueryable-provider-part-i/)
-[Part 2](https://blogs.msdn.microsoft.com/mattwar/2007/07/31/linq-building-an-iqueryable-provider-part-ii/)
-
-The Provider is a factory of IQueryable based on a given Expression.
-It is also the visitor that can execute a given Expression.
-The fact that the Provider is a separate object from the IQueryable means that we can use polymorphism and different visitors with varying execution results.
-
-```C#
-public interface IQueryProvider
-{
-    IQueryable CreateQuery(Expression expression);
-    IQueryable<TElement> CreateQuery<TElement>(Expression expression);
-    object Execute(Expression expression);
-    TResult Execute<TResult>(Expression expression);
-}
-```
-
-### IQueryable
-
-DbContext's DbSet&lt;T&gt;'s inherit from IQueryable.
-
-An IQueryable is a class that contains:
-
-* the resulting Expression tree
-* the type of elements (T in IQueryable&lt;T&gt;)
-* the Provider that produces the successive IQueryable and will run the final Expression
-
-```C#
-public interface IQueryable : IEnumerable
-{
-    Expression Expression { get; }
-    Type ElementType { get; }
-    IQueryProvider Provider { get; }
-}
-```
-
-#### [DbFunctions](https://docs.microsoft.com/en-us/dotnet/api/system.data.entity.dbfunctions?view=entity-framework-6.2.0)
-
-This class contains DateTime/Numbers/String manipulation methods to be executed on (IQueryable) DbContext entities.
-They are executed as CLR code at the DB-level -- not in memory!
+* `Enumerable` = defines methods for `System.Collections.Generic.IEnumerable<T>`
+  * **ParallelEnumerable** = parallel equivalent of `Enumerable`
+  * **Iterator** = an object named _Something_`Iterator` (eg `WhereEnumerableIterator`; and inheriting from `IEnumerable<T>`) returned by a query operator
+* `Queryable` = defines methods for `IQueryable<T>` (in the Linq namespace)
+  * `IQueryable<T>` (inherits from `IEnumerable<T>`) = holds the (combined) **Expression** (tree) & **Provider** properties, implemented by eg: EF's (`DbContext`'s) `DbSet<T>`
+  * `IQueryable` (inherits from `IEnumerable`) = holds the (combined) **Expression** (tree) & **Provider** properties, implemented by **providers** (but not by `Queryable`)
+  * [Expression (trees)](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/expression-trees) = represents code in a tree-like data structure (ie instead of IL)
+    * Expression provide flexibility because the tree can be traversed in various ways (see Provider)
+  * **Provider** = implements `IQueryProvider` & `IQueryable` for a particular data store, and performs the visit of an Expression tree when its `Execute()` method is launched
+    * `IQueryProvider` = exposes the `IQueryable<T> CreateQuery<T>(expression)` (called by each successive **query operator** in the chain, and building the expression tree) & ultimate `T Execute<T>(expression)` methods
+    * Since the Provider is a separate object from `IQueryable`, different [visitors](https://en.wikipedia.org/wiki/Visitor_pattern#C#_example) can browse the same expression with varying outputs
+    * In the case of _Linq to SQL_ and _EF_, the Provider visits the tree to produces a SQL query, that is passed to the SQL Server where it gets executed
+* **Query Operator** = a Linq extension method such as `Select()`, `Where()`
+  * Similarly named query operators exist in both `Enumerable` & `Queryable` (but they don't overlap 1:1)
 
 ## Links
 
-* [LinqExpander](https://github.com/lukemcgregor/LinqExpander/)
+* [Linq - Query Operators](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/standard-query-operators-overview)
+* [Microsoft - Lambda Expressions vs Anonymous Methods](https://docs.microsoft.com/fr-be/archive/blogs/ericlippert/lambda-expressions-vs-anonymous-methods-part-one)
+* [Ben Cull - Expression & Projection Magic for EF Core](https://benjii.me/2018/01/expression-projection-magic-entity-framework-core)
+* [Jon Skeet - Edulinq](https://codeblog.jonskeet.uk/category/edulinq/)
+* [Luke McGregor - LinqExpander](https://github.com/lukemcgregor/LinqExpander)
+* [Matt Warren - Buidling an IQueryable Provider (Part 1)](https://blogs.msdn.microsoft.com/mattwar/2007/07/30/linq-building-an-iqueryable-provider-part-i)
+* [Matt Warren - Buidling an IQueryable Provider (Part 2)](https://blogs.msdn.microsoft.com/mattwar/2007/07/31/linq-building-an-iqueryable-provider-part-ii)
+* [StackOverflow - How LINQ works internally](https://stackoverflow.com/a/671425)
+* [StackOverflow - IEnumerable vs IQueryable (anonymous method & expression tree)](https://stackoverflow.com/a/2433386)
+* [StackOverflow - IEnumerable vs IQueryable (input parameters)](https://stackoverflow.com/a/28513685)
+* [StackOverflow - IEnumerable vs IQueryable (return types)](https://stackoverflow.com/a/16180410)
+* [StackOverflow - IEnumerable vs IQueryable (IQueryable-only properties](https://stackoverflow.com/a/252857) = (Expression & Provider)
+* [StackOverflow - AsEnumerable() vs AsQueryable()](https://stackoverflow.com/a/17996264)
+* [StackOverflow - What is a LINQ provider?](https://stackoverflow.com/a/1568054)
+* [StackOverflow - Lambdas vs Delegates](https://stackoverflow.com/questions/73227/)
+* [StackOverflow - Function vs Lambda](https://softwareengineering.stackexchange.com/a/130731)
+* [StackOverflow - Dialects of LINQ](https://stackoverflow.com/a/2443847)
+  * [LINQ to Objects (L2O)](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/linq-to-objects) = vanilla LINQ on `IEnumerable`/`IEnumerable<T>`
+  * [LINQ to XML](https://learn.microsoft.com/en-us/dotnet/standard/linq/linq-xml-overview) = in-memory XML programming interface
+  * [LINQ to SQL](https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/sql/linq) = SQL Server/ADO.NET (in .NET Framework 3.5)
+  * [LINQ to Entities](https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ef/language-reference/linq-to-entities) = Entity Framework
+  * [LINQ to DataSets](https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/queries-in-linq-to-dataset) = manipulating ADO.NET DataTable/DataSet (old fashion)
+
+## Code
+
+### API
+
+* `Any<T>([Func])` = always faster than `Enumerable.Count() > 0`, because the latter has to count the full collection, whilst the former returns true ASAP
+* `Enumerable.GroupBy()` = groups the elements of a sequence, with deferred execution
+* `Enumerable.ToDictionary()` = maps one key -> one value (1:1)
+* `Enumerable.ToLookup()` = maps one key -> n values (1:n), immediately (not deferred), querying a key that does not exist returns an empty sequence (w/o error)
+* `Enumerable.Empty<T>()` (not an extension) = returns an empty (but non-null) `IEnumerable<T>` (actually a `System.Linq.EmptyEnumerable<T>`) that yields 0 elements
+  * More efficient than instantiating & returning a new `List<T>()`
+* `AsEnumerable()` = changes the compile type to `IEnumerable<T>`, usually applied on an `IQueryable` to use the L2O methods `Queryable` does not offer
+  * `AsEnumerable()` can be used instead of `ToList()` when deferred execution is to be preserved
+  * `AsEnumerable()` can also be applied on an `IGrouping` (eg resulting from some kind of `GroupBy(…).First(…)`)
+* `AsQueryable()` = cast or convert the compile type to `IQueryable`
+  * [StackOverflow - Uses of AsQueryable](https://stackoverflow.com/a/20379242)
+  * If the sequence implements `IQueryable`, it is simply cast, otherwise, a conversion takes place by wrapping it in a `ConstantExpression` referred to in a returned `EnumerableQuery`
+  * `EnumerableQuery<T>` = represents an `IEnumerable<T>` as a `IQueryable<T>` (note: Microsoft code, not intended for developers)
+  * `ConstantExpression` = an expression (inherits from `System.Linq.Expressions.Expression`) that has a constant value (eg `Expression.Constant(777.0);`)
+* `Queryable.Skip(i)` = returns the _n-i_ last elements, enables efficient paging (only those rows are returned from DB)
+* `Queryable.Take(i)` = returns the _i_ first elements, enables efficient paging (only those rows are returned from DB)
+
+### Samples
+
+* Remove duplicates = `people.GroupBy(p => p.Name).Select(g => g.First()).ToList()` (same logic as SQL partitions!)

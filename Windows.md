@@ -39,6 +39,7 @@
 
 ## Windows 10
 
+* `Shift + Restart` = access Advanced Startup Options (ASO Boot Menu)
 * `Windows + Ctrl + Left/Right` = Switch Virtual Desktop
 * `Win + Shift + S` = Screenshot
 * `Win + i` = Settings

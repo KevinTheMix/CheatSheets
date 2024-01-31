@@ -8,6 +8,8 @@ Angular is basically modularly organized Typescript using webpack for module/tem
 
 ## Environment
 
+* [Augury](https://augury.rangle.io/) = Chrome & Firefox Angular applications debugging extension
+
 ### NPM
 
 Package manager for JavaScript (we could use another one however NPM is shipped with Node).
@@ -27,7 +29,7 @@ Package manager for JavaScript (we could use another one however NPM is shipped 
     npm list -g --depth=0   # Lists top-level packages
     npm update              # Installs all missing package references
 
-### CLI
+### [CLI](https://github.com/angular/angular-cli)
 
 Command-line interface for Angular. Contains all the entities generation (scaffold) commands.
 

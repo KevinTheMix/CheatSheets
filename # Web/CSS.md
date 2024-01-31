@@ -1,5 +1,7 @@
 # CSS
 
+* `curor: pointer;`
+
 ## [CSS Selectors](https://www.w3schools.com/cssref/css_selectors.asp)
 
 Identify target(s) of a CSS Rule.
@@ -25,10 +27,29 @@ el[att^=val] {} /* All <el>s with att="val%" */
 el[att$=val] {} /* All <el>s with att="%val" */
 el[att*=val] {} /* All <el>s with att="%val%" */
 :x {}
-:nth-child(odd) {} /* e.g. p:nth-child(5n) applies to each 5*nth child that is also a paragraph
+:nth-child(odd) {} /* e.g. p:nth-child(5n) applies to each 5*nth child that is also a paragraph */
+:first-line {} /* first line of text element */
+:first-letter {} /* first letter of text element */
+:first-child {} /* first child element*/
+:link {} /* virgin links */
+:visited {} /* visited links */
+:hover {} /* links getting hovered over right now */
+:active {} /* links getting clicked right now */
+:focus {} /* eg while being focused by tab key */
 ::y {}
 #id {} /* Unique ID */
-style=""
+style="" /* inline */
+```
+
+Via JS:
+
+```js
+document.all('lienA').innerHTML
+document.getElementById(id).style.display = 'block'
+```
+
+```html
+<tr onMouseOver="javascript:this.style.background='#E8E8E8'" />
 ```
 
 ## [Declarations](https://en.wikipedia.org/wiki/CSS#Declaration_block)
@@ -109,6 +130,8 @@ center {
 ```
 
 ### Background
+
+Use `background-color` when using `background-image`.
 
 * `background: {image} {repeat} {position}`
   * `background-image: url("http://.")`, or `gradient: -webkit-linear-gradient(#666CCC, #BC1324);`

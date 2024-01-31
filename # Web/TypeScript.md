@@ -1,6 +1,12 @@
 # TypeScript
 
 Superset of JavaScript, transpiled to JavaScript by **tsc** the TypeScript compiler.
+Can use all of JS features, but adds a layer of OO classes, static typing, casting, etc.
+
+## API
+
+* [TypeScript Variable Declaration](https://www.typescriptlang.org/docs/handbook/variable-declarations.html)
+* OO `class Child extends Parent { ... }`
 
 ## tsconfig.json
 

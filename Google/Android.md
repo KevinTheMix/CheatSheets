@@ -4,10 +4,27 @@
 
 ### Glossary
 
+* [Activities](https://developer.android.com/guide/components/activities/intro-activities) = one app entry point, defined in _AndroidManifest.xml_
+* [Android SDK Platform Tools](https://developer.android.com/tools/releases/platform-tools) = primarily **adb** & **fastboot** exe (see dedicated section below)
+  * Can be installed via Android Studio's SDK Manager (default path `C:\Users\Kalex\AppData\Local\Android\Sdk\platform-tools`)
+* [Android Studio](https://developer.android.com/studio/) = full Android development SDK, for building apps on Android devices
+  * includes **Android SDK Platform Tools** (which are also available as standalone tools)
+* Architecture/Platform = _arm_ or _arm64_ (less commonly _x86_ or _x86\_64_) - see [Open GApps](https://opengapps.org/)
+  * [ARM](https://www.androidcentral.com/what-arm-cpu) (Acorn RISC Machine) = English company selling low-power processor architecture used in mobiles
 * [AOSP](https://source.android.com/) = Android Open Source Project
+* apk = file containing an app
+  * [How to install apk files from a PC](https://www.wikihow.com/Install-APK-Files-from-a-PC-on-Android)
 * GMS (aka Google Mobile Services) = Google **Proprietary** APIs, not part of AOSP
 * Google apps = stock Google branded apps (Play Store, Gmail, Maps, etc.)
 * Google Play (aka Google Play Store aka Android Market) = App Store
+* Image = _.img_ file, part of the OS, to be flashed (installed) to the partition matching its name on the device
+* OEM = the company that constructed the original component, sold to the end users by another company
+* OTA Updates = Over-the-air updates, the upgrades to the current OS
+* ROM (aka Firmware) = basically the OS installed on the device, in its read-only memory. It is a bit ambiguous whether this refers to all images (most likely), or just the _system_ one
+  * Stock ROM = orginal factory OEM ROM
+  * Custom ROM = ROM not emitted by OEM. Usually contains but a subset of all images (i.e. most importantly a _system_ image), and reuse pre-existing (e.g. stock) images for non-system partitions
+* [Rooting](https://www.androidcentral.com/root)
+  * Systemless Rooting = lighter rooting that does not require modifying system or boot partition
 * [Rooting, Bootloader, Recovery](https://android.stackexchange.com/a/117593)
   * [Bootloader](https://source.android.com/devices/bootloader/) = basically the BIOS (+ MBR)
     * Low-level interface used to flash images on a partition via `fastboot` commands
@@ -18,28 +35,11 @@
     * [How to enter it](https://www.reddit.com/r/Nexus5/comments/2akpco/rooted_nexus_5_but_cant_boot_into_recovery/)
     * Pre-menu of stock recovery mode looks like a lying Android logo with a **red triangle and exclamation mark**
       * From there, hold Power and pressing Volume Up **once**
-* [Android Studio](https://developer.android.com/studio/) = full Android development SDK, for building apps on Android devices
-  * includes **Android SDK Platform Tools** (which are also available as standalone tools)
-* [Android SDK Platform Tools](https://developer.android.com/tools/releases/platform-tools) = primarily **adb** & **fastboot** exe (see dedicated section below)
-  * Can be installed via Android Studio's SDK Manager (default path `C:\Users\Kalex\AppData\Local\Android\Sdk\platform-tools`)
-* Architecture/Platform = _arm_ or _arm64_ (less commonly _x86_ or _x86\_64_) - see [Open GApps](https://opengapps.org/)
-* OTA Updates = Over-the-air updates, the upgrades to the current OS
-* Sideloading = installing an image onto the phone directly from a file located on the PC
-* Image = _.img_ file, part of the OS, to be flashed (installed) to the partition matching its name on the device
-* Vendor image = image containing device-specific drivers for controlling GPS, gyro, proximity & co
-* ROM (aka Firmware) = basically the OS installed on the device, in its read-only memory. It is a bit ambiguous whether this refers to all images (most likely), or just the _system_ one
-* Stock ROM = orginal factory OEM ROM
-* Custom ROM = ROM not emitted by OEM. Usually contains but a subset of all images (i.e. most importantly a _system_ image), and reuse pre-existing (e.g. stock) images for non-system partitions
-* OEM = the company that constructed the original component, sold to the end users by another company
-* apk = file containing an app
-  * [How to install apk files from a PC](https://www.wikihow.com/Install-APK-Files-from-a-PC-on-Android)
 * SafetyNet = feature by which an App required higher security (e.g. banking) can enforce the device is trustworthy
   * I.e. checks the device is not rooted & bootloader is locked
   * Circumventable via microG DroidGuard Helper
-* [Rooting](https://www.androidcentral.com/root)
-  * Systemless Rooting = lighter rooting that does not require modifying system or boot partition
-* [ARM](https://www.androidcentral.com/what-arm-cpu) (Acorn RISC Machine) = English company selling low-power processor architecture used in mobiles
-* [Activities](https://developer.android.com/guide/components/activities/intro-activities) = one app entry point, defined in _AndroidManifest.xml_
+* Sideloading = installing an image onto the phone directly from a file located on the PC
+* Vendor image = image containing device-specific drivers for controlling GPS, gyro, proximity & co
 
 ### Versions
 
