@@ -3,7 +3,7 @@
 Git is a version control system for tracking files changes and coordinating work with speed, storage & data integrity in mind.
 Git employs a three-tiered architecture composed of a **Working Directory**, a **Staging Area**, and a **Repository** (aka HEAD).
 Contrary to earlier client-server VCS architectures, Git is distributed and does not require ongoing sync with a central online entity.
-It also is self-contained as each cloned repo contains the full versions history (in hidden `./.git/` folder) as a sequence of update deltas (requiring minimal storage).
+It also is self-contained as each cloned repo contains the full versions history (in hidden `.git/` folder) as a sequence of update deltas (requiring minimal storage).
 
 ## Quick Tips
 
@@ -21,8 +21,8 @@ It also is self-contained as each cloned repo contains the full versions history
 * **Cache** = another term for the staging area
 * **Cherry picking** = applying specific commits from one branch to another, actually creating new commits (à la copy-paste, with different hashes) since a new parallel commit history also has to exist
 * **Cloning** = creating a local repository based on a remote repository still associated to it (via push/pull commands)
-* **Commit** = fundamental building blocks of a Git repository recording a snapshot of a project at a specific point in time
-  * **Commit hash** = human-friendly identity/name of a commit (short version usually first 7 characters of longer 40 characters version)
+* **Commit** = fundamental building blocks of a Git repository recording a snapshot of a project at a specific point in time (saved in local repo DB in `.git/objects/`)
+  * **Commit hash** = human-friendly identity/name of a commit (short version usually first 7 characters of the longer 40 characters version)
   * **Detached/Orphaned Commits** (in the case of a detached HEAD) don't belong to any branch (usually transitorily until next branch checkout)
   * Each commit holds a reference to its parent commit (or multiple parents in the case of a merge commit), forming a chain that constitutes the history of the project
   * Commits no longer referenced anywhere (eg after a hard reset) are eventually garbage collected, even if they are still cited in the reflog
@@ -32,7 +32,7 @@ It also is self-contained as each cloned repo contains the full versions history
   * _.gitignore_ = tracking strategy per file type
 * **Fork** = on platform like GitHub, duplicates an existing repository/project along with its full history towards own account (typically followed by cloning, and ending with a pull request back to the original repo)
 * **HEAD** = a special reference to either a branch or a specific commit (then said in a **detached HEAD** state), ie what's opened in the editor minus any new unstaged changes
-  * Unlike other refs, HEAD is saved in the `./.git/HEAD` file, which contains either a symbolic reference to a branch (eg `ref: refs/heads/main`) or a specific commit's hash
+  * Unlike other refs, HEAD is saved in the `.git/HEAD` file, which contains either a symbolic reference to a branch (eg `ref: refs/heads/main`) or a specific commit's hash
 * **Index** = another term for the staging area
 * **Origin** = default name (and alias for a URL) given to remote repository from which a local repo was cloned (and will eventually be pushed)
   * Multiple other remotes can be added to a same (local) repo, each with a different name (eg `upstream`, `github`, `bitbucket`)
@@ -41,12 +41,13 @@ It also is self-contained as each cloned repo contains the full versions history
   * A typical use case is when working on a feature branch, switching to main, pulling latest remote changes from origin, then rebasing the feature branch from the updated main to integrate those latest changes
   * Don't rebase commits that have already been pushed to shared repo (use merging instead); rebase only local/unshared branches
 * **Repository** = a regular folder augmented into a self-contained version-controlled directory that tracks changes to (some/all of its) files over time
-* **Reference** (or just **ref(s)**) = label/pointer to specific commits (ie aliases for commit hashes), saved as files (in the `./.git/refs/` directory)
+* **Reference** (or just **ref(s)**) = label/pointer to specific commits (ie aliases for commit hashes), saved as files (in the `.git/refs/` directory)
   * Branches (`refs/heads/{branch}`), Tags (`refs/tags/{tag}`), remote branches (`refs/remotes/{remote}`), even _HEAD_ are all (types of) references
-* **Reflog** (for **Reference Log**) = a history of all reference modifications (à la video game _saved states_), used as a safety net to recover lost commits/changes
+* **Reflog** (**Reference Log**) = history of all reference modifications (à la VG _saved states_), used as a safety net to recover lost commits/changes (for a little time until garbage collection permanently clears them)
   * Reflog entries (aka lines, found in `.git/logs/`) use the following format: `{previous_commit} {new_commit} {user_name} <{user_email}> {timestamp} {action}: {comment}`
   * The reflog is forward-only (it's a growing list/log, not a stack), but its entries may be pruned over time due to retention policies
 * **Remote (repository)** = a (nonmandatory) repo hosted on a separate/centralized/shared server, required for some commands (cloning, fetching, pull, pushing)
+  * Having a remote set up is the first step to pushing changes (as it essentially provides an alias for URL), but the local branch must have a remote branch linked as well
 * [Resetting](https://stackoverflow.com/a/50022436/3559724) = unstaging (_soft_) and uncommitting (_mixed_) and removing changes (_hard_)
 * **Scope** = one of three levels where configuration parameters can be defined (System in _Program Files_, User in _~_, Local in  _._)
 * [Staging (area)](https://githowto.com/staging_and_committing) (aka **Index** or **Cache**) = logical space/list of files registered for the next commit
@@ -127,14 +128,24 @@ filesystem directory where the currently opened project resides, represents proj
 
 ### Remote
 
+git remote add REMOTE_NAME REMOTE_URL # (REMOTE_NAME e.g. 'origin' or 'upstream')
+git remote remove NAME
+git remote set-url REMOTE_NAME git@github.com:username/repo.git
+git remote -v # Display dfined remotes of current repo
+git remote prune origin # Clean remote branches
+
+* `git fetch {remote}` = fetches remote branches (saved in the `.git/refs/remotes` folder, necessary after removing/re-adding a remote)
+* `git branch -u {remote}/{branch}` = connects current local branch to remote branch (adds a _branch_ section in `.git/config`)
+* `git branch --set-upstream-to={remote}/{branch}` = same but with longer syntax
 * `git remote` = lists all the remote repos names associated with local repo
 * `git remote -v` = lists all remote repositories names & URLs associated with local repo
-* `git remote add {remote} {url}` = adds a remote repository reference to this local repo (saved as dedicated sections in `./.git/config`)
-* `git remote remove {remote}` = removes remote repo (note that `origin` can also be removed)
-* `git remote prune {remote}` = removes branches that no longer exist on the remote repo
+* `git remote add {remote} {url}` = adds a remote repo to local repo (adds a _remote_ section in `.git/config`)
+* `git remote remove {remote}` = removes remote repo (deletes _remote_ & _branch_ sections in `.git/config` & folder from `.git/refs/remotes`, note that even `origin` can be removed)
+* `git remote prune {remote}` = removes local branches that no longer exist on the remote repo
 * `git remote show {remote}` = detailed information about remote repo
-* `git fetch {remote}` = fetches changes from the remote repository (`origin`)
-* `git push` = pushes changes to the remote repository (`origin`)
+* `git ls-remote {remote}` = list all remote references (including branches)
+* `git push` = pushes changes to remote repo
+* `git push -(-set-)u(pstream) {remote} {branch}` = connects current local branch to a remote branch (same as `git branch -u {remote}/{branch}`) & pushes to it
 * `git push origin {tag}` = shares local tag with remote repo (eg `git push origin v1.0.0`)
 * `git pull origin main`
 
@@ -150,7 +161,7 @@ filesystem directory where the currently opened project resides, represents proj
 GitHub is a web platform hosting (mostly software) projects using Git.
 
 * Uploading an (existing) local repo to GitHub:
-  1. create a repo on GitHub via the website (or API)
+  1. create a repo on GitHub via the website (or [CLI](https://cli.github.com/))
   2. add a remote using the URL provided by GitHub on creation (eg `git remote add origin "https://github.com/{user}/{repository}"`)
   3. push local onto remote repo (eg `git push origin master`)
 * If a **README** file is present in the repo, its content gets displayed (with homonyms priority: _README.md_ > _README_ > _README.txt_)
