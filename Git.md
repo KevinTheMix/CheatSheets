@@ -9,6 +9,13 @@ It also is self-contained as each cloned repo contains the full versions history
 
 * Use trailing (_dangling_) commas at the end of source code lines (even with no follow-up) in order to reduce the number of lines marked as modified
 * A local repo (for personal projects) provides version control by itself without the need of any associated remote repos
+* Authentication error: _could not create ssl/tls secure channel_
+  * [Proven solution](https://support.captureone.com/hc/en-us/articles/360014239757--Could-not-create-SSL-TLS-secure-channel-activation-error-on-Windows-7): fix by enabling TLS 1.2 (disabled by default on Windows 7)
+    * Go to `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols`
+    * Right-click on **Protocols** folder, `New > Key`, and rename the freshly created folder to _TLS 1.2_
+    * Create a new **Key** under that folder, name that subfolder _Client_
+    * Create a new **DWORD (32-bit) Value** under that subfolder, set its **Name** to _DisabledByDefault_ (**Data** must be 0)
+    * (Optional:) restart computer if necessary
 
 ## Glossary
 
@@ -30,10 +37,15 @@ It also is self-contained as each cloned repo contains the full versions history
   * _.gitconfig_ (User), _C:/Program Files/Git/etc/gitconfig_ (System), _./git/config_ (Local) = configuration sections
   * _.gitattributes_ = (binary/textual) merging and [line ending](https://stackoverflow.com/a/10855862/3559724) stragtegies per file type
   * _.gitignore_ = tracking strategy per file type
-* **Fork** = on platform like GitHub, duplicates an existing repository/project along with its full history towards own account (typically followed by cloning, and ending with a pull request back to the original repo)
+* **Fetching** = re-synching from remote repository into local repository
+* **Fork** = on platforms like GitHub, duplicates an existing repository/project along with its full history towards the user's own account
+  * This is typically followed by a cloning (to work locally), pushing changes to (_origin_) remote, and ending with a pull request back to the original (_upstream_) repo
 * **HEAD** = a special reference to either a branch or a specific commit (then said in a **detached HEAD** state), ie what's opened in the editor minus any new unstaged changes
   * Unlike other refs, HEAD is saved in the `.git/HEAD` file, which contains either a symbolic reference to a branch (eg `ref: refs/heads/main`) or a specific commit's hash
 * **Index** = another term for the staging area
+* **Merging** = combines changes from a given branch (usually a feature branch) into the current branch (usually the main/master branch)
+  * If there are any conflicts, the operation is put on hold until the user has manually resolved all of them
+  * This creates a **Merge Commit** with joined development histories, ie a commit with two parents (the previous commit on current & latest commit on imported branch)
 * **Origin** = default name (and alias for a URL) given to remote repository from which a local repo was cloned (and will eventually be pushed)
   * Multiple other remotes can be added to a same (local) repo, each with a different name (eg `upstream`, `github`, `bitbucket`)
 * **Pull Request** = on collaborative platforms (eg GitHub, Azure DevOps), a formal proposal to merge changes into a codebase
@@ -43,9 +55,10 @@ It also is self-contained as each cloned repo contains the full versions history
 * **Repository** = a regular folder augmented into a self-contained version-controlled directory that tracks changes to (some/all of its) files over time
 * **Reference** (or just **ref(s)**) = label/pointer to specific commits (ie aliases for commit hashes), saved as files (in the `.git/refs/` directory)
   * Branches (`refs/heads/{branch}`), Tags (`refs/tags/{tag}`), remote branches (`refs/remotes/{remote}`), even _HEAD_ are all (types of) references
-* **Reflog** (**Reference Log**) = history of all reference modifications (à la VG _saved states_), used as a safety net to recover lost commits/changes (for a little time until garbage collection permanently clears them)
+* **Reflog** (**reference log**) = history of all reference modifications (à la VG _saved states_), used as a safety net to recover lost commits/changes (for a little time until garbage collection permanently clears them)
   * Reflog entries (aka lines, found in `.git/logs/`) use the following format: `{previous_commit} {new_commit} {user_name} <{user_email}> {timestamp} {action}: {comment}`
   * The reflog is forward-only (it's a growing list/log, not a stack), but its entries may be pruned over time due to retention policies
+* **Refspec** (**reference specification**) = mapping between local & remote references (eg for `fetch` & `push`, saved in that remote's section in `.git/config` in the `+<source>:<destination>` format)
 * **Remote (repository)** = a (nonmandatory) repo hosted on a separate/centralized/shared server, required for some commands (cloning, fetching, pull, pushing)
   * Having a remote set up is the first step to pushing changes (as it essentially provides an alias for URL), but the local branch must have a remote branch linked as well
 * [Resetting](https://stackoverflow.com/a/50022436/3559724) = unstaging (_soft_) and uncommitting (_mixed_) and removing changes (_hard_)
@@ -54,13 +67,12 @@ It also is self-contained as each cloned repo contains the full versions history
   * Modified files are not automatically all registered; they have to be deliberately _staged_ (thus enabling granular control over committed files)
 * **Tag** = reference to a specific commit in the history (generally for significant milestones or release; note that tags can have the same name as a branch)
   * **Lightweight Tags** are simple references to specific commits whereas **Annotated Tags** include additional metadata (notably a mandatory message, plus a creation date & tagger's name/email)
-* **Upstream** = original repo from which a project was forked on platforms (like GitHub or GitLab)
-* **Work(ing) tree** (aka **Working Directory**) = a directory where the (project) files reside and where changes are made (it may also contain untracked files)
-
-filesystem directory where the currently opened project resides, represents project state of latest or currently checked commit (and any modifications)
+* **Upstream** = on platforms (like GitHub or GitLab), this is the original repo from which a project was forked
+* **Work(ing) tree** (aka **Working Directory**) = a directory where the (project) files reside and where changes are made (note: may also contain untracked files)
 
 ## API/CLI
 
+* `HEAD~n`, `{branch}~n`, `{commit}~n`, `{ref}~n` (on Unix use `^` instead of `~`, no _n_ equates _n=1_) = refers to the nth commit before a given commit (note: _HEAD_, branches & references all point to commits)
 * `git {command} --help` = opens local HTML manual page (or `man git-{command}` on Unix)
 
 * `git init` = sets up the current directory as a Git repository
@@ -70,12 +82,16 @@ filesystem directory where the currently opened project resides, represents proj
 * `git branch` = lists all branches (with current branch highlighted)
 * `git branch {branch}` = creates a new branch
 * `git branch {branch} {commit}` = creates a new branch pointing to a specific commit
-* `git checkout {branch}` = moves HEAD to latest commit of branch
-* `git checkout {commit}` = detaches HEAD, makes it point directly to specific commit
+* `git checkout .` = revert all uncommitted changes (**warning**: discards any changes)
 * `git checkout HEAD` = reverts working directory content back to last commit state (**warning**: discards any changes)
+* `git checkout {file}` = reverts specific file to current branch last commit (**warning**: discards any changes)
+* `git checkout {branch}` = moves HEAD to (latest commit of) branch (same thing, or does nothing if already on that branch)
+* `git checkout {commit}` = detaches HEAD, makes it point directly to specific commit
 * `git commit` = when a message is not provided, the default text editor is launched and its result fed as message
 * `git commit -m "{message}"`
 * `git commit -a` = stages all (already/previously) tracked files then commit ine one go
+* `git merge {branch}` = merges changes from given into current branch, creating a (merge) commit
+* `git merge --abort/--continue` = abort/continues the latest merge operation paused due to conflicts
 * `git reset {file}` = unstages one or several files (opposite of `add`), removing them from the staging area, thereby excluding them from the next commit
 * `git reset ({commit}) --soft` = uncommits (changes are left staged)
 * `git reset ({commit}) --mixed` = uncommits & unstages changes (left in the working tree)
@@ -128,26 +144,24 @@ filesystem directory where the currently opened project resides, represents proj
 
 ### Remote
 
-git remote add REMOTE_NAME REMOTE_URL # (REMOTE_NAME e.g. 'origin' or 'upstream')
-git remote remove NAME
-git remote set-url REMOTE_NAME git@github.com:username/repo.git
-git remote -v # Display dfined remotes of current repo
-git remote prune origin # Clean remote branches
-
-* `git fetch {remote}` = fetches remote branches (saved in the `.git/refs/remotes` folder, necessary after removing/re-adding a remote)
-* `git branch -u {remote}/{branch}` = connects current local branch to remote branch (adds a _branch_ section in `.git/config`)
-* `git branch --set-upstream-to={remote}/{branch}` = same but with longer syntax
+* `git clone {url}` = creates a local copy of remote repo (with _origin_ default name remote) including all branches & commits, and adds an (_upstream_) remote if _origin_ is a forked repo (keeping track of the original)
+* `git fetch` = fetches zero or one remote (the only one, or the one named _origin_, otherwise none)
+* `git fetch {remote}` = fetches remote (saved in the `.git/refs/remotes` folder, necessary after removing/re-adding a remote)
+* `git fetch --prune` = fetches remote and remove local branches that no longer exist remotely
+* `git branch -u {remote}/{branch}` (or `--set-upstream-to {remote}/{branch}`) = links local branch to remote branch (adds (max one, previous gets replaced) _branch_ section in `.git/config`)
 * `git remote` = lists all the remote repos names associated with local repo
 * `git remote -v` = lists all remote repositories names & URLs associated with local repo
 * `git remote add {remote} {url}` = adds a remote repo to local repo (adds a _remote_ section in `.git/config`)
+* `git remote set-url {remote} {url}` = update the remote's URL (in the context of GitHub, the URL format `git@github.com:user/repo.git` is an SSH URL)
 * `git remote remove {remote}` = removes remote repo (deletes _remote_ & _branch_ sections in `.git/config` & folder from `.git/refs/remotes`, note that even `origin` can be removed)
 * `git remote prune {remote}` = removes local branches that no longer exist on the remote repo
 * `git remote show {remote}` = detailed information about remote repo
 * `git ls-remote {remote}` = list all remote references (including branches)
-* `git push` = pushes changes to remote repo
-* `git push -(-set-)u(pstream) {remote} {branch}` = connects current local branch to a remote branch (same as `git branch -u {remote}/{branch}`) & pushes to it
-* `git push origin {tag}` = shares local tag with remote repo (eg `git push origin v1.0.0`)
-* `git pull origin main`
+* `git pull {remote} {branch}` = `git fetch` + `git merge`
+* `git push` = pushes changes to remote branch linked with current branch
+* `git push {remote} {branch}` = pushes changes to a remote repo branch
+* `git push {remote} {tag}` = shares local tag with remote repo (eg `git push origin v1.0.0`)
+* `git push -u {remote} {branch}` (or `--set-upstream-to`) = links current local branch to a remote branch, then pushes changes to it
 
 ## Eco-system
 
