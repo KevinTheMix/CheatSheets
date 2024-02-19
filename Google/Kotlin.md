@@ -1,10 +1,17 @@
 # Kotlin
 
-<https://kotlinlang.org/docs/basic-syntax.html>
+Google preferred language for Android app developers since 2019 (replacing Java), designed & developed by JetBrains.
 
-## Lingo
+Compiles to JVM, or JavaScript for IOS support.
+
+## Glossary
 
 * [Activity](https://developer.android.com/reference/kotlin/android/app/Activity)
+* **Gradle** = build automation tool supporting Java, Kotlin, C/C++ & JavaScript
+
+## API
+
+[Basic Syntax](https://kotlinlang.org/docs/basic-syntax.html)
 
 ## Types
 

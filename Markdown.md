@@ -1,42 +1,44 @@
-Markdown
-=
+# Markdown
 
-Choose a style of headers & lists and stick to it (cannot mix * and - for instance).
-Also note that tab input chars in Visual Studio Code depends on the initial scan of the file.
-=> delete some tab chars, close & reopen to be able to use the Tab key to input 4 spaces.
+* Number of spaces added by Tab depends on the initial scan of the file (first indentation decides whether it's two or four)
+* [GitHub](https://guides.github.com/features/mastering-markdown)
+* [Microsoft Azure DevOps](https://learn.microsoft.com/en-us/azure/devops/project/wiki/markdown-guidance?view=azure-devops)
+* [Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
 
-There's no deying that an effective document
--
+## API
 
-Has to breakdown titles
--
-
-- A
-- B
-- C
-  - C1
-  - C2
-
-1. One
-2. Two
-3. Three
-
-You so *sneaky* but _shh_ it is ok. Look_at_me_now. Look_*at*_me_now
-
-But I **love** it.
-
-But ~~this~~ is not ok.
+* `*italic*` (or `_italic`)
+* `**bold**` (or `__italic__`)
+* `***both***` (or ```both```)
+* `~~barred~~`
+* `> quote`
+* List
+  * node
+  1. 1
+  2. 2
+  3. 3
+  4. 4
+  * node
+* [Reference to same file](#eof)
+* [Reference to another file](../CheatSheets/Markdown.md#eof)
+* [Variants](https://en.wikipedia.org/wiki/Markdown#Variants) = GitHub Flavored & co
+  * `log<sub>10</sub>` (non-standard)
+  * `var<sup>10</sup>` (non-standard)
+  * Footnotes (non-standard)
+    * note [^1]
+    * note [^a]
+    * note [^note]
+  * Fenced code blocks (eg ```javascript multi-line```)
+* Code:
 
 Is it code?
     No (too close from previous line)
-  
-    Yes (2 tab == 4 spaces)
+
+    Yes (2 tabs == 4 spaces)
     Yes! (4 spaces)
 
-\```
-Code!
-\```
+## EOF
 
-See <https://guides.github.com/features/mastering-markdown/>
-
-[Local anchors](https://stackoverflow.com/a/56779004/3559724) = jump to header
+[^1]: footnote
+[^a]: footnote
+[^note]: footnote

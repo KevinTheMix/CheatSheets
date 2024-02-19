@@ -99,6 +99,7 @@ Most of the WPF API is contained in _PresentationFramework.dll_ which contains t
     * `Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type local:KokoButton}}"`
 * **UpdateSourceTrigger** = when to update the source as part of bi-directional binding (values: `Default`/`PropertyChanged`/`LostFocus`/`Explicit`)
   * note: `TextBox.Text`'s default is `LostFocus` => set to `PropertyChanged` instead to react to _each_ key press
+* **Visual Tree** = hierarchical structure of visual elements in the GUI (with a root, parent-child relationships, controls & containers, event routing à la bubbling)
 * **XAML** (eXtensible Application Markup Language) = Microsoft's XML variant for building GUIs
   * Element = XAML tag (note that element & attributes names are case-sensitive since they have to match their classes counterparts)
   * Properties can be defined as an XML attribute textual value (`<E Content="" />`) or a child XML element (explicitely `<E><E.Content>{content}</E.Content></E>` or implicitly `<E>{content}</E>`)
@@ -153,3 +154,16 @@ Debugging WPF can be tricky, because most errors are met during execution rather
 * [Xceed's Extended WPF toolkit](https://xceedsoftware.github.io/wpftoolkit) = collection of WPF controls, components and utilities
 * Telerik
   * Grid `IsReadonlyBinding` = specify at the grid level which (boolean) attribute of the row item indicates if the row is read-only
+
+### Prism
+
+Prism is a framework for building loosely coupled, maintainable, and testable XAML applications in WPF, and Xamarin Forms.
+It combines the following components:
+
+* MvvM
+* An [Event Aggregator](https://prismlibrary.com/docs/event-aggregator.html)
+* A Region Manager (à la ASP Master Page)
+* Navigation (from/to) via `INavigationAware` methods
+* DI via either **MEF** or Unity
+
+* [Prism - Using the ViewModelLocator](https://www.youtube.com/watch?v=I_3LxBdvJi4) (naming convention-based)

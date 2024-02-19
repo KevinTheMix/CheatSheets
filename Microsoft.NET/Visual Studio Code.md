@@ -37,32 +37,33 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 
 ### [Keyboards shortcuts](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf)
 
-* `Alt + {n}` = Go to Tab {n}
-* `Alt + Left/Right` = Go back/forward
+* `Alt + {n}` = go to Tab {n}
+* `Alt + Left/Right` = go back/forward
 * `Alt + Click` or `Alt + Double-Click` or `Alt + Drag` = add cursors at clicked/selected locations
-* `Alt + Shift + F` = Format/Tidy (e.g. HTML)
-* `Alt + Shift + Left/Right` = Shrink/Expand selection
-* `Alt + Shift + Up/Down` = Copy line up/down
-* `Ctrl + ,` = Settings (also via gear icon at the bottom-left or via File > Preferences > Settings)
-* `Ctrl + ù` or `Ctrl + J` = Toggle Terminal
-* `Ctrl + µ` = Clones selected tab or Split Terminal
+* `Alt + Shift + F` = Format/tidy (e.g. HTML)
+* `Alt + Shift + Left/Right` = shrink/expand selection
+* `Alt + Shift + Up/Down` = copy line up/down
+* `Ctrl + ,` = Settings (also via gear icon at the bottom-left or via _File > Preferences > Settings_)
+* `Ctrl + ù` or `Ctrl + J` = toggle Terminal
+* `Ctrl + µ` = clones selected tab or Split Terminal
 * `Ctrl + /` = toggle comments
-* `Ctrl + B` = Toggle side-bar
+* `Ctrl + B` = toggle side-bar
 * `Ctrl + D`\* = select word at current cursor position (\* then add next matching selection to multi-selection)
-* `Ctrl + K, Ctrl + O` = Open Folder
-* `Ctrl + K, Ctrl + R` = Open URL to Keyboard Shortcuts PDF
-* `Ctrl + K, Ctrl + S` = Keyboard shortcuts
-* `Ctrl + K, Ctrl + T` = Select Theme
-* `Ctrl + K, R` = Reveal in File Explorer
-* `Ctrl + K, V` = Preview Markdown Side-by-side
-* `Ctrl + K, Z` = Zen Mode
-* `Ctrl + L` = Select current paragraph & move next
-* `Ctrl + P` = Search files
+* `Ctrl + K, Ctrl + O` = open Folder
+* `Ctrl + K, Ctrl + R` = open URL to Keyboard Shortcuts PDF
+* `Ctrl + K, Ctrl + S` = keyboard shortcuts
+* `Ctrl + K, Ctrl + T` = select Theme
+* `Ctrl + K, R` = reveal in File Explorer
+* `Ctrl + K, V` = preview Markdown Side-by-side
+* `Ctrl + K, Z` = zen Mode
+* `Ctrl + L` = select current paragraph & move next
+* `Ctrl + P` = search files
   * Type `:` to go to line
   * Type `>` to access Command Palette from here
-  * Type `#` to search global symbols (classes, properties, methods, etc.), works with camelCase initials search
+  * Type `#` to search global symbols
   * Type `@` to search local blocks
-* `Ctrl + R` = Open recent
+* `Ctrl + R` = open Recent
+* `Ctrl + T` = search global symbols (classes, properties, methods, etc.), works with camelCase initials search
 * `Ctrl + Shift + .` = local blocks
 * `Ctrl + Shift + Enter` = Insert line above
 * `Ctrl + Shift + F` = Search

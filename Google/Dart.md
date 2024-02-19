@@ -1,6 +1,7 @@
 # Dart
 
-OO programming language developed by Google and designed for (mobile/web) client development.
+OO programming language developed by Google designed for fast (with QoL features such as Hot Reload) multi-platform (web, mobile, desktop, server) app development, that can be compiled to machine code, JavaScript or WebAssembly.
+
 Dart draws its inspiration from major and familiar languages (C#, Java, JavaScript).
 
 Features:

@@ -1,26 +1,27 @@
 # Android
 
-## Environment
-
-### Glossary
+## Glossary
 
 * [Activities](https://developer.android.com/guide/components/activities/intro-activities) = one app entry point, defined in _AndroidManifest.xml_
 * [Android SDK Platform Tools](https://developer.android.com/tools/releases/platform-tools) = primarily **adb** & **fastboot** exe (see dedicated section below)
   * Can be installed via Android Studio's SDK Manager (default path `C:\Users\Kalex\AppData\Local\Android\Sdk\platform-tools`)
-* [Android Studio](https://developer.android.com/studio/) = full Android development SDK, for building apps on Android devices
-  * includes **Android SDK Platform Tools** (which are also available as standalone tools)
-* Architecture/Platform = _arm_ or _arm64_ (less commonly _x86_ or _x86\_64_) - see [Open GApps](https://opengapps.org/)
-  * [ARM](https://www.androidcentral.com/what-arm-cpu) (Acorn RISC Machine) = English company selling low-power processor architecture used in mobiles
+* [Android Studio](https://developer.android.com/studio) = full Android development SDK, for building apps on Android devices
+  * Includes **Android SDK Platform Tools** (which are also available as standalone tools)
+* [ARM](https://www.androidcentral.com/what-arm-cpu) (Acorn RISC Machine) = English company selling low-power processor architecture used in mobiles
+  * By extension, an architecture (instructions set) for low-power scalable CPUs used in mobile devices (**ARM Code** is basically a name for (mobile native) machine code)
+  * Architecture/Platform = _arm_ or _arm64_ (less commonly _x86_ or _x86\_64_) - see [Open GApps](https://opengapps.org)
 * [AOSP](https://source.android.com/) = Android Open Source Project
-* apk = file containing an app
-  * [How to install apk files from a PC](https://www.wikihow.com/Install-APK-Files-from-a-PC-on-Android)
-* GMS (aka Google Mobile Services) = Google **Proprietary** APIs, not part of AOSP
-* Google apps = stock Google branded apps (Play Store, Gmail, Maps, etc.)
-* Google Play (aka Google Play Store aka Android Market) = App Store
-* Image = _.img_ file, part of the OS, to be flashed (installed) to the partition matching its name on the device
-* OEM = the company that constructed the original component, sold to the end users by another company
-* OTA Updates = Over-the-air updates, the upgrades to the current OS
-* ROM (aka Firmware) = basically the OS installed on the device, in its read-only memory. It is a bit ambiguous whether this refers to all images (most likely), or just the _system_ one
+* apk = file containing an app ([How to install apk files from a PC](https://www.wikihow.com/Install-APK-Files-from-a-PC-on-Android))
+* **Download Mode** = Samsung devices' boot mode (very similar to Fastboot mode)
+* **Heimdall** = a cross-platform tool for interacting with Download mode on Samsung devices.
+* **Odin** = utility used by Samsung to reset (or flash) their smartphones
+* **GMS** (aka Google Mobile Services) = Google **Proprietary** APIs, not part of AOSP
+* **Google apps** = stock Google branded apps (Play Store, Gmail, Maps, etc.)
+* **Google Play** (aka Google Play Store aka Android Market) = App Store
+* **Image** = _.img_ file, part of the OS, to be flashed (installed) to the partition matching its name on the device
+* **OEM** (Original Equipment Manufacturer) = a company that constructed an original component sold to end users by another company
+* **OTA Updates** = Over-the-air updates, the upgrades to the current OS
+* **ROM** (aka Firmware) = basically the OS installed on the device, in its read-only memory. It is a bit ambiguous whether this refers to all images (most likely), or just the _system_ one
   * Stock ROM = orginal factory OEM ROM
   * Custom ROM = ROM not emitted by OEM. Usually contains but a subset of all images (i.e. most importantly a _system_ image), and reuse pre-existing (e.g. stock) images for non-system partitions
 * [Rooting](https://www.androidcentral.com/root)
@@ -35,11 +36,11 @@
     * [How to enter it](https://www.reddit.com/r/Nexus5/comments/2akpco/rooted_nexus_5_but_cant_boot_into_recovery/)
     * Pre-menu of stock recovery mode looks like a lying Android logo with a **red triangle and exclamation mark**
       * From there, hold Power and pressing Volume Up **once**
-* SafetyNet = feature by which an App required higher security (e.g. banking) can enforce the device is trustworthy
+* **SafetyNet** = feature by which an App required higher security (e.g. banking) can enforce the device is trustworthy
   * I.e. checks the device is not rooted & bootloader is locked
   * Circumventable via microG DroidGuard Helper
-* Sideloading = installing an image onto the phone directly from a file located on the PC
-* Vendor image = image containing device-specific drivers for controlling GPS, gyro, proximity & co
+* **Sideloading** = installing an image onto the phone directly from a file located on the PC
+* **Vendor image** = image containing device-specific drivers for controlling GPS, gyro, proximity & co
 
 ### Versions
 
@@ -90,7 +91,7 @@ This _.zip_ package must first be opened (e.g. in the _platform-tools_ folder) t
 
 Note that custom ROMs only include the system image.
 
-### [Android SDK Platform Tools](https://developer.android.com/studio/releases/platform-tools) (contains ADB, fastboot, systrace)
+## [Android SDK Platform Tools](https://developer.android.com/studio/releases/platform-tools) (contains ADB, fastboot, systrace)
 
 * In device manager, phones appear with different names depending on device power & (USB debugging session) autorization status
   * Powered-on & authorized phone appears as _Galaxy Nexus_
@@ -126,6 +127,3 @@ Note that custom ROMs only include the system image.
   * `fastboot reboot-bootloader` = restart again
   * `fastboot -w update image-takju-jwr66y.zip` = flash all partitions contained in the _.zip_ file
     * `-w` = Wipe userdata
-* Note: Samsung devices come with a unique boot mode called _Download Mode_, very similar to Fastboot mode.
-* Heimdall us a cross-platform tool for interacting with Download mode on Samsung devices.
-* Odin is a utility used by Samsung to reset (or flash) their smartphones

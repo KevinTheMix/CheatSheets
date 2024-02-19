@@ -2,9 +2,8 @@
 
 * [How to Update to latest on any phone](https://medium.com/@manume/how-to-install-the-latest-android-version-on-any-phone-or-tablet-dbc810599ca4)
 
-## Ecosystem
+## Glossary
 
-* [Complete Guide to Flashing](https://android.gadgethacks.com/how-to/complete-guide-flashing-factory-images-android-using-fastboot-0175277/)
 * [CyanogenMod](https://cyanogenmodroms.com/) = Android OS
 * [/e/ Foundation](https://e.foundation/)
   * /e/ ROM = fork of Android OS (in particular LineageOS), packed with migroG
@@ -18,9 +17,9 @@
   * [How to Google apps on LineageOS](https://askinglot.com/how-do-i-install-google-apps-on-lineage-os)
 * [Magisk](https://magisk.me/) = Systemless rooting
 * [migroG](https://microg.org/) = Google Mobile Services open alternative
-* MindTheGapps = Google apps open alternative
-* MIUI = Android ROM developed by Xiaomi for its smartphones
-* NANDroid Backup = 1 to 1 perfect copy of system and apps (not personal data e.g. music, photos, etc.)
+* **MindTheGapps** = Google apps open alternative
+* **MIUI** = Android ROM developed by Xiaomi for its smartphones
+* **NANDroid Backup** = 1 to 1 perfect copy of system and apps (not personal data e.g. music, photos, etc.)
 * [Open GApps](https://opengapps.org/?api=7.1&variant=nano) = Google apps open alternative
   * Several variants are available (e.g. pico is a light version while stock is full)
 * Stores
@@ -34,6 +33,8 @@
 * [Universal ADB Drivers](https://adb.clockworkmod.com/)
 
 ## Rooting Guide
+
+* [Complete Guide to Flashing](https://android.gadgethacks.com/how-to/complete-guide-flashing-factory-images-android-using-fastboot-0175277/)
 
 ### /e/ With TWRP
 

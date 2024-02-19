@@ -1,10 +1,12 @@
 # Android Studio
 
+Google's official android IDE.
+
+## Glossary
+
+* **AVD** = Android Virtual Device
+
 ## Environment
-
-### Lingo
-
-* AVD = Android Virtual Device
 
 ### Install
 

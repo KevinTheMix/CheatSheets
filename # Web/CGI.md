@@ -1,11 +1,11 @@
-# CGI
+# CGI (Common Gateway Interface)
 
-## Environment
+Standard protocol allowing web servers to execute programs/scripts to generate dynamic content in response to client requests, in a variety of languages (most often Perl).
+The generated content can be HTML/XML, or any text/data (eg CSV, JSON, images, à la ASP's _ashx_).
 
-2014.06.12:
-
-CGI scripts are placed in a cgi-bin directory by convention, eg _C:\Program Files\EasyPHP-5.3.2i\apache\cgi-bin_
-Perl CGI scripts end with the _.cgi_ extension.
+* 2014.06.12
+  * CGI scripts are placed in a cgi-bin directory by convention, eg _C:\Program Files\EasyPHP-5.3.2i\apache\cgi-bin_
+  * Perl CGI scripts end with the _.cgi_ extension.
 
 ## Samples
 

@@ -227,3 +227,9 @@ An event is a special type of delegate that can hold references to multiple meth
   * override `ToString()` & `implicit` operator to provide serialization
   * implement 3 x constructors (parameter-less, message, message & innerException)
   * pass the innerException  when throwing it in order to maintain the exception tree & inner call stack
+
+## Extensions (Namespaces)
+
+* **MEF** (Microsoft Extensibility Framework) = framework for creating lightweight extensible applications (namespace of MEF nuget is `System.Composition`)
+  * Essentially a configurable (via app config file & `[attribute]` metadata) decentralized (no single container: plugin-based via interface implementation) DI engine with runtime DLL assemblies discoverability
+* [System.IO.Abstractions](https://www.nuget.org/packages/System.IO.Abstractions) = like `System.IO.File` but via injectable instance (instead of static) & mock-able
