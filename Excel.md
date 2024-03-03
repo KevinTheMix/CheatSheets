@@ -1,5 +1,7 @@
 # Excel
 
+## Quick Tips
+
 * [8 Excel tips](https://www.instagram.com/p/CnhQwTjonpC/)
 
 * _Data > Filter_ = Make header into sort/filter cell
@@ -8,23 +10,30 @@
   * Drag & slide the square at the bottom-right dot of the selection
   * This will continue the current series and generate values for the sequence
 
+* Select Column/Row > Right Click > Hide/Unhide
+* Regional Settings for comma/dot separator = _File > Options > Advanced > Editing Options > (Uncheck) Use System Separater_
+* [Edit a macro](https://support.microsoft.com/en-us/office/edit-a-macro-ed9e8c3d-58fd-47a1-83eb-bdee680376bb)
+  * File extension must be `.xslm`
+
+## Shortcuts
+
 * `'` = Format cell value as string
 * `$` = cell coordinate _freeze_ when copy-pasting
-  * _$A1_ = Freeze a column's reference when copy-pasting a cell horizontally
-  * _A$1_ = Freeze a row's reference when when copy-pasting a cell vertically
+  * Eg _$A1_ = Freeze a column's reference (when copy-pasting a cell horizontally)
+  * Eg _A$1_ = Freeze a row's reference (when copy-pasting a cell vertically)
   * `F4` = cycle through column/row dollar freezing combinations in current formula
 
 * `Alt + =` auto-sum adjacent cells (both horizontalliy & vertically, at the same time)
 * `Alt + H + O + I`
 * `Alt + Down` = easy fill cell using dropdown of all previous column cells values
 * `Alt + F1` = generate a bar chart using the selected data
+* `Alt + F11` = Open Visual Basic editor
 * `Alt + W + V + G` = toggle gridlines
 
 * `Ctrl + ~` or `Ctrl + "`  = toggle displaying cell formulas/values
 * `Ctrl + Enter` = paints active cell's content (eg formula) into selected cells (active cell must be in edit mode eg click formula bar)
 * `Ctrl + Up/Down` = go to top/bottom of current column (add `Shift` to select range)
 * `Ctrl + Left/Right` = go to start/end of current row (add `Shift` to select range)
-* `Ctrl + B/D` (**B**as/**D**own) = copy down topmost cell into selected cells below
   * Also via the _Home_ menu, the down arrow icon under the _Sum_ sign
 * `Ctrl + E` = Flash Fill (fill based on pattern eg other columns bodies based on 1st column & column header)
 * `Ctrl + F` = Search
@@ -40,14 +49,16 @@
 * `Shift + Alt + Left/Right` (or _Data > Outline > Group_) = Group/Ungroup
 * `Shift + F11` = Add new sheet
 
-* Select Column/Row > Right Click > Hide/Unhide
-* Regional Settings for comma/dot separator = _File > Options > Advanced > Editing Options > (Uncheck) Use System Separater_
+### EN
 
-## Development
+* `Ctrl + D(own)` = copy down topmost cell into selected cells below
+* `Ctrl + N` = go to last row
 
-* [Edit a macro](https://support.microsoft.com/en-us/office/edit-a-macro-ed9e8c3d-58fd-47a1-83eb-bdee680376bb)
-* `Alt + F11` = Open Visual Basic editor
-* File extension must be `.xslm`
+### FR
+
+* `Ctrl + B(as)` = copy-paste up cell
+* `Ctrl + D` = copy-paste left cell
+* `Ctrl + N` = create new book
 
 ## Extensions
 

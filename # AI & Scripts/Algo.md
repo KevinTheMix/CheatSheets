@@ -3,6 +3,11 @@
 * Don't recalculate x in algo while (eg `while() {array[i*x +y]}` => intead add `x` each iteration)
 * TriCount algo = divide sum of everything by # of people, each's delta = that number - paid
 * Pick Random Item = `items[Math.floor(Math.random() * items.length)]` (JavaScript)
+* MIT OpenCourseWare
+  * [Lecture 19: Dynamic Programming I: Fibonacci, Shortest Paths](https://www.youtube.com/watch?v=OQ5jsbhAv_M) = recursion + memoization
+  * [Lecture 20: Dynamic Programming II: Text Justification, Blackjack](https://www.youtube.com/watch?v=ENyox7kNKeY)
+  * [Lecture 21: Dynamic Programming III: Parenthesization, Edit Distance, Knapsack](https://www.youtube.com/watch?v=ocZMDMZwhCY)
+  * [Lecture 22: Dynamic Programming IV: Guitar Fingering, Tetris, Super Mario Bros.](https://www.youtube.com/watch?v=tp4_UXaVyx8)
 
 ## Glossary
 

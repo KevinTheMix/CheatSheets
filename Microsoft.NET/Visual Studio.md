@@ -37,6 +37,7 @@
   * `Ctrl + Shift + V` = Clipboard history
 * Search & Navigation
   * `Ctrl + Tab` = Go to Files and Windows
+  * `Ctrl + I` = incremental search (à la Firefox)
   * `Ctrl + T` = Go to All
   * `Ctrl + $` = Search Solution Explorer
   * `Ctrl + ) + S` = Sync with Active Document

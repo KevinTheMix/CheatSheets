@@ -2,10 +2,11 @@
 
 ## Glossary
 
-* **DbContext** = combines the Unit Of Work & Repository patterns
+* **DbContext** = acts as a Unit Of Work pattern
 * **ObjectContext** = represents a connection between the CLR & the DB (for CRUD operations)
 * **DbFunctions** = CLR (DateTime/Numbers/String manipulation) methods to be executed on (`IQueryable`) `DbContext` or `ObjectContext` entities (Linq to Entities queries)
   * They are executed as **CLR code at the DB-level, not in memory**
+* **DbSet** = acts as a Repository pattern
 * **ORM (Object-Relational Mapping)** = technique for converting data between a relational DB and the heap of an OO programming language
 * `DbSet<T>` = a `DbContext` property that inherits from `IQueryable<T>`
 

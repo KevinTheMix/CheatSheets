@@ -10,10 +10,10 @@
 * [ARM](https://www.androidcentral.com/what-arm-cpu) (Acorn RISC Machine) = English company selling low-power processor architecture used in mobiles
   * By extension, an architecture (instructions set) for low-power scalable CPUs used in mobile devices (**ARM Code** is basically a name for (mobile native) machine code)
   * Architecture/Platform = _arm_ or _arm64_ (less commonly _x86_ or _x86\_64_) - see [Open GApps](https://opengapps.org)
-* [AOSP](https://source.android.com/) = Android Open Source Project
+* [AOSP](https://source.android.com) = Android Open Source Project
 * apk = file containing an app ([How to install apk files from a PC](https://www.wikihow.com/Install-APK-Files-from-a-PC-on-Android))
 * **Download Mode** = Samsung devices' boot mode (very similar to Fastboot mode)
-* **Heimdall** = a cross-platform tool for interacting with Download mode on Samsung devices.
+* **Heimdall** = a cross-platform tool for interacting with Download mode on Samsung devices
 * **Odin** = utility used by Samsung to reset (or flash) their smartphones
 * **GMS** (aka Google Mobile Services) = Google **Proprietary** APIs, not part of AOSP
 * **Google apps** = stock Google branded apps (Play Store, Gmail, Maps, etc.)

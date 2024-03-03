@@ -152,6 +152,7 @@ Debugging WPF can be tricky, because most errors are met during execution rather
 
 * [Fody's PropertyChanged](https://github.com/Fody/PropertyChanged) = takes care of the PropertyChanged boilerplate (applies to each class inheriting _INotifyPropertyChanged_)
 * [Xceed's Extended WPF toolkit](https://xceedsoftware.github.io/wpftoolkit) = collection of WPF controls, components and utilities
+* **Snoop** = WPF trees spying/editing utility (w/o debugger)
 * Telerik
   * Grid `IsReadonlyBinding` = specify at the grid level which (boolean) attribute of the row item indicates if the row is read-only
 

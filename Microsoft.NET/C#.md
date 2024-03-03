@@ -28,7 +28,6 @@
 * **Casting** = changing compile type of a variable for types with no implicit conversion (but [explicit ones](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/numeric-conversions#explicit-numeric-conversions))
 * [Boxing/Unboxing](https://stackoverflow.com/a/2111905) = converts value to/from reference type (to be avoided)
   * Can be used to shoehorn polymorphism in antiquated structures (eg. ArrayList that requires `object`s, not `int`s)
-* **Covariant**/**Contravariant** = essentially polymorphism for generic types
 * **Finalizer** (or **Destructor**) = for cleaning unmanaged resources before a class instance gets collected by the garbage collector `~Koko() { }`
   * Called when calling `Dispose()` on that instance
   * `WeakReference` = a reference that still allows the referenced (typically a memory intensive but easily recreatable) object to be collected by the GC
@@ -37,6 +36,24 @@
     * Eg. `public string Name {get; set;}`
   * Private Setter acts as a private variable, yet publicily (read-only) visible
     * Eg. `public string Name {get; private set; }` or `public ILimits<SimpleOverrideValue> Limits { get; private set; }`
+* **Variance** (covariant & contravariant) = essentially polymorphism for generic types
+
+### Versions
+
+Credit: _Tech World With Milan Milanović_
+
+* 2002.01. **C# 1.0** = initial version released with VS 2002
+* 2005.11. **C# 2.0** = generics, anonymous methods, nullable types
+* 2007.11. **C# 3.0** = lambda expression, extension methods, anonymous types, var
+* 2010.04. **C# 4.0** = dynamic, delegate, variance, named args
+* 2012.08. **C# 5.0** = async
+* 2015.07. **C# 6.0** = string interpolation, null condition operator
+* 2017.03. **C# 7.0** = tuples, ref locals, pattern matching
+  * **C# 7.1** to **C# 7.3** = async main, `Span<T>`
+* 2019.09. **C# 8.0** = nullable ref-types, async streams, using declarations
+* 2020.11. **C# 9.0** = init-only props, records, with-expressions
+* 2021.11. **C# 10.0** = record structs, global usings
+* 2022.11. **C# 11.0** = file-scoped types, required members, auto-default structs
 
 ### Keywords
 
@@ -80,6 +97,8 @@
 
 ### Operators
 
+* `~` = bitwise complement
+* `^` = bitwise xor
 * `??` = null coalescing operator
 * `.?` = safe navigation operator
 * `&` and ``&&` can actually [both be used to join boolean expressions in condition](https://stackoverflow.com/a/4163509/3559724)
@@ -89,14 +108,18 @@
 ## Types
 
 * Everything is an `Object` in .Net
-* `int` is a struct
-* `byte` aka `System.Byte` = 8 bits unsigned (0 to 255), basically the shortest integer longer than a boolean bit
-* `short` aka `System.Int16` = 16 bits integer (-32,768 to 32,767)
 * `enum MyEnum : byte {A, B, C};` = underlying type can be specified (byte, sbyte, short, ushort, int, uint, long, ulong)
 * `Enum(GetValues(type))` = returns all the enum values as an Array
 * `typeof(T)` vs `obj.GetType()` = compile time vs runtime type
 * `Convert.ToByte(string? value, int fromBase)` = convert a string to an equivalent 8-bit unsigned integer in the given base (2, 8, 10, 16)
 * Anonymous type eg. `var a = new {Name = "A", Score = 1};` => name will be generated e.g. ``f__AnonymousType0`2[System.String, System.Double]``
+
+### Numbers
+
+* `0b_1111_1000`
+* `int` is a struct
+* `byte` aka `System.Byte` = 8 bits unsigned (0 to 255), basically the shortest integer longer than a boolean bit
+* `short` aka `System.Int16` = 16 bits integer (-32,768 to 32,767)
 
 ### System.String
 
@@ -228,8 +251,24 @@ An event is a special type of delegate that can hold references to multiple meth
   * implement 3 x constructors (parameter-less, message, message & innerException)
   * pass the innerException  when throwing it in order to maintain the exception tree & inner call stack
 
-## Extensions (Namespaces)
+## Extensions
 
+### Libraries & Nugets
+
+* **AutoMapper** = DLL-discovery-based layer entities mapper
+* [CsGL](https://csgl.sourceforge.net) = C# graphics library (_discontinued_)
+* **Dapper** = simple (EF/ORM) object mapper for .NET
+* **ExpertComponents Toolkit Total** = .NET PDF & Excel creation (_$700+_)
+* **Html Agility Pack** = C# HTML parser/reader library
 * **MEF** (Microsoft Extensibility Framework) = framework for creating lightweight extensible applications (namespace of MEF nuget is `System.Composition`)
   * Essentially a configurable (via app config file & `[attribute]` metadata) decentralized (no single container: plugin-based via interface implementation) DI engine with runtime DLL assemblies discoverability
+* **NPOI** = .NET library for read/writing Microsoft Office binary and OOXML file formats
+* **Npoi.Mapper** = convention-based _Excel_ mapper for NPOI
 * [System.IO.Abstractions](https://www.nuget.org/packages/System.IO.Abstractions) = like `System.IO.File` but via injectable instance (instead of static) & mock-able
+
+### Tools
+
+* **.NET Reflector** = .NET decompiler (_$94_)
+* **dotPeek** = .NET decompiler
+* **ILSpy** = .NET assembly decompiler
+* **JustDecompile** = .NET assembly decompiler

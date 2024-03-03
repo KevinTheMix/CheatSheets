@@ -9,13 +9,15 @@
 * **Bottlenecks** = system part that degrades the entire system's performance when congested
 * **Dependability** = Availability, Reliability, Integrity, (Security), Safety, Maintainability, Confidentiality
 * **Encapsulation** = cacher le mécanisme interne d'un objet en vue de forcer une certaine utilisation et garantir son intégrité
+* **Enterprise service bus** = communication system between mutually interacting software SOA applications, special client-server variant where each application can behave as either
+* **Façade** = layer holding controllers
 * **Module** = une fonction ou une classe ou un fichier, selon les langages
   * L'intérêt est de pouvoir décomposer une partie de traitement dans un module réutilisable ayant le moins de dépendances/liens/informtion possibles
+* **OO** = Héritage + Polymorphisme + Encapsulation
 * **Reliability** = the probability that the system will perform accordingly for a specific time
   * Mean Time Between Failures (MTBF) = (total elapsed time - sum of downtime) / number of failures
   * Mean Time To Repair (MTTR)
 * **Requirement** = design mandate, must be testable
-* **OO** = Héritage + Polymorphisme + Encapsulation
 * **Security** = Confidentiality + Integrity + Availability (CIA)
 * **Single Point of Failure** = system part that halts the entire system if it fails
 * [SOLID](https://en.wikipedia.org/wiki/SOLID) = SRP + OCP + LSP + ISP + DIP
@@ -30,13 +32,16 @@
 ### Design Patterns
 
 * **Adapter** = adapts interface A into interface B
+* [Behavioral patterns](https://en.wikipedia.org/wiki/Behavioral_pattern) = design patterns that identify common comunication patterns among objects (eg Memento, Observer, Visitor)
 * **Builder** = used in .Net Core configuration
 * **Composite** = composite class implements interface and manages a collection of instances (or a factory), then dispatchs calls to one of those instances.
 * **Decorator**
   * Add a behavior, at runtime, without modifying the existing, separation of concerns.
   * Implements the Interface of a decorated object, and receives an instance in its constructor, then call the methods of that instance, adding extra features
 * **Iterator** = cfr .Net GetEnumerator() (well-spred nowadays)
+* **Repository pattern** = kind of container where data access logic is stored, hides DL details from BL (ie BL can access DL data without knowledge of underlying data access architecture)
 * **Singleton** = a Single instance; hard to test
+* **Unit of Work pattern** = keeps track of changes affecting a DB during a 'work' session, then figures out the delta and persists only that
 * **Visitor** = allows to follow Open-Close Principle
 
 ### Properties
@@ -53,3 +58,13 @@ Tous ces critères n'ont pas le même poids à la conception ; un programme non 
 * **Vérifiabilité** = le système peut-il être vérifié simplement
 * **Intégrité** = aspect sécuritaire
 * **Convivialité** = interface graphique, agréabilité d'utilisation
+
+### Clean Architecture
+
+Clean Architecture = DDD + CQRS.
+
+* Layers
+  * **Domain** = entities only (POCOs, no logic, no dependencies)
+  * **Application** (references Domain) = BL (services) interfaces (no implementation), Commands & Queries, DTOs
+  * **Presentation** (references Application layer) = GUI/WebAPI, BL (services) implementation, Startup with DI pipeline (links implementation to interfaces)
+  * **Infrastructure** (references Application layer) = DL implementation (DB/EF, I/O, WS client, SMTP, etc.)

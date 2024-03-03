@@ -26,6 +26,7 @@
 * `Alt + Mouse Scroll` = Navigate back/forward
 
 * `Ctrl + {#}` = open {#}th tab
+* `Ctrl + E/K` = search (bar)
 * `Ctrl + U` = Page Source
 * `Ctrl + Shift + J` = (master) Browser Console (able to log from all sources, eg a standalone popup page)
 * `Ctrl + Shift + M` = Responsive Design Mode

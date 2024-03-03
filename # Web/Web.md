@@ -25,30 +25,3 @@
 * **PaaS** = Platform as a Service, a (DB/.NET/Java) platform space/repo on which to deploy such apps
 * **Serverless computing** = cloud servers that are virtualized and treated as a single pay-per-use platform instead of discrete units
 * **No-code** = application creation via visual-based GUIs rather than programming, aimed at businesses
-
-### Tools
-
-* **daisyUI** = **Tailwind CSS** components library (eg accordions, alerts, avatars, carousel)
-* **Honeycode** = Amazon's no-code mobile/web app development platform
-* **Jekyll** = open-source static site generator (written in Ruby)
-* **Nginx** = web server often used as a load balancer (but also mail proxy, reverse proxy, HTTP cache)
-* **Selenium** = open-source scripting/playback tools for automating web apps/browser tasks (eg for testing, debugging), for a variety of languages (eg C#, Java, JS, Python)
-* **Shopify** = turnkey online stores for e-commerce entrepreneurs
-* **Twilio** = communication APIs for SMS, voice, video, authentication
-
-* **Amazon**
-  * **Amazon Web Services** (AWS) = cloud platform & API
-  * **Elastic Compute Cloud** (EC2) = IaaS (virtual machines)
-  * **Simple Storage Service** (S3) = objet storage via web services
-* **AppSheet** = Google's no-code mobile/web app development platform
-* **AppVeyor** = desktop CI/CD service used to build/test projects hosted on GitHub & co (GitLab, BitBucket)
-* **Couchbase** = NoSQL Cloud Database
-* **Cloudflare** = CDN, cloud cybersecurity, DDoS mitigation, ICANN domain registration services
-* **DigitalOcean** = cloud IaaS/PaaS platform (where **Droplet** = a VM)
-* **GitLab** = DevOps for Git
-* **Heroku** = Cloud Application platform (Node.js, Ruby, Java, PHP, Python, Go, Scala, Clojure, as well as all Linux run languages via buildpacks)
-* **Power BI** = Microsoft's analytics & visualization reporting (part of **Microsoft Power Platform** or embedded in **Azure**)
-* **Supabase** = open-source Firebase alternative (Postrgres DB, Authentication, instan APIs, Edge Functions, Realtime subscriptions, Storage, Vector embeddings)
-* **Terraform** (_Hashicorp_) = infrastructure as code (cloud APIs as declarative configuration files)
-* **Vagrant** (_Hashicorp_) = (à la Docker)
-* **Webflow** = SF-based no-code website development & hosting SaaS

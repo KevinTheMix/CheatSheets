@@ -83,9 +83,15 @@ Arrays are actually ordered maps (aka hashtables ie values-keys associations), a
 * `$_POST` = associative array of parameters passed via HTTP POST (get one via `$_POST["parameter"]`)
 * `$_SESSION` = superglobal associative array containing session variables (see [Session functions](https://www.php.net/manual/en/ref.session.php))
 
-## Apache
+## Extensions
 
-Config file httpd.conf is in _C:\Program Files\WAMP\bin\apache\Apache2.4.4\conf_
-Improper config can be found in Windows Event Viewer
-
-* `DocumentRoot` = Server web directory (default: www)
+* **Apache HTTP Server** = closs-platform web-server
+  * Config file _httpd.conf_ is located in _C:\Program Files\WAMP\bin\apache\Apache2.4.4\conf_
+  * Improper config can be discovered in _Windows Event Viewer_
+  * _DocumentRoot_ = Server web directory (default: _www_)
+* **CodeIgniter** = MVC for PHP
+* **EasyPHP** = Apache, MySQL, Php(MyAdmin) web server
+* **phpMyAdmin** = MySQL administration portable web app in PHP
+* **PhpStorm** = PHP + JavaScript IDE (contains WebStorm, _$199_)
+* **WampServer** = WAMP (Apache, MySQL, PHP)
+* **Zend Framework** = PHP framework (OO, MVC, coding best practices)

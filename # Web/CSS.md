@@ -1,6 +1,9 @@
 # CSS
 
+## Quick Tips & Tricks
+
 * `curor: pointer;`
+* `* { margin: 0; padding: 0; }` = Reset all browser (user-agent) defaults (0 => no need for unit)
 
 ## [CSS Selectors](https://www.w3schools.com/cssref/css_selectors.asp)
 
@@ -228,46 +231,16 @@ Use `background-color` when using `background-image`.
 }
 ```
 
-## SASS
+## Extensions
 
-[Difference between SASS & SCSS](https://responsivedesign.is/articles/difference-between-sass-and-scss/)
-[Difference between SASS & SCSS](https://stackoverflow.com/a/5732683)
-
-Stands for Syntactically Awesome Style Sheets
-Augments regular CSS syntax with programming concepts (e.g. variables, OO, nesting, Mixins).
-Ultimately, the extended stylsheets are interpreted into regular CSS (e.g. all variables are replaced, unnest, evaluated expressions end up as values)
-
-### Variables
-
-`$var = #123456;`
-
-### Evaluation
-
-`darken([color], 75%)`
-
-### Nesting
-
-Actually interpreted to two separate block definitions (& refers to the parent selector)
-
-`elem { inside { } }` equals `elem {}` + `elem inside {}`
-
-### [Mixins](https://responsivedesign.is/articles/helpful-sass-mixins/)
-
-(todo)
-
-## SCSS
-
-Prefixing:
-
-`.elem { &-sub {} }` equals `.elem {}` + `.elem-sub {}`
-
-## Tips & Tricks
-
-Reset all browser (user-agent) defaults
-
-```css
-* {
-  margin: 0;  /* 0 => no need for unit */
-  padding: 0; /* 0 => no need for unit */
-}
-```
+* [Difference between SASS & SCSS](https://responsivedesign.is/articles/difference-between-sass-and-scss/)
+* [Difference between SASS & SCSS](https://stackoverflow.com/a/5732683)
+* **SASS** (Syntactically Awesome Style Sheets) = augments regular CSS syntax with programming concepts (eg variables, OO, nesting, Mixins), transpiled to regular CSS
+  * Variables `$var = #123456;`
+  * Evaluation `darken([color], 75%)`
+  * Nesting `elem { inside { } }` equals `elem {}` + `elem inside {}` (actually interpreted as two separate block definitions)
+  * [Mixins](https://responsivedesign.is/articles/helpful-sass-mixins)
+* **SCSS**
+  * Prefixing `.elem { &-sub {} }` equals `.elem {}` + `.elem-sub {}`
+* **Tailwind CSS** = FOSS CSS framework providing a list of composable utility classes
+  * **daisyUI** = **Tailwind CSS** components library (eg accordions, alerts, avatars, carousel)

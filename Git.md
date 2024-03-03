@@ -9,6 +9,7 @@ It also is self-contained as each cloned repo contains the full versions history
 
 * Use trailing (_dangling_) commas whenever possible at the end of source code lines in order to reduce the number of lines marked as modified
 * A local repo (for personal projects) provides version control by itself without the need of any associated remote repos
+* [A Hacker's Guide to Git](https://wildlyinaccurate.com/a-hackers-guide-to-git)
 
 ## Glossary
 
@@ -18,6 +19,7 @@ It also is self-contained as each cloned repo contains the full versions history
   * It's true that a branch can be made to point to an earlier commit (via `reset`), but that just means that the earlier commit becomes the latest one for that branch
   * Creating a branch equates creating a new pointer to the current commit (multiple branches can point to the same commit, notably in the case of a branch creation)
   * **Tip of a branch** = the specific (latest) commit that the branch points to
+  * See [Branchig & Merging](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging)
 * **Cache** = another term for the staging area
 * **Cherry picking** = applying specific commits from one branch to another, actually creating new commits (à la copy-paste, with different hashes) since a new parallel commit history also has to exist
 * **Cloning** = creating a local repository based on a remote repository still associated to it (via push/pull commands)
@@ -40,6 +42,7 @@ It also is self-contained as each cloned repo contains the full versions history
 * **Merging** = combines changes from a given branch (usually a feature branch) into the current branch (usually the main/master branch)
   * If there are any conflicts, the operation is put on hold until the user has manually resolved all of them
   * This creates a **Merge Commit** with joined development histories, ie a commit with two parents (the previous commit on current & latest commit on imported branch)
+  * **Fast-Forward Merge** = avoids creating a merge commit for those case where the feature branch is simply ahead from the current branch (current branch is an ancestor of feature branch), this is the default
 * **Origin** = default name (and alias for a URL) given to remote repository from which a local repo was cloned (and will eventually be pushed)
   * Multiple other remotes can be added to a same (local) repo, each with a different name (eg `upstream`, `github`, `bitbucket`)
 * **Pull Request** = on collaborative platforms (eg GitHub, Azure DevOps), a formal proposal to merge changes into a codebase
@@ -128,6 +131,8 @@ It also is self-contained as each cloned repo contains the full versions history
 * `git commit -a` = stages all (already/previously) tracked files then commit ine one go
 * `git merge {branch}` = merges changes from given into current branch, creating a (merge) commit
 * `git merge --abort/--continue` = abort/continues the latest merge operation paused due to conflicts
+* `git merge --ff`
+* `git merge --(no-)squash {feature_branch}` = brings the change from feature branch into current branch's working tree, without committing (no merge commit gets created)
 * `git reset` = unstages all files (removes them from staging area thereby excluding them the next commit)
 * `git reset {file}` = unstages one or several files (opposite of `add`)
 * `git reset ({commit}) --soft` = uncommits (changes are left staged)
@@ -173,10 +178,21 @@ It also is self-contained as each cloned repo contains the full versions history
 * `git push {remote} {tag}` = shares local tag with remote repo (eg `git push origin v1.0.0`)
 * `git push -u {remote} {branch}` (or `--set-upstream-to`) = links current local branch to a remote branch, then pushes changes to it
 
-## Eco-system
+## Troubleshooting
 
+* Authentication error: _could not create ssl/tls secure channel_
+  * [Proven solution](https://support.captureone.com/hc/en-us/articles/360014239757--Could-not-create-SSL-TLS-secure-channel-activation-error-on-Windows-7): fix by enabling TLS 1.2 (disabled by default on Windows 7)
+    * Go to `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols`
+    * Right-click on **Protocols** folder, `New > Key`, and rename the freshly created folder to _TLS 1.2_
+    * Create a new **Key** under that folder, name that subfolder _Client_
+    * Create a new **DWORD (32-bit) Value** under that subfolder, set its **Name** to _DisabledByDefault_ (**Data** must be 0)
+    * (Optional:) restart computer if necessary
+
+## Extensions
+
+* **AppVeyor** = desktop CI/CD service used to build/test projects hosted on GitHub & co (GitLab, BitBucket)
 * `gitk` = commit history, branches and tags GUI visualizer
-* **GitLab** = web-based Git DevOps (wiki, issue tracking, CI)
+* **GitLab** = web-based DevOps for Git (wiki, issue tracking, CI)
 * [Git Credential Manager (GCM)](https://github.com/git-ecosystem/git-credential-manager) = provides 2FA capabilities to Git's simple 1FA authentication (mandatory for GitHub & co)
   * Stores logins in Windows Credential Store
   * Replaces the older [Git Credential Manager for Windows](https://github.com/Microsoft/Git-Credential-Manager-for-Windows)
@@ -190,13 +206,3 @@ GitHub is a web platform hosting (mostly software) projects using Git.
   2. add a remote using the URL provided by GitHub on creation (eg `git remote add origin "https://github.com/{user}/{repository}"`)
   3. push local onto remote repo (eg `git push origin master`)
 * If a **README** file is present in the repo, its content gets displayed (with homonyms priority: _README.md_ > _README_ > _README.txt_)
-
-## Troubleshooting
-
-* Authentication error: _could not create ssl/tls secure channel_
-  * [Proven solution](https://support.captureone.com/hc/en-us/articles/360014239757--Could-not-create-SSL-TLS-secure-channel-activation-error-on-Windows-7): fix by enabling TLS 1.2 (disabled by default on Windows 7)
-    * Go to `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols`
-    * Right-click on **Protocols** folder, `New > Key`, and rename the freshly created folder to _TLS 1.2_
-    * Create a new **Key** under that folder, name that subfolder _Client_
-    * Create a new **DWORD (32-bit) Value** under that subfolder, set its **Name** to _DisabledByDefault_ (**Data** must be 0)
-    * (Optional:) restart computer if necessary

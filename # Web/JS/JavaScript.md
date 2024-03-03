@@ -113,29 +113,33 @@ See <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statement
 
 ## Extensions
 
-* _Alpine.js_ = HTML-centric tiny _JavScript_ framework (presented as "Tailwind fof JavaScript", with jQuery-like effects)
-* _Astro_ = builds/pre-renders JS-powered apps into static HTML pages with less client-side JS (à la _Hugo_ or _Jekyll_), but with ability to render/hydrate dynamic JS components
-* _Blitz.js_ = _Next.js_ fullstack toolkit
-* _date-fns_ = dates manipulation library
-* _Deno_ = _JavaScript_ runtime similar to _Node.js_ (by its creator), built for TypeScript natively (& WebAssembly) based on V8 engine & Rust
-* _Handlebars.js_ = string templating (à la `String.Format`) engine library
-* _HTMX_ = HTML-augmenting (JavaScript) UI library (providing access to AJAX, CSS transitions, WebSockets, Server-sent events, form validation)
+* **Alpine.js** = HTML-centric tiny _JavScript_ framework (presented as "Tailwind fof JavaScript", with jQuery-like effects)
+* **Astro** = builds/pre-renders JS-powered apps into static HTML pages with less client-side JS (à la _Hugo_ or _Jekyll_), but with ability to render/hydrate dynamic JS components
+* **Blitz.js** = _Next.js_ fullstack toolkit
+* **CodePress** = JavaScript languages syntax highlighter
+* **date-fns** = dates manipulation library
+* **Deno** = JavaScript runtime similar to _Node.js_ (by its creator), built for TypeScript natively (& WebAssembly) based on V8 engine & Rust
+* **Handlebars.js** = string templating (à la `String.Format`) engine library
+* **HTMX** = HTML-augmenting (JavaScript) UI library (providing access to AJAX, CSS transitions, WebSockets, Server-sent events, form validation)
 * [JSON Server](https://github.com/typicode/json-server) = fake REST API (with zero coding, for front-end developers who need a quick back-end for prototyping & mocking)
-* _JSX_ (JavaScript XML, formally JavaScript Syntax eXtension) = syntactic sugar enabling creation of DOM trees via XML-like syntax, transpiled to nested JS functions, initially created by Facebook for React
-* _Lodash_ = extension toolkit (eg LINQ-style collection manipulation methods, deep cloning, debouncing, etc.)
-* _Moment.js_ = dates library
-* _Next.js_ = _React_-based open-source web development framework for server-side (universal App-to-plain-HTML on the server side instead of the client) rendering & static website generation (by _Vercel_)
-* _Nuxt.js_ = _Vue.js_ FOSS library similar to _Next.js_ (but based on , _Nitro_ & _Vite_)
-* _Quasar_ = _Vue.js_ cross-platform framework
-* _React_ = FOSS front-end (JavaScript) library for building UIs based on components, can be used to develop SPAs, mobile or server-rendered apps (via additional frameworks eg _Next.js_)
+* **JSX** (JavaScript XML, formally JavaScript Syntax eXtension) = syntactic sugar enabling creation of DOM trees via XML-like syntax, transpiled to nested JS functions, initially created by Facebook for React
+* **Lodash** = extension toolkit (eg LINQ-style collection manipulation methods, deep cloning, debouncing, etc.)
+* **Moment.js** = dates library
+* **nestedSortable** = jQuery plugin for manipulating nested lists
+* **Next.js** = _React_-based open-source web development framework for server-side (universal App-to-plain-HTML on the server side instead of the client) rendering & static website generation (by _Vercel_)
+* **Nuxt.js** = _Vue.js_ FOSS library similar to _Next.js_ (but based on , _Nitro_ & _Vite_)
+* **Quasar** = _Vue.js_ cross-platform framework
+* **React** = FOSS front-end (JavaScript) library for building UIs based on components, can be used to develop SPAs, mobile or server-rendered apps (via additional frameworks eg _Next.js_)
   * uses virtual DOM
-* _React Native_ = open-source cross-platform (mobile, web, desktop, VR) UI framework
-* _Redux_ = JS-powered apps state container
-* _Solid.js_ (2018) = lightweight, highly performant, (truely surgically) reactive UI framework, transpiles to _JavaScript_, uses JSX (like React), loved by developers
-* _SST_ = _Next.js, Svelte or Astro_ AWS front/backend platform
-* _Svelte_ =
-* _SvelteKit_ =
-* _Vite_ = build tool
+* **React Native** = open-source cross-platform (mobile, web, desktop, VR) UI framework
+* **Redux** = state container for JavaScript apps
+* **Socket.IO** = bi-directional client-server communication (via WebSocket or HTTP long-polling as a fallback)
+* **Solid.js** (2018) = lightweight, highly performant, (truely surgically) reactive UI framework, transpiles to _JavaScript_, uses JSX (like React), loved by developers
+* **SST** = _Next.js, Svelte or Astro_ AWS front/backend platform
+* **Svelte** =
+* **SvelteKit** =
+* **Vite** = build tool
+* **WYMeditor** = JavaScript WYSIWYM XHTML editor (_discontinued_)
 
 ### jQuery
 

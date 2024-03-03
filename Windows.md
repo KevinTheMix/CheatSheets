@@ -6,7 +6,7 @@
   * Remote desktop to home computer
   * SSH Tunnel + Proxy Socks via Putty (Laurent D'Havé & Frédéric Branger)
     * <https://securitymusings.com/article/462/how-to-set-up-a-socks-proxy-using-putty-ssh>
-* [Removing "This Copy of Windows Is Not Genuine"](https://appuals.com/removing-this-copy-of-windows-is-not-genuine)
+* [Removing "This Copy of Windows Is Not Genuine"](https://appuals.com/removing-this-copy-of-windows-is-not-genuine) (rearm operation)
   * Windows 11: avoid built-in bloatwares by selecting region _English (World)_ or _English (Europe)_ (disturbing the OOBE service responsible with localized apps), then switching back to real region later
 
 ## Glossary

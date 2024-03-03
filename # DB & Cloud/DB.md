@@ -1,4 +1,4 @@
-# Databases
+# DB
 
 ## Glossary
 
@@ -34,8 +34,3 @@
 * **Wildcards** = matches one (`_`), or several (`%`), or ranges of characters (`[a-z0-9.,;]` or opposite `[^…]`) as part of a `LIKE` clause
 * **Write-ahead Logging** = techniques for atomicity & durability (two of ACID properties), and an implementation of Event Sourcing architecture
 * **Write-ahead Log** = append-only structure for crash & transaction recovery where changes are initially written before being actually applied
-
-### Tools
-
-* **Cassandra** (by **Apache**) = FOSS distributed wide-column store NoSQL DB designed to handle large amounts of data across servers (high availability with no single point of failure)  
-* **Redis** = open source in-memory data store use as a cache, vector or document database, streaming engine, and message broker

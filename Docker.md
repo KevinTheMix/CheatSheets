@@ -2,20 +2,21 @@
 
 Docker is an open-source platform to package, deploy and run applications in containers, making them easily portable and self-sufficient.
 
-## Components
+## Glossary
 
-* Docker Toolbox is an older version of Docker that only runs on Linux => it installs on Windows with the (Oracle) VirtualBox hypervisor and runs inside it.
-* Container Host OS = OS of the machine/VM on which the Docker Engine runs
-* Docker Engine = Docker Daemon & Docker Client
-  * Docker Daemon (aka Container Host) = heart of Docker: a service inside of which containers run
-* Container Base OS = base image, that contains an OS such as Windows Nano Server, Windows Server Core, Linux Alpine, or not (using FROM scratch, only on Linux).
-* Multi-stage Build = used to decrease the size of the final Image. E.g. full SDK base image is necessary for building & publishing, but a lighter runtime base image might suffice after that => re-package published result
-* Registry = Docker Hub & co. Contains repositories. Companies often have a private registry to manage their own custom Images (e.g. using Azure Container Registry)
-* Repository = collection of related Images under common Tag
-* Tag = label used to identify the specific platform (OS) and version (e.g. .NET version) of an Image when several of those are available
-* Compose = CLI tool using YAML for defining & running multi-container applications (from several Images) => a single command (```docker compose```) creates several containers on the Docker host
-* Cluster = collection of Docker hosts exposed as one. Used by orchestration for scaling
-* Orchestrator = manages the lifecycle and locations of various Containers, with error control & restart capabilities. E.g. Azure Fabric Service, Docker Swarm, Kubernetes, Mesosphere
+* **Cluster** = collection of Docker hosts exposed as one. Used by orchestration for scaling
+* **Compose** = tool using YAML for defining & running multi-container applications (from several Images) => a single command (`docker compose`) creates several containers on the Docker host
+* **Container Base OS** = base image containing an OS (eg Windows Nano Server, Windows Server Core, Linux Alpine), or not (using FROM scratch, only on Linux)
+* **Container Host OS** = OS of the machine/VM on which the Docker Engine runs
+* **Docker Host**
+* **Docker Engine** = Docker Daemon & Docker Client
+  * **Docker Daemon** (aka Container Host) = heart of Docker: a service inside of which containers run
+* **Docker Toolbox** = older version of Docker, installs & runs via (Oracle) VirtualBox hypervisor for Windows/Mac
+* **Multi-stage Build** = used to decrease the size of the final Image (eg full SDK base image is necessary for building & publishing, but a lighter runtime base image might suffice after that => re-package published result)
+* **Orchestrator** = manages the lifecycle and locations of various Containers, with error control & restart capabilities. E.g. Azure Fabric Service, Docker Swarm, Kubernetes, Mesosphere
+* **Registry** = Docker Hub & co. Contains repositories. Companies often have a private registry to manage their own custom Images (e.g. using Azure Container Registry)
+* **Repository** = collection of related Images under common Tag
+* **Tag** = label used to identify the specific platform (OS) and version (e.g. .NET version) of an Image when several of those are available
 
 ### Image
 
@@ -144,3 +145,5 @@ We can specify the OS we want by adding its tag as a suffix to the Image in the 
 ## Questions
 
 Compile the source code before or after building an Image? Is it like CI where source is automatically retrieved from repo & built?
+
+## Extensions

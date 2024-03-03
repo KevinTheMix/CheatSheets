@@ -1,5 +1,0 @@
-# Cloud
-
-## Glossary
-
-### Tools

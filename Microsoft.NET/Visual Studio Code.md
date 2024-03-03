@@ -43,6 +43,7 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 * `Alt + Shift + F` = Format/tidy (e.g. HTML)
 * `Alt + Shift + Left/Right` = shrink/expand selection
 * `Alt + Shift + Up/Down` = copy line up/down
+* `Alt + Mouse scroll` = scroll faster
 * `Ctrl + ,` = Settings (also via gear icon at the bottom-left or via _File > Preferences > Settings_)
 * `Ctrl + ù` or `Ctrl + J` = toggle Terminal
 * `Ctrl + µ` = clones selected tab or Split Terminal
