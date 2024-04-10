@@ -52,8 +52,10 @@
   * `Shift + X` = delete (no cut)
 * Player/Preview
   * `Drag&Drop source clip` = copy to source/project
-  * `I/O` = set In/Out (beginning/end) point
-  * `P` = switch source/project
+  * `Space` = Play
+  * `I/O` = Set In/Out (beginning/end) point
+  * `J/L` = Play quickly back/forwards
+  * `P` = Switch source/project
   * `Left/Right` = previous/next frame
   * `Page Up/Down` = fast-forward/rewind 1 second
     * `+ Shift` = 2 seconds

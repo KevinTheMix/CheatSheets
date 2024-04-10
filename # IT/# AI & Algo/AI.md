@@ -3,6 +3,11 @@
 ## Quick Tips
 
 * [Neural Networks: Zero to Hero](https://karpathy.ai/zero-to-hero.html) by Andrej Karpathy of OpenAI/Tesla fame
+* [Threre's An AI For That](https://theresanaiforthat.com) (TAAFT) = find & compare hundreds of AI tools by features, pricing, etc.
+* [Huging Face](https://huggingface.co) = machine learning models collaborative/sharing platform
+* [Ollama](https://ollama.com) = run llama2 (uncensored) & other models (Mistral)
+* [PrivateGPT](https://github.com/imartinez/privateGPT) = interact with your documents using the power of GPT, 100% privately
+  * [Installing PrivateGPT on WSL with GPU support](https://medium.com/@docteur_rs/installing-privategpt-on-wsl-with-gpu-support-5798d763aa31) (@Emilien Lancelot)
 
 ## Glossary
 

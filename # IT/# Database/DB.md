@@ -35,16 +35,20 @@
 * **Write-ahead Logging** = techniques for atomicity & durability (two of ACID properties), and an implementation of Event Sourcing architecture
 * **Write-ahead Log** = append-only structure for crash & transaction recovery where changes are initially written before being actually applied
 
-### Tools
+## Tools
 
-* **Cassandra** (by **Apache**) = FOSS distributed wide-column store NoSQL DB designed to handle large amounts of data across servers (high availability with no SPoF)  
+* **Cassandra** (by **Apache**) = FOSS distributed wide-column store NoSQL DB designed to handle large amounts of data across servers (high availability with no SPoF)
+* [dbdiagram.io](https://dbdiagram.io) = online DB diagrams
 * **Redis** = open source in-memory data store use as a cache, vector or document database, streaming engine, and message broker
 * **SQuirreL SQL Client** = Java-based multi-DB administration tool
 
-#### Microsoft
+### Microsoft
 
 * **ApexSQL** = SSMS plugin for deep/meta search
 * **DB Browser for SQLite** = SQLite DB IDE
 * **SQL Manager for MySQL** = MySQL DB IDE (also for PostgreSQL, Oracle, DB2)
 * **SQL Manager for SQL Server** = SQL Server IDE (SMSS-like)
 * **SQL Server Data Tools (SSDT)** = SQL Server for Visual Studio (SQL Diff & SSIS)
+* **Microsoft® SQL Server® Express** = free MSSQL
+  * [2019.11](https://www.microsoft.com/fr-FR/download/details.aspx?id=101064)
+  * [2022.11](https://www.microsoft.com/fr-fr/sql-server/sql-server-downloads)

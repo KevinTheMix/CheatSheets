@@ -8,6 +8,8 @@
   * [Lecture 20: Dynamic Programming II: Text Justification, Blackjack](https://www.youtube.com/watch?v=ENyox7kNKeY)
   * [Lecture 21: Dynamic Programming III: Parenthesization, Edit Distance, Knapsack](https://www.youtube.com/watch?v=ocZMDMZwhCY)
   * [Lecture 22: Dynamic Programming IV: Guitar Fingering, Tetris, Super Mario Bros.](https://www.youtube.com/watch?v=tp4_UXaVyx8)
+* [Flow Field Pathfinding for Tower Defense](https://www.redblobgames.com/pathfinding/tower-defense) = A* visualization
+* [What is the alphanumeric id in a reddit URL?](http://stackoverflow.com/questions/410485/whats-the-5-character-alphanumeric-id-in-reddit-url) = base 36 (ie lowercase alphanumeric)
 
 ## Glossary
 

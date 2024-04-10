@@ -1,6 +1,9 @@
 # VeraCrypt
 
-Note: it's cleaner to remove all Partitions/Volume (in Windows Disk Manager) from the HDD, so it does not appear in Windows.
+## Quick Tips
+
+* It's cleaner to remove all Partitions/Volume (in Windows Disk Manager) from the HDD, so it does not appear in Windows
+  * Drawback is that Windows will want to format it upon connecting
 
 ## USB Key Device
 

@@ -5,6 +5,8 @@ Git employs a three-tiered architecture composed of a **Working Directory**, a *
 Contrary to earlier client-server VCS architectures, Git is distributed and does not require ongoing sync with a central online entity.
 It also is self-contained as each cloned repo contains the full versions history (in hidden `.git/` folder) as a sequence of update deltas (requiring minimal storage).
 
+In Git all operations are atomic: either they succeed as whole, or they fail without any changes (from [GIT vs CVS](https://stackoverflow.com/a/824241/3559724)).
+
 ## Quick Tips
 
 * Use trailing (_dangling_) commas whenever possible at the end of source code lines in order to reduce the number of lines marked as modified

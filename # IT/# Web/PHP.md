@@ -93,5 +93,7 @@ Arrays are actually ordered maps (aka hashtables ie values-keys associations), a
 * **EasyPHP** = Apache, MySQL, Php(MyAdmin) web server
 * **phpMyAdmin** = MySQL administration portable web app in PHP
 * **PhpStorm** = PHP + JavaScript IDE (contains WebStorm, _$199_)
+* **Symfony** = set of reusable php components & framework for web project
+* **Twig** (_Symfony_) = template engine
 * **WampServer** = WAMP (Apache, MySQL, PHP)
 * **Zend Framework** = PHP framework (OO, MVC, coding best practices)

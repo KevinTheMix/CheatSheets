@@ -9,15 +9,16 @@
 
 ## Menu/Options
 
-* Tools > Import and Export Settings (Wizard) > _Reset all settings_ = Reset [Environment settings](https://learn.microsoft.com/en-us/visualstudio/ide/environment-settings) (General vs C#)
 * Project Creation: _Create new project_ => can give different name to whole solution & first project!
-* Tools > Options > Projects and Solutions > _Track Active Item in Solution Explorer_ = keep current file highlighted in Solution Exporer
 * Start application twice
   * F5, then Solution explorer > right click other projet > Debug > start new instance
   * Solution Properties > _Run Multiple Projects_
-* Parallel Tools
-  * Debug > Windows > _Parallel Watch_
-  * Debug > Windows > _Parallel Stack_
+
+* Debug > Windows > _Parallel Watch_ & _Parallel Stack_
+* Tools
+  * SQL Server > _New Schema Comparison…_ = SQL compare
+  * Import and Export Settings (Wizard) > _Reset all settings_ = Reset [Environment settings](https://learn.microsoft.com/en-us/visualstudio/ide/environment-settings) (General vs C#)
+  * Options > Projects and Solutions > _Track Active Item in Solution Explorer_ = keep current file highlighted in Solution Exporer
 
 ## Keyboard & Mouse Shortcuts
 
@@ -26,8 +27,8 @@
   * `Ctrl + H` = Replace
     * Can be scoped to text selection
   * `Ctrl + ;` = Quick Actions and Refactoring (_Extract Method_, _Invert If_, etc.)
-    * Right-click on `if` > Quick Actions and Refactorings... > _Convert to conditional expression_
-    * Right-click on `if` > Quick Actions and Refactorings... > _Add braces_
+    * Right-click on `if` > Quick Actions and Refactorings… > _Convert to conditional expression_
+    * Right-click on `if` > Quick Actions and Refactorings… > _Add braces_
   * `Ctrl + (Shift +) U` = Lower(Upper)case
   * `Ctrl + K + D` = Tidy
   * `Ctrl + R + G` = Tidy usings

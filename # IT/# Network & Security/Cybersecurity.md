@@ -21,7 +21,7 @@
 * **OPSEC** (Operation Security) = military analysis of whether critical information is accessible to the enemy (trackability prevention)
   * Also refers to obfuscating/hiding techniques by hackers to evade security & getting found
 * **OSCP** (Offensive Security Certified Professional) = ethical hacking certification (by _Offensive Security_ aka _Offsec_)
-* **C/XSRF** (Cross-Site Request Forgery) = coerces a victim into browsing a legit page she's currently logged in via a specially crafted URL with parameters having an immediate effect
+* **C/XSRF** (Cross-Site Request Forgery) = coerces a victim into browsing a legit page s/he's currently logged in via a specially crafted URL with parameters having an immediate effect
   * Caused by a lack of mechanisms to check the source of a request (URL referer or generated form token)
 * **XSS** (Cross-Site Scripting) = abuses a legit page's lack of input (URL, form field) sanitization to insert a malicious (JS) script, accounts for 84% of all security vulnerabilities
   * **Persistent** = the script is saved and served back to the victim when she browses a page displaying unsanitized content (eg _MMQ_)
@@ -49,27 +49,6 @@
 * _MDCrack_ = Cracks MD4, MD5 & co Hash password
 * _Ophcrack_ = Windows password cracker (rainbow tables)
 * _RockYou.txt_ = large (multi-GB) wordlist for password crackers
-
-### Networks & Wi-Fi
-
-* _Aircrack-ng_ = WiFi packet monitoring/sniffing & cracking toos suite
-* _bettercap_ = (Go-based) hacking tool for WiFi, Bluetooth Low Energy, wireless hijacking
-* _ESP32_ = low-cost low-power system-on-a-chip MCU (Microcontroller Unit, ie an electronic board/chip) with integrated WiFi & Bluetooth (by _Espressif Systems_)
-* _Fiddler Classic_ = Log/edit HTTP(S) web traffic
-* _Flipper Zero_ = open-source & customizable portable multi-tool for hackers/pentesters (RFID, radio protocols, access control systems, GPIO pins hardware)
-* _LOIC_ (C# rewrite) = DoS and DDoS for stress-testing
-* _Nmap "Network Mapper"_ = _Linux_ Network discovery
-* _NukeNabber_ = Windows XP TCP/UDP ports listener (_discontinued_)
-* _PCAP_ (Packet Capture) = API for capturing network traffic (packet sniffing)
-  * _libpcap_ = _Unix_ Implementation of pcap API (base driver)
-  * _WinPcap_ = _Windows_ port of libpcap (_discontinued_)
-  * _Npcap_ = _Windows 7_ port of libpcap
-* _Pwnagotchi_ (for _Raspberry Pi Zero W_) = WiFi cracking (via AI + bettercap, [Guide](https://www.reddit.com/r/pwnagotchi/comments/sl2rv1/guerrilla_guide_to_pwnagotchi_v1552022))
-* _tcpdump_ = _Unix_ Packet analyzer (uses libcap)
-* _WiFi Pineapple_ = pentesting router (monitoring, AP spoofing, targeted captive portals)
-* _WinDump_ = _Windows_ port of tcpdump (uses WinPcap)
-* _WireGuard_ = FOSS VPN (Ubuntu native)
-* _Wireshark_ = network packets analyzer (uses WinPcap or Npcap)
 
 ### SQL Injection (SLQi)
 

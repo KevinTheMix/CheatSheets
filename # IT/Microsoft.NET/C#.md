@@ -256,7 +256,7 @@ An event is a special type of delegate that can hold references to multiple meth
 ### Libraries & Nugets
 
 * **AutoMapper** = DLL-discovery-based layer entities mapper
-* **CefSharp** = open-source (embedded) web browser for WinForms & WPF apps (+ headless version for automation projects, based on _Chromium Embedded_ Framework, ie open-source Chrome)
+* **CefSharp** = open-source (embedded) web browser for WinForms/WPF apps (based on _CEF_ aka _Chromium Embedded Framework_, w/ headless version for automation projects)
 * [CsGL](https://csgl.sourceforge.net) = C# graphics library (_discontinued_)
 * **Dapper** = simple (EF/ORM) object mapper for .NET
 * **ExpertComponents Toolkit Total** = .NET PDF & Excel creation (_$700+_)

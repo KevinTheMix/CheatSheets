@@ -1,16 +1,23 @@
-# [Security Assertion Markup Language](https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language)
+# SAML (Security Assertion Markup Language)
+
+Authentication/authorization exchange standard between id & service provider (enables SSO across different domains).
 
 Standard for communicating identity across organizations via XML, and enabling Single sign-on.
-The XML SAML assertion is signed using [X.509](https://en.wikipedia.org/wiki/X.509) certificates.
+The XML SAML assertion is signed using (X.509) certificates.
 
 SAML's purpose is different from OAuth, because it is designed to **authenticate** a user, whereas OAuth is concerned with **authorization** delegation.
 See <https://auth0.com/intro-to-iam/saml-vs-oauth/>
 
-## Entities
+## Quick Tips
 
-* User (Agent) = the Principal, who wants to authenticate, and has an account at the IdP.
-* Service Provider = target application/service, that also maintains a limited list of approved users.
-* Identity Provider (aka IdP) = authority that is capable of authenticating the User (connected to AD).
+* [Intro to SAML](https://www.youtube.com/watch?v=0fmNoqz6Urw&gl=BE)
+* [SAML 2.0: Technical Overview](https://www.youtube.com/watch?v=SvppXbpv-5k)
+
+## Glossary
+
+* **User (Agent)** = the Principal, who wants to authenticate, and has an account at the IdP.
+* **Service Provider** = target application/service, that also maintains a limited list of approved users.
+* **Identity Provider** (aka IdP) = authority that is capable of authenticating the User (connected to AD).
 
 ## [Federated identity](https://en.wikipedia.org/wiki/Federated_identity) & [Single sign-on](https://en.wikipedia.org/wiki/Single_sign-on)
 
@@ -53,8 +60,3 @@ These can be:
   * The IdP prepaes a second very small message called SAML artifact, and forwards that (via the User Agent) instead of the SAML assertion
   * The SP connects directly (!) to the IdP to resolve the artifact, and finally obtain the SAML assertion
   * This scenario is useful to limit the length of data sent through the User Agent and circumvent some such limitations (see <https://stackoverflow.com/a/13618537>)
-
-## Resources
-
-* [Intro to SAML](https://www.youtube.com/watch?v=0fmNoqz6Urw&gl=BE)
-* [SAML 2.0: Technical Overview](https://www.youtube.com/watch?v=SvppXbpv-5k)

@@ -16,15 +16,16 @@ Unlike a virtual machine, Docker does not virtualize hardware, but the operating
 * **Bind Mounts** = map to any folder in the host filesystem (access to sensitive OS folder may create security risk)
 * **Cluster** = collection of Docker hosts exposed as one. Used by orchestration for scaling
 * **Compose** = a Docker client to work with applications consisting of a set of containers
-  * Uses YAML to define & run multi-container applications (from several Images)
+  * Uses a single YAML file to define & run multi-container applications (from several Images)
   * A single (`docker compose`) command creates several containers on the Docker host
-* **Container** = running or stopped instance of an Image
+* **Container** = (running or stopped) stateless (ie volatile, though a persistent disk can be mounted ) instance of an Image
   * Containers share the kernel of the container host (which is the host machine itself if run natively) with other containers
   * Containers are configurable (via Dockerfile) & parameterized (by providing arguments to the `docker run` command) => 1 image can actually generate various containers
   * This scaling/orchestration ability from a single image makes even monolithic applications want to use Containers
   * A Windows container requires a Windows Server-based Docker host (_native_)
   * A Linux container requires a Linux-based Docker host (_native or VM_)
 * **Containers vs VMs** = Containers have a smaller footprint (a few MBs, seconds to start) than actual VM images (a few GBs, minutes to start)
+  * On a VM, resources (CPU, RAM) are fixed, while with Containers they are allocated dynamically
   * Docker reuses the kernel of its hosts, so it does not have to pack it up, let alone starting it up each time
   * By contrast, a virtual machine (VM) runs a full-blown guest OS with virtual access to host resources through a hypervisor
   * In general, VMs provide an environment with more resources than most applications need; on the other hand, they provide better isolation

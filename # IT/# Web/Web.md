@@ -21,10 +21,12 @@
 * **WebDAV** = HTTP extension methods on resources (_COPY_, _LOCK_, _MOVE_)
 
 * _Emmet_ = text editors plugin for HTML & CSS (interprets complex snippets, cycle-browse through markup elements)
+* [HTML-Kit](http://www.htmlkit.com) (build 292 = last free version)
 * _Jekyll_ = open-source static site generator (written in Ruby)
-* _Nginx_ = web server often used as a load balancer (but also mail proxy, reverse proxy, HTTP cache)
+* _Nginx_ = HTTP & mail/reverse proxy server often used as a load balancer (& HTTP cache)
+* _Plausible_ = Google Analytics alternative
 * _Selenium_ = open-source scripting/playback tools for automating web apps/browser tasks (eg for testing, debugging), for a variety of languages (eg C#, Java, JS, Python)
-
+* [Wix](https://www.wix.com) = build a website
 * [web.dev](https://web.dev) = guidance by the Chrome team to build modern cross-browser web apps (eg accessibility, CSS, HTML, performance, privacy, PWA)
 
 ### Backend & Cloud
