@@ -15,7 +15,7 @@ Saves its data in a .kdbx file, that can be published to the cloud, as long as i
 
 ## API
 
-* File > _Database Settings…_ > Security > _Iterations_ = 10000077
+* File > _Database Settings…_ > Security > _Iterations_ = 10000077 (depends on the DB file itself)
 * Tools > _Generate Password…_
   * Length = 20 characters
   * Upper-case, Lower-case, Digits, Underline (`_`)
@@ -24,6 +24,11 @@ Saves its data in a .kdbx file, that can be published to the cloud, as long as i
     * include `!&@#~$*`
     * include `#$`
   * Brackets
+* Tools > Options
+  * Security > _Lock workspace after global user inactivity (seconds)_
+  * Interface (1) > _Minimize to tray instead of taskbar_
+  * Interface (1) > _Esc keypress in main window_
+  * Advanced > _Automatically save when/after …_
 
 ## [Plugins](https://keepass.info/plugins.html)
 

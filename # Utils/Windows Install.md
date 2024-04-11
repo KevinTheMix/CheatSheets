@@ -16,6 +16,7 @@
   * Only first install on new hardware (CPU/motherboard combination) requires a valid Windows license key)
   * See [Windows 10+ Digital License explained](https://www.elevenforum.com/t/windows-10-and-windows-11-digital-licencing-explained.14051)
 * **KMS** (Key Management Services) = method to activate Windows/Server/Office
+* **Media Creation Tool** = downloads & flashes Windows images
 * **Unattended** = refers to installing an OS without particular supervision or inputs from the user
 
 ## [Underscore_ - La trouvaille scandaleuse d'un chercheur sur Windows 11](https://www.youtube.com/watch?v=SlIZxdeoWDY)

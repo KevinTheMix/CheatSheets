@@ -99,6 +99,7 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 * **Better Comments** = colorize comments (eg `!` is red, `TODO` is orange, `// //` is greyed out)
 * **carbon-now-sh** = copies code snippets for public/sharing
 * **Dart** (installed with Flutter)
+* **Dev Containers** = open a folder inside a Docker container
 * **Flutter**
 * **GitLens — Git supercharged** = improve VS Code git functionalities
 * [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint)
@@ -106,9 +107,8 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 * **PowerShell**
 * **Prettify JSON** (F1 > Prettify)
 * **Quokka** = JavaScript and TypeScript playground in your editor
-* **Remote - Containers_-** = open a folder inside a Docker container
 * **Remote Repositories** = contribute to Github repositories from within VS Code without typing git commands
-* **Remote - SSH**
+* **Remote - SSH** = open any folder on a remote machine via SSH
 * **Paste JSON as Code** = generate models based on JSON for a series of languages
 * [Winter is Coming](https://github.com/johnpapa/vscode-winteriscoming) = theme
 * Vue & JS

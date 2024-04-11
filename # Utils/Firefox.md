@@ -51,13 +51,13 @@
 * **Dark Reader** = dark mode everywhere
 * **Decentraleyes** = blocks trackers
 * DelayWebpage = applies a delay on distracting websites
-* Disable JavaScript = disable JavaScript
+* **Disable JavaScript** = disable JavaScript
 * **DuckDuckGo Privacy Essentials** = blocks trackers
 * **Facebook Container** = isolates Facebook
 * Flash Player 2022 = Flash player
 * FoxyProxy = open-source proxy management tool
 * **Ghostery - Privacy Ad Blocker** = blocks ad trackers
-* Google Container = isolates Google
+* **Google Container** = isolates Google
 * Honey = finds online shopping coupon codes
 * Hoxx VPN Proxy = browser proxy
 * HTTPS Everywhere (_discontinued_) = use HTTPS for websites that support it
@@ -78,20 +78,20 @@
     * Pattern type = Wildcard
     * Pattern Description = <https://lifehacker.com/how-to-force-a-chronological-feed-in-facebooks-new-desi-1842426847>
   * Reddit
-    * Description = _Facebook front page_
+    * Description = _Reddit front page_
     * Example URL = <https://www.reddit.com>
     * Include pattern = `*reddit.com`
     * Redirect to = <https://www.reuters.com>
     * Pattern type = Wildcard
 * **Return YouTube Dislike** = displays YouTube dislikes count
 * Ruffle - Flash Emulator = Flash player
-* **SponsorBlock** = skip YouTube video sponsors
+* SponsorBlock = skip YouTube video sponsors
 * The Stream Detector = download streams
 * **uBlock Origin** = blocks ads
-* **Video DownloadHelper** = download HTTP videos (& images)
+* Video DownloadHelper = download HTTP videos (& images)
   * [DownloadHelper CoApp](https://github.com/aclap-dev/vdhcoapp) = cross-platform companion application enabling file writing, video player launcher, _ffmpeg_
 * Video Scrubber for Instagram = displays Instagram video player controls
-* Video Speed Controller = displays HTML5 video speed controls
+* **Video Speed Controller** = HTML5 video speed controls & keyboard shortcuts
 
 ## Troubleshooting
 
