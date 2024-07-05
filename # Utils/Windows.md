@@ -2,30 +2,23 @@
 
 * [Microsoft Windows Download](https://www.microsoft.com/software-download)
 
-## Quick Tips
-
-* **Invisible/Hidden Folder** = name a folder `" "` (ie a no-Break Space, CharMap _U+00A0_, _Alt+255_ or _Alt+0160_), then change folder icon to a blank one
-
 ## Glossary
 
 * **con.txt File** = [forbidden file name](https://www.reddit.com/r/todayilearned/comments/a0zht/til_that_you_cant_create_a_file_in_windows_called/c0fcr5n)
-* **File Size Search** = `size: > 2GB AND < 3GB` (or `size:` and select listed proposition)
 * **Host File** = local DNS rules file (edit in `C:\Windows\System32\drivers\etc` with admin privileges, then run `ipconfig /flushdns`)
-* **Media Creation Tool** = download/flash a Windows ISO to a disk/USB key
+* **Invisible/Hidden Folder** = name a folder `" "` (ie a no-Break Space, CharMap _U+00A0_, _Alt+255_ or _Alt+0160_), then change folder icon to a blank one
+* **File Size Search** = `size: > 2GB AND < 3GB` (or `size:` and select listed proposition)
 * [NTFS links](https://en.wikipedia.org/wiki/NTFS_links)
   * **Hard Links** = two _index_ entries point to the same physical file
   * **Junction Points** = hard link for a folder
   * **Symbolic Link** = Windows shortcut = a physical file whose content is the path of another file
-* **Windows 10 End of support** = 10/10/2025
-* [Windows 11 System Requirements](https://www.microsoft.com/en-in/windows/windows-11-specifications)
-* **UUP** = streamlined, smaller update distribution process for on-premises
-* [UUP dump](https://uupdump.net) = download more advanced (then release) versions of Windows (ie Insider Release Preview, Beta & Dev Channel builds)
 
 ## Shortcuts
 
 * `Ctrl + Alt + Arrow` = rotate Screen
 * `Ctrl + Arrows` = move cursor in folder while keep current files selection
   * `Space` = add file to selection
+* `Ctrl + Esc` == `Windows`
 * `Ctrl + Wheel` (in a folder window) = cycle through window views
 * `Shift + F10` = right-click (at cursor location)
 * `Windows + R` = Run
@@ -51,10 +44,6 @@
 * `Drag (file) to (opened/pinned) program in Windows Bar` = pin the file to that program's Windows bar tab's (right-click) context menu
 * `Drag (file) to command prompt` = pastes file path
 
-### Windows 7
-
-* `Ctrl + Esc` == `Windows`
-
 ### Windows 10+
 
 * `Ctrl + Esc` = ? (switch between windows in the order that they were opened (1 2 3 1 2 3))
@@ -62,8 +51,10 @@
 * `Shift + Restart` = access Advanced Startup Options (ASO Boot Menu)
 * `Windows + Ctrl + Left/Right` = Switch Virtual Desktop
 * `Windows + Shift + S` = Screenshot
-* `Windows + i` = Settings
+* `Windows + I` = Settings
+* `Windows + S` = Search
 * `Windows + Space` = Change language
+
 * `2 fingers` = Scroll
 * `3 fingers up` == `Windows + Tab`
 * `3 fingers Left/Right` == `Alt + Tab`
@@ -72,6 +63,7 @@
 
 ### Windows 11
 
+* `Windows + G` = Game capturing
 * `taskmgr -d` = _classic_ Task Manager
 
 ## [Cmd.exe](https://en.wikipedia.org/wiki/Cmd.exe#Windows_NT_family)
@@ -81,6 +73,7 @@
 * `copy /b {image} + {hidden} {output}` = hide file in an image file (output image must be same extension/type as input)
 * `echo koko`
 * `@echo [on|off]` = turns prompt on/off
+* `envir` = System Properties > Advanced
 * `explorer .` = open explorer window at current path
 * `for %%i in ({pattern}) do {statement using %%i}` (pattern can be fixed words eg `(Debug Release)` or matching expression eg `(*.json)`)
 * `format {disk:}`
@@ -93,7 +86,11 @@
 * `where {exe1} ({exe2} {exe3} …)` = display files path (searching by pattern)
 * `whoami`
 
-* **Cancel Printer Job** = run `net stop spooler`, then `cd \windows\system32\spool\printers`, then  `del *.*`, then `net start spooler`, then go to Printers window & hit `F5` to refresh (2010.06)
+* Cancel Printer Job = run `net stop spooler`, then `cd \windows\system32\spool\printers`, then  `del *.*`, then `net start spooler`, then go to Printers window & hit `F5` to refresh (2010.06)
+* View current **CD Key**
+  * CMD = `wmic path softwareLicensingService get OA3xOriginalProductKey`
+  * PowerShell = `(Get-WmiObject -query 'select * from SoftwareLicensingService').OA3xOriginalProductKey`
+  * Registry = `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform` > _BackupProductKeyDefault_
 
 ### Network
 

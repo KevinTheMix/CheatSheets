@@ -1,4 +1,4 @@
-# [Erlang](https://www.erlang.org/)
+# [Erlang](https://www.erlang.org)
 
 Erlang is a functional programming language written in C, Prolog & itself and intended primarily for telecom applications & companies.
 It has very high capabilities in concurrency & multi-threading and on the other hand lacks integrated support of concepts such as strings.
@@ -7,6 +7,7 @@ It has very high capabilities in concurrency & multi-threading and on the other 
 
 * **BIFs** (Built-In Functions) = methods defined in the built-in _erlang:_ module
 * **EPMD** = Erlang Process Manager Daemon
+* **erlide** = Erlang IDE, as an Eclipse plugin
 * **ERTS** = Erlang Runtime System
 * **OTP** = Open Telecom Platform
 * **LYME** = Erlang's LAMP framework

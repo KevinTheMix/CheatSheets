@@ -20,3 +20,12 @@
 * `sizeof(variable)` = returns the number of bytes occupied by variable
 * `cin >> koko` = read input
 * `cin.get()` = pause a console program until a key is pressed (à la C#'s `Console.ReadKey()`)
+
+## Extensions
+
+* [Borland C++ (5.02)](https://archive.org/details/BorlandC5.02) = C/C++ IDE (_discontinued_ in 1997)
+* **Borland C++ Builder** = C/C++ IDE (continuation of Borland C++, _$415_ trialware)
+* **Borland C++ Compiler** = C++ CLI compiler & binder (based on Builder)
+* **Code::Blocks** = C/C++ IDE very extensible via plugins
+* [CppDoc](https://download.cnet.com/CppDoc/3000-2383_4-10055397.html) = C++ HTML documentation generator (_discontinued_)
+* **LCC** = C Compiler

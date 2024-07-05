@@ -1,26 +1,33 @@
 # VLC
 
+## Quick Tips
+
+* [Convert a DVD VIDEO_TS](https://stackoverflow.com/a/70808591)
+  * Media > _Convert / Save…_ (`Ctrl + R`) > Disk > Convert (`Alt + O`)
+
 ## Shortcuts
 
-* `a` = aspect ratio
-* `e` = image-by-image
-* `r` = random
-* `t` = time
-* `o` = toggle original size
-* `p` = previous
+* `A` = aspect ratio
+* `E` = image-by-image
+* `R` = random
+* `T` = elapsed time / total time
+* `O` = toggle original size
+* `P` = previous
 
-* `s` = stop
-* `d` = disinterlace
-* `f` = full-screen
-* `g` = subtitles delay
-* `h` = subtitles delay
+* `S` = stop
+* `D` = disinterlace
+* `F` = full-screen
+* `G` = subtitles delay
+* `H` = subtitles delay
 
-* `c` = rognage
-* `v` = subtitles track selection
-* `b` = audio track selection
-* `n` = next
+* `C` = rognage
+* `V` = subtitles track selection
+* `B` = audio track selection
+* `N` = next
 
 * `Ctrl + I` = current media (General, Metadata, Codec, Statistics) information
+* `Ctrl + L` = toggle Playlist
+* `Ctrl + R` = convert & save
 * `Ctrl + Wheel` = subtitle size
 
 ## Settings

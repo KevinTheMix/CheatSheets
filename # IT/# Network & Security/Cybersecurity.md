@@ -21,6 +21,8 @@
 * **OPSEC** (Operation Security) = military analysis of whether critical information is accessible to the enemy (trackability prevention)
   * Also refers to obfuscating/hiding techniques by hackers to evade security & getting found
 * **OSCP** (Offensive Security Certified Professional) = ethical hacking certification (by _Offensive Security_ aka _Offsec_)
+* **Reverse shell** = remote shell execution, from target to attacker thus bypassing protection measures blocking ingoing-only requests (eg firewalls, IDS, IPS)
+  * Precondition = attacker has access to target's shell, launching an interactive `bash` listening to commands served by attacker (via _ncat_)
 * **C/XSRF** (Cross-Site Request Forgery) = coerces a victim into browsing a legit page s/he's currently logged in via a specially crafted URL with parameters having an immediate effect
   * Caused by a lack of mechanisms to check the source of a request (URL referer or generated form token)
 * **XSS** (Cross-Site Scripting) = abuses a legit page's lack of input (URL, form field) sanitization to insert a malicious (JS) script, accounts for 84% of all security vulnerabilities
@@ -42,8 +44,6 @@
 * **PBKDF** (Password-Based Key Derivation Function) = turn human-friendly text passphrases into strong cryptographic keys with a sliding computational cost to reduce vulnerability to brute-force attacks
 
 * _Cain & Abel_ = password cracking/recovery
-* _CeWL_ (Custom Word List generator) = crawls a website to extract a keywords list, which can be fed as potential contextal passwords fragments to a cracker
-* _hashcat_ = hash/password cracker
 * _ihashgpu_ = Hash (MD4, MD5, SHA1) cracking CLI (_discontinued_)
 * _John the Ripper_ = password cracking/recovery
 * _MDCrack_ = Cracks MD4, MD5 & co Hash password

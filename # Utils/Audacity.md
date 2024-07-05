@@ -11,7 +11,7 @@
 
 * **Clip** = portion of a track (a yet unedited track is basically one big clip)
 * **Compression** = uniformization of high dynamic ranged audio (evens volume by amplifying quiet & softening loud sounds)
-* **Track** = one/two (if mono/stereo) horizontal wave
+* **Track** = one or two (ie Mono or Stereo L/R) horizontal wave
 
 ## Menus
 
@@ -20,7 +20,7 @@
 * Edit > Preferences > (keyboard) _Shortcuts_
 * View > Toolbars > _Reset Toolbars_
 * Tracks > Mix
-  * **Mix Stereo Down to Mono** = merge L/R channels into single mono
+  * **Mix Stereo Down to Mono** = (lossy) merge L/R channels into single mono
   * **Mix and Render** = merge all tracks into first track
   * **Mix and Render to New Track** = merge all tracks into new track
 * Generate = use this menu to insert new stuff (eg silences) on a track
@@ -29,6 +29,7 @@
   * Noise Removal and Repair > _Noise Gate…_ = silence noise
   * Special > _Truncate Silence…_
 * Tools > [Apply Macro](https://manual.audacityteam.org/man/apply_macro.html)
+* Track Name Dropdown > _Make Stereo Track_ (when multiple tracks are selected) = merges two Mono tracks into one Stereo tracks
 
 ## Shortcuts
 
@@ -36,13 +37,15 @@
 * `F2` = envelope tool, can be used for gradual (time-based) volume adjustments
 * `F3` = draw tool
 * `F4` = multi-tool
-* `P` = Pause/resume from 'play head' position
+* `P` = Pauses _play head_
+* `X` = Play, or move _play head_ at selection
+* `Space` = play from current selection (& loops inside a looping region), or reset _play head_
 * `Delete` = removes portion of audio & shifts left the part after
-* `Space` = play from current selection (& loops inside a looping region)
 * `Shift + Space` = play from user selection (& plays just once inside a looping region)
 * `Shift + Click` = set beginning/end of selection
 * `Alt + ,` = previous Clip
 * `Alt + .` = next Clip
+* `Alt + Drag clip` = time-stretch
 * `(Shift +) Tab` = cycle through clips
 * `Ctrl + 1` = zoom in
 * `Ctrl + 3` = zoom out
@@ -51,6 +54,7 @@
 * `Ctrl + D` = Duplicate selection as new track
 * `Ctrl + E` = fit selection to width
 * `Ctrl + F` = Fit project to width
+* `Ctrl + J` = Join clips (after selecting multiple)
 * `Ctrl + L` = silences (but doesn't delete) audio selection
 * `Ctrl + P` = Preferences
 * `Ctrl + T` = Trim audio outside selection

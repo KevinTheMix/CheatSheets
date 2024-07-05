@@ -24,7 +24,9 @@ A good text editor.
 * [Tabs vs Spaces](https://stackoverflow.com/a/29972553)
   * `"[plaintext]": { "editor.insertSpaces": false }`   # Note that .txt files are referenced as "plaintext" filetype.
 * [Editor sticky scroll](https://code.visualstudio.com/updates/v1_70#_editor-sticky-scroll)
-* [Set keyboard shortcut for](https://stackoverflow.com/a/41688564/3559724) for lower/uppercase
+* [Set lower/uppercase keyboard shortcut](https://stackoverflow.com/a/41688564/3559724)
+  * File-> Preferences -> _Keyboard Shortcuts_ (or `Ctrl + K, Ctrl + S`)
+  * _Transform to Uppercase/Lowercase_
 
 ## Commands
 
@@ -35,6 +37,7 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 * _File > Auto Save_ = Autosave
 * _Right-click folder > Open in Terminal_ = Open folder in terminal
 * _Drag & Drop Tab_ = Move opened file view
+* `Drag & Drop middle button` = multi-line text block selection
 
 ### [Keyboards shortcuts](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf)
 
@@ -59,7 +62,7 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 * `Ctrl + K, V` = preview Markdown Side-by-side
 * `Ctrl + K, Z` = zen Mode
 * `Ctrl + L` = select current paragraph & move next
-* `Ctrl + P` = search files
+* `Ctrl + P` = search (opened) files by name (`:` line number, `@` symbol ie header)
   * Type `:` to go to line
   * Type `>` to access Command Palette from here
   * Type `#` to search global symbols
@@ -102,7 +105,8 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 * **Dev Containers** = open a folder inside a Docker container
 * **Flutter**
 * **GitLens — Git supercharged** = improve VS Code git functionalities
-* [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint)
+* [markdownlint](https://github.com/DavidAnson/vscode-markdownlint#configure)
+  * `Ctrl + ,` > _markdownlint config_ > `"markdownlint.config": { "no-duplicate-heading":false }` (note that `markdownlint.ignore` section is for (wildcard) ignoring files instead)
 * **Material Icon Theme** = file icons
 * **PowerShell**
 * **Prettify JSON** (F1 > Prettify)

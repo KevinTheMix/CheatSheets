@@ -1,6 +1,6 @@
-# Vim
+# [Vim](http://www.openvim.com)
 
-<http://www.openvim.com/>
+* **gVim** = Vim for Windows
 
 ## Symbols
 

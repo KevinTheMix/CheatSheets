@@ -61,7 +61,8 @@
 * Honey = finds online shopping coupon codes
 * Hoxx VPN Proxy = browser proxy
 * HTTPS Everywhere (_discontinued_) = use HTTPS for websites that support it
-* **I don't care about cookies** = gets rid of most websites' cookie warnings
+* **I still don't care about cookies** = gets rid of most websites' cookie warnings
+  * Avoid the original (_I don't care about cookies_) which was apparently sold to a data mining company (Avast?)
 * Kee - Password Manager = KeePass
 * Keep or Delete Bookmarks = clean up bookmarks
 * **LeechBlock NG** = block time-wasting websites (eg `.*reddit\.com/r/pleiade.*`)
@@ -85,13 +86,27 @@
     * Pattern type = Wildcard
 * **Return YouTube Dislike** = displays YouTube dislikes count
 * Ruffle - Flash Emulator = Flash player
+* **ScrollAnywhere** = middle-click-based intertia scrolling
 * SponsorBlock = skip YouTube video sponsors
 * The Stream Detector = download streams
 * **uBlock Origin** = blocks ads
+  * Filter lists (according to [Reddit Piracy](https://old.reddit.com/r/GenP/wiki/index)), click _Update now_ after checking:
+    * Built-in = 5/5
+    * Ads = 3/3
+    * Privacy = 4/4
+    * Malware protection, security = 2/2
+    * Multipurpose = 1/2 (_Peter Lowe_)
+    * Cookie notice = 4/4
+    * (Social widgets = 0/3)
+    * Annoyances = 9/9
 * Video DownloadHelper = download HTTP videos (& images)
   * [DownloadHelper CoApp](https://github.com/aclap-dev/vdhcoapp) = cross-platform companion application enabling file writing, video player launcher, _ffmpeg_
 * Video Scrubber for Instagram = displays Instagram video player controls
 * **Video Speed Controller** = HTML5 video speed controls & keyboard shortcuts
+  * `S` = faster
+  * `D` = slower
+  * `V` = toggle display
+  * `G` = toggle 180% speed
 
 ## Troubleshooting
 

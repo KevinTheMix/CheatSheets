@@ -9,8 +9,9 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 
 ## Quick Tips
 
-* Use trailing (_dangling_) commas whenever possible at the end of source code lines in order to reduce the number of lines marked as modified
+* Always commit after tidy, before refactoring
 * A local repo (for personal projects) provides version control by itself without the need of any associated remote repos
+* Use trailing (_dangling_) commas whenever possible at the end of source code lines in order to reduce the number of lines marked as modified
 * [A Hacker's Guide to Git](https://wildlyinaccurate.com/a-hackers-guide-to-git)
 * [Scott Chacon - Git Tips and Tricks](https://blog.gitbutler.com/git-tips-and-tricks) = also a FOSDEM 2024 talk (by GitHub cofounder)
 

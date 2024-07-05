@@ -1,9 +1,38 @@
 # Youtube-dl
 
-* `--hls-use-mpegts` to download live streams
-  * see <https://www.reddit.com/r/youtubedl/comments/kajbof/how_do_i_download_a_livestream_from_youtube/gfbvfcq/>
-  * see <https://www.stellarinfo.com/blog/moov-atom-not-found/>
+* [Subreddit](https://www.reddit.com/r/youtubedl)
 
-    Moov atom or movie atom is a part of file data that contains information about duration, timescale, display characteristics, and sub atoms of each track in a video. When you open a video file in a media player, it first reads this metadata information to play your video. For example, the Moov atom may be located at the beginning of the end of a video file.
+## Quick Tips
 
-    Without a Moov atom, you won’t be able to open a video or movie and may receive an error such as ‘Moov atom not found.’
+* [Downloading segmented video from Vimeo](https://gist.github.com/alexeygrigorev/a1bc540925054b71e1a7268e50ad55cd?permalink_comment_id=4366460#gistcomment-4366460)
+  * find _master.json_ in browser console network
+  * change _json_ to _mpd_ (remove `base64_init=1` but keep `query_string_ranges=1`, so `master.mpd?query_string_ranges=1`)
+  * provide it to youtube-dl: `youtube-dl {edited_url}`
+  * (FFmpeg must be installed otherwise the audio/video streams will remain separated)
+* [How to download embeded Vimeo stream using yt-dlp?](https://forum.videohelp.com/threads/414977-How-to-download-embeded-vimeo-stream-using-yt-dlp)
+  * Find iframe HTML request in console network by filterin on `player.vimeo.com/video` and _HTML_ type (not _XHR_)
+  * Select that line in the network, go to Response tab, toggle _Raw_
+  * Find `m3u8` URLs in that HTML, replace `\u0026` with `&`
+  * Feed that directly to **ytp-dl** (with double quotes)
+
+## CLI
+
+* `-i` = ignore errors
+* `-o {file}` = output
+* `--audio-format mp3 {youtube_url_}` = download video as mp3
+* `--hls-use-mpegts` = when downloading live streams that tend to get cut off, and lack a moov atom
+  * [Reddit - How do I download a live-stream from Youtube?](https://www.reddit.com/r/youtubedl/comments/kajbof/comment/gfbvfcq)
+  * [Fix ‘Moov Atom Not Found’ Error](https://www.stellarinfo.com/blog/moov-atom-not-found)
+
+## Extensions
+
+* **youtube-dl-gui** = cross-platform GUI for _youtube\_dl_ (made in Electron & Node.js)
+* **yt-dlp** = _youtube-dl_ (DMCA-ed) fork based on _youtube-dlc_ (inactive)
+  * [How To Download & Install yt-dlp on Windows](https://old.reddit.com/r/youtubedl/comments/qzqzaz)
+  * Set up yt-dlp & FFmpeg in a _ytdl_ folder on _C:_ with environment variables, then `cd \ytdl` to it
+  * [yt-dlp CLI](https://github.com/yt-dlp/yt-dlp?tab=readme-ov-file#usage-and-options)
+    * `-s(imulate)` = don't download anything
+    * `--flat-playlist` = do not extract the videos of a playlist, only list them
+    * `--print-to-file TEMPLATE FILE` = append to FILE
+  * [Set up cookies login](https://www.reddit.com/r/youtubedl/wiki/cookies)
+  * Use `"` (double) instead of `'` (single)

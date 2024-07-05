@@ -14,6 +14,8 @@
 * Regional Settings for comma/dot separator = _File > Options > Advanced > Editing Options > (Uncheck) Use System Separater_
 * [Edit a macro](https://support.microsoft.com/en-us/office/edit-a-macro-ed9e8c3d-58fd-47a1-83eb-bdee680376bb)
   * File extension must be `.xslm`
+* Formulas > _Show Formulas_ = toggle displaying cell formulas/values
+* Formulas > _Name Manager_ = CRUD cell names
 
 ## Shortcuts
 
@@ -30,11 +32,10 @@
 * `Alt + F11` = Open Visual Basic editor
 * `Alt + W + V + G` = toggle gridlines
 
-* `Ctrl + ~` or `Ctrl + "`  = toggle displaying cell formulas/values
+* `Ctrl + '` (or `Ctrl + "`) = clone above value
 * `Ctrl + Enter` = paints active cell's content (eg formula) into selected cells (active cell must be in edit mode eg click formula bar)
 * `Ctrl + Up/Down` = go to top/bottom of current column (add `Shift` to select range)
 * `Ctrl + Left/Right` = go to start/end of current row (add `Shift` to select range)
-  * Also via the _Home_ menu, the down arrow icon under the _Sum_ sign
 * `Ctrl + E` = Flash Fill (fill based on pattern eg other columns bodies based on 1st column & column header)
 * `Ctrl + F` = Search
   * Search in _Values_ = search displayed values (otherwise hidden by underlying formulas)
@@ -45,6 +46,7 @@
   * _Table Design_ > table theme (colours) dropdown > _Clear_ = strip table style (formatting)
   * _Table Design_ > _Convert to Range_ = remove table
 * `Ctrl + V, Ctrl, V` = copy values
+* `Ctrl + Z` = cancels last auto-formatting upon pasting
 
 * `Shift + Alt + Left/Right` (or _Data > Outline > Group_) = Group/Ungroup
 * `Shift + F11` = Add new sheet

@@ -1,9 +1,13 @@
 # Markdown
 
+## Quick Tips
+
+* Include two spaces at the end of a line to make next line a different paragraph
 * Number of spaces added by Tab depends on the initial scan of the file (first indentation decides whether it's two or four)
 * [GitHub](https://guides.github.com/features/mastering-markdown)
 * [Microsoft Azure DevOps](https://learn.microsoft.com/en-us/azure/devops/project/wiki/markdown-guidance?view=azure-devops)
 * [Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+* Escape backtick = `` here you go: ` `` (spaces on both sides make it render properly)
 
 ## API
 
@@ -20,7 +24,7 @@
   4. 4
   * node
 * [Reference to same file](#eof)
-* [Reference to another file](../CheatSheets/Markdown.md#eof)
+* [Reference to another file](<../Design Thinking.md>) (use inner `<>` to handle spaces)
 * [Variants](https://en.wikipedia.org/wiki/Markdown#Variants) = GitHub Flavored & co
   * `log<sub>10</sub>` (non-standard)
   * `var<sup>10</sup>` (non-standard)

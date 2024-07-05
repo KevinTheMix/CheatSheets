@@ -112,6 +112,8 @@ quotemeta()     # Escapes '\' special characters
 qq[...]         # Quotes. Similar to "..." for when ... contains quotes characters.
 ```
 
+* [qw Operator](https://www.geeksforgeeks.org/perl-qw-operator) = explodes a string into single-quote-separated words list
+
 ## Conditions
 
 ```perl
