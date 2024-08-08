@@ -32,7 +32,13 @@
 * **Virus** = replicates itself when executed by modifying other programs with its own code
 * **Worm** = standalone program that replicates itself and spreads to other computers
 
+* _Burp Suite Scanner_ = web app vulnerability testing/scanning graphical tool, server-side vulnerabilities, Interactive Application Security Testing (IAST), web proxy, web app crawler
 * _KON-BOOT_ = Bypass Windows/Mac logon (_active_)
+* _IronWASP_ = open-source web app vulnerability testing/scanning, reports, extensible
+* _Nessus_ = (OS, network, hypervisors, DB, web servers) vulnerability scanner, plugins written in the Nessus Attack Scripting (NAS) language
+* _OpenVAS_ = vulnerability scanner, security issues, un/authenticated testing, detailed reports, free (GNU), plugins written in the Nessus Attack Scripting (NAS) language
+* _OWASP Zap_ = web app security testing, AJAX Spidering, Fuzzing, REST APIs testing, active/passive scan, Filters, Anti-CSRF tokens, WebSocket testing, HTTP sessions, Spider
+* _SQLmap_ = open source automated SQL injection flaws penetration testing, DB fingerprinting, multi-platform (MySQL, MSSQL, etc), password hash dic attack, DB dump
 
 ### Crypto/Passwords
 
@@ -40,12 +46,13 @@
 * **Key Derivation** = process to generate cryptographically strong produce keys from one or more values (eg keys, passphrases)
 * **Key Partitioning** = dividing a single key into a set of keys (eg splitting a 256-bit key into two keys of 128 bits each)
 * **On-the-fly encryption** = method used by some disk encryption tools (eg _VeraCrypt_) where data gets automatically de/encrypted as it is loaded/saved
-* **OTP** (One-Time Pad) = encryption technique that's uncrackable (even with quantum computing), but necessitate a single-use pre-shared key that's longer than the message
-* **PBKDF** (Password-Based Key Derivation Function) = turn human-friendly text passphrases into strong cryptographic keys with a sliding computational cost to reduce vulnerability to brute-force attacks
+* **One-Time Pad** (OTP) = encryption technique that's uncrackable (even with quantum computing), but necessitate a single-use **pre-shared** key that's longer than the message
+* **PBKDF** (Password-Based Key Derivation Function) = turn other keys or human-friendly passphrases into strong cryptographic keys with a sliding computational cost to reduce vulnerability to brute-force attacks
+  * [Peanut Butter Keeps Dogs Friendly Too](https://blog.1password.com/defending-against-crackers-peanut-butter-keeps-dogs-friendly-too)
 
 * _Cain & Abel_ = password cracking/recovery
 * _ihashgpu_ = Hash (MD4, MD5, SHA1) cracking CLI (_discontinued_)
-* _John the Ripper_ = password cracking/recovery
+* _John the Ripper_ = FOSS fast password cracker, brute force, common passwords, dic attacks, 20+ (human) languages
 * _MDCrack_ = Cracks MD4, MD5 & co Hash password
 * _Ophcrack_ = Windows password cracker (rainbow tables)
 * _RockYou.txt_ = large (multi-GB) wordlist for password crackers

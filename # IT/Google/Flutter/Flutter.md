@@ -1,12 +1,9 @@
 # [Flutter](https://gallery.flutter.dev)
 
-Open-source UI SDK created by Google for cross (mobile/web/desktop) applications from a single codebase
+Open-source UI SDK by Google for cross (mobile/web/desktop) applications from a single (Dart) codebase, compiled via **Flutter SDK**.
+It builds on top of the Dart language (à la C#'s WPF) and adds a set of UI building blocks called widgets, based on (Google) Material & (Apple) Cupertino design.
 
-It builds on top of the Dart language (Flutter is to Dart like WPF to C#) & adds a set of UI building blocks called widgets, based on (Google) Material & (Apple) Cupertino design.
-The **Flutter SDK** is the part of the framework responsible with compiling the single Dart codebase to different target platforms.
-
-Flutter does not simply translate its widgets to their native iOS/Android counterparts the way other frameworks do (e.g. React Native).
-Flutter **does** compile to native(machine code) apps, but it **does not** use native UI components (aka Platform Primitives).
+Flutter does not translate its widgets to their native iOS/Android counterparts the way other frameworks do (eg React Native), and it **does not** use native UI components (aka Platform Primitives).
 Instead, Flutter draws pixels on the target device using its own low-level rendering engine named _Skia_, à la _Unity_.
 It is therefore way more free & flexible than other frameworks, while also highly performant (close to native code).
 For instance, Flutter is capable of advanced 2D/3D morph/transform animations à la PowerPoint transitions (see **Transform** widget).
@@ -15,22 +12,22 @@ Flutter uses a [declarative style](https://docs.flutter.dev/get-started/flutter-
 
 ## Quick Tips
 
-* Use two fingers to scroll lists & co will make it faster (useful tip to detect apps written in Flutter)
+* Identify mobile apps written in Flutter by scrolling using two fingers (this will make content scroll faster)
 
 ## Glossary
 
-* [CanvasKit](https://skia.org/docs/user/modules/canvaskit/) = WebAssembly for rendering Skia Graphics API to HTML canvas & SVG
+* [CanvasKit](https://skia.org/docs/user/modules/canvaskit) = WebAssembly for rendering Skia Graphics API to HTML canvas & SVG
 * [Casual Games Toolkit](https://docs.flutter.dev/resources/games-toolkit)
 * **Constraints** = the min/max height/width dimension constraints cascading down the widget tree from parents to children
-  * **Loose constraints** = constraints allowing a range of possible values (i.e. min < max)
-  * **Tight constraints** = constraints defined as a single point (i.e. min == max), e.g. the app root widget **must** fit the whole screen exactly
+  * **Loose constraints** = constraints allowing a range of possible values (ie min < max)
+  * **Tight constraints** = constraints defined as a single point (ie min == max), eg the app root widget **must** fit the whole screen exactly
 * [DevTools](https://docs.flutter.dev/development/tools/devtools/overview) = debugging & performance tools
   * [Flutter Inspector](https://docs.flutter.dev/development/tools/devtools/inspector)
     * **Layout Explorer** = debug/inspect/edit layout properties in real-time
 * **Firebase** = Google's mobile/web app development platform. Subject to privacy controversies
 * **Element** = instantiation of a Widget at a particular location in the _Element Tree_
   * Elements are very simple, holding just the widget type & reference, a reference to child Elements, and potential State
-  * This (and their tree) is what Flutter uses to pilot the lifecycle of widgets, and update/redraw the UI
+  * Elements (tree) is what Flutter uses to pilot the lifecycle of widgets, and update/redraw the UI
   * While widgets are immutable, Elements are like their mutable counterpart and mounted by Flutter to form the Element Tree
   * The Element Tree is built and handled all by Flutter (based on the Widget Tree), and never by the developer
   * The Element Tree acts as an app skeleton
@@ -42,26 +39,26 @@ Flutter uses a [declarative style](https://docs.flutter.dev/get-started/flutter-
   * A way to keep track of States uniquement for Stateful Widgets, useful when adding/reordering widgets on the screen
   * **LocalKey** only work at a specific location (under its parent) in the Tree
     * **UniqueKey** is like a GUID
-    * **ObjectKey** bases off multiple values (e.g. address) which aggregated are unique
-    * **ValueKey** bases off a single value (e.g. TODO item task's text) which is unique amongst its siblings
+    * **ObjectKey** bases off multiple values (eg address) which aggregated are unique
+    * **ValueKey** bases off a single value (eg TODO item task's text) which is unique amongst its siblings
       * **PageStorageKey** stores a user scroll location, so we can resume it when going back to the Widget
-  * **GlobalKey** allow Widgets to change parents without losing State, or access information about another Widget, both anyhere in the Tree
+  * **GlobalKey** allow Widgets to change parents without losing State, or access information about another Widget, both anywhere in the Tree
 * **Material Design** = design language developed by Google in 2014
 * **Packages**/**Modules** = Dart code **only**; can use plugins (and still qualify as a package); they're published to <https://pub.dev>
 * **Plugin** = native code (Kotlin/JS/Swift) features [wrapped as Dart](https://stackoverflow.com/a/63154273/3559724)
   * Fluent Design System = a design language developed by Microsoft in 2017
-* **Property** = actual value held in a widget e.g. the _text_ property of a **RichText** widget
+* **Property** = actual value held in a widget eg the _text_ property of a **RichText** widget
 * **RenderObject** = object in the RenderTree that renders & paints the UI (handles size, layout, painting)
 * **Scrim** = the greyed out area appearing on the rest of the screen when a modal element is shown (dialog, drawer). Clicking on it sometimes removes the modal element
-* [Shrink-wrap](https://flutteragency.com/what-does-the-shrink-wrap-property-does/) = force a widget to pre-calculate its total size ~ its items
-* **Skia** = open-source graphics (or even game) engine written in C++ used in Chrome; uses GPU accel 3D via Vulkan & Metal
+* [Shrink-wrap](https://flutteragency.com/what-does-the-shrink-wrap-property-does) = force a widget to pre-calculate its total size ~ its items
+* **Skia** = open-source graphics/game engine written in C++ used in Chrome; uses GPU accel 3D via Vulkan & Metal
 * **Slivers** = different parts of a scrollable area that can each react appropriately to the same scroll
 * **State** = objects associated with stateful widgets (actually linked **from** their associated Elements)
   * States survive tree rebuilds (eg a few parts of the screen gets updated), but not navigating to a whole different page, which replaces subtrees
   * _Lifting state up_ = moving state data up one level to broaden its access; basic solution to fix state sharing between multiple widgets
 * **Widget** = immutable (declarative) description of part of a UI (layout component or behavior: center, pad, rotate)
   * All Widgets are @`immutable`, holding only `final` data, so any mutating data has to be outsourced into a dedicated mutable **State**
-  * immutability is an important part of Flutter, because previous widgets get discarded & new ones created each time `build()` is called
+  * immutability is an important part of Flutter, as previous widgets get discarded & new ones created each time `build()` is called
   * Widgets - or State -, **not Elements**, hold properties with actual values
   * [Stateless Widget](https://www.youtube.com/watch?v=wE7khGHVkYY) = immmutable widget w/ `final` properties & `const` constructor
     * Those get rebuilt (aka replaced) when the input data from their parent changes, ie when their parent rebuilds
@@ -72,25 +69,25 @@ Flutter uses a [declarative style](https://docs.flutter.dev/get-started/flutter-
     * Get rebuilt (ie replaced) either when the input data from their parent or when their internal (associated) State changes
     * The associated State however is persistent, and survives widget tree rebuilds
     * The State has access to its associated widget's properties (usually passed down from parent), via the `widget` variable
-    * `setState()` is [an anonymous method](https://iiro.dev/set-state/) mostly containing _asserts_ and marking the Element dirty
+    * `setState()` [takes in & executes an anonymous method, mostly contains _asserts_, then marks the Element dirty](https://iiro.dev/set-state)
   * [Inherited Widget](https://www.youtube.com/watch?v=Zbm3hjPjQMk) = DYI DI via _context_
-    * Inherited Widget takes at least one parameter: a _child_ (its sub-tree that gets notified) which is passed to `super()`
+    * Inherited Widget takes at least one parameter: a _child_ (ie its sub-tree that gets notified) which is passed to `super()`
     * Define `of()` shorthand method eg `static InheritedNose of(BuildContext context) => context.inheritFromWidgetOfExactType(InheritedNose)`
     * **Theme**, **MediaQuery** are examples of Inherited Widgets, accessible to all children in their hierarchy
-      * E.g. `Theme.of(context).primaryColor`
+      * Eg `Theme.of(context).primaryColor`
     * Use this to pass DB or service instances down the widget hierarchy
     * For more complex scenarios, use an integrated State Management solution instead
 
 ## Environment
 
 * [Flutter Samples](https://flutter.github.io/samples/#)
-  * [Material 3](https://flutter.github.io/samples/web/material_3_demo/#/)
+  * [Material 3](https://flutter.github.io/samples/web/material_3_demo)
   * [Git Source](https://github.com/flutter/samples)
 * [Flutter Community](https://flutter.dev/community)
 
-### Install
+### [Install](https://docs.flutter.dev/get-started/install/windows/mobile)
 
-* [Android Studio](https://developer.android.com/studio/)
+* [Android Studio](https://developer.android.com/studio)
   * Install the following under _Tools > SDK Manager > SDK Tools_:
     * [Android SDK Command-line Tools](https://developer.android.com/studio/intro/update#sdk-manager)
     * Google/Samsung USB Driver (those get downloaded and must be then installed manually)
@@ -103,7 +100,7 @@ Flutter uses a [declarative style](https://docs.flutter.dev/get-started/flutter-
   * PowerShell extension
   * Flutter extension
   * Material Icon Theme
-* Any browser (Flutter might complain it requires Chrome, but e.g. Firefox works, even the **Dart DevTools**' live Debugger)
+* Any browser (Flutter might complain it requires Chrome, but eg Firefox works, even the **Dart DevTools**' live Debugger)
   * Might require closing/restarting the app, closing/reopening/reattaching (while the app is running) the browser tab
 
 ### [CLI](https://docs.flutter.dev/reference/flutter-cli)
@@ -140,7 +137,7 @@ Use command with options long names or short names, eg:
   * `flutter run release --apk`
   * `flutter run -d(evice-id) {device}` = Run to chosen device
     * `flutter run -d chrome`
-    * `flutter run -d web-server` (works in any browser <https://stackoverflow.com/a/71518488>)
+    * `flutter run -d web-server` ([works in any browser](https://stackoverflow.com/a/71518488))
   * `flutter run -d web-server --web-renderer [html|canvaskit]` = same as build
   * `flutter run -d {device} --profile` (physical devices only) = display additional performance metrics banner
   * [Fix "Parameter format not correct"](https://stackoverflow.com/a/69519005/3559724)
@@ -148,7 +145,7 @@ Use command with options long names or short names, eg:
 * `flutter clean` = clear build & packages cache (very useful before archiving/zipping an app source code)
 * `flutter format {filename}` = Format document
 * `flutter pub {add} {package}` = manages the _pubspec.yaml_ file, which contains assets & dependencies, downloaded from <pub.dev>
-  * E.g. [Install intl](https://stackoverflow.com/a/51706630/3559724)
+  * eg [Install intl](https://stackoverflow.com/a/51706630/3559724)
 * `flutter pub get` = explicitely pulls packages into the project & generates _pubspec.lock_ (implied with `flutter run`)
   * `flutter packages get` = [alias for the above](https://stackoverflow.com/a/61038022/3559724)
 * `flutter pub cache repair`
@@ -185,7 +182,6 @@ Clean repositories:
   * Editor > Guides: **Bracket Pairs**_ = set parentheses matching coloured line guides (previously an extension, now built-in)
   * (_Extensions > Dart > DevTools >_) Dart: **Dev Tools Browser** = `chrome` or `system default` (eg Firefox)
   * (_Extensions > Dart > DevTools >_) Dart: **Dev Tools Location** = `active`/`beside` (VS Code) or `external` (browser)
-
 * (_View >_) **Command Palette** (`Ctrl + Shift + P`)
   * Dart: **Open DevTools** (`Ctrl + Alt + D`)
   * Dart: **Add Dependency** = add (comma-separated) package(s) in one go
@@ -193,12 +189,9 @@ Clean repositories:
   * `Ctrl + ;` = Quick Fix… (also displays _Refactor_ options)
   * `Ctrl + I|Space` = Trigger Suggestions
   * `Ctrl + Shift + R` = Refactor
-  * `Shift + Alt + F` = (Right-Click >) Format document (provided by Flutter extension)
+  * `Shift + Alt + F` = (`Right-Click >`) Format document (provided by Flutter extension)
     * Append a comma to each closing parenthesis to take advantage of this command
   * `Ctrl + Click` = `F12` = Go to definition
-
-* Don't forget you can auto-complete via camelCase initials (eg `sichsc + Tab` => **SingleChildScrollView**)
-
 * Terminal area
   * _PROBLEMS_ tab contains list of compile issues
   * _DEBUG CONSOLE_ contains list of runtime issues
@@ -209,6 +202,7 @@ Clean repositories:
 * `st` = widget
 * `stle` = Statless Widget
 * `stfu` = Stateful widget
+* Don't forget you can auto-complete via camelCase initials (eg `sichsc + Tab` => **SingleChildScrollView**)
 
 ## API
 
@@ -220,7 +214,7 @@ Clean repositories:
 * Form
   * [How to use InputFormatters](https://stackoverflow.com/a/50123743/3559724)
 
-* It's possible to create widgets in variables, then we can access their properties (eg height) down the tree, or add them conditionally in several places
+* It's possible to create & assign widgets to variables, then we can access their properties (eg height) down the tree, or add them conditionally in several places
 
 * [Background computation isolate](https://docs.flutter.dev/cookbook/networking/background-parsing) = `compute()` returns a Future
 
@@ -260,7 +254,7 @@ Clean repositories:
   * [Scroll a list when keyboard pops up](https://stackoverflow.com/a/70612950/3559724)
   * [Move bottom sheet when autofocused keyboard is up](https://stackoverflow.com/a/57515977)
 
-* [Colors](https://api.flutter.dev/flutter/material/Colors-class.html) e.g. `Colors.green[400]`
+* [Colors](https://api.flutter.dev/flutter/material/Colors-class.html) eg `Colors.green[400]`
   * `Color.fromRGBO(r, g, b, opacity)` where _opacity_ is a **double** between _0.0_ and _1.0_
   * `Color.fromARGB(alpha, r, g, b)` where _alpha_ is an **int** between _0_ and _255_
   * `withOpacity(0.0 - 1.0)`
@@ -289,10 +283,10 @@ Clean repositories:
 
 * _RenderFlex children have non-zero flex but incoming height constraints are unbounded_
   * The issue is that a (a _non-zero flex_) **Expanded** is nested inside a **Column** nested inside a **Column**.
-  * Columns are **Flex**; they provide their _non-flex_ (aka fixed-sized or `flex=0`) children with unbounded constraints so those can figure out their own size (asking them nicely to _shrinkWrap_), which may sometimes lead to a yellow/black banner but no error. After that, the _flex_ children share the remaining space. The inner Column here is _non-flex_ (it is **Flex**, but not **Flexible**: it does not inherit from **Flexible** and does not have a _flex_ property) therefore it receives unbounded constraints from its parent Column. But then the inner-inner (**Flexible**) Expanded asks to take all of the incoming now unbounded constraints i.e. asking to fill infinity, which is an error.
+  * Columns are **Flex**; they provide their _non-flex_ (aka fixed-sized or `flex=0`) children with unbounded constraints so those can figure out their own size (asking them nicely to _shrinkWrap_), which may sometimes lead to a yellow/black banner but no error. After that, the _flex_ children share the remaining space. The inner Column here is _non-flex_ (it is **Flex**, but not **Flexible**: it does not inherit from **Flexible** and does not have a _flex_ property) therefore it receives unbounded constraints from its parent Column. But then the inner-inner (**Flexible**) Expanded asks to take all of the incoming now unbounded constraints ie asking to fill infinity, which is an error.
   * Read [Column class Troubleshooting](https://api.flutter.dev/flutter/widgets/Column-class.html#troubleshooting)
   * Read [Column > Column > Expanded Explanation](https://stackoverflow.com/a/66718208/3559724)
-    * **Column** directly inherits from **Flex** but it _not_ a flex-factor (i.e. no _flex_ property) widget (it does not inherit from **Flexible**)
+    * **Column** directly inherits from **Flex** but it _not_ a flex-factor (ie no _flex_ property) widget (it does not inherit from **Flexible**)
     * **Expanded** directly inherits from **Flexible** (ie it has a _flex_ property and is essentially a Flexible with `fit: FlexFit.tight`)
       * This also means that setting its _flex_ property to 0 makes it a non-flex-factor widget, thus fixes the issue! (_tested & confirmed_)
 
@@ -315,5 +309,5 @@ Clean repositories:
   * See <https://www.flutteroverflow.dev/sized-box-for-whitespace/>
 
 * Faint border lines above/below some widgets
-  * **DrawerHeader** = set **Divider** color (to _transparent_) or width (to _0_) via (global/local) themeing
+  * **DrawerHeader** = set **Divider** `color` (to _transparent_) or `width` (to _0_) via (global/local) themeing
   * **Material/Card** = set the _shape_'s _side_'s `color` (to _transparent_) or `width` (to _0_)

@@ -9,7 +9,7 @@
 * [intl](https://api.flutter.dev/flutter/intl/intl-library.html) = date formatting
 * [services](https://api.flutter.dev/flutter/services/services-library.html)
 
-## [Public Packages & Plugins](https://pub.dev/)
+## [Public Packages & Plugins](https://pub.dev)
 
 At a minimum, a Dart package is a directory containing a pubspec file.
 A plugin is a type of package; the full designation is _plugin package_, which is generally shortened to _plugin_.
@@ -78,12 +78,12 @@ Hot Reload/Restart are not enough to reload plugins with platform native device 
 * [shared_preferences](https://pub.dev/packages/shared_preferences)
 * [get_storage](https://pub.dev/packages/get_storage) = key-value in memory storage wit disk backup, alternative to **shared_preferences**
 
-* [Isar Database](https://isar.dev/) = replacement for Hive with full Web support (relies on IndexDB)
+* [Isar Database](https://isar.dev) = replacement for Hive with full Web support (relies on IndexDB)
   * [_Isar does not support freezed_](https://github.com/isar/isar/issues/197#issuecomment-1207419153) unless extra mapping
   * [Hive](https://pub.dev/packages/hive) = key-value NoSQL DB (written in Dart)
-* [ObjectBox](https://objectbox.io/) = high-performance Offline-First NoSQL DB with integrated Data Sync; no Web support
-  * [ObjectBox Sync](https://sync.objectbox.io/)
-* [Drift](https://drift.simonbinder.eu/) (previously _Moor_)= offline-first persistence
+* [ObjectBox](https://objectbox.io) = high-performance Offline-First NoSQL DB with integrated Data Sync; no Web support
+  * [ObjectBox Sync](https://sync.objectbox.io)
+* [Drift](https://drift.simonbinder.eu) (previously _Moor_)= offline-first persistence
 
 ### Animations, Graphism, Sounds & Themes
 
@@ -104,7 +104,6 @@ Hot Reload/Restart are not enough to reload plugins with platform native device 
   * [shimmer](https://pub.dev/packages/shimmer) = pulsating UI loading effect
 * Images
   * [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons) = generate all platforms/sizes icons
-  * [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons)
   * [spinkit](https://pub.dev/packages/flutter_spinkit) loading icons package
   * [Rive](https://pub.dev/packages/rive)
   * [LottieFiles](https://pub.dev/packages/lottie) = GIF-like After Effects (exported via bodymovin extension) JSON vector animations

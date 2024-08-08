@@ -9,11 +9,12 @@ Transact-SQL (**T-SQL**) is Microsoft's and Sybase's proprietary SQL extension.
 * [Column Description](https://stackoverflow.com/a/9018619) = comment on a column
 * `ORDER BY i` = ordering by ith column
 * `ORDER BY NEWID()` = (incombination with `TOP 1`) obtain a random row
+* [1+N problem](https://stackoverflow.com/q/97197/861716) = 1+N query vs a single Join
 
 ## Glossary
 
 * [Error handing](https://www.sqlshack.com/how-to-implement-error-handling-in-sql-server)
-* [Geometry](https://learn.microsoft.com/en-us/sql/t-sql/spatial-geometry/spatial-types-geometry-transact-sql) = geometry type for space boundaries checking (& drawing)
+* [Spatial Types](https://learn.microsoft.com/en-us/sql/t-sql/spatial-geometry/spatial-types-geometry-transact-sql) = _geometry_ type for space boundaries checking (& drawing)
   * Eg `select Id, geometry::STGeomFromText(Geometry, 4283) from pw.Request`
 * [Graph tables](https://learn.microsoft.com/en-us/sql/t-sql/statements/create-table-sql-graph) = create (graph) `NODE` or `EDGE` tables (requires SQL Server 2017+)
   * [Graph search](https://learn.microsoft.com/en-us/sql/t-sql/queries/match-sql-graph) = match search along edges & nodes tables
@@ -123,4 +124,4 @@ When multiplying a non integer and dividing by that same number, _decimals_ lose
 
 ## Extensions
 
-* [https://www.apexsql.com] = search field & tables names, [generate random sample data](https://www.apexsql.com/sql-tools-generate) for new tables/tests
+* [ApexSQL](https://www.apexsql.com) = search field & tables names, [generate random sample data](https://www.apexsql.com/sql-tools-generate) for new tables/tests

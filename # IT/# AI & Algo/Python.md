@@ -6,5 +6,5 @@
 
 ## Extensions
 
-* **Django** = web framework
+* **Django** = Python's web framework
 * **Flask** = light & extensible web framework

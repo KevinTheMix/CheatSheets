@@ -3,6 +3,10 @@
 Erlang is a functional programming language written in C, Prolog & itself and intended primarily for telecom applications & companies.
 It has very high capabilities in concurrency & multi-threading and on the other hand lacks integrated support of concepts such as strings.
 
+## Quick Tips
+
+* [Learn You Some Erlang for Great Good!](https://learnyousomeerlang.com) = for programmers without functional programming experience
+
 ## Glossary
 
 * **BIFs** (Built-In Functions) = methods defined in the built-in _erlang:_ module

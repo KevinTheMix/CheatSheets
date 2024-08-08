@@ -41,7 +41,7 @@
   * Search in _Values_ = search displayed values (otherwise hidden by underlying formulas)
 * `Ctrl + G` = Go To
   * Go to Special allows quick selection of cells on blanks, errors, etc.
-* `Ctrl + T` = Format as Table
+* `Ctrl + T` = Format as Table (works with a single cell selected)
   * All table references (Charts, formulas, pivot) are automatically updated as the table's data is changed
   * _Table Design_ > table theme (colours) dropdown > _Clear_ = strip table style (formatting)
   * _Table Design_ > _Convert to Range_ = remove table

@@ -2,7 +2,7 @@
 
 * [ResizeImage](https://api.flutter.dev/flutter/painting/ResizeImage-class.html)
 
-* [WidgetsApp](https://api.flutter.dev/flutter/widgets/WidgetsApp-class.html) = wraps a number of base functionality widgets (i.e. MediaQuery)
+* [WidgetsApp](https://api.flutter.dev/flutter/widgets/WidgetsApp-class.html) = wraps a number of base functionality widgets (ie MediaQuery)
 * [MaterialApp](https://api.flutter.dev/flutter/material/MaterialApp-class.html) = builds Material design on top of the base **WidgetsApp**
 * [Scaffold](https://api.flutter.dev/flutter/material/Scaffold-class.html) = basic Material design layout with a set of pre-configured widgets
   * It's possible to use a Drawer without a Scaffold, in which case it's not modal (see <https://material.io/components/navigation-drawer/flutter>)
@@ -17,7 +17,7 @@
 * `NeverScrollableScrollPhysics()` = prevents ListView scrolling when the user drags
 * `ClampingScrollPhysics()`
 * **SingleChildScrollView** = makes child scrollable
-  * This widget should be reserved to scenarios where the content is actually supposed to be displayed in full (i.e. not scrollable), but a smaller than usual devices' screen does make not that possible, so scroll must be added to avoid out-of-bounds
+  * This widget should be reserved to scenarios where the content is actually supposed to be displayed in full (ie not scrollable), but a smaller than usual devices' screen does make not that possible, so scroll must be added to avoid out-of-bounds
   * If the intent is to have a scrollable list, then _lazy_, _sliver-based_ **ListView**/**CustomScrollView** are vastly more efficient
   * To take advantage of lazy-optimization, the **ListView** must be dynamically built (using one of its builders eg `ListView.builder()`)
   * When using `ListView.builder(ctx, index)` make sure to not name the first parameter `context`, especially with inner `MediaQuery.of(context)`
@@ -51,7 +51,7 @@
   * **Column**/**Row** (inheriting from **Flex**)
     * They are flex spaces, giving unbounded constraints to all their children to let them choose their space (& usually asking them to shrinkWrap)
       * The space given to their _flexible_ children is the remaining space = parent_constraints - fixed_items
-    * They themselves take up max size in their main axis by default (i.e. `mainAxisSize: MainAxisSize.max`)
+    * They themselves take up max size in their main axis by default (ie `mainAxisSize: MainAxisSize.max`)
   * [Flex](https://api.flutter.dev/flutter/widgets/Flex-class.html) = base class for Column & Row
 * Positioning = Align, Center, Positioned, Expanded, Flexible
 
@@ -92,7 +92,7 @@
     * Can be used for _continuous_ (ie pulsating) repeating animations using its `onEnd` callback set the end point to the start value and back
 * Explicit = has to be started/piloted manually; requires a **AnimationController** (and its proper disposable within a StatefulWidget's State)
   * **Animation\<T>** = anything of type _T_ (double, Color, Size) that changes over time
-  * **AnimatedBuilder** = full-custom explicit (i.e. coded by the developer) animation using Tweens (provide _child_ to optimize rendering)
+  * **AnimatedBuilder** = full-custom explicit (ie coded by the developer) animation using Tweens (provide _child_ to optimize rendering)
     * Set its _child_ property to an inert widget to more efficiently rebuilding only the parts that animated
     **AnimatedIcon** = (`icon: AnimatedIcon.play_pause, progress: _controller`)
   * **AnimationController** = animation pilot/player (`vsync: this`, `(reverse)Duration`, `isCompleted|Dismissed`, `value`)
@@ -126,7 +126,7 @@
 1. **SafeArea** = checks MediaQuery to ensure we get a neat uncut rectangle on the screen.
 2. **Expanded** = expands a child widget to take up all available space in its parent
 3. **Wrap** = "word wrap" children (_direction_, _alignment_ _spacing_, _runSpaching_); good for buttons & chips
-4. **AnimatedContainer** = implicit (i.e. built-in) animations via linear interpolation (_color_, _shadow_, layouts, _curve_ & _duration_)
+4. **AnimatedContainer** = implicit (ie built-in) animations via linear interpolation (_color_, _shadow_, layouts, _curve_ & _duration_)
 5. **Opacity** & **AnimatedOpacity** = alpha (0 is like CSS' `invisiblility: hidden`)
 6. **FutureBuilder** = display something while loading a future's result and something else when it's done
 7. **FadeTransition** = explicit opacity animation via _animationController_ (clean it up in dispose())
@@ -149,7 +149,7 @@
 24. **BackdropFilter** & ImageFilter class = image blur/rotate/skew/stretch effects (`blur()`, `matrix()`), use with parent **Stack** & _fill_
 25. **Align** = position a child within its parent (_t/b/r/l_, or specific _double_ value) à la HTML relative position. See **AlignmentTween**
 26. **Positioned** = position children within a **Stack** (_t/b/r/l/heigh/width_, `fill()`) à la HTML absolute position
-27. **AnimatedBuilder** = explicit (i.e. coded by the developer) animation using Tweens (provide _child_ to optimize rendering)
+27. **AnimatedBuilder** = explicit (ie coded by the developer) animation using Tweens (provide _child_ to optimize rendering)
 28. **Dismissible** = left/right swipeable items (_key_, (secondary)_background_, _direction_ , `onDismissed()` to remove underlying item)
 29. **SizedBox** = give child a size (_w/h_, `double.infinity` == max, `SizedBox.expand()` == max _w/h_), use empty for spacing
 30. **ValueNotifier** & **ValueListenableBuilder** = Observer pattern replacing `setState()` (set optional _child_ to const subtree for performance)
@@ -172,7 +172,7 @@
 47. **Semantics** = provide child Widget with (lots of) meta-information, improving accessibility
 48. **ConstrainedBox** = adds min & max h/w constraints to its parent's (the resulting constraints are the more restrictive ones eg the screen)
 49. **Stack** = z-axis stacking (_fit_ to children `StackFit.loose` by default, or to parent `StackFit.expand`, _alignment_, _overflow_)
-50. **AnimatedOpacity** = implicit (i.e. piloted via property) opacity animation (_duration_, _opacity_ via `setState()`, _curve_)
+50. **AnimatedOpacity** = implicit (ie piloted via property) opacity animation (_duration_, _opacity_ via `setState()`, _curve_)
 51. **FractionallySizedBox** = size by percentage (_heigh/widthFactor_), align in parent or wrap in **Flexible**; use no child for whitespacing
 52. **ListView** = scrollable list (_scrollDirection_, _reverse_, _physics_, _addAutomaticKeepAlives_, _cacheExtent_, `ListView.builder` with _itemBuilder_ & _itemExtent_, `ListView.separated` with _separatorBuilder_ & _itemCount_, `ListView.custom` with _childrenDelegate_ sliver)
 53. **ListTile** = Material List item (up to 3 lines _title_/_subtitle_/_isThreeLine_, _dense_, `tap`, `onLongPress`, `ListTile.divideTiles()`)

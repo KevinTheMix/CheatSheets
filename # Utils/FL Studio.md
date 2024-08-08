@@ -1,19 +1,9 @@
 # FL Studio
 
+## Quick Tips
+
 * [FL Studio Reference Manual](https://www.image-line.com/support/flstudio_online_manual/html/title.htm)
-* More layers are not always the answer. Focus on fewer, quality sounds!
-* Hi-Pass Filters are your friend for removing excess low end
-* Finish as much music as you can. You'll improve the quickest this way.
-* Velocity will help humanize drums, pianos, other real instruments.
-* Judge your quality by looking back at how far you've come
-
-## TODO
-
-* Watch again
-  * [FL Studio Tips](https://www.youtube.com/watch?v=jPYysISSL14)
-  * [Top 5 Free VST Plugins for Mixing](https://www.youtube.com/watch?v=FJkLSQBVzGs)
-  * [Hidden FL Studio Features](https://www.youtube.com/watch?v=KP5unXM_1Ww)
-* [Sonic Academy](https://www.sonicacademy.com/courses)
+* Find missing files/samples by including (recursive) folders via _Options > File settings > Browser extra search folders_
 
 ## Glossary
 

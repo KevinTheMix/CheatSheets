@@ -24,33 +24,33 @@
 
 * `Right-Click > Generate Method` = create method call before definition
 * Edit
+  * `Alt + Up/Down` = Move line around
+  * `Alt + Shift + Click` = Multiline editing
+  * `Alt + Shift + F10` = Adds using reference
   * `Ctrl + H` = Replace
     * Can be scoped to text selection
-  * `Ctrl + ;` = Quick Actions and Refactoring (_Extract Method_, _Invert If_, etc.)
+  * `Alt + Enter` or `Ctrl + ;` = Quick Actions and Refactoring (_Extract Method_, _Invert If_, etc)
     * Right-click on `if` > Quick Actions and Refactorings… > _Convert to conditional expression_
     * Right-click on `if` > Quick Actions and Refactorings… > _Add braces_
   * `Ctrl + (Shift +) U` = Lower(Upper)case
   * `Ctrl + K + D` = Tidy
   * `Ctrl + R + G` = Tidy usings
   * `Ctrl + K + S` = Surround With
-  * `Alt + Up/Down` = Move line around
-  * `Alt + Shift + Click` = Multiline editing
-  * `Alt + Shift + F10` = Adds using reference
-  * `Ctrl + E|K + C/U` = Comment/Uncomment
+  * `Ctrl + K + C/U` = Comment/Uncomment
   * `Ctrl + Shift + V` = Clipboard history
 * Search & Navigation
-  * `Ctrl + Tab` = Go to Files and Windows
-  * `Ctrl + I` = incremental search (à la Firefox)
-  * `Ctrl + T` = Go to All
-  * `Ctrl + $` = Search Solution Explorer
-  * `Ctrl + ) + S` = Sync with Active Document
-  * `Ctrl + Shift + F` = Advanced Find/Replace
-  * `Ctrl + K + R` = Find All References (note: different results on a class or on its constructor)
+  * `(Shift +) F8` = previous/next error (in Error List or Output window)
   * `F12` = Go To Definition
   * `Ctrl + F12` = Go to Implementation
+  * `Ctrl + K + R` = Find All References (note: different results on a class or on its constructor)
+  * `Ctrl + I` = incremental search (à la Firefox)
+  * `Ctrl + Q` = Feature Search (eg _CodeLens_)
+  * `Ctrl + T` = Code Search (files, types, members)
+  * `Ctrl + $` = Search Solution Explorer
+  * `Ctrl + ) + S` = Sync with Active Document
   * `Ctrl + (Shift +) -` or `Mouse Back/Forward Buttons` = Navigate Backward/Forward
-  * `F8` = Next error (in Error List or Output window)
-  * `Shift + F8` = Previous error (in Error List or Output window)
+  * `Ctrl + Shift + F` = Advanced Find/Replace
+  * `Ctrl + Tab` = Go to Files and Windows
 * Debug
   * `Ctrl + F5` = Run not in Debug
   * `Ctrl + F10` = Run To Cursor (run all the statements to target)
@@ -85,8 +85,8 @@
 
 ### Third Party
 
-* [JetBrains - ReSharper](https://www.jetbrains.com/resharper) = code quality analyzer, refactoring, fixes
-* [OzCode - Magical Debugging](https://marketplace.visualstudio.com/items?itemName=CodeValueLtd.OzCode) = augmented debugging
-  * [OzCode - LINQ Debugging](https://blog.somewhatabstract.com/2016/06/13/i-am-an-ozcode-magician-and-i-have-a-new-linq-trick)
-* [Postsharp - Metalama](https://www.postsharp.net/metalama) = aspects (meta attributes), real-time code verification (~architecture) & code fixes
-* [SonarSource - Sonarqube](https://www.sonarsource.com/products/sonarqube) = code quality analyzer
+* [ReSharper](https://www.jetbrains.com/resharper) (JetBrains) = code quality analyzer, refactoring, fixes
+* [Magical Debugging](https://marketplace.visualstudio.com/items?itemName=CodeValueLtd.OzCode) (OzCode) = augmented debugging
+  * [LINQ Debugging](https://blog.somewhatabstract.com/2016/06/13/i-am-an-ozcode-magician-and-i-have-a-new-linq-trick)
+* [Metalama](https://www.postsharp.net/metalama) (Postsharp) = aspects (meta attributes), real-time code verification (~architecture) & code fixes
+* [Sonarqube](https://www.sonarsource.com/products/sonarqube) (SonarSource) = code quality analyzer

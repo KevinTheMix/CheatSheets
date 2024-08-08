@@ -37,7 +37,7 @@
 * `Shift + Del` = forget Search query (browse queries in Search bar via arrows)
 * `Shift + Esc` = Process/Task Manager
 * `Shift + Left/Right Mouse wheel` = scroll horizontally
-* `(Shift +) Space` = scroll up/down
+* `(Shift +) Space` = (reverse) scroll
 
 ## Extensions
 

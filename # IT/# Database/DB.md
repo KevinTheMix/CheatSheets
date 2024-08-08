@@ -1,5 +1,9 @@
 # DB
 
+## Quick Tips
+
+* [Saga](https://microservices.io/patterns/data/saga.html) = pattern to handle operations spanning multiple microservices (one DB per service) via choregraphed events/orchestrated messages
+
 ## Glossary
 
 * **ACID** (Atomicity, Consistency, Isolation, Durability) = DB transactions properties intended to guarantee data validity despite errors & failures
@@ -24,6 +28,7 @@
   1. no repetitive attributes, Primary Key
   2. 1NF + non-key attributes cannot depend on part of a key
   3. 2NF + no functional dependency between non-key attributes
+* **NoSQL** (non-SQL aka non-relational) = schema-less, non tabular relations more flexible DB, via different data structure (eg key–value pair, wide column, graph, or document), making some operations faster
 * **Schema** = namespace-like containing other DB entities, to which granular permissions can apply (eg `CREATE SCHEMA {name} AUTHORIZATION {user}`)
   * Tables created without a schema specified will get a default schema applied (_dbo_)
   * Two tables with the same name can coexist in the same DB if they have different schemas
@@ -37,9 +42,12 @@
 
 ## Tools
 
+* **Apache TinkerPop** = graph computing framework for graph DB (OLTP) & graph analytic systems (OLAP), using Gremlin Query Language (GQL) for graph traversal
 * **Cassandra** (by **Apache**) = FOSS distributed wide-column store NoSQL DB designed to handle large amounts of data across servers (high availability with no SPoF)
 * [dbdiagram.io](https://dbdiagram.io) = online DB diagrams
-* **Redis** = open source in-memory data store use as a cache, vector or document database, streaming engine, and message broker
+* **GraphQL** = DB-agnostic data query/manipulation language for APIs, letting a client specify data to fetch (possibly from separate sources as one unified result)
+* **PowerBuilder** = .NET compatible IDE (by SAP) using _DataWindow_ objects to CRUD query a DB
+* **Redis** (Remote Dictionary Server) = open source in-memory storage, used as a distributed in-memory key-value DB, cache, and message broker
 * **SQuirreL SQL Client** = Java-based multi-DB administration tool
 
 ### Microsoft

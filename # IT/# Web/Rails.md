@@ -2,52 +2,57 @@
 
 ## Installation
 
-Cygwin file path endline character fix (see https://github.com/sstephenson/execjs/issues/78).
-Coffee script 1.9.0 bug (see http://stackoverflow.com/questions/28241981/rails-4-execjsprogramerror-in-pageswelcome).
+Cygwin file path endline character fix (see <https://github.com/sstephenson/execjs/issues/78>).
+Coffee script 1.9.0 bug (see <http://stackoverflow.com/questions/28241981/rails-4-execjsprogramerror-in-pageswelcome>).
 
-## Command-lines (run from application directory)
+## CLI (run from application directory)
 
 ### Generators
 
-    rails g[enerate]	# Displays all available generators for the application (depends on the Gems e.g. RSpec)
+* `rails g[enerate]` = displays all available generators for the application (depends on the Gems e.g. RSpec)
 
 ### Rake
 
 Utility to automate certain tasks (automation tool i.e. a Ruby Make e.g. running all DB migration scripts).
 
-    rake -T		# Displays all tasks
-    rake -T db	# Displays all DB-related tasks
+* `rake -T` = displays all tasks
+* `rake -T db`= displays all DB-related tasks
 
 ## Debugging
 
-    fail	# Debugging trick to raise an exception and stop the application at a certain point (e.g. in a Controller to look at request parameters)
+*`fail` = debugging trick to raise an exception and stop the application at a certain point (e.g. in a Controller to look at request parameters)
 
 ## Augmented API % Ruby (e.g. from ActiveSupport Gem)
 
-    10.day[s]			# Quantity of seconds in days (864000)
-    10.month[s]			# Quantity of seconds in months
-    10.year[s]			# Quantity of seconds in years
-    864000.from_now	# The day in 10 days (ActiveSupport::TimeWithZone object)
-    5.days.ago		# The day 5 days ago (ActiveSupport::TimeWithZone object)
+* `10.day[s]` = quantity of seconds in days (864000)
+* `10.month[s]` quantity of seconds in months
+* `10.year[s]` = quantity of seconds in years
+* `864000.from_now` = day in 10 days (ActiveSupport::TimeWithZone object)
+* `5.days.ago` = day 5 days ago (ActiveSupport::TimeWithZone object)
 
 # Applications
+
 ## Creation & Configuration
+
 ### Create
-    rails new {application}	# Generates the application structure, including a Gemfile, and runs 'bundle install'
-    rails new {application} --skip-test-unit (aka -T)	# Doesn't embed Test::Unit in the application (in case we want to use another/no test gem)
+
+* `rails new {application}` =generates the application structure, including a Gemfile, and runs 'bundle install'
+* `rails new {application} --skip-test-unit (aka -T)` = doesn't embed Test::Unit in the application (in case we want to use another/no test gem)
 
 ### Gemfile
+
 In ~/Gemfile.
 Manifest of required Ruby Gems dependencies.
 
-	gem "{gem}"						# Requires specified gem in the application
-	group :environment do .. end	# Requires specified gem for specified environment
+* `gem "{gem}"` = requires specified gem in the application
+* `group :environment do … end` = requires specified gem for specified environment
 
 ### Bundle
-	bundle install						# Downloads and installs all the dependencies found in the Gemfile
-	bundle install --without production # Exclude gems in a given group
-	bundle update {gem}					# Updates specific gem from Gemfile configuration
-	bundle check
+
+* `bundle install` = downloads and installs all the dependencies found in the Gemfile
+* `bundle install --without production` = exclude gems in a given group
+* `bundle update {gem}` = updates specific gem from Gemfile configuration
+* `bundle check`
 
 ### Environment
 In ~/config/environments.
@@ -539,3 +544,7 @@ Next,
 
 	git remote -add origin ''
 	git push origin master
+
+## Extensions
+
+* **Brakeman** = free vulnerability scanner (static analyzer) for Ruby on Rails applications

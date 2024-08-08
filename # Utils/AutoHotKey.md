@@ -1,5 +1,7 @@
 # AutoHotKey
 
+Windows inputs (keyboard & mouse) macros/scripting.
+
 ## Special
 
 * `{#}`

@@ -37,11 +37,11 @@
 * `F2` = envelope tool, can be used for gradual (time-based) volume adjustments
 * `F3` = draw tool
 * `F4` = multi-tool
-* `P` = Pauses _play head_
-* `X` = Play, or move _play head_ at selection
-* `Space` = play from current selection (& loops inside a looping region), or reset _play head_
+* `P` = play/pauses _play head_
+* `X` = starts from cursor, or move cursor/selection start at _play head_ and stop
+* `Space` = play from cursor (with looping), or stop
 * `Delete` = removes portion of audio & shifts left the part after
-* `Shift + Space` = play from user selection (& plays just once inside a looping region)
+* `Shift + Space` = play from cursor, or stop
 * `Shift + Click` = set beginning/end of selection
 * `Alt + ,` = previous Clip
 * `Alt + .` = next Clip

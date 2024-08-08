@@ -1,5 +1,9 @@
 # Android
 
+## Quick Tips
+
+* URLs can be configured to be opened via designated apps (instead of the browser by default)
+
 ## Glossary
 
 * [Activities](https://developer.android.com/guide/components/activities/intro-activities) = one app entry point, defined in _AndroidManifest.xml_
@@ -12,7 +16,6 @@
   * Architecture/Platform = _arm_ or _arm64_ (less commonly _x86_ or _x86\_64_) - see [Open GApps](https://opengapps.org)
 * [AOSP](https://source.android.com) = Android Open Source Project
 * apk = file containing an app ([How to install apk files from a PC](https://www.wikihow.com/Install-APK-Files-from-a-PC-on-Android))
-* **Download Mode** = Samsung devices' boot mode (very similar to Fastboot mode)
 * **GApps** = Google apps
 * **GMS** (Google Mobile Services) = Google **Proprietary** apps & APIs, not part of AOSP (eg _Google Play_, _Gmail_, _Google Maps_, …)
 * **Google Play (Store)** = app store
@@ -22,21 +25,17 @@
 * **Odin** = utility used by Samsung to reset (or flash) their smartphones
 * **OEM** (Original Equipment Manufacturer) = a company that constructed an original component sold to end users by another company
 * **OTA Updates** = Over-the-air updates, the upgrades to the current OS
+* **ProGuard** = open source CLI to shrink/optimize/obfuscate Java code (distributed as part of Android SDK)
 * **ROM** (aka Firmware) = basically the OS installed on the device, in its read-only memory. It is a bit ambiguous whether this refers to all images (most likely), or just the _system_ one
   * Stock ROM = orginal factory OEM ROM
   * Custom ROM = ROM not emitted by OEM. Usually contains but a subset of all images (i.e. most importantly a _system_ image), and reuse pre-existing (e.g. stock) images for non-system partitions
-* [Rooting](https://www.androidcentral.com/root)
+* **Rooting** = how users can attain privileged control (aka _root access_, or _superuser_) over various subsystems
   * Systemless Rooting = lighter rooting that does not require modifying system or boot partition
 * [Rooting, Bootloader, Recovery](https://android.stackexchange.com/a/117593)
-  * [Bootloader](https://source.android.com/devices/bootloader/) = basically the BIOS (+ MBR)
-    * Low-level interface used to flash images on a partition via `fastboot` commands
-    * Responsible for bringing up the kernel, or launches recovery mode, etc.
-    * Responsible for the base layer of security (prevents _system_ change), and unlocking the bootloader erases all previous data
-  * Recovery = side menu that can be started from bootloader for disk/partition management (wipe/format)
-    * Enter recovery mode by first entering the bootloader, selecting _Recovery mode_
-    * [How to enter it](https://www.reddit.com/r/Nexus5/comments/2akpco/rooted_nexus_5_but_cant_boot_into_recovery/)
-    * Pre-menu of stock recovery mode looks like a lying Android logo with a **red triangle and exclamation mark**
-      * From there, hold Power and pressing Volume Up **once**
+* [Bootloader](https://source.android.com/devices/bootloader) = basically a BIOS & MBR (vendor-proprietary image), which brings up the kernel, launching recovery mode, etc
+  * Low-level interface used to flash images on a partition via `fastboot` commands
+  * Responsible for the base layer of security (prevents _system_ change), as unlocking the bootloader erases all previous data
+* **Recovery** = disk/partition management (wipe/format), download/apply OS update, (un)mount drives/volumes, factory reset
 * **SafetyNet** = feature by which an App required higher security (e.g. banking) can enforce the device is trustworthy
   * I.e. checks the device is not rooted & bootloader is locked
   * Circumventable via microG DroidGuard Helper

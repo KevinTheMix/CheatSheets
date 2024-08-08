@@ -4,6 +4,8 @@ Ruby in written in C and thus allows the inclusion of C libraries. There exists 
 
 ## Environment & Installation
 
+* **RubyMine** = Ruby IDE (JetBrains)
+* **RubyMotion** = Ruby IDE (HipByte)
 * [SSL Certificate issue](https://gist.github.com/fnichol/867550)
   * Download [certificate authority file](http://curl.haxx.se/ca/cacert.pem) and set the *SSL_CERT_FILE* environment variable to its path: `SSL_CERT_FILE=[certificate_file_path]`.
 * Paths
@@ -17,18 +19,18 @@ Ruby in written in C and thus allows the inclusion of C libraries. There exists 
 * Shebang
   * `#!/usr/bin/ruby -w` = Shebang notation with warnings. Same as Perl
   * `#!/usr/bin/env ruby` = Use the environment to find the Ruby interpreter.
-    * This can change per user, plus arguments (e.g. `-w`) cannot be provided.
+    * This can change per user, plus arguments (eg `-w`) cannot be provided.
 
 ## Syntax & Special variables
 
 ```Ruby
 \#  # Comment
 ()  # Parentheses in methods definition and call are optional. Empty parentheses must directly follow the method name without space
-;   # Statement separator can be used in place of the usual newline character. Allows one-liners e.g. class A; end
+;   # Statement separator can be used in place of the usual newline character. Allows one-liners eg class A; end
 \   # Statement continuation character. At the end of a line, indicates that the statement continues next line
-_   # Digit grouping (layout) character e.g. 1_000_000
+_   # Digit grouping (layout) character eg 1_000_000
 @   # Class and Instances variables sign
-$   # Global variables sign. Use it to define an accessible everywhere variable from inside a more reduced scope e.g. within a Class or Method
+$   # Global variables sign. Use it to define an accessible everywhere variable from inside a more reduced scope eg within a Class or Method
 
 See http://blog.mattcallanan.net/2012/11/cryptic-ruby-global-variables.html
 $!  #Exception message set by 'raise'
@@ -63,7 +65,7 @@ nil.class # NilClass
 .object_id # Note a = 5; b = 5 => a & b will have the same object_id (true for Symbol and Numeric)
 
 .to_sym # Symbol (aka .intern)
-.to_i   # Integer. Returns 0 if the object cannot be converted e.g. "abc".to_i)
+.to_i   # Integer. Returns 0 if the object cannot be converted eg "abc".to_i)
 Integer # Integer. ArgumentError Exception if the object cannot be converted
 .to_int # Integer strict. To implement if an object is to behave like an Integer
         # Typical usage: 'a.to_i if (a.respond_to? ("to_int"))'
@@ -77,8 +79,8 @@ Integer # Integer. ArgumentError Exception if the object cannot be converted
 .to_ary
 .to_h   # Hash
 .to_hash
-.chr    # String (character from int e.g. 97.chr -> "a")
-.ord    # Fixnum (int from character e.g. "a".ord -> 97)
+.chr    # String (character from int eg 97.chr -> "a")
+.ord    # Fixnum (int from character eg "a".ord -> 97)
 
 <=>     # General comparison operator (spaceship operator)
         # Returns [-1,0,1] if left side [less, equal, greater] than right side
@@ -159,7 +161,7 @@ quotient,remainder = divmod(number,divisor)
 i = 123
 puts i          # 123
 puts "#{i}"     # 123
-puts i + "\n"   # Error => must call the number's .to_s() specifically or use a parameter list e.g. puts i, "\n"
+puts i + "\n"   # Error => must call the number's .to_s() specifically or use a parameter list eg puts i, "\n"
 
 rand()      # Returns a Float between 0.0 and 1.0
 rand(0)     # Returns a Float between 0.0 and 1.0
@@ -194,9 +196,9 @@ s= "\x41\x42\x43"   # "ABC" (Hex characters representation)
 ('aa'..'bb').to_a   # ["aa", "ab", .., "az", "ba", "bb"]
 
 print   # Actually a Kernel class method (Kernel.print()). Equivalent to args.join($,) + $\
-        # Also accepts several parameters and concatenates them calling .to_s() on each of them e.g. print s, " ", i
+        # Also accepts several parameters and concatenates them calling .to_s() on each of them eg print s, " ", i
         # If the parameter is "concatenated" + "terms", don't forget to apply .to_s() to each (non-String) of them
-        # Returns nil (=> evaluated as false if used as condition e.g. if print "ok"). Also "print nil" prints nothing
+        # Returns nil (=> evaluated as false if used as condition eg if print "ok"). Also "print nil" prints nothing
 puts    # print with $, and $\ set to newline. Uses an object's .to_s() if its result is a String, otherwise uses .inspect()
 p       # puts the .inspect of the string, which is nice for debugging. Same as 'puts object.inspect'
 ""      # Parses #{evaluate}.
@@ -206,12 +208,12 @@ bbb"    # Line continuation
 %q[<a href="javascript:method('call')">link</a>]    # Custom %q separators
 "Hello #{statement}"    # Interpolation. Calls to_s on statement that can be anything (var, method, yield) that will not be literally printed.
                         # Usable as a standalone String, i.e. outside puts usage.
-"Hello #{variable}"     # Display the value of the variable. Numbers are automatically converted to Strings, so no need for to_s, e.g. #{i.to_s}
+"Hello #{variable}"     # Display the value of the variable. Numbers are automatically converted to Strings, so no need for to_s, eg #{i.to_s}
 
 s1 + s2         # Concatenate. Non-String objects need to be converted first (to_s), unlike Perl.
 s1 += s2        # Works but a new String is created each time => worse performance compared to s1 << s2
 s1 << s2        # Append-concatenate. Same result as s1 += s2. << is an operator => s1.<<(s2) and returns its left-value (s1)
-s[index]        # E.g. s1[index] = s1[index] + s2 to insert a String into another String
+s[index]        # eg s1[index] = s1[index] + s2 to insert a String into another String
 s[index, length]# Substring, can also be used in lvalue
 s[start..end]   # If end is negative, indicates index backward from the end (until the end if -1).
 s1[s2]          # The first occurence of s2 in s1
@@ -265,7 +267,7 @@ words = %w(A little sentence)   # Array from sentence. No quotes nor commas
 t2 = t.clone    # t == t2
 
 t = [1,2,3]     # Multi-assignment
-a,b = t         # a=1 b=2 (parenthesis optional e.g. (a,b) = t)
+a,b = t         # a=1 b=2 (parenthesis optional eg (a,b) = t)
 a,b,c,d = t     # a=1 b=2 c=3 d=nil
 t[1,2] = [3,2]  # [1,3,2]
 
@@ -305,14 +307,14 @@ a, b, *c = 1,2, *t  # c == [3,4] and would be [[3,4]] without the *t
 .count  # Same as .size and .length
 .count {|item| condition}   # Number of items satisfying condition
 .reverse                # Returns a reversed Array (also .reverse!)
-.join(separator)        # Returns a string of the items in t joined using the separator string. Uses the $, variable (empty) by default as separator (e.g. $, = "-")
+.join(separator)        # Returns a string of the items in t joined using the separator string. Uses the $, variable (empty) by default as separator (eg $, = "-")
 .grep(pattern)          # Returns an Array of all matching items (pattern is String or Regex). Grep actually wraps .select() and ===
 .collect                # See .map()
-.map {|item| .. }       # Returns an array of same size formed by the .. block statements
+.map {|item| … }       # Returns an array of same size formed by the … block statements
 .map!                   # Modifies and returns the array it iterates on
 .sort                   # Sorts an array using the general comparison <=> operator on its items (also .sort!)
 .sort {|a,b| a<=>b}     # Specifies the order of the sort
-.sort_by {|item| .. }   # Sort an array by '..'
+.sort_by {|item| … }   # Sort an array by '…'
 .sort_by(&:attribute)   # Sorts a collection of objects by comparing their specified attribute
 .uniq                   # Returns a copy of array without duplicates
 .uniq!                  # Removes duplicates and returns array. Returns nil if no duplicates
@@ -326,15 +328,15 @@ a, b, *c = 1,2, *t  # c == [3,4] and would be [[3,4]] without the *t
 .select {|item| condition}      # Returns an array of all the items satisfying a condition
 .reject {|item| condition}      # Inverse of .select()
 .partition {|item| condition}   # Returns an array of two arrays of items distributed according to a condition
-.zip(t2,t3,..)                  # Array of Arrays of elements taken from each Array (instance and *parameters) sequentially one at the time, filling with nil
+.zip(t2,t3,…)                  # Array of Arrays of elements taken from each Array (instance and *parameters) sequentially one at the time, filling with nil
 .ary(t2)                        # Union of the Array with t2, excluding duplicates, preserving Array order
 .inject()                       # See reduce (synonym)
-.reduce(initial, symbol)        # Returns a scalar value obtained by accumulating its items (e.g. Integers, Strings) using a binary operation symbol (e.g. :+, :*)
+.reduce(initial, symbol)        # Returns a scalar value obtained by accumulating its items (eg Integers, Strings) using a binary operation symbol (eg :+, :*)
 .reduce(initial) {|memo,item| memo+item}    # Assigns to memo the result of the block statement at each iteration
     # Default initial value is first item in the array => returns nil if unspecified and Array is empty
     # Initial value is necessary if it's a collection of class objects otherwise it will take the first object as initial value, while we actually need an expression of its attributes
     # If we're reducing an Array of numbers, then initial value isn't necessary (unless of course we want it different from intrisical neutral value 0/1 for +/*)
-.flatten    # Reduces a multi dimension Array to a single dimension Array e.g. [[1,2],3] -> [1,2,3]
+.flatten    # Reduces a multi dimension Array to a single dimension Array eg [[1,2],3] -> [1,2,3]
 .sample     # Returns a random element from the Array
 ```
 
@@ -344,12 +346,12 @@ a, b, *c = 1,2, *t  # c == [3,4] and would be [[3,4]] without the *t
 h = {}                      # Empty
 h = Hash.new                # Empty
 h = Hash.new(default_value) # Provides a default value to return when accessing a key that is not in the Hash (instead of nil) => allows immediate += assignments
-h = {'key'=>'value', ..}    # Order not kept, unlike arrays.
-h = {:key => 'value', ..}   # Quotes mandatory except around key if it's a :symbol
-h = {key: value, ..}        # Alternate syntax when the key is a :symbol. The two syntaxes can me mixed
+h = {'key'=>'value', …}    # Order not kept, unlike arrays.
+h = {:key => 'value', …}   # Quotes mandatory except around key if it's a :symbol
+h = {key: value, …}        # Alternate syntax when the key is a :symbol. The two syntaxes can me mixed
 h = Hash[t]                 # Initialization from Array. Only works if t is an Array of [key, value] pairs
-h = Hash[k1, v1, k2, v2,..] # Initialization from even number of arguments. Arguments list can be obtained from an Array using splat operator e.g. Hash[*t]
-h = {key: {..}}             # Nested Hash
+h = Hash[k1, v1, k2, v2,…] # Initialization from even number of arguments. Arguments list can be obtained from an Array using splat operator eg Hash[*t]
+h = {key: {…}}             # Nested Hash
 
 .keys               # Array
 .values             # Array
@@ -362,15 +364,15 @@ h = {}; h[:k] = 0; h[:k] += 1   # OK
 h.has_key?(key)
 h.delete(key)
 
-.each {|k,v| ..}
+.each {|k,v| …}
 .each_key {|k|}
 .each_value {|v|}
 .sort_by{|k,v| v}   # Returns an Array of sorted [key, value] pairs
 .select{|k,v| cond} # Returns a Hash composed of the pairs satisfying the condition
 h1.merge(h2)        # Appends or overwrites values of h2 onto h1
 
-.method({key: value,..})
-.method(key: value,..)   # Since {} are optional
+.method({key: value, …})
+.method(key: value, …)   # Since {} are optional
 ```
 
 ## Flow
@@ -397,7 +399,7 @@ not and/&& or/|| # and/&& and or/|| can be used for short-circuit evaluation (A 
     (1..5) == (1..5)    # true
     (1..5) == (1..10)   # false
 === # Subsumption operator (a === b means "is b part of the set described by a?"). General object goes left, specific goes right
-    # Order of operators matters because of object to which operator belongs (e.g. Fixnum#=== cannot take a Range but Range#=== can take a Fixnum)
+    # Order of operators matters because of object to which operator belongs (eg Fixnum#=== cannot take a Range but Range#=== can take a Fixnum)
     (1..5) === 1        # true
     (1..5) === 10       # false
     (1..5) === "koko"   # false
@@ -436,16 +438,16 @@ case expr
 end
 ```
 
-#### Loops # Iterators are methods that can can traverse a collection e.g. an Array
+#### Loops # Iterators are methods that can can traverse a collection eg an Array
 
 Most iterators are implemented internally using these basic methods
-In the following statements, .. is NOT a block and the optional [do] is a reserved word (See <http://www.tutorialspoint.com/ruby/ruby_loops.htm>)
+In the following statements, … is NOT a block and the optional [do] is a reserved word (See <http://www.tutorialspoint.com/ruby/ruby_loops.htm>)
 Difference between each and for is scoping: local variables exist outside for loop. This is because for doesn't use a block => the variable is not local
 
 ```Ruby
-while condition [do] .. end
-until condition [do] .. end
-for i in 0...size [do] .. end # i exists after the for loop
+while condition [do] … end
+until condition [do] … end
+for i in 0...size [do] … end # i exists after the for loop
 
 next if condition   # Jumps to next iteration
 break if condition  # Exits the loop
@@ -454,7 +456,7 @@ break if condition  # Exits the loop
 The following methods return an Enumerator when no block is provided (see following section)
 
 ```Ruby
-loop do .. end
+loop do … end
 number.times {|index|}      # index starts at 0. Returns number itself (-> self) or nil in case of break
 start.upto(end) {|index|}   # index starts at start -> end (Works with Strings)
 start.downto(end) {|index|} # index starts at start -> end (Works with Strings)
@@ -480,7 +482,7 @@ end
 
 Blocks are pieces of code that are called by a method and allows some customization, often a recurring treatment applied to each item provided by the method
 Blocks cannot stand on their own: they can only follow a method call, however a block can be attached to any method (all methods have a default one)
-Methods that don't use blocks can still get one attached, in which case nothing happens e.g. puts {puts "koko"} prints nothing
+Methods that don't use blocks can still get one attached, in which case nothing happens eg puts {puts "koko"} prints nothing
 This construct is useful to change what happens during each iteration just by changing the block (and not the method)
 => From a design standpoint this is good because different concerns are decoupled
 
@@ -493,7 +495,7 @@ Blocks can return a value back to the method: the value of its last evaluated ex
 
 ```Ruby
 {}          # Single line by convention. Also precedence (http://stackoverflow.com/questions/5587264/do-end-vs-curly-braces-for-blocks-in-ruby)
-do .. end   # Multiple lines by convention. Works just as well for chaining methods like fn() do .. end .another_fn()
+do … end   # Multiple lines by convention. Works just as well for chaining methods like fn() do … end .another_fn()
 {|a| .}     # Block parameter
 {|a,b| .}   # Block parameters
 {|a;b| .}   # Protects existing variable b from being modified by the block in case a local variable with the same name is defined in the block
@@ -507,7 +509,7 @@ puts block_given? ? yield : "Does not compute"  # Handles LocalJumpError when ca
 
 ### Enumerables & each()
 
-When a Class includes ("mixes in") the Enumerable module, it has access to all the methods pertaining to collections e.g. .find, .select, etc.
+When a Class includes ("mixes in") the Enumerable module, it has access to all the methods pertaining to collections eg .find, .select, etc.
 All those Enumerable methods actually rely on the .each() method to iterate through the elements of the collection
 Including Enumerable in a class requires the explicit definition of the each() method (Enumerable module doesn't provide any since it's class specific)
 => include Enumerable + define .each() and all the other Enumerable methods will make use of the custom .each()
@@ -515,14 +517,14 @@ Including Enumerable in a class requires the explicit definition of the each() m
 Classes such as Array and Hash of course include the Enumerable module
 But an .each method can actually be implemented in any Class (i.e. not Enumerable)
 The role of the each() method is simply to yield items to the associated block
-Typically, it will do so when looping through a collection of some sort (e.g. while < collection.size) and invoke yield on each of its elements
-yield statements could even be hardcoded independantly from a collection e.g. `def each; yield 1; yield 2; yield 3; yield 42; end`
+Typically, it will do so when looping through a collection of some sort (eg while < collection.size) and invoke yield on each of its elements
+yield statements could even be hardcoded independantly from a collection eg `def each; yield 1; yield 2; yield 3; yield 42; end`
 See <http://graysoftinc.com/early-steps/the-evils-of-the-for-loop>
 Returns an Array of the iterated items
 
-* `.each {|item| .. }` he type of item depends on the type of the items in the collection
-  * `array.each {|item| .. }`
-  * `hash.each {|key,value| .. }` Hash is a class that includes Enumerable and implements .each with 2 parameters
+* `.each {|item| … }` he type of item depends on the type of the items in the collection
+  * `array.each {|item| … }`
+  * `hash.each {|key,value| … }` Hash is a class that includes Enumerable and implements .each with 2 parameters
 * `.each_with_index` Adds an extra parameter to a block in the form of an automatically incremented index (starting at offset)
 * `.each_with_object`
 * `.each_slice(n)` Iterates on object by slices of n elements
@@ -537,13 +539,13 @@ Does Enumerator knows what method is to be accomplished when the eventual .each 
 
 ```Ruby
 enum = array.map    # Block is not specified here
-enum.each{...}      # Will actually do .map() using the code in the {...} block
+enum.each{…}      # Will actually do .map() using the code in the {…} block
 
 enumerator.peek
 enumerator.next         # Returns next object and moves internal position forward
 enumerator.next_values  # Returns next object as an array and moves internal position forward
-enumerator.with_index(offset){|param,index| ..}
-enumerator.with_object(){|param,object| ..}
+enumerator.with_index(offset){|param,index| …}
+enumerator.with_object(){|param,object| …}
 ```
 
 ### Procs
@@ -562,7 +564,7 @@ def f n; puts yield n; end  # Defines a Method that takes one parameter
 f (5, &double)              # Proc-block is passed as a method parameter
 ```
 
-Other uses of '&' include meta-manipulating a block from within a method, e.g. displaying its parameters
+Other uses of '&' include meta-manipulating a block from within a method, eg displaying its parameters
 See <http://ablogaboutcode.com/2012/01/04/the-ampersand-operator-in-ruby/>
 
 #### to_proc()
@@ -594,7 +596,7 @@ Methods that take parameters by reference don't exist in Ruby. Closest thing is 
 Actually, a method such as swap() is unnecessary in Ruby: `a,b = b,a`.
 
 Everything in Ruby is an objet and calling a method on an object means sending a message to that object (i.e. 'instance.send(:method)').
-Example: in `object.method(..)`, the Receiver is the object, and the Message corresponds to the method name and parameters.
+Example: in `object.method(…)`, the Receiver is the object, and the Message corresponds to the method name and parameters.
 
 Every method is Ruby has a receiver, even if implicit (in which case we need to look at the context to determine what it is)
 In an instance method it's the instance, and in a class method it's the Class itself
@@ -604,19 +606,19 @@ Definition
 
 ```Ruby
 # Standalone
-def f .. end        # () are optional
-def f p .. end      # () are optional but prefered in method definition
-def f(p) .. end
-def f(p = "default") .. end
+def f … end        # () are optional
+def f p … end      # () are optional but prefered in method definition
+def f(p) … end
+def f(p = "default") … end
 define_method(:name)# Using reflection to create an instance method on the receiver (see <http://apidock.com/ruby/Module/define_method>)
 # Convention for Destructive (aka bang!) & Predicate ('!' and '?' are part of their name)
-def f!(p) .. end    # Destructive method (modifies the caller object in place)
-def f?(p) .. end    # Predicate method (returns true/false)
+def f!(p) … end    # Destructive method (modifies the caller object in place)
+def f?(p) … end    # Predicate method (returns true/false)
 ## Instance/Class
-def Class.method .. end
-def instance.method .. end
-class << Class; def method .. end; end
-class << instance; def method .. end; end
+def Class.method … end
+def instance.method … end
+class << Class; def method … end; end
+class << instance; def method … end; end
 # Returns
 return expr
 expr        # When no return keyword is present, the value of the last statement is returned (cfr Perl)
@@ -636,10 +638,10 @@ object.send(:f, params) # object. can be self.
 
 ### Accessibility
 
-Public (default) can be accessed from any object (e.g. instance.public_method)
-Protected can only be accessed from within object (from instance methods, not Class methods) and subclasses (e.g. self.protected_method)
+Public (default) can be accessed from any object (eg instance.public_method)
+Protected can only be accessed from within object (from instance methods, not Class methods) and subclasses (eg self.protected_method)
 Private is like protected but the method cannot have an explicit receiver (not even 'self.')
-These keywords have _no effect_ on Class methods (they remain public)
+These keywords have *no effect* on Class methods (they remain public)
 
 Defining multiple methods with a given accessibility:
 
@@ -697,34 +699,36 @@ CONSTANT # Accessed outside the class using Class::CONSTANT (:: is the scope-res
 ### Instance Variable
 
 Look what 'self' refers to when a variable is used to identifies its nature (Class or Instance)
-If it appears outside an instance method, it's a _class-level_ instance variable (initialized the first time the class is loaded)
+If it appears outside an instance method, it's a *class-level* instance variable (initialized the first time the class is loaded)
 See <http://stackoverflow.com/questions/6043618/ruby-initialize-vs-class-body>
 Class-level instance variables are useful to define class variables that are independant in subclasses (unlike @@class_variables who are changed globally)
 See <http://www.railstips.org/blog/archives/2006/11/18/class-and-instance-variables-in-ruby/>
 
-	@instance_variable
+`@instance_variable`
 
 ### Class Variable
 
-	@@class_variable
+`@@class_variable`
 
 ### Attributes (properties)
 
-	def name; @name; end		# Reader (cannot be assigned anything => use writer)
-								# Note: if the object read is a collection, the value of its elements can actually be modified
-	def name=(n); @name=n; end	# Writer, as indicated by the equal sign part of the method name
+```ruby
+def name; @name; end        # Reader (cannot be assigned anything => use writer)
+                            # Note: if the object read is a collection, the value of its elements can actually be modified
+def name=(n); @name=n; end  # Writer, as indicated by the equal sign part of the method name
+```
 
 #### Virtual attribute
 
 A virtual attribute is an attribute that doesn't wrap a dedicated instance variable
 
-	def time_in_minutes; @seconds/60; end
+`def time_in_minutes; @seconds/60; end`
 
 ### Accessors
 
 Accessor ease the task of writing readers/writers manually
 attr_* are actually method calls creating attributes that get/set @instance_variables with the same name (given by Symbol or String)
-See http://stackoverflow.com/questions/4370960/what-is-attr-accessor-in-ruby
+See <http://stackoverflow.com/questions/4370960/what-is-attr-accessor-in-ruby>
 
 ```Ruby
 attr_reader :name # Reader
@@ -736,48 +740,42 @@ attr_accessor (:name) # Reader & writer
 
 Has access to instance variables & instance methods (with or without 'self.' prefix), class variables and even class methods (with 'Class.' prefix)
 
-	def method
+`def method`
 
 ### Class Methods (static)
 
 Has only access to other Class methods there is no access to an Instance
 
-	def Class.method
+`def Class.method`
 
-Alternate ways to define a class method, see http://www.railstips.org/blog/archives/2009/05/11/class-and-instance-methods-in-ruby/
+Alternate ways to define a class method, see <http://www.railstips.org/blog/archives/2009/05/11/class-and-instance-methods-in-ruby>
 
-	def self.method
+`def self.method`
 
 ### self
 
 Class instance reference. In Perl, $self is the name of the variable that receives an instance in class methods
 
-	self
+`self`
 
 ### to_s (ToString())
 
-Will be automatically called when printing the object e.g. puts instance
-Also called on each item when printing an array of objects e.g. puts t = [Class.new, Class.new]; puts t
+Will be automatically called when printing the object eg puts instance
+Also called on each item when printing an array of objects eg puts t = [Class.new, Class.new]; puts t
 
-	def to_s
-		print "My member is #{@instance_variable}."
-	end
+`def to_s print "My member is #{@instance_variable}." end`
 
 ### <=> General comparison operator used by sort()
 
-	def <=>(other)
-		@instance_variable <=> other    # aka self.@instance_variable
-	end
+`def <=>(other) @instance_variable <=> other    # aka self.@instance_variable end`
 
 ### each
 
-	def each
-		@instance_collection.each {|item| yield item}
-	end
+`def each @instance_collection.each {|item| yield item} end`
 
 ### Call
 
-new() is a _Class_ method that allocates some memory to create an instance then calls instance.initialize() to set up its state
+new() is a *Class* method that allocates some memory to create an instance then calls instance.initialize() to set up its state
 
 ```Ruby
 instance = Class.new
@@ -811,7 +809,7 @@ Class.constants             # Nested classes
 
 instance.class              # The class of the instance
 instance.methods            # The methods of the instance
-instance.instance_variables # Instance instance variables (Members specific to one instance e.g. initialized in .initialize())
+instance.instance_variables # Instance instance variables (Members specific to one instance eg initialized in .initialize())
 instance.kind_of?(Class)    # See .is_a?
 instance.is_a?(Class)       # true if instance is a Class or inherits from it
 instance.instance_of?(Class)# true if instance is a Class (only direct Class, false if ancestor)
@@ -820,19 +818,20 @@ instance.respond_to?(:method, true/false) # true if instance has method (1st par
 
 ### Nested Class
 
-	class A
-		class B
-		end
-	end
-	print A.constants	# B
+```Ruby
+class A class B end end
+print A.constants   # B
+```
 
 ### Extension
 
-	class String	# Extends one of the core Ruby classes
-		def dash_split
-			self.split('-')	# self is optional since split is a String method and can be called from here.
-		end
-	end
+```Ruby
+class String    # Extends one of the core Ruby classes
+    def dash_split
+        self.split('-') # self is optional since split is a String method and can be called from here.
+    end
+end
+```
 
 ### Inheritance
 
@@ -841,37 +840,39 @@ The Child class has access to Parent constants, variables and methods and can ov
 Use super(parameters) in an overriding Child method to call the Parent method with the same name
 Tip: Don't completely override a parent method if there's a way to reuse it in the child => adapt super() instead
 
-	class Child < Parent
-		def my_method
-			super() * 2	# Calls Parent#my_method
-		end
-	end	
-	Child.superclass	# Parent
+```Ruby
+class Child < Parent
+    def my_method
+        super() * 2 # Calls Parent#my_method
+    end
+end
+Child.superclass    # Parent
+```
 
 We can add child variables by overriding the initialize method and using super to pass along variables to parent constructor
 
-	def initialize (old, new)
-		super(old)	# Calls the parent initialize
-		@new = new
-	end
+```Ruby
+def initialize (old, new)
+    super(old)  # Calls the parent initialize
+    @new = new
+end
+```
 
 ### <<
 
-Appends .. to the object, which can be a Class or an Instance.
+Appends … to the object, which can be a Class or an Instance.
 
 #### Class
 
  Creates a class method (i.e. static)
 
-	class << object
-		..
-	end
+`class << object … end`
 
 #### Instance
 
 Creates an instance method for that specific object instance only
 
-	instance << object
+`instance << object`
 
 ## Struct
 
@@ -886,8 +887,8 @@ Although Struct objects behave like Classes, Ruby distinguishes between them and
 Struct.new(:attributes)             # Returns a Class object
 Struct.new("Constant", :attributes) # When a name is provided, the generated Class can be accessed by a Constant with that name in the Struct module
                                     # => Access via Struct::Constant. Also returns that Constant
-Class = ..          # Assignment to a Constant (i.e. a Class). Use like a regular Class
-class Class < ..    # Inheritance
+Class = …          # Assignment to a Constant (i.e. a Class). Use like a regular Class
+class Class < …    # Inheritance
 Class.superclass    # Struct
 
 Class = Struct.new(:a,:b)
@@ -905,31 +906,33 @@ Objects defined inside Module can be accessed anywhere within same Module name s
 Unlike classes, they CANNOT be instantiated => the "module methods" they contain are called through Module.method (same as with Class methods)
 They also cannot be inherited from (but can be included (i.e. mixins) or extended)
 The name of a module is in CamelCase whilst the name of file it is located in uses lowercase & underscores
-E.g. MyModule => my_module.rb
+eg MyModule => my_module.rb
 
 ### Requiring
 
-Ruby is a dynamic language => if a module has been loaded in memory once during execution (e.g. in the 'main' file),
+Ruby is a dynamic language => if a module has been loaded in memory once during execution (eg in the 'main' file),
 it will be available everywhere from then on, including other submodules that don't explicitely include it
 
-	require_relative 'file_name'    # Looks for the filename file in the same directory (.rb extension optional)
-	B require C
-	A require B	# Will also includes C in A
+```Ruby
+require_relative 'file_name'    # Looks for the filename file in the same directory (.rb extension optional)
+B require C
+A require B # Will also includes C in A
+```
 
 ### Module Definition
 
 ```Ruby
 module Module
-	class Class
-	CONSTANT
-	@member
-	@@static_member
-	def Module.method;end;
-	def self.method; end;	# Since self. is the Module
-	def self.get; @@static_member; end
-	def self.set(param); @@static_member = param; end
+    class Class
+    CONSTANT
+    @member
+    @@static_member
+    def Module.method;end;
+    def self.method; end;   # Since self. is the Module
+    def self.get; @@static_member; end
+    def self.set(param); @@static_member = param; end
 end
-if __FILE__ == $0	# Used to put some usage example code inside a class/module file that will only be when running that file directly
+if __FILE__ == $0  # Used to put some usage example code inside a class/module file that will only be when running that file directly
 ```
 
 ### Call
@@ -937,7 +940,7 @@ if __FILE__ == $0	# Used to put some usage example code inside a class/module fi
 ```Ruby
 Module.method       # Module method
 Module::method      # Module method via scope-resolution operator '::'
-                    # Actualy also works for Class methods and Instance methods (e.g. Class::method and instance::method)
+                    # Actualy also works for Class methods and Instance methods (eg Class::method and instance::method)
 Module::CONSTANT    # Constant (only) via scope-resolution operator '::'
 ```
 
@@ -948,7 +951,7 @@ Used to share common properties amongst classes that are not meant to inherit fr
 Mixins provide instance methods (and variables, and constants) to the including classes, not lib-style Module methods like regular modules
 Like other Modules, Mixins can not be instantiated either, so the internal properties will only be usable via the classes that include them
 The included module can use @instance_variables although it can't initialize them. They can be initialized in the including classes
-Comes between class and parent class in ancestor hierarchy e.g. Array > Enumerable < Hash
+Comes between class and parent class in ancestor hierarchy eg Array > Enumerable < Hash
 À la interfaces in C#/Java (except that mixins define more than a signature, they implement the method)
 
 #### Module
@@ -956,7 +959,7 @@ Comes between class and parent class in ancestor hierarchy e.g. Array > Enumerab
 ```Ruby
 module Able
     CONSTANT
-    def instance_method .. end
+    def instance_method … end
 end
 ```
 
@@ -975,7 +978,7 @@ Class.new.instance_method
 ```Ruby
 Class.class             # Class
 Class.superclass        # Object
-Class.ancestors         # [Class, Able, Object, ..]
+Class.ancestors         # [Class, Able, Object, …]
 Class.included_modules  # [Able, Kernel]
 Class.include? module   # true/false
 Class < module          # true/false
@@ -1013,7 +1016,7 @@ Command line parameters as an Array
 
 ### Call
 
-	ARGV.shift	# Returns the first parameter (also removes it)
+`ARGV.shift # Returns the first parameter (also removes it)`
 
 ### File
 
@@ -1022,126 +1025,124 @@ Command line parameters as an Array
 ```Ruby
 file = File::open("filename.txt", [mode]) # Default mode is 'r' (r,r+,w,w+,a,a+,b,t)
     while(line = file.gets)     # Read (.gets() returns nil if EOF reached)
-    file.each_line {|line| ..}  # Read
+    file.each_line {|line| …}  # Read
     file << "content"}          # Write
 file.close
 ```
 
 Better construct to avoid forgetting closing a file: use a block and the file is closed at the end
 
-	File::open("filename.txt", [mode]) do |file|
-		.. # Read/Write (see above)
-	end
+`File::open("filename.txt", [mode]) do |file| {…} # Read/Write (see above) end`
 
 #### Read
 
-	File::read("filename.txt")		# Open/close the file and returns its whole content
-	File::readlines("filename.txt")	# Open/close the file and returns an Array of all the lines => we can use .each {|line|} on it
+* `File::read("filename.txt")` = Open/close the file and returns its whole content
+* `File::readlines("filename.txt")` = Open/close the file and returns an Array of all the lines => we can use .each {|line|} on it
 
 #### Rename/Delete
 
-	File::rename("old.txt", "new.txt")
-	File::delete("filename.txt")
+* `File::rename("old.txt", "new.txt")`
+* `File::delete("filename.txt")`
 
 ### Dir
 
-	Dir::["path_with_files_pattern"]	# Array of names of matching files in the given directory
-	Dir::[]("path_with_files_pattern")	# Just like with hashes, [] is a class operator => can use it as a method
+* `Dir::["path_with_files_pattern"]` = Array of names of matching files in the given directory
+* `Dir::[]("path_with_files_pattern")` = Just like with hashes, [] is a class operator => can use it as a method
 
 ## Regex
 
-	s =~ /pattern/	# true/false
+* `s =~ /pattern/` = true/false
 
 ## Gems
 
-	gem env 	# See the gems installation directory
+* `gem env` = see the gems installation directory
 
 ### Packaging
 
-Namespace the classes & modules of the application under a common name (e.g. Application) and organize the directories & files in a hierarchy such as this one:
+Namespace the classes & modules of the application under a common name (eg Application) and organize the directories & files in a hierarchy such as this one:
 
-	bin
-		# In order for the main file to behave like a command-line program, remove its .rb extension and preface it with #!/usr/bin/ruby -w and chmod +x bin/main
-		# We also need to change the targets of require_relative so that it goes into the library directory (=> ../lib/application/module)
-		main	
-		iofiles
-	lib
-		application
-			classes
-	spec
-		# In the spec files, we must require the lib classes instead of require_relative (see http://stackoverflow.com/questions/3672586/what-is-the-difference-between-require-relative-and-require-in-ruby)
-		# RSpec actually adds the lib/ and spec/ directories to Ruby's load path ($LOAD_PATH ($:)) => require 'application/module' and the files in those subdirectories will found
-		# Using this organization, specification files can now all be run from the application directory using the 'rspec' command (no '.' necessary)
-		application
-			specs
-	LICENSE.txt
-	README.txt
-	application.gemspec	# Gem specification file, a file written in domain-specific language to specify what the gem is and what it does
+```os
+bin
+    # In order for the main file to behave like a command-line program, remove its .rb extension and preface it with #!/usr/bin/ruby -w and chmod +x bin/main
+    # We also need to change the targets of require_relative so that it goes into the library directory (=> ../lib/application/module)
+    main
+    iofiles
+lib
+    application
+        classes
+spec
+    # In the spec files, we must require the lib classes instead of require_relative (see http://stackoverflow.com/questions/3672586/what-is-the-difference-between-require-relative-and-require-in-ruby)
+    # RSpec actually adds the lib/ and spec/ directories to Ruby's load path ($LOAD_PATH ($:)) => require 'application/module' and the files in those subdirectories will found
+    # Using this organization, specification files can now all be run from the application directory using the 'rspec' command (no '.' necessary)
+    application
+        specs
+LICENSE.txt
+README.txt
+application.gemspec # Gem specification file, a file written in domain-specific language to specify what the gem is and what it does
+```
 
-### Build
-
-	gem build application.gemspec
-
-### Install
-
-	gem install gem_name.gem	# Install the gem and its dependancies
-
-### Info
-
-	gem list application -d
-
-### Deploy	(rubygems.org)
-
-	gem push application.gem
-	gem search -r application # -r for remote
-	gem install application
+* `gem build application.gemspec` = build
+* `gem install gem_name.gem` = install the gem and its dependancies
+* `gem list application -d` = info
+* Deploy (rubygems.org)
+  * `gem push application.gem`
+  * ``gem search -r application` (-r for remote)
+  * `gem install application`
 
 ### Run
 
 Command-line
 
-	application
+`application`
 
 IRB
 
-	require 'application/module'	# Loads the module into IRB. If other modules are required from this one, we can use them as well
-	m = Application::Module.new()
-	n = Application::SubModule.new()
+```ruby
+    require 'application/module'    # Loads the module into IRB. If other modules are required from this one, we can use them as well
+    m = Application::Module.new()
+    n = Application::SubModule.new()
+```
 
 ### RSpec (Ruby Specification)
+
 Unit testing
 
 #### File
 
-	file_spec	# Naming convention for the file containing the unit tests (notice it's *_spec, not *_rspec)
+* `file_spec` = naming convention for the file containing the unit tests (notice it's *`_spec`, not `*_rspec`)
 
 #### Call
 
-	rspec [FILE] --color	# Add rspec to the environment path for this to work
-	rspec . --color			# Runs all the *_spec.rb file in the current directory (.)
+* `rspec [FILE] --color` = add rspec to the environment path for this to work
+* `rspec . --color` = runs all the *_spec.rb file in the current directory (.)
 
 Definition
 
-	describe Class do
-		before do
-			# Initialize state
-		end
-		
-
-		context "something being done under certain circumstances" do 	# Set context for an entire subcategory of tests
-		
-			# Add or replace the state established in upper-level 'before' block
-			before do
-				*Initialize state*
-			end
+```ruby
+describe Class do
+    before do
+        # Initialize state
+    end
+    
+    context "something being done under certain circumstances" do # Set context for an entire subcategory of tests
+    
+        # Add or replace the state established in upper-level 'before' block
+        before do
+            *Initialize state*
+        end
 
 One test
 
-			it "does something" do
-				# Hijacks the return value of a given method
-				# The method body is skipped altogether
-				object.stub(:method).and_return(desired_value)
-				allow(object).to receive(:method).and_return(desired_value)
-			end
-		end
-	end
+        it "does something" do
+            # Hijacks the return value of a given method
+            # The method body is skipped altogether
+            object.stub(:method).and_return(desired_value)
+            allow(object).to receive(:method).and_return(desired_value)
+        end
+    end
+end
+```
+
+## Extensions
+
+* **Flay** = Ruby static code analyzer, looking for structural similarities

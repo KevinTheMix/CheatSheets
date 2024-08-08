@@ -23,12 +23,15 @@
 * **MSTest**
   * Check that invalid scenarios return expected error messages = `try {…} catch { Assert.IsTrue(ex.Message == String.Format("{format}", param)) }`
 * [Explicit interface implementation hiding](https://stackoverflow.com/a/5284799)
+* Reflection
+  * `typeof(Type).IsAssignableFrom(t)` = is _t_ assignable to variable of type _Type_
 
 ## Glossary
 
 * **Casting** = changing compile type of a variable for types with no implicit conversion (but [explicit ones](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/numeric-conversions#explicit-numeric-conversions))
 * [Boxing/Unboxing](https://stackoverflow.com/a/2111905) = converts value to/from reference type (to be avoided)
   * Can be used to shoehorn polymorphism in antiquated structures (eg. ArrayList that requires `object`s, not `int`s)
+* [Code Contracts](https://docs.microsoft.com/en-us/dotnet/framework/debug-trace-profile/code-contracts) = pre/post-conditions & invariants (eg `Contract.Requires(`{boolean_expression}`)
 * **Finalizer** (or **Destructor**) = for cleaning unmanaged resources before a class instance gets collected by the garbage collector `~Koko() { }`
   * Called when calling `Dispose()` on that instance
   * `WeakReference` = a reference that still allows the referenced (typically a memory intensive but easily recreatable) object to be collected by the GC
@@ -61,6 +64,9 @@ Credit: _Tech World With Milan Milanović_
 * `abstract` = interface-like, but the class can contain methods that are implemented (non-abstract). The class must be abstract if it contains one abstract member. Abstract members must be overriden in children. See <https://msdn.microsoft.com/en-us/library/sf985hc5.aspx>, <http://stackoverflow.com/questions/747517/interfaces-vs-abstract-classes>, <http://forums.asp.net/t/1411490.aspx?Can+the+C+Abstract+Methods+have+Implementation+>
 * `checked` = check overflow that the compiler misses (i.e. addition with variable arguments)
 * `constant` = can only be initialized at declaration (=> static compile time)
+* `default`
+  * Either a [default value](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/default-values) for a given type (either as an operator `default(int?)` or a literal `int? i = default`)
+  * Or a means to distinguish which one of two methods with same name to override (derived method with `where T : default` means overriding the method without `where` constraints in the base class)
 * `dynamic` = disable compile-time type checking
   * Usually a code smell but can be used for objects with common members instead of a full-fledged polymorphic solution (for quick prototyping or handling legacy code)
 * `implicit` = implicit casting operator (use a Type in place of another, with automatic casting). The operator implementation defines how the source type is transformed into the (local class) destination Type, typically by calling one of its constructor
@@ -133,15 +139,19 @@ Credit: _Tech World With Milan Milanović_
 
 ### Dates
 
+* `new DateTimeOffset(date, offset)`
+* `DateTime.SpecifyKind()` = sets _DateTimeKind_ (Local, Unspecified, Utc) of a DateTime
+* `DateTime|DateTimeOffset.ToLocalTime()`
+* `DateTime|DateTimeOffset.ToUniversal()`
+* `DateTime|DateTimeOffset.ToUTC()`
 * `TimeZoneInfo.IsAmbiguous(DateTime date)`
 * `TimeZoneInfo.IsDaylightSavingTime(DateTime date)`
-* `date/dto.ToLocalTime()`
-* `date/dto.ToUniversal()`
-* `date/dto.ToUTC()`
-* `new DateTimeOffset(date, offset)`
+* `TimeZoneInfo.Local.IsAmbiguousTime`
+* `TimeZoneInfo.Local.IsAmbiguousTime(Convert.ToDateTime("2021-10-31T01:00Z"));` = true, string is UTC (thx to `Z`) but `ToDateTime()` loses tz/offset info (_Unspecified_ kind), and it's right on DST transition hour
 * [Standard date/time format strings](https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-date-and-time-format-strings)
 * [Custom date/time format strings](https://docs.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings)
   * `DateTime.ToString("T")` => _12:34:56_ (note: only works if _T_ is the only character in the string format, otherwise it is considered a literal character 'T')
+* `Z` in a date-time string stands for "Zulu time," which is a military/aviation term for Coordinated Universal Time (UTC), with no offset
 
 ### [Collections](http://geekswithblogs.net/BlackRabbitCoder/archive/2011/06/16/c.net-fundamentals-choosing-the-right-collection-class.aspx)
 
@@ -250,45 +260,3 @@ An event is a special type of delegate that can hold references to multiple meth
   * override `ToString()` & `implicit` operator to provide serialization
   * implement 3 x constructors (parameter-less, message, message & innerException)
   * pass the innerException  when throwing it in order to maintain the exception tree & inner call stack
-
-## Extensions
-
-### Libraries & Nugets
-
-* **AutoMapper** = DLL-discovery-based layer entities mapper
-* **CefSharp** = open-source (embedded) web browser for WinForms/WPF apps (based on _CEF_ aka _Chromium Embedded Framework_, w/ headless version for automation projects)
-* [CsGL](https://csgl.sourceforge.net) = C# graphics library (_discontinued_)
-* **Dapper** = simple (EF/ORM) object mapper for .NET
-* **ExpertComponents Toolkit Total** = .NET PDF & Excel creation (_$700+_)
-* **Fluent Validation** = strongly-typed validation rules
-* **Hangfire** = recurrent & persistent jobs
-* **Html Agility Pack** = C# HTML parser/reader library
-* **Infragistics** = UI controls suite for all UI .NET (ASP.NET Core, Blazor, Uno, UWP, WinForms, WinUI, WPF, Xamarin) and JavaScript (Angular, jQuery, React) frameworks
-  * [App Builder](https://appbuilder.indigo.design) = cloud-based WYSIWYG drag&drop UI design tool
-* **MediatR** = mediator implementation in .NET
-* **MEF** (Microsoft Extensibility Framework) = framework for creating lightweight extensible applications (namespace of MEF nuget is `System.Composition`)
-  * Essentially a configurable (via app config file & `[attribute]` metadata) decentralized (no single container: plugin-based via interface implementation) DI engine with runtime DLL assemblies discoverability
-* **Moq** = popular .NET mocking framework
-* **NHibernate** = open-source ORM (_actively developed_)
-  * **Fluent NHibernate** = fluent XML-less compile safe automated convention-based mappings for NHibernate
-* **Ninject** = DI engine
-* **Noda** = date/time API (nuget)
-* **NPOI** = .NET library for read/writing Microsoft Office binary and OOXML file formats
-* **Npoi.Mapper** = convention-based _Excel_ mapper for NPOI
-* **Rx.NET** (_ReactiveX_) = Observer pattern applied to async streams as iterables (debounce & co)
-  * See [ReactiveX](https://reactivex.io) = cross-platform asynchronous programming (eg debounce) with observable streams API (for eg .NET, Java, JavaScript)
-* **Seq** = real-time search/analysis server for structured logs & traces, basically a JSON events viewer UI with search/alerting capabilities
-* **Serilog** (Serialized log) = simple diagnostic logging to files/console/elsewhere, extending .NET format strings with a simple message templates DSL
-* **Simple Injector** = FOSS simple DI library for aging .NET frameworks (.NET 5, .NET Standard, UWP, Mono, Xamarin)
-* **Specflow** = FOSS behavior-driven development (BDD) framwork, as a **Visual Studio extension**
-* **Syncfusion** = Web, Desktop, & Mobile UI components (for .NET & JS, à la Telerik)
-* [System.IO.Abstractions](https://www.nuget.org/packages/System.IO.Abstractions) = like `System.IO.File` but via injectable instance (instead of static) & mock-able
-* **Telerik** = UI controls suite for .NET & JS (_Kendo UI for jQuery_ for HTML5 UI components)
-* **Topshelf** = enables to run an application as either a console or (Windows) service - for ease of debugging
-
-### Tools
-
-* **.NET Reflector** = .NET decompiler (_$94_)
-* **dotPeek** (_JetBrains_) = .NET decompiler
-* **ILSpy** = .NET assembly decompiler
-* **JustDecompile** (_Telerik_) = .NET assembly decompiler

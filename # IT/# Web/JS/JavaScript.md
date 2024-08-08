@@ -67,8 +67,8 @@
 
 ### Collections
 
-* [Sets](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) = basically Hashtables of (unique) values
-  * `Set.add()` adds a value only if it does not appear in the set yet (does not raise error, it's just idempotent)
+* [Sets](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) = basically hashtables of (unique) values
+  * `Set.add()` adds a value if it does not already appear in the set yet (does not raise error, it's just idempotent)
 
 #### Arrays
 
@@ -131,6 +131,7 @@ See <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statement
 * **Next.js** = _React_-based open-source web development framework for server-side (universal App-to-plain-HTML on the server side instead of the client) rendering & static website generation (by _Vercel_)
 * **Nuxt.js** = _Vue.js_ FOSS library similar to _Next.js_ (but based on , _Nitro_ & _Vite_)
   * **Nuxt UI** = UI library for Nuxt
+* **Polymer** = open-source JavaScript library (by Google) for building web applications via **Web Components**
 * **Quasar** = _Vue.js_ cross-platform framework
 * **React** = FOSS front-end (JavaScript) library for building UIs based on components, can be used to develop SPAs, mobile or server-rendered apps (via additional frameworks eg _Next.js_)
   * uses virtual DOM
@@ -143,13 +144,14 @@ See <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statement
 * **SST** = _Next.js, Svelte or Astro_ AWS front/backend platform
 * **Svelte** =
 * **SvelteKit** =
+* **Kendo UI** (Telerik) = JavaScript UI library for jQuery, Angular, React & Vue
 * **TodoMVC** = same to-do web application implemented in a variety of JavaScript-affine UI frameworks (eg Angular, React, Vue), to use as guide/examples
 * **Vite** = build tool
 * **WYMeditor** = JavaScript WYSIWYM XHTML editor (_discontinued_)
 
 ### PWA
 
-* **Progressive Web Application** (PWA) = web app delivered via the web, for web browsers or as a mobile app with near-full native capabilities (eg push notification, desktop icon, work offline)
+* **Progressive Web Application** (PWA) = delivered via the web, for browsers or as a mobile app with near-full native capabilities (eg push notif, desktop icon, work offline, phone API access)
 * _Bubblewrap_ = set of CLI tools & libraries to create an Android app launching a PWA (via a Trusted Web Activity)
 * _HNPWA_ (Hacker News Progressive Web App) = list of unofficial Hacker News client PWA in a variety of JavaScript-affine UI frameworks, to use as guide/examples
 * _Lightouse_ = open-source Chrome DevTools extension (or Node module) that audits/scores a web page/app quality (with metrics, diagnostics, accessibility)
@@ -159,9 +161,10 @@ See <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statement
 
 ### jQuery
 
+* **jQuery Mobile** = touch-optimized mobile/web framework as a JavaScript library
 * **jQuery UI** = UI interactions, effects, widgets & themes for jQuery
-* [scrollTop()](https://api.jquery.com/scrolltop) = gets/sets vertical position of the scroll bar (also: `scrollLeft`)
-* [offset()](https://api.jquery.com/offset) = gets/sets the relative coordinates
+* (element)[.scrollTop()](https://api.jquery.com/scrolltop) = gets/sets vertical position of the scroll bar (also: `element.scrollLeft()`)
+* (element)[.offset()](https://api.jquery.com/offset) = gets/sets the relative coordinates (`.top`)
 
 ### [ag-Grid](https://www.ag-grid.com/javascript-grid-cell-editing/)
 

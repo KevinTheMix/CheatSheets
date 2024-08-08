@@ -9,10 +9,12 @@
   * Systems in series = `A x A` (eg `0.9 x 0.9 = 0.81` so global availability decreases)
   * Systems in parallel = `1 - (1-A)²` (eg `1-(1-0.9)²` = `1-(0.1)²` = `1-0.01` = `0.99` so global availability increases)
 * **Bottlenecks** = system part that degrades the entire system's performance when congested
+* **Function/Lexical closure** = function (eg anonymous or lambda) + its captured context (ie values/references of inbound parameters at closure creation)
 * **Dependability** = Availability, Reliability, Integrity, (Security), Safety, Maintainability, Confidentiality
 * **Dependency Injection** (DI) = programming technique where object or function _receives_ others objects/functions as opposed to instantiating them internally
+* **Domain-specific language** (DSL) = computer language (ie programming, markup, data, etc) specialized to a particular application domain (eg HTML)
 * **Encapsulation** = cacher le mécanisme interne d'un objet en vue de forcer une certaine utilisation et garantir son intégrité
-* **Enterprise service bus** = communication system between mutually interacting software SOA applications, special client-server variant where each application can behave as either
+* **Entreprise Service Bus** (ESB) = communication system between distributed SOA applications, a special case of client-server in which any application can behave as either
 * **Façade** = layer holding controllers
 * **Mixin** = in OO, a feature-able class that can be _included_ without being inherited from (eg C# `IEquatable`, Ruby include, JS extend/assign), promoting reusability & multiple inheritance
 * **Module** = une fonction ou une classe ou un fichier, selon les langages

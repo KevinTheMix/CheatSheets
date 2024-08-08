@@ -1,6 +1,6 @@
 # Android Studio
 
-Google's official android IDE.
+Google's official Android IDE.
 
 ## Glossary
 

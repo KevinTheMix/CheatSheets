@@ -17,7 +17,7 @@
 
 ## [Commands](https://en.wikipedia.org/wiki/List_of_Unix_commands)
 
-* [`AWK`](https://en.wikipedia.org/wiki/AWK) = pattern scanning and filtering (actually a full-fledged domain-specific language used as a data extraction and reporting tool)
+* [`AWK`](https://en.wikipedia.org/wiki/AWK) = full-fledged domain-specific language for text processing (filter & pattern search) and data extraction/reporting tool
 * `cal` = calendar
   * `cal 9 1752` = specific month
 * [`cat`](https://en.wikipedia.org/wiki/Cat_(Unix)) (con**cat**enate) = read file content & write it to standard output
@@ -47,7 +47,7 @@
   * `ls -l` = long
   * `ls abc*` = lists files starting with _abc_
 * `man`
-  * `man {command}` = help on _command_ e.g. `man who`
+  * `man {command}` = help on _command_ eg `man who`
   * `man man` = help on help
 * `mkdir` = make directory (`-p /a/b/c` = creates folders in hierarchy if they don't exist)
 * `(un)mount {path eg /dev/floppy}` = (un)mount
@@ -61,7 +61,7 @@
   * `rm {dir} -rf` = delete directory without confirmation
 * `rmdir` = remove directory
 * `sed` (**s**tream **ed**itor) = parse and transform text
-  * `sed s` = substitute e.g. `echo Sunday | sed 's/day/night/'` outputs _Sunnight_
+  * `sed s` = substitute eg `echo Sunday | sed 's/day/night/'` outputs _Sunnight_
 * `stat {file}` = file inode information
 * `uname` = display system information (`-a`=all, `-n`=system (host) name)
 * `which {command}` = display the location of an executable

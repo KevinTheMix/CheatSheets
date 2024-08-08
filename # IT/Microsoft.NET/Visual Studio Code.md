@@ -2,16 +2,15 @@
 
 A good text editor.
 
-## Tips
+## Quick Tips
 
-* New files must first be saved for certain shortcuts to become available based on their extension (eg Markdown tidying)
-* Breadcrumb path fragments are browsable seamlessly between containing file system & document inner sections
 * Code comparison updates in real-time
-
+* Breadcrumb path fragments are browsable seamlessly between containing file system & document inner sections
 * [Fireship: 25 VS Code Productivity Tips](https://www.youtube.com/watch?v=ifTF3ags0XI)
-* [Visual Studio Code (online)](https://vscode.dev)
 
 ## Environment
+
+* [Visual Studio Code (online)](https://vscode.dev)
 
 ### Settings
 
@@ -68,7 +67,7 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
   * Type `#` to search global symbols
   * Type `@` to search local blocks
 * `Ctrl + R` = open Recent
-* `Ctrl + T` = search global symbols (classes, properties, methods, etc.), works with camelCase initials search
+* `Ctrl + T` = search global symbols (eg classes, properties, methods), works with camelCase initials search
 * `Ctrl + Shift + .` = local blocks
 * `Ctrl + Shift + Enter` = Insert line above
 * `Ctrl + Shift + F` = Search
@@ -122,3 +121,4 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
   * [Vue VSCode Snippets](https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-snippets)
     * `vdata` = Vue data snippet
     * `vmethod` = Vue methods snippet
+* [Webview API](https://code.visualstudio.com/api/extension-guides/webview) = à la iframe for custom VS Code extension

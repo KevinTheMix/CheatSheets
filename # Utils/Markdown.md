@@ -24,7 +24,8 @@
   4. 4
   * node
 * [Reference to same file](#eof)
-* [Reference to another file](<../Design Thinking.md>) (use inner `<>` to handle spaces)
+* [Reference to another file](<../Design Thinking.md>)
+* [URL containing spaces](<https://www.facebook.com/search/top/?q=game beurs>) =  use inner `<>` to handle spaces
 * [Variants](https://en.wikipedia.org/wiki/Markdown#Variants) = GitHub Flavored & co
   * `log<sub>10</sub>` (non-standard)
   * `var<sup>10</sup>` (non-standard)

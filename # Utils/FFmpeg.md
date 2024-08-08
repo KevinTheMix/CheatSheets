@@ -2,6 +2,13 @@
 
 FFmpeg is a FOSS set of libraries for manipulating video, audio files/streams.
 
+## Quick Tips
+
+* [Download m3u8 playlists](https://old.reddit.com/r/youtubedl/comments/13yctys/comment/jmmgbo0) (eg loom)
+  * Download the master, audio & video m3u8 playlists locally
+  * Edit media URLs in audio/video playlists to include host root (eg `https://…`) and GET parameters (eg `?Signature=…`), which can be found in the playlists request)
+  * Feed the local master playlist to ffmpeg: `ffmpeg -allowed_extensions ALL -protocol_whitelist 'crypto,file,http,https,tls,tcp,ts' -i master.m3u8 -c copy out.ts`
+
 ## Glossary
 
 * **AV1** = video coding format for transmissions over internet (successor to VP9)

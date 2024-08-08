@@ -29,6 +29,7 @@
 * **Sysinternals** = various semi-official Microsoft system utilities (Process Explorer, Windows Task Manager, Autoruns, RootkitRevealer, defragmentation tools)
 * **Ultimate Boot CD** = bootable CD-ROM containing system & diagnostics tools (BIOS CMOS wipe, CPU stress testing, boot management, data/disk recovery/erasing, partitioning)
 
+* _BitDefender_ = good antivirus
 * _BitLocker_ = encryption for Windows 7 Ultimate, Enterprise
 * _Norton Insight_ = whitelists files based on reputation
 * _Norton Power Eraser_ = small portable executable that scans a computer system (via _Norton Insight_)
@@ -50,7 +51,10 @@
 * **MagicDisc** = virtual drive for MagicISO (mounts images, _discontinued_)
 * **MagicISO** = create, read & burn ISO/CUE/BIN images (_discontinued_, trialware)
 * **(Norton) Ghost** = disk cloning & backup (_discontinued_)
+* **PhotoRec** (@Christophe Grenier) = FOSS advanced file recovery tool using data carving (ie reassembling file frags w/o metadata)
+* **Recuva** = free but proprietary files recovery/undeletion software for Windows
 * **Rufus** = create bootable USB flash drives (akin to GNU dd)
+* **TestDisk** (@Christophe Grenier) = FOSS lost & corrupted partition/filesystems recovery tool
 * **UIF to ISO** = converts UIF image to ISO image
 * **Ventoy** = FOSS to create bootable USB drive from ISO, WIM images
 * **WinCDEmu** = FOSS disk image/ISO mounting (à la Daemon Tools)
@@ -69,12 +73,16 @@
 * **Parrot Security OS** = FOSS portable Debian-based OS with 600 tools (for pentesting, security & development)
 * **Tails** (aka _The Amnesic Incognito Live System_) = secure DVD/USB Debian Linux Tor network based OS, writes to RAM not HDD (_1300MB_)
 * **WSL** (_Windows Subsystem for Linux_) = manually installable (via PowerShell) feature to run a Linux environment in Windows 10+
-* **Wine** = Windows runtime for Linux & macOS
+* **Wine** = FOSS compatibility layer between Windows applications/games and Unix-like OSes (ie Linux & macOS)
 * Custom OS = alternative/unapproved modified & lighter Windows versions (XP, 7, 10, 11) without telemetry
   * [tiny10&tiny11](https://tiny10.com) = half footprint Windows 10/11 (made via _NTLite_), with local account, without Secure Boot & TPM
   * [NTLite](https://www.ntlite.com) = edit a Windows image by selecting desired options
   * [AtlasOS](https://atlasos.net) = FOSS modified/optimized (bloatware-free) Windows intended for gamers with a vibrant community
     * First install a clean Windows with a legit activation key, then install AtlasOS that cleans on top
+* Hypervisor = soft/firm/hard-ware creates & runs a VM
+  * **Oracle VirtualBox**
+  * **VMWare Workstation (Pro)**
+  * **Hyper-V** (Microsoft)
 
 ### Tweak
 

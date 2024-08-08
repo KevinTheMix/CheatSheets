@@ -1,10 +1,13 @@
 # Media
 
+* Neveo = deliver someone one printed photo album par month
+
 ## Audio
 
 * **Able Rawer** = RAW images viewer/converter
 * **Audacity** = digital audio editing & recording
 * [BlockTheSpot](https://github.com/mrpond/BlockTheSpot) = blocks ad for Spotify on Windows (note: _not the Microsoft Store version_)
+* **CDex** = free audio CD rip/convert
 * **CopyTrans** = iTunes alternative suite
 * **FastStone Image Viewer** = image viewer & editor
 * **FL Studio** (formerly **Fruity Loops**, _Image-Line_) = DAW ($189)
@@ -38,6 +41,7 @@
 * **Flameshot** = FOSS screenshot tool
 * **GIMP** (GNU Image Manipulation Program) = FOSS raster graphics editor (image manipulation/retouching, editing, drawing)
 * **Greenshot** = FOSS screenshot, annotate & share tool (for Windows)
+* [Iconfinder](https://www.iconfinder.com) = online catalogue of graphics (icons, illustrations, 3D, stickers) by independent designers
 * **Inkscape** = FOSS vector graphics editor (for cartoons, clip art, logos, typography, flowcharting)
 * **Krita** = FOSS raster graphics editor (for digital art & 2D animation)
 * [Canva](https://www.canva.com) = online collaborative/multiplayer visual content design tool
@@ -57,15 +61,16 @@
 * **BS.Player** = media player
 * **CamStudio** = FOSS video recorder
 * **Da Vinci Resolve** = free(mium) color/visual effects/post-production video editor
-* **FFmpeg** = FOSS video, audio record/convert/stream
+* **FFmpeg** = FOSS video & audio download/convert/record/stream CLI
 * **Fraps** = FPS viewer, screen recording
 * **Gspot** = analyze installed codecs
+* **Handbrake** = FOSS video transcoder
 * **MakeMKV** = DVD & Blu-ray transcoder
 * **Media Player Classic** = FOSS lightweight media player
 * **Open Broadcaster Software** (OBS) = FOSS for video recording & live streaming
 * **Shotcut** = cross-platform video editor
 * **SplitCam** = video/games live streaming/recording, webcam splitting/effects
-* **VirtualDub** = video capture & editing (w/ Deshaker plugin)
+* **VirtualDub** = video capture & editing (w/ _Deshaker_ plugin)
 
 ## Office/Text
 

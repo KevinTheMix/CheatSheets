@@ -14,7 +14,8 @@
 
 ## Plugins
 
-* **FingerText** = key macros
-* **Explorer** = project directory hierarchy
-* **JSTool**
 * **Compare**
+* **Explorer** = project directory hierarchy
+* **FingerText** = key macros
+* **JSTool**
+* [Markdown Syntax Highlighting for Notepad++](https://github.com/Edditoria/markdown-plus-plus)

@@ -26,6 +26,7 @@
   * `control.exe srchadmin.dll` = Indexing Options (delete & rebuild index)
   * `diskpart` = disk/partition/volume management CLI (`list disk`, `select disk #`, `list partition`, `select partition #`, `delete partition override`)
   * `dxdiag` = DirectX Diagnostics Tool
+  * `msinfo32` = System Information (OS, hardware, environment variables, services)
   * `mstsc(.exe)` = Remote Desktop Connection
   * `optionalfeatures` = Turn Windows features on or off
   * `pnputil` = drivers/Plug&Play utility (can force-delete drivers, run as admin)
@@ -70,6 +71,7 @@
 
 * `cls` = clear screen
 * `date`
+* `certlm.msc` = Certificates
 * `copy /b {image} + {hidden} {output}` = hide file in an image file (output image must be same extension/type as input)
 * `echo koko`
 * `@echo [on|off]` = turns prompt on/off
@@ -80,6 +82,7 @@
 * `goto {label}` goes to `:{label}`
 * `if {condition} {statement}` (condition can be eg `exist {path}`)
 * `pause`
+* `powercfg` = power system settings (eg `/A` lists available sleep states)
 * `set {VAR}` = assignment
 * `setlocal`
 * `time`

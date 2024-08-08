@@ -63,8 +63,8 @@ For instance, in this example at <https://benjii.me/2018/01/expression-projectio
 
 * `Any<T>([Func])` = always faster than `Enumerable.Count() > 0`, because the latter has to count the full collection, whilst the former returns true ASAP
 * `Enumerable.GroupBy()` = groups the elements of a sequence, with deferred execution
-* `Enumerable.ToDictionary()` = maps one key -> one value (1:1)
-* `Enumerable.ToLookup()` = maps one key -> n values (1:n), immediately (not deferred), querying a key that does not exist returns an empty sequence (w/o error)
+* `Enumerable.ToDictionary()` = maps one key -> one value (1:1), [mutable](https://stackoverflow.com/a/5659080/3559724)
+* `Enumerable.ToLookup()` = maps one key -> n values (1:n), unmutable, immediately (not deferred), querying a key that does not exist returns an empty sequence (w/o error)
 * `Enumerable.Empty<T>()` (not an extension) = returns an empty (but non-null) `IEnumerable<T>` (actually a `System.Linq.EmptyEnumerable<T>`) that yields 0 elements
   * More efficient than instantiating & returning a new `List<T>()`
 * `AsEnumerable()` = changes the compile type to `IEnumerable<T>`, usually applied on an `IQueryable` to use the L2O methods `Queryable` does not offer

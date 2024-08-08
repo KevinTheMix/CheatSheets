@@ -44,7 +44,7 @@
   * State Management (_get\_it_, _provider_ = synctactic sugar for built-in inherited widget/stream builder & compatible with Firebase)
 * [Top 10 tips I learned at 2M+ users](https://medium.com/@zharfan104/top-10-flutter-developer-tips-i-learned-after-2-million-users-ab03eda10a55)
 
-### [Flutter](https://docs.flutter.dev/)
+### [Flutter](https://docs.flutter.dev)
 
 * [Flutter for Android developers](https://docs.flutter.dev/get-started/flutter-for/android-devs)
   * Flutter does not have activities; rather navigation via routes within same activity
@@ -107,20 +107,20 @@
     * [Eric Seidel - runApp twice](https://stackoverflow.com/a/44379895/3559724)
     * [Collin Jackson - Preventing initial load stuttering](https://stackoverflow.com/a/44379991/3559724)
   * [Rémi Rousselet - Authenticated routes](https://stackoverflow.com/a/47810160/3559724)
-  * [Splash screen](https://blog.logrocket.com/make-splash-screen-flutter/)
+  * [Splash screen](https://blog.logrocket.com/make-splash-screen-flutter)
 
-* [Material Design 3](https://m3.material.io/)
+* [Material Design 3](https://m3.material.io)
   * [Material Typography](https://m3.material.io/styles/typography/fonts)
 
 * Themeing
-  * [AppBar customization](https://www.geeksforgeeks.org/flutter-appbar-widget/)
-  * [Reddit: ThemeData is a mess](https://www.reddit.com/r/FlutterDev/comments/xjlman/themedata_is_a_mess/)
+  * [AppBar customization](https://www.geeksforgeeks.org/flutter-appbar-widget)
+  * [Reddit: ThemeData is a mess](https://www.reddit.com/r/FlutterDev/comments/xjlman/themedata_is_a_mess)
   * Dark theme(ing)
   * Colors
     * Find synergetic [Color palettes](https://coolors.co/palettes/trending)
     * [Material.io - Picking colors](https://material.io/design/color/the-color-system.html#tools-for-picking-colors) (cyan, teal)
   * Fonts
-    * [Google Fonts](https://fonts.google.com/)
+    * [Google Fonts](https://fonts.google.com)
   * Icons, Images
     * **AnimatedIcon** = like Icons.abc, but animated (`icon: AnimatedIcon.play_pause, progress: myAnimation`, `myAnimation.forward/reverse()`)
     * [Pack images for each device size](https://docs.flutter.dev/development/ui/assets-and-images)
@@ -144,28 +144,28 @@
   * [Flutter: Pragmatic State Management Using Provider (The Boring Flutter Development Show)](https://www.youtube.com/watch?v=HrBiNHEqSYU)
   * [Fireship: State Management Grand Tour](https://www.youtube.com/watch?v=3tm-R7ymwhc) = **StatefulBuilder**, _RxDart_, _get\_it_, _bloc_
   * [Flutter state management for minimalists](https://suragch.medium.com/flutter-state-management-for-minimalists-4c71a2f2f0c1)
-  * [Flutter Redux](https://blog.logrocket.com/flutter-redux-complete-tutorial-with-examples/) = DI for data using InheritedWidgets
+  * [Flutter Redux](https://blog.logrocket.com/flutter-redux-complete-tutorial-with-examples) = DI for data using InheritedWidgets
   * Bloc (Business Logic Component)
-    * [What is the BLoC pattern?](https://www.flutterclutter.dev/flutter/basics/what-is-the-bloc-pattern/2021/2084/)
-    * [Streams, Bloc and Reactive Programming](https://www.didierboelens.com/2018/08/reactive-programming-streams-bloc/)
+    * [What is the BLoC pattern?](https://www.flutterclutter.dev/flutter/basics/what-is-the-bloc-pattern/2021/2084)
+    * [Streams, Bloc and Reactive Programming](https://www.didierboelens.com/2018/08/reactive-programming-streams-bloc)
     * [Bloc Login tutorial](https://bloclibrary.dev/#/flutterlogintutorial)
   * Provider
     * [Enrico Ori: A simple guide for Provider](https://medium.com/theotherdev-s/starting-with-flutter-a-simple-guide-for-provider-401b25957989)
 
 * Archi
-  * [Flutter Architecture Samples](https://fluttersamples.com/)
-  * [Aglowid: Flutter Best Practices to Follow in 2022](https://aglowiditsolutions.com/blog/flutter-best-practices/)
+  * [Flutter Architecture Samples](https://fluttersamples.com)
+  * [Aglowid: Flutter Best Practices to Follow in 2022](https://aglowiditsolutions.com/blog/flutter-best-practices)
   * [Conner Aldrich: Code Organization](https://medium.com/flutter-community/flutter-code-organization-revised-b09ad5cef7f6)
   * [Aashish Vichare: Flutter Widgets lifecycle](https://medium.com/nerd-for-tech/flutter-widgets-lifecycle-widget-tree-and-element-tree-ac41ab1918da)
   * [JediPixels: Widget Tree & Element Tree](https://www.youtube.com/watch?v=4W8eN_6mO2E)
-  * [Didier Boelens: Flutter internals](https://www.didierboelens.com/2019/09/flutter-internals/) ("there is no Widget Tree"? may be incorrect/wrong)
+  * [Didier Boelens: Flutter internals](https://www.didierboelens.com/2019/09/flutter-internals) ("there is no Widget Tree"? may be incorrect/wrong)
   * [Platform Channels](https://docs.flutter.dev/development/platform-integration/platform-channels) = platform-specific code/APIs
 
 * [Awesome Flutter](https://github.com/Solido/awesome-flutter) = github index of Flutter resources
   * [Ins and Outs of Flutter Web by Nash](https://github.com/Solido/awesome-flutter)
   * [https://medium.com/@diegoveloper](https://medium.com/@diegoveloper)
     * [Communication between Widgets](https://medium.com/flutter-community/flutter-communication-between-widgets-f5590230df1e)
-  * [Awesome Flutter tips & tricks](https://github.com/erluxman/awesomefluttertips/)
+  * [Awesome Flutter tips & tricks](https://github.com/erluxman/awesomefluttertips)
   * [Todo List built with Flutter](https://github.com/lesnitsky/todolist_flutter)
 * [Flutter in Focus: Flutter Performance Tips](https://www.youtube.com/watch?v=PKGguGUwSYE)
 
@@ -189,7 +189,7 @@
 
 * [RawKeyboardListener](https://stackoverflow.com/a/58321483/3559724)
 
-* [Flutter Search Bar](https://www.geeksforgeeks.org/flutter-search-bar/)
+* [Flutter Search Bar](https://www.geeksforgeeks.org/flutter-search-bar)
 
 * [Optimizing](https://www.youtube.com/watch?v=vVg9It7cOfY)
 

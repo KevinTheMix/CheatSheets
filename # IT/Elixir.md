@@ -11,6 +11,8 @@ Possesses the same qualities as Erlang: concurrency & communication, scalability
   * That characteristic makes data reuse super safe, especially in a concurrent setting
   * It also makes memory usage more efficient, since multiple parts of an application can use a single piece data, staving off duplication.
   * E.g. the compositional nature of lists (data structure), that can chain existing sublists in order to make new combined ones.
+* **Plataformatec** = Elixir's company (José Valim)
+* **Phoenix** = Elixir's web framework
 
 ## API
 

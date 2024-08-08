@@ -1,8 +1,7 @@
 # Dart
 
-OO programming language developed by Google designed for fast (with QoL features such as Hot Reload) multi-platform (web, mobile, desktop, server) app development, that can be compiled to machine code, JavaScript or WebAssembly.
-
-Dart draws its inspiration from major and familiar languages (C#, Java, JavaScript).
+OO programming language by Google designed for fast (eg QoL features such as Hot Reload) multi-platform (web, mobile, desktop, server) app development.
+Dart draws its inspiration from major and familiar languages (C#, Java, JavaScript) and can be compiled to machine code, JavaScript or WebAssembly.
 
 Features:
 
@@ -27,7 +26,7 @@ Don't forget:
 ## Environment
 
 * [DartPad](https://dartpad.dev)
-* [DartPad](https://dartpad.github.io/)
+* [DartPad](https://dartpad.github.io)
 * [DartPad](https://dartpad.dartlang.org)
 
 * [Libraries and visibility](https://dart.dev/guides/language/language-tour#libraries-and-visibility)
@@ -61,7 +60,7 @@ Don't forget:
 * `final` (à la C# `readonly`) = assigned once, either at declaration, or in constructor's initiliazation list (**not its body**)
 * `late` = declare a non-nullable variable w/o initialization & fix static warnings that it can be _null_ (when you know it won't be)
 * `var` = type is (statically) infered from right-side value (it is **not** dynamic). This is the prefered way of initializing variables.
-* `dynamic` = [dynamic](https://www.w3schools.io/languages/dart-dynamic-type/)
+* `dynamic` = [dynamic](https://www.w3schools.io/languages/dart-dynamic-type)
   * _default_ type when none is specified
   * [dynamic vs Object](https://stackoverflow.com/a/31295855/3559724)
 
@@ -279,7 +278,7 @@ Key-value object. Both Key & Value can be any type. Keys are unique (not values)
     * [Factory](https://dart.dev/guides/language/language-tour#factory-constructors) = static constructor
       * can be used for caching (singleton returning single static instance) or polymorphism (via switch-case-return subclasses)
       * eg `factory Animal() { return single/different Animal(s) here }`
-  * [Constructors](https://www.freecodecamp.org/news/constructors-in-dart/)
+  * [Constructors](https://www.freecodecamp.org/news/constructors-in-dart)
   * [Exploring Dart Constructors](https://medium.flutterdevs.com/exploring-dart-constructors-345398a0e4c5)
 * Getters & Setters
   * `get height { return this._height}`
@@ -300,7 +299,7 @@ Multiple inheritance is not permitted: every class (except for `Object`) has exa
   * any class without a constructor can be a mixin eg `class ConstructorlessClass {void fun() {…}}` (make it _abstract_ to prevent instanciation)
   * mixed-in methods can be overriden eg `mixin KokoMixin {void fun() {…}}`, then `class Koko with KokoMixin {@override fun() {…}}`
   * it is possible to combine extension with mixins eg `class AB extends Parent with A, B {}`
-* [extends vs with vs implements](https://www.geeksforgeeks.org/dart-extends-vs-with-vs-implements/)
+* [extends vs with vs implements](https://www.geeksforgeeks.org/dart-extends-vs-with-vs-implements)
 * A member in a child class can override a parent member of different nature with same name
   * eg a [property overriding a getter](https://flutterfromdotnet.hashnode.dev/flutter-first-impressions)
 * `constructor({required super.property})` = shorthand to pass on a named parameter to  _super_ constructor (e.g. an **InheritedWidget**'s _child_)
@@ -315,9 +314,9 @@ Multiple inheritance is not permitted: every class (except for `Object`) has exa
   * `yield` statement is for immediately available, produced one-by-one values _on-demand_
   * `yield*` allows to yield an entire Iterable (ie its values one a time); see [Generator Functions](https://www.youtube.com/watch?v=TF-TBsgIErY)
 
-#### [Future](https://dart-tutorial.com/asynchronous-programming/future-in-dart/)
+#### [Future](https://dart-tutorial.com/asynchronous-programming/future-in-dart)
 
-`async-await` [is the recommended choice as it improves readability](https://dart.dev/guides/language/effective-dart/usage#prefer-asyncawait-over-using-raw-futures), but cannot be used in some scenarii (cannot make some methods async such as initState or [constructors](https://www.reddit.com/r/dartlang/comments/a4da0q/when_to_use_await_vs_then/ebevh52/), we cast multiple requests at the same time and want them to run together instead of blocking on each one, although we can use [Future.wait](https://stackoverflow.com/a/42176121/3559724) for that scenario).
+`async-await` [is the recommended choice as it improves readability](https://dart.dev/guides/language/effective-dart/usage#prefer-asyncawait-over-using-raw-futures), but cannot be used in some scenarii (cannot make some methods async such as initState or [constructors](https://www.reddit.com/r/dartlang/comments/a4da0q/when_to_use_await_vs_then/ebevh52), we cast multiple requests at the same time and want them to run together instead of blocking on each one, although we can use [Future.wait](https://stackoverflow.com/a/42176121/3559724) for that scenario).
 
 * [Future for beginners](https://medium.com/flutter-community/a-guide-to-using-futures-in-flutter-for-beginners-ebeddfbfb967)
 * `async-await Future` vs `Future.then()` [are different](https://stackoverflow.com/a/54515559/3559724) (former is blocking; latter is a callback)
@@ -369,7 +368,7 @@ Streams are (async) like Futures but for Iterables, where values are produced to
 * `map(…)`
 * `foreach(…)`
 
-## Libraries & [Packages](https://pub.dev/)
+## Libraries & [Packages](https://pub.dev)
 
 * _dart:math_ * `Random().nextInt(n)`
 * _dart:convert_ = JSON encode/decode

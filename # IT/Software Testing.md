@@ -1,7 +1,8 @@
-# Testing
+# Software Testing
 
 ## Glossary
 
+* **Behavior-driven development** (BDD) = naming tests using domain language (DSL) & natural-language constructs (ie English) to describe code behavior
 * **Defect Rate/Density** = defect / KLOC (1000 lines of code)
 * **Mock** = hi-jacks existing BL/DL methods and replaces their implementation to let them return arbitrary values instead (eg not make a real DB call)
   * [Mock out dependencies, not the actual classes under test](https://stackoverflow.com/a/2277068)
@@ -18,12 +19,17 @@
   * **Validation** = ensures the system conforms to the customer's expectations including emergent properties (ie green light), ie are we building the right product?
   * **Verification** = checking the software conforms to specification & meets functional & non-functional requirements, ie are we building the product right?
 * Types of tests
-  * **Unit Test** = path, **structural**, whitebox, interface consistent, coverage analysis
-  * **Acceptance/Release Test** = blackbox, Functional, Acceptance, Validation, Requirements Testing
-  * **Integration Test** = (interface), Integration tests, **regression**
-  * **System Test** = Stress-testing, Black-Box, failure, behaviour, Functional, Non-functional
+  * **Unit** = does a unit of code work as intended (path, **structural**, whitebox, interface consistent, coverage analysis)
+  * **Acceptance/Release** = does a codebase conform to its specification (blackbox, Functional, Acceptance, Validation, Requirements Testing)
+  * **Integration** = are multiple parts of a system working well together (interface, Integration tests, **regression**)
+  * **System** (end-to-end) = does complete system work (Stress-testing, Black-Box, failure, behaviour, Functional, Non-functional)
 * Types of errors
   * **Defect** (aka **Bug**) = deviation from expected behavior due to flaws in code or design (related to Validation)
   * **Error** (aka **Mistake**) = coder mistake, ie code logic does not follow specification due to misunderstanding or oversight
   * **Failure** = accumulation of defects leading to information loss
   * **Fault** = unintended behavior by a program, ie a usecase that wasn't forethought, potentially leading to a failure
+
+## Tools
+
+* **Robot framework** = Python-based generic test automation framework for acceptance testing & test-driven development, a keyword-driven testing framework using tabular test data syntax
+  * [RIDE](https://github.com/robotframework/RIDE) = Robot Framework IDE (edit _.robot_ files)

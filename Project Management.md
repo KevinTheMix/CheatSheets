@@ -1,20 +1,20 @@
-# Scrum
-
-Answers the question "how do we self-organize as a _development_ team?".
-Seems easy on the surface, actually digs deep (social/company/national culture).
+# Project Management
 
 ## Quick Tips
 
-* **Freehand** (by _InVision_, acquired by **Miro**) = collaborative/multiplayer workspace
-* **Miro** = collaborative/multiplayer workspace
-* **Mural** = collaborative/multiplayer workspace
-* [Scrum Retros](https://www.funretrospectives.com)
+* [FunRetrospectives](https://www.funretrospectives.com)
+* Online collaborative/multiplayer workspaces
+  * [Miro](https://miro.com)
+  * [Mural](https://www.mural.co)
+  * [Freehand](https://www.freehandapp.com) (by _InVision_, acquired by **Miro**)
+* Basecamp = project management platform for small teams (blog, todo, files, document, (group) chat, calendar, taskboard, overview, log)
 
 ## Glossary
 
 * **Agile** = adaptable, reactive framework promoting teamwork, aimed to combat failed waterfall projects lacking in communication, allegedly beats the alternative
 * **Definition of Done** = when a US is considered complete
 * **Product Owner** = responsible for USs
+* **Scrum** = aswers the question "how do we self-organize as a _development_ team?", seems easy on the surface, actually digs deep (social/company/national culture)
 * **Scrum Master** = team helper/support (eg taskboard redactor), shield against outside forces, process > progress
 * **Sprint Review** = prepared & rehearsed demo presentation for the layman (no in-depth figures, syntesize) in collaboration with PO
   * Presentation: establish/remind project context then sprint, each team member presents (or at least gets credited/mentioned)

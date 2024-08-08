@@ -9,6 +9,7 @@ Most of the WPF API is contained in _PresentationFramework.dll_ which contains t
 
 ## Quick Tips
 
+* For real-time debugging, use Live Visual Tree & Live Property Explorer
 * [Never put BL in ViewModel](https://stackoverflow.com/q/16338536/3559724)
 * [VM can call BL, BL notifies via Event aggregator](https://www.codeproject.com/Questions/1233249/Mvvm-model-to-viewmodel-comminication) (promotes loose coupling)
 
@@ -58,13 +59,16 @@ Most of the WPF API is contained in _PresentationFramework.dll_ which contains t
   * [Apply DataTemplates depending on property type](https://stackoverflow.com/a/5011728/3559724), polymorphic-style
 * **Dependency Property** = a property augmented with WPF dependency mechanism, enabling binding capabilities (hierarchical retrieval, conversions, default values)
   * The containing class must inherit from `DependencyObject` (as do all of WPF UI Controls), which provides the `SetValue()` & `GetValue()` methods
-  * DPs are typically (purely conventional and optional) encapsulated by CLR properties that provide a shorthand for calling `Get/SetValue()`
-  * It is only the _target_ property (ie the receiver, on the left of the XAML assign) that needs to be a Dependency Property (eg `<element dep_prop={Binding clr_prop}`)
-  * The source can be either a DP or a CLR property (but **has** to invoke `PropertyChanged` event to benefit from continuous data binding and not only as one-time on creation/initialization)
+  * DPs are typically (purely conventional/optional) encapsulated by CLR properties that provide a shorthand for calling `Get/SetValue()`
+  * Only the left/receiver/target property (of a XAML assign) needs to be a Dependency Property (eg `<element dep_prop={Binding clr_prop}`)
+  * The source can be either a DP or a CLR property (but **has** to invoke `PropertyChanged` event to benefit from continuous data binding, not only as one-time on creation/initialization)
   * In practice, unless you are creating your own controls, you will not need to create your own dependency properties
 * **FrameworkElement** = fundamental base class that for (UI) elements in the visual tree, presents common properties for width/height, margin, alignment
-* **INotifyPropertyChanged** = interface that classes with right-side bound properties must inherit from, that presents a single public event to implement (`PropertyChanged`)
-  * WPF (MVVM) frameworks typically package the boilerplate code to wrap those events in a generic fashion, but it can also be simply [coded by hand](https://stackoverflow.com/a/1316417) (and triggered from property setters)
+* **INotifyPropertyChanged** = interface that is the base for all binding in WPF, presents a single public event to implement (`PropertyChanged`)
+  * Classes with (right-side bound) properties (ie, not DPs) must inherit from it to enable reactivity
+  * MVVM frameworks typically wrap such properties event boilerplate code in a generic fashion
+  * Can also be simply [coded & triggered by hand](https://stackoverflow.com/a/1316417) (eg from property setters)
+  * Classes such as `ObservableCollection` [implement it for free](https://stackoverflow.com/a/4279221/3559724)
 * **ItemsControl** = base class for controls with **Items** & **ItemsSource** properties (eg Combo/ListBox, DataGrid, TabControl - but not panels)
   * **Items** = a static collection of (`FrameworkElement`) objects
   * **ItemsSource** = a bindable IEnumerable that can notify change
@@ -73,11 +77,10 @@ Most of the WPF API is contained in _PresentationFramework.dll_ which contains t
     * **ItemsPanel** (ie **ItemsPanelTemplate**) must be provided to be used by the **ItemsPresenter** (**StackPanel** is the default for the base class)
     * **ItemTemplate** (ie **DataTemplate**) must be provided to display each individual items
 * [Lookless Controls](https://www.codeproject.com/Articles/1056014/WPF-Lookless-Controls)
-  * A .cs class inheriting from _Control_, but doesn't have an associated XAML file (so kinda code-behind only)
+  * A .cs class inheriting from _Control_ that doesn't have an associated XAML file (so kinda code-behind only - note that a custom UserControl doesn't need a XAML file per se)
   * Although called lookless, a default visual template gets automatically generated for it upon creation (in _Themes/Generic.xaml_), which can be easily modified or overriden
   * It is better than a regular UserControl because the visual representation is fully separate from its logic
   * Should be used when the UserControl is to be widely reused (<https://stackoverflow.com/a/2637830> & <https://stackoverflow.com/a/3334780>)
-  * Note that a (custom) UserControl doesn't need a XAML file(!) if it just inherits from UserControl, it will behave like one, plus any additional local class properties & methods
 * **Markup Extensions** = extends XAML features by get/setting properties values during the parsing process (dynamically at runtime, essential for eg **binding**, **resources**, via curly braces `{}` syntax)
   * Note how the entire Bindings markup are surrounded with quotes i.e. `Property="{Binding ...}"` so it's kinda akin to string interpolation/parsing by the WPF engine
 * **ObjectDataSource** = can be used to bind to a (static or [instance](https://stackoverflow.com/a/639494)) method result (with `MethodName` & `MethodParameters`)
@@ -116,6 +119,7 @@ Most of the WPF API is contained in _PresentationFramework.dll_ which contains t
 
 * Border (`.BorderBrush`, `.BorderThickness`)
 * Button, RadioButton (group by `GroupName`), CheckBox (use `.IsThreeState` for "Toggle All", note: `.CheckBox.IsThreeState == False` are still nullable in code-behind)
+* ComboBox's [DisplayMemberPath, SelectedItem, SelectedValuePath](https://stackoverflow.com/a/3797074/3559724)
 * Text
   * TextBlock (not a FrameworkElement) = multi-line, text only
   * Label = single-line control (converted to TextBlock if purely text - no decoration) applied as label to another control
@@ -154,20 +158,10 @@ Debugging WPF can be tricky, because most errors are met during execution rather
 ## Extensions
 
 * [Fody's PropertyChanged](https://github.com/Fody/PropertyChanged) = takes care of the PropertyChanged boilerplate (applies to each class inheriting _INotifyPropertyChanged_)
-* [Xceed's Extended WPF toolkit](https://xceedsoftware.github.io/wpftoolkit) = collection of WPF controls, components and utilities
+* **Infragistics** = UI controls suite for all UI .NET (ASP.NET Core, Blazor, Uno, UWP, WinForms, WinUI, WPF, Xamarin) and JavaScript (Angular, jQuery, React) frameworks
+  * [App Builder](https://appbuilder.indigo.design) = cloud-based WYSIWYG drag&drop UI design tool
 * **Snoop** = WPF trees spying/editing utility (w/o debugger)
-* Telerik
+* **Syncfusion** = Web, Desktop, & Mobile UI components (for .NET & JS, à la Telerik)
+* **Telerik** = .NET & JS UI components/controls suite
   * Grid `IsReadonlyBinding` = specify at the grid level which (boolean) attribute of the row item indicates if the row is read-only
-
-### Prism
-
-Prism is a framework for building loosely coupled, maintainable, and testable XAML applications in WPF, and Xamarin Forms.
-It combines the following components:
-
-* MvvM
-* An [Event Aggregator](https://prismlibrary.com/docs/event-aggregator.html)
-* A Region Manager (à la ASP Master Page)
-* Navigation (from/to) via `INavigationAware` methods
-* DI via either **MEF** or Unity
-
-* [Prism - Using the ViewModelLocator](https://www.youtube.com/watch?v=I_3LxBdvJi4) (naming convention-based)
+* [Xceed's Extended WPF toolkit](https://xceedsoftware.github.io/wpftoolkit) = collection of WPF controls, components and utilities
