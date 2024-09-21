@@ -21,7 +21,9 @@
 * **Protocol Buffers** (aka _Protobuf_) = FOSS cross-platform data format (by Google) used to serialize structured data, described via a WSDL-like Interface Description Language (IDL)
 * **Proxy (Server)** = intermediary in a client-server network, can be forward (at client) or reverse (at server)
 * **Reverse Proxy** = retrieves resources on behalf of clients, as if they originated from them, can be used for security (eg DMZ), caching, logging, monitoring user activty
+* **SSH** (Secure Shell Protocol) = crypto protocol for network services over unsecured network (eg remote login & CLI execution)
 * **SSL** (Secure Sockets Layer) = deprecated encryption protocol replaced with **TLS**
+* **Telnet** = bi-directional client-server application protocol to access virtual terminals of remote system on LAN/Internet
 * **TLS** (Transport Layer Security) = cryptographic protocol to provide communications security over a network
 * **TLS Handshake** = client initiates an asymmetric connexion, then sends a (faster & more efficient for large amounts of data) symmetric key encrypted using server public key found in its certificate
 
@@ -44,8 +46,10 @@
 * _Putty_ = FOSS SSH & telnet client
 * _tcpdump_ = _Unix_ Packet analyzer (uses libcap)
 * _TMeter_ = free network packet traffic analyzer with built-in firewall & NAT capabilities
+* _WebMin_ = web-based server management control panel for Unix systems (eg users, disk quotas, services, config files)
 * _Wget_ = CLI to GET files over HTTP(S), FTP(S)
 * _WireGuard_ = communication protocol & FOSS encrypted VPN (native on Ubuntu)
+  * Cfr Florent depuis machine locale (Vue sur Nginx avec IP dynamique) via tunnel bi-directionnel (en tant que connexion réseau Windows virtuelle) à machine (virtuelle) publique (droplet DigitalOcean pour l'IP fixe)
 * _Wireshark_ = network packets analyzer (uses WinPcap or Npcap)
   * Protocol inspection, live capture & offline analysis, rich VoIP analysis, multi-platform, multiple capture file formats, decryption support, GUI & CLI (TShark)
 * _WinDump_ = _Windows_ port of tcpdump (uses WinPcap)

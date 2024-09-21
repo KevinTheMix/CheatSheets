@@ -13,7 +13,7 @@ Windows inputs (keyboard & mouse) macros/scripting.
 
 Applies to the following key/input.
 
-* Alt =
+* Alt = `!`
 * Ctrl = `^`
 * Shift = `+`
 * Ctrl + Shift = `^+`

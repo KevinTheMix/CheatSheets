@@ -24,7 +24,8 @@ Note that [in Windows, all I/O is asynchronous; synchronous APIs are just a conv
 * `await` = suspends current context & non-blockingly yields control back to caller whilst waiting for an asynchronous operation to conclude (a Task result)
   * If the awaited task is already completed (or is _extremely fast_), the current context is not captured and the execution continues immediately/synchronously
   * When the task completes, the captured context is restored and the remaining code is executed within that context
-  * There may be no statements left in the method, but it **still needs execution time to exit**, hence potential deadlocks if the captured context is blocking  
+  * There may be no statements left in the method, but it **still needs execution time to exit**, hence potential deadlocks if the captured context is blocking
+  * Any code before first await is executed **synchronously** as (background) asynchrony only starts then (compiler will complain if no awaits are found, making method synchronous instead)
   * [A method with multiple await statements will pause itself and resume its caller multiple times](https://stackoverflow.com/a/18445829)
 * `lock` = renders a portion of code atomic, providing thread-safety for sets of indivisible operations in a _concurrent_ context (or usually more complex shared memory configuration)
 
@@ -46,12 +47,12 @@ when CPU control can be yielded while a low-level time-consuming operation is be
   * Can be used to speed up a treatment that can be neatly broken down into parts, or even perform **speculative multithreading**
 * **Parallel Extensions** = Parallel LINQ (PLINQ) + Task Parallel Library (TPL)
 * **Parallel programming** = a subset of concurrent programming focused on executing tasks simultaneously, enabled by the rise of modern CPUs with multiple cores
-* **Preemption** = the act of temporarily interrupting a task being carried out by a computer system, without requiring its cooperation, and with the intention of resuming the task at a later time
+* **Preemption** = the act of temporarily interrupting a task being carried out by a computer system, without requiring its cooperation, and with intention of resuming it at a later time
   * **Time slice/ing** = allotted amount of time for which a process is allowed to run in a preemptive multitasking system
 * **Process** = an isolated executing program instance, running as one (default main launched at startup) or several (created within) threads sharing the same environment and memory space
 * **Speculative multithreading** = a technique used to anticipate a user's action and preload parts of the application as s/he navigates, only to discard those paths not taken
 * **SynchronizationContext** = accesses & captures (eg when encountering an `await`) contextual information on the current execution/thread
-  * Can be saved and made to execute delegates it via `Send(delegate)` (sync) & `Post(delegate)` (async)
+  * Can be saved and made to execute delegates via it ie `Send(delegate)` (sync) & `Post(delegate)` (async)
   * Unlike Console applications who use a threadpool as SynchronizationContext, GUIs employ **a single thread** as SynchronizationContext
   * This can cause unexpected deadlock issues with the same code that would actually work in a (console) unit test
   * [What does SynchronizationContext do?](https://stackoverflow.com/a/18098557/3559724)
@@ -75,6 +76,7 @@ when CPU control can be yielded while a low-level time-consuming operation is be
 * [Microsoft - Asynchronous programming scenarios](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async)
 * [Microsoft - Best Practices in Asynchronous Programming](https://msdn.microsoft.com/en-us/magazine/jj991977.aspx)
   * **Avoid async void**, **Async all the way**, `ConfigureAwait(false)`, _A Common Deadlock Problem When Blocking on Async Code_
+  * Using `Task.Result/Wait()` in **synchronous** code causes it to fully pause/block its (Synchronization)Context, so when inner **async** await (callback part) resumes, it can't
 * [Stephen Cleary - There is no thread](http://blog.stephencleary.com/2013/11/there-is-no-thread.html)
 * [Stephen Cleary - Don't block on async code](http://blog.stephencleary.com/2012/07/dont-block-on-async-code.html)
 * [Stephen Cleary - SynchronizationContext](https://docs.microsoft.com/en-us/archive/msdn-magazine/2011/february/msdn-magazine-parallel-computing-it-s-all-about-the-synchronizationcontext)

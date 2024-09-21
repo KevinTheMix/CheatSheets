@@ -64,7 +64,7 @@
 * **Cloudflare** = CDN, cloud cybersecurity, DDoS mitigation, ICANN domain registration services
 * **Couchbase** = NoSQL Cloud Database
 * **DigitalOcean** = cloud IaaS/PaaS platform, where _Droplet_ is a (Linux) VM
-* **Firebase** = Google's mobile/web apps cloud platform
+* **Firebase** = Google's mobile/web apps development cloud platform (subject to privacy controversies)
 * **Heroku** = cloud PaaS supporting several programming languages (ie _polyglot_, eg Node.js, Ruby, Java, PHP, Python, Go, Scala, Clojure, and others eg Elixir via Buildpacks)
 * **Honeycode** = Amazon's no-code mobile/web app development platform
 * **Hystrix** = Netflix's microservices defensive circuitry (_not actively maintained_)

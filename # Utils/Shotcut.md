@@ -2,8 +2,9 @@
 
 ## Quick Tips
 
+* Change video resolution via Settings > Video Mode > Custom
 * Use built-in Keyframes tab for simple effects transitions (no need for Glaxnimate)
-* The transition effect for crossfaded Timeline clips can be modified in the clip's Properties
+* Transition effect for crossfaded Timeline clips can be modified in that crossfade clip's Properties
 
 ## Glossary
 
@@ -81,6 +82,7 @@
   * `Ctrl + Alt + R` = ripple all tracks (applies ripple edits to all tracks)
   * `Ctrl + Alt + U` = delete
 * Jump/Select/View
+  * `Alt + Left/Right` = browse tracks borders
   * `Double-click` = go to clip beginning
   * `Home/End` = go to track beginning/end
   * `</>` = go to previous/next bookmark

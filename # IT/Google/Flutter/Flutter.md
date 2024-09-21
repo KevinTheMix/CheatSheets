@@ -1,14 +1,12 @@
 # [Flutter](https://gallery.flutter.dev)
 
-Open-source UI SDK by Google for cross (mobile/web/desktop) applications from a single (Dart) codebase, compiled via **Flutter SDK**.
-It builds on top of the Dart language (à la C#'s WPF) and adds a set of UI building blocks called widgets, based on (Google) Material & (Apple) Cupertino design.
+Open-source UI SDK by Google for cross mobile (Android/iOS) & desktop (Windows, MacOS, Linux) & later Web applications from a single (Dart) codebase, compiled via **Flutter SDK**.
+It builds on top of the Dart language (à la C#'s , except with no syntax-specific XML-like language; everything is in Dart) and adds a set of UI building blocks called widgets, based on (Google) Material & (Apple) Cupertino design.
 
-Flutter does not translate its widgets to their native iOS/Android counterparts the way other frameworks do (eg React Native), and it **does not** use native UI components (aka Platform Primitives).
-Instead, Flutter draws pixels on the target device using its own low-level rendering engine named _Skia_, à la _Unity_.
-It is therefore way more free & flexible than other frameworks, while also highly performant (close to native code).
+Rather than using native components, it draws pixels on target device via own low-level rendering engine named _Skia_, à la _Unity_, while remaining highly performant (close to native code).
 For instance, Flutter is capable of advanced 2D/3D morph/transform animations à la PowerPoint transitions (see **Transform** widget).
 
-Flutter uses a [declarative style](https://docs.flutter.dev/get-started/flutter-for/declarative), which alleviates the need of the developer to manage UI transitions (à la old WinForm for instance); indeed, she only needs to manage the state (and call `setState()`), and the framework will handle all the UI updating through re-build()'s. Old immutable instances get discarded for new ones, while the RenderObjects persist.
+Flutter uses a [declarative style](https://docs.flutter.dev/get-started/flutter-for/declarative), which alleviates the need to manage UI transitions (eg à la old WinForm); indeed, she only needs to manage the state (and call `setState()`), and the framework will handle all UI updating through re-build()'s. Old immutable instances get discarded for new ones, while RenderObjects persist.
 
 ## Quick Tips
 
@@ -24,39 +22,37 @@ Flutter uses a [declarative style](https://docs.flutter.dev/get-started/flutter-
 * [DevTools](https://docs.flutter.dev/development/tools/devtools/overview) = debugging & performance tools
   * [Flutter Inspector](https://docs.flutter.dev/development/tools/devtools/inspector)
     * **Layout Explorer** = debug/inspect/edit layout properties in real-time
-* **Firebase** = Google's mobile/web app development platform. Subject to privacy controversies
-* **Element** = instantiation of a Widget at a particular location in the _Element Tree_
-  * Elements are very simple, holding just the widget type & reference, a reference to child Elements, and potential State
-  * Elements (tree) is what Flutter uses to pilot the lifecycle of widgets, and update/redraw the UI
+* **Element** = instantiation of a Widget at a particular location in the _Element Tree_ (that Widget is considered that Element's _configuration_)
+  * An elements is very simple, holding just a reference to associated widget (& its original type), its children elements, and potential State
   * While widgets are immutable, Elements are like their mutable counterpart and mounted by Flutter to form the Element Tree
-  * The Element Tree is built and handled all by Flutter (based on the Widget Tree), and never by the developer
-  * The Element Tree acts as an app skeleton
-  * The Element Tree is more "stable" than the widget tree, because unlike the former that gets rebuilt all the time, it is seldom modified
+  * Elements (tree) is what Flutter uses to pilot the lifecycle of widgets, and update/redraw the UI
+  * Element Tree acts as an app skeleton, and is built and handled all by Flutter (based on the Widget Tree), and never by the developer
+  * Element Tree is more "stable" than the widget tree, because unlike the former that gets rebuilt all the time, it is seldom modified
   * You can think of Elements as a buffer between configuration and rendering, because Widgets get rebuild often and mutable Elements do not
   * (You can think of Elements as association tables, because they hold practically no data and mostly point to other stuff (Widget & State))
 * [Impeller](https://github.com/flutter/flutter/wiki/Impeller) = latest rendering enging replacing Skia, eliminating costly runtime shader compiling
-* [Keys](https://medium.com/flutter/keys-what-are-they-good-for-13cb51742e7d)
-  * A way to keep track of States uniquement for Stateful Widgets, useful when adding/reordering widgets on the screen
-  * **LocalKey** only work at a specific location (under its parent) in the Tree
-    * **UniqueKey** is like a GUID
-    * **ObjectKey** bases off multiple values (eg address) which aggregated are unique
-    * **ValueKey** bases off a single value (eg TODO item task's text) which is unique amongst its siblings
-      * **PageStorageKey** stores a user scroll location, so we can resume it when going back to the Widget
-  * **GlobalKey** allow Widgets to change parents without losing State, or access information about another Widget, both anywhere in the Tree
+* **Keys** — see [@Emily Fortuna - Keys! What are they good for?](https://medium.com/flutter/keys-what-are-they-good-for-13cb51742e7d)
+  * A way to keep track of States (ie for Stateful Widgets only), useful when adding/reordering widgets on the screen
+  * **LocalKey** = only works at a specific location (under its parent) in the Tree
+    * **UniqueKey** = à la GUID
+    * **ObjectKey** = bases off multiple values (eg address) which aggregated are unique
+    * **ValueKey** = bases off a single value (eg TODO item task's text) which is unique amongst its siblings
+      * **PageStorageKey** = stores a user scroll location, so it can be resumeed when going back to widget
+  * **GlobalKey** allow widgets to change parents without losing State, or access information about another Widget, both anywhere in the Tree
 * **Material Design** = design language developed by Google in 2014
 * **Packages**/**Modules** = Dart code **only**; can use plugins (and still qualify as a package); they're published to <https://pub.dev>
 * **Plugin** = native code (Kotlin/JS/Swift) features [wrapped as Dart](https://stackoverflow.com/a/63154273/3559724)
   * Fluent Design System = a design language developed by Microsoft in 2017
 * **Property** = actual value held in a widget eg the _text_ property of a **RichText** widget
 * **RenderObject** = object in the RenderTree that renders & paints the UI (handles size, layout, painting)
-* **Scrim** = the greyed out area appearing on the rest of the screen when a modal element is shown (dialog, drawer). Clicking on it sometimes removes the modal element
 * [Shrink-wrap](https://flutteragency.com/what-does-the-shrink-wrap-property-does) = force a widget to pre-calculate its total size ~ its items
-* **Skia** = open-source graphics/game engine written in C++ used in Chrome; uses GPU accel 3D via Vulkan & Metal
+* **Skia** = open-source GPU accelerated 2D (3D via Vulkan & Metal) graphics library, written in C++ (à la Unity) code (running with WebAssembly), also used by Chrome
 * **Slivers** = different parts of a scrollable area that can each react appropriately to the same scroll
 * **State** = objects associated with stateful widgets (actually linked **from** their associated Elements)
   * States survive tree rebuilds (eg a few parts of the screen gets updated), but not navigating to a whole different page, which replaces subtrees
   * _Lifting state up_ = moving state data up one level to broaden its access; basic solution to fix state sharing between multiple widgets
 * **Widget** = immutable (declarative) description of part of a UI (layout component or behavior: center, pad, rotate)
+  * _Everything is a widget_, including app itself
   * All Widgets are @`immutable`, holding only `final` data, so any mutating data has to be outsourced into a dedicated mutable **State**
   * immutability is an important part of Flutter, as previous widgets get discarded & new ones created each time `build()` is called
   * Widgets - or State -, **not Elements**, hold properties with actual values
@@ -115,15 +111,16 @@ Use command with options long names or short names, eg:
 * `flutter doctor --android-licenses`
 * `flutter devices` = list all connected devices
 * `flutter create kokoapp`
-* `flutter create .` = add web support to existing app (see <https://docs.flutter.dev/get-started/web#add-web-support-to-an-existing-app>)
+* `flutter create .` = regenerate platform-specific directories (android/, ios/, etc)
+  * Eg adding web support to existing app (see <https://docs.flutter.dev/get-started/web#add-web-support-to-an-existing-app>)
   * `flutter create --sample=widgets.SingleChildScrollView.1 mysample` = create new app from existing sample code
   * `flutter create --template=skeleton` = generate a List View / Detail View app that follows community best practices
   * `flutter create -t package {koko}` = [creates a package project](https://docs.flutter.dev/development/packages-and-plugins/developing-packages)
 * `flutter analyze` = inspect code and display all infos/warnings/errors
 * `flutter test` = run tests
 * `flutter build`
-  * `flutter build appbundle`
-  * `flutter build apk --split-per-abi`
+  * `flutter build appbundle` = builds Android App Bundle (AAB), for publishing to Google Play Store
+  * `flutter build apk --split-per-abi` (note: this target is called _apk_, not _android_)
   * `flutter build ios`
   * `flutter build web` = [Build for web deployment](https://docs.flutter.dev/deployment/web)
   * `flutter build web --web-renderer [html|canvaskit]` = [Web Renderers](https://docs.flutter.dev/development/platform-integration/web/renderers)
@@ -149,6 +146,7 @@ Use command with options long names or short names, eg:
 * `flutter pub get` = explicitely pulls packages into the project & generates _pubspec.lock_ (implied with `flutter run`)
   * `flutter packages get` = [alias for the above](https://stackoverflow.com/a/61038022/3559724)
 * `flutter pub cache repair`
+* `flutter pub upgrade`
 * `flutter upgrade` = install latest Flutter version
   * [Upgrade and clean cache](https://stackoverflow.com/a/64515721/3559724)
 
@@ -169,12 +167,6 @@ Use command with options long names or short names, eg:
 * _pubspec.lock_ = required; generated automatically based on the _pubspec.yaml_
 * _pubspec.yaml_ = project imported 3rd-party dependencies, fonts, images
 * _README.md_ = Git/doc
-
-Clean repositories:
-
-1. delete all _flutter\_build_ folders
-2. delete all _build_ folders
-3. delete all _ephemeral_ folders
 
 ### Visual Studio Code
 
@@ -206,34 +198,26 @@ Clean repositories:
 
 ## API
 
-* `runApp(…)` = takes in the instance of a widget and inflate it to the screen size (calls its `build()` method, etc.)
-* `MateriapApp(debugShowCheckedModeBanner: false)` = [remove debug banner](https://stackoverflow.com/a/48893964/3559724)
-
 * `toStringDeep()` = Returns a string representation of this node and its descendants
-
+* `runApp(…)` = takes in widget instance and inflate it to screen size (calls its `build()` method, etc.)
+* `MateriapApp(debugShowCheckedModeBanner: false)` = [remove debug banner](https://stackoverflow.com/a/48893964/3559724)
+* **MaterialPageRoute** _fullScreenDialog_ = 'X' close button instead of back arrow (and slightly different transition animation)
+* [Background computation isolate](https://docs.flutter.dev/cookbook/networking/background-parsing) = `compute()` returns a Future
+* It's possible to create & assign widgets to variables, then we can access their properties (eg height) down the tree, or add them conditionally in several places
 * Form
   * [How to use InputFormatters](https://stackoverflow.com/a/50123743/3559724)
 
-* It's possible to create & assign widgets to variables, then we can access their properties (eg height) down the tree, or add them conditionally in several places
-
-* [Background computation isolate](https://docs.flutter.dev/cookbook/networking/background-parsing) = `compute()` returns a Future
-
-* **MaterialPageRoute** _fullScreenDialog_ = 'X' close button instead of back arrow (and slightly different transition animation)
-
 ### Lifecycles
 
-* Lifecycle
-  * `mounted` = after creating state and before `initState()`, until `dispose()` gets called
-  * `void initState()` = one-time init (probably better to initialize state variables here than in the state's constructor)
-  * `void dispose()` = widget removed from UI
-    * Always dispose controllers, focus nodes, streams etc.
-
-* App
+* `mounted` = after creating state and before `initState()`, until `dispose()` gets called
+* `void initState()` = one-time init (probably better to initialize state variables here than in the state's constructor)
+* `void dispose()` = widget removed from UI (always dispose controllers, focus nodes, streams etc)
+* App level
   * [What does WidgetsFlutterBinding.ensureInitialized() do?](https://stackoverflow.com/a/63873689/3559724)
   * [WidgetsFlutterBinding.ensureInitialized()](https://stackoverflow.com/a/67295324) = wait for async platform channels (eg for Firebase)
   * **WidgetsBindingObserver**, `WidgetsBinding.instance.add|removeObserver(this)`, `didChangeAppLifecycleState(AppLifecycleState s)`
-* Widget (_ctor_, `createState()`)
-* State (_ctor_, `initState()`, `didUpdateWidget()`, `dispose()`)
+* Widget level = _ctor_, `createState()`
+* State level = _ctor_, `initState()`, `didUpdateWidget()`, `dispose()`
   * `didUpdateWidget()` can be used to update something along in the state when its associated widget got rebuilt (with a new input value)
     * See <https://github.com/rrousselGit/flutter_hooks#motivation>
 
@@ -247,10 +231,10 @@ Clean repositories:
   * `.size.width` = screen width
   * `.size.shortestSide < 600` = is phone or tablet?
   * `.viewInsets.bottom` = soft virtual keyboard
-  * Make sure that the _context_ originates from the root of the app, not a local _ctx_ instance (eg from a `builder((ctx) => …)` method)
-  * If multiple call to MediaQuery are done in the same file/widget, place it in a local variable and use that instead
+  * Make sure that the _context_ originates from app root, not a local _ctx_ instance (eg from a `builder((ctx) => …)` method)
+  * If multiple call to MediaQuery are done in same file/widget, place it in a local variable and use that instead
   * Using InheritedWidgets such as **MediaQuery** or **Theme** in a widget causes the widget to get rebuilt when they change
-    * This is the case even from built-in widgets eg **Text** very logically rebuilds whenever Theme is changed
+    * This is the case even for built-in widgets (eg **Text** very logically rebuilds whenever Theme is changed)
   * [Scroll a list when keyboard pops up](https://stackoverflow.com/a/70612950/3559724)
   * [Move bottom sheet when autofocused keyboard is up](https://stackoverflow.com/a/57515977)
 
@@ -271,7 +255,7 @@ Clean repositories:
 ## Troubleshooting
 
 * _Vertical viewport was given unbounded height_
-  * A space-hungry misbehaved **ListView** is inside an unbounded constraints permissive (**Flex**) **Column**
+  * A space-hungry misbehaving **ListView** is inside an unbounded constraints permissive (**Flex**) **Column**
   * Read [Column class Troubleshooting](https://api.flutter.dev/flutter/widgets/Column-class.html#troubleshooting)
   * Watch [Decoding Fluter: Unbounded height/widget](https://www.youtube.com/watch?v=jckqXR5CrPI)
   * The solution to this error is to be specific as possible in the intended layout and the bounds given to the ListView

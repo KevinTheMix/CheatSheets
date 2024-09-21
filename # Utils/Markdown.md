@@ -3,11 +3,11 @@
 ## Quick Tips
 
 * Include two spaces at the end of a line to make next line a different paragraph
+* Escape backtick = `` here you go: ` `` (spaces on both sides make it render properly)
 * Number of spaces added by Tab depends on the initial scan of the file (first indentation decides whether it's two or four)
 * [GitHub](https://guides.github.com/features/mastering-markdown)
-* [Microsoft Azure DevOps](https://learn.microsoft.com/en-us/azure/devops/project/wiki/markdown-guidance?view=azure-devops)
 * [Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
-* Escape backtick = `` here you go: ` `` (spaces on both sides make it render properly)
+* [Microsoft Azure DevOps](https://learn.microsoft.com/en-us/azure/devops/project/wiki/markdown-guidance?view=azure-devops)
 
 ## API
 

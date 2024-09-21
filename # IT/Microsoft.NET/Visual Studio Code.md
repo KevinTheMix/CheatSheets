@@ -1,7 +1,5 @@
 # Visual Studio Code
 
-A good text editor.
-
 ## Quick Tips
 
 * Code comparison updates in real-time
@@ -61,6 +59,7 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 * `Ctrl + K, V` = preview Markdown Side-by-side
 * `Ctrl + K, Z` = zen Mode
 * `Ctrl + L` = select current paragraph & move next
+* `Ctrl + M` = Toggle _Tab Moves Focus_
 * `Ctrl + P` = search (opened) files by name (`:` line number, `@` symbol ie header)
   * Type `:` to go to line
   * Type `>` to access Command Palette from here
@@ -79,6 +78,8 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
   * `create new term`
   * `Format Document`
   * `View: Toggle Minimap`
+* `Ctrl + Shift + Space` = preview method full definition
+* `Ctrl + Space` = auto-complete suggestions
 * `View > Show Minimap` or _Command Palette_ > `View: Toggle Minimap` = Toggle Minimap
 * `View > Toggle Word Wrap` or `Alt + Z` = Toggle Word Wrap
 

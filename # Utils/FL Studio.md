@@ -2,16 +2,22 @@
 
 ## Quick Tips
 
+* Double right-click on ghost notes to swap between channels
+* How to change default/template channels (kick, clap, hat, snare) & stuff?
+* Individual FPC drumpads can be sent to different mixer channels (Output == offset)
+* Copy automation envelopes from one clip to the next (Articulator > Copy/Paste state)
+* Look for _Arrow + File_ icons that indicate it's possible to clone settings via drag & drop
 * [FL Studio Reference Manual](https://www.image-line.com/support/flstudio_online_manual/html/title.htm)
 * Find missing files/samples by including (recursive) folders via _Options > File settings > Browser extra search folders_
 
 ## Glossary
 
-* Channel = source of sound (synth, kick, keyboard, guitar) produced by audio sampling or VST generator
-* Pattern = group of Channels playing notes that can then be added to the Playlist
-* Playlist = full song
-* Track = either an horizontal line of pattern(s) in the Playlist, or a Mixer slot
-* VST (Virtual Sound Technology) = Virtual Instrument / Plugin
+* **Channel** = source of sound (synth, kick, keyboard, guitar) produced by audio sampling or VST generator
+* **Pattern** = group of Channels playing notes that can then be added to the Playlist
+* **Piano Roll** = one Channel's melody sequence (vertical = 'piano' notes, horizontal = time)
+* **Playlist** = full song sequence
+* **Track** = either an horizontal line of pattern(s) in the Playlist, or a Mixer slot
+* **VST** (Virtual Sound Technology) = Virtual Instrument / Plugin
 
 ## Settings
 
@@ -28,13 +34,12 @@
 ## Shortcuts & Tips
 
 Lookup unknown shortcuts and use them immediately instead of clicking, à la Day9.
-Look for Arrow+File icon that allows to Drag & Drop cloning settings
 
 * Buttons & Sliders
-  * `Ctrl + Move` = Fine-tune
+  * `Ctrl + Move knob/slider` = Fine-tune
   * `Right-click > Create automation clip`
   * `Right-click > Link to controller` = Linking knobs
-    * `(Top menu) Multilink to controllers > Click any plugin's button` = when linking is not available on some plugins (e.g. Serum)
+    * `(Top menu) Multilink to controllers > Click any plugin's button` = when linking is not available on some plugins (eg Serum)
 * Menus
   * `F1` = Help pages
   * `F4` = Create New Pattern
@@ -55,7 +60,7 @@ Look for Arrow+File icon that allows to Drag & Drop cloning settings
   * `P` = Draw
   * `B` = Paint
   * `C` = Slice a Pattern (_note: this clones the pattern and shifts start/stop times_)
-  * `Alt + T` = Name selected timeline section (e.g. "Chorus", "Verse")
+  * `Alt + T` = Name selected timeline section (eg "Chorus", "Verse")
     * Those can be moved be grabbing them from their left side
   * `Alt + Drag` = Fine moving patterns
   * `Alt + Roll` = Zoom vertically
@@ -114,64 +119,15 @@ Look for Arrow+File icon that allows to Drag & Drop cloning settings
   * `Alt + Left` = Reverse
   * `Ctrl + R` = Reverb
 
-## Tutorials
-
-* [Akai MPK mini setup Official Installation Guide](https://www.youtube.com/watch?v=cah50PUb7AI)
-
-### Professoar
-
-* [Learn FL Studio playlist](https://www.youtube.com/playlist?list=PLOAyyCeKwsR42q150SE5cY35XMjJiD0HP)
-* [Free VSTs Plugins](https://www.youtube.com/watch?v=XgTvQRcj3oI)
-* [Hi-Hat Repeat Trick](https://www.youtube.com/watch?v=8iwB38ZTz_c)
-* [How To Export Stems](https://www.youtube.com/watch?v=xoo6E6MiZMk)
-
-### In The Mix
-
-* [12 Essential Tips](https://www.youtube.com/watch?v=RBw-pdqus3k)
-* [Loop to Song #1](https://www.youtube.com/watch?v=LLmTDBV2riQ)
-  * Slice a Pattern, then make it unique
-* [Loop to Song #2](https://www.youtube.com/watch?v=NwTPqJKoFW8)
-  * Rename, color, icons Playlist Timeline, Playlist Track, Rack Channel, Pattern, Mixer tracks (Ctrl + L)
-* [Loop to Song #3](https://www.youtube.com/watch?v=jUq9UE55VNs)
-  * Inspiration & change by fresh loop ends, automation fluctuation, playing manually, doubling down melody to bass, staggering chord notes, instruments selection & atmospheric string trial
-* [Compression](https://www.youtube.com/watch?v=yi0J9JsRdI4)
-* [Make Your own Kick Drums](https://www.youtube.com/watch?v=JhZU6JGvoHw)
-
-#### [Sound Design](https://www.youtube.com/watch?v=NJLIS2MkFe4)
-
-90% of sound design = Wave shape + Filter + ADSR
-
-* Wave shape = Sin or Square or Saw
-  * Additive synth = Sin U Square U Saw
-  * Reinforce bass kick with sin wave synth
-* Filter (Subtractive synth) = remove some of the frequencies
-  * Lowpass = only the low frequencies can pass
-  * Highpass = only the high frequencies can pass
-  * Cutoff = change the frequency at which the filter starts applying
-* ADSR = controls Volume over time
-  * Attack = how fast sounds reach max volume
-  * Decay = how fast to lower down to sustain volume
-  * Sustain = volume of pressed key
-  * Release = how fast sound dies off when release key?
-* LFO
-  * Create Automation clip on an EQ Filter's cutoff's LFO speed = Thriftworks
-
 ## VST Plugins
 
 Download VST <https://www.youtube.com/watch?v=ZUxML8BhLfk&t=213s>
 
+* [Cracks](https://www.vstcrack.com)
+  * [Diva](https://www.vstcrack.com/u-he-diva-1-4-win)
 * [Serum](https://splice.com/accounts/sign-up)
-* [VST 4 Free](http://vst4free.com/)
-* [Splice](https://splice.com/)
+* [Splice](https://splice.com)
   * [Free Plugins](https://splice.com/plugins/free_plugins)
   * [Portal](https://splice.com/plugins/38587013-portal-vst-au-by-output)
-* [Torrent](https://audionews.org/)
-* [Cracks](https://www.vstcrack.com)
-  * [Diva](https://www.vstcrack.com/u-he-diva-1-4-win/)
-* Modal ?
-* 808 ?
-* Julien Vocoder.exe
-
-## Questions
-
-* How to change default/template channels (kick, clap, hat, snare) & stuff?
+* [Torrent](https://audionews.org)
+* [VST 4 Free](http://vst4free.com)

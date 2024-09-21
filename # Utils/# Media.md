@@ -17,11 +17,11 @@
 * **Gelli** = Android Jellyfin music client
 * **GoldWave** = digital audio editing ($19)
 * **IrfanView** = image viewer & editor
-* [JDownloader 2](https://jdownloader.org/jdownloader2) = complex rules multimedia downloader
 * **Jellyfin** = FOSS multi-platform home media server (with desktop, web, Android clients)
   * [Music screen off stutter issue](https://github.com/jellyfin/jellyfin-android/issues/39) = use Gelli or Yatse instead of official client
   * [ConfusedPolarBear - Intro Skipper](https://github.com/ConfusedPolarBear/intro-skipper)
 * **Kodi** = FOSS multi-platform extensible home media/radio/TV library/theater
+* [NCS](https://ncs.io) (No Copyright Sounds)
 * **Otter.ai** = voice meeting notes & real-time transcription
 * **PixRecovery** = repairs corrupted image files
 * **PrtScr** = super easy screenshots

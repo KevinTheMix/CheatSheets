@@ -1,33 +1,6 @@
-# Flutter Packages
+# [Flutter Packages & Plugins](https://pub.dev)
 
-* [stemmer](https://pub.dev/packages/stemmer) = reduces word to their base form
-
-## [Framework Libraries](https://api.flutter.dev/index.html)
-
-* [collection](https://api.flutter.dev/flutter/package-collection_collection/package-collection_collection-library.html) = array manipulation
-  * [IterableExtension\<T>](https://api.flutter.dev/flutter/package-collection_collection/IterableExtension.html) = à la C# Linq
-* [intl](https://api.flutter.dev/flutter/intl/intl-library.html) = date formatting
-* [services](https://api.flutter.dev/flutter/services/services-library.html)
-
-## [Public Packages & Plugins](https://pub.dev)
-
-At a minimum, a Dart package is a directory containing a pubspec file.
-A plugin is a type of package; the full designation is _plugin package_, which is generally shortened to _plugin_.
-A plugin package is a special kind of package that makes platform functionality available to the app. Plugin packages can be written for Android (using Kotlin or Java), iOS (using Swift or Objective-C), web, macOS, Windows, Linux, or any combination thereof. For example, a plugin might provide Flutter apps with the ability to use a device’s camera.
-
-**Pub** is actually the name of a package manager, which takes care of fetching packages and package versioning information.
-Its CLI can be summoned either via `dart pub {pub_command}` or `flutter pub {pub_command}`
-
-The tags (in blue) listed under the package name & version indicate which SDK & platform the package necessitates/targets.
-Lots of packages require the full Flutter SDK, but a few require only the Dart SDK.
-
-Hot Reload/Restart are not enough to reload plugins with platform native device features => `flutter run` (or _F5_ equivalent) after adding.
-
-* [Using packages](https://docs.flutter.dev/development/packages-and-plugins/using-packages)
-* [Flutter Favorite program](https://docs.flutter.dev/development/packages-and-plugins/favorites)
-  * [Flutter Favorite](https://pub.dev/packages?q=is%3Aflutter-favorite) packages
-
-* [dart.dev](https://pub.dev/publishers/dart.dev/packages)
+* [dart.dev](https://pub.dev/publishers/dart.dev/packages) = official core/foundational packages published by Dart team
   * [crypto](https://pub.dev/packages/crypto)
   * [grpc](https://pub.dev/packages/grpc)
   * [http](https://pub.dev/packages/http)
@@ -59,6 +32,36 @@ Hot Reload/Restart are not enough to reload plugins with platform native device 
 * [RxDart](https://pub.dev/packages/rxdart) = reactive programming
 * [FlutterGen](https://pub.dev/packages/flutter_gen) = access assets programmatically instead of path strings
 * [undo](https://pub.dev/packages/undo)
+
+## Quick Tips
+
+* Lots of packages require the full Flutter SDK, but a few require only the Dart SDK
+* Blue tags under package name/version indicate which SDK (Dart or Flutter) & platform (Android, IOS, MACOS, WEB, WINDOWS) it targets/is compatible with
+* Hot Reload/Restart are not enough to reload plugins with platform native device features => `flutter run` (or _F5_ equivalent) after adding
+* [Using packages](https://docs.flutter.dev/development/packages-and-plugins/using-packages)
+* [Flutter Favorite program](https://docs.flutter.dev/development/packages-and-plugins/favorites)
+  * [Flutter Favorite](https://pub.dev/packages?q=is%3Aflutter-favorite) packages
+
+## Glossary
+
+* **Package** = at a minimum, a Dart package is a directory containing a pubspec file
+* **Plugin** (aka _plugin package_) = a special kind of package that makes platform functionality available to the app
+  * Plugin packages can be written for Android (using Kotlin or Java), iOS (using Swift or Objective-C), web, macOS, Windows, Linux, or any combination thereof
+  * For example, a plugin might provide Flutter apps with the ability to use a device’s camera
+* **Pub** = name of a package manager, which takes care of fetching packages and package versioning information
+  * Its CLI can be summoned either via `dart pub {pub_command}` or `flutter pub {pub_command}`
+
+## [Framework Libraries](https://api.flutter.dev/index.html)
+
+* [collection](https://api.flutter.dev/flutter/package-collection_collection/package-collection_collection-library.html) = array manipulation
+  * [IterableExtension\<T>](https://api.flutter.dev/flutter/package-collection_collection/IterableExtension.html) = à la C# Linq
+* [intl](https://api.flutter.dev/flutter/intl/intl-library.html) = date formatting
+* [services](https://api.flutter.dev/flutter/services/services-library.html)
+
+## Text
+
+* [stemmer](https://pub.dev/packages/stemmer) = reduces word to their base form
+* [pdf_text](https://pub.dev/packages/pdf_text)  PDF
 
 ### DI & State Management
 
