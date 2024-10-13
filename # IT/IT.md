@@ -1,10 +1,11 @@
 # IT
 
-* Onlne courses = Codeschools, Coursera, Lynda, Pluralsight
+* Online courses = Codeschools, Coursera, Lynda, Pluralsight
 
 ## Glossary
 
 * **Eiffel** = OO language (1985)
+* **Framework** = architectural style, boilerplate alleviating, toolschain complementing an existing language
 * **GDPR** (General Data Protection Regulation)
   * All people _living_ in Europe, and **all** digital marketing data (eg cookies but also dynamic IP)
   * Doesn't require consent to collect and process data required to run the site, but only for a well-defined, transparent purpose
@@ -14,6 +15,7 @@
   * **Clojure** = dynamic functional dialect of Lisp on Java platform
 * **Rust** = general-purpose language emphasizing performance, type safety, concurrency, memory safety (all references point to valid memory), without a garbage collector
 * **Scala** = strong statically typed high-level general-purpose language, both OO & functional, designed to be concise and address criticisms of Java
+* **SDK** = set of APIs, compilers, documentation, libraries, and tools created by language developers to serve as basis for development
 
 ### Hardware
 

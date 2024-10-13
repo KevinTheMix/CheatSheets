@@ -16,12 +16,12 @@ The same Dart code can run on multiple platforms (eg mobile/desktop via Flutter,
 * **Dart VM** = optimized runtime supporting both JIT and AOT compilation, Garbage Collection, Concurrency via isolates, Cross-platform execution
 * **Isolate** = independant unit of execution that doesn't share memory & communicate via messages, making it safer for concurrency compared to thread-based models
 * **JIT** (Just-in-Time) = compiles incrementally after each changes, enable QoL features such as _Stateful Hot Reload/Restart_
-* **FFI** ([Foreign function interface](https://en.wikipedia.org/wiki/Foreign_function_interface)) = call to native APIs (C, Swift, Objective-C)
-  * Eg [C interop using dart:ffi](https://dart.dev/guides/libraries/c-interop)
+* **FFI** ([Foreign Function Interface](https://en.wikipedia.org/wiki/Foreign_function_interface)) = interoperability with the C programming language (see [C interop using dart:ffi](https://dart.dev/guides/libraries/c-interop))
 
 ### Keywords
 
 * `_` (identifier prefix) = internal member only visible inside (entire) file/library (not a particular class)
+  * `_` = a private constructor (for use in eg singleton pattern) if it's the entire name
 * `as` = cast
 * `as` (library) = specifying an (arbitrary) local scope name of whole [library](https://dart.dev/language/libraries)
 * `const` = value fixed once and for all at declaration compile time

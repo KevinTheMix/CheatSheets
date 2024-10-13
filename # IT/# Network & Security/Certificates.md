@@ -2,7 +2,9 @@
 
 **(Public Key) Certificates** are a means to attest the authenticity & trustworthiness of an entity (eg some information or website), more accurately of its associated **public key**.
 It is a document containing certain metadata (subject, validity start/end), the trusted issuer identity (CA name & tamper-proof **digital signature**), and a **public key**.
+
 Certificates are notably used in **TLS** (for HTTPS), and **SAML** authentication (to represent a logged user).
+
 (ChatGPT:) _In summary, an SSL/TLS certificate is a digital file stored on the server. When a client requests a secure connection, the server reads this file and transmits its contents as part of the initial SSL/TLS handshake process_
 
 ## Quick Tips
@@ -26,6 +28,10 @@ Certificates are notably used in **TLS** (for HTTPS), and **SAML** authenticatio
   * Those renown authorities are assumed to have performed some authenticity/integrity checks on a website before delivering a certificate
   * Any website that requires SSL (for HTTPS) must first register to one of those public root CA and pay a subscription fee
 * **Self-Signed Certificate** = certificate that are not issued by a CA, basically managing custom certificates (chain) manually
+* **SSL/TLS Handshake**
+  * The client initiates a connection to the server on port 443 (the default port for HTTPS)
+  * The server responds by presenting its SSL/TLS certificate
+  * The client and server then negotiate encryption parameters and establish a secure connection
 * **X.509** = standard defining the creation/format of public key certificate (also defines extensions eg _.pfx_)
 
 ## API

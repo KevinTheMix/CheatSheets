@@ -1,5 +1,7 @@
 # [Flutter Packages & Plugins](https://pub.dev)
 
+Plugins make it easy to access platform services and hardware (eg accelerometer, camera, etc.) OS-independently.
+
 * [dart.dev](https://pub.dev/publishers/dart.dev/packages) = official core/foundational packages published by Dart team
   * [crypto](https://pub.dev/packages/crypto)
   * [grpc](https://pub.dev/packages/grpc)

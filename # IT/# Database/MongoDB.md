@@ -72,3 +72,4 @@ Les commandes suivantes nécessitent de pointer sur une DB :
 ## TODO
 
 * [$eq(aggregation)](https://www.mongodb.com/docs/manual/reference/operator/aggregation/eq/#mongodb-expression-exp.-eq)
+* [$size(aggregation)](https://docs.mongodb.com/manual/reference/operator/aggregation/size/#mongodb-expression-exp.-size)

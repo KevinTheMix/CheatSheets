@@ -6,6 +6,7 @@
 
 * **Adaptative** = same code handling different platforms (eg Android, iOS, Web)
 * **Display typeface** = for short but eye-catching/important/large elements (eg titles, headings, pull quotes) rather than extended passages of body text
+* [Fitt's Law](https://en.wikipedia.org/wiki/Fitts%27s_law#Implications_for_UI_design) = place buttons at screen edges
 * **Flat design** = minimalist design language
 * **Reactivity** = how UI responds to changes in underlying data (aka `UI = f(state`))
 * **Responsivity** = responding to screen size change

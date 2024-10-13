@@ -63,7 +63,7 @@
 
 * `s.indexOf('look')`
 * `s.substring(start, count)`
-* `age=${koko.age}` = template literal string interpolation
+* `` `age=${koko.age}` `` = template literal string interpolation
 
 ### Collections
 
@@ -135,7 +135,7 @@ See <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statement
 * **Quasar** = _Vue.js_ cross-platform framework
 * **React** = FOSS front-end (JavaScript) library for building UIs based on components, can be used to develop SPAs, mobile or server-rendered apps (via additional frameworks eg _Next.js_)
   * uses virtual DOM
-* **React Native** = open-source cross-platform (mobile, web, desktop, VR) UI framework
+* **React Native** = open-source cross-platform (mobile, web, desktop, VR) UI framework, native components for each platform via JS bridge, provides base components & leaves community implement (3rd party) packages
 * **Redux** = state container for JavaScript apps
 * **RxJS** (_ReactiveX_) = reactive extensions, for composing asynchronous or callback-based code by using Observable sequences (RxJs is _Lodash_ for events)
   * See [ReactiveX](https://reactivex.io) = cross-platform asynchronous programming (eg debounce) with observable streams API (for eg .NET, Java, JavaScript)

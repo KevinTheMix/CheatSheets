@@ -34,7 +34,7 @@
   * `services.msc` = Services
   * `shell:appsfolder` = opens Apps folder (Windows 10+ only)
   * `shell:startup` = opens Startup folder (Windows launch applications)
-  * `winver(.exe)` = about Windows (version & co)
+  * `winver` = About Windows (version, build, etc)
 * `Windows + Left/Right/Up` = move Window around desktop
 * `Windows + Shift + Left/Right` = send Window to other screen
 * `Windows + Space` = peek at desktop (make all windows transparent)

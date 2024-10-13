@@ -1,20 +1,31 @@
 # [Flutter](https://gallery.flutter.dev)
 
-Open-source UI SDK by Google for cross mobile (Android/iOS) & desktop (Windows, MacOS, Linux) & later Web applications from a single (Dart) codebase, compiled via **Flutter SDK**.
-It builds on top of the Dart language (à la C#'s , except with no syntax-specific XML-like language; everything is in Dart) and adds a set of UI building blocks called widgets, based on (Google) Material & (Apple) Cupertino design.
+Highly performant (close to native) open-source UI **SDK** by Google for cross mobile (Android/iOS) & desktop (Windows, MacOS, Linux) & later Web applications from a single (Dart) codebase.
 
-Rather than using native components, it draws pixels on target device via own low-level rendering engine named _Skia_, à la _Unity_, while remaining highly performant (close to native code).
-For instance, Flutter is capable of advanced 2D/3D morph/transform animations à la PowerPoint transitions (see **Transform** widget).
+Features:
 
-Flutter uses a [declarative style](https://docs.flutter.dev/get-started/flutter-for/declarative), which alleviates the need to manage UI transitions (eg à la old WinForm); indeed, she only needs to manage the state (and call `setState()`), and the framework will handle all UI updating through re-build()'s. Old immutable instances get discarded for new ones, while RenderObjects persist.
+* No specialized layout language (HTML/XML as in WPF), everything is Dart
+* Native pixel painting (via Skia/Impeller, a Google 2D painting library) à la Unity/Unreal
+* Flutter is faster than React Native, closer to native performance (cfr graph Fireship's R vs F)
+* Advanced 2D/3D morph/transform animations à la PowerPoint transitions (see eg **Transform** widget)
+* UI building blocks called widgets as app blue print, based on (Google) Material & (Apple) Cupertino design
+* Access to native features (location, maps, camera), especially wrapped through rich 3rd-party growing plugins ecosystem
+* State-based [declarative style](https://docs.flutter.dev/get-started/flutter-for/declarative) with reactive views (ie `UI = f(State)`)
+  * Don't manage changes (à la WinForm) or bound properties (à la WPF), only manage state (via `setState()`) to rebuild UI parts
 
 ## Quick Tips
 
 * Identify mobile apps written in Flutter by scrolling using two fingers (this will make content scroll faster)
+* [@Wm Leler](https://leler.com/wm/bio.html#flutter) = Flutter-promoting articles (eg _what's revolutionary?_, _why Dart?_, _company pitch_)
+  * Flutter was started as an experiment by members of the Chrome team for a new kind of layout/rendering engine
+  * Most of the time, Flutter can do layout in a single pass (or even none, through cacheing), aka linear time
+  * As a result, layout is so fast it can be used for scrolling & any animations
+  * React Native uses a virtual-DOM-like virtual widgets tree, which helps not going through the costly JS bridge
+* [Matthew Smith - Why we chose Flutter and how it's changed our company](https://medium.com/@matthew.smith_66715/why-we-chose-flutter-and-how-its-changed-our-company-for-the-better-271ddd25da60)
 
 ## Glossary
 
-* [CanvasKit](https://skia.org/docs/user/modules/canvaskit) = WebAssembly for rendering Skia Graphics API to HTML canvas & SVG
+* [CanvasKit](https://skia.org/docs/user/modules/canvaskit) = lightweight WebAssembly-based graphics library built on Skia optimized for web browser painting (to HTML canvas/SVG) via WebGL
 * [Casual Games Toolkit](https://docs.flutter.dev/resources/games-toolkit)
 * **Constraints** = the min/max height/width dimension constraints cascading down the widget tree from parents to children
   * **Loose constraints** = constraints allowing a range of possible values (ie min < max)
@@ -41,16 +52,22 @@ Flutter uses a [declarative style](https://docs.flutter.dev/get-started/flutter-
   * **GlobalKey** allow widgets to change parents without losing State, or access information about another Widget, both anywhere in the Tree
 * **Material Design** = design language developed by Google in 2014
 * **Packages**/**Modules** = Dart code **only**; can use plugins (and still qualify as a package); they're published to <https://pub.dev>
+* **Platform Channel** = bi-directional communication between Flutter custom code and native platform, with serialization via _codecs_
+  * **MethodChannel** = invoke a method on native platform and get back some value
+  * **EventChannel** = stream data continuously/unidirectionally from native platform to Flutter
+  * **BasicMessageChannel** = send/receive asynchronous messages in both directions
 * **Plugin** = native code (Kotlin/JS/Swift) features [wrapped as Dart](https://stackoverflow.com/a/63154273/3559724)
   * Fluent Design System = a design language developed by Microsoft in 2017
 * **Property** = actual value held in a widget eg the _text_ property of a **RichText** widget
 * **RenderObject** = object in the RenderTree that renders & paints the UI (handles size, layout, painting)
+  * On rebuild(), old immutable instances get discarded for new ones, while RenderObjects persist
 * [Shrink-wrap](https://flutteragency.com/what-does-the-shrink-wrap-property-does) = force a widget to pre-calculate its total size ~ its items
-* **Skia** = open-source GPU accelerated 2D (3D via Vulkan & Metal) graphics library, written in C++ (à la Unity) code (running with WebAssembly), also used by Chrome
+* **Skia** = open-source 2D (3D via Vulkan & Metal) GPU-accelerated graphics library to draw stuff, written in C++ (à la Unity, running in web as WebAssembly), also used by Chrome
 * **Slivers** = different parts of a scrollable area that can each react appropriately to the same scroll
 * **State** = objects associated with stateful widgets (actually linked **from** their associated Elements)
   * States survive tree rebuilds (eg a few parts of the screen gets updated), but not navigating to a whole different page, which replaces subtrees
   * _Lifting state up_ = moving state data up one level to broaden its access; basic solution to fix state sharing between multiple widgets
+* **WebGL** = JavaScript API for rendering interactive 2/3D graphics with GPU-accelerated physics to web browsers (ie HTML canvas) without plugins
 * **Widget** = immutable (declarative) description of part of a UI (layout component or behavior: center, pad, rotate)
   * _Everything is a widget_, including app itself
   * All Widgets are @`immutable`, holding only `final` data, so any mutating data has to be outsourced into a dedicated mutable **State**
@@ -295,3 +312,5 @@ Use command with options long names or short names, eg:
 * Faint border lines above/below some widgets
   * **DrawerHeader** = set **Divider** `color` (to _transparent_) or `width` (to _0_) via (global/local) themeing
   * **Material/Card** = set the _shape_'s _side_'s `color` (to _transparent_) or `width` (to _0_)
+
+* [Flutter Web: Lottie Animation issue](https://stackoverflow.com/a/73779834/3559724)
