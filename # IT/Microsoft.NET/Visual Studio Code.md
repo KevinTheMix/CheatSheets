@@ -46,11 +46,12 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 * `Alt + Shift + Up/Down` = copy line up/down
 * `Alt + Mouse scroll` = scroll faster
 * `Ctrl + ,` = Settings (also via gear icon at the bottom-left or via _File > Preferences > Settings_)
-* `Ctrl + ù` or `Ctrl + J` = toggle Terminal
+* `Ctrl + ù` = toggle Terminal
 * `Ctrl + µ` = duplicate tab
 * `Ctrl + /` = toggle comments
 * `Ctrl + B` = toggle side-bar
 * `Ctrl + D`\* = select word at current cursor position (\* then add next matching selection to multi-selection)
+* `Ctrl + J` = toggle Panel area (Terminal & co)
 * `Ctrl + K, Ctrl + O` = open Folder
 * `Ctrl + K, Ctrl + R` = open URL to Keyboard Shortcuts PDF
 * `Ctrl + K, Ctrl + S` = keyboard shortcuts

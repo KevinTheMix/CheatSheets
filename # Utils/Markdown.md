@@ -23,7 +23,8 @@
   3. 3
   4. 4
   * node
-* [Reference to same file](#eof)
+* [Reference to same file header](#eof)
+* [Reference to same flie complex header](#eof-&amp;-2) =  HTML encoded lower-kebap-case
 * [Reference to another file](<../Design Thinking.md>)
 * [URL containing spaces](<https://www.facebook.com/search/top/?q=game beurs>) =  use inner `<>` to handle spaces
 * [Variants](https://en.wikipedia.org/wiki/Markdown#Variants) = GitHub Flavored & co
@@ -47,3 +48,5 @@ Is it code?
 [^1]: footnote
 [^a]: footnote
 [^note]: footnote
+
+## EOF & 2

@@ -17,7 +17,8 @@ Most of the WPF API is contained in _PresentationFramework.dll_ which contains t
 
 * [Adorners](https://docs.microsoft.com/en-us/dotnet/framework/wpf/controls/adorners-overview)
   * Use Adorners to display a '_Loading..._' atop a target UI element
-* **Attached Property** = a construct similar to a Dependency Property that uses a static method instead of a property get/setter, so that it can be called from other classes statically
+* **Attached Property** = a static Dependency Property that uses static get/setter methods, so that it can be called from other classes statically (eg typically a child that sets some of its parent layout properties)
+  * Eg `<Grid><Button Grid.Row="1" Grid.Column="2" Content="Click Me"/></Grid>` where _Row/Column_ properties belong to _Grid_ class
 * **Binding** = mechanism via which values can be provided from a source (ie an object) at runtime, via **Markup Extension** syntax
   * `{Binding}` = default without source specified binds to the whole current data context
   * `{Binding NameOfProperty}` (or `{Binding Path=NameOfProperty}` where _Path_ is the default property of Binding) = binds to a given **public property** (not a variable!) of the current data context

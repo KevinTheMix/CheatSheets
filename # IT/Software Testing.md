@@ -18,7 +18,7 @@
   * Attempts to discover faults or defects int the software (incorrect, indesirable, not conform to spec)
   * **Validation** = ensures the system conforms to the customer's expectations including emergent properties (ie green light), ie are we building the right product?
   * **Verification** = checking the software conforms to specification & meets functional & non-functional requirements, ie are we building the product right?
-* Types of tests
+* [Types of Software Testing](https://www.javatpoint.com/types-of-software-testing)
   * **Unit** = does a unit of code work as intended (path, **structural**, whitebox, interface consistent, coverage analysis)
   * **Acceptance/Release** = does a codebase conform to its specification (blackbox, Functional, Acceptance, Validation, Requirements Testing)
   * **Integration** = are multiple parts of a system working well together (interface, Integration tests, **regression**)

@@ -93,6 +93,7 @@ when CPU control can be yielded while a low-level time-consuming operation is be
   * Eg: getting a value from a **ConcurrentDictionary** in an _async_ method, if the key is already present, _return_ `Task.FromResult()` immediately
 * `await Task.Yield()` = voluntarily yields control to the calling thread's scheduler
 * `await foreach (var item in asyncSequence)`
+  * Eg read from a gRPC stream `await foreach (var response in call.ResponseStream.ReadAllAsync()) { … }`
 
 * `Task.Run()`
 

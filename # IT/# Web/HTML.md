@@ -2,6 +2,9 @@
 
 ## Glossary
 
+* Data Attributes = custom user-defined HTML tags in the form `data-*` (where `*` is in _kebab-case_) that are then referenceable via JS via an element's `dataset` property (always exists for any element)'s subproperty (in _camelCase_)
+  * Eg `<button data-koko-kontan="hello">Click</button>`, then `kokoButton.dataset.kokoKontan`
+
 ## API
 
 * Characters

@@ -14,13 +14,13 @@
 
 ## Glossary
 
+* **Bellman-Ford** = shortest path in a weighted graph
 * **Complément à 2**
   1. Use 1st bit as sign = `[-127,127]` on 8 bits, `[-32767,32767]` on 16 bits, but zero appears twice: _0000_ & _1000_
   2. Complément à 1 = invert all bits (still two zero's: 0000 & 1111)
   3. Complément à 2 = C1 + 1 => only one zero and add/sub also works (eg `1 - 1` = `0001 + (1110+1)` = `0000`)
 * **Loop invariant** = a property of a loop true before & after each iteration (eg an overall expression that stays true even though its constituting variables get updated)
 * **Levenshtein distance** = measuring (insert/delete/substitute/swap operations) difference between two sequences, eg for spelling correction, DNA similarity (strings of proteins ACGT)
-* **Bellman-Ford** = shortest path in a weighted graph
 
 ## Coins
 

@@ -2,6 +2,11 @@
 
 Ruby in written in C and thus allows the inclusion of C libraries. There exists implementations in other languages
 
+## Glossary
+
+* **Bang method** = signifies a version of a method that mutates its instance (eg `koko.do!`)
+  * A non-bang version of that same method can typically exist, which returns a new instance instead
+
 ## Environment & Installation
 
 * **RubyMine** = Ruby IDE (JetBrains)

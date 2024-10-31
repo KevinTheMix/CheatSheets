@@ -6,7 +6,7 @@ Both NPM and Webpack (written in JS) are part of Node.js ecosystem and therefore
 
 ## Glossary
 
-* Node Version Manager = used to retrieve a specific version of Node
+* **Node Version Manager** = used to retrieve a specific version of Node
 
 ## API
 

@@ -50,6 +50,7 @@
 * [Noun Project](https://thenounproject.com) = free icons & stock photos
 * **Paint.NET** = free (image & photo) raster graphics editor for Windows
 * [Paragraphica](https://aivalley.ai/paragraphica) = camera without a lens art project generating images via AI image generation based on contextual description
+* **Rive** (integrated **Flare**) = design & interactively animate vector/raster graphics using state machines, online or via a Flutter-based Windows app
 * [Very Icon](https://www.veryicon.com) = free PNG & vector icons
 
 ## Video

@@ -5,7 +5,7 @@
 * [Getting started as a JD-Developer](https://jdownloader.org/knowledge/wiki/development/get-started)
 * Download full Youtube Channel (adapted & corrected from <https://rgetter.com/2021/12/21/back-up-a-youtube-channel-with-jdownloader2>)
   * Go to Youtube Channel > **Videos**
-  * Scroll to bottom (`var scroll = setInterval(function(){ window.scrollBy(0, 1000)}, 1000);` then `window.clearInterval(scroll);`)
+  * Scroll to bottom (using script: `var scroll = setInterval(function(){ window.scrollBy(0, 1000)}, 1000);` and afterwards `window.clearInterval(scroll);`)
   * Paste `console.clear(); urls = $$('a'); urls.forEach(function(v,i,a){if (v.id=="video-title-link"){console.log('\t'+v.title+'\t'+v.href+'\t')}});` (lists all videos title & URLs)
   * Right-Click the console output and select _Copy all Messages_
   * Paste the text into Excel

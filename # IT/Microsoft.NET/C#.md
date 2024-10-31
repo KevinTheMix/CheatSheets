@@ -14,7 +14,7 @@
   * `<see href="http://www.koko.com">` = external link (URL)
   * `<para/>` or `<para>...</para>` = paragraph (with line break)
 * The **IFormattable** interface can be inherited from to format the value of an object into a string representation, i.e. a richer ToString() method
-  * `public string ToString(string format, IFormatProvider provider) { if (provider == null) provider = CultureInfo.CurrentCulture; switch(format) { .. } }` with _format_ equal to e.g. "full" or "short", or even a pattern
+  * `public string ToString(string format, IFormatProvider provider) { if (provider == null) provider = CultureInfo.CurrentCulture; switch(format) { .. } }` with _format_ equal to eg "full" or "short", or even a pattern
 * Don't instantiate `HttpClient` multiple times; inject it from startup in classes that use it
 * Don't forget to apply a `ToArray()`/`ToList()` on cached variables (so they're calculated/queryed only once)
 * Naming
@@ -32,6 +32,7 @@
 * [Boxing/Unboxing](https://stackoverflow.com/a/2111905) = converts value to/from reference type (to be avoided)
   * Can be used to shoehorn polymorphism in antiquated structures (eg. ArrayList that requires `object`s, not `int`s)
 * [Code Contracts](https://docs.microsoft.com/en-us/dotnet/framework/debug-trace-profile/code-contracts) = pre/post-conditions & invariants (eg `Contract.Requires(`{boolean_expression}`)
+* **Expression-bodied members** = member (ie method/property) statement as a single expression (eg `member => expression;`)
 * **Finalizer** (or **Destructor**) = for cleaning unmanaged resources before a class instance gets collected by the garbage collector `~Koko() { }`
   * Called when calling `Dispose()` on that instance
   * `WeakReference` = a reference that still allows the referenced (typically a memory intensive but easily recreatable) object to be collected by the GC
@@ -212,13 +213,13 @@ Even if we define our custom type e.g. that has an `ArrayList` of `Person` that 
 
 ### Delegates
 
-Method reference (à la function pointer), which can be used to pass methods as parameters.
+Method reference (à la function pointer but with type safety), which can be used to pass methods as parameters.
 
 * First define the delegate as a kind of method signature: `delegate string KokoDelegate(string s)`
 * Then instantiate it by passing another method matching that signature: `Koko koko = new KokoDelegate(m);`, and finally call it `koko("abc");`
 * Delegates are instrumental in events (handler format definition): `delegate void Handler(object sender, Args e);`
 * They can also be one-lined with an anonymous method eg `delegate { Debug.WriteLine("Test"); }` (see [Anonymous method vs Lambda expression](https://stackoverflow.com/a/17709299))
-* **Action** & **Function** (and more niche **Predicate**) are a set of delegates already defined by the framework for convenience (up to 12 parameters)
+* **Action** & **Function** (and more niche **Predicate**) are a set of delegates already defined by the framework for convenience (up to 16 parameters)
 * [Multicast Delegates](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/delegates/how-to-combine-delegates-multicast-delegates)
   * Multiple objects can be assigned to one delegate instance (via the `+`/`-` operators & the `Delegate.Combine()` invocation lists concatenation method)
 

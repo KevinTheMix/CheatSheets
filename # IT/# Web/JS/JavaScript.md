@@ -6,22 +6,26 @@
 
 ## Glossary
 
+* **Bracket notation** = accessing an object's property/method via a string expression (eg `object[expression]`) rather than a dot notation (eg `object.property`)
+* [Computed Property Names](https://tylermcginnis.com/computed-property-names) = use expression result (string) as property name (eg `['koko']='kontan';` creates the object `{ koko: 'kontan' }`)
 * **EventSource** JavaScript API = server-sent event (eg for social media status updates, news feeds, sending data to client IndexDB or web storage)
-* **Reactivity** = reacting to (input) change in real-time in a very clear, visible fashion, and possibly impacting several parts of an application
-* [XMLHttpRequest](https://developer.mozilla.org/fr/docs/Web/API/XMLHttpRequest) = interact with servers, without reloading the full page (used extensively by **AJAX**)
+* **Global Variable**
+  * HTML elements with IDs are automatically made available as global variables (eg `<div id="menu">…</div>` can be manipulated in JS via `menu` variable)
+* **IIFE** (Immediately invoked function expression) = useful for context-scoping, and can have a return value
+* **Spread Syntax** (`...`) = destructure array items/object properties into distinct variables
+  * Can be used for shallow-cloning (eg `{…a}={…b}`), recombining objects into more/fewer (eg `const koko = {…a,…b }`), pushing/(un)shifting/splicing arrays (eg `a = […a, '1', '2', '3' ]`)
+  * [Spread operator](https://www.geeksforgeeks.org/javascript-spread-operator)
+  * [Destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
+* **XMLHttpRequest** = interact with servers, without reloading the full page (used extensively by **AJAX**)
 
 ## API
 
-* [Immediately invoked function expression](https://en.wikipedia.org/wiki/Immediately_invoked_function_expression) (IIFE) = useful for context-scoping, and can have a return value
-* [Computed property Name](https://tylermcginnis.com/computed-property-names) = use expression result (string) as property name (eg `['koko']='kontan';` creates the object `{ koko: 'kontan' }`)
+* `element.closest({criteria})` = closest ancestor matchin given criteria
+
 * [Get](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get) = getter method
 
 * `typeof(variable)` = (name of) type of variable
 * `{}` = [Destructuring Objects](https://wesbos.com/destructuring-objects) = decomposes an object's properties in the order they were defined (eg `{ first, second } = koko;`, where _koko_ could have more properties eg `third`)
-* `...` = [Spread Syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) = destructure array items/object properties into distinct variables
-  * Can be used for shallow-cloning (eg `{…a}={…b}`), recombining objects into more/fewer (eg `const koko = {…a,…b }`), pushing/(un)shifting/splicing arrays (eg `a = […a, '1', '2', '3' ]`)
-  * [Spread operator](https://www.geeksforgeeks.org/javascript-spread-operator)
-  * [Destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
 * `f(...parameters)` = [Rest parameter](https://www.geeksforgeeks.org/javascript-rest-operator/), turns a list of (indefinite number of) function parameters into a single array
   * Then `const [first, second] = parameters` using [Destructuring](https://www.samanthaming.com/tidbits/20-destructuring-function-arguments)
 
@@ -29,9 +33,14 @@
   * `Number(rgb).toString(16)` # Display as Hexadecimal using [Number.prototype.toString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toString)
   * `**` = power
 
+### Events
+
+* `onpaste`, `ondragstart`, `onKeyUp`, `onKeyDown`, `onKeyPress`
+* `event.target` = element that received an event
+* [Event delegation](https://javascript.info/event-delegation) = event catching-all by a common ancestor (not once per child), enables centralized event-handling (and behaviors)
+
 ### DOM & co
 
-* Events (`onpaste`, `ondragstart`, `onKeyUp`, `onKeyDown`, `onKeyPress`)
 * Logging
   * `console.log({ a, b, c })` using computed property names
   * `console.log('%c Hellow', 'color: red')` using CSS style
@@ -133,9 +142,11 @@ See <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statement
   * **Nuxt UI** = UI library for Nuxt
 * **Polymer** = open-source JavaScript library (by Google) for building web applications via **Web Components**
 * **Quasar** = _Vue.js_ cross-platform framework
-* **React** = FOSS front-end (JavaScript) library for building UIs based on components, can be used to develop SPAs, mobile or server-rendered apps (via additional frameworks eg _Next.js_)
-  * uses virtual DOM
+* **React** = FOSS front-end (JavaScript) library for building UIs based on components, can be used to develop SPAs, mobile or server-rendered apps (via additional frameworks eg _Next.js_), uses virtual DOM
+  * [JSConf - Rehinking best practices](https://www.youtube.com/watch?v=x7cQ3mrcKaY) = loosely coupled UI, components are idempotent (_render_) functions
 * **React Native** = open-source cross-platform (mobile, web, desktop, VR) UI framework, native components for each platform via JS bridge, provides base components & leaves community implement (3rd party) packages
+  * Uses a virtual-DOM-like virtual widgets tree, which helps not going through the costly JS bridge
+  * Uses a _bridge_, ie some kind of adapter that exposes native UI components/widgets to let JavaScript (ie app logic) _pilot_ them
 * **Redux** = state container for JavaScript apps
 * **RxJS** (_ReactiveX_) = reactive extensions, for composing asynchronous or callback-based code by using Observable sequences (RxJs is _Lodash_ for events)
   * See [ReactiveX](https://reactivex.io) = cross-platform asynchronous programming (eg debounce) with observable streams API (for eg .NET, Java, JavaScript)

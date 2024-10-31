@@ -23,6 +23,7 @@
 * **Reverse Proxy** = retrieves resources on behalf of clients, as if they originated from them, can be used for security (eg DMZ), caching, logging, monitoring user activty
 * **SSH** (Secure Shell Protocol) = crypto protocol for network services over unsecured network (eg remote login & CLI execution)
 * **SSL** (Secure Sockets Layer) = deprecated encryption protocol replaced with **TLS**
+* **SSO** (Single Sign-On) = use one login on multiple system, whether personal (eg Google Account SSO, or OAuth 2.0 social login), or entreprise-wide (using SAML-based SSO eg Azure AD or Okta)
 * **Telnet** = bi-directional client-server application protocol to access virtual terminals of remote system on LAN/Internet
 * **TLS** (Transport Layer Security) = cryptographic protocol to provide communications security over a network
 * **TLS Handshake** = client initiates an asymmetric connexion, then sends a (faster & more efficient for large amounts of data) symmetric key encrypted using server public key found in its certificate

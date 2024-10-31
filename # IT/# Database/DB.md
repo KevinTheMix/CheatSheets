@@ -29,6 +29,7 @@
   2. 1NF + non-key attributes cannot depend on part of a key
   3. 2NF + no functional dependency between non-key attributes
 * **NoSQL** (non-SQL aka non-relational) = schema-less, non tabular relations more flexible DB, via different data structure (eg key–value pair, wide column, graph, or document), making some operations faster
+* **ORM (Object-Relational Mapping)** = technique for converting data between a relational DB and the heap of an OO programming language
 * **Schema** = namespace-like containing other DB entities, to which granular permissions can apply (eg `CREATE SCHEMA {name} AUTHORIZATION {user}`)
   * Tables created without a schema specified will get a default schema applied (_dbo_)
   * Two tables with the same name can coexist in the same DB if they have different schemas
