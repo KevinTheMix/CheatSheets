@@ -5,8 +5,9 @@ Building blocks of Flutter.
 ## Quick Tips
 
 * [Widget Catalog](https://docs.flutter.dev/ui/widgets)
-* _Not everything is a widget_ (eg BoxDecoration, TextStyle)
-* Wrapping (eg **Center**) & containing widgets have a _child(ren)_ property
+  * [Material](https://docs.flutter.dev/ui/widgets/material)
+  * [Material 3](https://flutter.github.io/samples/web/material_3_demo)
+* _Not everything is a widget_ (eg **BoxDecoration**, **TextStyle**)
 
 ## Misc
 
@@ -15,8 +16,66 @@ Building blocks of Flutter.
 * **SimpleDialog** = modal dialog (_contentPadding_, _children_)
 * [ResizeImage](https://api.flutter.dev/flutter/painting/ResizeImage-class.html)
 * **AndroidView** & **UiKitView** = embeds Android/iOS view in widget hierarchy, allows using native controls (eg a browser control, Google Maps) but pretty performance-expensive
-* **Visibility** = toggles widgets display on/off
 * **PageRouteBuilder** = creates route & page (with _pageBuilder_) with transition effect (via _transitionsBuilder_)
+* **Switch** = radio button (`Switch.adaptive()`)
+* **Semantics** = provide child Widget with (lots of) meta-information, improving accessibility
+* **Circular/LinearProgressIndicator** = Material progress bar (_value_, _backgroundColor_, `ThemeData.accentColor` by default)
+  * _valueColor_ takes in an **Animation\<T>** instance, which can be result of controlled Tween (via `drive()` or `animate()`)
+* **Rect** = can be assigned as `offset & size` (**Offset** & **Size**)
+
+## App & Navigation
+
+* `runApp(…)` = takes in widget instance and inflate it to screen size (ie calls its `build()` method, etc)
+* `showSearch(ctx, SearchDelegate)` = (framework provided) shows a full screen search page that returns result when closed
+* **WidgetsApp** = wraps a number of base functionality widgets (ie MediaQuery)
+* **Material** = piece of material (clipping, elevation, ink effects), `Material.of`, **MaterialInkController**, _shape_ (**Beveled/RoundedRectangleBorder** with _borderRadius_ **BorderRadius**)
+* **MaterialApp** = builds Material design on top of base **WidgetsApp** (defines _theme_ used by all Material children)
+  * Sets _theme_ as **ThemeData** (_useMaterial3_ now default since Flutter 3.16)
+  * `MateriapApp(debugShowCheckedModeBanner: false)` = [remove debug banner](https://stackoverflow.com/a/48893964/3559724)
+* **MaterialPageRoute** _fullScreenDialog_ = 'X' close button instead of back arrow (and slightly different transition animation)
+
+* **AppBar** = top menu (_leading_, _title_, _actions_ as widgets to display after title, _bottom_), also see scrollable **SliverAppBar** (embeds **AppBar** & **CustomScrollView**)
+* **BottomNavigationBar** = with **BottomNavigationBarItem**s (Material 2)
+* **Drawer** = **Scaffold** `(end)drawer:` (`child:` col of **DrawerHeader** & **ListTile**s), open via `Scaffold.of(context).open(End)Drawer()`
+  * _drawerEdgeDragWidth_ = area within which a horizontal swipe will open **Drawer**
+* **PreferredSizeWidget** = base interface for widget that have an ideal size when unconstrained, such as **AppBar**
+* **Scaffold** = basic Material design layout with a set of pre-configured widgets
+  * _floatingActionButtonLocation_ = dictates how/where associated FAB integrates/incrustates
+  * It's possible to use a Drawer without a Scaffold, in which case it's not modal (see <https://material.io/components/navigation-drawer/flutter>)
+* Tabs
+  * **DefaultTabController** = inherited **TabController** for descendants widgets that don't specify one explicitly
+  * **TabBar** = Material Design primary tab bar
+  * **TabBarView** = page view displaying currently selected tab's child/widget
+  * **TabController** = coordinates tab selection between a **TabBar** & **TabBarview**
+  
+* **MenuBar** = menu bar managing cascading child menus (à la Windows top menu)
+* **MenuItemButton** = MenuBar button (also see **SubmenuButton** for menu item with submenu)
+
+* NavigationBar = with **NavigationDestination**s (Material 3)
+  * See [Material 3 navigation bar](https://m3.material.io/components/navigation-bar/overview) = nav menu (available)
+  * See [Material 3 bottom app bar](https://m3.material.io/components/bottom-app-bar/overview) = 4 icons & FAB (in progress)
+
+### Adaptivity & Themes
+
+* Use `double.infinity` to set to max available dimensions (eg screen entire width)
+
+* **Border** = (usually) 4 **BorderSides** part of a **BoxDecoration** (`merge()`)
+  * **BeveledRectangleBorder**
+  * **BorderRadius**
+  * **BorderSide** = one side of a border
+  * **BoxBorder**
+  * **BoxDecoration** = (_shape_, _boxShadow_ = collection of **BoxShadow**s)
+  * **CircleBorder**
+  * **ContinuousRectangleBorder**
+  * **OutlineInputBorder** (eg in a **InputDecoration**)
+  * **RoundedRectangleBorder**
+  * **ShapeBorder** = base class
+  * **StadiumBorder**
+  * **StarBorder** = star or polygon-shaped border (_points_, _pointsRounding_, _valleyRounding_)
+
+* **ButtonStyle** = _back/foregroundColor_
+  * Old buttons used many static properties for each independant color & state, this was replaced with dynamic methods handling complex interacion states (see **MaterialState**)
+  * `…Button.styleFrom(…)` = allows defining some properties, defaulting rest to first found **Theme** ancestor (possibly at app root)
 
 * [Colors](https://api.flutter.dev/flutter/material/Colors-class.html)
   * `Colors.green[400]`
@@ -24,67 +83,85 @@ Building blocks of Flutter.
   * `Color.fromARGB(alpha, r, g, b)` where _alpha_ is an **int** between _0_ and _255_
   * `Color.lerp(colorA, colorB, ratio)` = calculate intermediate % color between two colors
     * Use [colors linear interpolation](https://stackoverflow.com/a/66385071/3559724) between tabs transitions (via **TabController**'s _offset_)
-  * `withOpacity(0->1)`
-* [Borders](https://www.woolha.com/tutorials/flutter-using-boxborder-examples)
-  * **OutlineInputBorder** (eg in a **InputDecoration**)
-  * **ShapeBorder**
-  * **RoundedRectangleBorder**
-  * Properties
-    * **BorderRadius**
-    * **BorderSide**
-  * **BoxDecoration** = (_shape_, _boxShadow_ = collection of **BoxShadow**s)
+  * `withOpacity(0.0 -> 1.0)`
 
-## App & Navigation
+* **LayoutBuilder** = rebuilds when incoming parent constraints change (ie when local parent changes, more granular than whole **MediaQuery**), making layout responsive
+* **MediaQuery** = Object used to retrieve info about screen size, orientation, text scaling
+* **MediaQueryData** = provided via `MediaQuery.of(context)`
+  * _orientation_ (device), OrientationBuilder (parent widget) or LayoutBuilder (parent widget, not just its orientation)
+  * _padding_ = parts of display partially obscured by system UI (typically hardware notches or system status bar)
+  * _size_ (`size.height` = includes **AppBar** & (top) status bar, `.size.shortestSide < 600` = is phone or tablet?)
+    * `height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top` x (0.0 -> 1.0 ratio)
+  * _viewInsets_ = parts of display completely obscured by system UI (typically device's soft/virtual keyboard)
+  * _viewPadding_ = parts of display partially obscured by system UI (typically hardware notches or system status bar)
+  * Make sure that the _context_ originates from app root, not a local _ctx_ instance (eg from a `builder((ctx) => …)` method)
+  * If multiple call to MediaQuery are done in same file/widget, place it in a local variable and use that instead
+  * Using InheritedWidgets such as **MediaQuery** or **Theme** in a widget causes the widget to get rebuilt when they change
+    * This is the case even for built-in widgets (eg **Text** very logically rebuilds whenever Theme is changed)
+  * [Scroll a list when keyboard pops up](https://stackoverflow.com/a/70612950/3559724)
+  * [Move bottom sheet when autofocused keyboard is up](https://stackoverflow.com/a/57515977)
+* **SafeArea** = checks **MediaQuery** to ensure we get a neat uncut rectangle on the screen (no obstructing system status bar or hardware objects)
+* **ThemeData** = provided via `Theme.of(context)` (`ThemeData.light()` & `ThemeData.dark()`)
+  * `copyWith(…)` = applies a set of specific styling/theme, defaulting rest to first found **Theme** ancestor (possibly at app root)
+  * _colorScheme_ = set of 45 colors based on Material spec to configure most components colors, dynamic colors scheme can be set from a single seed
+  * _platform_ = `TargetPlatform.iOS ? iOSWidget(…) : AndroidWidget(…)` (alternatively `import 'dart:io' show Platform;` then `Platform.isAndroid` or `.adaptive()` method on some widgets)
+  * _textScheme_
+* **Visibility** = toggles widgets display on/off
 
-* **WidgetsApp** = wraps a number of base functionality widgets (ie MediaQuery)
-* **MaterialApp** = builds Material design on top of base **WidgetsApp**
-* **Scaffold** = basic Material design layout with a set of pre-configured widgets
-  * It's possible to use a Drawer without a Scaffold, in which case it's not modal (see <https://material.io/components/navigation-drawer/flutter>)
-  * `drawerEdgeDragWidth`
-* **PreferredSizeWidget** = base interface for widget that have an ideal size when unconstrained, such as **AppBar**
-* **AppBar** = top menu (_leading_, _title_, _actions_ as wdigets to display after title, _bottom_), also see scrollable **SliverAppBar** (embeds **AppBar** & **CustomScrollView**)
-* **Material** = piece of material (clipping, elevation, ink effects), `Material.of`, **MaterialInkController**, _shape_ (**Beveled/RoundedRectangleBorder** with _borderRadius_ **BorderRadius**)
+* [States](https://m2.material.io/design/interaction/states.html) = interactive states (eg hovered, pressed, focused, disabled, scrolledUnder) taken by some (Material) widgets
+* **WidgetState** = more general (non-Material exclusive) version of (@deprecated) **MaterialState** (in _material\_state.dart_)
+  * `WidgetStateProperty.all<Color>(Colors.…)` return single color irrespective of particular states
+  * `WidgetStateColor.resolveWith((Set<WidgetState> states) => …` return colors depending on states
+* **WidgetStateColor** = defines a color that is also a **WidgetStateProperty** (allows shorthanding by passing color instead of full resolver)
+* **WidgetStateProperty\<T>** (abstract) = base for classes that resolve to T-typed value based on interactive states
 
-* **BottomNavigationBar** = with **BottomNavigationBarItem**s (Material 2)
-* NavigationBar = with **NavigationDestination**s (Material 3 w/ _useMaterial3_)
-  * See [Material 3 navigation bar](https://m3.material.io/components/navigation-bar/overview) = nav menu (available)
-  * See [Material 3 bottom app bar](https://m3.material.io/components/bottom-app-bar/overview) = 4 icons & FAB (in progress)
+## Inputs & Texts
 
-## Buttons & Images & Text
-
-* Buttons
-  * **CupertinoButton** = iOS-style button
-  * **DropDownButton\<T>** = a Material Design button for selecting from a list of items
-  * **ElevatedButton** = Material Design elevated button
-  * **FilledButton** = fill-colored button (`FilledButton.tonal`)
-  * **FloatActionButton** (aka **FAB**) = Scaffold stacked button, use _floatingActionButtonLocation_ to embed in _bottomNavigationBar_
-  * **IconButton** = a Material Design icon button (_icon_, _tooltip_, _onPressed_, `IconButton.filled|filledTonal|outlined`)
-  * **InkWell** = rectangle with touch responses (_on(Double)Tap_, _onLongPress_, _onHover_)
-  * **OutlinedButton** = a TextButton with an outlined border (_borderSide_)
-  * **RawMaterialButton** = base for a button with a child widget (eg **Text**, _fillColor_, _splashColor_, _shape_)
-  * **SegmentedButton** = radio buttons looking like pills/tabs
-  * **TextButton** = basic text button (`TextButton.icon()` = button with both text AND icon)
-  * **ToggleButtons** = on/off/radio buttons (_isSelected_ = `List<bool>`, _onPressed_ controls selection logic, _abcColor_, _abcBorder_)
-* Deprecated Buttons
-  * _FlatButton_ = replaced with **TextButton**
-  * _OutlineButton_ = replaced with **OutlinedButton**
-  * _RaisedButton_ = replaced with **ElevatedButton**
-* Button Styling
-  * `ElevatedButton.styleFrom(primary: Colors.green, onPrimary: Colors.yellow)`
-  * `ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.red))`
-  * `ButtonStyle(backgroundColor: MaterialStateColor.resolveWith((Set<MaterialState> states) => states.contains(MaterialState.disabled) ? Colors.blueGrey : Colors.blue))`
+* **AbsorbPointer** = disable all pointer/touch events over a widgets group (_absorbing_, _ignoringSemantics_ for screen readers ignoring)
+* **FocusNode** = obtain keyboard focus & handle keyboard events in a stateful widget
 * **Form** = form that can be saved/reset/validated (_onChanged_), with input fields
   * **FormField** = single form field (_onSaved_, _validator_)
   * **TextFormField** (_controller_: **TextEditingController**, _decoration_: **InputDecoration**, _validator_ checked on Form `validate()`)
     * This is a convenience widget wrapping a **TextField** in a **FormField**, so use former only if there is no enclosing **Form** (eg a search field)
+  * [How to use InputFormatters](https://stackoverflow.com/a/50123743/3559724)
+* **GestureArena** = disambiguation between gestures using a battle royale strategy
+* **GestureDetector** = detects user inputs (eg (double) tap, long press, h/v drag, pinch)
+  * For low-level device OS input events, see **Listener** (_onPointerDown/Up/Move_)
+* **RichText** = multiple styles per line (`text: TextSpan(style: …, children: <TextSpan>[…]`) for when standard **Text** is not enough
+* **SelectableText** = (_showCursor_, _cursorWidth_, _cursorColor_, _cursorRadius_, _toolbarOptions_, _onTap_, _scrollPhysics_, `.rich()`)
+* **Slider** = slider (_onChanged_, _min/max_, _divisions_, _label_, `Slider.adaptive()`), **CupertinoSlider** (iOS-style), **RangeSlider** (from/to slider)
 * **TextEditingController** = gives access to associated **TextField** programmatically
-* **TextField** = input text field (_controller_, _onChanged_, _decoration_: **InputDecoration** (_hintText_, _border_, _focusedBorder_, _prefix/suffixIcon_))
+* **TextField** = input text field (_controller_, _decoration_, _inputFormatters_, _onChanged|EditingComplete|Submitted_)
+  * **InputDecoration** = _hint|labelText_, _border_, _focusedBorder_, _prefix/suffixIcon_
+  * **TextInputFormatter** = **LengthLimitingTextInputFormatter** (length), **FilteringTextInputFormatter** (regex pattern)
+
 * **TextStyle** = à la CSS (_fontSize_)
+* **Tooltip** = accessibility-friendly alt text (_child_, _message_, _verticalOffset_, _height_), some Widgets have a _tooltip_ property
 
-## Containers & Layout
+### Buttons
 
-Basicall, widgets with multiple children.
+* **CupertinoButton** = iOS-style button
+* **DropDownButton\<T>** = a Material Design button for selecting from a list of items
+* **ElevatedButton** = Material Design elevated button (avoid on already-elevated content eg dialogs/cards)
+* **FilledButton** = fill-colored button (`FilledButton.tonal`)
+* **FloatActionButton** (**FAB**) = Scaffold stacked button, use _floatingActionButtonLocation_ to embed in _bottomNavigationBar_
+* **IconButton** = a Material Design icon button (_icon_, _tooltip_, _onPressed_, `IconButton.filled|filledTonal|outlined`)
+* **InkWell** = rectangle with touch responses (_on(Double)Tap_, _onLongPress_, _onHover_)
+* **OutlinedButton** = a TextButton with an outlined border (_borderSide_)
+* **RawMaterialButton** = base for a button with a child widget (eg **Text**, _fillColor_, _splashColor_, _shape_)
+* **SegmentedButton\<T>** = pill/tabs-looking radio buttons
+* **TextButton** = basic text button (`TextButton.icon()` = button with both text AND icon)
+* **ToggleButtons** = on/off/radio buttons (_isSelected_ = `List<bool>`, _onPressed_ controls selection logic, _abcColor_, _abcBorder_)
+* Deprecated
+  * _FlatButton_ = replaced with **TextButton**
+  * _OutlineButton_ = replaced with **OutlinedButton**
+  * _RaisedButton_ = replaced with **ElevatedButton**
 
+## Layout Containers
+
+Basically, widget nodes with one or multiple children.
+
+* **Alignment** = point within a rectangle (top-left _(-1.0,-1.0)_ to bottom-right _(1.0,1.0)_ but values can be outside those bounds)
 * **BoxConstraint** = class with immutable layout constraints for **RenderBox** layout (notable properties: _minHeight_, _minWidth_, _maxHeight_, _maxWidth_)
   * `BoxConstraints.loose()` (**min<max**), `BoxConstraints.tightFor[Finite]()` (**min==max**), `BoxConstraints.expand()` (**max**)
 * **Card** = Material rectangle shape with rounded corners and z-axis (_elevation_) shadow, size depends on child unless its parent specifies
@@ -97,18 +174,21 @@ Basicall, widgets with multiple children.
     * [Example](https://stackoverflow.com/a/69476516) using `quadraticBezierTo(…)`
 * **CircleAvatar** = circle container (_back/foreground-Image_ with child text initial fallback, append `.image` to **Image**), adequate for user pfp
 * **ColoredBox**
+* **DecoratedBox** = paints a (**(Box)Decoration**) _decoration_ before/after its child paints (also see **DecoratedBoxTransition**)
 * **EdgeInsets** = padding (_zero_, `all()`, `symmetric(vertical, horizontal)`, `only(right:…, top:…)`)
+* **IntrinsicHeight** & **IntrinsicWidth** = sizes its child to its maximum intrinsic h/w by letting it speculatively sizing to its its largest child
+  * Useful for edge cases (eg when each sibling wants to align in different directions in a scrollable context), but can be expensive (worse case O(N²))
 * **PageView** = horizontal or vertical swipable pages/screens (à la gallery/slideshow, _initialPage_, _scrollDirection_), controllable/queryable via **PageController** (_viewportFraction_)
 * **RadioListTile** = literally Radio + (tappable anywhere) ListTile
-* **RenderBox** = a **RenderObject** (inherits from it) in a 2D Cartesian coordinate system (with a _size_ property, and **BoxConstraint** _constraints_ property inherited from parent)
-* **RenderObject** = render tree object handling concrete operations (layout, painting, hit testing, accessbility) without child model (undefined child/children/named children) nor coordinate system (Cartesian/polar)
-  * **RenderObjectElement** = element that uses **RenderObjectWidget** as configuration, with an associated RenderObject in render tree
-  * **RenderObjectWidget** = configuration for **RenderObjectElement**
 
 * Lists & Grids = **DataTable**, **GridTile**, **GridView**, **ListTile**, **ListView**, **Table**
+  * **DataTable** = auto-adjust grid with sorting (_columns_, _rows_, _sortColumnIndex_, _sortAscending_), wrap in **SingleChildScrollView** to handle overflow
+    * **DataCell** = _showEditIcon_, _placeholder_, cells are widget (ie customizable)
+    * **DataColumn** = _label_, _numeric_
+    * **DataRow** = _selected_, _cells_
   * **ExpansionPanel** = expandable 'v' arrow tiles (`headerBuilder:(ctx,isOpen)`, _body_, _isExpanded_, _canTabOnHeader_ indicates whether whole header is tappable)
   * **ExpansionPanelList** = **ExpansionPanel** container (_expansionCallback_, _animationDuration_, _dividerColor_, _elevation_, _expandedHeaderPadding_)
-  * **GridView** = grid layout; usually via `GridView.count()` constructor (_crossAxisCount_, _mainAxisSpacing_, _crossAxisSpacing_)
+  * **GridView** = grid (`.builder()`, `.count()`, `.extent()`, _crossAxisCount_, _main|crossAxisSpacing_)
   * **GridTile** = (with **GridTileBar** as _header_ or _footer_)
   * **ListView** = scrollable list of children (_scrollDirection_, _reverse_, _physics_, _addAutomaticKeepAlives_, _cacheExtent_, `ListView.builder` with _itemBuilder_ & _itemExtent_, `ListView.separated` with _separatorBuilder_ & _itemCount_, `ListView.custom` with _childrenDelegate_ sliver)
     * **Dismissible** = left/right swipeable items (_key_ to track what's visible/hidden, (secondary)_background_, _direction_ , `onDismissed()` to remove underlying item)
@@ -131,15 +211,19 @@ Basicall, widgets with multiple children.
     * In unbounded context, they try to fit their children (who must all be inflexible)
     * Their cross axis must always be bounded, since they take up all space in that direction
     * See [Understanding constraints: Flex](https://docs.flutter.dev/ui/layout/constraints#flex)
-  * **ConstrainedBox** = adds min & max h/w constraints to its parent's, resulting constraints are the more restrictive/forced ones (ie strict/tighter always win, eg screen)
+  * **ConstrainedBox** = adds min & max h/w constraints on top of its parent's, which may get ignored if more restrictive/tight constraints already apply (eg screen)
   * **Container** = wraps child widget in margin/padding/size/color/decoration/shape (_aligment_ will fit parent, _constraints_ (eg `BoxConstraints.expand()`), _transform_)
     * Has no `createRenderObject()` method, it is a convenience compositional wrapper for other layout widgets ~ its properties (see its `build()` source code)
-  * **FittedBox** = make child fit smaller parent with (no-wrap) scaling (_fit_ = `BoxFit.{value=contain|cover|fitH/W|fill|none}`, _alignment_)
+  * **FittedBox** = fit/scale child within smaller parent (_fit_ = `BoxFit.{value=contain|cover|fitH/W|fill|none}`, _alignment_)
+  * **FractionallySizedBox** = size by percentage (_heigh/widthFactor_), align in parent or wrap in **Flexible**; use no child for whitespacing
   * **LimitedBox** = give limited constraints (_maxH/W_) to child with infinite (specifically, only) parent constraints (eg **ListView**/**Column**/**Row**/**UnconstrainedBox**)
   * **OverflowBox** = lets child be any size it wants, also removing parent constraints, but shows no warnings (simply hides excess/shows as much as it can)
-  * **SizedBox** = give child a size (_w/h_, _double.infinity_ == max, _SizedBox.expand()_ == max _w/h_), use empty for spacing
-    * [SizedBox.expand() vs Expanded](https://stackoverflow.com/a/72416413/3559724) = _SizedBox.expand()_ can be used anywhere
+  * **RotatedBox** = affects layout ie moves everything around it (`quarterTurns`, in contrast `Transform.rotate()` affects rendering, not layout ie as if original was still in place)
+  * **SizedBox** = give child a size (_w/h_, _double.infinity_ == max, _SizedBox.expand()_ == max _w/h_), use without child for spacing
+    * [SizedBox.expand() vs Expanded](https://stackoverflow.com/a/72416413/3559724) = **Expanded** can only be used inside a **Flex**
+    * Can be used to cut expensive layout costs by defining a fixed size for a widget (and its entire subtree)
   * **Stack** = z-axis stacking (_fit_ to children `StackFit.loose` by default, or to parent `StackFit.expand`, _alignment_, _overflow_)
+    **IndexedStack** = **Stack** showing only one of several _children_ widgets at a time, preserving each of their individual states (_index_ via `setState()`)
   * **UnconstrainedBox** = lets child be any size it wants, removing inbound parent (tight) constraints, with black/yellow warning if too large
   * **Wrap** = "word wrap" children (_direction_, _alignment_ _spacing_, _runSpaching_); good for buttons & chips
 
@@ -147,14 +231,16 @@ Basicall, widgets with multiple children.
 
 * `NeverScrollableScrollPhysics()` = prevents ListView scrolling when the user drags
 * `ClampingScrollPhysics()`
-* **CustomScrollView** = custom scroll via _slivers_ (**SliverAppBar**, **SliverList**, **SliverGrid**, `center: key`)
+* **CustomScrollView** = (hybrid) grid/list scrolls via _slivers_ (**SliverAppBar**, **SliverList**, **SliverGrid**, `center: key`)
+  * **SliverAppBar** = scroll-reactive top menu using **CustomScrollView** (_expandedHeight_, _flexibleSpace_, _floating_, _pinned_), with effects (zoom, blur)
+  * **SliverList** = inner list
 * **SingleChildScrollView** = makes child scrollable
   * This widget should be reserved to scenarios where the content is actually supposed to be displayed in full (ie not scrollable), but a smaller than usual devices' screen does make not that possible, so scroll must be added to avoid out-of-bounds
   * If the intent is to have a scrollable list, then _lazy_, _sliver-based_ **ListView**/**CustomScrollView** are vastly more efficient
   * To take advantage of lazy-optimization, the **ListView** must be dynamically built (using one of its builders eg `ListView.builder()`)
   * When using `ListView.builder(ctx, index)` make sure to not name the first parameter `context`, especially with inner `MediaQuery.of(context)`
-* [ScrollController](https://api.flutter.dev/flutter/widgets/ScrollController-class.html) = pilots one or multiple scrollable widget(s)
-  * Eg: **SingleChildScrollView**, **ListView**, **DraggableScrollableSheet**
+* [ScrollController](https://api.flutter.dev/flutter/widgets/ScrollController-class.html) = pilots one or multiple scrollable widget(s) (eg **SingleChildScrollView**, **ListView**, **DraggableScrollableSheet**)
+* **RestorableScrollController** = special type of scroll controller with embedded restoration capabilities
 
 ## [Animations](https://docs.flutter.dev/ui/animations)
 
@@ -167,20 +253,20 @@ Basicall, widgets with multiple children.
 * **Hero** = images/clips/etc. morphing animation between **Navigator** routes (_child_, _tag_)
 * **HeroMode** = disables a **Hero**
 * **Transform** = custom (PowerPoint-like) transitions (`rotate()`, `scale()`,, `skewX()` `translate()`, or 4x4 custom matrix)
-* Tweens
-  * **Animatable\<T>** = base abstract class for tweens, `Animatable<T>.animate(controller)` is identical to `controller.drive(Animatable<T>)`
-  * **Tween** = linear interpolation between (generic) _begin_ & _end_ values
-  * **AlignmentGeometryTween** = interpolation between two **AlignmentGeometry**
-  * **AlignmentTween** = interpolation between two alignments
-  * **ColorTween** = interpolation between two colors
-  * **ConstantTween** = tween with a constant value
+* Tweens = (linear) interpolation be**tween**
+  * **Animatable\<T>** = base abstract class for tweens (`Animatable<T>.animate(controller)` is identical to `controller.drive(Animatable<T>)`)
+  * **Tween** = _begin_ & _end_ values
+  * **ReverseTween** = reverses its parent
+  * **AlignmentGeometryTween** = two **AlignmentGeometry**
+  * **AlignmentTween** = two alignments
+  * **ColorTween** = two colors
+  * **ConstantTween** = with a constant value
   * **CurveTween** = transforms value of a given animation by given **Curve** _curve_
-  * **FractionalOffsetTween** = interpolation between two fractional offsets
-  * **IntTween** = interpolation between two integers that rounds
-  * **RectTween** = interpolation between two rectangles
-  * **ReverseTween** = tween that evaluates its parent in reverse
-  * **SizeTween** = interpolation between two sizes
-  * **StepTween** = interpolation between two integers that floors
+  * **FractionalOffsetTween** = two fractional offsets
+  * **IntTween** = two integers that rounds
+  * **RectTween** = two rectangles
+  * **SizeTween** = two sizes
+  * **StepTween** = two integers that floor
 
 ### Implicit
 
@@ -212,12 +298,11 @@ Performed automatically when a property updates (via `setState()`), non-repeatin
 To be started/piloted manually, for infinitely repeating, discontinued, or multi-widgets animations.
 In order to implement a custom widget, use either **AnimatedBuilder**, or extend its parent abstract class **AnimatedWidget** if animation is mostly self-contained.
 
-* Requires a **AnimationController** (and its proper disposal within a StatefulWidget's State)
+* Requires a **AnimationController** (to `dispose()` within a StatefulWidget's State)
 * **Animation\<T>** = anything of type _T_ (double, Color, Size) that changes over time
-* **AnimatedBuilder** (extends **AnimatedWidget** via **ListenableBuilder**) = full-custom explicit animation using Tweens (provide a _child_ to optimize rendering)
-  * Set its _child_ property to an inert widget to more efficiently rebuilding only the parts that animated
-  **AnimatedIcon** = controllable icon, explicit (=> requires a controller, see Animations done right) despite naming (`icon: AnimatedIcon.play_pause, progress: _controller`)
-* **AnimationController** (extends `Animation<double>`) = animation pilot/player (_status_, _(reverse)Duration_, _isCompleted|Dismissed_, _value_)
+* **AnimatedBuilder** (extends **AnimatedWidget** via **ListenableBuilder**) = full-custom explicit animation (provide an inert _child_ to optimize rendering)
+* **AnimatedIcon** = controllable icon, explicit despite naming  (`icon: AnimatedIcon.play_pause, progress: _controller`)
+* **AnimationController** (extends **Animation\<double>**) = animation pilot/player (_status_, _(reverse)Duration_, _isCompleted|Dismissed_, _value_)
   * `add(Status)Listener()`, `forward()`, `fling()`, `repeat()`, `reverse()`, `dispose()`, `animateTo(double value)` (similar to TweenAB's end), `drive(Animatable<T>)`
   * Controllers can even update widgets without plugging it into any animation, ie by adding a listener that `setState()` (although better to use existing options, see Animation Deep Dive)
   * An **AnimationController** is just _a thing that emits values_ => listening widgets don't actually have to use that `value`, they just get refreshed while it's playing
@@ -235,7 +320,7 @@ In order to implement a custom widget, use either **AnimatedBuilder**, or extend
   * **AlignTransition**
   * **DecoratedBoxTransition**
   * **DefaultTextStyleTransition**
-  * **FadeTransition**
+  * **FadeTransition** = opacity animation
   * **MatrixTransition** = animates Matrix4 of a transformed widget
   * **PositionedTransition**
   * **RelativePositionedTransition**
@@ -250,27 +335,28 @@ In order to implement a custom widget, use either **AnimatedBuilder**, or extend
 Observer pattern.
 
 * **Listenable** (abstract) = object that maintains a list of listeners (`addListener()`, `removeListener()`)
-  * **ValueListenable** (abstract, extends **Listenable**) = interface for subclasses of **Listenable** that expose a (current/single) _value_
-  * **Animation** (abstract, extends **Listenable**, implements **ValueListenable\<T>**) = animation with value _T_, and a concept of direction
+  * **ValueListenable<T>** (abstract, extends **Listenable**) = interface for subclasses of **Listenable** that expose a (current/single) _value_
+  * **Animation\<T>** (abstract, extends **Listenable**, implements **ValueListenable\<T>**) = value with status & direction
   * **ChangeNotifier** (mixin, implements **Listenable**) = listenable with `notifyListeners()`
-  * **ValueNotifier** (extends **ChangeNotifier**, implements **ValueListenable\<T>**) = a **ChangeNotifier** that holds a single (mutable) value triggering notifiations
+  * **ValueNotifier\<T>** (extends **ChangeNotifier**, implements **ValueListenable\<T>**) = a **ChangeNotifier** that holds a single (mutable) value triggering notifiations
 
 * **ListenableBuilder** = widget rebuilding its subtree when a given **Listenable** changes (without `setState()`, set optional _child_ to const subtree for performance)
 * **ValueListenableBuilder** = widget syncing its content with a **ValueListenable** object (without `setState()`, set optional _child_ to const subtree for performance)
+* **NotificationListener** = listens to notifications produced by some descendant widgets (eg **ScrollNotifications** by **ListView**/**Router**)
 
 ## [Flutter: Widgets of the Week](https://www.youtube.com/watch?v=lkF0TQJO0bA&list=PLjxrf2q8roU23XGwz3Km7sQZFTdB996iG&index=129)
 
-1. **SafeArea** = checks MediaQuery to ensure we get a neat uncut rectangle on the screen (no obstructing system status bar or hardware objects)
+1. SafeArea
 2. Expanded
 3. Wrap
 4. AnimatedContainer
 5. **Opacity** & **AnimatedOpacity** = alpha (0 is like CSS' `invisiblility: hidden`)
 6. **FutureBuilder** = display something while loading a future's result and something else when it's done
-7. **FadeTransition** = explicit opacity animation via _animationController_ (clean it up in dispose())
+7. FadeTransition
 8. FloatActionButton
 9. PageView
 10. Table
-11. **SliverAppBar** = scroll-reactive top menu using **CustomScrollView** (_expandedHeight_, _flexibleSpace_, _floating_, _pinned_)
+11. SliverAppBar
 12. SliverList & SliverGrid
 13. **FadeInImage** = placeholder for images (_placeholder_ from directory/memory, _fadeInDuration_, _fadeInCurve_, **transparent_image** package)
 14. **StreamBuilder** = rebuilds its children whenever stream data arrives (_initialData_, `snapshot.connectionState|data|error`, `snapshot.hasData|Error`)
@@ -278,12 +364,12 @@ Observer pattern.
 16. ClipRRect
 17. Hero
 18. **CustomPaint** = low-level paint calls (_size_, _painter_); surround with `FittedBox(SizedBox(width: image.width.toDouble(), height:…))`, (see _Custom painting in Flutter_ video)
-19. **Tooltip** = accessibility-friendly alt text (_child_, _message_, _verticalOffset_, _height_), some Widgets have a _tooltip_ property
+19. Tooltip
 20. FittedBox
-21. **LayoutBuilder** = provide **constraints**-aware _builder_ function, useful to make adaptative layout
-22. **AbsorbPointer** = disable all pointer/touch events over a widgets group (_absorbing_, _ignoringSemantics_ for screen readers ignoring)
+21. LayoutBuilder
+22. AbsorbPointer
 23. Transform
-24. **BackdropFilter** & ImageFilter class = image blur/rotate/skew/stretch effects (`blur()`, `matrix()`), use with parent **Stack** & _fill_
+24. **BackdropFilter** & **ImageFilter** class = image blur/rotate/skew/stretch effects (`blur()`, `matrix()`), use with parent **Stack** & _fill_
 25. Align
 26. Positioned
 27. AnimatedBuilder
@@ -293,30 +379,15 @@ Observer pattern.
 31. **Draggable\<T>** (_data_, _child(WhenDragging)_, _feedback_) & **DragTarget\<T>** (_builder_, _onWillAccept_, _onAccept_, _onLeave_)
 32. AnimatedList
 33. Flexible
-34. **MediaQuery** = Object used to retrieve info about screen size, orientation, text scaling
+34. MediaQuery
 35. Spacer
 36. **InheritedWidget** = passing data from ancestors to descendants via the **BuildContext** (matching nearest tree ancestor of same type), used by framework (eg **Theme**)
-37. **AnimatedIcon** = (`icon: AnimatedIcon.play_pause, progress: myAnimation`, `myAnimation.forward/reverse()`)
+37. AnimatedIcon
 38. **AspectRatio** = formats _child_ to be a specific box ratio (_aspectRatio_ as `width / height` for readability), incompatible with (parent) **Expanded** (unless using **Align** between)
 39. LimitedBox
 40. **Placeholder** = temporary stand-in while building the UI (use _fallbackHeight/Width_ inside unbounded parent, _color_, _strokWidth_)
-41. **RichText** = multiple styles per line (`text: TextSpan(style: …, children: <TextSpan>[…]`) for when standard **Text** is not enough
+41. RichText
 42. **ReordableListView** = drag & drop list items (_children_, `onReorder: (old, new) {setState()}`, optional _header_); use with **ListTile**
-43. **AnimatedSwitcher** = child transition animation (_duration_, _child_ via `setState()`, _transitionBuilder_); use keys if same type
-44. AnimatedPositioned
-45. **AnimatedPadding** = animated **Padding** reacting to properties change (_curve_, _duration_, _padding_ via `setState()`)
-46. **IndexedStack** = **Stack** showing one of several _children_ widgets at a time (_index_ via `setState()`)
-47. **Semantics** = provide child Widget with (lots of) meta-information, improving accessibility
-48. ConstrainedBox
-49. Stack
-50. AnimatedOpacity
-51. **FractionallySizedBox** = size by percentage (_heigh/widthFactor_), align in parent or wrap in **Flexible**; use no child for whitespacing
-52. ListView
-53. ListTile
-54. Container
-55. **SelectableText** = (_showCursor_, _cursorWidth_, _cursorColor_, _cursorRadius_, _toolbarOptions_, _onTap_, _scrollPhysics_, `.rich()`)
-56. **DataTable** = grid-like (_columns_, _rows_, _sortColumnIndex_, _sortAscending_; **DataColumn** _label_, _numeric_, **DataRow** _selected_, _cells_; **DataCell** _showEditIcon_, _placeholder_, and all cells are widget themselves => customizable), wrap in **SingleChildScrollView**
-57. (Material) **Slider**, **RangeSlider**, **CupertinoSlider** = sliders (_onChanged_, _min/max_, _divisions_, _label_, `Slider.adaptive()`)
 
 * **(Cupertino)AlertDialog** = pop-up (_title_, _content_ (any), _actions_, _elevation_, _backgroundColor_, _shape_, _barrierDismissible_)
 * **DraggableScrollableSheet** = draggable container (_builder_ => pass `scrollControlller` to **SingleChildScroll/ListView**, _abcSize_)
@@ -324,7 +395,6 @@ Observer pattern.
 * **CupertinoActionSheet** = iOS-themed actions sliding from the bottom
 * **Image** = image (_fit_, _colorBlendMode_, _semanticLAbel_) via asset (sizes in _pubspec.yaml_), network (_loadingBuilder_), file, memory
 * **DefaultTabController**, **TabBar**, **TabBarView** = tabbed widgets
-* **Drawer** = **Scaffold** `(end)drawer:` (`child:` col of **DrawerHeader** & **ListTile**s), open via `Scaffold.of(context).open(End)Drawer()`
 * **SnackBar** = pop-up a temporary message holding _content_ (ie a widget), open via `Scaffold.of(context).showSnackBar(…)` (can use a **Builder** to pass it _context_)
 * **ListWheelScrollView** = price-is-right 3D carousel list (_itemExtent_, _diameterRatio_, _offAxisFraction_, _userMagnifier_ & _magnification_)
 * **ShaderMask** = apply color/gradient/image masks (`shaderCallback(bounds) => abcGradient().createShader(bounds)`)
@@ -332,20 +402,16 @@ Observer pattern.
 * **Builder** = widget used to access an ancestor's **BuildContext**, from **within same `build()` method** where that ancestor is also declared in (as it otherwise does not exist yet in that context)
   * That ancestor is an InheritedWidget like **Scaffold**, **Navigator**, **ThemeData**, **MediaQuery**, **Provider\<T>**
   * Was created to avoid overkill of splitting a very simple widget into two child/parent (giving access to parent's context to child)
-* **Circular/LinearProgressIndicator** = Material (in)determinate progress (_value_, _value/bgColor_, `ThemeData.accentColor` by default)
 * **Divider** = basically HTML's `<hr>` (_thickness_, _(end)Indent_), set once for all via **MaterialApp**'s **ThemeData**'s _dividerTheme_
 * **IgnorePointer** = ignore pointer/touch events on a specific child (but [click can bubble up](https://stackoverflow.com/a/55431032/3559724))
 * **CupertinoActivityIndicator** = Apple's counterpart for **CircularProgressIndicator**
 * **Padding** = padding
 * **CheckboxListTile** = literally Checkbox + (tappable anywhere) ListTile (`secondary`, `controlAffinity`, `value`, `onChanged`, coloring)
 * **AboutDialog** = boring legalese stuff (`showAboutDialog()`, `application`, `children`, `LicenseRegistry.addLicense()`)
-* **SliverAppBar** (again) = AppBar reacting to scroll, now with new effects (zoom, blur)
 * **InteractiveViewer** = lets user interact (ie pan/scale/zoom) with content larger than the device
-* **GridView** = Grid (`.builder()`, `.count()`, `.extent()`, `crossAxisCount`, `main|crossAxisSpacing`)
 * **SwitchListTile** = literally Switch + (tappable anywhere) ListTile (`value`, `onChanged` with `setState()`, `(in)activeThumbImage`)
 * **ImageFiltered** & **BackdropFilter** = filters (blur, scale, translate, skew, rotate)
 * **PhysicalModel** = rectangle with rounded corners with 3D shadow effects based on (z-axis pixels) _elevation_, with antialising clipping (also see **PhysicalShape** for shapes other than rectangle)
-* **RotatedBox** = affects layout (ie moves everything around it, `quarterTurns`), in contrast, `Transform.rotate()` affects rendering, not layout (ie acts as if original was still in place)
 * **Scrollbar** = add scrollbar to _finite_ scrollable widget (**List|Grid|CustomScrollView**) (`isAlwaysShown`, `showTrackOnHover`, **ScrollbarTheme**)
 * **Connectivity**
 * **FlutterLogo** (100th Widget of the Week!) = built-in Flutter logo (`size`)
@@ -357,13 +423,12 @@ Observer pattern.
 * **TabPageSelector**
 * **Theme**
 * **CachedNetworkImage**
-* **GestureDetector** = detects user taps, long presses, drags, etc.
 * **Freezed**
 * **Baseline**
 * **Badges**
 * **ScaffoldMessenger**
 * **StatefulBuilder** = rebuild only a subtree by using a scoped StateSetter (`builder: (ctx, setState)`), can actually even be used in a Stateless widget
-* **RepaintBoundary**
+* **RepaintBoundary** = gives a widget & its RenderObject its own layer, possibly avoiding/short-circuiting extra unnecessary painting by limiting change contagion
 * **FocusableActionDetector**
 * **NavigationRail**
 * **AutoComplete**

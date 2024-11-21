@@ -8,7 +8,7 @@ Features:
 
 * Everything is Dart (no specialized layout HTML/XML language)
 * Everything is a widget (including pure layout components eg **Center**, **Padding**), however all (visual element) leaves are **RenderObject**
-  * Widgets are UI building blocks as app blue print, based on (Google) Material & (Apple) Cupertino design
+  * Widgets are UI building blocks as app blueprint/recipe, based on (Google) Material & (Apple) Cupertino design
 * Native pixel painting (via Skia/Impeller, a Google 2D painting library) à la Unity/Unreal
 * Flutter is faster than React Native, closer to native performance (see graph Fireship's R vs F)
 * Advanced 2D/3D morph/transform animations à la PowerPoint transitions (see eg **Transform** widget)
@@ -22,10 +22,16 @@ Features:
 
 ## Quick Tips
 
+* [Flutter Samples](https://flutter.github.io/samples)
+  * [Material 3 Demo](https://flutter.github.io/samples/web/material_3_demo)
 * [@Wm Leler](https://leler.com/wm/bio.html#flutter) = Flutter-promoting articles (eg _what's revolutionary?_, _why Dart?_, _company pitch_)
   * Most of the time, Flutter can do layout in a single pass (or even none, through cacheing), aka linear time, so it can even be used for scrolling & any animations
 * [Matthew Smith - Why we chose Flutter and how it's changed our company](https://medium.com/@matthew.smith_66715/why-we-chose-flutter-and-how-its-changed-our-company-for-the-better-271ddd25da60)
 * _const_ in front of constructors is very important, making rendering more efficient by skipping most of rebuild
+* It's possible to create & assign widgets to variables, then we can access their properties (eg height) down the tree, or add them conditionally in several places
+* Break down long widgets into modular widgets rather than helper methods (see Decoding Flutter video on that topic)
+* Use `compute()` (similar to Dart `Isolate.run()`) to run a given callback in background, for operations that take longer than a few milliseconds
+* `build()` should remain 'pure' ie without side-effects or state update (see <https://stackoverflow.com/a/52249579/3559724>)
 
 ## Glossary
 
@@ -48,10 +54,10 @@ Features:
   * Elements are mutable and modified in place to reflect changes in Widgets tree, hence Elements tree is seldom rebuilt & more stable, and acts as a buffer/**cache** between configuration & rendering
   * Element Tree acts as an app skeleton, and is built and handled all automatically by Flutter (based on the Widget Tree), using it to pilot widgets lifecycle, and update/redraw UI
   * (You can think of Elements as association tables, because they hold practically no data and mostly point to other stuff (Widget & State))
-  * **ComponentElement** = host for other elements
-  * **RenderObjectElement** = participates in layout/paint phases (ie a leaf element)
   * **StatefulElement** = an **Element** that uses a **StatefulWidget** as its configuration
   * **StatelessElement** = an **Element** that uses a **StatelessWidget** as its configuration
+  * **ComponentElement** = container/host for other elements
+* [Flutter Create](http://flutter.dev/create) = a one-time coding competition in 2019
 * [Impeller](https://github.com/flutter/flutter/wiki/Impeller) = latest rendering enging replacing Skia (already on iOS since Flutter 3.10), eliminating costly runtime shader compiling
 * **Keys** — see [@Emily Fortuna - Keys! What are they good for?](https://medium.com/flutter/keys-what-are-they-good-for-13cb51742e7d)
   * A way to keep track of States (ie for Stateful Widgets only), useful when adding/reordering widgets on the screen
@@ -60,19 +66,33 @@ Features:
     * **ObjectKey** = bases off multiple values (eg address) which aggregated are unique
     * **ValueKey** = bases off a single value (eg TODO item task's text) which is unique amongst its siblings
       * **PageStorageKey** = stores a user scroll location, so it can be resumeed when going back to widget
-  * **GlobalKey** allow widgets to change parents without losing State, or access information about another Widget, both anywhere in the Tree
-* **Material Design** = design language developed by Google in 2014
-  * [Material 3 Demo](https://flutter.github.io/samples/web/material_3_demo)
+  * **GlobalKey** allow widgets to change parents without losing State, or access information about another Widget, both anywhere in the Tree (see **LabeledGlobalKey**, **GlobalObjectKey**)
+* **Lifecycles**
+  * App
+    * **WidgetsBindingObserver** = mixin to observe various lifecycle events affecting overall app/widget tree (eg entering back/foreground, screen orientation/size, text scale factor, Android back button)
+      * Set `WidgetsBinding.instance.add|removeObserver(this)` & override `didChangeAppLifecycleState(state)`
+    * `WidgetsFlutterBinding.ensureInitialized()` = make sure there is an instance of **WidgetsBinding**, needed to use platform channels to call native code asynchronously (ie if _main_ is `async`)
+  * Widget = `createState()` = other than that they don't have a lifecycle as they're immutable, they exist or they don't and that's the end of it
+  * State
+    * `initState()` = one-time init
+    * `didChangeDependencies()` = when a dependency changes (eg an **InheritedWidget** in `build()` changes), called immediately after `initState()`
+    * `didUpdateWidget()` = whenever (associated stateful) widget configuration changes (eg its input values)
+    * `void dispose()` = widget removed from UI (always dispose controllers, focus nodes, streams, etc)
+    * _mounted_ (bool) = true if this state is associated with a **BuildContext** (ie after creation/construction, ie before `initState()`, and until `dispose()` gets called)
+  * StatefulElement = _initial_ (created not mounted/attached), _active_ (mounted to tree), _inactive_ (temporarily removed), _defunct_ (removed permanently)
 * **Packages**/**Modules** = Dart code **only**; can use plugins (and still qualify as a package); they're published to <https://pub.dev>
 * **Platform Channel** = bi-directional communication between Flutter custom code and native platform, with serialization (thus slowser than FFIs) via _codecs_
   * **MethodChannel** = invoke a method on native platform and get back some value
   * **EventChannel** = stream data continuously/unidirectionally from native platform to Flutter
   * **BasicMessageChannel** = send/receive asynchronous messages in both directions
-* **Plugin** = native code (Kotlin/JS/Swift) features [wrapped as Dart](https://stackoverflow.com/a/63154273/3559724)
-  * Fluent Design System = a design language developed by Microsoft in 2017
 * **Property** = actual value held in a widget eg the _text_ property of a **RichText** widget
-* **RenderObject** = counterpart of RenderObjectElements (but not ComponentElements) in a **Render Tree**, abstract model for layout and painting
+* **RenderBox** (extends **RenderObject**) = 2D Cartesian coordinate system (with a _size_ property, and **BoxConstraint** _constraints_ property inherited from parent)
+* **RenderObject** = counterpart of **RenderObjectElement** (but not **ComponentElement**) in a **RenderTree**, abstract model for layout and painting
+  * Render tree object handling concrete operations (layout, painting, hit testing, accessbility) without child model (undefined child/children/named children) nor coordinate system (Cartesian/polar)
   * Paints UI via dedicated subclasses that can handles size, layout, painting (eg **RenderParagraph** renders text, **RenderImage** an image)
+  * Everything that we see displayed on screen is a RenderObject
+* **RenderObjectElement** = **Element** that uses **RenderObjectWidget** as configuration, with an associated **RenderObject** in render tree, participates in layout/paint phases (ie a leaf element)
+* **RenderObjectWidget** = configuration for **RenderObjectElement**
 * **RenderTree** = data structure storing UI geometry (computed at layout, used for painting & hit testing)
 * **RenderView** = root of all RenderObjects, it total output of Render Tree (its `compositeFrame()` generates a frame to display)
 * **Skia** = open-source cross-platform 2D (3D via Vulkan & Metal) GPU-accelerated graphics library to draw stuff, written in C++ (à la Unity, running in web as WebAssembly), also used by Chrome
@@ -87,6 +107,7 @@ Features:
     * State (aka private variables) can be managed in any Dart class really, but `setState()` is what Flutter does need to update UI
   * _Lifting state up_ = moving state data up one level to broaden its access; basic solution to fix state sharing between multiple widgets
   * State is persistent between widget tree rebuilds (eg a few parts of the screen gets updated), but not navigating to a whole different page, which replaces subtrees
+* **State Restoration** = restoring state after app was backgrounded/suspended by OS (**RestorationManager**, `with RestorationMixin` > `restoreState()`)
 * **WebGL** = JavaScript API for rendering interactive 2/3D graphics with GPU-accelerated physics to web browsers (ie HTML canvas) without plugins
 * **Widget** = immutable (declarative) description of part of a UI (layout component or behavior: center, pad, rotate)
   * _Everything is a widget_, including app itself
@@ -115,14 +136,14 @@ Features:
   * **Unbounded constraints** = maximum height and/or width is set to _double.infinity_, which is intended for inflexible widgets to define their own size
     * If inflexible children decrease available space too much, first all flex children get compressed to 0 pixels, then inflexible children get clipped at the edge (with a black/yellow warning in debug mode)
     * Flex children appearing in this context cause an error
-* **Composition** = overlaying visual elements in draw order
+* **Composition** = overlaying visual elements in draw order (into a single image)
 * [Layout](https://docs.flutter.dev/ui/layout) = positioning & sizing elements (_where & how big everything is_)
   * Parent-child layout conversation: _Constraints go down. Sizes go up. Parent sets the position_:
     1. child receives constraints (ie set of 4 doubles: min/max height & width) from parent
     2. child determines its size, passes it back up
     3. parent determines child positionsheila
 * **Paint** = converting elements into visual representation (_determining visual appearance_), prepares different layers for compositing, isolates unchanged subtrees
-* **Rasterizing** = translates output into GPU render instructions
+* **Rasterizing** = translates output into GPU render instructions (ie pixels)
 * **Rendering** = layout + paint + composition
 * [Shrink-wrap](https://flutteragency.com/what-does-the-shrink-wrap-property-does) = force a widget to pre-calculate its total size ~ its items
 
@@ -142,6 +163,7 @@ Features:
   * **Flutter** extension provides dev tools & debugging (via `F5`), and also auto-Hot reload when saving files
 * Any **browser** (Flutter might complain it requires Chrome, but eg Firefox works, even the **Dart DevTools**' live Debugger)
   * Might require closing/restarting the app, closing/reopening/reattaching (while the app is running) the browser tab
+* Some apps may require enabling symbolic links (launch Windows Developer Mode via Win + R > `start ms-settings:developers`)
 
 ### [CLI](https://docs.flutter.dev/reference/flutter-cli)
 
@@ -149,30 +171,38 @@ Use command with options long names or short names, eg:
 
 * `flutter -t skeleton`
 * `flutter --template=skeleton`
-
 * `flutter --version`
-* `flutter doctor -v(erbose)` (Tip: use PowerShell to get Unicode support)
-* `flutter doctor --android-licenses`
-* `flutter devices` = list all connected devices
+
+* `flutter analyze` = inspect code and display all infos/warnings/errors
+* `flutter build`
+  * `flutter build appbundle` = builds Android App Bundle (AAB), for publishing to Google Play Store
+  * `flutter build apk --split-per-abi` (note: this target is called _apk_, not _android_)
+  * `flutter build ios`
+  * `flutter build web` = [Build for web deployment](https://docs.flutter.dev/deployment/web)
+  * `flutter build web --web-renderer [canvaskit|html|skwasm]` = specify renderer (ie _CanvasKit_, _HTML_ & _WebAssembly_)
+    * _canvaskit_ & _skwasm_ both draw to a single HTML `<canva>`, can handle complex visual games/presentations
+    * _html_ maps component to native HTML/CSS/JS elements (eg images as `<img>`), can handle basic CSS animations, better for SEO
+  * `flutter build web --base-href {path}` = [HTML \<base> href](https://www.w3schools.com/Tags/att_base_href.asp)
+* `flutter channel [master|beta|stable]` = pick release channel (_master_ = dev, _beta_ = finalized/tested, _stable_ = production)
+* `flutter clean` = clear build & packages cache (very useful before archiving/zipping an app source code)
 * `flutter create kokoapp`
 * `flutter create .` = regenerate platform-specific directories (android/, ios/, etc)
   * Eg adding web support to existing app (see <https://docs.flutter.dev/get-started/web#add-web-support-to-an-existing-app>)
   * `flutter create --sample=widgets.SingleChildScrollView.1 mysample` = create new app from existing sample code
   * `flutter create --template=skeleton` = generate a List View / Detail View app that follows community best practices
   * `flutter create -t package {koko}` = [creates a package project](https://docs.flutter.dev/development/packages-and-plugins/developing-packages)
-* `flutter analyze` = inspect code and display all infos/warnings/errors
-* `flutter test` = run tests
-* `flutter build`
-  * `flutter build appbundle` = builds Android App Bundle (AAB), for publishing to Google Play Store
-  * `flutter build apk --split-per-abi` (note: this target is called _apk_, not _android_)
-  * `flutter build ios`
-  * `flutter build web` = [Build for web deployment](https://docs.flutter.dev/deployment/web)
-  * `flutter build web --web-renderer [html|canvaskit]` = [Web Renderers](https://docs.flutter.dev/development/platform-integration/web/renderers)
-  * `flutter build web --base-href {path}` = [HTML \<base> href](https://www.w3schools.com/Tags/att_base_href.asp)
-  * Web Troubleshooting
-    * Hack: set `<base href>` manually to _./_ relative path to deploy in a (non-root) subfolder
-      * note that _index.html_ contains a unique service worker version ID changing at each build so don't replace the whole file
-    * run `flutter clean` then rebuild if _flutter.js_ is not regenerated each time (see <https://stackoverflow.com/a/73780022/3559724>)
+* `flutter devices` = list all connected devices
+* `flutter doctor -v(erbose)` (Tip: use PowerShell to get Unicode support)
+* `flutter doctor --android-licenses`
+* `flutter format {filename}` = Format document
+* `flutter install` = install app to attached device
+* `flutter pub` = manages the _pubspec.yaml_ file, which contains assets & dependencies, downloaded from <pub.dev>
+* `flutter pub add {package}` = downloads & references package
+* `flutter pub cache repair`
+  * eg [Install intl](https://stackoverflow.com/a/51706630/3559724)
+* `flutter pub get` = explicitely pulls packages into the project & generates _pubspec.lock_ (implied with `flutter run`)
+  * `flutter packages get` = [alias for the above](https://stackoverflow.com/a/61038022/3559724)
+* `flutter pub upgrade`
 * `flutter run` = run app (without debugging, equivalent to `Ctrl + F5` in **Visual Studio Code** with _Flutter_ extension installed)
   * `r` = Hot reload, `R` = Hot restart (resets state), `h` = List commands, `d` = Detach (terminates run but app lives on), `c` = clrscr, `q` = Quit
   * `flutter run -d(evice-id) {device}` = Run to chosen device
@@ -183,15 +213,7 @@ Use command with options long names or short names, eg:
   * `flutter run --no-enable-impeller` = force use old Skia rendering engine
   * `flutter run --release` = compile to release mode (removes all debugging directives eg asserts)
   * [Fix "Parameter format not correct"](https://stackoverflow.com/a/69519005/3559724)
-* `flutter install` = install app to attached device
-* `flutter clean` = clear build & packages cache (very useful before archiving/zipping an app source code)
-* `flutter format {filename}` = Format document
-* `flutter pub {add} {package}` = manages the _pubspec.yaml_ file, which contains assets & dependencies, downloaded from <pub.dev>
-  * eg [Install intl](https://stackoverflow.com/a/51706630/3559724)
-* `flutter pub get` = explicitely pulls packages into the project & generates _pubspec.lock_ (implied with `flutter run`)
-  * `flutter packages get` = [alias for the above](https://stackoverflow.com/a/61038022/3559724)
-* `flutter pub cache repair`
-* `flutter pub upgrade`
+* `flutter test` = run tests
 * `flutter upgrade` = install latest Flutter version
   * [Upgrade and clean cache](https://stackoverflow.com/a/64515721/3559724)
 
@@ -234,8 +256,8 @@ Use command with options long names or short names, eg:
     * Append a comma to each closing parenthesis to take advantage of this command
   * `Ctrl + Click` = `F12` = Go to definition
 * Terminal area
-  * _PROBLEMS_ tab contains list of compile issues
-  * _DEBUG CONSOLE_ contains list of runtime issues
+  * _PROBLEMS_ = contains list of compile issues
+  * _DEBUG CONSOLE_ = contains list of runtime issues
   * `Right-Click` > _Clear Console_
 
 #### Snippets
@@ -245,55 +267,11 @@ Use command with options long names or short names, eg:
 * `stfu` = Stateful widget
 * Don't forget you can auto-complete via camelCase initials (eg `sichsc + Tab` => **SingleChildScrollView**)
 
-## API
-
-* `runApp(…)` = takes in widget instance and inflate it to screen size (ie calls its `build()` method, etc)
-* `showSearch(ctx, SearchDelegate)` = (framework provided) shows a full screen search page that returns result when closed
-* `toStringDeep()` = Returns a string representation of this node and its descendants
-* `MateriapApp(debugShowCheckedModeBanner: false)` = [remove debug banner](https://stackoverflow.com/a/48893964/3559724)
-* **MaterialPageRoute** _fullScreenDialog_ = 'X' close button instead of back arrow (and slightly different transition animation)
-* [Background computation isolate](https://docs.flutter.dev/cookbook/networking/background-parsing) = `compute()` returns a Future
-* It's possible to create & assign widgets to variables, then we can access their properties (eg height) down the tree, or add them conditionally in several places
-* Form
-  * [How to use InputFormatters](https://stackoverflow.com/a/50123743/3559724)
-
-### Lifecycles
-
-* `void initState()` = one-time init (probably better to initialize state variables here than in the state's constructor)
-* `void dispose()` = widget removed from UI (always dispose controllers, focus nodes, streams, etc)
-* App
-  * [What does WidgetsFlutterBinding.ensureInitialized() do?](https://stackoverflow.com/a/63873689/3559724)
-  * [WidgetsFlutterBinding.ensureInitialized()](https://stackoverflow.com/a/67295324) = wait for async platform channels (eg for Firebase)
-  * **WidgetsBindingObserver**, `WidgetsBinding.instance.add|removeObserver(this)`, `didChangeAppLifecycleState(AppLifecycleState s)`
-* Widget = _ctor_, `createState()`
-* State = _ctor_, `initState()`, `didUpdateWidget()`, `dispose()` (_created_, _initialized_, _ready_, _defunct_)
-  * _mounted_ (bool) = true if this state is associated with a BuildContext (ie after creation/construction (before `initState()`) and until `dispose()` gets called)
-  * `didUpdateWidget()` can be used to update something along in the state when its associated widget got rebuilt (with a new input value)
-    * See <https://github.com/rrousselGit/flutter_hooks#motivation>
-* **(Stateful)Element** states = _initial_, _active_, _inactive_, _defunct_
-
-### Adaptative Design
-
-* `MediaQuery.of(context)`
-  * `.orientation` (device), OrientationBuilder (parent widget) or LayoutBuilder (parent widget, not just its orientation)
-  * `.size.height` = height on screen, including AppBar & (top) status bar
-    * `height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top` x (0.0 -> 1.0 ratio)
-  * `.size.width` = screen width
-  * `.size.shortestSide < 600` = is phone or tablet?
-  * `.viewInsets.bottom` = soft virtual keyboard
-  * Make sure that the _context_ originates from app root, not a local _ctx_ instance (eg from a `builder((ctx) => …)` method)
-  * If multiple call to MediaQuery are done in same file/widget, place it in a local variable and use that instead
-  * Using InheritedWidgets such as **MediaQuery** or **Theme** in a widget causes the widget to get rebuilt when they change
-    * This is the case even for built-in widgets (eg **Text** very logically rebuilds whenever Theme is changed)
-  * [Scroll a list when keyboard pops up](https://stackoverflow.com/a/70612950/3559724)
-  * [Move bottom sheet when autofocused keyboard is up](https://stackoverflow.com/a/57515977)
-
-* Platform-adaptative
-  * `Theme.of(context).platform == TargetPlatform.iOS ? iOSWidget(…) : AndroidWidget(…)` = Apple vs Google button style
-  * `import 'dart:io' show Platform;` then `Platform.isAndroid`
-  * `.adaptive()` method on some widgets (eg `Switch.adaptive()`)
-
 ## [Troubleshooting](https://docs.flutter.dev/testing/common-errors)
+
+* Red text with yellow double underline = a Material Design based widget (eg **Text**, **Slider**, etc) does not have an ancestor providing default styling (eg **DefaultTextStyle**)
+  * Usually, that ancestor is included in another widget (eg **Scaffold** which adds a **Material** widget that applies that styling)
+  * Same goes for widgets that require a **MediaQuery** ancestor (provided via **MaterialApp**)
 
 * _Vertical viewport was given unbounded height_
   * A space-hungry misbehaving **ListView** is inside an unbounded constraints permissive (**Flex**) **Column**
@@ -338,4 +316,31 @@ Use command with options long names or short names, eg:
   * **DrawerHeader** = set **Divider** `color` (to _transparent_) or `width` (to _0_) via (global/local) themeing
   * **Material/Card** = set the _shape_'s _side_'s `color` (to _transparent_) or `width` (to _0_)
 
-* [Flutter Web: Lottie Animation issue](https://stackoverflow.com/a/73779834/3559724)
+* Web
+  * Hack: set `<base href>` manually to _./_ relative path to deploy in a (non-root) subfolder
+    * note that _index.html_ contains a unique service worker version ID changing at each build so don't replace the whole file
+  * run `flutter clean` then rebuild if _flutter.js_ is not regenerated each time (see <https://stackoverflow.com/a/73780022/3559724>)
+
+### [Debugging](https://docs.flutter.dev/testing/code-debugging)
+
+Run apps actually without debugging (unless intended) for faster development/execution cycles.
+
+* Use `toStringDeep()` = a string representation of this node and its descendants
+* Use _dart:convert_ `jsonEncode(…)` to encode & pass whole objects
+* For custom widgets, override `debugFillProperties()` to add custom information (**DiagnosticsProperty**) into Flutter widget tree inspector (especially when publishing packages)
+* Toggle Repaint Rainbow tool to identify superfluous repaints (via **DevTools** or _debugRepaintRainbowEnabled_)
+* **DevTools**: add log to Logging view (or system console)
+  * Print to _sdout_ & _stderr_ via `print(…)` or `stderr.writeln(…)` (from _dart:io_)
+  * Use `debugPrint()` to wrap `print(…)` and avoid Android throttling log lines due to too high a volume
+  * Use _dart:developer_ `log(…)`, eg with object as error `developer.log(…, name: …, error: jsonEncode(koko)`
+* Set breakpoints (programmatic breakpoints via _dart:developer_ `debugger(when: condition)` statement)
+* Print widget tree via `debugDumpApp()` (from _package:flutter/rendering.dart_) from within `runApp()` (calls `toStringDeep()` recursively)
+* Print render tree via `debugDumpRenderTree()` not during layout/paint (in a callback/event handler), displays all constraints
+* Print layer tree via `debugDumpLayer Tree()`
+* Print focus tree via `debugDumpFocusTree()`
+* Print semantics tree via `debugDumpSemanticsTree()`
+* Highlight layout issues via `debugPaintSizeEnabled` from _package:flutter/rendering.dart_ set to true (boxes, padding, alignment, spacers)
+* Slow down animation via **DevTools** Inspector view or set `timeDilation` from _scheduler_ to number greater than 1.0
+* Tracing = **Timeline** utilities in _dart:developer_ (`startSync(…)` & `finishSync()`)
+* Performance overlay = `MaterialApp { showPerformanceOverlay: true }`
+* Alignment grid = `MaterialApp { debugShowMaterialGrid: true }` or use a **GridPaper** (inside a **Stack** to use as overlay)

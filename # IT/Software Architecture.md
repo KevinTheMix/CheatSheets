@@ -76,9 +76,7 @@
   * **Visitor** = one way follow the Open-Close Principle
 * **Builder** = used in .Net Core configuration
 * **Composite** = composite class implements interface and manages a collection of instances (or a factory), then dispatchs calls to one of those instances.
-* **Decorator**
-  * Add a behavior, at runtime, without modifying the existing, separation of concerns.
-  * Implements the Interface of a decorated object, and receives an instance in its constructor, then call the methods of that instance, adding extra features
+* **Decorator** = add a behavior, at runtime without modifying the existing by accumulating subclasses taking previous instance as ctor parameter, separation of concerns
 * **Inversion of control** (IoC) = custom code receives control of flow (or its dependencies in case of **DI**) from a generic framework (eg via providing callbacks) that handles boilerplate treatment (eg GUI)
 * **Repository pattern** = defines reusable boilerplate CRUD logic/interface to abstract data access considerations (BL does not care how DL works/where data is coming from)
 * **Singleton** = a Single instance; hard to test

@@ -18,21 +18,44 @@
 
 ## Glossary
 
-* **Adaptative** = same code handling different platforms (eg Android, iOS, Web)
+* **Adaptive** = same code handling different platforms (eg Android, iOS, Web)
 * **Display typeface** = for short but eye-catching/important/large elements (eg titles, headings, pull quotes) rather than extended passages of body text
 * [Fitt's Law](https://en.wikipedia.org/wiki/Fitts%27s_law#Implications_for_UI_design) = place buttons at screen edges
 * **Flat design** = minimalist design language
+* **Fluent Design System** = a design language developed by Microsoft in 2017
+* **Hover** = change in color, shadow or animation of a button/link/icon in response to a mouseover
+* **Mouseover** = mouse is over an element (just a state, no inherent associated animation/visuals)
 * **Reactivity** = how UI responds to changes in underlying data (aka `UI = f(state`))
   * Reacting to (input) change in real-time in a very clear, visible fashion, and possibly impacting several parts of an application
-* **Responsivity** = responding to screen size change
+* **Responsive** = responding to screen size change
+* **Rollover** = icon/image-based swap in response to a mouseover
 * **Scrim** = temporary greyed out (Material) area appearing on surface/rest of screen to make its content less prominent when a modal element is shown (eg dialog, drawer)
   * Clicking on it sometimes removes the modal element
 * **Typeface** (aka **font family**) = design for alphanumerics & symbols used in printing/electronic display
 * **Viewport** = a box that is bigger on the inside, ie children outside bounds can be scrolled into view
 
+### [Material](https://m3.material.io)
+
+* **Material Design** = design language developed by Google in 2014
+
 ### Graphics
 
-* **OpenGL** = cross-platform 2D/3D graphics rendering API
+* **Bit Blit** = computer graphics data operation combining several bitmaps into one using a boolean function
 * **Direct3D** = Windows 3D graphics rendering API
 * **DirectX** = collection of Windows-focused API suite for graphics, audio (**DirectSound**), input devices (**DirectInput** eg kb/m), network communication (**DirectPlay**)
-* **Bit Blit** = computer graphics data operation combining several bitmaps into one using a boolean function
+* **Graphics Pipeline** = whole step-by-step process performed by a GPU to render a 3D scene as a 2D projection
+* **GLSL** (OpenGL Shading Language) = high-level OpenGL shading programming language based on C
+* **Hardware-accelerated** = runs on dedicated (GPU) hardware rather than solely on general purpose CPU (which is also hardware btw)
+* **Khronos Group** = consortium of hardware and software vendors with a vested interest in OpenGL, maintaining it
+* **Mesa 3D** = open source imeplementation of OpenGL, Vulkan & other libraries
+* **OpenGL** = cross-platform 2D/3D graphics rendering API (ie a standard set of possible instructions without concrete implementation)
+  * [OpenGL Book](https://openglbook.com)
+* **Shader** = GPU-executed program that transforms 3D data into a (three-dimensional-looking) 2D scene, part of Graphics Pipeline
+  * **Fragment/Pixel Shader** = calculates color for each pixel (kinda inefficient because threads don't share calculation but done in parallel)
+  * [The Book of Shaders](https://thebookofshaders.com)
+  * [Shadertoy](https://www.shadertoy.com) = community shaders library (eg [Raymarched Hexagonal Truchet](https://www.shadertoy.com/view/4td3zj))
+
+* Music Visualization
+  * [Interactive Particles Music Visualizer](https://github.com/tgcnzn/Interactive-Particles-Music-Visualizer) = Three.js
+  * [projectM](https://github.com/projectM-visualizer/projectm) = cross-platform music visualization library
+  * [ShaderFlow](https://github.com/BrokenSource/ShaderFlow) = create & export real-time audio reactive shaders
