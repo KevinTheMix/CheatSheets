@@ -7,13 +7,13 @@ Building blocks of Flutter.
 * [Widget Catalog](https://docs.flutter.dev/ui/widgets)
   * [Material](https://docs.flutter.dev/ui/widgets/material)
   * [Material 3](https://flutter.github.io/samples/web/material_3_demo)
-* _Not everything is a widget_ (eg **BoxDecoration**, **TextStyle**)
+* _Not everything is a widget_ (eg **BoxDecoration**, **ThemeData**, **TextStyle**)
 
 ## Misc
 
 * **Canvas** = eg `canvas.drawArc()` draws circle (arc)
 * **SelectionArea** = selectable text (Flutter >=3.3)
-* **SimpleDialog** = modal dialog (_contentPadding_, _children_)
+* **SimpleDialog** = modal popup (_contentPadding_, _children_)
 * [ResizeImage](https://api.flutter.dev/flutter/painting/ResizeImage-class.html)
 * **AndroidView** & **UiKitView** = embeds Android/iOS view in widget hierarchy, allows using native controls (eg a browser control, Google Maps) but pretty performance-expensive
 * **PageRouteBuilder** = creates route & page (with _pageBuilder_) with transition effect (via _transitionsBuilder_)
@@ -22,6 +22,7 @@ Building blocks of Flutter.
 * **Circular/LinearProgressIndicator** = Material progress bar (_value_, _backgroundColor_, `ThemeData.accentColor` by default)
   * _valueColor_ takes in an **Animation\<T>** instance, which can be result of controlled Tween (via `drive()` or `animate()`)
 * **Rect** = can be assigned as `offset & size` (**Offset** & **Size**)
+* **Icon** = (_icon_ **IconData** with `Icons.…`)
 
 ## App & Navigation
 
@@ -34,14 +35,16 @@ Building blocks of Flutter.
   * `MateriapApp(debugShowCheckedModeBanner: false)` = [remove debug banner](https://stackoverflow.com/a/48893964/3559724)
 * **MaterialPageRoute** _fullScreenDialog_ = 'X' close button instead of back arrow (and slightly different transition animation)
 
-* **AppBar** = top menu (_leading_, _title_, _actions_ as widgets to display after title, _bottom_), also see scrollable **SliverAppBar** (embeds **AppBar** & **CustomScrollView**)
-* **BottomNavigationBar** = with **BottomNavigationBarItem**s (Material 2)
-* **Drawer** = **Scaffold** `(end)drawer:` (`child:` col of **DrawerHeader** & **ListTile**s), open via `Scaffold.of(context).open(End)Drawer()`
-  * _drawerEdgeDragWidth_ = area within which a horizontal swipe will open **Drawer**
 * **PreferredSizeWidget** = base interface for widget that have an ideal size when unconstrained, such as **AppBar**
+
 * **Scaffold** = basic Material design layout with a set of pre-configured widgets
-  * _floatingActionButtonLocation_ = dictates how/where associated FAB integrates/incrustates
-  * It's possible to use a Drawer without a Scaffold, in which case it's not modal (see <https://material.io/components/navigation-drawer/flutter>)
+  * **AppBar** = top menu (_leading_, _title_, _actions_ as widgets to display after title, _bottom_), also see scrollable **SliverAppBar** (embeds **AppBar** & **CustomScrollView**)
+  * **BottomNavigationBar** = with **BottomNavigationBarItem**s (Material 2)
+  * **(end)Drawer** = `Scaffold.of(context).open(End)Drawer()` & `Navigator.pop(context);`, it's possible to use a (then non-modal) Drawer without a Scaffold
+    * _child_ = **DrawerHeader** + **ListTile**s
+    * _drawerEdgeDragWidth_ = area within which a horizontal swipe will open **Drawer**
+  * **FloatingActionButton** with _floatingActionButtonLocation_ = dictates how/where associated FAB integrates/incrustates
+
 * Tabs
   * **DefaultTabController** = inherited **TabController** for descendants widgets that don't specify one explicitly
   * **TabBar** = Material Design primary tab bar
@@ -55,6 +58,15 @@ Building blocks of Flutter.
   * See [Material 3 navigation bar](https://m3.material.io/components/navigation-bar/overview) = nav menu (available)
   * See [Material 3 bottom app bar](https://m3.material.io/components/bottom-app-bar/overview) = 4 icons & FAB (in progress)
 
+* [Router](https://api.flutter.dev/flutter/widgets/Router-class.html)
+
+* Closable via **Navigator** `pop()`:
+  * `Scaffold.of(c).showBottomSheet(…)` (or shorthand, to nearest **Scaffold**: `showModalBottomSheet(context: …, builder: …)`)
+  * `Scaffold.of(c).openDrawer()`
+  * `Scaffold.of(c).showSnackBar(SnackBar())`
+  * `showDialog()`
+  * `showAboutDialog()`)
+
 ### Adaptivity & Themes
 
 * Use `double.infinity` to set to max available dimensions (eg screen entire width)
@@ -64,7 +76,7 @@ Building blocks of Flutter.
   * **BorderRadius**
   * **BorderSide** = one side of a border
   * **BoxBorder**
-  * **BoxDecoration** = (_shape_, _boxShadow_ = collection of **BoxShadow**s)
+  * **BoxDecoration** = immutable description how to paint a box (_boxShadow_ = collection of **BoxShadow**'s, _gradient_, circle/rectangle _shape_)
   * **CircleBorder**
   * **ContinuousRectangleBorder**
   * **OutlineInputBorder** (eg in a **InputDecoration**)
@@ -104,6 +116,7 @@ Building blocks of Flutter.
 * **ThemeData** = provided via `Theme.of(context)` (`ThemeData.light()` & `ThemeData.dark()`)
   * `copyWith(…)` = applies a set of specific styling/theme, defaulting rest to first found **Theme** ancestor (possibly at app root)
   * _colorScheme_ = set of 45 colors based on Material spec to configure most components colors, dynamic colors scheme can be set from a single seed
+    * [primaryColor is one of those shades, normally equal to `primarySwatch\[500\]`](https://stackoverflow.com/a/50214259/3559724)
   * _platform_ = `TargetPlatform.iOS ? iOSWidget(…) : AndroidWidget(…)` (alternatively `import 'dart:io' show Platform;` then `Platform.isAndroid` or `.adaptive()` method on some widgets)
   * _textScheme_
 * **Visibility** = toggles widgets display on/off
@@ -120,10 +133,8 @@ Building blocks of Flutter.
 * **AbsorbPointer** = disable all pointer/touch events over a widgets group (_absorbing_, _ignoringSemantics_ for screen readers ignoring)
 * **FocusNode** = obtain keyboard focus & handle keyboard events in a stateful widget
 * **Form** = form that can be saved/reset/validated (_onChanged_), with input fields
-  * **FormField** = single form field (_onSaved_, _validator_)
-  * **TextFormField** (_controller_: **TextEditingController**, _decoration_: **InputDecoration**, _validator_ checked on Form `validate()`)
-    * This is a convenience widget wrapping a **TextField** in a **FormField**, so use former only if there is no enclosing **Form** (eg a search field)
-  * [How to use InputFormatters](https://stackoverflow.com/a/50123743/3559724)
+  * **FormField** = single form field (_onSaved_, _validator_ checked on associated **FormFieldState** `validate()`)
+  * **TextFormField** = **FormField** that contains a **TextField**
 * **GestureArena** = disambiguation between gestures using a battle royale strategy
 * **GestureDetector** = detects user inputs (eg (double) tap, long press, h/v drag, pinch)
   * For low-level device OS input events, see **Listener** (_onPointerDown/Up/Move_)
@@ -132,10 +143,10 @@ Building blocks of Flutter.
 * **Slider** = slider (_onChanged_, _min/max_, _divisions_, _label_, `Slider.adaptive()`), **CupertinoSlider** (iOS-style), **RangeSlider** (from/to slider)
 * **TextEditingController** = gives access to associated **TextField** programmatically
 * **TextField** = input text field (_controller_, _decoration_, _inputFormatters_, _onChanged|EditingComplete|Submitted_)
-  * **InputDecoration** = _hint|labelText_, _border_, _focusedBorder_, _prefix/suffixIcon_
+  * **InputDecoration** = (_border_, _counter_ of entered characters, _enabled_, _focusedBorder_, _(prefix|suffix)icon_, _hint|labelText_)
   * **TextInputFormatter** = **LengthLimitingTextInputFormatter** (length), **FilteringTextInputFormatter** (regex pattern)
-
-* **TextStyle** = à la CSS (_fontSize_)
+    * [How to use InputFormatters](https://stackoverflow.com/a/50123743/3559724)
+* **TextStyle** = à la CSS (_fontSize_, _fontWeight_)
 * **Tooltip** = accessibility-friendly alt text (_child_, _message_, _verticalOffset_, _height_), some Widgets have a _tooltip_ property
 
 ### Buttons
@@ -174,7 +185,7 @@ Basically, widget nodes with one or multiple children.
     * [Example](https://stackoverflow.com/a/69476516) using `quadraticBezierTo(…)`
 * **CircleAvatar** = circle container (_back/foreground-Image_ with child text initial fallback, append `.image` to **Image**), adequate for user pfp
 * **ColoredBox**
-* **DecoratedBox** = paints a (**(Box)Decoration**) _decoration_ before/after its child paints (also see **DecoratedBoxTransition**)
+* **DecoratedBox** = paints a **(Box)Decoration** either before or after its child paints (also see **DecoratedBoxTransition**)
 * **EdgeInsets** = padding (_zero_, `all()`, `symmetric(vertical, horizontal)`, `only(right:…, top:…)`)
 * **IntrinsicHeight** & **IntrinsicWidth** = sizes its child to its maximum intrinsic h/w by letting it speculatively sizing to its its largest child
   * Useful for edge cases (eg when each sibling wants to align in different directions in a scrollable context), but can be expensive (worse case O(N²))
@@ -190,7 +201,9 @@ Basically, widget nodes with one or multiple children.
   * **ExpansionPanelList** = **ExpansionPanel** container (_expansionCallback_, _animationDuration_, _dividerColor_, _elevation_, _expandedHeaderPadding_)
   * **GridView** = grid (`.builder()`, `.count()`, `.extent()`, _crossAxisCount_, _main|crossAxisSpacing_)
   * **GridTile** = (with **GridTileBar** as _header_ or _footer_)
-  * **ListView** = scrollable list of children (_scrollDirection_, _reverse_, _physics_, _addAutomaticKeepAlives_, _cacheExtent_, `ListView.builder` with _itemBuilder_ & _itemExtent_, `ListView.separated` with _separatorBuilder_ & _itemCount_, `ListView.custom` with _childrenDelegate_ sliver)
+  * **ListView** = scrollable list of children (_scrollDirection_, _reverse_, _physics_, _addAutomaticKeepAlives_, _cacheExtent_)
+    * Use `ListView.builder(…)` for lazy/many items (_itemCount|Extent_) or `ListView.separated` (_separatorBuilder_) or `ListView.custom` (_childrenDelegate_ sliver)
+    * Implicit constructor also performs some display virtualization but creates all items immediately (non-lazily) upfront
     * **Dismissible** = left/right swipeable items (_key_ to track what's visible/hidden, (secondary)_background_, _direction_ , `onDismissed()` to remove underlying item)
     * **ListTile** = Material List item (up to 3 lines _title_/_subtitle_/_isThreeLine_, _dense_, `tap`, `onLongPress`, `ListTile.divideTiles()`)
   * **SliverList** & **SliverGrid** = advanced scrolling control (_delegate_: `Sliver[Child|Builder]ListDelegate`, `.count()` & `.extent()` ctors)

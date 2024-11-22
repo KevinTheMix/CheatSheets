@@ -24,7 +24,7 @@ Features:
 
 * [Flutter Samples](https://flutter.github.io/samples)
   * [Material 3 Demo](https://flutter.github.io/samples/web/material_3_demo)
-* [@Wm Leler](https://leler.com/wm/bio.html#flutter) = Flutter-promoting articles (eg _what's revolutionary?_, _why Dart?_, _company pitch_)
+* [@Wm Leler](https://leler.com/wm/bio.html#flutter) = Flutter-promoting articles (eg _what's revolutionary?_, _why Dart?_ UX study with eight developers, _company pitch_)
   * Most of the time, Flutter can do layout in a single pass (or even none, through cacheing), aka linear time, so it can even be used for scrolling & any animations
 * [Matthew Smith - Why we chose Flutter and how it's changed our company](https://medium.com/@matthew.smith_66715/why-we-chose-flutter-and-how-its-changed-our-company-for-the-better-271ddd25da60)
 * _const_ in front of constructors is very important, making rendering more efficient by skipping most of rebuild
@@ -99,8 +99,8 @@ Features:
   * Native Android apps also use Skia as part of their rendering routine, however Flutter packs its own standalone copy (in the engine layer) to remain decouple from a platform's specific version
 * **Slivers** = different parts of a scrollable area that can each react appropriately to the same scroll
 * **State** = objects associated with stateful widgets (actually linked **from** their associated Elements)
-  * `widget` = access to its associated widget's properties (usually passed down from parent)
-  * `context` = access to its associated widget's context (might need to specify `late final` variables to use it in an initializer)
+  * _widget_ = access to its associated widget's properties (usually passed down from parent)
+  * _context_ = access to its associated widget's context (ie outside of `build()`, declare `late final` variables to use in an initializer)
   * `build()` = called by Flutter (and never directly!), possibly very often whenever it needs to paint something (ie `setState()` called, or parent input data changes, or once during app creation)
     * Always return a new or cached (tree of) widget(s), ie it constitutes a reactive snapshot of UI
   * `setState()` = [takes in & executes an anonymous method, mostly contains _asserts_, then marks the Element dirty](https://iiro.dev/set-state)

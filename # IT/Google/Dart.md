@@ -123,19 +123,20 @@ The same Dart code can run on multiple platforms (eg mobile/desktop via Flutter,
 * String signature = `abstract final class String implements Comparable<String>, Pattern`
 * `r'C:\System'` or `r"C:\System"` = raw string (escapes automatically `\` and prevents interpolation, à la C# `@"C:\System"`)
   * `'C:\\System` alternatively with manual escaping
-* `'$koko'` or `'${longer.expression[i]}'` = interpolation
-* `String s = 'a' 'b'    'c'` = concatenation (result: `'abc'`)
-* `'ko' * 4` = `'kokokoko'` = string multiplication
+* Interpolation = `'$koko'` or `'${longer.expression[i]}'`
+* Concatenation = `'a' + 'b' + 'c'` or `'a' 'b'    'c'` (result: `'abc'`)
+* Multiplication = `'ko' * 4` = `'kokokoko'`
 * `s.startsWith()`
 * `s.substring(start, [end])`
 * `s.characters` (property) = string as characters list (requires _characters_ package)
 * Unicode support using _characters.dart_ package (Runes and grapheme clusters)
 * [IsNullOrEmpty](https://stackoverflow.com/a/52948927/3559724) = `s?.isEmpty ?? true` or simply `s == null || s.isEmpty`
 * Formatting
-  * `NumberFormat('###.00').format(num)` = _"123.00"_
-  * `num.toStringAsFixed(2)` = _"123.00"_
-  * `DateFormat.yMMMd().add_Hm().format(dateText)` = _"Aug 12, 2022 16:20_
-  * `DateFormat('y.MM.dd').add_Hm().format(dateText)` = _"2022.08.12 16:20"_
+  * `object.toString()` = string representation (automatically called when using an object in a string context eg an interpolation)
+  * `NumberFormat('###.00').format(num)` = _123.00_
+  * `num.toStringAsFixed(2)` = _123.00_
+  * `DateFormat.yMMMd().add_Hm().format(dateText)` = _Aug 12, 2022 16:20_
+  * `DateFormat('y.MM.dd').add_Hm().format(dateText)` = _2022.08.12 16:20_
 * `padLeft(int width)` = <https://api.dart.dev/stable/1.21.0/dart-core/String/padLeft.html>
 * **StringBuffer** `write()`, `writeln()`, `writeAll()`, `clear()`, _isEmpty_, _length_
 
