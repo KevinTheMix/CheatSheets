@@ -3,6 +3,7 @@
 ## Quick Tips
 
 * [Saga](https://microservices.io/patterns/data/saga.html) = pattern to handle operations spanning multiple microservices (one DB per service) via choregraphed events/orchestrated messages
+* [Coding Horror - A Visual Explanation of SQL Joins](https://blog.codinghorror.com/a-visual-explanation-of-sql-joins)
 
 ## Glossary
 
@@ -13,6 +14,8 @@
 * **CTE** (Common Table Expression) = intermediary virtual tables whose data are piped/reusable to the following DML statement/CTE, also enables recursion
 * **Cursor** = a type of variable that can keep browse a query result set (eg `DECLARE CURSOR {name} FOR SELECT …`)
   * Avoid cursors by thinking less in terms of loops and more in terms of sets (as SQL was intended)
+* **Eager Read Derivation** = preparing report (DBs) on writes rather than reads (à la Facebook homepage)
+  * See <https://martinfowler.com/bliki/EagerReadDerivation.html>
 * **Eventual Consistency** = distributed DB model to achieve high availability at the cost (and guarantee) of eventual consistency
 * [Fragmentation](https://www.mssqltips.com/sqlservertip/4331/sql-server-index-fragmentation-overview) = internal (too much free space) or external (table storage pages are out of order)
 * **Index** = a lookup table applied to PK, FK and UNIQUE-constrained fields that enables dichotomical (_log(n)_) searches, as opposed to slow sequential _O(n)_ table-scanning (reads get faster, but inserts get slower)
@@ -30,6 +33,9 @@
   3. 2NF + no functional dependency between non-key attributes
 * **NoSQL** (non-SQL aka non-relational) = schema-less, non tabular relations more flexible DB, via different data structure (eg key–value pair, wide column, graph, or document), making some operations faster
 * **ORM (Object-Relational Mapping)** = technique for converting data between a relational DB and the heap of an OO programming language
+* **Replication** = copying of data from a primary to replica DBs in order to achieve distributedness and/or reliability (either triggered in real-time, or scheduled by batch)
+* **Reporting Database** = (one or more) read-only DBs dedicated to getting queryed (ie not updated from direct user interactions) efficiently
+  * See <https://martinfowler.com/bliki/ReportingDatabase.html>
 * **Schema** = namespace-like containing other DB entities, to which granular permissions can apply (eg `CREATE SCHEMA {name} AUTHORIZATION {user}`)
   * Tables created without a schema specified will get a default schema applied (_dbo_)
   * Two tables with the same name can coexist in the same DB if they have different schemas

@@ -5,7 +5,10 @@ It has very high capabilities in concurrency & multi-threading and on the other 
 
 ## Quick Tips
 
+* [Sequential Programming](https://www.erlang.org/doc/system/seq_prog.html)
 * [Learn You Some Erlang for Great Good!](https://learnyousomeerlang.com) = for programmers without functional programming experience
+* [Random in Erlang processes](https://www.no-spoon.de/posts/2006/09/random-in-erlang-processes)
+* [Erlang is still (as of 2016) the only distributed actor model implementation with preemptive scheduler](https://news.ycombinator.com/item?id=11449767)
 
 ## Glossary
 
@@ -38,7 +41,7 @@ It has very high capabilities in concurrency & multi-threading and on the other 
   * `?` or `h` = help
 
 * `b().` = display all (variable) bindings
-* `c(module)`
+* `c(module)` = compile module
 * `c {job_number}` = connects to given shell, or current shell if no number specified
 * `e(cmd)` = command _cmd_ re-eval
 * `erase().` = efface tous les objets

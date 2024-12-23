@@ -21,6 +21,9 @@
 * **Server-Sent Events** (SSE) = unidirectional (unlike WebSockets) server-to-client push technology (via HTTP connection, once it's initially established)
 * **Service Worker** = makes a web site/app behave like a native app, solves loss of connectivity issues, by enabling caching data locally & working offline-first (acts as a proxy for requests & responses)
 * **Shadow DOM** = DOM encapsulation/nesting technique, isolates (without barbaric iframes) inner DOM as a standalone component (eg CSS is contained)
+* **Text Fragment** (`#:~:text=`) = (browser-specific) URL suffix to search & highlight a given string (if present) on web page
+* **URL Rewriting** = rewrite a URL (eg turn GET parameters into URL fragments)
+* **URL Slug** = human-readable last part of a URL address explaining its content as a non-technical ID
 * **Web SQL** = a now deprecated & unsupported wrapper around SQLite (it was never standard)
 * [Web Storage](https://en.wikipedia.org/wiki/Web_storage) = `localStorage` (persistent per same origin) & `sessionStorage` (tab)
   * [Web Storage vs IndexDB](https://stackoverflow.com/a/37105645/3559724)
@@ -30,7 +33,6 @@
 
 ### Tools
 
-* **Emmet** = text editors plugin for HTML & CSS (interprets complex snippets, cycle-browse through markup elements)
 * [HTML-Kit](http://www.htmlkit.com) (build 292 = last free version)
 * **Jekyll** = open-source static site generator (written in Ruby)
 * **Nginx** = FOSS **web server** (à la Apache HTTP) that can be used as a reverse proxy, load balancer (used for this by large fraction of web servers), mail proxy & HTTP cache
@@ -78,4 +80,5 @@
 * **Supabase** = open-source Firebase alternative (Postrgres DB, Authentication, instan APIs, Edge Functions, Realtime subscriptions, Storage, Vector embeddings)
 * **Terraform** (_Hashicorp_) = infrastructure as code (cloud APIs as declarative configuration files)
 * **Twilio** = CPaaS (Communications Platform as a Service), APIs for 2FA, SMS, voice, video, authentication
+* **Vercel** = cloud infrastruture, build & deploy (CI/CD), generates URL on git push
 * **Webflow** = SF-based no-code website development & hosting SaaS

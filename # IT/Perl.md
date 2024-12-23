@@ -1,5 +1,6 @@
 # Perl
 
+* [Perl debugging](https://perldoc.perl.org/perldebug)
 * `` `command` `` = execute the given shell command
 
 ```perl

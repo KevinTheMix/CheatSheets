@@ -70,7 +70,7 @@ Credit: _Tech World With Milan Milanović_
   * Or a means to distinguish which one of two methods with same name to override (derived method with `where T : default` means overriding the method without `where` constraints in the base class)
 * `dynamic` = disable compile-time type checking
   * Usually a code smell but can be used for objects with common members instead of a full-fledged polymorphic solution (for quick prototyping or handling legacy code)
-* `implicit` = implicit casting operator (use a Type in place of another, with automatic casting). The operator implementation defines how the source type is transformed into the (local class) destination Type, typically by calling one of its constructor
+* `implicit` = implicit casting operator (use a Type in place of another with automatic casting), implementation defines how source type is transformed into (local class) destination Type, typically by calling one of its constructor
 * `in` = readonly reference parameter entering a method
 * `interface` = interface members must be implemented `public`ly (prefer interfaces over abstract classes)
 * `internal` = accessible only within same assembly

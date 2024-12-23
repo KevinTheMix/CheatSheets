@@ -6,6 +6,7 @@
   * Remote desktop to home computer
   * SSH Tunnel + Proxy Socks via Putty (_Laurent D'Havé_ & _Frédéric Branger_)
     * <https://securitymusings.com/article/462/how-to-set-up-a-socks-proxy-using-putty-ssh>
+* [DNSstuff tools](https://www.dnsstuff.com/freetools)
 
 ## Glossary
 
@@ -28,32 +29,34 @@
 * **TLS** (Transport Layer Security) = cryptographic protocol to provide communications security over a network
 * **TLS Handshake** = client initiates an asymmetric connexion, then sends a (faster & more efficient for large amounts of data) symmetric key encrypted using server public key found in its certificate
 
-* _cURL_ = CLI for data transfer (FTP, HTTP, Email & co)
-* _Cyberduck_ = (S)FTP, WebDAV (aka HTTP) & cloud storage (S3, Azure) client
-* _Fiddler Classic_ = log & edit HTTP(S) web traffic
-* _FileZilla Portable_ = no-install FTP
-* _FileZilla Server_ = FTP Server
-* _HTTrack_ = Web crawler/copier (also as no install)
-* _LeechFTP_ = multi-threaded FTP client
-* _LOIC_ (C# rewrite) = DoS and DDoS for stress-testing
-* _Nmap "Network Mapper"_ = _Linux_ Network discovery
-* _NukeNabber_ = Windows XP TCP/UDP ports listener (_discontinued_)
-* _OpenSSH_ = setsuite of tools to encrypt all traffic to eliminate eavesdropping, remote login (via SSH), SSH tunneling, file transfer, BSD licence
-* _OpenVPN_ = FOSS client/server VPN using OpenSSL encryption library
-* _PCAP_ (Packet Capture) = API for capturing network traffic (packet sniffing)
-  * _libpcap_ = _Unix_ implementation of pcap API (base driver)
-  * _WinPcap_ = _Windows_ port of libpcap (_discontinued_)
-  * _Npcap_ = _Windows 7_ port of libpcap
-* _Putty_ = FOSS SSH & telnet client
-* _tcpdump_ = _Unix_ Packet analyzer (uses libcap)
-* _TMeter_ = free network packet traffic analyzer with built-in firewall & NAT capabilities
-* _WebMin_ = web-based server management control panel for Unix systems (eg users, disk quotas, services, config files)
-* _Wget_ = CLI to GET files over HTTP(S), FTP(S)
-* _WireGuard_ = communication protocol & FOSS encrypted VPN (native on Ubuntu)
+### Tools
+
+* **cURL** = CLI for data transfer (FTP, HTTP, Email & co)
+* **Cyberduck** = (S)FTP, WebDAV (aka HTTP) & cloud storage (S3, Azure) client
+* **Fiddler Classic** = log & edit HTTP(S) web traffic
+* **FileZilla Portable** = no-install FTP
+* **FileZilla Server** = FTP Server
+* **HTTrack** = Web crawler/copier (also as no install)
+* **LeechFTP** = multi-threaded FTP client
+* **LOIC** (C# rewrite) = DoS and DDoS for stress-testing
+* **Nmap "Network Mapper"** = Linux Network discovery
+* **NukeNabber** = Windows XP TCP/UDP ports listener (_discontinued_)
+* **OpenSSH** = setsuite of tools to encrypt all traffic to eliminate eavesdropping, remote login (via SSH), SSH tunneling, file transfer, BSD licence
+* **OpenVPN** = FOSS client/server VPN using OpenSSL encryption library
+* **PCAP** (Packet Capture) = API for capturing network traffic (packet sniffing)
+  * **libpcap** = Unix implementation of pcap API (base driver)
+  * **WinPcap** = Windows port of libpcap (_discontinued_)
+  * **Npcap** = Windows 7 port of libpcap
+* **Putty** = FOSS SSH & telnet client
+* **tcpdump** = Unix Packet analyzer (uses libcap)
+* **TMeter** = free network packet traffic analyzer with built-in firewall & NAT capabilities
+* **WebMin** = web-based server management control panel for Unix systems (eg users, disk quotas, services, config files)
+* **Wget** = HTTP(S)/FTP CLI to GET files from web servers
+* **WireGuard** = communication protocol & FOSS encrypted VPN (native on Ubuntu)
   * Cfr Florent depuis machine locale (Vue sur Nginx avec IP dynamique) via tunnel bi-directionnel (en tant que connexion réseau Windows virtuelle) à machine (virtuelle) publique (droplet DigitalOcean pour l'IP fixe)
-* _Wireshark_ = network packets analyzer (uses WinPcap or Npcap)
+* **Wireshark** = network packets analyzer (uses WinPcap or Npcap)
   * Protocol inspection, live capture & offline analysis, rich VoIP analysis, multi-platform, multiple capture file formats, decryption support, GUI & CLI (TShark)
-* _WinDump_ = _Windows_ port of tcpdump (uses WinPcap)
+* **WinDump** = Windows port of tcpdump (uses WinPcap)
 
 ## Wi-Fi
 
@@ -88,6 +91,7 @@
 * _Aircrack-ng_ = WiFi packet monitoring/sniffing & cracking tools suite, WEP/WPA key recovery, replay attacks, deauthentication, fake access points via packet injection, CLI
   * _aircrack-ng_ = cracks WEP keys
   * _airdecap-ng_ = decrypts WEP/WPA encrypted capture files
+  * _airmon-ng_ = enable monitor mode on wireless interfaces or kill network managers
   * _airodump-ng_ = packet sniffer
   * _airserv-ng_ = access other computers' wireless card
   * _easside-ng_ = communicate to access point without WEP key

@@ -30,6 +30,7 @@ Transact-SQL (**T-SQL**) is Microsoft's and Sybase's proprietary SQL extension.
   * Use to detect duplicates: partition on some possibly duplicate field(s) ordering on others (eg a timestamp), then delete rows with number higher than one (ie keeping only first created)
   * Eg `SELECT ROW_NUMBER() OVER (PARTITION BY HServerId, Date ORDER BY CreatedOn DESC) AS Row, Id, HServerId, Date, CreatedOn FROM app.HAvailability` (within a CTE or [nested FROM](https://stackoverflow.com/a/3491378))
   * [Alternative homogeneity detection](https://stackoverflow.com/questions/39922045) (eg `HAVING COUNT(DISTINCT column) <> 1` for all, or `HAVING COUNT(CASE WHEN column = 'value' THEN 1 END) = COUNT(*)` for a given _value_)
+* **SQL Server Management Objects** (**SMO**) = manage SQL Server programmatically (ie from an appication)
 * [Temporary tables](https://www.red-gate.com/simple-talk/sql/t-sql-programming/temporary-tables-in-sql-server)
   * **Table variable** = variable of type `TABLE` (eg `DECLARE @table TABLE ({inline_columns_definition})`, [local and automatically dropped](https://stackoverflow.com/a/5653535))
   * **Temporary table** = temporary (but actually _physically stored_ inside _TempDB_) table visible to current session or all sessions (`#Temp` or `##Temp` eg `SELECT * INTO #Koko` then `DROP TABLE #Koko`)

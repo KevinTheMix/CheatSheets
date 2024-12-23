@@ -43,6 +43,7 @@ when CPU control can be yielded while a low-level time-consuming operation is be
 * [Message loop in Microsoft Windows](https://en.wikipedia.org/wiki/Message_loop_in_Microsoft_Windows)
 * **Multitasking** = concurrent (but not necessarily parallel) execution of multiple tasks over a certain period of time
 * **Multithreading** = concurrent execution of two or more threads (within the same process) _on a single CPU (or CPU core)_, for better responsiveness & resource utilization
+* **Mutual Exclusion** = concurrency control in which one thread cannot enter a critical section while another concurrent thread is already accessing it
 * **Parallel computing** = when multiple operations can be executed at the exact same instant, enabled by multi-core CPUs (& supercomputers), impossible on a single core CPU
   * Can be used to speed up a treatment that can be neatly broken down into parts, or even perform **speculative multithreading**
 * **Parallel Extensions** = Parallel LINQ (PLINQ) + Task Parallel Library (TPL)
@@ -51,7 +52,7 @@ when CPU control can be yielded while a low-level time-consuming operation is be
   * **Time slice/ing** = allotted amount of time for which a process is allowed to run in a preemptive multitasking system
 * **Process** = an isolated executing program instance, running as one (default main launched at startup) or several (created within) threads sharing the same environment and memory space
 * **Speculative multithreading** = a technique used to anticipate a user's action and preload parts of the application as s/he navigates, only to discard those paths not taken
-* **SynchronizationContext** = accesses & captures (eg when encountering an `await`) contextual information on the current execution/thread
+* **SynchronizationContext** = accesses & captures (eg when encountering an `await`) contextual information on current execution/thread
   * Can be saved and made to execute delegates via it ie `Send(delegate)` (sync) & `Post(delegate)` (async)
   * Unlike Console applications who use a threadpool as SynchronizationContext, GUIs employ **a single thread** as SynchronizationContext
   * This can cause unexpected deadlock issues with the same code that would actually work in a (console) unit test
@@ -91,7 +92,7 @@ when CPU control can be yielded while a low-level time-consuming operation is be
 * `await Task.Delay(0)` = [not actually asynchronous](https://stackoverflow.com/a/33407181/3559724) as it resolves immediately
 * `await Task.FromResult(koko)` = call _sync_ code (or already available async data) from _async_ method
   * Eg: getting a value from a **ConcurrentDictionary** in an _async_ method, if the key is already present, _return_ `Task.FromResult()` immediately
-* `await Task.Yield()` = voluntarily yields control to the calling thread's scheduler
+* `await Task.Yield()` = voluntarily yields control to calling thread's scheduler
 * `await foreach (var item in asyncSequence)`
   * Eg read from a gRPC stream `await foreach (var response in call.ResponseStream.ReadAllAsync()) { … }`
 

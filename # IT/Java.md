@@ -55,6 +55,7 @@ Java basé sur OAK et Smalltalk (et C++ interagit pour amélioration)
   * [NekoHTML](http://nekohtml.sourceforge.net) = parse/fix HTML documents via XML interfaces
 * JUnit = unit testing in Java
 * Apache [Maven](https://maven.apache.org/what-is-maven.html) = build, management & automation tool for java projects
-* [Moconti](http://hick.org/~raffi/moconti.html) = light-weight application server to create web sites using the [Sleep Scripting Language](http://sleep.dashnine.org)
+* [Moconti](http://hick.org/~raffi/moconti.html) = light-weight application server to create web sites using **Sleep** (see below)
 * [MySQL Connector/J](https://www.w3resource.com/mysql/mysql-java-connection.php) = MySQL AB's JDBC Type 4 driver for MySQL
 * [Pooka](https://suberic.net/pooka) = e-mail client written in Java
+* [Sleep](http://sleep.dashnine.org) = multi-paradigm scripting language

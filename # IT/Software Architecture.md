@@ -13,13 +13,16 @@
     * **Application** (references Domain) = BL (services) interfaces (no implementation), Commands & Queries, DTOs
     * **Presentation** (references Application layer) = GUI/WebAPI, BL (services) implementation, Startup with DI pipeline (links implementation to interfaces)
     * **Infrastructure** (references Application layer) = DL implementation (DB/EF, I/O, WS client, SMTP, etc.)
-  * **CQRS** (Command Query Responsibility Segregation)
-    * [Commands vs Events](https://stackoverflow.com/q/4962755/3559724) (commands can be rejected, events have happened)
+  * **CQRS** (Command Query Responsibility Segregation) = use different models for reading & updating (unlike basic CRUD)
+    * **Query** = return a resulit but do not change state (ie free of side-effects)
+    * **Command** (aka modifiers or mutators) = change state but don't return a value
+      * [Commands vs Events](https://stackoverflow.com/q/4962755/3559724) = commands can be rejected, events have happened
 * **Dependability** = Availability, Reliability, Integrity, (Security), Safety, Maintainability, Confidentiality
 * **Dependency Injection** (DI) = providing dependencies at runtime using reflection, rather than passing them top-down all over the place, reduces tight coupling
 * **Domain-specific language** (DSL) = computer language (ie programming, markup, data, etc) specialized to a particular application domain (eg HTML)
 * **Encapsulation** = cacher le mécanisme interne d'un objet en vue de forcer une certaine utilisation et garantir son intégrité
 * **Entreprise Service Bus** (ESB) = communication system between distributed SOA applications, a special case of client-server in which any application can behave as either
+* **Event Sourcing** = using separate event objects to capture/snapshot successive changes to application state (in an event log), allowing to rebuild/travel it back/forward
 * **Façade** = layer holding controllers
 * **Framework** = architectural style, boilerplate alleviating, toolschain complementing an existing language
 * **Function/Lexical closure** = function (eg anonymous or lambda) + its captured context (ie values/references of inbound parameters at closure creation)
@@ -36,7 +39,9 @@
   * **Parametric** = generic functions
   * **Subtyping** = using base class in place of a variety of children (à la ESI)
 * Programming Styles
-  * **Declarative Programming** = focuses/abstracts _how_ things are done (that is still taken care of imperatively under the hood)
+  * **Declarative Programming** = focuses on _what_ is to be done by abstracting _how_ things must be done whenever a treatment gets executed
+    * Works by convention & pre-configuring/declaring once rather than every time an operation takes place
+    * Low-level logic is still performed imperatively under the hood
   * **Functional Programming** = pure functions as 1st class without side-effects, immutability, declarative code
   * **Reactive Programming** = data streams & propagation of changes (ie when something changes, other elements depending on it get updated)
 * Properties (some more important than others)
@@ -78,6 +83,6 @@
 * **Composite** = composite class implements interface and manages a collection of instances (or a factory), then dispatchs calls to one of those instances.
 * **Decorator** = add a behavior, at runtime without modifying the existing by accumulating subclasses taking previous instance as ctor parameter, separation of concerns
 * **Inversion of control** (IoC) = custom code receives control of flow (or its dependencies in case of **DI**) from a generic framework (eg via providing callbacks) that handles boilerplate treatment (eg GUI)
-* **Repository pattern** = defines reusable boilerplate CRUD logic/interface to abstract data access considerations (BL does not care how DL works/where data is coming from)
+* **Repository pattern** = abstracts DB-tied data access with reusable generic CRUD (concrete DL considerations are abstracted in a way that BL is agnostic)
 * **Singleton** = a Single instance; hard to test
 * **Unit of Work pattern** = keeps track of changes affecting a DB during a 'work' session, then persists that as a single transaction (or rollback everything)

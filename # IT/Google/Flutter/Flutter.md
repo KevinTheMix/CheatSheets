@@ -31,7 +31,10 @@ Features:
 * It's possible to create & assign widgets to variables, then we can access their properties (eg height) down the tree, or add them conditionally in several places
 * Break down long widgets into modular widgets rather than helper methods (see Decoding Flutter video on that topic)
 * Use `compute()` (similar to Dart `Isolate.run()`) to run a given callback in background, for operations that take longer than a few milliseconds
-* `build()` should remain 'pure' ie without side-effects or state update (see <https://stackoverflow.com/a/52249579/3559724>)
+* `build()` should remain 'pure' ie without side-effects (see <https://stackoverflow.com/a/52249579/3559724>)
+* [Material Theme Builder](https://material-foundation.github.io/material-theme-builder) = generate dynamic color schemes (pick primary, secondary, etc)
+* Refactor small widget subtrees subject to change out of large `build()` methods to get more granular & efficient rebuilds
+* Builders are methods that can map data to return widgets dynamically, also enable describing UI declaratively (as `build()` does)
 
 ## Glossary
 
@@ -42,6 +45,7 @@ Features:
   * **Embedder** = native application hosting all Flutter content, interfaces host OS & Flutter, is app main entrypoint (as an Android Activity or iOS UIViewController), manages event loop & lifecycle
   * **Runner** = native-level customizable code (originally generated via `flutter create`)
   * [Inside Flutter](https://docs.flutter.dev/resources/inside-flutter) = optimized & single pass layouting, onboarding strategies
+* [BLoC](https://www.flutterclutter.dev/flutter/basics/what-is-the-bloc-pattern/2021/2084) = state management design pattern using Streams of events (in) & states (out)
 * [Build Modes](https://docs.flutter.dev/testing/build-modes) = Debug (development, Hot Reload), Profile (performances analysis), Release (release app)
 * **BuildContext** = context for current widget, handle for widget location in its tree, holds a reference to its corresponding Element
 * [CanvasKit](https://skia.org/docs/user/modules/canvaskit) = lightweight version of Skia compiled to WebAssembly optimized for web browser (paint to HTML canvas/SVG) via WebGL
@@ -105,9 +109,10 @@ Features:
     * Always return a new or cached (tree of) widget(s), ie it constitutes a reactive snapshot of UI
   * `setState()` = [takes in & executes an anonymous method, mostly contains _asserts_, then marks the Element dirty](https://iiro.dev/set-state)
     * State (aka private variables) can be managed in any Dart class really, but `setState()` is what Flutter does need to update UI
-  * _Lifting state up_ = moving state data up one level to broaden its access; basic solution to fix state sharing between multiple widgets
+  * _Lifting state up_ = moving state up to first common ancestor; basic solution to fix state sharing between multiple widgets
   * State is persistent between widget tree rebuilds (eg a few parts of the screen gets updated), but not navigating to a whole different page, which replaces subtrees
 * **State Restoration** = restoring state after app was backgrounded/suspended by OS (**RestorationManager**, `with RestorationMixin` > `restoreState()`)
+* **Tear-off** = passing a method via name (à la delegate/pointer, ie not a lambda/anonymous function)
 * **WebGL** = JavaScript API for rendering interactive 2/3D graphics with GPU-accelerated physics to web browsers (ie HTML canvas) without plugins
 * **Widget** = immutable (declarative) description of part of a UI (layout component or behavior: center, pad, rotate)
   * _Everything is a widget_, including app itself
@@ -118,7 +123,7 @@ Features:
     * Those get rebuilt (aka replaced) when the input data from their parent changes, ie when their parent rebuilds
     * A widget tree composed of only _stateless_ widgets therefore never updates
     * All visual elements such as buttons, texts are stateless widgets
-  * [Stateful Widget](https://www.youtube.com/watch?v=AqCMFXEmf3w) = associated with a companion class called State that holds changing data, `build()` & `setState()` methods
+  * [Stateful Widget](https://www.youtube.com/watch?v=AqCMFXEmf3w) = (also!) immutable widget associated with a companion class called State that holds changing data, `build()` & `setState()` methods
   * [Inherited Widget](https://www.youtube.com/watch?v=Zbm3hjPjQMk) = DYI DI via _context_
     * Inherited Widget takes at least one parameter: a _child_ (ie its sub-tree that gets notified) which is passed to `super()`
     * Define `of()` shorthand method eg `static InheritedNose of(BuildContext context) => context.inheritFromWidgetOfExactType(InheritedNose)`
@@ -188,9 +193,12 @@ Use command with options long names or short names, eg:
 * `flutter create kokoapp`
 * `flutter create .` = regenerate platform-specific directories (android/, ios/, etc)
   * Eg adding web support to existing app (see <https://docs.flutter.dev/get-started/web#add-web-support-to-an-existing-app>)
-  * `flutter create --sample=widgets.SingleChildScrollView.1 mysample` = create new app from existing sample code
-  * `flutter create --template=skeleton` = generate a List View / Detail View app that follows community best practices
-  * `flutter create -t package {koko}` = [creates a package project](https://docs.flutter.dev/development/packages-and-plugins/developing-packages)
+  * `-e` = generates a (barebone minimal) empty app (without comments)
+  * `--org "com.koko"` = package namespace
+  * `--platforms [android,ios]` = target platforms
+  * `--sample=widgets.SingleChildScrollView.1 mysample` = create new app from existing sample code
+  * `--template=skeleton` = generate a List View / Detail View app that follows community best practices
+  * `-t package {koko}` = [creates a package project](https://docs.flutter.dev/development/packages-and-plugins/developing-packages)
 * `flutter devices` = list all connected devices
 * `flutter doctor -v(erbose)` (Tip: use PowerShell to get Unicode support)
 * `flutter doctor --android-licenses`
@@ -205,12 +213,12 @@ Use command with options long names or short names, eg:
 * `flutter pub upgrade`
 * `flutter run` = run app (without debugging, equivalent to `Ctrl + F5` in **Visual Studio Code** with _Flutter_ extension installed)
   * `r` = Hot reload, `R` = Hot restart (resets state), `h` = List commands, `d` = Detach (terminates run but app lives on), `c` = clrscr, `q` = Quit
-  * `flutter run -d(evice-id) {device}` = Run to chosen device
-    * `flutter run -d {device} --profile` (physical devices only) = display additional performance metrics banner
+  * `flutter run -d(evice-id) {device}` = run to chosen device
     * `flutter run -d chrome`
     * `flutter run -d web-server` ([works in any browser](https://stackoverflow.com/a/71518488))
     * `flutter run -d web-server --web-renderer [html|canvaskit]` = same as build
   * `flutter run --no-enable-impeller` = force use old Skia rendering engine
+  * `flutter run --profile` (then `P`) = displays profiling performance metrics overlay (on physical devices, not emulators)
   * `flutter run --release` = compile to release mode (removes all debugging directives eg asserts)
   * [Fix "Parameter format not correct"](https://stackoverflow.com/a/69519005/3559724)
 * `flutter test` = run tests
@@ -247,6 +255,7 @@ Use command with options long names or short names, eg:
   * Dart: **Open DevTools** (`Ctrl + Alt + D`)
   * Dart: **Add Dependency** = add (comma-separated) package(s) in one go
   * Flutter: **Toggle Debug Painting** = show/hide dashed layout wireframes
+* Keyboard shortcuts
   * `F5` = Start Debugging
   * `Ctrl + F5` = Run Without Debugging
   * `Ctrl + ;` = Quick Fix… (also displays _Refactor_ options)
@@ -259,6 +268,11 @@ Use command with options long names or short names, eg:
   * _PROBLEMS_ = contains list of compile issues
   * _DEBUG CONSOLE_ = contains list of runtime issues
   * `Right-Click` > _Clear Console_
+* Extensions
+  * **Dart**
+  * **Dart Data Class Generator** = generates class members (eg constructor based off properties, ie à la manual **Freezed** plugin)
+  * **Flutter** (also installs Dart)
+  * **Material** Icon Theme
 
 #### Snippets
 
@@ -277,7 +291,7 @@ Use command with options long names or short names, eg:
   * A space-hungry misbehaving **ListView** is inside an unbounded constraints permissive (**Flex**) **Column**
   * Read [Column class Troubleshooting](https://api.flutter.dev/flutter/widgets/Column-class.html#troubleshooting)
   * Watch [Decoding Fluter: Unbounded height/width](https://www.youtube.com/watch?v=jckqXR5CrPI)
-  * Solution = be specific as possible in intended layout and bounds given to the ListView
+  * Solution = be specific as possible in intended layout and bounds given to ListView
     * => wrap the ListView in either flex-space-sharing-friendly **Expanded**/**Flexible**, or a **SizedBox** with a pre-fixed height
   * [shrinkWrap](https://api.flutter.dev/flutter/widgets/ScrollView/shrinkWrap.html) fixes the error, but do not use it with **Nested ListViews**
     * _shrinkWrap_ forces (sub-)lists to render upfront instead of lazily, which is costly performance-wise
@@ -321,7 +335,7 @@ Use command with options long names or short names, eg:
     * note that _index.html_ contains a unique service worker version ID changing at each build so don't replace the whole file
   * run `flutter clean` then rebuild if _flutter.js_ is not regenerated each time (see <https://stackoverflow.com/a/73780022/3559724>)
 
-### [Debugging](https://docs.flutter.dev/testing/code-debugging)
+## [Debugging](https://docs.flutter.dev/testing/code-debugging)
 
 Run apps actually without debugging (unless intended) for faster development/execution cycles.
 
@@ -336,11 +350,17 @@ Run apps actually without debugging (unless intended) for faster development/exe
 * Set breakpoints (programmatic breakpoints via _dart:developer_ `debugger(when: condition)` statement)
 * Print widget tree via `debugDumpApp()` (from _package:flutter/rendering.dart_) from within `runApp()` (calls `toStringDeep()` recursively)
 * Print render tree via `debugDumpRenderTree()` not during layout/paint (in a callback/event handler), displays all constraints
-* Print layer tree via `debugDumpLayer Tree()`
+* Print layer tree via `debugDumpLayerTree()`
 * Print focus tree via `debugDumpFocusTree()`
 * Print semantics tree via `debugDumpSemanticsTree()`
 * Highlight layout issues via `debugPaintSizeEnabled` from _package:flutter/rendering.dart_ set to true (boxes, padding, alignment, spacers)
-* Slow down animation via **DevTools** Inspector view or set `timeDilation` from _scheduler_ to number greater than 1.0
+* Slow down animations via **DevTools** Inspector view, or set `timeDilation` from _scheduler.dart_ to number greater than 1.0
 * Tracing = **Timeline** utilities in _dart:developer_ (`startSync(…)` & `finishSync()`)
 * Performance overlay = `MaterialApp { showPerformanceOverlay: true }`
 * Alignment grid = `MaterialApp { debugShowMaterialGrid: true }` or use a **GridPaper** (inside a **Stack** to use as overlay)
+
+## Testing
+
+* **WidgetTester** = programmatically interact with widgets & test environment
+  * See [WidgetTester class](https://api.flutter.dev/flutter/flutter_test/WidgetTester-class.html) where a test uses `pumpWidget()` to load a widget tree
+* **TestWidgetsFlutterBinding** = base class for bindings used by widgets library tests (`ensuteInitialized()`)

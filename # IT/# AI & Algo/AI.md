@@ -9,6 +9,7 @@
 * [PrivateGPT](https://github.com/imartinez/privateGPT) = interact with your documents using the power of GPT, 100% privately
   * [Installing PrivateGPT on WSL with GPU support](https://medium.com/@docteur_rs/installing-privategpt-on-wsl-with-gpu-support-5798d763aa31) (@Emilien Lancelot)
 * Machine Learning doesn't output data, but code
+* _Let ChatGPT write it_, _Shit in, shit out_, _How hard can it be?_ -- William Verhaeghe
 
 ## Glossary
 
@@ -21,15 +22,18 @@
 * **GPT** (Generative Pre-trained Transformer) = deep learning generative large language model created by OpenAI that can process complex questions and even generate websites
 * [ImageNet](http://www.image-net.org) = image DB organized according to WordNet hierarchy
 * **Machine Learning** (ML) = field of study of AI studying statistical algorithms to learn from existing data then generalize to new data to complete tasks without explicit instructions
-* **(Artificial) Neural Network** (ANN) = branch of ML built on biological neural organization
-* **Reinforcement learning** = numerical performance score as guidance (eg **Q-learning**)
+* **Neural Network** (aka Artificial NN) = branch of ML built on biological neural organization (ie in/out with math in middle)
+* **Overfitting** = when an analysis corresponds too closely to a particular set of data (ie its training data) and therefore fails to fit additional data or predict future reliably
+* **Reinforcement learning** = no data & no labels but we have ruleset (eg a game), numerical performance score as guidance (eg **Q-learning**)
   * [OpenAI - Proximal Policy Optimization](https://openai.com/blog/openai-baselines-ppo) = reinforcement learning
-* **Unsupervised learning** = learns from untagged data, through mimicry like people
+* **Supervised learning** = we have both in (ie data) & out (ie labels), eg classification (colors), object detection (person, sensor), segmentation (face)
+* **Unsupervised learning** = learns from unlabeled/untagged data, through mimicry like people
 * [WordNet](https://wordnet.princeton.edu) = large English lexical DB (of nouns/verbs/adjectives/adverbs)
 
 * _DeepMind_ = British AI company acquired by Google
 * _JupyterLab_ = notebooks, code & data with a flexible interface
 * _Jupyter Notebook_ = online shared inlined analysis/reporting scripting supporting a variety of programming languages
+* _Kaggle_ = platform with common datasets (for training)
 * _OpenAI_ = SF-based AI company founded by Elon Musk, Sam Altman & co
 * _PyTorch_ = FOSS ML/deep learning framework based on Torch library developed by Meta AI
 * _TensorFlow_ = FOSS (Python/JS/C++/Java) library for machine learning, for DNNs training & inference, developed by Google

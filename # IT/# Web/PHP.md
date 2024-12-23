@@ -91,6 +91,7 @@ Arrays are actually ordered maps (aka hashtables ie values-keys associations), a
   * _DocumentRoot_ = Server web directory (default: _www_)
 * **CodeIgniter** = MVC for PHP
 * **EasyPHP** = Apache, MySQL, Php(MyAdmin) web server
+* **Laravel** = web application framework
 * **phpMyAdmin** = MySQL administration portable web app in PHP
 * **PhpStorm** = PHP + JavaScript IDE (contains WebStorm, _$199_)
 * **Symfony** = set of reusable php components & framework for web project

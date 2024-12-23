@@ -15,7 +15,7 @@ Most of the WPF API is contained in _PresentationFramework.dll_ which contains t
 
 ## Glossary
 
-* [Adorners](https://docs.microsoft.com/en-us/dotnet/framework/wpf/controls/adorners-overview)
+* [Adorners](https://docs.microsoft.com/en-us/dotnet/framework/wpf/controls/adorners-overview) = custom FrameworkElement bound to a UIElement & rendered in their own (Adorner)Layer
   * Use Adorners to display a '_Loading..._' atop a target UI element
 * **Attached Property** = a static Dependency Property that uses static get/setter methods, so that it can be called from other classes statically (eg typically a child that sets some of its parent layout properties)
   * Eg `<Grid><Button Grid.Row="1" Grid.Column="2" Content="Click Me"/></Grid>` where _Row/Column_ properties belong to _Grid_ class
@@ -28,6 +28,7 @@ Most of the WPF API is contained in _PresentationFramework.dll_ which contains t
   * **RelativeSource** = binds to an element relative to this one (see default property [mode](https://learn.microsoft.com/fr-fr/dotnet/api/system.windows.data.relativesourcemode), eg use _Self_ to display its current Width as Text)
   * [Colin Eberhardt - Everything about databinding](https://blog.scottlogic.com/2012/04/05/everything-you-wanted-to-know-about-databinding-in-wpf-silverlight-and-wp7-part-one)
   * Binding can be bypassed altogether and information passed from code-behind (à la WinForm) via controls names (eg `this.lbxUsers.Items.Add(new User("Koko"));`, but error if `ItemsSource` dependency property was set)
+* [Commands](https://learn.microsoft.com/en-us/dotnet/desktop/wpf/advanced/commanding-overview) = do some action (eg cut/copy/paste), separates caller from action, enabled if can/not
 * [ContentControl](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.contentcontrol) (inherits from **Control**) = base class for all controls that have a **Content** property
   * Content = the most useful property of a `ContentControl`; their nature (type) depend on the type of Control (e.g. the Content of a Textblock is its Text)
   * An intermediary container (eg `<Element><WrapPanel><Control*n></WrapPanel></Element>`) must be used in case multiple children are provided as (a parent's single child) Content
@@ -43,7 +44,8 @@ Most of the WPF API is contained in _PresentationFramework.dll_ which contains t
     * Optionally specify a `[ValueConversion]` attribute to indicate input/output types, which [has some use cases](https://stackoverflow.com/a/26763137)
   * Second pre-declare it as resource, mapping a XAML key to that class (eg `<kokonamespace:KokoConverter x:Key="kokoConverter" />`)
   * Third, use it by referencing it (as `StaticResource`, not just a string) in a binding via that key (eg `{Binding Path=…, Converter={StaticResource KokoConverter}}`)
-  * [Built-in Converters](http://stackoverflow.com/questions/505397/built-in-wpf-ivalueconverters)
+  * [Built-in IValueConverters](https://stackoverflow.com/a/505809/3559724)
+  * [List of default converters](https://stackoverflow.com/a/12977516/3559724)
   * **Type Converters** are converters used to (case insensitively!) parse a string into a value of the type corresponding to the assigned (dependency) property
     * Eg programmatically `b.Background = (Brush)System.ComponentModel.TypeDescriptor.GetConverter(typeof(Brush)).ConvertFromInvariantString("White");` (credit: _WPF 4 Unleashed_)
 * **DataContext** = an object containing the properties bound to a control (and all its child elements - or they can use their own Data Context)
@@ -64,7 +66,7 @@ Most of the WPF API is contained in _PresentationFramework.dll_ which contains t
   * Only the left/receiver/target property (of a XAML assign) needs to be a Dependency Property (eg `<element dep_prop={Binding clr_prop}`)
   * The source can be either a DP or a CLR property (but **has** to invoke `PropertyChanged` event to benefit from continuous data binding, not only as one-time on creation/initialization)
   * In practice, unless you are creating your own controls, you will not need to create your own dependency properties
-* **FrameworkElement** = fundamental base class that for (UI) elements in the visual tree, presents common properties for width/height, margin, alignment
+* **FrameworkElement** (inherits core **UIElement**) = fundamental base class that for (UI) elements in the visual tree, presents common properties for width/height, margin, alignment
 * **INotifyPropertyChanged** = interface that is the base for all binding in WPF, presents a single public event to implement (`PropertyChanged`)
   * Classes with (right-side bound) properties (ie, not DPs) must inherit from it to enable reactivity
   * MVVM frameworks typically wrap such properties event boilerplate code in a generic fashion
@@ -152,6 +154,7 @@ Most of the WPF API is contained in _PresentationFramework.dll_ which contains t
 
 Debugging WPF can be tricky, because most errors are met during execution rather than at compilation time.
 
+* [How To Debug Data Binding Issues in WPF](https://spin.atomicobject.com/wpf-data-binding-debug)
 * Visual Studio Output window: check the _Output_ Console from time to time to track Binding/DI errors
 * Visual Studio Live Visual Tree
 * Implementing a hollow DebugConverter

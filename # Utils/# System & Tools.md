@@ -94,7 +94,7 @@
 * **HashCheck** = checksum shell extension
 * **Mouse without Borders** = Control up to 4 computers via a single K&M
 * **Open-Shell** = Custom Start menu & windows (_active_)
-* **Rainmeter** = FOSS sdesktop customization tool
+* **Rainmeter** = FOSS desktop customization tool
 * **UltraMon** = Multiple screen manager (_$39_)
 
 * [Should I remove it?](https://www.shouldiremoveit.com) = online apps/bloatware/trialware uninstall advice/guides

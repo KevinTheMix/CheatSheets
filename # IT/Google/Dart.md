@@ -110,11 +110,27 @@ The same Dart code can run on multiple platforms (eg mobile/desktop via Flutter,
   * `floorToDouble()`, `ceilToDouble()` & `roundToDouble()` similarly
   * `double.tryParse(num) != null` = [Check if number](https://stackoverflow.com/a/24085491/3559724)
 * `~/` = forces division integer result
+* `NumberFormat(pattern).format(num)` = (eg with pattern `###.00`: _123.00_)
+* `num.toStringAsFixed(2)` = specify number of decimals (eg _123.00_)
+* **Float32List** = fixed-length list of (IEEE 754) single-precision binary floating-point numbers
+  * Considerably more space & time efficient compared to default List implementation
 
 ### Dates & Durations
 
-* `date.difference(date)` = **Duration**
-* `inSeconds`
+* `DateTime(year)` = implicit constructor (_year_ is the only required positional argument, yielding a date as 1st of January)
+* `DateTime.now()` = name constructor
+* `Duration(days: …)`
+
+* _inSeconds_
+* `difference(date)` = **Duration**
+* `subtract(duration)`
+* `isAfter(date)` = true/false
+* `isSameDayAs(date)` = true/false
+* `DateFormat` (class) = (**intl** package)
+  * `DateFormat.E().format(date)` = _Mon_, _Tue_, _Wed_, etc
+  * `DateFormat.yMd('fr_BE').format(date)` = locale/ization
+  * `DateFormat.yMMMd().add_Hm().format(dateText)` = _Aug 12, 2022 16:20_
+  * `DateFormat('y.MM.dd').add_Hm().format(dateText)` = _2022.08.12 16:20_
 
 ### Strings
 
@@ -123,20 +139,16 @@ The same Dart code can run on multiple platforms (eg mobile/desktop via Flutter,
 * String signature = `abstract final class String implements Comparable<String>, Pattern`
 * `r'C:\System'` or `r"C:\System"` = raw string (escapes automatically `\` and prevents interpolation, à la C# `@"C:\System"`)
   * `'C:\\System` alternatively with manual escaping
+* `''' a [CRLF] b [CRLF] c '''` = multi-lines string
 * Interpolation = `'$koko'` or `'${longer.expression[i]}'`
 * Concatenation = `'a' + 'b' + 'c'` or `'a' 'b'    'c'` (result: `'abc'`)
 * Multiplication = `'ko' * 4` = `'kokokoko'`
 * `s.startsWith()`
 * `s.substring(start, [end])`
 * `s.characters` (property) = string as characters list (requires _characters_ package)
-* Unicode support using _characters.dart_ package (Runes and grapheme clusters)
+* `object.toString()` = string representation (automatically called when using an object in a string context eg an interpolation)
 * [IsNullOrEmpty](https://stackoverflow.com/a/52948927/3559724) = `s?.isEmpty ?? true` or simply `s == null || s.isEmpty`
-* Formatting
-  * `object.toString()` = string representation (automatically called when using an object in a string context eg an interpolation)
-  * `NumberFormat('###.00').format(num)` = _123.00_
-  * `num.toStringAsFixed(2)` = _123.00_
-  * `DateFormat.yMMMd().add_Hm().format(dateText)` = _Aug 12, 2022 16:20_
-  * `DateFormat('y.MM.dd').add_Hm().format(dateText)` = _2022.08.12 16:20_
+* Unicode support using _characters.dart_ package (Runes and grapheme clusters)
 * `padLeft(int width)` = <https://api.dart.dev/stable/1.21.0/dart-core/String/padLeft.html>
 * **StringBuffer** `write()`, `writeln()`, `writeAll()`, `clear()`, _isEmpty_, _length_
 
@@ -158,6 +170,11 @@ Map, Set, Queue, List, LinkedList.
 * `any(condition)`
 * `contains(item)` = find item by reference (address)
 * `join("…")` = converts all elements to Strings and concatenates them
+* `skip(count)` = creates an Iterable that skips {count} first elements
+* Also see [IterableExtension](https://api.flutter.dev/flutter/package-collection_collection/IterableExtension.html) = additional collection methods
+
+#### Iterable & Iterator
+
 * [Iterable&lt;E&gt;](https://api.dart.dev/stable/3.5.4/dart-core/Iterable-class.html) (à la C# Enumerable)
   * collection of values/elements that can be accessed sequentially, via its [iterator](https://api.dart.dev/stable/3.5.4/dart-core/Iterable/iterator.html) getter property
   * base class for Lists & co
@@ -192,25 +209,25 @@ In Dart, arrays are List objects, so most people just call them _lists_.
 * `<int>[1, 2, 3]` = with explicit generic type
 * `<int>[]` = with explicit generic type now mandatory since there are no items yet to infer from
   * For casting however, we need to use `List<Type>` instead
-* `[1, 2.34, 'text', ['nested', 5]]` = mixed types list are also valid
-* `list.reversed` = an `Iterable<E>` property, basically the reverse of _iterator_
+* `[1, 2.34, 'text', ['nested', 5]]` = hybrid types items are valid
+* _reversed_ = `Iterable<E>` basically the reverse of _iterator_
   * can be used to reverse Strings in a single statement ie `s.split('').reversed.join()` (or `s.characters.reversed.join()` with _characters/characters.dart_ package added)
+* `forEach((i) => print(i));` or simply `list.forEach(print);`
+* `for(var item in list) …`
 * `List.generate(count, (index) => … );` = uses generator function to generate _count_ items
 * `List<T>.from(Iterable)` = constructs a T List from an Iterable, useful to cast each item, or convert another Iterable type (eg a Set) to a List
 * **Collection if** = add item conditionally (eg `[if (condition) Item(…), b, c]`), Note: **don't use curly braces** (to delimite blocks) in this syntax
 * **Collection for** = add items using a loop (eg `[for (var i in integers) '$i']` = turns a list of int into a list of Strings)
-* `list.add(item)`
-* `list.addAll(other)`
-* `list.insert(index, item)` eg `list.insert(0, item)` to add at the beginning (unlike `add()`)
-* `list.remove(item)` = remove by reference
-* `list.removeAt(index)` = remove by index
-* `list.removeWhere(condition)` = remove by condition
-* `list.elementAt(i)` == `list[i]`
-* `list.indexOf(item)` = index by reference
-* `list.indexWhere(condition)` = index by condition
-* `list.forEach((i) => print(i));` or simply `list.forEach(print);`
-* `for(var item in list) …`
-* `list.map((item) => …)` = C# Linq `Select()`, can be used to create one Widget for each list item
+* `add(item)`
+* `addAll(other)`
+* `insert(index, item)` eg `list.insert(0, item)` to add at the beginning (unlike `add()`)
+* `remove(item)` = remove by reference
+* `removeAt(index)` = remove by index
+* `removeWhere(condition)` = remove by condition
+* `elementAt(i)` == `list[i]`
+* `indexOf(item)` = index by reference
+* `indexWhere(condition)` = index by condition
+* `map((item) => …)` = C# Linq `Select()`, can be used to create one Widget for each list item
   * Returns an `Iterable<T>`, so append `toList()` to evaluate it immediately and turn into a non-lazy List
   * [Map with index](https://channaly.medium.com/map-with-index-in-dart-flutter-6e6665850ea8)
 * `list.fold<int>(start, (accu, next) => accu + next)` = [same as reduce but can return any type](https://stackoverflow.com/a/20491946/3559724)
@@ -247,7 +264,7 @@ Key-value object (aka a hash map). Both Key & Value can be any type. Keys are un
 * `map['koko']` = access a value
 * `map['nokoko']` = _null_ (no error if key does not exist)
 * `map.entries` = a collection of KVPs => this is one way to use `map()` with **Map** (<https://www.codevscolor.com/dart-iterate-map>)
-* `map.values.elementAt(index)` = access a value by index (or using an [extension method](https://stackoverflow.com/a/60521753/3559724))
+* `map.values.elementAt(index)` = access a value by index (or `map.elementAt(index)` via an [extension method](https://stackoverflow.com/a/60521753/3559724))
 * `map.addAll(other)`
 * `map.containsKey(key)`
 * `map.forEach((key, value) {…})` (or using _for … in_: `for (var key in map.keys) { … map[key] … }`)
@@ -337,15 +354,14 @@ Streams are (async) like Futures but for Iterables, where values are produced to
 * Dart has [first-class functions](https://livebook.manning.com/book/dart-in-action/chapter-4), ie functions (pointers) as parameters
   * That means we can pass a function name directly as argument, or define a function on the spot using lambda/anonymous notation
   * Eg `koko(() {…});` = named function taking in an anonymous function as argument
-  * `Function` = any function
+  * `Function` = any function (eg specifying return & parameter types `TypeR Function(TypeP1 p1, TypeP2 p2)`)
   * `VoidCallback` = a Function without parameters nor return
 * Anonymous Functions
   * `_`, `__`, etc = ignore incoming callback parameter
-  * `(a) { return a; }` or
-  * `(a) { return a; } ()` executes it immediately (eg `var koko = (s) { return s + s; } ('ko');`)
+  * `(a) { return a; }`
+  * `(a) { return a; } ()` or `((a) => a) ()` = executes it immediately (eg `var koko = (s) { return s + s; } ('ko');`)
   * `(a) => a` using arrow notation ([=> is syntaxic sugar for single return statement](https://stackoverflow.com/a/15804303/3559724))
     * Note: unlike in C#, `(a) => { return a; }` (using both arrow AND curly braces) is invalid!
-  * `((a) => a) ()` similarly executes it immediately (eg `var koko = ((s) => s + s) ('ko');`)
 * `external` = separates function declaration & body (as a way to include abstract functions to non-abstract classes)
 
 ### Classes
@@ -359,13 +375,16 @@ Streams are (async) like Futures but for Iterables, where values are produced to
   * **Named Constructor** = explicitly named (eg `Koko.other(…)`, `Koko.withSpecificities(…)`)
   * **Unnamed Constructor** = constructor with same name as class (eg `Koko(…)`)
   * `Koko._(…) …` = makes unnamed constructor private, hence class can only instantiate via other **named** constructors (eg for singleton pattern)
-  * `Koko(…): this.other(…)` = calling a named constructor
-  * `Koko.other(…): this(…)` = calling unnamed constructor (or `this._()` if it is private)
+  * `Koko(…) : this.other(…)` = calling a named constructor
+  * `Koko.other(…) : this(…)` = calling unnamed constructor (or `this._()` if it is private)
   * Constructors overload does not exist (same as for functions), so there can be only one unnamed ctor (but multiple named ctors)
-  * `factory` = [Factory](https://dart.dev/language/constructors#factory-constructors) **static** constructor
-    * Can be used for caching (singleton returning single static instance (or collection, especially with `putIfAbsent()`)) or polymorphism (via switch-case-return subclasses)
+  * [`factory`](https://dart.dev/language/constructors#factory-constructors) = **static** constructor, used for either:
+    * Caching instances = singleton (single static instance) or collection (especially with `putIfAbsent()`)
+    * Polymorphism = new subtype instance (via switch-case-return subclasses)
+    * Complex initialization = perform non-trivial work prior to constructing an instance (eg checking arguments or other processing)
     * Eg `factory Koko() { return single/multiple item(s) here }`
   * `new` keyword is optional (in Dart 2.0)
+* `sealed` = prevents a (then implicitly abstract) class to be instanciated/extended/implemented outside its own library, also forces `switch` cases for all existing subtypes
 * `static` = can be applied to class methods, to be called via `Class.method()`
 * Getters & Setters
   * `get height { return this._height}`
@@ -383,6 +402,7 @@ Streams are (async) like Futures but for Iterables, where values are produced to
   * Eg `var record = ('first', a: 2, b: true, 'last');` = anonymously typed record instance
   * Eg `typedef Koko = ({A a, B b});` = defines a new type with named fields (close to a lightweight class definition)
 * `call(…)` = special class method that allows instances of that class to be called as methods (eg `koko(…)`)
+* `@immutable` (annotation) = forces class and all subtypes to be immutable as well
 
 #### Inheritance & Mixins
 
@@ -405,16 +425,45 @@ Multiple inheritance is not permitted: every class (except for root-level `Objec
   * Mixins are basically (multiple) behavioral inheritance, or utility/toolboxes, constrasting with logical inheritance relationship
   * Any class without a constructor can be a mixin eg `class ConstructorlessClass {void fun() {…}}` (make it _abstract_ to prevent instanciation)
   * Mixed-in methods can be overriden eg `mixin KokoMixin {void fun() {…}}`, then `class Koko with KokoMixin {@override fun() {…}}`
-  * It is possible to combine extension with mixins eg `class AB extends Parent with A, B {}`
+  * It is possible to combine extending with mixins eg `class AB extends Parent with A, B {}`
 * A [vanilla property can override a getter](https://flutterfromdotnet.hashnode.dev/flutter-first-impressions) (_damage_)
 * `constructor({super.property})` or `constructor({required super.property})` = shorthand to pass on a named parameter to  _super_ constructor
   * Eg used in **InheritedWidget**'s abstract const constructor's _child_ property (ie `const InheritedWidget({ super.key, required super.child });`) & classes than extends it
 * See [extends vs with vs implements](https://www.geeksforgeeks.org/dart-extends-vs-with-vs-implements)
 
+## [Enums](https://dart.dev/language/enums)
+
+Enums can either be simple or enhanced.
+Enhanced enums have fields and a (const unnamed) constructor referenced by values themselves, in addition to other methods.
+
+```dart
+enum TaskCategories {
+  // Properties.
+  final IconData icon;
+  final Color color;
+  // Constructor.
+  const TaskCategories(this.icon, this.color);
+  // The following call above constructor.
+  home(Icons.home, Colors.green),
+  personal(Icons.person, Colors.lightBlue),
+  shopping(Icons.shopping_bag, Colors.pink),
+  social(Icons.people, Colors.brown),
+  travel(Icons.flight, Colors.deepOrange),
+  work(Icons.work, Colors.amber);
+  others(Icons.calendar_month, Colors.purple),
+  // Additional method.
+  static TaskCategories stringToCategory(String name) {
+    try { return TaskCategories.values.firstWhere((category) => category.name == name); }
+    catch (e) { return TaskCategories.others; }
+  }
+}
+```
+
 ## Extensions
 
-* _dart:math_ = `Random().nextInt(n)`
 * _dart:convert_ = JSON encode/decode
+* _dart:math_ = `Random().nextInt(n)`
+* _dart:mirrors_ = reflection
 
 ### [Packages](https://pub.dev/publishers/tools.dart.dev/packages)
 

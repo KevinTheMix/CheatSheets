@@ -1,5 +1,10 @@
 # C++
 
+## Quick Tips
+
+* [MIT - Practical Programming in C](https://ocw.mit.edu/courses/6-087-practical-programming-in-c-january-iap-2010)
+* [MIT - Introduction to C++](https://ocw.mit.edu/courses/6-096-introduction-to-c-january-iap-2011)
+
 ## Glossary
 
 * [Sequence container](https://en.wikipedia.org/wiki/Sequence_container_(C%2B%2B))

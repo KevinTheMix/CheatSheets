@@ -82,6 +82,7 @@ private void HandleChangeTrackedItemsOnAfterSave()
 
     // Forces detach of all entities of DatabaseContext after write operation, in order to prevent "cannot be tracked because another instance same key" InvalidOperationException.
     // See https://docs.microsoft.com/en-us/ef/core/change-tracking/#how-to-track-entities
+    // See https://docs.microsoft.com/en-us/ef/core/change-tracking/identity-resolution#overusing-a-single-dbcontext-instance
     // See https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.changetracking.changetracker.clear?view=efcore-5.0
     this.ChangeTracker.Clear();
 }

@@ -15,10 +15,12 @@
   10. Using justified text
 * [w3.org - Personal names around the world](https://www.w3.org/International/questions/qa-personal-names)
 * [Jakob Nielsen - Response Times: The 3 important Limits](https://www.nngroup.com/articles/response-times-3-important-limits) (Usability) = 0.1, 1 and 10
+* [Material Icons Guide](https://developers.google.com/fonts/docs/material_icons)
 
 ## Glossary
 
 * **Adaptive** = same code handling different platforms (eg Android, iOS, Web)
+* **Breakpoint** = well-defined size at which an app layout adapts/switches (betwen destop/mobile/tablet)
 * **Display typeface** = for short but eye-catching/important/large elements (eg titles, headings, pull quotes) rather than extended passages of body text
 * [Fitt's Law](https://en.wikipedia.org/wiki/Fitts%27s_law#Implications_for_UI_design) = place buttons at screen edges
 * **Flat design** = minimalist design language
@@ -31,6 +33,7 @@
 * **Rollover** = icon/image-based swap in response to a mouseover
 * **Scrim** = temporary greyed out (Material) area appearing on surface/rest of screen to make its content less prominent when a modal element is shown (eg dialog, drawer)
   * Clicking on it sometimes removes the modal element
+* **Staggered animation** = a human-friendly way to introduce new UI elements on screen, one by one
 * **Typeface** (aka **font family**) = design for alphanumerics & symbols used in printing/electronic display
 * **Viewport** = a box that is bigger on the inside, ie children outside bounds can be scrolled into view
 
@@ -52,8 +55,12 @@
   * [OpenGL Book](https://openglbook.com)
 * **Shader** = GPU-executed program that transforms 3D data into a (three-dimensional-looking) 2D scene, part of Graphics Pipeline
   * **Fragment/Pixel Shader** = calculates color for each pixel (kinda inefficient because threads don't share calculation but done in parallel)
+  * **Vertex** = 3D rotate/stretch projections
+  * **Geometry** = add details or modify geometry in real-time (eg fur/hair)
+  * **Compute** = general-purpose for other non-graphical tasks (physics calculation, AI)
   * [The Book of Shaders](https://thebookofshaders.com)
   * [Shadertoy](https://www.shadertoy.com) = community shaders library (eg [Raymarched Hexagonal Truchet](https://www.shadertoy.com/view/4td3zj))
+* **Vulkan** (_Khronos Group_) = low-level cross-platform API & open standard for 3D graphics & computing, addressing **OpenGL** sortcomings
 
 * Music Visualization
   * [Interactive Particles Music Visualizer](https://github.com/tgcnzn/Interactive-Particles-Music-Visualizer) = Three.js

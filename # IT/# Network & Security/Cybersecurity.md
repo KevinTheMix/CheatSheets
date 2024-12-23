@@ -16,7 +16,7 @@
 * **Directory Traversal** = abuses an input expecting eg a filename with a more elaborate parent hierarchy traversing path (to something interesting eg a filesystem index or password file)
 * **File Inclusion** = abuses a page including another page (even PHP scripts) via its URL, loading/executing them with no boundaries/filters in place, bypassing same website policy
   * **Local** (LFI) = only local files are allowed, could still be used by files whose content can be maniplated by attacker (eg access logs)
-  * **Remote** (RFI) = any remote file/page can be included (eg `index.php?page=http://www.google.com`, google them via `inurl:"index.php?page="`)
+  * **Remote File Inclusion** (RFI) = any remote file/page can be included (eg `index.php?page=http://www.google.com`, google them via `inurl:"index.php?page="`)
 * **InfoSec** (Information Security) = protecting information by mitigating risks
 * **OPSEC** (Operation Security) = military analysis of whether critical information is accessible to the enemy (trackability prevention)
   * Also refers to obfuscating/hiding techniques by hackers to evade security & getting found
@@ -43,12 +43,14 @@
 ### Crypto/Passwords
 
 * **AES** (Advanced Encryption Standard, aka Rijndael) = data encryption specification (via matrix transformation)
+* **Diffie-Hellman key exchange** = generation & transmission of a symmetric key over a public channel
 * **Key Derivation** = process to generate cryptographically strong produce keys from one or more values (eg keys, passphrases)
 * **Key Partitioning** = dividing a single key into a set of keys (eg splitting a 256-bit key into two keys of 128 bits each)
 * **On-the-fly encryption** = method used by some disk encryption tools (eg _VeraCrypt_) where data gets automatically de/encrypted as it is loaded/saved
 * **One-Time Pad** (OTP) = encryption technique that's uncrackable (even with quantum computing), but necessitate a single-use **pre-shared** key that's longer than the message
 * **PBKDF** (Password-Based Key Derivation Function) = turn other keys or human-friendly passphrases into strong cryptographic keys with a sliding computational cost to reduce vulnerability to brute-force attacks
   * [Peanut Butter Keeps Dogs Friendly Too](https://blog.1password.com/defending-against-crackers-peanut-butter-keeps-dogs-friendly-too)
+* **RSA** (Rivest-Shamir-Adleman) = asymmetric public-key crypto for secure data transmission
 
 * _Cain & Abel_ = password cracking/recovery
 * _ihashgpu_ = Hash (MD4, MD5, SHA1) cracking CLI (_discontinued_)

@@ -5,10 +5,11 @@
 * Code comparison updates in real-time
 * Breadcrumb path fragments are browsable seamlessly between containing file system & document inner sections
 * [Fireship: 25 VS Code Productivity Tips](https://www.youtube.com/watch?v=ifTF3ags0XI)
-
-## Environment
-
 * [Visual Studio Code (online)](https://vscode.dev)
+
+## Glossary
+
+* **Emmet** (formerly **Zen Coding**) = (built-in) advanced snippet generator for HTML, CSS, etc (cycle-browse through markup elements)
 
 ### Settings
 
@@ -45,10 +46,10 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 * `Alt + Shift + Left/Right` = shrink/expand selection
 * `Alt + Shift + Up/Down` = copy line up/down
 * `Alt + Mouse scroll` = scroll faster
+* `Ctrl + :` (aka `Ctrl + /`) = toggle comments
 * `Ctrl + ,` = Settings (also via gear icon at the bottom-left or via _File > Preferences > Settings_)
 * `Ctrl + ù` = toggle Terminal
 * `Ctrl + µ` = duplicate tab
-* `Ctrl + /` = toggle comments
 * `Ctrl + B` = toggle side-bar
 * `Ctrl + D`\* = select word at current cursor position (\* then add next matching selection to multi-selection)
 * `Ctrl + J` = toggle Panel area (Terminal & co)

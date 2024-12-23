@@ -14,13 +14,22 @@
 
 ## Glossary
 
+* **Alpha-beta pruning** = search algorithm that stops evaluating a move (and its search path subtree) when it is estimated to be worse than a previously examined move
 * **Bellman-Ford** = shortest path in a weighted graph
 * **Complément à 2**
   1. Use 1st bit as sign = `[-127,127]` on 8 bits, `[-32767,32767]` on 16 bits, but zero appears twice: _0000_ & _1000_
   2. Complément à 1 = invert all bits (still two zero's: 0000 & 1111)
   3. Complément à 2 = C1 + 1 => only one zero and add/sub also works (eg `1 - 1` = `0001 + (1110+1)` = `0000`)
+* **Dijkstra's algorithm** = find shortest path between nodes in a weighted graph
 * **Loop invariant** = a property of a loop true before & after each iteration (eg an overall expression that stays true even though its constituting variables get updated)
-* **Levenshtein distance** = measuring (insert/delete/substitute/swap operations) difference between two sequences, eg for spelling correction, DNA similarity (strings of proteins ACGT)
+* String distances = for spelling correction, DNA ACGT proteins similarity
+  * **Levenshtein distance** = string metric measuring difference between two sequences, ie minimum number of single-character edits (insertions, deletions or substitutions)
+  * **Damerau-Levenshtein distance** = Levenshtein distance + substitutions & transpositions (aka permutations)
+* **Memoization** = optimization technique that stores result of expensive function calls to produce same outputs for same future inputs
+* **Rope** = binary tree data structure used to store longer strings as smaller linked ones (eg used by text editors)
+* **Sort**
+  * **Merge** = O(n log n)
+* **Trie** = k-ary tree data structure digital/prefix search tree, usually with string keys (eg for autocomplete/predictive text)
 
 ## Coins
 
