@@ -32,6 +32,8 @@ Saves its data in a .kdbx file, that can be published to the cloud, as long as i
 
 ## [Plugins](https://keepass.info/plugins.html)
 
+Place plgx plugin files in _C:\Program Files\KeePass Password Safe 2\Plugins_
+
 * [Kee](https://www.kee.pm) = browsers extension performing DOM manipulation to generate, save & auto-fill passwords (requires _KeePassRPC_)
 * [KeePassRPC](https://keepass.info/plugins.html#keepassrpc) = Used to communicate with the FireFox extension
 * [KeeOtp2](https://github.com/tiuub/KeeOtp2) = 2FA (TOTP) for KeePass (desktop)

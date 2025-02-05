@@ -400,30 +400,29 @@ Read on about scoped slots datacontext...: <https://developer.mozilla.org/en-US/
 
 ## Extensions
 
-* [Vue Router](https://router.vuejs.org)
-* [Vuex](https://vuex.vuejs.org) = State Management (similar to Flux or Redux). Makes apps with massive state manageable
-  * Provides simple tools to add elements to the solution, collaboratively
-* [Vuetify.js](https://vuetifyjs.com) = UI [Material Design](https://en.wikipedia.org/wiki/Material_Design) components (date pickers & co)
 * [VeeValidate](https://logaretm.github.io/vee-validate)
-* [Vue I18n](https://kazupon.github.io/vue-i18n/guide/formatting.html#named-formatting)
-  * <https://medium.com/@vinaymahamuni/internationalization-in-vue-js-86cd7870c68d>
-* [Vuetify](https://vuetifyjs.com) = Component Framework (à la Angular Material)
-  * Collection of turnkey Material GUI components for standard controls (buttons, lists, date pickers, etc.)
 * [Vue Devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools) = Browser extension
   * Debug & manipulate the data model in real time (add/remove objects and set properties)
   * Inspect: Model, Vuex, Events, Routing & Performance
-* [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur) = Visual Studio Code Extension for linting, syntax-highlighting, emmet, etc.
-* [Vue VSCode Snippets](https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-snippets) = Visual Studio Code Extension for snippets
-  * Depends on Vetur (=> installs it automatically)
-  * `vbase` generates a component template & script sections
-  * `vdata`
-  * `vcomputed`
-  * `vmethod`
-  * `vwatcher`
-  * `vprops`
-  * `vmixin-use`
-  * `vroutename` = using a route named in router.js
-  * `vroutenameparam` = same, with a URL parameter
-  * `vroutepath` = explicit URL route
-  * `vmutation` = Vuex Mutation
-  * `vaction` = Vuex Action
+* [Vue I18n](https://kazupon.github.io/vue-i18n/guide/formatting.html#named-formatting)
+  * <https://medium.com/@vinaymahamuni/internationalization-in-vue-js-86cd7870c68d>
+* [Vue Router](https://router.vuejs.org)
+* [Vuetify](https://vuetifyjs.com) = open-source collection/framework/library of turnkey UI components for standard controls (buttons, lists, date pickers, etc)
+* [Vuex](https://vuex.vuejs.org) = State Management (similar to Flux or Redux). Makes apps with massive state manageable
+  * Provides simple tools to add elements to the solution, collaboratively
+* **Visual Studio Code** extensions
+  * **TSLint Vue**
+  * [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur) = Vue tooling (linting, syntax-highlighting, emmet, etc)
+  * [Vue VSCode Snippets](https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-snippets) = snippets (depends on Vetur => installs it automatically)
+    * `vaction` = Vuex Action
+    * `vbase` generates a component template & script sections
+    * `vcomputed`
+    * `vdata` = Vue data snippet
+    * `vmethod` = Vue methods snippet
+    * `vmixin-use`
+    * `vmutation` = Vuex Mutation
+    * `vprops`
+    * `vroutename` = using a route named in router.js
+    * `vroutenameparam` = same, with a URL parameter
+    * `vroutepath` = explicit URL route
+    * `vwatcher`

@@ -46,6 +46,7 @@
 * **Bit Blit** = computer graphics data operation combining several bitmaps into one using a boolean function
 * **Direct3D** = Windows 3D graphics rendering API
 * **DirectX** = collection of Windows-focused API suite for graphics, audio (**DirectSound**), input devices (**DirectInput** eg kb/m), network communication (**DirectPlay**)
+  * [Why do game developers prefer Windows?](https://softwareengineering.stackexchange.com/a/88055)
 * **Graphics Pipeline** = whole step-by-step process performed by a GPU to render a 3D scene as a 2D projection
 * **GLSL** (OpenGL Shading Language) = high-level OpenGL shading programming language based on C
 * **Hardware-accelerated** = runs on dedicated (GPU) hardware rather than solely on general purpose CPU (which is also hardware btw)

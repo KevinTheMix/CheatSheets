@@ -35,3 +35,8 @@ Shorthands:
 ### Compiler Options
 
 [TODO](https://medium.com/jspoint/typescript-compilation-the-typescript-compiler-4cb15f7244bc#d276)
+
+## Extensions
+
+* Visual Studio Code extensions
+  * **TSLint**

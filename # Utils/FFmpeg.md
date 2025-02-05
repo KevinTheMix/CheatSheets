@@ -8,6 +8,7 @@ FFmpeg is a FOSS set of libraries for manipulating video, audio files/streams.
   * Download the master, audio & video m3u8 playlists locally
   * Edit media URLs in audio/video playlists to include host root (eg `https://…`) and GET parameters (eg `?Signature=…`), which can be found in the playlists request)
   * Feed the local master playlist to ffmpeg: `ffmpeg -allowed_extensions ALL -protocol_whitelist 'crypto,file,http,https,tls,tcp,ts' -i master.m3u8 -c copy out.ts`
+* `ffmpeg -i input.mp4 -vn -acodec copy output.m4a` = extract audio from video
 
 ## Glossary
 
@@ -31,12 +32,15 @@ FFmpeg is a FOSS set of libraries for manipulating video, audio files/streams.
 
 ## CLI ([Main options](https://ffmpeg.org/ffmpeg.html#Main-options))
 
+* `-acodec copy` = copies audio stream without re-encoding (faster and lossless)
 * `-bsf` = bitstream filtering (note: [explanation](https://stackoverflow.com/a/32035072), warning: pretty complex topic)
 * `-c` or `-codec` = select an encoder
 * `-c:a` = applies audio streams (`-c:a:1` = applies to a particular stream)
 * `-c:v` = applies to video streams
 * `-c copy` = does not re-encode stream
 * `-i {url}` = one input (there can be multiple)
+* `-vn` = excludes video stream from output (eg audio only)
+
 * `ffprobe -i {input}` = information about input (streams)
 
 ### Samples

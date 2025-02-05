@@ -89,7 +89,7 @@ The same Dart code can run on multiple platforms (eg mobile/desktop via Flutter,
 * `?.` = returns `null` if operand is null
 * `??` = returns left value if not null, right value otherwise
 * `??=` = assigns value only if operand was null
-* `..` and `?..` = cascade notation, applies a mutating function on an object, and return that object (eg `return List<int>.from(items)..add(Item());`)
+* `..` and `?..` = cascade notation to perform a sequence of operations (ie setting members or calling methods) on same object
 * `...` = spread operator (see collections section below)
 * See [The dots and question marks of Dart](https://medium.com/@habib23me/the-dots-and-question-marks-of-darts-bccfc759d129)
 * [Parentheses, Square brackets, Curly braces, Angle brackets](https://stackoverflow.com/a/61948369/3559724)
@@ -134,12 +134,11 @@ The same Dart code can run on multiple platforms (eg mobile/desktop via Flutter,
 
 ### Strings
 
-[Single vs Double quotes](https://stackoverflow.com/a/54014914/3559724) = identical, useful to mix them up to make it easier to work with inner quotes (eg `"This is a 'great' example"`). Use triple (single or double) quotes for multi-lines.
+Following examples work identically with either [Single vs Double quotes](https://stackoverflow.com/a/54014914/3559724), both useful to work with nested quotes (eg `"This is a 'great' example"`).
 
 * String signature = `abstract final class String implements Comparable<String>, Pattern`
-* `r'C:\System'` or `r"C:\System"` = raw string (escapes automatically `\` and prevents interpolation, à la C# `@"C:\System"`)
-  * `'C:\\System` alternatively with manual escaping
-* `''' a [CRLF] b [CRLF] c '''` = multi-lines string
+* Raw string = `r'C:\System'` (automatically escapes `\` and prevents interpolation, à la C# `@"C:\System"` instead of manually `'C:\\System`)
+* Multiline = `''' a [CRLF] b [CRLF] c '''`
 * Interpolation = `'$koko'` or `'${longer.expression[i]}'`
 * Concatenation = `'a' + 'b' + 'c'` or `'a' 'b'    'c'` (result: `'abc'`)
 * Multiplication = `'ko' * 4` = `'kokokoko'`

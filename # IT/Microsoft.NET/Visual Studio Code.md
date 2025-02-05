@@ -42,10 +42,11 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 * `Alt + {n}` = go to Tab {n}
 * `Alt + Left/Right` = go back/forward
 * `Alt + Click` or `Alt + Double-Click` or `Alt + Drag` = add cursors at clicked/selected locations
-* `Alt + Shift + F` = Format/tidy (e.g. HTML)
+* `Alt + Shift + F` = format/tidy (eg HTML)
 * `Alt + Shift + Left/Right` = shrink/expand selection
 * `Alt + Shift + Up/Down` = copy line up/down
 * `Alt + Mouse scroll` = scroll faster
+* `Ctrl + Alt` = display (eg _const_/_final_/_var_) variable explicit types
 * `Ctrl + :` (aka `Ctrl + /`) = toggle comments
 * `Ctrl + ,` = Settings (also via gear icon at the bottom-left or via _File > Preferences > Settings_)
 * `Ctrl + ù` = toggle Terminal
@@ -61,21 +62,21 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 * `Ctrl + K, V` = preview Markdown Side-by-side
 * `Ctrl + K, Z` = zen Mode
 * `Ctrl + L` = select current paragraph & move next
-* `Ctrl + M` = Toggle _Tab Moves Focus_
+* `Ctrl + M` = toggle _Tab Moves Focus_
 * `Ctrl + P` = search (opened) files by name (`:` line number, `@` symbol ie header)
   * Type `:` to go to line
   * Type `>` to access Command Palette from here
   * Type `#` to search global symbols
   * Type `@` to search local blocks
 * `Ctrl + R` = open Recent
-* `Ctrl + T` = search global symbols (eg classes, properties, methods), works with camelCase initials search
+* `Ctrl + T` = search global symbols (eg classes, properties, methods, and also Markdown headers), works with camelCase initials search
 * `Ctrl + Shift + .` = local blocks
 * `Ctrl + Shift + Enter` = Insert line above
 * `Ctrl + Shift + F` = Search
 * `Ctrl + Shift + L` = multi-select all identical selections
-* `Ctrl + Shift + T` = Tasklist
-* `Ctrl + Shift + V` = Preview Markdown
-* `Ctrl + Shift + ù` = New Terminal
+* `Ctrl + Shift + T` = tasklist
+* `Ctrl + Shift + V` = preview Markdown
+* `Ctrl + Shift + ù` = new Terminal
 * `Ctrl + Shift + P` or `F1` or _View > Command Palette_ = Command Palette
   * `create new term`
   * `Format Document`
@@ -100,13 +101,12 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 
 * **Add jsdoc comments**
 * **Auto Rename Tag**
-* **Awesome Flutter Snippets**
 * **Better Comments** = colorize comments (eg `!` is red, `TODO` is orange, `// //` is greyed out)
 * **carbon-now-sh** = copies code snippets for public/sharing
-* **Dart** (installed with Flutter)
 * **Dev Containers** = open a folder inside a Docker container
-* **Flutter**
+* **Error Lens** = display errors messages inline right next to faulty statement
 * **GitLens — Git supercharged** = improve VS Code git functionalities
+* **Image preview** = shows (tiny) image preview in gutter (aka code breakpoints area)
 * [markdownlint](https://github.com/DavidAnson/vscode-markdownlint#configure)
   * `Ctrl + ,` > _markdownlint config_ > `"markdownlint.config": { "no-duplicate-heading":false }` (note that `markdownlint.ignore` section is for (wildcard) ignoring files instead)
 * **Material Icon Theme** = file icons
@@ -116,12 +116,6 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 * **Remote Repositories** = contribute to Github repositories from within VS Code without typing git commands
 * **Remote - SSH** = open any folder on a remote machine via SSH
 * **Paste JSON as Code** = generate models based on JSON for a series of languages
+* **Todo Tree** = show TODO, FIXME comments as a tree view in a separate Visual Studio Code side bar menu
+* [Webview API](https://code.visualstudio.com/api/extension-guides/webview) = à la iframe for custom Visual Studio Code extension
 * [Winter is Coming](https://github.com/johnpapa/vscode-winteriscoming) = theme
-* Vue & JS
-  * **TSLint**
-  * **TSLint Vue**
-  * [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur) = Vue tooling for VS Code
-  * [Vue VSCode Snippets](https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-snippets)
-    * `vdata` = Vue data snippet
-    * `vmethod` = Vue methods snippet
-* [Webview API](https://code.visualstudio.com/api/extension-guides/webview) = à la iframe for custom VS Code extension

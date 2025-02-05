@@ -15,6 +15,8 @@
 
 ## Shortcuts
 
+* `Alt + Left/Right` = go back/forward
+* `Alt + Up`  = go folder up one level
 * `Ctrl + Alt + Arrow` = rotate Screen
 * `Ctrl + Arrows` = move cursor in folder while keep current files selection
   * `Space` = add file to selection

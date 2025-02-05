@@ -42,7 +42,7 @@ For well-known websites (eg Instagram).
 * **youtube.com**
   * _Filename for Video files_
     * Original = `*3D* *360* *VIDEO_NAME* (*H*p_*FPS*fps_*VIDEO_CODEC*-*AUDIO_BITRATE*kbit_*AUDIO_CODEC*).*EXT*`
-    * With date prefix = `*DATE[yyyy.MM.dd]*. *VIDEO_NAME*.*EXT*`
+    * With date & channel name prefixes = `*DATE[yyyy.MM.dd]*. *CHANNEL_NAME* - *VIDEO_NAME*.*EXT*`
 
 ### Packagizer
 

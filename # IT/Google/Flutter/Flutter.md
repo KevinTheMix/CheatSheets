@@ -33,7 +33,7 @@ Features:
 * Use `compute()` (similar to Dart `Isolate.run()`) to run a given callback in background, for operations that take longer than a few milliseconds
 * `build()` should remain 'pure' ie without side-effects (see <https://stackoverflow.com/a/52249579/3559724>)
 * [Material Theme Builder](https://material-foundation.github.io/material-theme-builder) = generate dynamic color schemes (pick primary, secondary, etc)
-* Refactor small widget subtrees subject to change out of large `build()` methods to get more granular & efficient rebuilds
+* Refactor small widget subtrees subject to frequent change out of large `build()` methods to leverage **more granular & efficient rebuilds**
 * Builders are methods that can map data to return widgets dynamically, also enable describing UI declaratively (as `build()` does)
 
 ## Glossary
@@ -164,8 +164,11 @@ Features:
 * **Flutter SDK**
 * (**PowerShell 5.1**, via _Windows Management Framework 5.1_ or along with Visual Studio)
 * **Visual Studio** (for developing Windows apps)
-* **Visual Studio Code** (with extensions **Flutter**, **Material Icon Theme**)
-  * **Flutter** extension provides dev tools & debugging (via `F5`), and also auto-Hot reload when saving files
+* **Visual Studio Code** extensions
+  * **Awesome Flutter Snippets** = advanced snippets (mostly integrated into vanilla **Flutter**)
+  * **Dart Data Class Generator** = generate Dart classes with equality, JSON serialization, etc
+  * **Flutter** (includes **Dart**) = provides dev tools & debugging (via `F5`), and also auto-Hot reload when saving files
+  * **Pubspec Assist** = add/update Dart/Flutter dependencies easily
 * Any **browser** (Flutter might complain it requires Chrome, but eg Firefox works, even the **Dart DevTools**' live Debugger)
   * Might require closing/restarting the app, closing/reopening/reattaching (while the app is running) the browser tab
 * Some apps may require enabling symbolic links (launch Windows Developer Mode via Win + R > `start ms-settings:developers`)
@@ -194,7 +197,7 @@ Use command with options long names or short names, eg:
 * `flutter create .` = regenerate platform-specific directories (android/, ios/, etc)
   * Eg adding web support to existing app (see <https://docs.flutter.dev/get-started/web#add-web-support-to-an-existing-app>)
   * `-e` = generates a (barebone minimal) empty app (without comments)
-  * `--org "com.koko"` = package namespace
+  * `--org "com.koko"` = organization in reverse domain name notation (à la package namespace, used as identifiers in generated plugin code)
   * `--platforms [android,ios]` = target platforms
   * `--sample=widgets.SingleChildScrollView.1 mysample` = create new app from existing sample code
   * `--template=skeleton` = generate a List View / Detail View app that follows community best practices
@@ -210,6 +213,7 @@ Use command with options long names or short names, eg:
   * eg [Install intl](https://stackoverflow.com/a/51706630/3559724)
 * `flutter pub get` = explicitely pulls packages into the project & generates _pubspec.lock_ (implied with `flutter run`)
   * `flutter packages get` = [alias for the above](https://stackoverflow.com/a/61038022/3559724)
+* `flutter pub run {executable} {options}` = runs a Dart script (with a `main()`) or a package that provides CLI (eg **build_runner**, **flutter_launcher_icons**, **native_splash_screen**)
 * `flutter pub upgrade`
 * `flutter run` = run app (without debugging, equivalent to `Ctrl + F5` in **Visual Studio Code** with _Flutter_ extension installed)
   * `r` = Hot reload, `R` = Hot restart (resets state), `h` = List commands, `d` = Detach (terminates run but app lives on), `c` = clrscr, `q` = Quit
@@ -254,7 +258,8 @@ Use command with options long names or short names, eg:
 * (_View >_) **Command Palette** (`Ctrl + Shift + P`)
   * Dart: **Open DevTools** (`Ctrl + Alt + D`)
   * Dart: **Add Dependency** = add (comma-separated) package(s) in one go
-  * Flutter: **Toggle Debug Painting** = show/hide dashed layout wireframes
+  * Flutter: **Toggle Repaint Rainbow** = highlights repainted areas
+  * (Flutter: **Toggle Debug Paint** was [replaced with DevTools](https://stackoverflow.com/a/55121731))
 * Keyboard shortcuts
   * `F5` = Start Debugging
   * `Ctrl + F5` = Run Without Debugging
@@ -347,6 +352,8 @@ Run apps actually without debugging (unless intended) for faster development/exe
   * Print to _sdout_ & _stderr_ via `print(…)` or `stderr.writeln(…)` (from _dart:io_)
   * Use `debugPrint()` to wrap `print(…)` and avoid Android throttling log lines due to too high a volume
   * Use _dart:developer_ `log(…)`, eg with object as error `developer.log(…, name: …, error: jsonEncode(koko)`
+  * Use Inspector (with mouse) to locate both widget in tree and also widget location in source code file
+  * View Network Response tab to investigate API HTTP calls (instead of printing them to terminal)
 * Set breakpoints (programmatic breakpoints via _dart:developer_ `debugger(when: condition)` statement)
 * Print widget tree via `debugDumpApp()` (from _package:flutter/rendering.dart_) from within `runApp()` (calls `toStringDeep()` recursively)
 * Print render tree via `debugDumpRenderTree()` not during layout/paint (in a callback/event handler), displays all constraints
@@ -356,11 +363,13 @@ Run apps actually without debugging (unless intended) for faster development/exe
 * Highlight layout issues via `debugPaintSizeEnabled` from _package:flutter/rendering.dart_ set to true (boxes, padding, alignment, spacers)
 * Slow down animations via **DevTools** Inspector view, or set `timeDilation` from _scheduler.dart_ to number greater than 1.0
 * Tracing = **Timeline** utilities in _dart:developer_ (`startSync(…)` & `finishSync()`)
-* Performance overlay = `MaterialApp { showPerformanceOverlay: true }`
+* Performance overlay = `MaterialApp { showPerformanceOverlay: true }` (look for spikes in second graph, while running app in profile mode ie `flutter run --profile`)
 * Alignment grid = `MaterialApp { debugShowMaterialGrid: true }` or use a **GridPaper** (inside a **Stack** to use as overlay)
+* Before `runApp(…)`, set `ErrorWidget.builder` to a callback returning a custom (Material) widget to display in place of error default red screens, and taking in **FlutterErrorDetails** as parameters
 
 ## Testing
 
 * **WidgetTester** = programmatically interact with widgets & test environment
   * See [WidgetTester class](https://api.flutter.dev/flutter/flutter_test/WidgetTester-class.html) where a test uses `pumpWidget()` to load a widget tree
 * **TestWidgetsFlutterBinding** = base class for bindings used by widgets library tests (`ensuteInitialized()`)
+* **integration_test** package = automated testing of app UI

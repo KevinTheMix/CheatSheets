@@ -4,10 +4,11 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 
 ## Quick Tips
 
-* Lots of packages require the full Flutter SDK, but a few require only Dart SDK
+* Lots of packages require the full Flutter SDK, yet a few require only Dart SDK
 * Hot Reload/Restart are not enough to reload plugins with platform native device features => `flutter run` (or _F5_ equivalent) after adding
 * Blue tags under package name/version indicate which SDK (Dart or Flutter) & platform (Android, IOS, MACOS, WEB, WINDOWS) it targets/is compatible with
 * [Using packages](https://docs.flutter.dev/development/packages-and-plugins/using-packages)
+* Quickly add plugins from within Visual Studio Code via Command Palette (`Ctrl + Shift + P`) > _Add Dependency_
 
 ## Glossary
 
@@ -49,7 +50,8 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
   * Use `pub run build_runner watch` to update output continusouly on source files change
   * Don't include folders where generated files reside to a git repo (by mentioning them in _.gitignore_ config)
 * **camera** (_@flutter.dev_)
-* **collection** (_@darT.dev_) = collection utilities (eg _max_)
+* **collection** (_@dart.dev_) = collection utilities (eg _max_)
+* **connectivit_plus (_@fluttercommunity.dev_) = discover network connectivity types (eg mobile, wifi, ethernet, vpn, bluetooth) for all platforms
 * **crypto** (_@dart.dev_) = cryptographic hashing functions for Dart
 * **device_info_plus** (_@fluttercommunity.dev_) = device/OS-specific information; `DeviceInfoPlugin()` then `.androidInfo` or `.iosInfo` ~ built-in `Platform.isAndroid|IOS`
 * **equatable** (_@fluttercommunity.dev_) = simplifies (value) equality comparison boilerplate
@@ -62,10 +64,13 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 * **flutter_hooks** (_@dash-overflow.net_) = makes boilerplate lifecycle-tied logic more compact & reusable (eg **AnimationController** via `useAnimationController`)
   * [Existing hooks](https://github.com/rrousselGit/flutter_hooks#existing-hooks)
 * **flutter_lints** (_@flutter.dev_) = recommended set of lints for Flutter apps, packages, and plugins
+* **flutter_local_notifications** (_@dexterx.dev_) = display (desktop & mobile) notifications
+* **flutter_native_splash** (_jonhanson.net_) = splash screen before/while Flutter boots
 * **flutter_rating_bar** (_@sarbagyastha.com.np_) = "5-stars" (or other icons) fractional rating bar
 * **flutter_slidable** (_@romainrastel.com_) ~= **Dismissible** but can stay in place (`actionPane`, `actions: [IconSlideAction]`, `actionExtentRatio: 1/actions.length`)
 * **focusable_control_builder** = reacts to all sorts of inputs (focus, tab key, mouse events, keyboard shortcut)
-* **freezed** _@dash-overflow.net_) = codegen for model classes (with JSON mapping) & union types (ie classes with multiple factory constructors then eg `state.when(initial: …, loading: …, success: …, failure: …`)
+* **freezed** (_@dash-overflow.net_) = codegen for model classes (with JSON mapping) & union types (ie classes with multiple factory constructors then eg `state.when(initial: …, loading: …, success: …, failure: …`)
+* **ftoast** (unverified) = toast pop-up messages (ie center screen notifications)
 * **geolocator** (_@baseflow.com_) = access native platforms specific geolocation services (last location, etc)
 * **go_router** (_@flutter.dev_) = declarative routing with deep links handling across multiple platforms (maintained by official Flutter team)
 * **google_maps_flutter** (_@flutter.dev_)
@@ -77,12 +82,14 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 * **http** (_@dart.dev_)
 * **in_app_purchase** (_@flutter.dev_) = storefront-independent API for purchases
 * **intl** (_@dart.dev_) = Dates & Numbers (& Bidi) formatting methods
+* **introduction_screen** (_unverified_) = onboarding starting slideshow
 * **jaspr** = web framework for building websites in Dart (with both client-side & server-side rendering)
 * **json_serializable** (_@google.dev_) = generate to/fromJson code based on annotated class members
 * **local_auth** (_@flutter.dev_) = local on-device authentication
 * **location** (_@bernos.dev_) = device geographical location; `serviceEnabled()`, `requestService()`, `hasPermission`, `requestPermission()`, `getLocation()`
 * **logging** (_@dart.dev_)
 * **mason** (_@brickhub.dev_) = generates boilerplate code based on bricks (ie interactive customizable & community-shared manifest files), augments `flutter create …`
+* **panara_dialogs (_@panarastudios.in_) = info/confirmation/warning/error modal dialogs
 * **path** (_@dart.dev_) = helper to combine/construct paths
 * **path_parsing** (_@flutter.dev_) = create & manipulate paths, parse Path from SVG data string
 * **path_provider** = find commonly used locations on the filesystem for different devices
@@ -104,7 +111,7 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
   * **stemmer** (-) = reduces word to their base form
   * **pdf_text** (_@aluc.dev_) =  PDF
 * DB, Storage, [Caching](https://docs.flutter.dev/get-started/fundamentals/local-caching)
-  * [Drift](https://drift.simonbinder.eu) (previously _Moor_) = reactive persistence library for Dart & Flutter (works with desktop)
+  * **drift** (previously _Moor_, _@simonbinder.eu_) = reactive persistence library for Dart & Flutter (works with desktop), builds on SQLite
   * **graphql_flutter** (_@zino.company_)
   * **get_storage** (_@getx.site_) = key-value in memory storage wit disk backup, alternative to **shared_preferences**
   * **hive_flutter** (_@hivedb.dev_) = lightweight wrapper around **Isar**, key-value NoSQL DB, written in pure Dart
@@ -122,10 +129,11 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 * **video_player** (_@flutter.dev_)
 
 * Animation & Clips
+  * **animate_do** (_@fernando-herrera.com_) = crisp bounce/in/out animations (à la jQuery, inspired by Animate.css)
   * **animations** (_@flutter.dev_) = turnkey transitions pack (container (à la **Hero**), shared axis (h/v/zoom), fade/pop)
     * [animations library API](https://pub.dev/documentation/animations/latest/animations/animations-library.html)
   * **animated_clipper** (_@oodavid.com_) = clip transitions for interactive buttons & co
-  * **animated_text_kit** (_@ayushagarwal.ml_) = text animations
+  * **animated_text_kit** (_@ayushagarwal.ml_) = text animations (rotate/fade/type/scale/colorize/liquidfill/wavy/flicker)
   * **clippy_flutter** (_deprecated_) = collection of clip shapes (arrows, rhombus)
   * **flutter_adaptive_scaffold** (_@flutter.dev_) = reacts to device/screen/user inputs, and renders according to Material 3 guidelines
   * **flutter_animate** (_@gskinner.com_) = easy compositionable animated effects (blur, colors, fade, scale, shimmer, slide)
@@ -145,7 +153,7 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
   * **material_symbols_icons** (_@hiveright.tech_) = uses official Material Symbols Icons
     * [Flutter-based Demo](https://timmaffett.github.io/material_symbols_icons)
 * Images
-  * **flutter_launcher_icons** (_@fluttercommunity.dev_) = CLI to generate all platforms/sizes icons from a single image asset
+  * **flutter_launcher_icons** (_@fluttercommunity.dev_) = CLI to generate all platforms/sizes icons from a single image asset (`flutter pub run flutter_launcher_icons:main`)
   * **flutter_spinkit** (_@ogbomo.com_) = funky loading icons package
   * **font_awesome_flutter** (_@fluttercommunity.dev_) = free [Font Awesome](https://fontawesome.com/icons) Icon pack as Flutter Icons
   * **lottie** (_@xaha.dev_) = GIF-like After Effects (exported via bodymovin extension) JSON vector animations
