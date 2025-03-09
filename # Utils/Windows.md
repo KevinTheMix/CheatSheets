@@ -7,7 +7,7 @@
 * **con.txt File** = [forbidden file name](https://www.reddit.com/r/todayilearned/comments/a0zht/til_that_you_cant_create_a_file_in_windows_called/c0fcr5n)
 * **Host File** = local DNS rules file (edit in `C:\Windows\System32\drivers\etc` with admin privileges, then run `ipconfig /flushdns`)
 * **Invisible/Hidden Folder** = name a folder `" "` (ie a no-Break Space, CharMap _U+00A0_, _Alt+255_ or _Alt+0160_), then change folder icon to a blank one
-* **File Size Search** = `size: > 2GB AND < 3GB` (or `size:` and select listed proposition)
+* **File Size Search** = `size: >1000MB AND < 3GB` (or `size:` and select listed proposition)
 * [NTFS links](https://en.wikipedia.org/wiki/NTFS_links)
   * **Hard Links** = two _index_ entries point to the same physical file
   * **Junction Points** = hard link for a folder
@@ -21,6 +21,7 @@
 * `Ctrl + Arrows` = move cursor in folder while keep current files selection
   * `Space` = add file to selection
 * `Ctrl + Esc` == `Windows`
+* `Ctrl + Shift + V` = paste without formatting
 * `Ctrl + Wheel` (in a folder window) = cycle through window views
 * `Shift + F10` = right-click (at cursor location)
 * `Windows + R` = Run
@@ -28,7 +29,7 @@
   * `control.exe srchadmin.dll` = Indexing Options (delete & rebuild index)
   * `diskpart` = disk/partition/volume management CLI (`list disk`, `select disk #`, `list partition`, `select partition #`, `delete partition override`)
   * `dxdiag` = DirectX Diagnostics Tool
-  * `msinfo32` = System Information (OS, hardware, environment variables, services)
+  * `msinfo32` = view System Information (OS, hardware, environment variables, services)
   * `mstsc(.exe)` = Remote Desktop Connection
   * `optionalfeatures` = Turn Windows features on or off
   * `pnputil` = drivers/Plug&Play utility (can force-delete drivers, run as admin)
@@ -67,6 +68,7 @@
 ### Windows 11
 
 * `Windows + G` = Game capturing
+* `Windows + X` = Windows options shortcuts
 * `taskmgr -d` = _classic_ Task Manager
 
 ## [Cmd.exe](https://en.wikipedia.org/wiki/Cmd.exe#Windows_NT_family)

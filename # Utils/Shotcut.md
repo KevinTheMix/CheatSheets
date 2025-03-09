@@ -24,8 +24,12 @@
 ## Shortcuts
 
 * `Mouse wheel over any slider` = increase/decrease value
+
+### Menus
+
 * `F4` = use proxy (Settings > Proxy)
 * `Ctrl + E` = Export
+
 * Views (top-right links)
   * `Alt + 1` = Derushing
   * `Alt + 2` = Editing
@@ -33,6 +37,7 @@
   * `Alt + 4` = Color
   * `Alt + 5` = Audio
   * `Alt + 6` = Player
+
 * Frames (top icons, toggable, **detachable**)
   * `Ctrl + 1` = Crête-mètre audio
   * `Ctrl + 2` = Properties
@@ -46,24 +51,28 @@
   * `Ctrl + 0` = Tasks
   * `Ctrl + Shift + 3` = Notes
   * `Ctrl + Shift + 6` = Bookmarks
-* Playlist
-  * `Ctrl + Shift + Up/Down` = Move Up/Down
-  * `Shift + C` = copy playlist clip
-  * `Shift + V` = paste
-  * `Shift + X` = delete (no cut)
-* Player/Preview
-  * `Drag&Drop source clip` = copy to source/project
-  * `Space` = Play
-  * `I/O` = Set In/Out (beginning/end) point
-  * `J/L` = Play quickly back/forwards
-  * `P` = Switch source/project
-  * `Left/Right` = previous/next frame
-  * `Page Up/Down` = fast-forward/rewind 1 second
-    * `+ Shift` = 2 seconds
-    * `+ Ctrl` = 5 seconds
-    * `+ Ctrl + Shift` = 10 seconds
-  * `Alt + Left/Right` = go to previous/next point
-  * `Ctrl + T` = jump to time
+
+### Playlist
+
+* `Ctrl + Shift + Up/Down` = Move Up/Down
+* `Shift + C` = copy playlist clip
+* `Shift + V` = paste
+* `Shift + X` = delete (no cut)
+
+### Player/Preview
+
+* `Drag&Drop source clip` = copy to source/project
+* `Space` = Play
+* `I/O` = Set In/Out (beginning/end) point
+* `J/L` = Play quickly back/forwards
+* `P` = Switch source/project
+* `Left/Right` = previous/next frame
+* `Page Up/Down` = fast-forward/rewind 1 second
+  * `+ Shift` = 2 seconds
+  * `+ Ctrl` = 5 seconds
+  * `+ Ctrl + Shift` = 10 seconds
+* `Alt + Left/Right` = go to previous/next point
+* `Ctrl + T` = jump to time
 
 ### Timeline
 
@@ -108,6 +117,7 @@
   * `Ctrl + V` = paste
   * `Ctrl + X` = cut
   * `Ctrl + Shift + M` = delete bookmark
+  * `Shift + S` = split all tracks
 
 ## Extensions
 
@@ -115,5 +125,5 @@
   * Used to create animated/moving masks
   * [Manual](https://glaxnimate.mattbas.org/manual)
   * [Canvas](https://glaxnimate.mattbas.org/manual/ui/canvas)
-  * [Popolon - Animated stickers](https://popolon.org/gblog3/?p=1376)
-* [Elusien - Persistence filter](https://www.elusien.co.uk/shotcut/filters/Persistence/index.html)
+  * [Animated stickers](https://popolon.org/gblog3/?p=1376)
+* [Persistence filter](https://www.elusien.co.uk/shotcut/filters/Persistence/index.html) = remanence

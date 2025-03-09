@@ -88,7 +88,7 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 * **local_auth** (_@flutter.dev_) = local on-device authentication
 * **location** (_@bernos.dev_) = device geographical location; `serviceEnabled()`, `requestService()`, `hasPermission`, `requestPermission()`, `getLocation()`
 * **logging** (_@dart.dev_)
-* **mason** (_@brickhub.dev_) = generates boilerplate code based on bricks (ie interactive customizable & community-shared manifest files), augments `flutter create …`
+* **mason** (_@brickhub.dev_) = generates boilerplate code based on bricks (ie interactive customizable & community-shared manifest files), augments `flutter create` with more flexible `mason add|make {brick_name}`
 * **panara_dialogs (_@panarastudios.in_) = info/confirmation/warning/error modal dialogs
 * **path** (_@dart.dev_) = helper to combine/construct paths
 * **path_parsing** (_@flutter.dev_) = create & manipulate paths, parse Path from SVG data string

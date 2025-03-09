@@ -9,6 +9,7 @@
 * [BlockTheSpot](https://github.com/mrpond/BlockTheSpot) = blocks ad for Spotify on Windows (note: _not the Microsoft Store version_)
 * **CDex** = free audio CD rip/convert
 * **CopyTrans** = iTunes alternative suite
+* [Exportify](https://exportify.net) = export Spotify playlist information
 * **FastStone Image Viewer** = image viewer & editor
 * **FL Studio** (formerly **Fruity Loops**, _Image-Line_) = DAW ($189)
 * **foobar2000** = customizable audio player

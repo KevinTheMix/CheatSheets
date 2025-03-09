@@ -39,9 +39,9 @@ Unlike a virtual machine, Docker does not virtualize hardware, but the operating
 * **Hyper-V** = hypervisor (available on Windows 8+) that can run other OS (required to run Linux Containers)
   * Hyper-V containers don't share the host OS kernel, they each run in its own separated (optimized) VM (kernel), providing better isolation
   * Hyper-V container require an additional parameter when the Container gets run
-* **Image** = cross-platform package usually constructed from another image (notably a base image) and including all dependencies (ie runtime, services, databases, libraries), ready to be deployed/run (build once, run anywhere)
+* **Image** = cross-platform package usually constructed from another image (notably a base image), including all dependencies (ie runtime, services, DBs, libraries), ready to be deployed (build once, run anywhere)
   * Note that dependencies can run in their own separate containers, yet interact with one another (à la microservices)
-  * Images only necessitates storage for successive deltas from its base image
+  * Images only necessitates storage for successive granular deltas from base image
   * Images act as a standard unit of deployment, even though they can package different codes & services and their dependencies
   * For reliability reasons, it's better to run different instances of the same image on different machines/VMs
   * Accepts runtime parameters when (docker) run

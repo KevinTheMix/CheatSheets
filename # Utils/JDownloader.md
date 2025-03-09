@@ -10,6 +10,8 @@
   * Right-Click the console output and select _Copy all Messages_
   * Paste the text into Excel
   * Copy only the list of URLs and paste it into JDownloader
+* [Download Youtube age-restricted](https://board.jdownloader.org/showthread.php?t=87525)
+  * [Via cookies](https://support.jdownloader.org/en/knowledgebase/article/account-cookie-login-instructions)
 
 ## Settings
 

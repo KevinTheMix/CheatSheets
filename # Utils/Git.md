@@ -74,7 +74,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * Having a remote set up is the first step to pushing changes (as it essentially provides an alias for URL), but the local branch must have a remote branch linked as well
 * [Resetting](https://stackoverflow.com/a/50022436/3559724) = unstaging (_soft_) and uncommitting (_mixed_) and removing changes (_hard_)
 * **Scope** = one of three levels where configuration parameters can be defined (System in _Program Files_, User in _~_, Local in  _._)
-* [Staging (area)](https://githowto.com/staging_and_committing) (aka **Index** or **Cache**) = logical space/list of files registered for the next commit
+* [Staging (area)](https://githowto.com/staging_and_committing) (aka **Index** or **Cache**) = logical space/list of files registered for next commit
   * Modified files are not automatically all registered; they have to be deliberately _staged_ (thus enabling granular control over committed files)
 * **Stashing** = temporarily saving changes that are not ready to be committed (eg work-in-progress) on the side to be resumed later (eg after some work on other branches)
 * **Tag** = reference to a specific commit in the history (generally for significant milestones or release; note that tags can have the same name as a branch)
@@ -109,6 +109,8 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 ### Info/Logging
 
 * `git blame`
+* `git diff (--staged)`= shows (un)staged changes in tracked files (`Page Down` to scroll down, `q` to exit)
+* `git diff {a} {b}` = shows difference between two git states (eg files, commits, local branches, local branch vs remote branch)
 * `git log {branch}` = lists commits history (parental ancestry) for that branch (_HEAD_ by default, if a tag has same name use full branch namespace eg `refs/heads/{branch}`)
 * `git log {tag}` = lists commits history for that tag (if tag has same name as a branch, Git complains and displays tag commits history)
 * `git log` = lists commits history in anti-chronological order (ie last first)
@@ -179,6 +181,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * `git clone {url}` = creates a local copy of remote repo (with _origin_ default name remote) including all branches & commits, and adds an (_upstream_) remote if _origin_ is a forked repo (keeping track of the original)
 * `git fetch` = fetches zero or one remote (the only one, or the one named _origin_, otherwise none)
 * `git fetch {remote}` = fetches remote (saved in the `.git/refs/remotes` folder, necessary after removing/re-adding a remote)
+* `git fetch --all` = fetches changes from all (configured) remote repositories, but does not update local branches
 * `git fetch --prune` = fetches remote and remove local branches that no longer exist remotely
 * `git branch -u {remote}/{branch}` (or `--set-upstream-to {remote}/{branch}`) = links local branch to remote branch (adds (max one, previous gets replaced) _branch_ section in `.git/config`)
 * `git remote` = lists all the remote repos names associated with local repo

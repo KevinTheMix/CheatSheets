@@ -2,19 +2,17 @@
 
 Windows inputs (keyboard & mouse) macros/scripting.
 
-## Special
+## API
 
 * `{#}`
-* `{Left}{Right}{Up}{Down}`
+* `{Left}`, `{Right}`, `{Up}`, `{Down}`
+* `{Delete}`
+* `{BackSpace}`
+* `{Space}`
 * `{Tab}`
-* `{Space}{BackSpace}{Delete}`
-
-## Modifiers
-
-Applies to the following key/input.
-
-* Alt = `!`
-* Ctrl = `^`
-* Shift = `+`
-* Ctrl + Shift = `^+`
-* Windows = `#`
+* Modifiers = aply to the following key/input
+  * Alt = `!`
+  * Ctrl = `^`
+  * Shift = `+`
+  * Ctrl + Shift = `^+`
+  * Windows = `#`

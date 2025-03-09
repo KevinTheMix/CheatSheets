@@ -65,7 +65,7 @@
 * [SOLID](https://en.wikipedia.org/wiki/SOLID) = SRP + OCP + LSP + ISP + DIP (most of those are trivial by today's standards & modern frameworks)
   * **Single-Responsibility Principle** = every class must only do one thing (_Robert C. Martin_)
   * **Open/Closed Principle** = software entities should be open for extension, but closed for modification
-    * Use stable Interfaces (defining common behaviors) that children can extend (ie implement) at will, not whole classes with implementation that could be modified (which could impact its children)
+    * Use stable Interfaces (defining common behaviors) that children can extend (ie implement/inherit from) at will, not whole classes with implementation that could be modified (which could impact its children)
   * **Liskov Substitution Principle** = class instance can be replaced by subclass instance with no side-effects (inheritance, co/contra-variance)
   * **Interface Segregation Principle** = split large Interfaces into more "role-granular" ones, so subclasses don't need to implement unnecessary methods
   * **Dependency Inversion Principle** = use Interfaces between parent & child classes (the parent owns, the child inherits/implements)

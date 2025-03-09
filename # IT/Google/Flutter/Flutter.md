@@ -7,14 +7,14 @@ Flutter was started as an experiment by members of the Chrome team for a new kin
 Features:
 
 * Everything is Dart (no specialized layout HTML/XML language)
-* Everything is a widget (including pure layout components eg **Center**, **Padding**), however all (visual element) leaves are **RenderObject**
+* Everything is a widget (including pure layout components eg **Center**, **Padding**), all (visual element) leaves are **RenderObject**
   * Widgets are UI building blocks as app blueprint/recipe, based on (Google) Material & (Apple) Cupertino design
-* Native pixel painting (via Skia/Impeller, a Google 2D painting library) à la Unity/Unreal
 * Flutter is faster than React Native, closer to native performance (see graph Fireship's R vs F)
+* Native pixel painting (à la Unity/Unreal) via Skia/Impeller painting libraries
 * Advanced 2D/3D morph/transform animations à la PowerPoint transitions (see eg **Transform** widget)
 * Access to native features (location, maps, camera), especially wrapped through rich 3rd-party growing plugins ecosystem
 * State-based [declarative style](https://docs.flutter.dev/get-started/flutter-for/declarative) with reactive views (ie `UI = f(State)`)
-  * UI isn't manually managed (à la WinForm) or even via bound mutable properties/viewmodel (à la WPF), only state is managed to rebuild UI parts
+  * UI isn't manually managed (à la WinForm) or even via individual bound mutable properties/viewmodel (à la WPF), only state is managed to rebuild UI parts
   * UI gets updated Flutter granularly/modularly replacing immutable widget(s) in hierarchy with other immutable widgets
     * Components don't get updated, instead old ones get dropped & replaced very quickly with fresh ones
   * Flutter compares old & new widget trees, and updates UI accordingly (if necessary)
@@ -39,7 +39,7 @@ Features:
 ## Glossary
 
 * [Architecture](https://docs.flutter.dev/resources/architectural-overview#anatomy-of-an-app)
-  * **Dart App** = custom user app
+  * **Dart App** = user custom app written entirely in Dart language
   * **Framework** = Flutter classes (high-level API in Dart)
   * **Engine** = platform-agnostic low-level API in C/C++, including rendering engine (eg Skia), Dart Runtime (including Dart VM that runs user Dart & framework Flutter code), platform channels, Embedder API
   * **Embedder** = native application hosting all Flutter content, interfaces host OS & Flutter, is app main entrypoint (as an Android Activity or iOS UIViewController), manages event loop & lifecycle
@@ -50,6 +50,7 @@ Features:
 * **BuildContext** = context for current widget, handle for widget location in its tree, holds a reference to its corresponding Element
 * [CanvasKit](https://skia.org/docs/user/modules/canvaskit) = lightweight version of Skia compiled to WebAssembly optimized for web browser (paint to HTML canvas/SVG) via WebGL
 * [Casual Games Toolkit](https://docs.flutter.dev/resources/games-toolkit) = mobile games development resources
+* **Configuration** = refers to a widget's input parameters/properties provided by its parent, or to a Widget in relation to its corresponding Element
 * [DevTools](https://docs.flutter.dev/development/tools/devtools/overview) = debugging & performance tools
   * [Flutter Inspector](https://docs.flutter.dev/development/tools/devtools/inspector)
     * **Layout Explorer** = debug/inspect/edit layout properties in real-time
@@ -71,19 +72,6 @@ Features:
     * **ValueKey** = bases off a single value (eg TODO item task's text) which is unique amongst its siblings
       * **PageStorageKey** = stores a user scroll location, so it can be resumeed when going back to widget
   * **GlobalKey** allow widgets to change parents without losing State, or access information about another Widget, both anywhere in the Tree (see **LabeledGlobalKey**, **GlobalObjectKey**)
-* **Lifecycles**
-  * App
-    * **WidgetsBindingObserver** = mixin to observe various lifecycle events affecting overall app/widget tree (eg entering back/foreground, screen orientation/size, text scale factor, Android back button)
-      * Set `WidgetsBinding.instance.add|removeObserver(this)` & override `didChangeAppLifecycleState(state)`
-    * `WidgetsFlutterBinding.ensureInitialized()` = make sure there is an instance of **WidgetsBinding**, needed to use platform channels to call native code asynchronously (ie if _main_ is `async`)
-  * Widget = `createState()` = other than that they don't have a lifecycle as they're immutable, they exist or they don't and that's the end of it
-  * State
-    * `initState()` = one-time init
-    * `didChangeDependencies()` = when a dependency changes (eg an **InheritedWidget** in `build()` changes), called immediately after `initState()`
-    * `didUpdateWidget()` = whenever (associated stateful) widget configuration changes (eg its input values)
-    * `void dispose()` = widget removed from UI (always dispose controllers, focus nodes, streams, etc)
-    * _mounted_ (bool) = true if this state is associated with a **BuildContext** (ie after creation/construction, ie before `initState()`, and until `dispose()` gets called)
-  * StatefulElement = _initial_ (created not mounted/attached), _active_ (mounted to tree), _inactive_ (temporarily removed), _defunct_ (removed permanently)
 * **Packages**/**Modules** = Dart code **only**; can use plugins (and still qualify as a package); they're published to <https://pub.dev>
 * **Platform Channel** = bi-directional communication between Flutter custom code and native platform, with serialization (thus slowser than FFIs) via _codecs_
   * **MethodChannel** = invoke a method on native platform and get back some value
@@ -113,7 +101,7 @@ Features:
   * State is persistent between widget tree rebuilds (eg a few parts of the screen gets updated), but not navigating to a whole different page, which replaces subtrees
 * **State Restoration** = restoring state after app was backgrounded/suspended by OS (**RestorationManager**, `with RestorationMixin` > `restoreState()`)
 * **Tear-off** = passing a method via name (à la delegate/pointer, ie not a lambda/anonymous function)
-* **WebGL** = JavaScript API for rendering interactive 2/3D graphics with GPU-accelerated physics to web browsers (ie HTML canvas) without plugins
+* **WebGL** = JavaScript API for rendering interactive 2D/3D graphics with GPU-accelerated physics to web browsers (ie HTML canvas) without plugins
 * **Widget** = immutable (declarative) description of part of a UI (layout component or behavior: center, pad, rotate)
   * _Everything is a widget_, including app itself
   * All Widgets are @`immutable`, holding only `final` data, so any mutating data has to be outsourced into a dedicated mutable **State**
@@ -152,14 +140,35 @@ Features:
 * **Rendering** = layout + paint + composition
 * [Shrink-wrap](https://flutteragency.com/what-does-the-shrink-wrap-property-does) = force a widget to pre-calculate its total size ~ its items
 
+### Lifecycles
+
+* App
+  * **WidgetsBindingObserver** = mixin to observe various lifecycle events affecting overall app/widget tree (eg entering back/foreground, screen orientation/size, text scale factor, Android back button)
+    * Set `WidgetsBinding.instance.add|removeObserver(this)` & override `didChangeAppLifecycleState(state)`
+  * `WidgetsFlutterBinding.ensureInitialized()` = make sure there is an instance of **WidgetsBinding**, needed to use platform channels to call native code asynchronously (ie if _main_ is `async`)
+* Widget = `createState()` = other than that they don't have a lifecycle as they're immutable, they exist or they don't and that's the end of it
+* State
+  * `initState()` = one-time init
+  * `didChangeDependencies()` = when a dependency changes (eg an **InheritedWidget** in `build()` changes), called immediately after `initState()`
+  * `didUpdateWidget()` = whenever (associated stateful) widget configuration changes (eg its input values)
+    * There's always a rebuild performed after this method
+  * `void dispose()` = widget removed from UI (always dispose controllers, focus nodes, streams, etc)
+  * _mounted_ (bool) = true if this state is associated with a **BuildContext** (ie after creation/construction, ie before `initState()`, and until `dispose()` gets called)
+* StatefulElement = _initial_ (created not mounted/attached), _active_ (mounted to tree), _inactive_ (temporarily removed), _defunct_ (removed permanently)
+
 ## Environment
 
 ### [Install](https://docs.flutter.dev/get-started/install)
 
 * **Android Studio**
-  * Install the following under _Tools > SDK Manager > SDK Tools_:
+  *
+  * Install under _Customize > All settings… > Languages & Frameworks > Android SDK > SDK Tools_:
+    * Android SDK Build-Tools (check _Show Package Details_ to install specific/older version)
     * [Android SDK Command-line Tools](https://developer.android.com/studio/intro/update#sdk-manager)
-    * Google/Samsung USB Driver (those get downloaded and must be then installed manually)
+    * (Android Emulator)
+    * (Android SDK Platform-Tools)
+    * (Google/Samsung USB Driver) (gets downloaded then must be installed manually)
+    * Intel Emulator Accelerator
   * (Flutter extension if using as IDE)
 * **Flutter SDK**
 * (**PowerShell 5.1**, via _Windows Management Framework 5.1_ or along with Visual Studio)
@@ -193,14 +202,14 @@ Use command with options long names or short names, eg:
   * `flutter build web --base-href {path}` = [HTML \<base> href](https://www.w3schools.com/Tags/att_base_href.asp)
 * `flutter channel [master|beta|stable]` = pick release channel (_master_ = dev, _beta_ = finalized/tested, _stable_ = production)
 * `flutter clean` = clear build & packages cache (very useful before archiving/zipping an app source code)
+* `flutter create .` = regenerate platform-specific directories (ie android/, ios/, web/, etc)
+  * Adding web support to existing app (see <https://docs.flutter.dev/get-started/web#add-web-support-to-an-existing-app>)
 * `flutter create kokoapp`
-* `flutter create .` = regenerate platform-specific directories (android/, ios/, etc)
-  * Eg adding web support to existing app (see <https://docs.flutter.dev/get-started/web#add-web-support-to-an-existing-app>)
   * `-e` = generates a (barebone minimal) empty app (without comments)
-  * `--org "com.koko"` = organization in reverse domain name notation (à la package namespace, used as identifiers in generated plugin code)
-  * `--platforms [android,ios]` = target platforms
+  * `--org "com.koko"` = organization in reverse domain name notation (used as namespace when developing/publishing plugin packages)
+  * `--platforms android,ios,linux,web,windows` = target platforms
   * `--sample=widgets.SingleChildScrollView.1 mysample` = create new app from existing sample code
-  * `--template=skeleton` = generate a List View / Detail View app that follows community best practices
+  * `--template=skeleton` = generate a List View / Detail View app that follows community best practices (incompatible with `-e`)
   * `-t package {koko}` = [creates a package project](https://docs.flutter.dev/development/packages-and-plugins/developing-packages)
 * `flutter devices` = list all connected devices
 * `flutter doctor -v(erbose)` (Tip: use PowerShell to get Unicode support)
@@ -213,8 +222,9 @@ Use command with options long names or short names, eg:
   * eg [Install intl](https://stackoverflow.com/a/51706630/3559724)
 * `flutter pub get` = explicitely pulls packages into the project & generates _pubspec.lock_ (implied with `flutter run`)
   * `flutter packages get` = [alias for the above](https://stackoverflow.com/a/61038022/3559724)
+* `flutter pub outdated` = display current/upgradable/latest versions for each dependency
 * `flutter pub run {executable} {options}` = runs a Dart script (with a `main()`) or a package that provides CLI (eg **build_runner**, **flutter_launcher_icons**, **native_splash_screen**)
-* `flutter pub upgrade`
+* `flutter pub upgrade` (+ `--major-versions` to force absolute latest)
 * `flutter run` = run app (without debugging, equivalent to `Ctrl + F5` in **Visual Studio Code** with _Flutter_ extension installed)
   * `r` = Hot reload, `R` = Hot restart (resets state), `h` = List commands, `d` = Detach (terminates run but app lives on), `c` = clrscr, `q` = Quit
   * `flutter run -d(evice-id) {device}` = run to chosen device
@@ -246,20 +256,21 @@ Use command with options long names or short names, eg:
 * _analysis\_opions.yaml_ = Dart linter
 * _pubspec.lock_ = required, generated automatically based on the _pubspec.yaml_
 * _pubspec.yaml_ = project imported 3rd-party dependencies, fonts, images
+  * _dependencies_ section = used in app's production code, required for app to function at runtime
+  * _dev\_dependencies_ section = used only during development, not included in production builds (eg tests or code generation packages)
 * _README.md_ = Git/doc
 
 ### Visual Studio Code
 
-* (_File > Preferences >_) **Settings** (`Ctrl + ,`)
-  * **Bracket Pairs** = set parentheses matching coloured line guides (formerly an extension, now built-in)
-  * **Dart: Dev Tools Browser** = `chrome` or `system default` (eg Firefox)
-  * **Dart: Dev Tools Location** = `active`/`beside` (VS Code) or `external` (browser)
-  * **Dart: Closing Labels** = enable/disable or change prefix (eg to _#_)
+* (_File > Preferences >_) **Settings** (`Ctrl + ,`) (_> Extensions > Dart_)
+  * Dart: **Dev Tools Browser** = `chrome` or (system) `default` (eg Firefox)
+  * Dart: **Dev Tools Location** = `active`/`beside` (VS Code) or `external` (browser)
+  * Dart: **Closing Labels** = toggle or change **Closing Labels Prefix** (eg `#`)
 * (_View >_) **Command Palette** (`Ctrl + Shift + P`)
   * Dart: **Open DevTools** (`Ctrl + Alt + D`)
   * Dart: **Add Dependency** = add (comma-separated) package(s) in one go
   * Flutter: **Toggle Repaint Rainbow** = highlights repainted areas
-  * (Flutter: **Toggle Debug Paint** was [replaced with DevTools](https://stackoverflow.com/a/55121731))
+  * Flutter: **Toggle Debug Paint** (_deprecated_ was [replaced with DevTools](https://stackoverflow.com/a/55121731))
 * Keyboard shortcuts
   * `F5` = Start Debugging
   * `Ctrl + F5` = Run Without Debugging
@@ -270,7 +281,7 @@ Use command with options long names or short names, eg:
     * Append a comma to each closing parenthesis to take advantage of this command
   * `Ctrl + Click` = `F12` = Go to definition
 * Terminal area
-  * _PROBLEMS_ = contains list of compile issues
+  * _PROBLEMS_ = contains list of compile issues (`Left-Click` one issue to jump to it and load suggested fixes, then `Right-Click` to show suggestions list)
   * _DEBUG CONSOLE_ = contains list of runtime issues
   * `Right-Click` > _Clear Console_
 * Extensions
@@ -347,7 +358,7 @@ Run apps actually without debugging (unless intended) for faster development/exe
 * Use `toStringDeep()` = a string representation of this node and its descendants
 * Use _dart:convert_ `jsonEncode(…)` to encode & pass whole objects
 * For custom widgets, override `debugFillProperties()` to add custom information (**DiagnosticsProperty**) into Flutter widget tree inspector (especially when publishing packages)
-* Toggle Repaint Rainbow tool to identify superfluous repaints (via **DevTools** or _debugRepaintRainbowEnabled_)
+* Toggle Repaint Rainbow tool to identify superfluous repaints (via **DevTools** or setting _debugRepaintRainbowEnabled_ in main)
 * **DevTools**: add log to Logging view (or system console)
   * Print to _sdout_ & _stderr_ via `print(…)` or `stderr.writeln(…)` (from _dart:io_)
   * Use `debugPrint()` to wrap `print(…)` and avoid Android throttling log lines due to too high a volume

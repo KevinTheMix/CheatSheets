@@ -8,7 +8,7 @@ Online UI design for apps & websites, with collaborative & prototyping capabilit
   * Note that the inner content must initially fit _within_ a larger parent and not overflow when applying this option
 * **Component** = reusable element of design (à la Flutter widget), changes to _original_ (only) propagate to all cloned instances
   * They appear in left tree as purple elements (original has a different icon), and also under _Assets_ tab
-* **Constraints** = anchoring/resizing strategy (editable eg in a rectangle properies)
+* **Constraints** = anchor/dock/resize strategy (editable eg in a rectangle properies)
 * **Edit Mode** = select as wireframe
 * **FigJam** = collaborative whiteboard & diagrams, mind maps & timelines
 * **File** = set of pages
@@ -34,6 +34,7 @@ Online UI design for apps & websites, with collaborative & prototyping capabilit
 * `Ctrl + G` = group selection of multiple elements
 * `Shift + Click/Drag` = snap-align or maintain element proportions while creating/resizing
 * `Shift + Click` multiple elements = multi-selection
+* `Shift + D` = Dev Mode
 * `Shift + X` = swap Fill & Stroke properties
 
 #### Left (tree) Panel
@@ -96,7 +97,7 @@ Online UI design for apps & websites, with collaborative & prototyping capabilit
 
 #### Right Panel
 
-Design Properties (and Prototype).
+Design Properties, and Prototype.
 
 * Align left = `Alt + A`
 * Align horizontal centers = `Alt + H`

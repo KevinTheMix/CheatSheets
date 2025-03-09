@@ -11,20 +11,45 @@
 
 * **Emmet** (formerly **Zen Coding**) = (built-in) advanced snippet generator for HTML, CSS, etc (cycle-browse through markup elements)
 
-### Settings
+## Preferences
+
+Via _File > Preferences_.
+
+* **Keyboard Shortcuts** (`Ctrl + K, Ctrl + S`)
+  * **Transform to Uppercase/Lowercase** = [set lower/uppercase keys](https://stackoverflow.com/a/41688564/3559724)
+* **Settings** (`Ctrl + ,`)
+  * **Text Editor**
+    * **Insert Spaces** = insert spaces on `Tab` (see [indentation settings](https://stackoverflow.com/a/29972553))
+    * **Bracket Pairs** = set parentheses matching coloured line guides (formerly an extension, now built-in)
+    * **Sticky Scroll: Enabled** = keep current scope (eg class, namespace) breadcrumb at top
+  * **Workbench**
+    * **List: Open Mode** = display file by single/double clicking Explorer files
+    * **Editor: Enable Preview** = tab preview in italics
+
+### Setting Files
 
 * [Scopes](https://developer.hyvor.com/vscode-editing-settings-json)
-  * By user (Global)
-    * %APPDATA%\Code\User\settings.json
-  * By workspace
-  * By folder
+* By user (Global)
+  * %APPDATA%\Code\User\settings.json
+* By workspace
+* By folder
 * [Setting by Filetype](https://code.visualstudio.com/docs/getstarted/settings#_language-specific-editor-settings)
-* [Tabs vs Spaces](https://stackoverflow.com/a/29972553)
-  * `"[plaintext]": { "editor.insertSpaces": false }`   # Note that .txt files are referenced as "plaintext" filetype.
-* [Editor sticky scroll](https://code.visualstudio.com/updates/v1_70#_editor-sticky-scroll)
-* [Set lower/uppercase keyboard shortcut](https://stackoverflow.com/a/41688564/3559724)
-  * File-> Preferences -> _Keyboard Shortcuts_ (or `Ctrl + K, Ctrl + S`)
-  * _Transform to Uppercase/Lowercase_
+* `"[plaintext]": { "editor.insertSpaces": false }`   # Note that .txt files are referenced as "plaintext" filetype.
+
+#### Flutter Settings
+
+Adapted from @Flutter Mapp 35 Flutter Tips video.
+
+```json
+{
+    // Collapses configuration files under pubspec.yaml.
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.expand": false,
+    "explorer.fileNesting.patterns": { "pubspec.yaml": ".flutter-plugins, .flutter-plugins-dependencies, .gitignore, .packages, .metadata, pubspec.lock, analysis_options.yaml, todoapp.iml" },
+    // Automatically fix/format/tidy code on save (eg adds missing 'const').
+    "editor.codeActionsOnSave": { "source.fixAll": "explicit" },
+}
+```
 
 ## Commands
 
@@ -89,6 +114,7 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 #### Terminal
 
 * `Ctrl + Left/Right` = works!
+* `clear` = à la clscr
 
 ## Snippets
 
