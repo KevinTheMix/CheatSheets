@@ -4,7 +4,7 @@
 
 * **Bypass company firewall** (2014.04)
   * Remote desktop to home computer
-  * SSH Tunnel + Proxy Socks via Putty (_Laurent D'Havé_ & _Frédéric Branger_)
+  * SSH Tunnel + Proxy Socks via PuTTY (_Laurent D'Havé_ & _Frédéric Branger_)
     * <https://securitymusings.com/article/462/how-to-set-up-a-socks-proxy-using-putty-ssh>
 * [DNSstuff tools](https://www.dnsstuff.com/freetools)
 
@@ -19,13 +19,16 @@
 * **HTTPS** = TLS layer between HTTP & TCP, attested via a digitally signed server certificate, initiated via public crypto key handshake
 * **OAuth** = authorization framework standard for access delegation
 * **OpenID Connect** = authentication layer for OAuth 2.0
+* **OpenSSH** = cross-platform suite of SSH-based secure channel utilities (eg **sshd** a SSH server daemon) over an unsecured network in a client-server architecture
 * **Protocol Buffers** (aka _Protobuf_) = FOSS cross-platform data format (by Google) used to serialize structured data, described via a WSDL-like Interface Description Language (IDL)
 * **Proxy (Server)** = intermediary in a client-server network, can be forward (at client) or reverse (at server)
+* **PuTTY** = FOSS (ssh, telnet, etc) terminal client for (OS/hardware) administration over networks, (originally) for Windows
 * **Reverse Proxy** = retrieves resources on behalf of clients, as if they originated from them, can be used for security (eg DMZ), caching, logging, monitoring user activty
+* **Reverse SSH Tunneling** = have a (usually well-protected) remote computer open a connection back to local machine (with SSH started from local machine)
 * **SSH** (Secure Shell Protocol) = crypto protocol for network services over unsecured network (eg remote login & CLI execution)
 * **SSL** (Secure Sockets Layer) = deprecated encryption protocol replaced with **TLS**
 * **SSO** (Single Sign-On) = use one login on multiple system, whether personal (eg Google Account SSO, or OAuth 2.0 social login), or entreprise-wide (using SAML-based SSO eg Azure AD or Okta)
-* **Telnet** = bi-directional client-server application protocol to access virtual terminals of remote system on LAN/Internet
+* **Telnet** = older bi-directional client-server application protocol to access virtual terminals of remote system on LAN/Internet
 * **TLS** (Transport Layer Security) = cryptographic protocol to provide communications security over a network
 * **TLS Handshake** = client initiates an asymmetric connexion, then sends a (faster & more efficient for large amounts of data) symmetric key encrypted using server public key found in its certificate
 
@@ -52,8 +55,7 @@
 * **TMeter** = free network packet traffic analyzer with built-in firewall & NAT capabilities
 * **WebMin** = web-based server management control panel for Unix systems (eg users, disk quotas, services, config files)
 * **Wget** = HTTP(S)/FTP CLI to GET files from web servers
-* **WireGuard** = communication protocol & FOSS encrypted VPN (native on Ubuntu)
-  * Cfr Florent depuis machine locale (Vue sur Nginx avec IP dynamique) via tunnel bi-directionnel (en tant que connexion réseau Windows virtuelle) à machine (virtuelle) publique (droplet DigitalOcean pour l'IP fixe)
+* **WireGuard** = communication protocol & FOSS encrypted VPN (native on Ubuntu), adds an OS-level virtual network interface
 * **Wireshark** = network packets analyzer (uses WinPcap or Npcap)
   * Protocol inspection, live capture & offline analysis, rich VoIP analysis, multi-platform, multiple capture file formats, decryption support, GUI & CLI (TShark)
 * **WinDump** = Windows port of tcpdump (uses WinPcap)

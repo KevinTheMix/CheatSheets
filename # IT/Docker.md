@@ -29,7 +29,7 @@ Unlike a virtual machine, Docker does not virtualize hardware, but the operating
   * Docker reuses the kernel of its hosts, so it does not have to pack it up, let alone starting it up each time
   * By contrast, a virtual machine (VM) runs a full-blown guest OS with virtual access to host resources through a hypervisor
   * In general, VMs provide an environment with more resources than most applications need; on the other hand, they provide better isolation
-* **Container Base OS** = base image containing an OS (eg Windows Nano Server, Windows Server Core, Linux Alpine), or not (using FROM scratch, only on Linux)
+* **Container Base OS** = base image containing an OS (eg Windows Nano Server, Windows Server Core, Linux Alpine), or not (using `FROM scratch`, only on Linux)
 * **Container Host** = machine/VM that has the OS on which the Docker Daemon runs
 * **Docker Client** = Docker uses a client-server architecture: the client talks to the daemon (not necessarily on the same system)
 * **Docker Daemon/Runtime** = heart of Docker that does the heavy lifting: a service inside of which containers are built/run/disttributed

@@ -28,6 +28,7 @@
 * `chmod` = change access rights
 * `chown {user} {file}` = change owner
 * `cp` = copy
+* `cron` = job scheduler (minute (0-59) hour (0-23) day (1-31) month (1-12) weekday (0-6))
 * `date` = system date
 * `DATE`
 * `du {file}` = disk usage (`-h(uman-readable)` = adds unit (_K, M, G_))

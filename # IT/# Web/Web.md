@@ -5,6 +5,7 @@
 ## Quick Tips
 
 * Include a referrer URL catcher (to index.php/master page) to find out where people come from (+ good for CSRF)
+* Florent = HTTP requests handled by local Nginx serving Vue app through bi-directional VPN tunnel via WireGuard (adding OS-level virtual network I/Os) between local (dynamic IP) machine and public remote (fixed IP) DigitalOcean Droplet VM
 
 ## Glossary
 

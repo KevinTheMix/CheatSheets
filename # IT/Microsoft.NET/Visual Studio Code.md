@@ -46,8 +46,8 @@ Adapted from @Flutter Mapp 35 Flutter Tips video.
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.expand": false,
     "explorer.fileNesting.patterns": { "pubspec.yaml": ".flutter-plugins, .flutter-plugins-dependencies, .gitignore, .packages, .metadata, pubspec.lock, analysis_options.yaml, todoapp.iml" },
-    // Automatically fix/format/tidy code on save (eg adds missing 'const').
-    "editor.codeActionsOnSave": { "source.fixAll": "explicit" },
+    // Automatically format code on save (eg adds missing 'const').
+    "[dart]": { "editor.codeActionsOnSave": { "source.fixAll": "explicit" }, }
 }
 ```
 

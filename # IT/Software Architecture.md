@@ -6,6 +6,8 @@
   * **Availability %** = (total elapsed time - sum of downtime)/total elapsed time
   * Systems in series = `A x A` (eg `0.9 x 0.9 = 0.81` so global availability decreases)
   * Systems in parallel = `1 - (1-A)²` (eg `1-(1-0.9)²` = `1-(0.1)²` = `1-0.01` = `0.99` so global availability increases)
+* **Barrel Files** = a file that does nothing but re-export things from other files
+  * [TkDodo - Please Stop Using Barrel Files](https://tkdodo.eu/blog/please-stop-using-barrel-files)
 * **Bottlenecks** = system part that degrades the entire system's performance when congested
 * **Clean Architecture** = DDD + CQRS
   * Layers

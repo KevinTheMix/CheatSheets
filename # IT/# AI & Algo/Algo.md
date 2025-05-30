@@ -1,6 +1,8 @@
 # Algo
 
-* Don't recalculate x in algo while (eg `while() {array[i*x +y]}` => intead add `x` each iteration)
+## Quick Tips
+
+* Don't recalculate x in algo while (eg `while() {array[i*x +y]}` => instead add `x` each iteration)
 * TriCount algo = divide sum of everything by # of people, each's delta = that number - paid
 * Pick Random Item = `items[Math.floor(Math.random() * items.length)]` (JavaScript)
 * MIT OpenCourseWare

@@ -43,6 +43,7 @@
 * **Transaction log** = records transactions & the modifications made by each of them
 * **Two-Phase Commit Protocol** = type of atomic commitment protocol, a distributed algorithm coordinating distributed atomic transactions and whether to commit or abort them
 * **Union** = concatenates result sets from two queries with identical columns number/order and compatible data types compatible (`UNION` removes duplicates, `UNION ALL` allows duplicates)
+* **Vector DB** = nearest neighbor/similarity & semantic searches
 * **Wildcards** = matches one (`_`), or several (`%`), or ranges of characters (`[a-z0-9.,;]` or opposite `[^…]`) as part of a `LIKE` clause
 * **Write-ahead Logging** = techniques for atomicity & durability (two of ACID properties), and an implementation of Event Sourcing architecture
 * **Write-ahead Log** = append-only structure for crash & transaction recovery where changes are initially written before being actually applied

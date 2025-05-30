@@ -32,7 +32,7 @@
 * **Responsive** = responding to screen size change
 * **Rollover** = icon/image-based swap in response to a mouseover
 * **Scrim** = temporary greyed out (Material) area appearing on surface/rest of screen to make its content less prominent when a modal element is shown (eg dialog, drawer)
-  * Clicking on it sometimes removes the modal element
+  * Clicking on it sometimes removes that modal element
 * **Staggered animation** = a human-friendly way to introduce new UI elements on screen, one by one
 * **Typeface** (aka **font family**) = design for alphanumerics & symbols used in printing/electronic display
 * **Viewport** = a box that is bigger on the inside, ie children outside bounds can be scrolled into view
@@ -54,7 +54,8 @@
 * **Mesa 3D** = open source imeplementation of OpenGL, Vulkan & other libraries
 * **OpenGL** = cross-platform 2D/3D graphics rendering API (ie a standard set of possible instructions without concrete implementation)
   * [OpenGL Book](https://openglbook.com)
-* **Shader** = GPU-executed program that transforms 3D data into a (three-dimensional-looking) 2D scene, part of Graphics Pipeline
+* **Shader** = program that runs on a GPU that transforms 3D data into a (three-dimensional-looking) 2D scene, part of Graphics Pipeline
+  * _If a GPU is being used, shaders are involved_ (confirmed by ChatGPT, unless old GPUs or using CPU for software rendering)
   * **Fragment/Pixel Shader** = calculates color for each pixel (kinda inefficient because threads don't share calculation but done in parallel)
   * **Vertex** = 3D rotate/stretch projections
   * **Geometry** = add details or modify geometry in real-time (eg fur/hair)

@@ -73,15 +73,17 @@
 
 ## [Cmd.exe](https://en.wikipedia.org/wiki/Cmd.exe#Windows_NT_family)
 
+* `%USERPROFILE%`
+* `@echo [on|off]` = turns prompt on/off
+* `@type {file}` = gives information about file (ie file header metadata)
 * `cls` = clear screen
 * `date`
 * `certlm.msc` = Certificates
 * `copy /b {image} + {hidden} {output}` = hide file in an image file (output image must be same extension/type as input)
 * `echo koko`
-* `@echo [on|off]` = turns prompt on/off
 * `envir` = System Properties > Advanced
 * `explorer .` = open explorer window at current path
-* `for %%i in ({pattern}) do {statement using %%i}` (pattern can be fixed words eg `(Debug Release)` or matching expression eg `(*.json)`)
+* `for %i in ({pattern}) do {statement}` (pattern can be files/strings of fixed words eg `(Debug Release)` or matching expression eg `(*.json)`)
 * `format {disk:}`
 * `goto {label}` goes to `:{label}`
 * `if {condition} {statement}` (condition can be eg `exist {path}`)

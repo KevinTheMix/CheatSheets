@@ -22,8 +22,6 @@ Features:
 
 ## Quick Tips
 
-* [Flutter Samples](https://flutter.github.io/samples)
-  * [Material 3 Demo](https://flutter.github.io/samples/web/material_3_demo)
 * [@Wm Leler](https://leler.com/wm/bio.html#flutter) = Flutter-promoting articles (eg _what's revolutionary?_, _why Dart?_ UX study with eight developers, _company pitch_)
   * Most of the time, Flutter can do layout in a single pass (or even none, through cacheing), aka linear time, so it can even be used for scrolling & any animations
 * [Matthew Smith - Why we chose Flutter and how it's changed our company](https://medium.com/@matthew.smith_66715/why-we-chose-flutter-and-how-its-changed-our-company-for-the-better-271ddd25da60)
@@ -46,8 +44,9 @@ Features:
   * **Runner** = native-level customizable code (originally generated via `flutter create`)
   * [Inside Flutter](https://docs.flutter.dev/resources/inside-flutter) = optimized & single pass layouting, onboarding strategies
 * [BLoC](https://www.flutterclutter.dev/flutter/basics/what-is-the-bloc-pattern/2021/2084) = state management design pattern using Streams of events (in) & states (out)
+* `build(BuildContext context)` = is itself a sort of _builder_ (ie indirect callback)
 * [Build Modes](https://docs.flutter.dev/testing/build-modes) = Debug (development, Hot Reload), Profile (performances analysis), Release (release app)
-* **BuildContext** = context for current widget, handle for widget location in its tree, holds a reference to its corresponding Element
+* **BuildContext** = context for current widget, holds a reference to its corresponding Element, handle for widget location in its tree
 * [CanvasKit](https://skia.org/docs/user/modules/canvaskit) = lightweight version of Skia compiled to WebAssembly optimized for web browser (paint to HTML canvas/SVG) via WebGL
 * [Casual Games Toolkit](https://docs.flutter.dev/resources/games-toolkit) = mobile games development resources
 * **Configuration** = refers to a widget's input parameters/properties provided by its parent, or to a Widget in relation to its corresponding Element
@@ -70,8 +69,10 @@ Features:
     * **UniqueKey** = à la GUID
     * **ObjectKey** = bases off multiple values (eg address) which aggregated are unique
     * **ValueKey** = bases off a single value (eg TODO item task's text) which is unique amongst its siblings
-      * **PageStorageKey** = stores a user scroll location, so it can be resumeed when going back to widget
-  * **GlobalKey** allow widgets to change parents without losing State, or access information about another Widget, both anywhere in the Tree (see **LabeledGlobalKey**, **GlobalObjectKey**)
+      * **PageStorageKey** = persists a widget state (including user scroll location) so it can be resumed upon recreation
+  * **GlobalKey** = unique across entire app, access/preverves a widget state (ie `GlobalKey<{state}>` eg **AnimatedListState** or **NavigatorState**) from anywhere in tree (via `kokoKey.currentState`)
+    * **GlobalObjectKey**
+    * **LabeledGlobalKey**
 * **Packages**/**Modules** = Dart code **only**; can use plugins (and still qualify as a package); they're published to <https://pub.dev>
 * **Platform Channel** = bi-directional communication between Flutter custom code and native platform, with serialization (thus slowser than FFIs) via _codecs_
   * **MethodChannel** = invoke a method on native platform and get back some value
@@ -100,7 +101,6 @@ Features:
   * _Lifting state up_ = moving state up to first common ancestor; basic solution to fix state sharing between multiple widgets
   * State is persistent between widget tree rebuilds (eg a few parts of the screen gets updated), but not navigating to a whole different page, which replaces subtrees
 * **State Restoration** = restoring state after app was backgrounded/suspended by OS (**RestorationManager**, `with RestorationMixin` > `restoreState()`)
-* **Tear-off** = passing a method via name (à la delegate/pointer, ie not a lambda/anonymous function)
 * **WebGL** = JavaScript API for rendering interactive 2D/3D graphics with GPU-accelerated physics to web browsers (ie HTML canvas) without plugins
 * **Widget** = immutable (declarative) description of part of a UI (layout component or behavior: center, pad, rotate)
   * _Everything is a widget_, including app itself
@@ -184,12 +184,9 @@ Features:
 
 ### [CLI](https://docs.flutter.dev/reference/flutter-cli)
 
-Use command with options long names or short names, eg:
+Use commands with either long/short names (eg `flutter --option=value` or just `flutter -o value`).
 
-* `flutter -t skeleton`
-* `flutter --template=skeleton`
 * `flutter --version`
-
 * `flutter analyze` = inspect code and display all infos/warnings/errors
 * `flutter build`
   * `flutter build appbundle` = builds Android App Bundle (AAB), for publishing to Google Play Store
@@ -205,12 +202,14 @@ Use command with options long names or short names, eg:
 * `flutter create .` = regenerate platform-specific directories (ie android/, ios/, web/, etc)
   * Adding web support to existing app (see <https://docs.flutter.dev/get-started/web#add-web-support-to-an-existing-app>)
 * `flutter create kokoapp`
-  * `-e` = generates a (barebone minimal) empty app (without comments)
+  * `--empty` = generates a (barebone minimal) empty app (without comments)
   * `--org "com.koko"` = organization in reverse domain name notation (used as namespace when developing/publishing plugin packages)
   * `--platforms android,ios,linux,web,windows` = target platforms
   * `--sample=widgets.SingleChildScrollView.1 mysample` = create new app from existing sample code
-  * `--template=skeleton` = generate a List View / Detail View app that follows community best practices (incompatible with `-e`)
-  * `-t package {koko}` = [creates a package project](https://docs.flutter.dev/development/packages-and-plugins/developing-packages)
+  * `--template` = specify project type
+    * `bug` = for bug report submissions
+    * `skeleton` = generate a List View / Detail View app that follows community best practices (incompatible with `-e`)
+    * `package {koko}` = [creates a package project](https://docs.flutter.dev/development/packages-and-plugins/developing-packages)
 * `flutter devices` = list all connected devices
 * `flutter doctor -v(erbose)` (Tip: use PowerShell to get Unicode support)
 * `flutter doctor --android-licenses`
@@ -227,13 +226,14 @@ Use command with options long names or short names, eg:
 * `flutter pub upgrade` (+ `--major-versions` to force absolute latest)
 * `flutter run` = run app (without debugging, equivalent to `Ctrl + F5` in **Visual Studio Code** with _Flutter_ extension installed)
   * `r` = Hot reload, `R` = Hot restart (resets state), `h` = List commands, `d` = Detach (terminates run but app lives on), `c` = clrscr, `q` = Quit
-  * `flutter run -d(evice-id) {device}` = run to chosen device
-    * `flutter run -d chrome`
-    * `flutter run -d web-server` ([works in any browser](https://stackoverflow.com/a/71518488))
-    * `flutter run -d web-server --web-renderer [html|canvaskit]` = same as build
-  * `flutter run --no-enable-impeller` = force use old Skia rendering engine
-  * `flutter run --profile` (then `P`) = displays profiling performance metrics overlay (on physical devices, not emulators)
-  * `flutter run --release` = compile to release mode (removes all debugging directives eg asserts)
+  * `-d(evice-id) {device}` = run to chosen device
+    * `chrome`
+    * `web-server` ([works in any browser](https://stackoverflow.com/a/71518488))
+    * `web-server --web-renderer [html|canvaskit]` = same as build
+  * `--no-enable-impeller` = force use old Skia rendering engine
+  * `--profile` (then `P`) = displays profiling performance metrics overlay (on physical devices, not emulators)
+  * `--release` = compile to release mode (removes all debugging directives eg asserts)
+  * `--v(erbose)`
   * [Fix "Parameter format not correct"](https://stackoverflow.com/a/69519005/3559724)
 * `flutter test` = run tests
 * `flutter upgrade` = install latest Flutter version
@@ -244,6 +244,7 @@ Use command with options long names or short names, eg:
 * _.idea/_ = Android Studio (built on JetBrains' IntelliJ **IDEA**) configuration
 * _.vscode/_ = Visual Studio configuration (zoom level, etc)
 * _android/_ = complete (passive) Android project used by Flutter (we don't need to change it)
+  * _app/src/debug/AndroidManifest.xml_ = (eg set internet access via `<uses-permission android:name="android.permission.INTERNET"/>`)
 * _build/_ = compile output generated by Flutter SDK
 * _ios/_ = same as Android
 * _lib_ = source files (everything is a library in Dart)
@@ -251,9 +252,8 @@ Use command with options long names or short names, eg:
 * _test_ = automated tests
 * _.gitignore_ = Git
 * _.metadata_ (managed by Flutter SDK) = version ID
-* _.packages_ (managed by Flutter SDK) =
 * _{project\_name}.iml_ (managed by Flutter SDK) = project dependencies
-* _analysis\_opions.yaml_ = Dart linter
+* _analysis\_opions.yaml_ = Dart [Linter rules](https://dart.dev/tools/linter-rules)
 * _pubspec.lock_ = required, generated automatically based on the _pubspec.yaml_
 * _pubspec.yaml_ = project imported 3rd-party dependencies, fonts, images
   * _dependencies_ section = used in app's production code, required for app to function at runtime

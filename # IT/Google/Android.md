@@ -7,8 +7,8 @@
 ## Glossary
 
 * [Activities](https://developer.android.com/guide/components/activities/intro-activities) = one app entry point, defined in _AndroidManifest.xml_
-* [Android SDK Platform Tools](https://developer.android.com/tools/releases/platform-tools) = primarily **adb** & **fastboot** exe (see dedicated section below)
-  * Can be installed via Android Studio's SDK Manager (default path `C:\Users\Kalex\AppData\Local\Android\Sdk\platform-tools`)
+* **Android SDK** = can be installed via Android Studio's SDK Manager (at `%USERPROFILE%\AppData\Local\Android\Sdk`)
+  * [Platform Tools](https://developer.android.com/tools/releases/platform-tools) = primarily **adb** & **fastboot** exe (see section below)
 * [Android Studio](https://developer.android.com/studio) = full Android development SDK, for building apps on Android devices
   * Includes **Android SDK Platform Tools** (which are also available as standalone tools)
 * [ARM](https://www.androidcentral.com/what-arm-cpu) (Acorn RISC Machine) = English company selling low-power processor architecture used in mobiles

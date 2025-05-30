@@ -16,6 +16,7 @@
   * File extension must be `.xslm`
 * Formulas > _Show Formulas_ = toggle displaying cell formulas/values
 * Formulas > _Name Manager_ = CRUD cell names
+* Page Layout -> Page Setup -> Print Area -> _Set Print Area_
 
 ## Shortcuts
 
@@ -45,6 +46,7 @@
   * All table references (Charts, formulas, pivot) are automatically updated as the table's data is changed
   * _Table Design_ > table theme (colours) dropdown > _Clear_ = strip table style (formatting)
   * _Table Design_ > _Convert to Range_ = remove table
+  * (Additionally, remove: Data > _Filter_)
 * `Ctrl + V, Ctrl, V` = copy values
 * `Ctrl + Z` = cancels last auto-formatting upon pasting
 

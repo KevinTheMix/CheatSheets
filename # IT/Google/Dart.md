@@ -36,28 +36,27 @@ The same Dart code can run on multiple platforms (eg mobile/desktop via Flutter,
 * **Record** = immutable structure of hybrid values (eg for returning more than one value in a function)
 * **Sound Null-Safety** = means non-nullable variables can never be attributed a null value at runtime, guarded at compile-time (it won't even compile)
   * Exceptions exists eg unsafe casting (eg `int? i; int j = i as int`) that's only checked at runtime, or misusing `!` operator
+* **Tear-off** = passing a method via name (à la delegate/pointer, ie not a lambda/anonymous function)
 
 ## CLI
 
 * `dart --version`
 * `dart analyze` = code static analyzer that identifies issues (good idea to plug into CI/CD pipeline)
+* `dart compile exe {source}.dart`
 * `dart fix` = automatically applies fixes for issues such as:
   * those revealed by the static analyzer that have an associated automated solution
   * depreciated APIs that can be auto-migrated to their newest counterpart
   * `dart fix --apply` = auto-applies suggested fixes in bulk
   * `dart fix --dry-run` = preview all suggested auto-fixes
 * `dart format` = code auto-tidy
-* `dart compile exe {source}.dart`
 * `dart run` = run current app
-* `dart run {file_relative_path}.dart`
+  * `{file_relative_path}.dart` = run specific file
 
 ## API
 
-* `async` = wait without blocking, okay as long as no costly operations take place (in that case use an isolate)
 * `a.hashCode` = pseudo-random hash code (warning: differs between program execution or even same class instances with identical values so don't use as map key or set item, unless value equality is explicitly implemented)
 * `a.runtimeType` = à la **runtime** `typeof` (types can be used as variables via **Type** class eg `Type kokoType = int`, à la reflection)
 * `print()` = built-in function to output text to console (for debugging/logging), we can pass it object instances (not just strings)
-* [`call()`](https://stackoverflow.com/a/58833763/3559724)
 
 ## Declaration
 
@@ -78,21 +77,21 @@ The same Dart code can run on multiple platforms (eg mobile/desktop via Flutter,
 ### Flow & [Operators](https://dart.dev/language/operators)
 
 * `assert(condition)` = development-only checks (not executed in production)
-* `identical(a, b)` = checks whether two objects have same address in memory (ie they're the same)
+* `identical(a, b)` = checks whether two object references are to the same object (ie they have same address in memory), used in `@override bool operator ==()`
 * `switch(…) { case pattern: …; }` = does not require a _default_ case
   * Switch expression = returns a value (eg `final value = switch(data) { pattern1 => … pattern2 => … _ => … }`, notice default case is `_`)
-* `try {…} catch(e) {…}`
-* `try {…} on KokoException catch(e) {…} catch(e) {…}` = catch specific exception type (then last generic catch all)
+* `try {…} catch(e) {…} finally {…}`
+* `try {…} on KokoException [catch(e)] {…} catch(e) {…}` = catch specific exception type (last generic catch takes it all)
 * `when` = guard (additional condition) while pattern matching, usually applying to value being matched
-  * Eg `if (x case int value when value > 10)`
-  * Eg `switch (x) { case int value when value > 10: …; break; case int value: …; break; }`
+  * Eg if = `if (x case int value when value > 10)`
+  * Eg switch = `switch (x) { case int value when value > 10: …; break; case int value: …; break; }`
 
 * `!` (Null Assertion Operator) = casts nullable to its underlying non-nullable type, or raises an error if it was null
   * This operator is a potential code smell and should be avoided (see _Null safety in Dart_ video)
   * This operator is unnecessary following an `if` not null check, as Dart is smart enough to figure out it's not null
 * `?.` (Null-Aware Access Operator) = returns `null` if operand is null
 * `?[]` (Null-Aware Index Operator)
-* `??` (If-Null Operator, Null-Coalescing Operator) = returns left value if not null, right value otherwise
+* `??` ((If-)Null Operator, Null-Coalescing Operator) = returns left value if not null, right value otherwise
 * `??=` (Null-Aware Assignment Operator) = assigns value only if operand was null
 * `..` (Cascade Operator) = notation to perform a sequence of operations (ie setting members or calling methods) on same object
 * `?..` (Null-Aware Cascade Operator)
@@ -115,13 +114,14 @@ The same Dart code can run on multiple platforms (eg mobile/desktop via Flutter,
   * `0.12e³` (ie `0.12 x 10³`) = scientific notation, actual _runtimeType_ depends on expression result (_int_ or _double_ whether has floating part)
 * **int**
   * `i.isOdd`, `i.isEven`
-  * `int.parse("123")`
+  * `i.toRadixString(base)` = convert to a string in that int radix (typically a multiple of two)
+  * `int.[try]parse("123")`
 * **double**
   * `floor()`, `ceil()` & `round()` = useful to turn a **double** into the closest **int**
   * `floorToDouble()`, `ceilToDouble()` & `roundToDouble()` = returns a double (but may be optimized as **int** by Dart runtime)
   * `double.parse("123")`
   * `double.tryParse(num) != null` = [Check if number](https://stackoverflow.com/a/24085491/3559724)
-* `~/` = forces division integer result
+* `~/` = truncated division (forces integer result)
 * `NumberFormat(pattern).format(num)` = (eg with pattern `###.00`: _123.00_)
 * `num.toStringAsFixed(2)` = specify number of decimals (eg _123.00_)
 * **Float32List** = fixed-length list of (IEEE 754) single-precision binary floating-point numbers
@@ -159,26 +159,25 @@ Following examples work identically with either [Single vs Double quotes](https:
   * Multiplication = `'ko' * 4` = `'kokokoko'`
   * `padLeft(int width)` = <https://api.dart.dev/stable/1.21.0/dart-core/String/padLeft.html>
 * Flow
-  * `isEmpty` (check null or empty eg `s?.isEmpty ?? true` or simply `s == null || s.isEmpty`)
+  * `isEmpty` = empty String (check null or empty eg `s?.isEmpty ?? true` or simply `s == null || s.isEmpty`)
   * `startsWith(pattern)`
   * `contains(pattern)`
 * Access & Manipulation
   * `s.characters` (property) = string as characters list (requires _characters_ package)
-  * `s.replaceFirst|All(pattern, replacement)`
+  * `s.replaceFirst|All(Pattern regex, String replace)`
   * `s.replaceAll|FirstMapped(pattern, String Function(Match) replace)`
   * `s.replaceRange(start, end, replacement)`
   * `s.substring(start, [end])`
+  * Custom `capitalize()` extension method = `String capitalize() { return "${this[0].toUpperCase()}${substring(1).toLowerCase()}"; }`
 * **StringBuffer** `write()`, `writeln()`, `writeAll()`, `clear()`, _isEmpty_, _length_
 
 ### [Collections](https://api.flutter.dev/flutter/dart-collection/dart-collection-library.html)
 
-Map, Set, Queue, List, LinkedList.
+**Set**, **List**, **Map**, **Queue** (first/last manipulation), **LinkedList** (_dart:collection_ specialized data structure).
 
-* `...` (spread operator) or `...?` (null-aware spread operator)
-  * Eg `[for(entry in collection) ...entry.items]` = flatten-concatenates subcollections (à la C# `SelectMany(…)`)
 * `const {collection_literal}` = define a compile-time constant collection
-* `collection.isEmpty|isNotEmpty`
-* `collection.length`
+* _isEmpty|isNotEmpty_
+* _length_
 * `collection.max` = max value (in _package:collection/collection.dart_)
 * `elementAt(i)` = identical to `list[i]` (**O(1)**) for lists, works with other iterables as well (**O(n)**)
 * `first` & `last` (properties) = error if empty
@@ -193,6 +192,10 @@ Map, Set, Queue, List, LinkedList.
 * `join("…")` = converts all elements to Strings and concatenates them
 * `skip(count)` = creates an Iterable that skips {count} first elements
 
+* `...` (spread operator) or `...?` (null-aware spread operator)
+* `expand()` = flatten-concatenates subcollections (à la C# `SelectMany(…)`, alternatively `[for(entry in collection) ...entry.items]`)
+* `toSet()` = creates a **Set** with same elements, removing any duplicates, original order not guaranteed
+
 * **Iterable** (à la C# _Enumerable_) = collection of values/elements that can be accessed sequentially via its _iterator_ getter property (base class for Lists, etc)
   * Eg `class … extends Iterable<E> { … Iterator<E> get iterator => … ; }`
 * **Iterator** = interface for getting items, one at a time
@@ -202,7 +205,7 @@ Map, Set, Queue, List, LinkedList.
 
 #### [Lists](https://dart.dev/language/collections#lists)
 
-Ordered sequences of objects, with lots of built-in methods.
+Ordered/sortable sequences of indexed/positioned objects, duplicates permitted.
 In Dart, arrays are List objects, so most people just call them _lists_.
 [Arrays in other languages are called Lists in Dart](https://stackoverflow.com/a/64273912/3559724).
 
@@ -219,6 +222,9 @@ In Dart, arrays are List objects, so most people just call them _lists_.
   * `List<T>.from(Iterable)` = constructs a T List from an Iterable, useful to cast each item, or convert another Iterable type (eg a Set) to a List
   * `[if (condition) Item(…), b, c]` = add item conditionally (note: **don't use curly braces** to delimite blocks in this syntax)
   * `[for (var i in integers) '$i']` = add items using a loop (eg turns a list of int into a list of Strings)
+  * `List.filled(length, value/instance, {growable})` = creates a length-long list filled with the current value at each position
+  * `List.unmodifiable(list)` = creates an unmodifiable list containing all elements in given list (cannot change its length or items)
+    * Also see **UnmodifiableListView** (eg unmodifiable getter: `List<Note> get notes => UnmodifiableListView(_notes)`)
 * Manipulation
   * `l1 + l2 + …` = concatenates multiple lists
   * `add(item)`
@@ -237,8 +243,9 @@ In Dart, arrays are List objects, so most people just call them _lists_.
   * `[a, b, c][index]` = useful to pick an item among many according to some selection index (eg menu selecting a screen, see NavigationBar Material 3 widget)
   * `indexOf(item)` = index by reference
   * `indexWhere(condition)` = index by condition
-  * `for(var item in list) …`
+  * `for(var item in list) …` = loops (note that _item_ is a copy of a reference, so if we set it to a new instance, _list_ is **not** updated)
   * `list.forEach((i) => print(i));` or simply `list.forEach(print);`
+  * `asMap()` = turns into a **Map** where keys are (0-based) indices
   * `map((item) => …)` = C# Linq `Select()`, can be used to create one Widget for each list item
     * Returns an `Iterable<T>`, so append `toList()` to evaluate it immediately and turn into a non-lazy List
     * [Map with index](https://channaly.medium.com/map-with-index-in-dart-flutter-6e6665850ea8)
@@ -249,8 +256,7 @@ In Dart, arrays are List objects, so most people just call them _lists_.
 
 #### Sets
 
-Unordered collection of (preferrably) **unique** items.
-Shares most of the same collection-related methods as Lists.
+Unordered collection of unique items, with fast (O(1)) lookups.
 
 * `var set = {'a', 'b', 'c'}` = type is inferred
 * `Set<String> set = {}` = provide type explicitely if it cannot be inferred
@@ -268,36 +274,47 @@ Shares most of the same collection-related methods as Lists.
 Key-value object (aka a hash map). Both Key & Value can be any type. Keys are unique (not values).
 (Can be used as a kind of ad-hoc "anonymous" class, with the keys acting as properties).
 
-* `var map = {};` = map of type `Map<dynamic, dynamic>`
-* `var map = { 'koko' : 123, 'kontan' : 777 }` = create a new Map using type inference
-* `var map = Map<String, int>()` = create a new Map with explicit types
-* `map['koko'] = 123` = add or modify
-* `map['koko']` = access a value
-* `map['nokoko']` = _null_ (no error if key does not exist)
-* `map.entries` = a collection of KVPs => this is one way to use `map()` with **Map** (<https://www.codevscolor.com/dart-iterate-map>)
-* `map.values.elementAt(index)` = access a value by index (or `map.elementAt(index)` via an [extension method](https://stackoverflow.com/a/60521753/3559724))
-* `map.addAll(other)`
-* `map.containsKey(key)`
-* `map.forEach((key, value) {…})` (or using `for (var key in map.keys) { … map[key] … }`)
-* `map.map((key, value) {…})` = returns new key-value **Map** (not a List)
-* `map.remove(key)` = removes value and returns it
-* `map.putIfAbsent(key, () => value)` = add (only)
-* `map.update(key, (oldValue) => newValue)`
+* Construction
+  * `var map = {};` = map of type `Map<dynamic, dynamic>`
+  * `var map = { 'koko' : 123, 'kontan' : 777 }` = create a new Map using type inference
+  * `var map = Map<String, int>()` = create a new Map with explicit types
+  * `map.map((key, value) {…})` = returns new key-value **Map** (not a List)
+* Access
+  * `map.entries` = a collection of KVPs => this is one way to use `map()` with **Map** (<https://www.codevscolor.com/dart-iterate-map>)
+  * `map.keys`
+  * `map.values`
+    * `map.values.elementAt(index)` = access a value by index (or `map.elementAt(index)` via an [extension method](https://stackoverflow.com/a/60521753/3559724))
+  * `map['koko']` = access a value
+  * `map['koko'] = 123` = add or modify
+  * `map['nokoko']` = _null_ (no error if key does not exist)
+  * `map.forEach((key, value) {…})` (or using `for (var key in map.keys) { … map[key] … }`)
+  * `map.containsKey(key)`
+* Manipulation
+  * `map.addAll(other)`
+  * `map.putIfAbsent(key, () => value)` = add (only)
+  * `map.remove(key)` = removes value and returns it
+  * `map.update(key, (oldValue) => newValue)`
 
 ### Futures & Streams
 
+* **StreamController** (in _dart:async_)
+* **StreamSink** (in _dart:async_)
 * [async vs async*](https://stackoverflow.com/a/60036568/3559724)
-  * `async` (with `await`) = Future (keyword comes between function head & body eg `function(…) async { … }`)
-  * `async*` (with `await for` & `yield`) = Stream (asynchronous generator function)
+  * `async` (with `await`) = **Future**, wait without blocking
+    * Keyword comes between function head & body (eg `function(…) async { … }`) or getter name & body (eg `Future<T> get koko async {…}`)
+    * If operation is too costly, use an isolate instead
+  * `async*` (with `await for` & `yield`) = **Stream** (asynchronous generator function)
   * `sync*` (with `yield`)  is related to synchronous generators, ie `Iterable<T>` functions
   * `yield` statement is for immediately available, produced one-by-one values _on-demand_
   * `yield*` allows to yield an entire Iterable (ie its values one a time)
 
 #### [Future](https://dart-tutorial.com/asynchronous-programming/future-in-dart)
 
-`async-await` [is the recommended choice as it improves readability](https://dart.dev/guides/language/effective-dart/usage#prefer-asyncawait-over-using-raw-futures), but cannot be used in some scenarii (cannot make some methods async such as initState or [constructors](https://www.reddit.com/r/dartlang/comments/a4da0q/when_to_use_await_vs_then/ebevh52), we cast multiple requests at the same time and want them to run together instead of blocking on each one, although we can use [Future.wait](https://stackoverflow.com/a/42176121/3559724) for that scenario).
-
+* `FutureOr<T>` (in _dart:async_) = type representing values that are either `Future<T>` or `T`
 * `async-await Future` vs `Future.then()` [are different](https://stackoverflow.com/a/54515559/3559724) (former is blocking; latter is a callback)
+* `async-await` [is the recommended choice as it improves readability](https://dart.dev/guides/language/effective-dart/usage#prefer-asyncawait-over-using-raw-futures).
+  * Yet, it cannot be used in some scenarii (ie some methods cannot be async eg initState or [constructors](https://www.reddit.com/r/dartlang/comments/a4da0q/when_to_use_await_vs_then/ebevh52))
+* `async` methods must always return a **Future** (hence optional `await` keyword in `return` statements has actually no effect)
 * `then(…)` also returns a Future (=> chainable eg `Future.then(…).then(…)`)
 * `then(…)`'s callback always takes in an argument (even when the Future returns nothing eg `then((_) => …)`)
 * `then(…)`'s callback can be a named function eg `then(print)`
@@ -310,40 +327,16 @@ Key-value object (aka a hash map). Both Key & Value can be any type. Keys are un
 * To handle errors with `await`, wrap the code in a _try-catch_ block (see <https://stackoverflow.com/a/61701836>)
   * Side-node on _try-catch_: use `rethrow` to rethrow the original error (probably preserving its callstack more efficiently)
 
-* `Future.delayed(duration).then(…)` = runs `then()` callback after _duration_ time (which can be zero but will still make the code async)
-  * Similar to C#'s `Task.Delay(ms)`
+* `Future.delayed(duration).then(…)` = runs `then()` callback after _duration_ time (note: zero duration still makes code async, unlike `Task.Delay(ms)` in C#)
 * `Future.error('…')` = returns an error future (note that raising an exception instead eg `throw Exception('…')` will get caught at same catchError)
 * `Future.timeout(Duration(seconds: 5), onTimeout: () {…} )` = set max time waiting for completion
 * `Future.value(123)` = a future already completed with a value
 * `Future.wait(futures)` = wait for multiple futures to complete
 
-```dart
-void main() {
-  var future = Future(() => 'Future');  // Future<String>
-  var value2 = Future.value(123);       // Future<int>
-  var value1 = Future.value();          // Future<dynamic>, same
-  var nothin = Future(() {});           // Future<Null>
-     
-  print('First');
-  
-  // This print comes last, since that Future's declaration was last.
-  nothin.then((_) => print('Future returns nothing, but then() always has a parameter - even if void'));
-  
-  future
-    .then<String>((s) { print(s); throw 'error'; }) // We need to indicate (generic) type here, so following on|catchError knows what to return!
-    .onError<String>((error, stackTrace) { print(error); return 'handled'; })
-    .catchError((error) { print(error); return 'caught'; })
-    .then((s) { print(s); }
-  );
-  
-  print('Second');
-}
-```
-
 #### Stream
 
 Streams is async feed of data & events.
-Streams are (async) like Futures but for Iterables, where values are produced to be consumed but not all are available from the start.
+Streams are (async) like Futures but for Iterables, with values produced to be consumed, where not all are available from the start.
 
 * `Stream<int> count() async* { int i=1; while(true) yield i++; }`
 * `async*` + `yield await` = produces one value (awaited from a Future) to be returned by the Stream
@@ -355,8 +348,10 @@ Streams are (async) like Futures but for Iterables, where values are produced to
 
 ### Functions
 
+Camel case.
+
 * `koko(a, b)` = required positional/ordinal parameters
-* `koko(a, [b])` = optional positional parameters
+* `koko(a, [b])` = optional positional parameters (come last)
 * `koko(a, {b, c})` = optional [named parameters](https://dart.dev/guides/language/language-tour#named-parameters)
   * `required` = forces otherwise optional named parameter ([with no natural default value](https://stackoverflow.com/a/63048076/3559724))
   * `@required` = deprecated analyzer annotation, replaced with stricter `required` null-safety keyword as of Dart 2.12 (see <https://stackoverflow.com/a/67642421/3559724>)
@@ -374,28 +369,33 @@ Streams are (async) like Futures but for Iterables, where values are produced to
   * `(a) => a` using arrow notation ([=> is syntaxic sugar for single return statement](https://stackoverflow.com/a/15804303/3559724))
     * Note: unlike in C#, `(a) => { return a; }` (using both arrow AND curly braces) is invalid!
 * `external` = separates function declaration & body (as a way to include abstract functions to non-abstract classes)
+* `call()` = implicit method that Function-type objects have (see <https://stackoverflow.com/a/58833763/3559724>)
 
 ### Classes
+
+Pascal case.
 
 * [Constructors](https://www.freecodecamp.org/news/constructors-in-dart)
   * `Koko(a, b) { this.a = a; this.b = b; }` = with body
   * `Koko(a) : this.a = a;` = with initializer (properties marked _final_ **must** be initialized here, not in constructor's body)
   * `Koko(this.a, this.b);` (positional, required) = without body, matching properties via _this_ prefix & matching name/type
   * `Koko({this.a, this.b});` (named, optional) = without body, matching properties via _this_ prefix & matching name/type
-  * `Koko({this.a}) : assert(a >= 0);` = testing condition during debugging/development
-  * **Named Constructor** = explicitly named (eg `Koko.other(…)`, `Koko.withSpecificities(…)`)
+  * `Koko({this.a}) : assert(a >= 0);` = testing condition during debugging/development (only for constructors)
+  * **Named Constructor** = explicitly named (eg `Koko.name(…) : prop1 = value 1, prop2 = value2`)
   * **Unnamed Constructor** = constructor with same name as class (eg `Koko(…)`)
   * `Koko._(…) …` = makes unnamed constructor private, hence class can only instantiate via other **named** constructors (eg for singleton pattern)
   * `Koko(…) : this.other(…)` = calling a named constructor
   * `Koko.other(…) : this(…)` = calling unnamed constructor (or `this._()` if it is private)
   * Constructors overload does not exist (same as for functions), so there can be only one unnamed ctor (but multiple named ctors)
-  * `factory` = **static** constructor, used for either:
+  * `factory` = **static** constructor that don't always return a new instance, used for either:
     * Caching (existing) instances = singleton (single static instance) or collection (especially with `putIfAbsent()`)
     * Polymorphism = new subtype instance (via switch-case-return subclasses)
-    * Complex initialization = perform non-trivial work prior to constructing an instance (eg checking arguments or other processing)
+    * Complex initialization = non-trivial instance construction (ie checking arguments, mapping from/to eg `fromJson()`)
     * Eg `factory Koko() { return single/multiple item(s) here }`
   * `new` keyword is optional (in Dart 2.0)
-* `sealed` = prevents a (then implicitly abstract) class to be instanciated/extended/implemented outside its own library, also forces `switch` cases for all existing subtypes
+  * `Koko.new` = pass a reference to constructor (ie a constructor tear-off, not an instantiation)
+* `sealed` = a (implicitly abstract) class that can only be extended/implemented inside its own library, making closed set of local subclasses all statically declared/known to compiler
+  * Enables explicit & exhaustive polymorphism with guard rails (eg a `switch` over those subtypes is ensured to be exhaustive as all cases must appear)
 * `static` = can be applied to class methods, to be called via `Class.method()`
 * Getters & Setters
   * `get height { return this._height}`
@@ -412,6 +412,7 @@ Streams are (async) like Futures but for Iterables, where values are produced to
   * Immutable means its fields cannot be reassigned post-creation (but record instance itself can, unless otherwise marked _final_)
   * Eg `var record = ('first', a: 2, b: true, 'last');` = anonymously typed record instance
   * Eg `typedef Koko = ({A a, B b});` = defines a new type with named fields (close to a lightweight class definition)
+* **Union Types** = a pattern built on sealed classes with multiple factory constructors (eg `state.when(initial: …, loading: …, success: …, failure: …`)
 * `call(…)` = special class method that allows instances of that class to be called as methods (eg `koko(…)`)
 * `@immutable` (annotation) = forces class and all subtypes to be immutable as well
 
@@ -429,7 +430,7 @@ Multiple inheritance is not permitted: every class (except for root-level `Objec
 * `extends` = class inheritance eg `class Koko extends KokoParent`
   * Can also constraint generic types (eg `class Koko<T extends StatefulWidget>`)
 * `final` = cannot be subclassed (enforces immutability, eg **String**)
-* `implements` = interface inheritance eg `class Koko implements KokoParent` (**must** `@override` all parent fields/methods)
+* `implements` = (abstract) class/interface inheritance eg `class Koko implements KokoParent` (**must** `@override` all parent fields/methods)
 * `mixin` = define a mixin (eg `mixin KokoMixin {…}`, or `mixin class KokoMixinClass` which can be used as either a class or a mixin)
 * `on` = constraint on which classes that mixing can be applied (eg `mixin KokoMixin on State<T>`)
 * `super` = access base fields/methods, or feed parameters to base constructor (eg `constructor(super.property)` or `constructor({super.property})`)
@@ -473,14 +474,16 @@ Related: [Multiple inheritance diamond problem](https://en.wikipedia.org/wiki/Mu
 
 ### [Enums](https://dart.dev/language/enums)
 
-Enums can either be simple or enhanced.
-Enhanced enums have properties, values built via a (const unnamed) constructor, other methods, and can implement interfaces.
+* `enum_value.index` = zero-based index of enum value within its declaration
+* `enum_value.name` = enum value as string
+* `Enum.values` = list of all values
 
 ```dart
+// Enhanced enums have properties, values built via a const unnamed constructor, other methods, and can implement interfaces
 enum Color {
-  red(255, 0, 0), green(0, 255, 0), blue(0, 0, 255);  // Values (comma-separated, must come first).
-  final int r, g, b;  // Properties.
+  red(255, 0, 0), green(0, 255, 0), blue(0, 0, 255);  // Values (comma-separated, must come first at the very top).
   const Color(this.r, this.g, this.b);  // Constructor
+  final int r, g, b;  // Properties.
 
   String get hex => '#${r.toRadixString(16).padLeft(2, '0')}' + '${g.toRadixString(16).padLeft(2, '0')}' + '${b.toRadixString(16).padLeft(2, '0')}';
 }
