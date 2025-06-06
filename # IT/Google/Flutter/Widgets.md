@@ -83,10 +83,11 @@ Building blocks of Flutter.
     * **NavigationRail** = (left) side navigation menu with same functionality as bottom navigation bar, for larger sized screens
       * Properties = _extended_ (whether labels appear), _destinations_ (list), _onDestinationSelected_, _elevation_, _(un)selectedLabelTextStyle_, _useIndicator_, _indicatorColor_, _leading/trailing_ widgets
     * Use **MediaQuery** to determine using either a **NavigationBar** or a **NavigationRail** depending on screen size
-  * _(end)Drawer_ = `Scaffold.of(context).open(End)Drawer()` & `Navigator.pop(context);`, it's possible to use a (then non-modal) Drawer without a Scaffold
+  * _(end)Drawer_ = `Scaffold.of(context).openDrawer|openEndDrawer()` & `Navigator.pop(context);`, it's possible to use a (then non-modal) Drawer without a Scaffold
+    * **DrawerButton** = icon button (ie 3 horizontal bar) that opens/closes a **Drawer**
     * _child_ = typically a **ListView** with **DrawerHeader** (within **SizedBox** to set height) & **ListTile**s children
     * _drawerEdgeDragWidth_ = area within which a horizontal swipe will open **Drawer**
-  * _bottomSheet_ = `Scaffold.of(context).showBottomSheet(…)` (or shorthand, to nearest **Scaffold**: `show(Modal)BottomSheet(context: …, builder: …, sheetAnimationStyle: …)`)
+  * _bottomSheet_ = persistent bottom sheet (`Scaffold.of(context).showBottomSheet(…)` or `show(Modal)BottomSheet(context: …, builder: …, sheetAnimationStyle: …)` shorthand to nearest Scaffold)
   * _extendBody_ = make sure body background is seen around docked FAB
   * _extendBodyBehindAppBar_ = makes app bar transparent so content appears through it
   * _floatingActionButton_ = actually accepts any widget (eg **AnimatedIcon**) or subtree (eg a column with two **FAB**s)
@@ -99,8 +100,17 @@ Building blocks of Flutter.
 
 There are two built-in solutions: imperative **Navigator** (push/pop API that works as a stack) and/or declarative `MaterialApp.router()`.
 
+* **Dialog** = general-purpose Material Design dialog (_child_, awaitable `show[About|General]Dialog<T>(context: context, builder: (context) {…} )`)
+  * **AboutDialog** = boring legalese stuff (`showAboutDialog()`, `application`, `children`, `LicenseRegistry.addLicense()`)
+  * **AlertDialog** = popup with a title, content and yes/no actions (_title_, _content_, _actions_, _elevation_, _backgroundColor_, _shape_, _barrierDismissible_), also **CupertinoAlertDialog**
+  * **SimpleDialog** = simplified popup with a basic list of choices (_contentPadding_, _children_ of **SimpleDialogOption**s)
+  * `show(Cupertino)Dialog()` = general, with Navigator
+  * `showGeneralDialog()` = full control over enumations & layout
+  * `showModalBottomSheet()` & `showCuprtinoModalPopup()`
+  * `showLicensePage()` = prebuilt dialog showing open-sources licenses
+  * Awaitable result of `showDialog()` is passed via `Navigator.pop(c, result)`
 * **MaterialPageRoute\<T>** = modal route replacing entire screen with a platform-adaptive transition
-  * _fullscreenDialog_ = whether that route opens as a full-screen dialog (turns back arrow button into a 'X' close button)
+  * _fullscreenDialog_ = whether that route opens as a full-screen dialog (ie _X_ close button instead of a back arrow)
 * **PageRouteBuilder** = creates route & page (with _pageBuilder_) with transition effect (via _transitionsBuilder_)
 * **Page\<T>** = describes configuration of a Route
 * **Route<T>** = abstraction for an entry managed by a Navigator, ie an abstract interface between navigator & routes that get pushed/popped off
@@ -157,11 +167,6 @@ There are two built-in solutions: imperative **Navigator** (push/pop API that wo
 * **Circular/LinearProgressIndicator** = Material progress bar (_value_, _backgroundColor_, `ThemeData.accentColor` by default)
   * _valueColor_ takes in an **Animation\<T>** instance, which can be result of controlled Tween (via `drive()` or `animate()`)
 * Date Picking = `Future<DateTime?> dateFuture = showDatePicker(context, initialDate, firstDate, lastDate)`
-* **Dialog** = Material Design dialog (_child_, awaitable `show[About|General]Dialog<T>(context: context, builder: (context) {…} )`)
-  * **AboutDialog** = boring legalese stuff (`showAboutDialog()`, `application`, `children`, `LicenseRegistry.addLicense()`)
-  * **AlertDialog** = pop-up (_title_, _content_, _actions_, _elevation_, _backgroundColor_, _shape_, _barrierDismissible_), also **CupertinoAlertDialog**
-  * **SimpleDialog** = modal popup (_contentPadding_, _children_)
-  * Awaitable result of `showDialog()` originates from `Navigator.pop(c, result)`
 * **Form** = form that can be saved/reset/validated (_onChanged_ or via associated **GlobalKey** `currentState.validate()`)
   * **FormState** = state associated with a **Form**, can be accessed via **GlobalKey**, has boolean `validate()` method triggering all descendant fields validators
   * **FormField** = single form field (_onSaved_, _validator_ checked on associated **FormFieldState** `validate()`)
@@ -344,7 +349,7 @@ There are two built-in solutions: imperative **Navigator** (push/pop API that wo
   * `Color.lerp(colorA, colorB, ratio)` = calculate intermediate % color between two colors
     * Use [colors linear interpolation](https://stackoverflow.com/a/66385071/3559724) between tabs transitions (via **TabController**'s _offset_)
   * `withOpacity(0.0 -> 1.0)`
-* [States](https://m2.material.io/design/interaction/states.html) = interactive states (eg _hovered/pressed/focused/disabled/scrolledUnder_) taken by some (Material) widgets
+* [States](https://m3.material.io/foundations/interaction/states/overview) = interactive states (eg _enabled/disabled/hovered/focused/pressed/dragged_) taken by some (Material) widgets
 * **Theme** = applies/overrides a given **ThemeData** locally to all its child/descendants widget tree
 * **ThemeData** = provided via `Theme.of(context)` (`ThemeData.light()` & `ThemeData.dark()`)
   * `copyWith(…)` = applies a set of specific styling/theme, defaulting rest to first found **Theme** ancestor (possibly at app root)

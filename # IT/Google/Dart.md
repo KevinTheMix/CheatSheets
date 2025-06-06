@@ -402,8 +402,9 @@ Pascal case.
   * `get height => _height`
   * `set height(value) => _height = value`
 * `extension … on …` = defines methods/get/set/static members/operators applying to some type
-  * Can be named (eg `extension KokoExtension on Koko { … }`) to manage package scope, or even private (`_`) to current file
+  * Can be named (eg `extension KokoExtension on Koko { … }`) to manage package scope, not named (`extension on String { … }`) or even private (`_`) to current file
   * `this.` prefix can be omitted within `{ … }` body (see <https://stackoverflow.com/a/59600729/3559724>)
+  * Type defined in `on` is irrelevant to `static` extension methods
 * Operator
   * Equality = reference-based by default; need to implement explicit value comparison (eg standard pattern `@override bool operator ==(Object other) => identical(this, other) || other is A && runtimeType == other.runtimeType && value == other.value`)
     * Override default _hashCode_ getter (eg via individual properties values `int get hashCode => Object.hash(p1.hashCode, p2.hashCode, p3.hashCode)`) => end of equality operator becomes `hashCode == other.hashCode` (instead of comparing each values)
@@ -497,3 +498,4 @@ enum Color {
 * _dart:mirrors_ = reflection
 * [Packages](https://pub.dev/publishers/tools.dart.dev/packages)
   * **Markdown**
+* [Invertase Melos](https://melos.invertase.dev) = manage projects split into mutliple packages

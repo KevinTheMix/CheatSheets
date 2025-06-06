@@ -133,6 +133,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * Note that it's possible to keep some files in the Git repo untracked/ignored if they're never added
 * `git add -i` = stages interactively (via CLI)
 * `git branch` = lists all branches (with current branch highlighted)
+* `git branch -m {old} {new}` = rename a branch (current branch if _old_ not provided)
 * `git branch {branch}` = creates a new branch
 * `git branch {branch} {commit}` = creates a new branch pointing to a specific commit
 * `git checkout (HEAD)` = lists modified files
@@ -196,7 +197,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * `git push` = pushes changes to remote branch linked with current branch
 * `git push {remote} {branch}` = pushes changes to a remote repo branch
 * `git push {remote} {tag}` = shares local tag with remote repo (eg `git push origin v1.0.0`)
-* `git push -u {remote} {branch}` (or `--set-upstream-to`) = links current local branch to a remote branch (=> set up only once), then pushes changes to it
+* `git push -u {remote} {branch}` (or `--set-upstream-to`) = one-time link current local branch to a remote branch (create it if not exist), then pushes changes to it
 
 ## Troubleshooting
 

@@ -189,8 +189,10 @@ Use commands with either long/short names (eg `flutter --option=value` or just `
 * `flutter --version`
 * `flutter analyze` = inspect code and display all infos/warnings/errors
 * `flutter build`
-  * `flutter build appbundle` = builds Android App Bundle (AAB), for publishing to Google Play Store
-  * `flutter build apk --split-per-abi` (note: this target is called _apk_, not _android_)
+  * `flutter build {platform} --release` = build in _build/app/outputs/_
+  * `flutter build {platform} --obfuscate --split-debug-info={symbols_directory}` = obfuscate & save symbols mapping file to directory
+  * `flutter build appbundle` = builds an [Android App Bundle (AAB)](../Android.md#glossary)
+  * `flutter build apk (--split-per-abi)` (note: this target is called _apk_, not _android_)
   * `flutter build ios`
   * `flutter build web` = [Build for web deployment](https://docs.flutter.dev/deployment/web)
   * `flutter build web --web-renderer [canvaskit|html|skwasm]` = specify renderer (ie _CanvasKit_, _HTML_ & _WebAssembly_)
@@ -199,7 +201,7 @@ Use commands with either long/short names (eg `flutter --option=value` or just `
   * `flutter build web --base-href {path}` = [HTML \<base> href](https://www.w3schools.com/Tags/att_base_href.asp)
 * `flutter channel [master|beta|stable]` = pick release channel (_master_ = dev, _beta_ = finalized/tested, _stable_ = production)
 * `flutter clean` = clear build & packages cache (very useful before archiving/zipping an app source code)
-* `flutter create .` = regenerate platform-specific directories (ie android/, ios/, web/, etc)
+* `flutter create .` = bootstraps a new project, or regenerate all missing platform-specific directories (ie _android_, _ios_, _linux_, _web_)
   * Adding web support to existing app (see <https://docs.flutter.dev/get-started/web#add-web-support-to-an-existing-app>)
 * `flutter create kokoapp`
   * `--empty` = generates a (barebone minimal) empty app (without comments)

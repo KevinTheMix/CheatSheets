@@ -49,7 +49,7 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 * **async** (_@dart.dev_) = additions to built-in [dart:async](https://api.dart.dev/stable/3.5.0/dart-async/dart-async-library.html) (`StreamGroup.merge()`, `AsyncCache<T>()` time-based cacheing, **StreamQueue**)
 * **auto_route** (_@codeness.ly_) = navigation/routing with deep linking & code generation
 * **build_runner** (_@tools.dart.dev_) = generate files on disk using Dart code
-  * Use `pub run build_runner watch -d` to update output continusouly on source files change
+  * Use `dart run build_runner watch -d` to update output continusouly on source files change
   * `flutter pub run build_runner build --delete-conflicting-outputs`
   * Don't include folders where generated files reside to a git repo (by mentioning them in _.gitignore_ config)
 * **camera** (_@flutter.dev_)
@@ -88,6 +88,7 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 * **grpc** (_@dart.dev_) = Google (HTTP/2 & Protobuf) protocol for connecting microservices or mobile clients to backends
 * **html** (_@tools.dart.dev_) = HTML 5 parser
 * **http** (_@dart.dev_)
+* **husky** (-) = manage git hooks (eg lint commit messages & code, run tests, etc in reaction to git commit/push)
 * **in_app_purchase** (_@flutter.dev_) = storefront-independent API for purchases
 * **intl** (_@dart.dev_) = Dates & Numbers (& Bidi) formatting methods
 * **intl_utils** (_@localizely.com_) = binding between your translations from .arb files and Flutter app
@@ -177,6 +178,7 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 * Images
   * **flutter_launcher_icons** (_@fluttercommunity.dev_) = CLI to generate all platforms/sizes icons from a single image asset (`flutter pub run flutter_launcher_icons:main`)
   * **flutter_spinkit** (_@ogbomo.com_) = funky loading icons package
+  * **flutter_svg** (_@flutter.dev_) = draw SVG files (`SvgPicture.asset('assets/icons/union.svg')` or from network)
   * **font_awesome_flutter** (_@fluttercommunity.dev_) = free [Font Awesome](https://fontawesome.com/icons) Icon pack as Flutter Icons
   * **lottie** (_@xaha.dev_) = GIF-like After Effects (exported via bodymovin extension) JSON vector animations
     * [Flutter Web: Lottie Animation issue](https://stackoverflow.com/a/73779834/3559724)

@@ -87,6 +87,10 @@
 * `format {disk:}`
 * `goto {label}` goes to `:{label}`
 * `if {condition} {statement}` (condition can be eg `exist {path}`)
+* `mklink {source} "{target path}"` = creates a symbolic link
+  * `/D` = directory
+  * `/J` = directory junction
+  * `/H` = hard link (not symbolic)
 * `pause`
 * `powercfg` = power system settings (eg `/A` lists available sleep states)
 * `set {VAR}` = assignment

@@ -4,9 +4,22 @@
 
 * URLs can be configured to be opened via designated apps (instead of the browser by default)
 
+* [Codemagic - Android Code Signing](https://docs.codemagic.io/flutter-code-signing/android-code-signing)
+  * **upload key** = to sign app before uploading to Codemagic or Google Play Store, associated with a certificate
+    * Stored within a **keystore** (that can hold multiple keys), both generated (using same password) via either:
+      * `keytool` Java command (installed with Android Studio)
+      * Android Studio > Build > _Generate Signed Bundle/APK_ dialog
+    * For Flutter, once an _upload-keystore.jks_ file is generated:
+      * Reference it from a _key.properties_ file (in _android_ folder, `/!\` both files must be excluded from git public source version control)
+      * Modify _android/app/build.gradle.kts_ to setup signing whenever building for release (ie `flutter build apk --release`)
+        * See <https://docs.flutter.dev/deployment/android#sign-the-app>
+  * Requires an **app signing key** (to let Google sign app to Users)
+    * This step is only mandatory when actually registering the app to Google Play Store
+
 ## Glossary
 
 * [Activities](https://developer.android.com/guide/components/activities/intro-activities) = one app entry point, defined in _AndroidManifest.xml_
+* **Android App Bundle** (AAB) = device-agnostic package format containing compiled code & resources, used by Play Stores to eventually generate/distribute (smaller) device-specific APKs
 * **Android SDK** = can be installed via Android Studio's SDK Manager (at `%USERPROFILE%\AppData\Local\Android\Sdk`)
   * [Platform Tools](https://developer.android.com/tools/releases/platform-tools) = primarily **adb** & **fastboot** exe (see section below)
 * [Android Studio](https://developer.android.com/studio) = full Android development SDK, for building apps on Android devices
