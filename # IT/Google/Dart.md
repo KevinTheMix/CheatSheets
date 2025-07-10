@@ -79,7 +79,7 @@ The same Dart code can run on multiple platforms (eg mobile/desktop via Flutter,
 * `assert(condition)` = development-only checks (not executed in production)
 * `identical(a, b)` = checks whether two object references are to the same object (ie they have same address in memory), used in `@override bool operator ==()`
 * `switch(…) { case pattern: …; }` = does not require a _default_ case
-  * Switch expression = returns a value (eg `final value = switch(data) { pattern1 => … pattern2 => … _ => … }`, notice default case is `_`)
+  * Switch expression = returns a value (eg `final value = switch(data) { pattern1 => … pattern2 => … _ => … };`, notice default case is `_`)
 * `try {…} catch(e) {…} finally {…}`
 * `try {…} on KokoException [catch(e)] {…} catch(e) {…}` = catch specific exception type (last generic catch takes it all)
 * `when` = guard (additional condition) while pattern matching, usually applying to value being matched
@@ -477,7 +477,7 @@ Related: [Multiple inheritance diamond problem](https://en.wikipedia.org/wiki/Mu
 
 * `enum_value.index` = zero-based index of enum value within its declaration
 * `enum_value.name` = enum value as string
-* `Enum.values` = list of all values
+* `Enum.values` = list of all values (ie `List<Enum>`)
 
 ```dart
 // Enhanced enums have properties, values built via a const unnamed constructor, other methods, and can implement interfaces

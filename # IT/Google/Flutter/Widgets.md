@@ -16,14 +16,13 @@ Building blocks of Flutter.
 ## Misc
 
 * **Badges** = colored circular-shaped superscript text (_badgeColor|Content_, _position_, _animationDuration|Type_, _toAnimate_, _showBadge_), previously a 3rd-party package
-* **Divider** = basically HTML's `<hr>` (_thickness_, _(end)Indent_), set once for all via **MaterialApp**'s **ThemeData**'s _dividerTheme_
+* **Divider** & **VerticalDivider** = basically HTML's `<hr>` (_thickness_, _(end)Indent_), set once for all via **MaterialApp**'s **ThemeData**'s _dividerTheme_
 * **PreferredSizeWidget** = base interface for widget that have an ideal size when unconstrained, such as **AppBar**
 * **Rect** = can be assigned as `offset & size` (**Offset** & **Size**)
 * **WidgetSpan** = immutable widget embedded inline within text (eg to embed **InputChip**s within a **TextField**)
 * Drag
   * **Draggable\<T>** (_data_, _child(WhenDragging)_, _feedback_)
   * **DragTarget\<T>** (_builder_, _onWillAccept_, _onAccept_, _onLeave_)
-  * **DraggableScrollableSheet** = draggable container (_builder_ => pass `scrollControlller` to **SingleChildScroll/ListView**, _abcSize_)
   * **LongPressDraggable** = drag child anywhere (_feedback_ alternate view while dragging, within a **Positioned** to pilot its _left/top_ via **Offset** set via _onDragEnd_)
 * Flutter: Widgets of the Week
   * **Actions**
@@ -77,7 +76,7 @@ Building blocks of Flutter.
   * _appBar_= top menu (_leading_, _title_, _centerTitle_, _actions_ widgets, _bottom_, _shape_ eg **RoundedRectangleBorder**)
   * _body_
   * _bottomNavigationBar_ = either a **BottomAppBar** (for one screen actions) or a **(Bottom)NavigationBar** (for navigation between screens)
-    * **BottomAppBar** = bottom actions menu with up to 4 action icon buttons & a FAB (_shape_ eg **CircularNotchedRectangle** works with docked FAB)
+    * **BottomAppBar** (deprecated 2025.05) = bottom actions menu with up to 4 action icon buttons & a FAB (_shape_ eg **CircularNotchedRectangle** works with docked FAB)
     * **BottomNavigationBar** (Material 2) = bottom navigation menu (_items_ **-Item**s, _type_ **-Type**, _(un)selectedItemColor|FontSize_)
     * **NavigationBar** (Material 3) = (bottom) navigation menu usable from any screen, using a list of **NavigationDestination**
     * **NavigationRail** = (left) side navigation menu with same functionality as bottom navigation bar, for larger sized screens
@@ -88,6 +87,7 @@ Building blocks of Flutter.
     * _child_ = typically a **ListView** with **DrawerHeader** (within **SizedBox** to set height) & **ListTile**s children
     * _drawerEdgeDragWidth_ = area within which a horizontal swipe will open **Drawer**
   * _bottomSheet_ = persistent bottom sheet (`Scaffold.of(context).showBottomSheet(…)` or `show(Modal)BottomSheet(context: …, builder: …, sheetAnimationStyle: …)` shorthand to nearest Scaffold)
+    * **DraggableScrollableSheet** = draggable container for scrollable content (**ScrollController** passed via _builder_, _initial|min|maxChildSize_)
   * _extendBody_ = make sure body background is seen around docked FAB
   * _extendBodyBehindAppBar_ = makes app bar transparent so content appears through it
   * _floatingActionButton_ = actually accepts any widget (eg **AnimatedIcon**) or subtree (eg a column with two **FAB**s)
@@ -105,8 +105,8 @@ There are two built-in solutions: imperative **Navigator** (push/pop API that wo
   * **AlertDialog** = popup with a title, content and yes/no actions (_title_, _content_, _actions_, _elevation_, _backgroundColor_, _shape_, _barrierDismissible_), also **CupertinoAlertDialog**
   * **SimpleDialog** = simplified popup with a basic list of choices (_contentPadding_, _children_ of **SimpleDialogOption**s)
   * `show(Cupertino)Dialog()` = general, with Navigator
-  * `showGeneralDialog()` = full control over enumations & layout
-  * `showModalBottomSheet()` & `showCuprtinoModalPopup()`
+  * `showGeneralDialog()` = full control over advanced animations & custom layout
+  * `showModalBottomSheet()` & `showCupertinoModalPopup()`
   * `showLicensePage()` = prebuilt dialog showing open-sources licenses
   * Awaitable result of `showDialog()` is passed via `Navigator.pop(c, result)`
 * **MaterialPageRoute\<T>** = modal route replacing entire screen with a platform-adaptive transition
@@ -150,7 +150,7 @@ There are two built-in solutions: imperative **Navigator** (push/pop API that wo
 * **Image** = image (_fit_, _colorBlendMode_, _semanticLAbel_) via asset (sizes in _pubspec.yaml_), network (_loadingBuilder_), file, memory
 * **ImageFiltered** = applies an **ImageFilter** to its _child_
 * **ImageFilter** = filter effect to apply to a raster image (blur, glassy, rotate, scale, skew, stretch, translate, `matrix()`)
-* **LinearGradient**, **RadialGradient** (_tileMode_)
+* **LinearGradient**, **RadialGradient** (_tileMode_, `createShader()`)
 * [ResizeImage](https://api.flutter.dev/flutter/painting/ResizeImage-class.html) = decode image at specified dimensions instead of its native size
 * **ShaderMask** = applies to child a (color/gradient/image) mask generated by a **Shader** (`shaderCallback(bounds) => ___Gradient().createShader(bounds)`)
 * Visibility
@@ -160,10 +160,33 @@ There are two built-in solutions: imperative **Navigator** (push/pop API that wo
 
 ## Inputs & Texts
 
+* Buttons
+  * **CupertinoButton** = iOS-style button
+  * **DropDownButton\<T>** = a Material Design button for selecting from a list of items
+  * **ElevatedButton** = Material Design elevated button (avoid on already-elevated content eg dialogs/cards)
+  * **FilledButton** = fill-colored button (`FilledButton.tonal`)
+  * **FloatingActionButton** (**FAB**) = Scaffold stacked button (_tooltip_, `FloatingActionButton.extended()` with label & optional icon)
+  * **IconButton** = a Material Design icon button (_icon_ (can be **AnimatedIcon**), _tooltip_, _onPressed_, `IconButton.filled|filledTonal|outlined`)
+  * **InkResponse** = Material area responding to touch, with external spill
+  * **InkWell** = specialized rectangular **InkResponse** with clipped splash (_borderRadius_, _splashColor_, _onHover|LongPress|(Double)Tap_)
+  * **OutlinedButton** = a (chip-looking) flat TextButton with an outlined border (_borderSide_, `.icon()`)
+  * **RawMaterialButton** = base for a button with a child widget (eg **Text**, _fillColor_, _splashColor_, _shape_)
+  * **SegmentedButton\<T>** = pill/tabs-looking radio buttons (`style: SegmentedButton.styleFrom(…Color)`)
+  * **TextButton** = basic text button (_onPressed_)
+  * **ToggleButtons** = on/off/radio buttons (_isSelected_ = `List<bool>`, _onPressed_ controls selection logic, _abcColor_, _abcBorder_)
+  * Use `___Button.icon()` constructor to get a basic button with both text AND icon
+  * **ButtonStyle** = _back/foregroundColor_
+  * Deprecated
+    * _FlatButton_ = replaced with **TextButton**
+    * _OutlineButton_ = replaced with **OutlinedButton**
+    * _RaisedButton_ = replaced with **ElevatedButton**
+    * Old buttons used many static properties for each color & state, this was replaced with dynamic methods handling complex interaction states (see **MaterialState**)
 * **CheckBox** = Material Design bi-/tri-states checkbox
 * **Chip** = rounded rectangle bordered labeled icon (`_Button.icon()`-like without interactivity, _avatar_, _label_)
-  * **FilterChip** = **Chip** with multi-selection
-  * **InputChip** = **Chip** that can be dismissed
+  * **ActionChip** = contextual dynamic button/trigger for toggle actions without navigation (ie filter, tag, smart suggestion eg 'Like' or 'Save'), less prominent than a **Button**
+  * **ChoiceChip** = single choice among chips set (eg single select filter like **SegmentedButton**)
+  * **FilterChip** = multi-selection filter among chips set
+  * **InputChip** = more complex piece of information, dismissible, with an optional avatar (eg label or several to/cc e-mail fields)
 * **Circular/LinearProgressIndicator** = Material progress bar (_value_, _backgroundColor_, `ThemeData.accentColor` by default)
   * _valueColor_ takes in an **Animation\<T>** instance, which can be result of controlled Tween (via `drive()` or `animate()`)
 * Date Picking = `Future<DateTime?> dateFuture = showDatePicker(context, initialDate, firstDate, lastDate)`
@@ -205,26 +228,6 @@ There are two built-in solutions: imperative **Navigator** (push/pop API that wo
   * Remove keyboard upon scrolling a list/grid = set **Grid|ListView** _keyboardDismissBehavior_ to `ScrollViewKeyboardDismissBehavior.onDrag`
   * [Scroll a list when keyboard pops up](https://stackoverflow.com/a/70612950/3559724)
   * [Move bottom sheet when autofocused keyboard is up](https://stackoverflow.com/a/57515977)
-* Buttons
-  * **CupertinoButton** = iOS-style button
-  * **DropDownButton\<T>** = a Material Design button for selecting from a list of items
-  * **ElevatedButton** = Material Design elevated button (avoid on already-elevated content eg dialogs/cards)
-  * **FilledButton** = fill-colored button (`FilledButton.tonal`)
-  * **FloatingActionButton** (**FAB**) = Scaffold stacked button (_tooltip_)
-  * **IconButton** = a Material Design icon button (_icon_ (can be **AnimatedIcon**), _tooltip_, _onPressed_, `IconButton.filled|filledTonal|outlined`)
-  * **InkWell** = rectangle with touch responses (_borderRadius_, _splashColor_, _onHover|LongPress|(Double)Tap_)
-  * **OutlinedButton** = a TextButton with an outlined border (_borderSide_)
-  * **RawMaterialButton** = base for a button with a child widget (eg **Text**, _fillColor_, _splashColor_, _shape_)
-  * **SegmentedButton\<T>** = pill/tabs-looking radio buttons (`style: SegmentedButton.styleFrom(…Color)`)
-  * **TextButton** = basic text button (_onPressed_)
-  * **ToggleButtons** = on/off/radio buttons (_isSelected_ = `List<bool>`, _onPressed_ controls selection logic, _abcColor_, _abcBorder_)
-  * Use `___Button.icon()` constructor to get a basic button with both text AND icon
-  * **ButtonStyle** = _back/foregroundColor_
-  * Deprecated
-    * _FlatButton_ = replaced with **TextButton**
-    * _OutlineButton_ = replaced with **OutlinedButton**
-    * _RaisedButton_ = replaced with **ElevatedButton**
-    * Old buttons used many static properties for each color & state, this was replaced with dynamic methods handling complex interaction states (see **MaterialState**)
 
 ## Containers
 
@@ -473,15 +476,15 @@ In order to implement a custom widget, use either **AnimatedBuilder**, or extend
   * Required by an **AnimationController** to function (via `vsync: this` on creation)
 * **TickerMode** = toggles tickers on/off for all widgets in subtree
 * Transitions = built-in explicit animations
-  * **Align-**
-  * **DecoratedBox-**
-  * **DefaultTextStyle-**
-  * **Fade-** = opacity animation
-  * **Matrix-** = animates Matrix4 of a transformed widget
-  * **Positioned-**
-  * **RelativePositioned-**
-  * **Rotation-**
-  * **Scale-**
-  * **Size-**
-  * **Slide-** = animates widget position relative to its normal position
-  * **SliverFade-**
+  * **AlignTransition**
+  * **DecoratedBoxTransition**
+  * **DefaultTextStyleTransition**
+  * **FadeTransition** = opacity animation
+  * **MatrixTransition** = animates Matrix4 of a transformed widget
+  * **PositionedTransition**
+  * **RelativePositionedTransition**
+  * **RotationTransition**
+  * **ScaleTransition**
+  * **SizeTransition**
+  * **SlideTransition** = move relatively to its normal position, using an Offset animation
+  * **SliverFadeTransition**

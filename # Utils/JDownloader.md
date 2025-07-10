@@ -2,6 +2,7 @@
 
 ## Quick Tips
 
+* `Middle-click` to start a download
 * [Getting started as a JD-Developer](https://jdownloader.org/knowledge/wiki/development/get-started)
 * Download full Youtube Channel (adapted & corrected from <https://rgetter.com/2021/12/21/back-up-a-youtube-channel-with-jdownloader2>)
   * Go to Youtube Channel > **Videos**

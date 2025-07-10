@@ -2,6 +2,8 @@
 
 ## Quick Tips
 
+* [Material 3 Expressive](https://m3.material.io/blog/building-with-m3-expressive) = 2025.05 update with visual constrasts, button menus, springy animations
+
 ## Glossary
 
 * [Color Role](https://m3.material.io/styles/color/roles) = one of 26 color abstractions to paint various UI elements divided in 6 groups

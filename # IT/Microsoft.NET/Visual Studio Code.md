@@ -88,11 +88,11 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 * `Ctrl + K, Z` = zen Mode
 * `Ctrl + L` = select current paragraph & move next
 * `Ctrl + M` = toggle _Tab Moves Focus_
-* `Ctrl + P` = search (opened) files by name (`:` line number, `@` symbol ie header)
-  * Type `:` to go to line
+* `Ctrl + P` = search files by name
+  * Type `:` to go to line in current file
   * Type `>` to access Command Palette from here
   * Type `#` to search global symbols
-  * Type `@` to search local blocks
+  * Type `@` to search local blocks/headers/sections/symbols
 * `Ctrl + R` = open Recent
 * `Ctrl + T` = search global symbols (eg classes, properties, methods, and also Markdown headers), works with camelCase initials search
 * `Ctrl + Shift + .` = local blocks

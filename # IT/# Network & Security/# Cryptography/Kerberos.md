@@ -8,7 +8,7 @@ This would obviously not be possible over the entire internet, where public-key 
 
 ## Glossary
 
-* Principal = something with an identity that can be protected (User, service or application)
+* **Principal** = something with an identity that can be protected (User, service or application)
 * Entities
   * **Client**
   * **KDC** (Key Distribution Center) = **AS** (Authentication Server, checks authentication) + **TGS** (Ticket-Granting Service, issues (authorization) ticket)

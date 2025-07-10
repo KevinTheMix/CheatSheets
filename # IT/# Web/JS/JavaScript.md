@@ -3,6 +3,7 @@
 ## Quick Tips
 
 * Unblock/jailbreak right-click = `document.oncontextmenu = true`
+* Use `| 0` on a (non-negative) floating point value to convert it to a 32-bit signed integer, effectively math flooring it quickly
 
 ## Glossary
 

@@ -218,7 +218,8 @@ Use commands with either long/short names (eg `flutter --option=value` or just `
 * `flutter format {filename}` = Format document
 * `flutter install` = install app to attached device
 * `flutter pub` = manages the _pubspec.yaml_ file, which contains assets & dependencies, downloaded from <pub.dev>
-* `flutter pub add {package}` = downloads & references package
+* `flutter pub add {package}` = downloads & add package to _pubspec.yaml_
+* `flutter pub add dev:{package}` = add package under _dev\_dependencies_ section
 * `flutter pub cache repair`
   * eg [Install intl](https://stackoverflow.com/a/51706630/3559724)
 * `flutter pub get` = explicitely pulls packages into the project & generates _pubspec.lock_ (implied with `flutter run`)
@@ -290,6 +291,8 @@ Use commands with either long/short names (eg `flutter --option=value` or just `
   * **Dart**
   * **Dart Data Class Generator** = generates class members (eg constructor based off properties, ie à la manual **Freezed** plugin)
   * **Flutter** (also installs Dart)
+  * **Flutter Riverpod Snippets** (_@Robert Brunhage_)
+    * [List of snippets](https://marketplace.visualstudio.com/items?itemName=robert-brunhage.flutter-riverpod-snippets)
   * **Material** Icon Theme
 
 #### Snippets

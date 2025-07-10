@@ -15,6 +15,7 @@
         * See <https://docs.flutter.dev/deployment/android#sign-the-app>
   * Requires an **app signing key** (to let Google sign app to Users)
     * This step is only mandatory when actually registering the app to Google Play Store
+* [Rooting, Bootloader, Recovery](https://android.stackexchange.com/a/117593)
 
 ## Glossary
 
@@ -29,6 +30,9 @@
   * Architecture/Platform = _arm_ or _arm64_ (less commonly _x86_ or _x86\_64_) - see [Open GApps](https://opengapps.org)
 * [AOSP](https://source.android.com) = Android Open Source Project
 * apk = file containing an app ([How to install apk files from a PC](https://www.wikihow.com/Install-APK-Files-from-a-PC-on-Android))
+* [Bootloader](https://source.android.com/devices/bootloader) = basically a BIOS & MBR (vendor-proprietary image), which brings up the kernel, launching recovery mode, etc
+  * Low-level interface used to flash images on a partition via `fastboot` commands
+  * Responsible for the base layer of security (prevents _system_ change), as unlocking the bootloader erases all previous data
 * **GApps** = Google apps
 * **GMS** (Google Mobile Services) = Google **Proprietary** apps & APIs, not part of AOSP (eg _Google Play_, _Gmail_, _Google Maps_, …)
 * **Google Play (Store)** = app store
@@ -44,13 +48,9 @@
   * Custom ROM = ROM not emitted by OEM. Usually contains but a subset of all images (i.e. most importantly a _system_ image), and reuse pre-existing (e.g. stock) images for non-system partitions
 * **Rooting** = how users can attain privileged control (aka _root access_, or _superuser_) over various subsystems
   * Systemless Rooting = lighter rooting that does not require modifying system or boot partition
-* [Rooting, Bootloader, Recovery](https://android.stackexchange.com/a/117593)
-* [Bootloader](https://source.android.com/devices/bootloader) = basically a BIOS & MBR (vendor-proprietary image), which brings up the kernel, launching recovery mode, etc
-  * Low-level interface used to flash images on a partition via `fastboot` commands
-  * Responsible for the base layer of security (prevents _system_ change), as unlocking the bootloader erases all previous data
 * **Recovery** = disk/partition management (wipe/format), download/apply OS update, (un)mount drives/volumes, factory reset
-* **SafetyNet** = feature by which an App required higher security (e.g. banking) can enforce the device is trustworthy
-  * I.e. checks the device is not rooted & bootloader is locked
+* **SafetyNet** = feature by which an App required higher security (eg banking) can enforce the device is trustworthy
+  * Ie checks the device is not rooted & bootloader is locked
   * Circumventable via microG DroidGuard Helper
 * **Sideloading** = installing an image onto the phone directly from a file located on the PC
 * **Vendor image** = image containing device-specific drivers for controlling GPS, gyro, proximity & co
@@ -112,12 +112,12 @@ Note that custom ROMs only include the system image.
 * [How to install ADB and fastboot](https://doc.e.foundation/pages/install-adb-windows)
   * Developer mode must be enabled on the device (by clicking build number 7 times), as well as USB Debugging in developer settings
 * [ADB](https://developer.android.com/studio/command-line/adb) (aka Android Debug Bridge) = CLI to interact with a (**powered-on**) device
-  * `adb devices [-l]` = display connected devices IDs (option: with device information)
+  * `adb devices (-l)` = display connected devices IDs (option: with device information)
   * `adb reboot bootloader` = reboot into the bootloader (alternatively, (re)starting the device while holding Volume Down, then Power)
   * `adb reboot recovery` = reboot into the recovery (alternatively, starting while holding Volume Down, then Power until a menu, then select _RECOVERY_)
-  * `adb sideload`
+  * `adb sideload {file}`
 * [Fastboot](http://adbcommand.com/fastboot) = interact with the bootloader (of a **powered-off** device)
-  * `fastboot devices [-l]` = display current devices (option: with device information)
+  * `fastboot devices (-l)` = display current devices (option: with device information)
   * `fastboot oem unlock` = unlocks the bootloader (**warning: this erases all previous data**), which enables installing a new (custom) OS
     * The _LOCK STATE_ is displayed on the bootloader (lying Android robot) screen
   * `fastboot oem lock` = lock bootloader (**Warning: only lock the bootloader when a Stock OS image is installed, as the last step**)

@@ -3,9 +3,9 @@ import 'package:flutter/widgets.dart';
 /// Utility widget that triggers a callback after the first layout of its child.
 /// This is useful for scenarios where you need to perform an action after the widget tree has been built and laid out.
 class AfterLayout extends StatefulWidget {
-  final void Function() onLayout;
+  final void Function() action;
   final Widget child;
-  const AfterLayout({super.key, required this.onLayout, required this.child});
+  const AfterLayout({super.key, required this.action, required this.child});
   @override State<AfterLayout> createState() => _AfterLayoutState();
 }
 class _AfterLayoutState extends State<AfterLayout> {
@@ -13,7 +13,8 @@ class _AfterLayoutState extends State<AfterLayout> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       debugPrint('${DateTime.now()}: AfterLayout callback triggered');
-      widget.onLayout(); });
+      widget.action();
+    });
   }
   @override Widget build(BuildContext context) => widget.child;
 }

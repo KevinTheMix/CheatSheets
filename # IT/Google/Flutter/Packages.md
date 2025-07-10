@@ -9,6 +9,7 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 * Blue tags under package name/version indicate which SDK (Dart or Flutter) & platform (Android, IOS, MACOS, WEB, WINDOWS) it targets/is compatible with
 * [Using packages](https://docs.flutter.dev/development/packages-and-plugins/using-packages)
 * Quickly add plugins from within Visual Studio Code via Command Palette (`Ctrl + Shift + P`) > _Add Dependency_
+* [Flutter Gems](https://fluttergems.dev) = collection of 6700+ curated Dart/Flutter packages (by feature)
 
 ## Glossary
 
@@ -49,7 +50,8 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 * **async** (_@dart.dev_) = additions to built-in [dart:async](https://api.dart.dev/stable/3.5.0/dart-async/dart-async-library.html) (`StreamGroup.merge()`, `AsyncCache<T>()` time-based cacheing, **StreamQueue**)
 * **auto_route** (_@codeness.ly_) = navigation/routing with deep linking & code generation
 * **build_runner** (_@tools.dart.dev_) = generate files on disk using Dart code
-  * Use `dart run build_runner watch -d` to update output continusouly on source files change
+  * `dart run build_runner build` = generate once (`--delete-conflicting-outputs`)
+  * `dart run build_runner watch -d` = generate continusouly on files change/save
   * `flutter pub run build_runner build --delete-conflicting-outputs`
   * Don't include folders where generated files reside to a git repo (by mentioning them in _.gitignore_ config)
 * **camera** (_@flutter.dev_)
@@ -76,6 +78,7 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 * **flutter_simple_treeview** (_@google.dev_) = tree structure of widget nodes
 * **flutter_slidable** (_@romainrastel.com_) ~= customizable **Dismissible** (`actionPane`, `actions: [IconSlideAction]`, `actionExtentRatio: 1/actions.length`)
 * **flutter_treeview** (_@kevinandre.com_) = customizable hierarchical tree of widgets
+* **flutter_zoom_drawer** (_@medyas.ml_) = custom drawer with rotation & shadow clones
 * **focusable_control_builder** = reacts to all sorts of inputs (focus, tab key, mouse events, keyboard shortcut)
 * **freezed** (_@dash-overflow.net_) = codegen for data/model/union classes (adds `copyWith()`, equality, JSON from/to, `toString()`), requires **build_runner** & **json_serializable**
 * **ftoast** (-) = toast pop-up messages (ie center screen notifications)
@@ -143,7 +146,9 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 
 ### UI (Animations, Graphism, Sounds & Themes)
 
-* **gap** (-) = adds space inside **Flex** widgets (eg **Column**/**Row** or scroll lists, see **MaxGap** & **SliverGap**)
+* **boxy** (_@tst.sh_) = set of layout widgets to align/position widgets against other widgets (eg flex, multi-child, dynamic inflation, slivers)
+* **flutter_sticky_header** (_@romainrastel.com_) = section headers that sticks while section scrolled
+* **gap** (-) = adds space inside **Flex** widgets (ie **Column**/**Row** or scroll lists, see **MaxGap** & **SliverGap**)
 * **image_picker** (_@flutter.dev_) = pick image from library or take a new one with camera
 * **ios_platform_images** (_@flutter.dev_) = share images between Flutter and iOS
 * **motion** (_@cendre.me_) = gyroscope-based "wobbling" effect
@@ -168,6 +173,9 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
   * **liquid_swipe** (_@sahdeepsingh.com_) = wave motion transition
   * **particle_field** (_@gskinner.com_) = high performance custom particle effects
   * **shimmer** (_@hunghd.dev_) = pulsating UI loading effect
+  * **wave_container** (-) = sine water-like wave animations
+  * **wave_transition** (-) = radial layer reveal effect
+  * **wave_transition_animation** (-) = radial layer reveal effect
 * Font & Themes
   * **dynamic_color** (_@material.io_) = Material color schemes based on platform dynamic color
   * **flex_color_scheme** (_@rydmike.com_) = Material Design 3 seeded generated color schemes
@@ -226,9 +234,11 @@ Using some of these packages allows building an app without never actually using
   * **StreamProvider** = wrapper around **StreamBuilder**
   * **ValueListenableProvider** = for **ValueNotifier**
 * **riverpod** (_@dash-overflow.net_) = statically typed compile-time safe reactive caching & data-binding state management framework, uses dependency-injected Provider global variables not **BuildContext**, testing flexibility
+  * `@riverpod` = shorthand for `Riverpod()` (with parameters such as `keepAlive: true`)
   * `ref.listen()` = register a callback executed on change (without rebuilds)
   * `ref.read()` = one-time access
   * `ref.watch()` = observe & rebuild on change
+  * `ref.watch(provider.select((state) => bool projection)` = responds to change on only a substrata of a provider
   * **AsyncNotifier** (_Riverpod 2.0_) = a **Notifier** that is asynchronously initialized (eg for caching network requests or initializing data from DB)
   * **ChangeNotifierProvider** (_deprecated_) = provides a **ChangeNotifier** (for **provider** backwards-compatibility, avoid in new code)
   * **Consumer** = (update eg `ref.read(P.notifier).state = …`)
