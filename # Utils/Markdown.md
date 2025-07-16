@@ -4,6 +4,7 @@
 
 * Include two spaces at the end of a line to make next line a different paragraph
 * Escape backtick = `` here you go: ` `` (spaces on both sides make it render properly)
+* Achieve a trailing space with <code>Hello </code> (using a Alt+160 non-breaking space workaround)
 * Number of spaces added by Tab depends on the initial scan of the file (first indentation decides whether it's two or four)
 * [GitHub](https://guides.github.com/features/mastering-markdown)
 * [Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)

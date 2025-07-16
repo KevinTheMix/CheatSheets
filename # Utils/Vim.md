@@ -1,92 +1,144 @@
 # [Vim](http://www.openvim.com)
 
+## Quick Tips
+
 * **gVim** = Vim for Windows
+* Use `vimtutor` Unix command (supposedly) 30 minutes tutorial
+* Create a _~/.vimrc_ configuration file to enable more features (see `:help vimrc-intro`)
+* Cursor position looks very weird in Normal mode, because [it is intended to modify text, not append more of it](https://stackoverflow.com/a/3676464/3559724)
 
-## Symbols
+## Glossary
 
-* `w` = word
-* `0` = line beginning
-* `$` = line end
+* Modes
+  * **Normal** or **Command** = move around & edit (starting mode)
+  * **Execution** or **Command-line** = run commands & range editing
+  * **Insert** = basic text typing
+  * **Replace** = overwrites existing characters as you type
+  * **Select** = selected text is replaced as you type
+  * **Visual** = select text to operate on
 
-## Modes
+## Commands
 
-* Commande (start)
-  * `a` or `i` = switch to Insert
-  * `:` = switch to Execution
-  * `v` = switch to Visual
-* Insert
-  * `Esc` = Switch to Command
-* Execution
-  * `Esc` or `cr` = Switch to Command
+* `{Escape}` = switch to **Normal** mode
+* `:` = switch to **Execution** mode
+* `R` = switch to **Replace** mode (à la Windows Insert)
+* `gh`/`gH` = select next char/whole line & switch to **Select** mode (use arrows to expand selection)
+* `v` = switch to **Visual** mode
+* Counts (multipliers)
+  * `{n}{motion}` = repeats motion _n_ times (can be used in place a single motion)
+  * `{n}{cmd}` = plays command _n_ times
+  * `{n}{a/A/i/I/o/O}{text}{escape}` = insert/append n times _text_ at cursor
 
-### Insert
+### Motions
 
-Type text.
+Can be used in Normal mode to jump at a position, or as an argument in a command.
 
-### Command
+* `(Mouse) Wheel` = move cursor up/down
+* `h`/`j`/`k`/`l` = left/down/up/right
+* `e`/`E` = end of current or next word through newlines (`E` non-alphabetic characters don't separate)
+* `b`/`w` = word backward/forward (ie place cursor at beginning of next/previous word)
+* `0`/`$` = line beginning/end
+* `#`/`*` = previous/next occurrence of word at cursor
+* `{`/`}` = previous/next paragraph
+* `gg`/`G` = beginning/end of file
+* `{n}gg`/`{n}G` = line _n_
+* `F{char}`/`f{char}` = find previous/next character on current line
+* `?` or `/` = find text back/forward (add `\c` for one-time ignore case)
+  * `n`/`N` previous/next occurence
+  * `Ctrl + i` or `Ctrl + o` = previous/next search location (_not a motion_)
+* `%` = matching (start/end) character in a parenthesis or bracket pair (ie _()_, _[]_, _{}_)
 
-Navigation
+### Normal Mode
 
-* `h j k l` = Left/Down/Up/Right
-* `b e` = Beginning/End
-* `w` = Next word
-* `f[c]` = Find character [c]
-* `0` = Beginning of line
-* `$` = End of line
-* `` =` = Previous occurence of the word at cursor
-* `*` = Next occurence of the word at cursor
-* `gg` = Beginning of file
-* `G` = End of file
-* `[n]G` = Go to line [n]
-* `/[text]Enter` = Search
-* `N` = Previous search
-* `n` = Next search
+* In this mode, cursor appears between characters, but is always _on_ a character
+* Manipulation
+  * `a`/`A` = append after cursor/line
+  * `i`/`I` = insert at cursor/line start
+  * `o`/`O` = open new line below/above
+  * `s`/`S` = cut character/whole line & switch to **Insert**
+  * `y{motion}` = copy (yank)
+  * `c{motion}` = cut & switch to **Insert**
+  * `d{motion}` = cut
+  * `yy` = copy whole line
+  * `cc` = cut whole line & switch to **Insert**
+  * `dd` = cut whole line
+  * `D` = cut until end of line (same as `d$`)
+  * `dap` = cut whole paragrah (no matter cursor position within)
+  * `x`/`X` = cut character at/before cursor (à la backspace/delete)
+  * `p`/`P` = paste (put) after/at cursor
+  * `r{char}` = replace character at cursor with _char_
+  * `J` = join lines (removes newlines, adding trailing space if next line is not empty)
+* Undo/redo
+  * `.` = redo last manipulation
+  * `u`/`Ctrl + r` = undo/redo (go back/forward one step in history)
+  * `U` = toggle undo all changes to same line
 
-Manipulation
+### Execution Mode
 
-* `a` = append
-* `c` = change
-* `d` = delete
-  * `d[dir] p` = Cut/paste in direction [dir]
-  * `D[dir] p` = Cut/paste until end of line
-* `i` = insert
-* `o` = insert a line
-  * `O` = Insert line before (switches to Insert mode)
-  * `o` = Insert line after (switches to Insert mode)
-* `p` = paste
-* `r[c]` = Replaces character at cursor with [c]
-* `x` = delete 1 char
-  * `x` = Deletes character before cursor (à la backspace/delete)
-  * `X` = Deletes character after cursor (à la backspace/delete)
-* `y` = copy
-
-## Execution
-
-* `:1,3 co 4` = copy lines 1 through 3 after line 4
-* `:.,.+5 mo $` = move current and 5 next lines to the end (_$_ == end)
-* `:1,7s/a/A/g` = remplace all _a_ with _A_ within lines 1 through 7
-
-* `:autoindent` = indenting
-* `i,jcok`
-* `i,jmok`
-* `:r` = read
-  * `:r koko.txt` = insert _koko.txt_ content in currently edited file
-  * `:r !{command}` = insert output of _command_
-* `:q` = quit with message
+* `Ctrl + d` = offer autocomplete suggestions
+* `{text}{Tab}` = autocomplete (cycle through shortlist if several, works for commands & files)
+* `:!{cmd}` = run (shell) command (note: autocomplete works too)
+* `:e {file}` = edit file (replaces current file)
+* `:w` = write buffer (ie save file)
+* `:q` = quit current window (eg Help page), or Vim itself
+* `:wq` = save & quit
 * `:q!` = quit without saving
-* `:set number` = numbering
-  * `:set number autoindent` = both numbering & indenting
-* `:w` = write (save)
-* `:wq` = write (save) & quit
-* `** :help` = help
+* `:help ({subject})` or `F1` = help (eg `c_CTRL-D`, `insert-index`, full `user-manual`)
+* `shell` = start an embedded shell (default one from _.passwd_ or overriden via set option _shell=/bin/bash_)
+* `:terminal` = built-in terminal emulator
+* `:set {options}` = set one or more terminal options (prepend `no` to toggle option off)
+  * _autoindent_ = autoindent (copy indent from current line on new line)
+  * _cp_ (_compatible_) = makes Vim Vi-compatible
+  * _hls_ (_hlsearch_) = highlight all matches
+  * _ic_ (_ignorecase_) = ignore case in searches
+  * _is_ (_incsearch_) = incremental search (show partial matches, set by default)
+  * _number_ = lines numbering
+  * _wrapscan_ option = search cycling (wrap back around end of file)
 
-## Macro
+#### Edition
 
-* `[n][cmd]` = Runs [cmd]*[n]
-* `[n]i[text]` = Insert [text]*[n] at cursor
-* `.` = Repeats previous command
+Spaces are optional.
 
-### Visual
+* `{n}` = n-th line
+* `.` = current line
+* `.+{n}` = n-th line after current
+* `{start},{end}` = range
+* `:{range} co {location}` = copy
+* `:{range} mo {location}` = move
+* `:{range}s/{from}/{to}/g` = substitution
+* `:r {file}` = insert file content (below cursor line)
+  * `:r !{command}` = insert output of command
+* Substitution
+  * `:s/{old}/{new}` = substitute once
+  * `:s/{old}/{new}/c` = substitute with confirmation
+  * `:s/{old}/{new}/g` = substitute whole line
+  * `:%s/{old}/{new}/g` = substitute in whole file
+  * `:{range}s/{old}/{new}` = substitute between range
 
-* `[dir]l` = Selects text
-* `[cmd]` = Do stuff with selected text
+### Visual Mode
+
+This this mode, preceding text selection is used in place of a succeeding motion.
+
+* `{motion}` = selects text
+* `{cmd}` = do Normal mode stuff with selected text (eg cut it `d`)
+* `:{cmd}` = same with Execution mode (typing `:` prepends `'<,'>` to command immediately, eg save it as a new file `:w {file}`)
+
+### Windows Management
+
+* Bottom right indicate viewport position in file (Top/Bot/All/%)
+
+* `Ctrl + v` or `Right-Click` = paste external data (not from internal registry like `p`, works in all modes)
+* `Page Up`/`Page Down`= scroll a whole screen up/down
+* `Ctrl + u/d` = scroll half a screen up/down
+* `Ctrl + g` = indicate file name, status (if _Modified_), total # of lines, % cursor position (not refreshed in real-time)
+* `zz` = center screen
+* `Ctrl + w, =` = equalise all splits
+* `Ctrl + w, _` = maximise current window's height (underscore stretches it to full height)
+* `Ctrl + w, +` = increase  height by 1 line
+* `Ctrl + w, -` = decrease height by 1 line
+* `Ctrl + w, Ctrl + w` = jump from one window to another
+
+## Extensions
+
+* **nvim-lspconfig** = LSP (Language Server Protocol, ie turns editor into IDE with completion, syntax highlighting, etc)
+* **Telescope** = fuzzy finder

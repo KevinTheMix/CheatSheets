@@ -78,7 +78,8 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * Modified files are not automatically all registered; they have to be deliberately _staged_ (thus enabling granular control over committed files)
 * **Stashing** = temporarily saving changes that are not ready to be committed (eg work-in-progress) on the side to be resumed later (eg after some work on other branches)
 * **Tag** = reference to a specific commit in the history (generally for significant milestones or release; note that tags can have the same name as a branch)
-  * **Lightweight Tags** are simple references to specific commits whereas **Annotated Tags** include additional metadata (notably a mandatory message, plus a creation date & tagger's name/email)
+  * **Lightweight Tag** = simple references to specific commits
+  * **Annotated Tag** = full Git object with a name & metadata (message, creation date, tagger's info ie name/email/timestamp)
 * **Trunk-based development** = branch workflow tailored for CI/CD, advocating short-lived feature branches with few small commits, and a clean always latest _main_ (vouched for by CI pipeline)
 * **Upstream** = on platforms (like GitHub or GitLab), this is the original repo from which a project was forked
 * **Work(ing) tree** (aka **Working Directory**) = a directory where the (project) files reside and where changes are made (note: may also contain untracked files)
@@ -114,21 +115,24 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * `git log {branch}` = lists commits history (parental ancestry) for that branch (_HEAD_ by default, if a tag has same name use full branch namespace eg `refs/heads/{branch}`)
 * `git log {tag}` = lists commits history for that tag (if tag has same name as a branch, Git complains and displays tag commits history)
 * `git log` = lists commits history in anti-chronological order (ie last first)
+  * `--all` = includes all commits (not just the ancestors of currently checked-out)
+  * `--author="{name}"`
+  * `--date={format}` = formats all dates (eg `short`, `iso`, `local`, `relative` eg "2 hours ago")
+  * `--decorate` = show branch & tag names
+  * `--graph` = draws Ascii tree of commits
+  * `--max-count=10` = limits output
+  * `--online` = compact one-line-per-commit format
   * `--pretty={format}` = where built-in _format_ is `oneline`, `short`, `medium` (default), `full`, `fuller` by increasing length, or `reference`, etc.
   * `--pretty=format:\"{custom}\"` = custom format (eg `%ad` author date, `%an` author, `%cd` date, `%d` references if any, `%h` hash, `%s` comment, `%n` newline)
-  * `--max-count=10` = limits output
   * `--since="5 minutes ago"` = after
   * `--until="5 minutes ago"` = before
-  * `--date={format}` = formats all dates (eg `short`, `iso`, `local`, `relative` eg "2 hours ago")
-  * `--author="{name}"`
-  * `--graph` = draws Ascii tree of commits
-  * `--all` = includes all commits (not just the ancestors of currently checked-out)
+  * Eg `git log --oneline --graph --all --decorate`
 * `git reflog (show) {reference}` = display reflog of a reference (eg `git reflog HEAD`)
 * `git status` = information about the working tree state (staged changes, unstaged changes, untracked files)
 
 ## Local
 
-* `git init` = sets up the current directory as a Git repository
+* `git init` = sets up the current directory as a Git repository (`--bare` without WD, usually to setup a repo only updated via `push`)
 * `git add` = stages one (`git add {file}`, _case sensitive_), several (`git add {*pattern*}`), or all (`git add .`) to be included in the next commit
   * Note that it's possible to keep some files in the Git repo untracked/ignored if they're never added
 * `git add -i` = stages interactively (via CLI)
@@ -142,7 +146,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * `git checkout -` == `git switch -`
   * `git checkout {file}` == `git restore {file}`
   * `git checkout {branch}` == `git switch {branch}`
-  * `git checkout {commit}` = checks out specified commit (detaches _HEAD_), works only if there are no unstaged changes or the commit is the last one
+  * `git checkout {commit}` = checks out specified commit (detaches _HEAD_, not on a branch anymore), works only if there are no unstaged changes or the commit is the last one
   * `git checkout -b {branch}` = creates a branch and checks it out
 * `git clean -fdx` = deletes all gitignored/untracked files (add `-n` option to preview but not do) (**warning**: destructive)
 * `git commit` = when a message is not provided, the default text editor is launched and its result fed as message
@@ -168,14 +172,17 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * `git rm {file}` = deletes a (tracked) file (both from Git & physically on disk) during next commit
 * `git rm {file} --cached` = un-tracks a file during next commit
 * `git rm {directory} --r` = deletes a a directory during next commit
+* `git show {object}` = display information about a commit, tag, blob (file), tree (directory)
 * `git switch -` (with hyphen === `@{-1}`) = switch to previous branch (more precisely the previous location in _HEAD_ reflog, non-destructive)
 * `git switch --detach` = detaches HEAD from the current branch (the content of the _HEAD_ file changes from a symbolic branch ref to a commit hash)
 * `git switch {branch}` = switches to branch (by moving HEAD to (latest commit of) that branch), or does nothing if already on that branch
-* `git tag (-l(ist))` = lists all tags
-* `git tag -n` = lists tags with messages
-* `git tag {tag}` = creates a new lightweight tag at the latest commit (eg a version/release name `git tag v1.0.0`) with an optional message (`-m {message}`)
-* `git tag {tag} -a -m "{message}` = creates an annotated tag with a (required) message
-* `git tag {tag} -d` = deletes tag
+* `git tag` (same with `-l(ist)`) = lists all tags (repo-wide, no matter where you currently are)
+  * `git tag {name}` = creates a tag (to current commit, ie HEAD)
+  * `git tag -a {name} -m {message}` = creates an annotated tag
+  * `git tag -n` = lists tags with messages
+  * `git tag {tag}` = creates a new lightweight tag at the latest commit (eg a version/release name `git tag v1.0.0`) with an optional message (`-m {message}`)
+  * `git tag {tag} -a -m "{message}` = creates an annotated tag with a (required) message
+  * `git tag {tag} -d` = deletes tag
 
 ### Remote
 

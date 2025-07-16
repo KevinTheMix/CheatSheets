@@ -7,7 +7,7 @@
 
 ## Glossary
 
-* **Active Directory** (AD) = directory service for Windows domain networks
+* **Active Directory** (AD) = directory service for Windows domain networks using a number of standardized protocols to provide a variety of network services (eg DNS-based naming)
 * **Directory Service** = maps network resources names to their respective network (eg IP) addresses (eg DNS)
 * **DMZ** (De-Militarized Zone) = network area that's neither internal or public, where public-facing (email/web) servers get placed
   * Traffic with a DMZ is mostly one-way towards it, ie it has very limited connectivity towards the internal network (as much as the firewall allows basically)

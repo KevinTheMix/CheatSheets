@@ -47,6 +47,7 @@
 * **Krita** = FOSS raster graphics editor (for digital art & 2D animation)
 * [Canva](https://www.canva.com) = online collaborative/multiplayer visual content design tool
 * [Figma](https://www.figma.com) = online collaborative/multiplayer interface design tool
+* **ImageMagick** = FOSS CLI cross-platform raster image editor
 * [ministprit](https://minisprit.es) = online pixel sprites designer
 * [Noun Project](https://thenounproject.com) = free icons & stock photos
 * **Paint.NET** = free (image & photo) raster graphics editor for Windows

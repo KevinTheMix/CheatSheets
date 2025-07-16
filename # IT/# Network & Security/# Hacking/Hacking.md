@@ -7,30 +7,42 @@
 * **Bypass company firewall** (2014.04)
   * Remote desktop to home computer
   * SSH Tunnel + Proxy Socks via PuTTY (_Laurent D'Havé_ & _Frédéric Branger_)
+* [Sticky notes for pentesting](https://exploit-notes.hdks.org)
+* <https://learnhacking.io/5-infosec-newsletters-youll-actually-read>
 
 ## Glossary
 
 * **Advanced Persistent Threat** (APT) = typically state-sponsored group of hackers striving to remain undetected for an extended period
 * **Attack Surface** = sum of different points (attack vectors) where attackers can try to enter/extract/control
+* **Attack Vector** = specific path/method/scenario that can be exploited
 * **Capture The Flag** (CTF) = exercise to find flags (ie text strings) secretly hidden in purposefully vulnerable programs/websites, for educational/competitive purposes
 * **CCNA** (Cisco Certified Network Associate) = network certification
 * **CompTIA** (Computing Technology Industry Association) = US trade association issuing vendor-neutral (eg not Cisco-specific) professional IT certifications
   * Eg _A+_ (Help Desk Support Specialist), _Network+_, _PenTest+_, _Security+_, _Security Pro_, _Cybersecurity Analyst+_ (CySA+)
+* **Exploit** = method/code that takes advantage of vulnerabilities, typically for malicious purposes
+* **Firewall**
+  * **Application Firewall** = controls I/O or system calls of an application/service, monitors & blocks communications based on configured policy (either Network-based for TCP/IP on Host-based for system calls)
+  * **Web Application Firewall** (WAF) = specific application firewall to filter/monitor/block HTTP traffic, mitigating known (eg SQLi, XSS, FI) and zero-day vulnerabilities
 * **Hack The Box** (HTB) = online cybersecurity courses & certifications
   * **CPTS** (Certified Penetration Testing Specialist) = certification
 * **InfoSec** (Information Security) = protecting information by mitigating risks
+* **Magic Numbers** (or **MAgic Bytes**) = first few bytes identifying a file content type
 * **OPSEC** (Operation Security) = military analysis of whether critical information is accessible to the enemy (trackability prevention)
   * Also refers to obfuscating/hiding techniques by hackers to evade security & getting found
 * **OSCP** (Offensive Security Certified Professional, by _Offensive Security_ aka _Offsec_) = ethical hacking certification (gold standard for cybersecurity certifications)
+* **OWASP** (Open Worldwide Application Security Project) = online community producing free articles/methodologies/tools on IoT, software & web security
 * **picoCTF** (_Carnegie Mellong University_) = CTFs courses & competitions
 * **Reverse shell** = remote shell execution, from target to attacker thus bypassing protection measures blocking ingoing-only requests (eg firewalls, IDS, IPS)
   * Precondition = attacker has access to target's shell, launching an interactive `bash` listening to commands served by attacker (via _ncat_)
+* **Threat** = potential negative action/event enabled by a vulnerability, resulting in unwanted impact
 * **TryHackMe** = CTFs (more beginner friendly than HTB)
 * **Virus** = replicates itself when executed by modifying other programs with its own code
+* **Vulnerability** = flaw/weakness in a system's design/implementation/management that can be exploited
 * **Worm** = standalone program that replicates itself and spreads to other computers
 
 ## Tools
 
+* _Burp Suite_ (by _PortSwigger_) = proprietary software for security assessment & penetration testing (eg brute-force boolean SQLi)
 * _Flipper Zero_ = open-source & customizable portable multi-tool for hackers/pentesters (RFID, radio protocols, access control systems, GPIO pins hardware)
 * _Kali Linux_ = professional penetration testing (ie hacking) OS, with built-in [tools](https://www.kali.org/tools)
 * _KON-BOOT_ = Bypass Windows/Mac logon (_active_)
@@ -46,7 +58,7 @@
 * _Cain & Abel_ = password cracking/recovery
 * _ihashgpu_ = Hash (MD4, MD5, SHA1) cracking CLI (_discontinued_)
 * _hashcat_ = fastest hash/password cracking & recovery, (CPU & GPU) hardware-accelerated, works on 200+ hash algos
-* _hydra_ = multithread root user password cracking
+* _Hydra_ (THC Hydra) = parallelized login cracking (brute force, dictionary attack)
 * _John the Ripper_ = FOSS fast password cracker, brute force, common passwords, dic attacks, 20+ (human) languages
 * _MDCrack_ = Cracks MD4, MD5 & co Hash password
 * _Ophcrack_ = Windows password cracker (rainbow tables)
