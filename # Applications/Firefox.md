@@ -21,7 +21,7 @@
 * `F7` = Toggle Caret Browsing (displays text cursor that is usually hidden)
 * `F12`== `Ctrl + Shift + I`  = Web Developer Tools
 
-* (`Backspace` = Go back (_note: this was changed in Firefox 86 to prevent loss of input data, but can be manually re-enabled_)
+* `Backspace` = Go back (_note: this was changed in Firefox 86 to prevent loss of input data, but can be manually re-enabled_)
 * `Alt + Left/Right` =  = Navigate back/forward
 * `Alt + Mouse Scroll` = Navigate back/forward
 

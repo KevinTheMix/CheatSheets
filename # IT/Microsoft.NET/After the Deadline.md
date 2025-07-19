@@ -4,8 +4,8 @@ Grammar & spellcheck Java HTTP server, which can be queried via regular HTTP GET
 
 ## Install & Run
 
-1. Download the distribution Java server from <https://open.afterthedeadline.com/download/download-source-code/>
-2. Download the multi-language pack from <https://open.afterthedeadline.com/download/multi-lingual-atd/>
+1. Download the distribution Java server from <https://open.afterthedeadline.com/download/download-source-code>
+2. Download the multi-language pack from <https://open.afterthedeadline.com/download/multi-lingual-atd>
 3. Move the _lang_ language pack into the _atd_ distribution folder
 4. Feel free to delete unnecessary languages folders; also comment them out in the _buildall.sh_ file (see sample below)
 5. Run the sh/bat commands with additional language parameter `-Datd.lang={lg}`
@@ -14,7 +14,7 @@ Grammar & spellcheck Java HTTP server, which can be queried via regular HTTP GET
 ## Dependencies
 
 * Requires Java Runtime Environment (JRE) 8 Update 121
-  * <https://www.filepuma.com/download/java_runtime_environment_64bit_8.0.1210.13-13997/>
+  * <https://www.filepuma.com/download/java_runtime_environment_64bit_8.0.1210.13-13997>
 * Comes packaged with the following Java libraries:
   * **Sleep** = scripting language
   * **Moconti** = _Sleep_-based application server

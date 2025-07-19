@@ -1,5 +1,7 @@
 # Software Architecture
 
+* _You might not think that programmers are artists, but programming is an extremely creative profession. It's logic-based creativity._ — John Romero
+
 ## Glossary
 
 * **Availability** = the percentage of time that the system is operational

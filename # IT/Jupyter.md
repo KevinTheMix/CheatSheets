@@ -1,4 +1,4 @@
-# [Project Jupyter](https://jupyter.org/)
+# [Jupyter](https://jupyter.org)
 
 ## Glossary
 

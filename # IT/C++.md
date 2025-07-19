@@ -17,6 +17,8 @@
 
 * `friend` = in a class, grants an another class/external function access to private/protected members
 * `static` = in a (non-class) function, defines a variable whose lifetime extends until the end of the program, whose values carries over subsequent calls, and that gets initialized only once
+* `virtual` = makes function child-overridable, actual function to be called is determined at runtime based on objet instance (dynamic) type
+  * In C++, `virtual` avoids the multiple inheritance [dreaded diamond](https://www.cs.technion.ac.il/users/yechiel/c++-faq/mi-diamond.html)
 
 ## API
 

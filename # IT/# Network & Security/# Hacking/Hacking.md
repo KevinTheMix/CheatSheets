@@ -9,12 +9,14 @@
   * SSH Tunnel + Proxy Socks via PuTTY (_Laurent D'Havé_ & _Frédéric Branger_)
 * [Sticky notes for pentesting](https://exploit-notes.hdks.org)
 * <https://learnhacking.io/5-infosec-newsletters-youll-actually-read>
+* [Cybersecurity Roadmap](https://roadmap.sh/cyber-security)
 
 ## Glossary
 
 * **Advanced Persistent Threat** (APT) = typically state-sponsored group of hackers striving to remain undetected for an extended period
 * **Attack Surface** = sum of different points (attack vectors) where attackers can try to enter/extract/control
 * **Attack Vector** = specific path/method/scenario that can be exploited
+* **Buffer Overflow** = manipulates a region of memory to inject malicious code, then sets execution to that address (eg overwrites a function return address or function pointer)
 * **Capture The Flag** (CTF) = exercise to find flags (ie text strings) secretly hidden in purposefully vulnerable programs/websites, for educational/competitive purposes
 * **CCNA** (Cisco Certified Network Associate) = network certification
 * **CompTIA** (Computing Technology Industry Association) = US trade association issuing vendor-neutral (eg not Cisco-specific) professional IT certifications
@@ -27,6 +29,7 @@
   * **CPTS** (Certified Penetration Testing Specialist) = certification
 * **InfoSec** (Information Security) = protecting information by mitigating risks
 * **Magic Numbers** (or **MAgic Bytes**) = first few bytes identifying a file content type
+* **Man-in-the-Middle** (MitM) = more than just snooping on a line, can intercept and pretend to be the other party (ie a secure channel with an attacker isn't secure at all)
 * **OPSEC** (Operation Security) = military analysis of whether critical information is accessible to the enemy (trackability prevention)
   * Also refers to obfuscating/hiding techniques by hackers to evade security & getting found
 * **OSCP** (Offensive Security Certified Professional, by _Offensive Security_ aka _Offsec_) = ethical hacking certification (gold standard for cybersecurity certifications)
@@ -34,6 +37,7 @@
 * **picoCTF** (_Carnegie Mellong University_) = CTFs courses & competitions
 * **Reverse shell** = remote shell execution, from target to attacker thus bypassing protection measures blocking ingoing-only requests (eg firewalls, IDS, IPS)
   * Precondition = attacker has access to target's shell, launching an interactive `bash` listening to commands served by attacker (via _ncat_)
+* **SOC** (Security Operations Center) = always-on hub of dedicated team/processes/tools that monitori, detect, analyze, respond to incidents/threats across an organization
 * **Threat** = potential negative action/event enabled by a vulnerability, resulting in unwanted impact
 * **TryHackMe** = CTFs (more beginner friendly than HTB)
 * **Virus** = replicates itself when executed by modifying other programs with its own code
@@ -51,6 +55,7 @@
 * _OpenVAS_ = vulnerability scanner, security issues, un/authenticated testing, detailed reports, free (GNU), plugins written in the Nessus Attack Scripting (NAS) language
 * _Parrot (Security) OS_ = FOSS portable Debian-based OS with 600 tools (for pentesting, security & development)
 * _Pwnbox_ = customized online Parrot Security Linux distribution with many hacking tools pre-installed
+* _Teensy_ = a programmable USB board that can spoof any USB type of device (eg emulate a keyboard)
 * _Volatility_ = FOSS RAM forensic analysis tool
 
 ### Cracking
@@ -61,12 +66,12 @@
 * _Hydra_ (THC Hydra) = parallelized login cracking (brute force, dictionary attack)
 * _John the Ripper_ = FOSS fast password cracker, brute force, common passwords, dic attacks, 20+ (human) languages
 * _MDCrack_ = Cracks MD4, MD5 & co Hash password
-* _Ophcrack_ = Windows password cracker (rainbow tables)
+* [Ophcrack](https://ophcrack.sourceforge.io) = free multi-platform Windows (XP/Vista/7) password cracker based on rainbow tables
 * _RockYou.txt_ = large (multi-GB) wordlist for password crackers
 
 ### Network
 
-* _Aircrack-ng_ = WiFi packet monitoring/sniffing & cracking tools suite, WEP/WPA key recovery, replay attacks, deauthentication, fake access points via packet injection, CLI
+* _Aircrack-ng_ = Wi-Fi packet monitoring/sniffing & cracking tools suite, WEP/WPA key recovery, replay attacks, deauthentication, fake access points via packet injection, CLI
   * _aircrack-ng_ = cracks WEP keys
   * _airdecap-ng_ = decrypts WEP/WPA encrypted capture files
   * _airmon-ng_ = enable monitor mode on wireless interfaces or kill network managers

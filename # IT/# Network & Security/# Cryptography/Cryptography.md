@@ -11,13 +11,13 @@
 * **AES** (Advanced Encryption Standard, aka Rijndael) = symmetric data encryption specification (via matrix transformation)
 * **DES** (Data Encryption Standard) = (_obsolete_) older symmetric key algorithm using a (now-considered short) 56 bits key
 * **Diffie-Hellman** shared key/secret exchange = generation & transmission of a symmetric key (eg SSL/TLS) over a **public channel** (eg mixing paints)
-* **Double Ratchet Algorithm** = Signal protocol
+* **Double Ratchet Algorithm** = _Signal_ protocol
+* **Elliptic Curve Digital Signature Algorithm** (ECDSA) = modern & efficient asymmetric keys for digital signature (authentication)
+* **Elliptic Curve Diffie-Hellman Ephemeral** (ECDHE) = improved Diffie-Hellman, used in TLS to derive a temporary shared session key
 * **Evaluation Assurance Level** (EAL) = methodological confidence in entire IT product/system (not only crypto)
 * **Federal Information Processing Standard** (FIPS) = security requirement for cryptographic modules (examines correct implementation of approved algorithms)
 * **HMAC** (Hardware-based Message Authentication Code) = specific type of MAC via a crypto hash function & secret crypto key
 * **Hardware Security Module** (HSM) = dedicated device/PCIe card or cloud-based service to generate/store/use cryptographic keys (eg certificate private key)
-* **JWT** (JSON Web Token) = internet standard for adding optional JSON signature/encryption to data, whose payload asserts some claims (eg "logged as admin")
-  * Token are designed to be compact, URL-safe, usable in a web-browser SSO context
 * **Key Derivation** = process to generate cryptographically strong keys from one or more values (eg keys, passphrases)
 * **Key Partitioning** = dividing a single key into a set of keys (eg splitting a 256-bit key into two keys of 128 bits each)
 * **MAC** (Message Authentication Code) = short piece of information to attest a message's **authenticity & integrity** (aka checksum, hash, error detection)
@@ -44,12 +44,9 @@
 
 ### Certificates
 
-Public key certificates are a means to attest the authenticity & trustworthiness of an entity (eg some information or website), ie of its associated **public key**.
-It is a document containing certain metadata (subject, validity start/end), a trusted issuer identity (CA name & tamper-proof **digital signature**), and a **public key**.
-Certificates are notably used in **TLS** (for HTTPS), and **SAML** authentication (to represent a logged user).
-
-(ChatGPT:) A digitally signed document that proves a specific public key belongs to a specific entity (like a website or organization).
-(ChatGPT:) _In summary, an SSL/TLS certificate is a digital file stored on the server. When a client requests a secure connection, the server reads this file and transmits its contents as part of the initial SSL/TLS handshake process_
+Public key certificates are a means to attest the authenticity & trustworthiness of an entity (eg some information/organization/website), ie of its associated **public key**.
+Digitally signed document/file stored on a server and containing certain metadata (subject, validity start/end), a trusted issuer identity (CA name & tamper-proof **digital signature**), and a **public key**.
+Certificates are often associated with **TLS** (for HTTPS) and **SAML** authentication (to represent a logged user).
 
 * **CA** (Certification Authority) = an issuing entity that can be trusted to validate other entities below it in a nested tree chained/propagated trust model
 * **CA Public Key** = well-known (preinstalled on OS, or easily obtainable from a trusted source - but not part of the server certificate) key to verify the validity of a CA's digital signature
@@ -64,9 +61,12 @@ Certificates are notably used in **TLS** (for HTTPS), and **SAML** authenticatio
   * Any website that requires SSL (for HTTPS) must first register to one of those public root CA and pay a subscription fee
 * **Self-Signed Certificate** = certificate that are not issued by a CA, basically managing custom certificates (chain) manually
 * **SSL/TLS Handshake**
-  * The client initiates a connection to the server on port 443 (the default port for HTTPS)
-  * The server responds by presenting its SSL/TLS certificate (over TLS itself, with TCP underneath)
-  * The client and server then negotiate encryption parameters and establish a secure connection
+  * Client initiates connection to the server on port 443 (the default port for HTTPS)
+  * Server responds by presenting its SSL/TLS certificate file content (over TLS itself, with TCP underneath)
+  * Client verifies certificate (CA signature, domain name) & initiate a (symmetric) session key exchange (Diffie-Hellmann or some variation)
+  * Server must sign that key exchange using its certificate private key (only that key is able to complete the handshake)
+  * An attacker possessing on the (public) certificate cannot forge a signature, nor decrypt handshake messages
+  * The client and server establish a secure connection, using the exchanged key to encrypt future communication
 * **X.509** = standard defining the creation/format of public key certificate (also defines extensions eg _.pfx_)
 
 * _.cer_ = (PEM or DER) certificate only (Windows/Java environments)

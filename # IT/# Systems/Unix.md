@@ -3,6 +3,7 @@
 ## Quick Tips
 
 * `~{user}` = shortcut for _/home/{user}_ (of course `~` is shorter for self)
+* `~/.bash_history` = user history of Bash commands
 * [bash](https://git.savannah.gnu.org/git/bash.git)
 * [GNU Core Utilities](https://github.com/coreutils/coreutils)
 * [Bash Prompt HOWTO](https://tldp.org/HOWTO/Bash-Prompt-HOWTO/index.html)
@@ -10,16 +11,11 @@
 
 ## Glossary
 
-* _.{file}_ = hidden file
-* _.bashrc_ = personal script automatically configuring environment everytime a new terminal window is opened
 * **Bash** (Bourne Again Shell) = an interactive CLI & scripting language shell for UNIX-like OSs (1989)
-* **Bourne shell** = shell CLI interpreter by Stephen Bourne at Bell Labs (1979)
-* **CLI Shell** = command interpreter running inside a terminal that reads/parses/executes commands & print results
-  * Provides built-in commands (eg `alias`, `cd`, `echo`), external utilities (`ls`, `cp`, `grep`, `ssh`) & kernel services (`read()`, `write()`, `open()`, `fork`, `clone`)
-* **Clobber(ing)** = overwriting (a file)
-* **Console** = physical keyboard/display/teletype directly attached to a computer, that receives kernel messages an login prompts
+  * _.bashrc_ = personal script automatically configuring environment everytime a new terminal window is opened
+* **Bourne Shell** = shell CLI interpreter by Stephen Bourne at Bell Labs (1979)
 * **Dash** = `sh` shell (in _/bin/sh_)
-* **ELF** (Executable and Linkable Format) = an executable file
+* **ELF** (Executable and Linkable Format) = a Unix executable file
 * **Here Document** = file or input stream literal
 * **Here String** = one-line heredoc
 * **EUID** (Effective User ID) = actual user ID a process is running under, usually same as UID (but can be different when eg `sudo`)
@@ -33,10 +29,17 @@
 * **Root** = built-in/default administrative (super)user account in Unix/POSIX
   * All root users are superusers (with UID _0_) but the opposite is not true (they are all equivalent in power)
   * Home directory is _/root_ (kept outside of _/home_ so always available even if user partitions are not mounted)
+* **Shebang** = starting characters of a script used by OS kernel's program loader (called by shell via `execvp({script})`) indicating which shell/utility will run that script
+  * `#!/usr/bin/{command} -w` = specify command absolute location (with warnings `-w`)
+  * `#!/usr/bin/env {command}` = use the environment to find command (can differ per user, and arguments eg `-w` cannot be provided)
 * **Shell** = technically, any outer layer that mediates between a user and a kernel's services
-  * **Login Shell** = started when first logged in (eg console, `ssh`, `tty`), starting with a `-` (eg `-bash`), reads global config (_etc/profile_)
-  * **Non-Login Shell** = started after already logged in (eg `bash`, or opening a terminal window in desktop GUI environment)
-  * **Standard Shell** = CLI interpreter conforming to widely accepted specification (typically POSIX shell standard)
+  * **CLI Shell** = command interpreter running inside a terminal that reads/parses/executes commands & print results
+    * Exposes built-in commands (eg `alias`, `cd`, `echo`), external utilities (`ls`, `cp`, `grep`, `ssh`) & kernel services (`read()`, `write()`, `open()`, `fork`, `clone`)
+  * **Login** = started when first logged in (eg console, `ssh`, `tty`), starting with a `-` (eg `-bash`), reads/sets global config (_etc/profile_, **$PATH**)
+  * **Non-Login** = started after already logged in (eg `bash`, or opened as a terminal window in desktop GUI environment eg _Gnome_)
+  * **Interactive** = connected to a TTY, not started with `-c {command}`, nor a script shebang
+  * **Non-interactive** = started via `cron`, `systemd`, `-c`, a script
+  * **Standard** = CLI interpreter conforming to widely accepted specification (typically POSIX shell standard)
     * Must handle commands interactively or not, support scripting (flow) features, process/command substitution, provide a read-eval loop in interactive mode
 * [Signal](https://en.wikipedia.org/wiki/Signal_(IPC)#POSIX_signals) = asynchronous message/notification sent to process to trigger specific behavior (eg quitting, error handling)
   * _SIGINT_ = interrupts aprocess (like via `Ctrl + C`)
@@ -69,18 +72,22 @@
 * **Alpine Linux** = security-oriented lightweight Linux distribution
 * **Arch Linux** = minimal base system offering rapid update cycle of its software (via rolling-release model, à la Firefox)
 * **CentOS** = Linux distribution (_discontinued_)
+* **Gnome** = FOSS desktop environment for Linux/Unix-like OS used by many distributions
 * **Lubuntu Alternate** = Even lighter Lubuntu for low-RAM PC/laptops
 * **Lubuntu Desktop** = Lightweight Linux distribution based on Ubuntu
 * **Tails** (aka _The Amnesic Incognito Live System_) = secure DVD/USB Debian Linux Tor network based OS, writes to RAM not HDD (_1300MB_)
 
 ## File System
 
-* **ext*** = informal shorthand for Linux extended-filesystem family
+* _.{file}_ = hidden file
+* **ext** = informal shorthand for Linux extended-filesystem family
   * **ext** (**extfs**) = first native, 16MB files, no journaling (1992)
   * **ext2** = 2TB volumes, 4GB files, stable but not journaled (1993)
   * **ext3** = **ext2** + metadata journal enabling faster recovery after crashes (2001)
   * **ext4** = 1EB volumes, 16TB files, extents, delayed allocations, checksums, online defrag (2008-present)
-* **Directory** = special file mapping other file names to inodes
+* **File Descriptor** = a small non-negative integer that a process uses to refer to an open file object inside kernel
+  * Every new process starts with three already-open descriptors (stdin _0_, stdout _1_, and stderr _2_ as a parallel channel to provide non-necessarily error-related feedback)
+* **File Object** = anything that implements byte-stream interface (eg file, directory, block/character devices, pipes/fifos, sockets)
 * **File-type Indicator** = file (_-_), directory (_d_), symlink (_l_), devices (_c_ & _b_), FIFO/pipe (_p_), socket (_s_)
 * **File Mode (String)** = User/Group/Other `rwx` Permissions + Optional attribute
   * **User** = creator, **Group** = group User belongs to, **Other** = everyone who has access (ie an account) on the system
@@ -94,13 +101,6 @@
     * Only file owner, directory owner or _root_ can delete/rename entries (no other users even with write persmissions)
     * Eg world-writable directories such as _/tmp_ or _/var/tmp_ where everyone can write but not tamper with others files
     * Set via octal value _1000_
-* **Hard Link** = directory entry associating a name with a file (ie another name to same inode)
-  * Hard links to directories are usually not permitted (as they can cause a circular structure and interferences with programs)
-* **Inode** = data structure in a Unix-style file system that describes a file-system object (metadata, permissions)
-* **Inode Table** = Kernel-managed mapping of inodes to their content on disk
-* **Journaling** = crash-consistency using a write-ahead log/journal where sets of planned updates are first written
-* **Mounting** = attaching a filesystem (regardless of provenance) to a specific directory
-* **Soft Link** or **Symbolic Link** = file containing a (filesystem) path to another (potentially moved/erased) file
 * _/_ (root) = top
 * _boot_ = static files needed for initial boot stage (ie kernel images, bootloader configuration)
 * _bin_ & _sbin_ = minimal set of essential user command binaries (eg `ls`, `cp`, `sh`) & system binaries (eg `fsck`, `iptables`), available during boot/rescue
@@ -110,6 +110,7 @@
   * _/dev/sda_ = device-file handle for first SCSI-class block disk Linux kernel discovers at boot/when hot-plugged
 * _etc_ = host-specific system-wide configuration files & startup scripts (_/etc/ssh/sshd\_config_)
   * _/etc/group_ = plain-text mapping DB of group names to IDs & defaults, only editable by **root** (via `vigr`)
+  * _/etc/nologin_ = presence of this file prevents unprivileged users from logging into the system (useful to temporarily disable all unprivileged login ie non-root users)
   * _/etc/passwd_ = plain-text mapping DB of user names to IDs & defaults (home dir, login shell), only editable by **root** (via `vipw`)
   * _/etc/os-release_ =  OS version information
   * _/etc/shells_ = list of valid login shells (any script can be added here, even those that exit immediately)
@@ -119,7 +120,10 @@
 * _media_ = automated mounting of removable media (CD-ROMs, USB drives), by GUI desktop environment or system services (eg `udisks`)
 * _mnt_ = manual mounting by (sys)administrators
 * _opt_ = optional ad-on software packages installed outside system's package manager (eg _/opt/{package}_)
-* _proc_ = pseudo-filesystem exposing kernel & process informations as files (eg _/proc/cpuinfo_, per-PID directories)
+* _proc_ = pseudo-filesystem exposing kernel & process informations as files
+  * _/proc/{PID}_ = per-process information
+  * _/proc/{PID}/maps_ = live view of every virtual memory region mapped by Kernel into process' address space
+  * _/proc/cpuinfo_ = CPU cores information
 * _root_ =  home directory for the _root_ user (keep separate from _/home_ for security & availability during single-user maintenance reasons)
 * _run_ = early-boot temporary state like PID files & sockets, actually a tmpfs (ie stored in RAM) so cleared at reboot
 * _srv_ = system-served data (eg web, FTP, rsync repos)
@@ -164,6 +168,7 @@
   * `-f {fields}` = select only these fields
 * `date` = system date
 * `DATE`
+* `dd` = convert & copy a file
 * `deluser` & `delgroup` = remove a user or group from system
 * `df` (disk free) = displays disk space (`-h` for human-readable)
 * `diff` = content differences between two files files (see `cmp`)
@@ -172,8 +177,6 @@
 * `echo {text}` = display a line of text (`-e` enable interpretation of backslash escapes)
 * `env` = print current environment, or run a program in a modified environment (ie set environment variables then execute command in that altered context)
   * Used in scripts shebang (ie `#!/usr/bin/env {command}`) to let `env` find best fitting command
-* `exec` = replaces shell with given command (see standard C library `exec_` functions family)
-  * This creates a new process in same memory space, replacing existing segments in memory, but keeping original PID
 * `exit` = close session
 * `fg ({job_id})` = brings background job to foreground (most recently backgrounded/stopped job if no argument given)
 * `file` = determine file type
@@ -217,6 +220,8 @@
 * `less` = displays page by page (more efficient than `more`)
 * `ln {target} {name}` = creates a link file to an existing file/directory
   * `-s` aka `--symbolic` = creates a soft link
+* `login` = begin session on system (should be invoked via `exec login` from shell, so shell gets replaced and newly logged user does not return to caller previous shell session after exiting)
+  * `nologin` = politely refuse a login
 * `ls` = liste folder content
   * `/` = lists root files
   * `-a` = all (hidden, _._ & _.._)
@@ -225,7 +230,7 @@
   * `-i` = inode number
   * `-l` = long format (file type - file mode bits - # hard links - owner - group - size - timestamp - filename)
   * `abc*` = lists files starting with _abc_
-* `man ({section}) {command}` or `man {command}(.{section})` = help on command (in given or higher section)
+* `man ({section}) {command}` or `man {command}(.{section})` = help on command (section number indicate category, not priority/popularity)
   * `1` = user commands & programs (eg `crontab(1)`)
   * `2` = system calls (eg `open(2)`)
   * `3` = C library functions (eg `printf(3)`)
@@ -302,9 +307,9 @@
   * `-c "{format}"` or `--format "{format}"` = manage outputs (eg `%a` octal permissions, `%i` inode #, `%U` owner username)
   * Basically a more targeted `ls` on a single file, with access to individual properties
 * `su` (switch user)
-* `sudo` (superuser do) = runs a program with another user's priviledge (by default a superuser)
+* `sudo` (superuser do) = runs a program with another user's privilege (by default a superuser)
   * Useful to limit surface area by limiting direct root usage (ie disable direct login as root, especially remotely eg via ssh)
-  * Incarnates least priviledge principle: normal users (with admin rights) don't need superuser powers all the time
+  * Incarnates least privilege principle: normal users (with admin rights) don't need superuser powers all the time
   * sudo calls are logged, so there's built-in auditability/traceability
 * `systemctl` = manage services (`start`, `stop`, `status`)
 * `tail` = displays just the end (see `head`)
@@ -349,16 +354,22 @@
   * `-q` = all login names + number of users logged on
   * Eg `who | awk '{print $1}' | sort | uniq` = display sorted unique login names
 * `whoami` = user name associated with current effective user ID
+* `whois` = opens a TCP socket, calls a WHOIS server, and prints result
 * `write` = sends a message to another user
 * `xxd` = hex dump (& reverse)
 * `(un)zip`
 
-#### Extension & Utilities
+#### System Calls
 
-* `fork()` = creates a new process (returns _0_ in child and child's PID in parent)
+* `brk()`/`sbrk()` = (_obsolete_) controls heap size
+* `exec()` = replaces shell with given command (see standard C library `exec_` functions family)
+  * This creates a new process in same memory space, replacing existing segments in memory, but keeping original PID
+* `execve({file}, argv, envp)`
+* `fork()` = creates a new process (**returns** _0_ in child and child's PID in parent) with virtual memory copy of its parent until a write operation is performed (aka copy-on-write)
+  * Children inherit their parent's file-descriptor table entries, so all stdout arrive in same open-file object (so all outputs go to same terminal/file)
+* `mmap()` = maps a region of of a process virtual memory (address space) & a source of data (ie a file/device or anonymous memory via local pointer)
 * `wait()` = wait for first child to die
 * `waitpid({pid})` = wait for specific pid
-* `whois`
 
 ### Invocation, Pipes & Streams
 
@@ -372,11 +383,6 @@ They all use `fork()` under the hood to spawn sub-processes.
 * `<(command)` = process substitution (when a command expects a filename, not a string, eg `diff`, `sort`, `uniq`)
   * Uses a temporary named pipe or _/dev/fd/*_ under the hood, containing command output
   * Eg `diff <(sort a.txt) <(sort b.txt)` = creates two temp files, diff them, then deletes them
-
-* File Descriptors (I/O streams)
-  * _0_ = _stdin_
-  * _2_ = _stdout_
-  * _3_ = _stderr_ (not errors per se yet very useful to produce meta-feedback without polluting actual output)
 
 * File Redirection Operators
   * They redirect _stdin_/_stdout_/_stderr_ of a (sub)process (spawned by shell) to other files
@@ -413,8 +419,8 @@ They all use `fork()` under the hood to spawn sub-processes.
 * `$-` = special Bash variable containing current shell flags
 * `$?` = exit status/return code of last (foreground) command
 * `$!` = PID of last background command
-* `$$` = PID of current shell (or process )
-* `$0` = name of running shell or script
+* `$$` = PID of current shell (or process)
+* `$0` = name of running shell or script (`$1` first argument, `$2` second argument, etc)
 * `$HOME` = user directory
 * `LANG` = character enchoding
 * `$LOGNAME` = username (alternatively `$(whoami)`)
@@ -438,6 +444,8 @@ They all use `fork()` under the hood to spawn sub-processes.
 
 ### Shell Scripting
 
+When a script-type file is launched (via `./script.sh`), shell calls `execve(script.sh, argv, envp)`
+
 * `?` = exactly one character
 * `*` = zero or more characters
 * `[abc]` & `[!abc]` = chaacter classes (one of these & not one of these)
@@ -460,5 +468,6 @@ They all use `fork()` under the hood to spawn sub-processes.
   * `for i in {0..32..4}` = 0 to 32 by steps of 4
 
 ```bash
-
+#!/usr/bin/env bash
+exec more $1
 ```

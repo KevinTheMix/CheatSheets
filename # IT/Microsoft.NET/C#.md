@@ -90,10 +90,9 @@ Credit: _Tech World With Milan Milanović_
 * `unsafe` = required on sections that use pointers in C#. Also must set compiler to run in unsafe mode.
 * `using` = wrap `IDisposable` objects with a _using_ statement to ensure their proper automatic `Dispose()`-al
 * `var` = type inference => lets the compiler figure out the type (note: still **strongly typed** ie at compile-time)
-  * Value cannot be null and cannot be used at class-level (class variable) or method return type)
-  * Eg. `var i = 5;` compiles/built into `int i = 5;` (checkable with ILSpy)
-* `virtual` = marks a method in a parent class to be overriden in a child class. Methods are non-virtual by default. See <https://msdn.microsoft.com/en-us/library/9fkccyh4.aspx>
-  * In C++, `virtual` avoids the multiple inheritance [dreaded diamond](https://www.cs.technion.ac.il/users/yechiel/c++-faq/mi-diamond.html)
+  * Value cannot be null and cannot be used at class-level (class variable) or as method return type
+  * Eg `var i = 5;` compiles/built into `int i = 5;` (checkable with ILSpy)
+* `virtual` = makes function child-overridable, actual function to be called is determined at runtime based on objet instance (dynamic) type (methods are non-virtual by default)
 * `where T:` = generic conditions
   * Values = `struct`, `class`, `IKoko<T>`, `KokoClass`, `new()` (meaning it must have a default constructor, let alone it also has to be a _reference_ type)
   * Multiple conditions = `where T : FirstCondition, SecondCondition`
