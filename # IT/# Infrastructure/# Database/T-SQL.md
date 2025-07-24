@@ -1,6 +1,6 @@
-# SQL (Structured Query Language)
+# Transact-SQL (T-SQL)
 
-Transact-SQL (**T-SQL**) is Microsoft's and Sybase's proprietary SQL extension.
+Microsoft's and Sybase's proprietary extension to SQL.
 
 ## Quick Tips
 
@@ -30,6 +30,7 @@ Transact-SQL (**T-SQL**) is Microsoft's and Sybase's proprietary SQL extension.
   * Use to detect duplicates: partition on some possibly duplicate field(s) ordering on others (eg a timestamp), then delete rows with number higher than one (ie keeping only first created)
   * Eg `SELECT ROW_NUMBER() OVER (PARTITION BY HServerId, Date ORDER BY CreatedOn DESC) AS Row, Id, HServerId, Date, CreatedOn FROM app.HAvailability` (within a CTE or [nested FROM](https://stackoverflow.com/a/3491378))
   * [Alternative homogeneity detection](https://stackoverflow.com/questions/39922045) (eg `HAVING COUNT(DISTINCT column) <> 1` for all, or `HAVING COUNT(CASE WHEN column = 'value' THEN 1 END) = COUNT(*)` for a given _value_)
+* **SQL** (Structured Query Language)
 * **SQL Server Management Objects** (**SMO**) = manage SQL Server programmatically (ie from an appication)
 * [Temporary tables](https://www.red-gate.com/simple-talk/sql/t-sql-programming/temporary-tables-in-sql-server)
   * **Table variable** = variable of type `TABLE` (eg `DECLARE @table TABLE ({inline_columns_definition})`, [local and automatically dropped](https://stackoverflow.com/a/5653535))
@@ -125,4 +126,9 @@ When multiplying a non integer and dividing by that same number, _decimals_ lose
 
 ## Extensions
 
-* [ApexSQL](https://www.apexsql.com) = search field & tables names, [generate random sample data](https://www.apexsql.com/sql-tools-generate) for new tables/tests
+* **ApexSQL** = SSMS plugin for deep/meta (field & tables names) search
+  * [Generate random sample data](https://www.apexsql.com/sql-tools-generate) for new tables/tests
+* **SQL Server Data Tools (SSDT)** = SQL Server for Visual Studio (SQL Diff & SSIS)
+* **Microsoft® SQL Server® Express** = free MSSQL
+  * [2019.11](https://www.microsoft.com/fr-FR/download/details.aspx?id=101064)
+  * [2022.11](https://www.microsoft.com/fr-fr/sql-server/sql-server-downloads)

@@ -104,17 +104,22 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 * **mason** (_@brickhub.dev_) = generates boilerplate code based on bricks (ie interactive customizable & community-shared manifest files), augments `flutter create` with more flexible `mason add|make {brick_name}`
 * **mockito** (_@dart.dev_) = mock library for unit tests (inspired by Java's Mockito)
 * **onboarding_overlay** (-) = large overlays
+* **package_info_plus** (_@fluttercommunity.dev_) = meta-information about application package (name, version, build number)
 * **panara_dialogs** (_@panarastudios.in_) = info/confirmation/warning/error modal dialogs
 * **path** (_@dart.dev_) = helper to combine/construct paths
 * **path_parsing** (_@flutter.dev_) = create & manipulate paths, parse Path from SVG data string
 * **path_provider** = find commonly used locations on the filesystem for different devices
 * **plugin_platform_interface** (_@flutter.dev_)
+* **pub_version_plus** (_@mrgnhnt.com_) = increment fragments of a version (& build) number via single command
+  * Usage = `dart run pub_version_plus:main {major|minor|patch|build} (--pre-release {beta|alpha|dev})`
+  * Works well with CI/CD **when installed as a dev-dependency**
 * **quick_actions** (_@flutter.dev_) = device home screen app custom quick actions (appearing when long-pressing app icon)
 * **rect_getter** (_@debuggerx.com_) = obtain a widget's rectangular coordinates
 * **rnd** (_@gskinner.com_) = makes working with random values easier (global **Random** instance + helpful extension methods)
 * **rxdart** (_@fluttercommunity.dev_) = extends Dart **Streams** & **StreamControllers** with reactive programming
 * **searchfield** (_@maheshjamdade.com_) = simple customizable autocomplete search widget
 * **sensors_plus** (_@fluttercommunity.dev_) = accelerometer, gyroscope, magnetometer, barometer sensors
+* **share_plus** (_@fluttercommunity.dev_) = share (text/URL/images/files) content between apps, using platform's share dialog
 * **showcaseview** (_@simform.com_) = small modal onboarding overlay arrows
 * **sliver_tools** (_@pietervanloon.com_) = missing sliver package (related: [SliverFooter](https://stackoverflow.com/a/49621060/3559724) by Rémy Rousselet)
 * **system_tray** (-) = design a system tray menu for desktop (Linux, macOS, Windows) opening from the system tray app icon

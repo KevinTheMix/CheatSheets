@@ -16,6 +16,7 @@
   * **Replace** = overwrites existing characters as you type
   * **Select** = selected text is replaced as you type
   * **Visual** = select text to operate on
+* **Register x** = where cut content is stored (internally) to be pasted in Vim
 
 ## Commands
 
@@ -24,6 +25,7 @@
 * `R` = switch to **Replace** mode (à la Windows Insert)
 * `gh`/`gH` = select next char/whole line & switch to **Select** mode (use arrows to expand selection)
 * `v` = switch to **Visual** mode
+* `q:` or `q/` or `q?`  = command-line window
 * Counts (multipliers)
   * `{n}{motion}` = repeats motion _n_ times (can be used in place a single motion)
   * `{n}{cmd}` = plays command _n_ times
@@ -37,7 +39,7 @@ Can be used in Normal mode to jump at a position, or as an argument in a command
 * `h`/`j`/`k`/`l` = left/down/up/right
 * `e`/`E` = end of current or next word through newlines (`E` non-alphabetic characters don't separate)
 * `b`/`w` = word backward/forward (ie place cursor at beginning of next/previous word)
-* `0`/`$` = line beginning/end
+* `0`/`^^/`$` = line beginning/end
 * `#`/`*` = previous/next occurrence of word at cursor
 * `{`/`}` = previous/next paragraph
 * `gg`/`G` = beginning/end of file
@@ -63,7 +65,7 @@ Can be used in Normal mode to jump at a position, or as an argument in a command
   * `cc` = cut whole line & switch to **Insert**
   * `dd` = cut whole line
   * `D` = cut until end of line (same as `d$`)
-  * `dap` = cut whole paragrah (no matter cursor position within)
+  * `yap`/`dap` = copy/cut whole paragrah (no matter cursor position within)
   * `x`/`X` = cut character at/before cursor (à la backspace/delete)
   * `p`/`P` = paste (put) after/at cursor
   * `r{char}` = replace character at cursor with _char_
@@ -78,36 +80,42 @@ Can be used in Normal mode to jump at a position, or as an argument in a command
 * `Ctrl + d` = offer autocomplete suggestions
 * `{text}{Tab}` = autocomplete (cycle through shortlist if several, works for commands & files)
 * `:!{cmd}` = run (shell) command (note: autocomplete works too)
-* `:e {file}` = edit file (replaces current file)
+* `:e {file}` = edit file (replaces current file, for content insertion see `:r` below)
 * `:w` = write buffer (ie save file)
 * `:q` = quit current window (eg Help page), or Vim itself
 * `:wq` = save & quit
 * `:q!` = quit without saving
 * `:help ({subject})` or `F1` = help (eg `c_CTRL-D`, `insert-index`, full `user-manual`)
-* `shell` = start an embedded shell (default one from _.passwd_ or overriden via set option _shell=/bin/bash_)
+* `:shell` = start an embedded shell (default one from _.passwd_ or overriden via set option _shell=/bin/bash_)
 * `:terminal` = built-in terminal emulator
 * `:set {options}` = set one or more terminal options (prepend `no` to toggle option off)
-  * _autoindent_ = autoindent (copy indent from current line on new line)
+  * _ai_ (_autoindent_) = autoindent (copy indent from current line on new line)
+  * _bk_ (_backup_) = make a stickying around backup before overwriting an existing file (see _writebackup_ for temp while-writing backup)
   * _cp_ (_compatible_) = makes Vim Vi-compatible
   * _hls_ (_hlsearch_) = highlight all matches
   * _ic_ (_ignorecase_) = ignore case in searches
   * _is_ (_incsearch_) = incremental search (show partial matches, set by default)
   * _number_ = lines numbering
   * _wrapscan_ option = search cycling (wrap back around end of file)
+  * _et_ (_expandtab_) = use real tab character instead of spaces (default on)
+  * _sw_ (_shiftwidth_) = number of spaces for each step of auto-indent (_>>_, _<<_, _==_, _o_)
+  * _ts_ (_tabstop_) = width of tab character (eg `set ts=4`)
 
 #### Edition
 
 Spaces are optional.
 
-* `{n}` = n-th line
-* `.` = current line
-* `.+{n}` = n-th line after current
-* `{start},{end}` = range
+* Locations
+  * `{n}` = n-th line
+  * `.` = current line
+  * `±{n}` = n-th line (`.` is implied)
+* `{location},{location}` = range
 * `:{range} co {location}` = copy
 * `:{range} mo {location}` = move
 * `:{range}s/{from}/{to}/g` = substitution
-* `:r {file}` = insert file content (below cursor line)
-  * `:r !{command}` = insert output of command
+* `:m±{n}` = move line up/down
+* `:{location}r {file}` = insert file content (below cursor line)
+  * `:{location}r !{command}` = insert output of command
 * Substitution
   * `:s/{old}/{new}` = substitute once
   * `:s/{old}/{new}/c` = substitute with confirmation
@@ -137,6 +145,7 @@ This this mode, preceding text selection is used in place of a succeeding motion
 * `Ctrl + w, +` = increase  height by 1 line
 * `Ctrl + w, -` = decrease height by 1 line
 * `Ctrl + w, Ctrl + w` = jump from one window to another
+* `Ctrl + Shift + F` = modern text search
 
 ## Extensions
 

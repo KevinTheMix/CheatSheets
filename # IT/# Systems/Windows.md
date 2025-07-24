@@ -20,7 +20,6 @@
 * **Hypervisor** = soft/firm/hard-ware creates & runs a VM (eg _Oracle VirtualBox_, _VMWare Workstation (Pro)_, _Hyper-V_ by _Microsoft_)
 * `winget` (**Windows Package Manager**) = FOSS package manager CLI for Windows 10+ to install applications (2020)
 * **Windows Terminal** = a tabbed GUI-based terminal emulator (click the `v` to access various consoles/shells)
-* **WSL** (_Windows Subsystem for Linux_) = manually installable (via admin PowerShell `wsl --install`) component to run a GNU/Linux environment in Windows 10+ (without VM/dualboot)
 
 ## Shortcuts
 
@@ -107,8 +106,12 @@
 * `set {VAR}` = assignment
 * `setlocal`
 * `time`
-* `where {exe1} ({exe2} {exe3} …)` = display files path (searching by pattern)
+* `where {command(s)}` = display command paths (searching via wildcarded patterns)
 * `whoami`
+* `wsl` (Windows Subsystem for Linux) = run a GNU/Linux environment in Windows 10+ (without VM/dualboot)
+  * `--install` = initialize (run as admin)
+  * `--install (-)-d(istribution) {distro}` = install given distribution
+  * `--unregister {distro}` = irreversibly deletes distro & its filesystem (also via Windows Settings > Installed Apps > Uninstall)
 
 ### Network
 

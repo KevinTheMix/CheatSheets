@@ -61,6 +61,7 @@ Arrays are actually ordered maps (aka hashtables ie values-keys associations), a
 * `count($tab)` = number of elements
 * `sizeof($tab)` = number of elements
 * `in_array($needle, $haystack)` = true if a value (case-sensitively for strings) appears in an array
+* `array_key_exists($key, $array)` = check if given key/index exists in array
 
 * `reset($tab)` = rewing pointer to first element
 * `each` = returns an array with two items (key,value) and advances cursor

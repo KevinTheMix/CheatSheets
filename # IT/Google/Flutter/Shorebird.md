@@ -15,7 +15,7 @@ Cannot update native changes (such as plugins using platform channels).
 Two options:
 
 * Powershell = `Set-ExecutionPolicy RemoteSigned -scope CurrentUser # Needed to execute remote scripts` then `iwr -UseBasicParsing 'https://raw.githubusercontent.com/shorebirdtech/install/main/install.ps1'|iex` (installs in _~/.shorebird/bin_)
-* Git = `git clone -b stable https://github.com/shorebirdtech/shorebird.git` (then add that /bin/ to Windows _PATH_)
+* Git = `git clone -b stable https://github.com/shorebirdtech/shorebird.git` (then add that _/bin/_ to Windows _PATH_)
 
 ## CLI
 

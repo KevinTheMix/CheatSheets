@@ -9,11 +9,16 @@
 ## Glossary
 
 * **AES** (Advanced Encryption Standard, aka Rijndael) = symmetric data encryption specification (via matrix transformation)
+* **Curve25519** = elliptic curve designed for use in ECDH
 * **DES** (Data Encryption Standard) = (_obsolete_) older symmetric key algorithm using a (now-considered short) 56 bits key
 * **Diffie-Hellman** shared key/secret exchange = generation & transmission of a symmetric key (eg SSL/TLS) over a **public channel** (eg mixing paints)
 * **Double Ratchet Algorithm** = _Signal_ protocol
-* **Elliptic Curve Digital Signature Algorithm** (ECDSA) = modern & efficient asymmetric keys for digital signature (authentication)
-* **Elliptic Curve Diffie-Hellman Ephemeral** (ECDHE) = improved Diffie-Hellman, used in TLS to derive a temporary shared session key
+* **Digital Signature Algorithm** (DSA) = public-key crypto digital signature proposed as FIPS (US standard) by NIST (US commerce promotion)
+* **EdDSA** (Edward-curve Digital Signature Algorithm) = digital signature scheme
+* **Ed25519** = EdDSA using SHA-512 and a Curve25519-related elliptic curve
+* **Elliptic Curve Cryptography** (ECC) = public-key crypto based on algebraic structure of elliptic curves over finit fields
+* **Elliptic Curve Digital Signature Algorithm** (ECDSA) = elliptic curve DSA, a modern & efficient asymmetric keys for digital signature (authentication)
+* **Elliptic Curve Diffie-Hellman Ephemeral** (ECDHE) = improved Diffie-Hellman, used in TLS & SSH to derive a temporary shared session key
 * **Evaluation Assurance Level** (EAL) = methodological confidence in entire IT product/system (not only crypto)
 * **Federal Information Processing Standard** (FIPS) = security requirement for cryptographic modules (examines correct implementation of approved algorithms)
 * **HMAC** (Hardware-based Message Authentication Code) = specific type of MAC via a crypto hash function & secret crypto key
@@ -21,6 +26,7 @@
 * **Key Derivation** = process to generate cryptographically strong keys from one or more values (eg keys, passphrases)
 * **Key Partitioning** = dividing a single key into a set of keys (eg splitting a 256-bit key into two keys of 128 bits each)
 * **MAC** (Message Authentication Code) = short piece of information to attest a message's **authenticity & integrity** (aka checksum, hash, error detection)
+  * Encryption ensures confidentiality, but not that a message wasn't altered (eg blind bits flipping, by an attacker with access to data)
 * **On-the-fly encryption** = method used by some disk encryption tools (eg _VeraCrypt_) where data gets automatically de/encrypted as it is loaded/saved
 * **One-Time Pad** (OTP) = encryption technique that's uncrackable (even with quantum computing), but necessitate a single-use **pre-shared** key that's longer than the message
 * **PBKDF** (Password-Based Key Derivation Function) = turn other keys or human-friendly passphrases into strong cryptographic keys with a sliding computational cost to reduce vulnerability to brute-force attacks
@@ -60,13 +66,6 @@ Certificates are often associated with **TLS** (for HTTPS) and **SAML** authenti
   * Those renown authorities are assumed to have performed some authenticity/integrity checks on a website before delivering a certificate
   * Any website that requires SSL (for HTTPS) must first register to one of those public root CA and pay a subscription fee
 * **Self-Signed Certificate** = certificate that are not issued by a CA, basically managing custom certificates (chain) manually
-* **SSL/TLS Handshake**
-  * Client initiates connection to the server on port 443 (the default port for HTTPS)
-  * Server responds by presenting its SSL/TLS certificate file content (over TLS itself, with TCP underneath)
-  * Client verifies certificate (CA signature, domain name) & initiate a (symmetric) session key exchange (Diffie-Hellmann or some variation)
-  * Server must sign that key exchange using its certificate private key (only that key is able to complete the handshake)
-  * An attacker possessing on the (public) certificate cannot forge a signature, nor decrypt handshake messages
-  * The client and server establish a secure connection, using the exchanged key to encrypt future communication
 * **X.509** = standard defining the creation/format of public key certificate (also defines extensions eg _.pfx_)
 
 * _.cer_ = (PEM or DER) certificate only (Windows/Java environments)

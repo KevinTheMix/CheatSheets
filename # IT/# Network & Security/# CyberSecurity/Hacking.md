@@ -1,4 +1,4 @@
-# Hacking & Pentesting
+# Team Red
 
 ## Quick Tips
 
@@ -8,8 +8,7 @@
   * Remote desktop to home computer
   * SSH Tunnel + Proxy Socks via PuTTY (_Laurent D'Havé_ & _Frédéric Branger_)
 * [Sticky notes for pentesting](https://exploit-notes.hdks.org)
-* <https://learnhacking.io/5-infosec-newsletters-youll-actually-read>
-* [Cybersecurity Roadmap](https://roadmap.sh/cyber-security)
+* [Active Directory Security](https://adsecurity.org)
 
 ## Glossary
 
@@ -17,29 +16,12 @@
 * **Attack Surface** = sum of different points (attack vectors) where attackers can try to enter/extract/control
 * **Attack Vector** = specific path/method/scenario that can be exploited
 * **Buffer Overflow** = manipulates a region of memory to inject malicious code, then sets execution to that address (eg overwrites a function return address or function pointer)
-* **Capture The Flag** (CTF) = exercise to find flags (ie text strings) secretly hidden in purposefully vulnerable programs/websites, for educational/competitive purposes
-* **CCNA** (Cisco Certified Network Associate) = network certification
-* **CompTIA** (Computing Technology Industry Association) = US trade association issuing vendor-neutral (eg not Cisco-specific) professional IT certifications
-  * Eg _A+_ (Help Desk Support Specialist), _Network+_, _PenTest+_, _Security+_, _Security Pro_, _Cybersecurity Analyst+_ (CySA+)
 * **Exploit** = method/code that takes advantage of vulnerabilities, typically for malicious purposes
-* **Firewall**
-  * **Application Firewall** = controls I/O or system calls of an application/service, monitors & blocks communications based on configured policy (either Network-based for TCP/IP on Host-based for system calls)
-  * **Web Application Firewall** (WAF) = specific application firewall to filter/monitor/block HTTP traffic, mitigating known (eg SQLi, XSS, FI) and zero-day vulnerabilities
-* **Hack The Box** (HTB) = online cybersecurity courses & certifications
-  * **CPTS** (Certified Penetration Testing Specialist) = certification
-* **InfoSec** (Information Security) = protecting information by mitigating risks
 * **Magic Numbers** (or **MAgic Bytes**) = first few bytes identifying a file content type
 * **Man-in-the-Middle** (MitM) = more than just snooping on a line, can intercept and pretend to be the other party (ie a secure channel with an attacker isn't secure at all)
-* **OPSEC** (Operation Security) = military analysis of whether critical information is accessible to the enemy (trackability prevention)
-  * Also refers to obfuscating/hiding techniques by hackers to evade security & getting found
-* **OSCP** (Offensive Security Certified Professional, by _Offensive Security_ aka _Offsec_) = ethical hacking certification (gold standard for cybersecurity certifications)
-* **OWASP** (Open Worldwide Application Security Project) = online community producing free articles/methodologies/tools on IoT, software & web security
-* **picoCTF** (_Carnegie Mellong University_) = CTFs courses & competitions
 * **Reverse shell** = remote shell execution, from target to attacker thus bypassing protection measures blocking ingoing-only requests (eg firewalls, IDS, IPS)
   * Precondition = attacker has access to target's shell, launching an interactive `bash` listening to commands served by attacker (via _ncat_)
-* **SOC** (Security Operations Center) = always-on hub of dedicated team/processes/tools that monitori, detect, analyze, respond to incidents/threats across an organization
 * **Threat** = potential negative action/event enabled by a vulnerability, resulting in unwanted impact
-* **TryHackMe** = CTFs (more beginner friendly than HTB)
 * **Virus** = replicates itself when executed by modifying other programs with its own code
 * **Vulnerability** = flaw/weakness in a system's design/implementation/management that can be exploited
 * **Worm** = standalone program that replicates itself and spreads to other computers
@@ -99,8 +81,3 @@
 * _WinDump_ = Windows port of tcpdump (uses WinPcap)
 * _Wireshark_ = network packets analyzer (uses WinPcap or Npcap)
   * Protocol inspection, live capture & offline analysis, rich VoIP analysis, multi-platform, multiple capture file formats, decryption support, GUI & CLI (TShark)
-
-### Web
-
-* _CeWL_ (Custom Word List generator) = crawls & extracts a website's keywords, to feed as contextal passwords fragments into a cracker
-* _gobuster_ = scans all (potentially nonreferenced) files/pages on a website via a wordlist

@@ -1,16 +1,21 @@
 # PowerShell
 
-## Code Samples
+## Glossary
 
-* Open prompt as admin = `Start-Process powershell -Verb runAs`
-* Long-running _ping_ with timeStamps:
+* **cmdlet** = PowerShell lightweight command, typically returning a .NET object to next command in pipeline
 
-```PowerShell
-ping.exe -t rtlbruadrep01|Foreach{"{0} - {1}" -f (Get-Date),$_} | Select-String -pattern "temps(<1ms|=1 ms)" -notMatch > "D:\ADREP01.log"
-ping.exe -t 192.168.35.42|Foreach{"{0} - {1}" -f (Get-Date),$_} | Select-String -pattern "temps(<1ms|=[1-3] ms)" -notMatch
-```
+## API
 
-See <https://stackoverflow.com/questions/24906268/ping-with-timestamp>
-See <https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/select-string?view=powershell-6>
-See <https://stackoverflow.com/questions/18183939/powershell-select-string-pattern-notmatch>
-See <https://stackoverflow.com/questions/37297041/powershell-or-operator-in-select-string>
+* `Get-Date` = get current date & time
+* `ping.exe {host}` = ping host (`-t` indefinitely)
+  * `ping.exe -t localhost | Foreach{"{0} - {1}" -f (Get-Date),$_} | Select-String -pattern "time(<1ms|=[1-3]ms)" -notMatch` = long-running higher-latencies ping with timestamp
+* `Select-String -pattern {regex}` = use regular expression to search for text patterns in input strings/files (à la Unix `grep` or Windows `findstr.exe`)
+  `-notMatch` = not matching pattern
+* `Start-Process {command}` = executes/opens command or file (in new window)
+  * `-FilePath {file}` = local file
+  * `-verb {action}` = what to do with file (`Edit`, `Open`, `Play`, `Print`, `PrintTo`, `RunAs` as admin, `RunAsUser`)
+  * `-WorkingDirectory {path}` = path to file
+
+## Streams
+
+* `> {file}` = redirect to file

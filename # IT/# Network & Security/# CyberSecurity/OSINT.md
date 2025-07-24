@@ -19,11 +19,12 @@
 ## Tools
 
 * [Autosploit](https://github.com/NullArray/AutoSploit) = automate exploitation of remote hosts identified via Shodan, Censys & Zoomeye
-* _Censys_ = platform scanning entire internet to provide information about every server (IP, hostname, services & protocols)
+* _Censys_ = scanned entire internet to provide information about Internet-connected hosts, websites, certificates, and other Internet assets (IP, hostname, services & protocols)
 * [Facebook ExtractFace](https://github.com/mrpnkt/ExtractFace)
 * [Facebook Sleep Stats](https://github.com/sorenlouv/fb-sleep-stats)
-* _Have I Been Pwned_ = enter target email
+* [Have I Been Pwned](https://haveibeenpwned.com) (HIBP) = enter target email
 * _Maltego_ = OSINT tool for link analysis & data visualization of relationships between people/groups/websites/domains/networks, real-time data mining, information as node-based graph to identify patterns
-* _Shodan_ = IoT search engine (webcams, unprotected devices)
+* _Shodan_ = IoT search engine (servers, routers, webcams, unprotected devices)
 * _Wayback Machine_ (by _Internet Archive_) = investigate (now possibly erased) past
+* [WiGLE](https://wigle.net) = information about wireless hotspots around world
 * _Zoomeye_ = analyze devices connected to internet (dynamic maps of assets, ports & protocols)

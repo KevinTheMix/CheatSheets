@@ -24,6 +24,9 @@
 ## Tools
 
 * _Burp Suite Scanner_ (by _PortSwigger_) = web app vulnerability testing/scanning graphical tool, server-side vulnerabilities, Interactive Application Security Testing (IAST), web proxy, web app crawler
+* _CeWL_ (Custom Word List generator) = crawls & extracts a website's keywords, to feed as contextal passwords fragments into a cracker
+* `dirb` (directory buster) = scans all (potentially nonreferenced) files/pages on a website via a dictionary/wordlist
+* _gobuster_ = scans all (potentially nonreferenced) files/pages on a website via a wordlist
 * _IronWASP_ = open-source web app vulnerability testing/scanning, reports, extensible
 * _OWASP Zap_ = web app security testing, AJAX Spidering, Fuzzing, REST APIs testing, active/passive scan, Filters, Anti-CSRF tokens, WebSocket testing, HTTP sessions, Spider
 

@@ -16,24 +16,27 @@
 * **Bourne Shell** = shell CLI interpreter by Stephen Bourne at Bell Labs (1979)
 * **Dash** = `sh` shell (in _/bin/sh_)
 * **ELF** (Executable and Linkable Format) = a Unix executable file
+* **GNU** (GNU's Not Unix) = collection of free software launched by Richard Stallman in 1983, a set of user-space tools added to most Linux kernels (eg gcc, Bash) under GNU GPL
 * **Here Document** = file or input stream literal
 * **Here String** = one-line heredoc
 * **EUID** (Effective User ID) = actual user ID a process is running under, usually same as UID (but can be different when eg `sudo`)
 * **IPC** (Inter-Process Communication) = eg pipes
+* **Linux** = independant open-source re-implementation of Unix-like kernel by Linus Torvalds in 1991, released under GNU GPL
 * **Orphan Process** = child process whose parent has died (terminated before child), automatically adopted & cleaned by `init` or more modern `systemd` (ie common ancestor of all processes with PID _1_)
 * **Pipe** = kernel(-space) managed memory buffered stream between one process _stdout_ to another _stdin_ (ie a unidirectional synchronous IPC)
   * Producer process must first feed a pipe, ie flushing its internal user-space data into kernel-space pipe
   * **Anonymous Pipe** = stored in memory, exists only during lifetime of pipe-using processes (eg `a | b`)
   * **Named Pipe** (aka **FIFOs**) = appear as FS node but data actually also passed in memory via which unrelated processes can read/write (exist until deleted)
 * **POSIX** (Portable Operating System Interface) = family of standards for compatilibity between OSes (eg APIs, CLI shells commands, utility interfaces )
+* **REPL** (Read-Eval-Print Loop) = interactive programming environment taking single inputs, executes them & returns result to user (eg CLI shells)
 * **Root** = built-in/default administrative (super)user account in Unix/POSIX
   * All root users are superusers (with UID _0_) but the opposite is not true (they are all equivalent in power)
   * Home directory is _/root_ (kept outside of _/home_ so always available even if user partitions are not mounted)
-* **Shebang** = starting characters of a script used by OS kernel's program loader (called by shell via `execvp({script})`) indicating which shell/utility will run that script
+* **Shebang** = starting characters of a script used by OS kernel to determine which shell/utility will run that script
   * `#!/usr/bin/{command} -w` = specify command absolute location (with warnings `-w`)
   * `#!/usr/bin/env {command}` = use the environment to find command (can differ per user, and arguments eg `-w` cannot be provided)
 * **Shell** = technically, any outer layer that mediates between a user and a kernel's services
-  * **CLI Shell** = command interpreter running inside a terminal that reads/parses/executes commands & print results
+  * **CLI Shell** = REPL command interpreter running inside a terminal that reads/parses/executes commands & print results
     * Exposes built-in commands (eg `alias`, `cd`, `echo`), external utilities (`ls`, `cp`, `grep`, `ssh`) & kernel services (`read()`, `write()`, `open()`, `fork`, `clone`)
   * **Login** = started when first logged in (eg console, `ssh`, `tty`), starting with a `-` (eg `-bash`), reads/sets global config (_etc/profile_, **$PATH**)
   * **Non-Login** = started after already logged in (eg `bash`, or opened as a terminal window in desktop GUI environment eg _Gnome_)
@@ -51,14 +54,16 @@
 * **Superuser** = any process running with special UID _0_ (eg **Root** or via `sudo`, but more can be added to _/etc/passwd_)
   * Any user/process with UID _0_ has full control over the system (ie can read/write/execute anything and change any system setting)
 * **Syscall** = request by a user-space program to a kernel service (eg `read()`, `write()`, `fork()`, `execve()`, `mmap()` memory allocation, `open()`, `unlink()`, `socket()`, `bind()`)
+* **Teletypewriter** = an ancient electromechanical printer-keyboard device
 * Terminals
-  * **Hardware Terminal** = physical device (keyboard + printer/screen) letting a human talk to a multi-user computer/mainframe over a serial line
-  * **TTY** (Teletypewriter) = in Unix, any (hardware or software) text terminal, a special kernel device file (eg _/dev/tty_, _/dev/tty1_, _/dev/pts/3_, etc) from which interactive/login shells can read inputs
-  * **Terminal Emulator** = software GUI that imitates vintage hardware terminals by opening a pseudo-terminal so programs think they interact with a real tty, and translating stream of I/O control codes into pixels
-  * **Pseudo-Terminal** (PTY) = a master-slave pair of kernel objects
+  * **Hardware Terminal** = old-ass physical device (keyboard + printer/screen) letting a human talk to a multi-user computer/mainframe over a serial line
+  * **TTY** (Teletypewriter) = any (hardware or software) text terminal, a special kernel device file (eg _/dev/tty_, _/dev/tty1_, _/dev/pts/3_, etc) from which shells can read/write
+  * **Terminal Emulator** = software GUI that imitates vintage hardware terminals by opening a pseudo-terminal so programs think they interact with a real tty, translating stream of I/O control codes into pixels
+  * **Pseudo-Terminal** (PTY) = pair of kernel objects making (master) applications (eg `ssh`, `tmux`, a new terminal tab) believe they interact with a human (TTY) whereas it is another (slave) program
     * Master end  (_/dev/ptmx_) = owned by terminal emulator
-    * Slave end  (_/dev/pts/N_) = looks exactly like a real tty device to whatever program is launched (eg `shell`, `ssh`, `top`, `vim`)
+    * Slave end  (_/dev/pts/N_) = looks exactly like a real tty device but real I/O originates from another program launched by user (eg `shell`, `ssh`, `top`, `vim`)
 * **tmpfs** = RAM-based filesystem (stores files in memory, not disk)
+* **Unix** = original OS family developed by AT&T Bell Labs in 1970, with most variants being propriertary (eg Solaris)
 * **Useless Use Of Cat** (UUOC) = jargon describing piping a cat command (`cat file | cmd`) in place of a more efficient yet less legible shell open (`cmd < file`)
 * **Zombie Process** = completed but its entry still exists in process table (until parent uses `wait()`)
 
@@ -73,8 +78,10 @@
 * **Arch Linux** = minimal base system offering rapid update cycle of its software (via rolling-release model, à la Firefox)
 * **CentOS** = Linux distribution (_discontinued_)
 * **Gnome** = FOSS desktop environment for Linux/Unix-like OS used by many distributions
+* **Kali Linux** = Debian-based Linux distribution designed for digital forensics & pentesting
 * **Lubuntu Alternate** = Even lighter Lubuntu for low-RAM PC/laptops
 * **Lubuntu Desktop** = Lightweight Linux distribution based on Ubuntu
+* **Parrot OS** = Debian-based Linux distribution for cybersecurity/hackers/sysadmins (with 600+ tools for blue/read team operations)
 * **Tails** (aka _The Amnesic Incognito Live System_) = secure DVD/USB Debian Linux Tor network based OS, writes to RAM not HDD (_1300MB_)
 
 ## File System
@@ -144,7 +151,7 @@
 
 * [`AWK`](https://en.wikipedia.org/wiki/AWK) = full-fledged domain-specific progrmaming language and data extraction/reporting tool for text processing (filter & pattern search)
   * Flexible, handles conditionals, regex, calculated fields
-* `bash` = (opens a new) bash process (_/bin/bash_)
+* `bash ({script})` = starts a new bash process (interactive shell, or interprets script if provided)
 * `base64` = base64 encode/decode
 * `bc` (basic calculator) = arbitrary-precision arithmetic language
 * `bzip2` = (_bz2_) file compressor (Burrows-Wheeler block sorting text compression algorithm), better than gzip
@@ -163,7 +170,10 @@
 * `cp {file} {target}` = copy (target may be a file, or directory in which case source file is added to that directory)
 * `cron` = job scheduler (_minute hour day month weekday_ (as 0-6), `@reboot` once at reboot)
 * `crontab` = maintain crontab files for individual users
-* `curl` = web request
+* `curl` = transfer data from/to a (mail or web) server using URLs
+  * `-X` = request method to use when starting the transfer
+  * `-H {header}` = header (eg `accept: application/json` or `Content-Type: application/json`)
+  * `-d` = data to send in a HTTP POST request
 * `cut` = split (`-d '{delimiter}'`) & splice (`-b {byte_range}`, `-c {char_range}`, `-f {fieldid_range}`)
   * `-f {fields}` = select only these fields
 * `date` = system date
@@ -201,6 +211,7 @@
 * `gdb` = GNU Debugger
 * `gpasswd` = administer _/etc/group_ & _/etc/gshadow_
 * `grep {pattern} {file}` (g/re/p aka global regular expression print) = match lines using regular expression patterns
+  * `-i` = ignore case
   * `-P` = use regular expressions
   * `-x` = pattern must match whole line (eg regex `^pattern$`)
 * `gzip` = (_gz_) compress/expand files (Lempel-Ziv coding LZ77)
@@ -217,7 +228,7 @@
 * `kill {pid}` or `kill %{job_id}` = sends a signal a process (see `pkill`)
   * `kill -9` = SIGKILL signal
 * `ldd {file}` = print shared object/libraries dependencies
-* `less` = displays page by page (more efficient than `more`)
+* `less` = displays page by page (more efficient than `more`, used by `man` to display its help)
 * `ln {target} {name}` = creates a link file to an existing file/directory
   * `-s` aka `--symbolic` = creates a soft link
 * `login` = begin session on system (should be invoked via `exec login` from shell, so shell gets replaced and newly logged user does not return to caller previous shell session after exiting)
@@ -245,10 +256,11 @@
 * `more` = display file contents in a terminal with paging (read whole file upfront, see `less`)
 * `mount {path eg /dev/floppy}` & `unmount` = (un)mount a filesystem
 * `mv {source} {target}` = rename/move
+* `nano` = small friendly editor
 * `nc` (aka `netcat`) = open/send/listen to TCP/UDP/sockets connections, scan ports
   * `-l (-p) {port}` = listens on a given port (if data is sitting in inbound pipe buffer, it is sent as soon as client connects & a socket opens)
   * `-l -k` = keep listening (when a connection is completed, listen for another one)
-* `netstat` (net statistics) or `ss` = displays open ports
+* `netstat` (Net Statistics) or `ss` (Socket Statistics, see below) = displays open ports
   * `-tulpn` = TCP/UDP, listening, PID/Program name for sockets, don't resolve names
 * `nmap` (Network Mapper) = network exploration & port scanner
 * `od` = (octal) dumping aka display file content in DUMP format (`-tx1` for hexadecimal)
@@ -263,12 +275,12 @@
   * `-e` = every process on system
   * `-f` = full-format (adds columns, displays command arguments)
   * `-l` = long format
-  * `-o {format}` = output format (eg `ps -o comm=` returns command name without path/arguments & suppresses column header as it is set to be all empty)
+  * `-o {format}` = output format (eg `ps -o ppid` displays parent PID, `ps -o comm=` displays commands without path/arguments/column header)
   * `-p {pid(s)}` = select by pid (eg `ps -p $$` returns about current shell process)
   * `-u {user}` = select by user (eg `ps -u $USER` returns all current user processes)
   * `-y` = don't show flags
   * `--forest` = ASCII art process tree
-* `pwd` (print working directory) = displays current directory name
+* `pwd` (print working directory) = displays current directory
 * `reboot` (with `sudo`)
 * `reset` = initialize/reset terminal state
 * `rm` (remove) = delete
@@ -281,10 +293,11 @@
   * `sed s` = substitute (eg `echo Sunday | sed 's/day/night/'` outputs _Sunnight_)
 * `setgid` (Set Group Identity) = access rights flags allowing to run executable with group permissions
 * `setuid` (Set User Identity) = access rights flags allowing to run executable with owner permissions
+* `sftp` = OpenSSH secure file transfer
 * `sh` = (opens a new) dash process (_/bin/sh_)
-* `shred {file}` = replaces file content with random data
+* `shred {file}` = replaces file content with random data (`-n 1` for single pass)
 * `shutdown` (with `sudo`) = turn off computer (`-h now` for immediately)
-* `sleep {time}` = delay for a specific amount of time (`sleep {time} &` in background)
+* `sleep {n}({suffix})` = delay for a specific amount of time (`s` second default suffix, `sleep {time} &` in background)
 * `socat` (SOckect CAT) = establishes bidirectional byte streams & transfers data between them
 * `sort {file}` = sort alphabetically
 * `source {script}` or `. {script}` = executes script in current shell context (not a subshell)
@@ -326,11 +339,10 @@
     * `{arrow}` or `o` = select pane
     * `d` = detach current client (session keeps on running)
   * Also offers scripting commands
-* `touch` = change file access & modification times
 * `top` = running processes with PID, CPU, memory usage (à la Windows Task Manager, see `htop`)
-* `touch {file(s)}` = creates one or moremultiple empty files
-  * `one two three` = creates multiple files
-  * `prefix{i..n}` = creates multiple files
+* `touch {file(s)}` = creates one or multiple empty files, or update existing files access/modification times
+  * `f1 f2 f3` = creates multiple files
+  * `prefix{i..n}` (literal curly braces) = creates multiple files
   * `-d tomorrow koko` = creates file with given creation date
 * `tr {from} {to}` = (translate/delete) characters manipulation (eg `tr a-z A-Z` uppercase, `tr 'A-Za-z' 'N-ZA-Mn-za-m'` ROT13)
 * `traceroute`
@@ -349,7 +361,7 @@
 * `wget` = web request
 * `whatis {command}` = one-line summary of command
 * `whereis {command}` = displays all locations where command is located
-* `which {command}` = display location of an executable
+* `which {command}` = locate a command (eg `which $SHELL`)
 * `who` = information about users currently logged in
   * `-q` = all login names + number of users logged on
   * Eg `who | awk '{print $1}' | sort | uniq` = display sorted unique login names
@@ -362,9 +374,10 @@
 #### System Calls
 
 * `brk()`/`sbrk()` = (_obsolete_) controls heap size
-* `exec()` = replaces shell with given command (see standard C library `exec_` functions family)
+* `exec()` = replaces shell with given command (ie no subshell is created, see standard C library `exec_` functions family)
   * This creates a new process in same memory space, replacing existing segments in memory, but keeping original PID
-* `execve({file}, argv, envp)`
+* `execve(file, argv, envp)` = executes program by path, replacing current process
+* `execvp(file, argv)`
 * `fork()` = creates a new process (**returns** _0_ in child and child's PID in parent) with virtual memory copy of its parent until a write operation is performed (aka copy-on-write)
   * Children inherit their parent's file-descriptor table entries, so all stdout arrive in same open-file object (so all outputs go to same terminal/file)
 * `mmap()` = maps a region of of a process virtual memory (address space) & a source of data (ie a file/device or anonymous memory via local pointer)
@@ -413,8 +426,9 @@ They all use `fork()` under the hood to spawn sub-processes.
 * `set` = display variables & functions
 * `unset {var}` = deletes both shell & environment copies (if present) of a variable
 
-* `var={value}` = defines a local variable (not inherited by children unless exported via `export var(={value})` or configured in _~/.bashrc_)
-* `$variable` = parameter expansion, use shell or environment variable
+* `var={value}` (no spaces) = defines a local variable (not inherited by children unless exported via `export var(={value})` or configured in _~/.bashrc_)
+* `$variable` = parameter expansion, use shell/environment variable (warning: interpolation requires double quotes)
+* `"$KOKO"` (and NOT `'$KOKO'`) = string interpolation only works with double quotes
 * `[ -z "${variable+x}" ]` = checks whether a variable is set (using parameter expansion incomprehensible syntax)
 * `$-` = special Bash variable containing current shell flags
 * `$?` = exit status/return code of last (foreground) command
@@ -444,8 +458,6 @@ They all use `fork()` under the hood to spawn sub-processes.
 
 ### Shell Scripting
 
-When a script-type file is launched (via `./script.sh`), shell calls `execve(script.sh, argv, envp)`
-
 * `?` = exactly one character
 * `*` = zero or more characters
 * `[abc]` & `[!abc]` = chaacter classes (one of these & not one of these)
@@ -471,3 +483,23 @@ When a script-type file is launched (via `./script.sh`), shell calls `execve(scr
 #!/usr/bin/env bash
 exec more $1
 ```
+
+#### Launch
+
+When a script is launched via `./script.sh`:
+
+1. current shell (eg `bash`) recognizes file as executable and a pathname (ie a custom not built-in script)
+2. current shell forks itself and `wait()` for child exit status
+3. child shell calls `execve("./script.sh", ["./script.sh", ...], env)`, effectively ceasing to exist as a shell
+4. OS kernel handles that call & takes over, reads shebang for interpreter, launches `{interpreter} script.sh` (with arguments)
+5. interpreter (eg `bash`/`python`) replaces child process image (keeping its PID) & execute script in parent inherited environment/FDs but in own process/working directory
+6. script ends (exit or EOF), original shell `wait()` reaps and sets `$?` (status of last fg command)
+
+When a script is launched via `bash script.sh`:
+
+1. current shell looks up `bash` command in _$PATH_
+2. current shell forks & `wait()` for child exit status
+3. child shell calls `execve("/usr/bin/bash", ["bash","script.sh",…], envp)`
+4. kernel loads `bash` ELF binary (but not _script.sh_ as an executable, which is instead passed as data)
+5. `bash` interpreter opens/reads _script.sh_ argument (which must be readable, but not executable)
+6. _script.sh_ is interpreted, shebang is seen as comment & ignored

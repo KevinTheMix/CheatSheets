@@ -1,4 +1,4 @@
-# [Flutter](https://gallery.flutter.dev)
+# Flutter
 
 Highly performant (close to native) open-source UI **SDK** by Google for cross mobile (Android/iOS) & desktop (Windows, MacOS, Linux) & later Web applications from a single (Dart) codebase.
 
@@ -188,16 +188,16 @@ Use commands with either long/short names (eg `flutter --option=value` or just `
 
 * `flutter --version`
 * `flutter analyze` = inspect code and display all infos/warnings/errors
-* `flutter build`
-  * `flutter build {platform} --release` = build in _build/app/outputs/_
-  * `flutter build {platform} --obfuscate --split-debug-info={symbols_directory}` = obfuscate & save symbols mapping file to directory
-  * `flutter build appbundle` = builds an [Android App Bundle (AAB)](../Android.md#glossary)
-  * `flutter build apk (--split-per-abi)` (note: this target is called _apk_, not _android_)
-  * `flutter build ios`
-  * `flutter build web` = [Build for web deployment](https://docs.flutter.dev/deployment/web)
-  * `flutter build web --web-renderer [canvaskit|html|skwasm]` = specify renderer (ie _CanvasKit_, _HTML_ & _WebAssembly_)
+* `flutter build {platform}` = build towards platform (ie _appbundle/apk/ios/web_)
+  * `appbundle` = builds an [Android App Bundle (AAB)](../Android.md#glossary)
+  * `web` = [Build for web deployment](https://docs.flutter.dev/deployment/web)
+    * `--web-renderer {canvaskit|html|skwasm}` = specify renderer (ie _CanvasKit_, _HTML_ & _WebAssembly_)
     * _canvaskit_ & _skwasm_ both draw to a single HTML `<canva>`, can handle complex visual games/presentations
     * _html_ maps component to native HTML/CSS/JS elements (eg images as `<img>`), can handle basic CSS animations, better for SEO
+  * `--build-name` & `--build-number` = override version & build numbers, respectively
+  * `--obfuscate --split-debug-info={symbols_directory}` = obfuscate & save symbols mapping file to directory
+  * `--release` = build in _build/app/outputs/_
+  * `--split-per-abi` = produces multiple APK, each optimized to a specific [Application Binary Interface (ABI)](../Android.md#glossary)
   * `flutter build web --base-href {path}` = [HTML \<base> href](https://www.w3schools.com/Tags/att_base_href.asp)
 * `flutter channel [master|beta|stable]` = pick release channel (_master_ = dev, _beta_ = finalized/tested, _stable_ = production)
 * `flutter clean` = clear build & packages cache (very useful before archiving/zipping an app source code)
@@ -220,6 +220,7 @@ Use commands with either long/short names (eg `flutter --option=value` or just `
 * `flutter pub` = manages the _pubspec.yaml_ file, which contains assets & dependencies, downloaded from <pub.dev>
 * `flutter pub add {package}` = downloads & add package to _pubspec.yaml_
 * `flutter pub add dev:{package}` = add package under _dev\_dependencies_ section
+* `flutter pub cache list` = lists cache locations (warning: large string)
 * `flutter pub cache repair`
   * eg [Install intl](https://stackoverflow.com/a/51706630/3559724)
 * `flutter pub get` = explicitely pulls packages into the project & generates _pubspec.lock_ (implied with `flutter run`)

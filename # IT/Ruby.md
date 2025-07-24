@@ -532,7 +532,7 @@ Returns an Array of the iterated items
   * `hash.each {|key,value| … }` Hash is a class that includes Enumerable and implements .each with 2 parameters
 * `.each_with_index` Adds an extra parameter to a block in the form of an automatically incremented index (starting at offset)
 * `.each_with_object`
-* `.each_slice(n)` Iterates on object by slices of n elements
+* `.each_slice(n)` = iterates on object by slices of n elements
 * `Enumerable.instance_methods`
 
 ### Enumerators

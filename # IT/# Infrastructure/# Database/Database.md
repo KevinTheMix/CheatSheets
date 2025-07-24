@@ -1,4 +1,4 @@
-# DB
+# Database
 
 ## Quick Tips
 
@@ -53,18 +53,10 @@
 * **Apache TinkerPop** = graph computing framework for graph DB (OLTP) & graph analytic systems (OLAP), using Gremlin Query Language (GQL) for graph traversal
 * **Cassandra** (by **Apache**) = FOSS distributed wide-column store NoSQL DB designed to handle large amounts of data across servers (high availability with no SPoF)
 * [dbdiagram.io](https://dbdiagram.io) = online DB diagrams
+* **DB Browser for SQLite** = SQLite DB IDE
 * **GraphQL** = DB-agnostic data query/manipulation language for APIs, letting a client specify data to fetch (possibly from separate sources as one unified result)
 * **PowerBuilder** = .NET compatible IDE (by SAP) using _DataWindow_ objects to CRUD query a DB
 * **Redis** (Remote Dictionary Server) = open source in-memory storage, used as a distributed in-memory key-value DB, cache, and message broker
-* **SQuirreL SQL Client** = Java-based multi-DB administration tool
-
-### Microsoft
-
-* **ApexSQL** = SSMS plugin for deep/meta search
-* **DB Browser for SQLite** = SQLite DB IDE
 * **SQL Manager for MySQL** = MySQL DB IDE (also for PostgreSQL, Oracle, DB2)
 * **SQL Manager for SQL Server** = SQL Server IDE (SMSS-like)
-* **SQL Server Data Tools (SSDT)** = SQL Server for Visual Studio (SQL Diff & SSIS)
-* **Microsoft® SQL Server® Express** = free MSSQL
-  * [2019.11](https://www.microsoft.com/fr-FR/download/details.aspx?id=101064)
-  * [2022.11](https://www.microsoft.com/fr-fr/sql-server/sql-server-downloads)
+* **SQuirreL SQL Client** = Java-based multi-DB administration tool

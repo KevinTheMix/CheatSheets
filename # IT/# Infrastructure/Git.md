@@ -51,6 +51,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * _hotfix_ branches can be created off _main_ for quick production patches, also increment _main_ (minor) version number, and also merge to _develop_ (or current _release_)
 * **HEAD** = a special reference (stored in the `.git/HEAD` file) to either a branch (via a symbolic reference eg `ref: refs/heads/main`) or specific commit (then said to be in a **detached HEAD** state)
   * **Detached HEAD** is useful to make experimental changes and create easily discardable **detached/orphaned commits** (ie that don't belong to any branch)
+* **Hooks** = set of dedicated files (in _.git/hooks/_) that can be edited to perform some scripted treatments at some specific lifecycle events (eg _pre-commit_, _pre-push_, _pre-rebase_)
 * **Index** = another term for the staging area
 * **Merging** = combines changes from a given branch (usually a feature branch) into the current branch (usually the main/master branch)
   * If there are any conflicts, the operation is put on hold until the user has manually resolved all of them
@@ -128,6 +129,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * `--until="5 minutes ago"` = before
   * Eg `git log --oneline --graph --all --decorate`
 * `git reflog (show) {reference}` = display reflog of a reference (eg `git reflog HEAD`)
+* `git rev-list {commit(s)} (--count)` = commit information (& count) in reverse chronological order
 * `git status` = information about the working tree state (staged changes, unstaged changes, untracked files)
 
 ## Local

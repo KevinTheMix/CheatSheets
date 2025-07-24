@@ -8,22 +8,27 @@
 ## Shortcuts
 
 * `A` = aspect ratio
-* `E` = image-by-image
-* `R` = random
-* `T` = elapsed time / total time
-* `O` = toggle original size
-* `P` = previous
-
-* `S` = stop
+* `B` = audio track selection
+* `C` = rognage
 * `D` = disinterlace
+* `E` = image-by-image
 * `F` = full-screen
 * `G` = subtitles delay
 * `H` = subtitles delay
-
-* `C` = rognage
-* `V` = subtitles track selection
-* `B` = audio track selection
+* `I` = toggle display play controls (when in full screen)
+* `J` = audio track delay (-50ms)
+* `K` = audio track delay (+50ms)
+* `L` = loop (repeat one, repeat all)
+* `M` = mute
 * `N` = next
+* `O` = toggle original size
+* `P` = previous
+* `R` = random
+* `S` = stop
+* `T` = display elapsed time / total time
+* `V` = subtitles track selection
+
+* `F11` = full screen interface
 
 * `Ctrl + I` = current media (General, Metadata, Codec, Statistics) information
 * `Ctrl + L` = toggle Playlist
