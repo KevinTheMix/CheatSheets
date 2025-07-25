@@ -134,9 +134,11 @@
 * `Ctrl + d` = end of input (EOF), actually lets shell exit since it considers session is over
   * Has true EOF effect only when on a new blank line (if not, press it twice so first one signals partial EOF for current non-empty line)
 
+* `adduser {user}` = create user on system
 * [`AWK`](https://en.wikipedia.org/wiki/AWK) = full-fledged domain-specific progrmaming language and data extraction/reporting tool for text processing (filter & pattern search)
   * Flexible, handles conditionals, regex, calculated fields
 * `bash ({script})` = starts a new bash process (interactive shell, or interprets script if provided)
+  * `-c '{string}'` = runs string in new Bash subprocess (environment is isolated, positional parameters _$i_ via eg `bash -c 'echo $1' -- "hello"`)
 * `base64` = base64 encode/decode
 * `bc` (basic calculator) = arbitrary-precision arithmetic language
 * `bzip2` = (_bz2_) file compressor (Burrows-Wheeler block sorting text compression algorithm), better than gzip
@@ -154,9 +156,11 @@
 * `cron` = job scheduler (_minute hour day month weekday_ (as 0-6), `@reboot` once at reboot)
 * `crontab` = maintain crontab files for individual users
 * `curl` = transfer data from/to a (mail or web) server using URLs
-  * `-X` = request method to use when starting the transfer
-  * `-H {header}` = header (eg `accept: application/json` or `Content-Type: application/json`)
   * `-d` = data to send in a HTTP POST request
+  * `-s` = silent/quiet mode (no progress/error messages)
+  * `-H {header}` = header (eg `accept: application/json` or `Content-Type: application/json`)
+  * `-X` = request method to use when starting the transfer
+  * Eg `curl http://wttr.in/brussels?format=3` for local weather
 * `cut` = split (`-d '{delimiter}'`) & splice (`-b {byte_range}`, `-c {char_range}`, `-f {fieldid_range}`)
   * `-f {fields}` = select only these fields
 * `date` = system date
@@ -244,7 +248,7 @@
 * `passwd` = change password
 * `pgrep` = look up processes by name
 * `pidwait` = wait processes by name
-* `ping` = ICMP (`-c` count, `-s` packet size)
+* `ping` = sends ICMP ECHO_REQUEST to hosts (`-c` max count, `-q` quiet, `-s` packet size, `-W` timeout in seconds)
 * `pkill {name}` = kill processes by name
 * `ps` = lists processes
   * `aux(ww)` = every process on system (BSD syntax, _ww_ prevents truncation)
@@ -294,7 +298,7 @@
 * `stat {file}` = file/file system status (inode number, permissions, owner, group, timestamps, etc)
   * `-c "{format}"` or `--format "{format}"` = manage outputs (eg `%a` octal permissions, `%i` inode #, `%U` owner username)
   * Basically a more targeted `ls` on a single file, with access to individual properties
-* `su` (switch user)
+* `su` (switch user) = start new (nested) login session as user (exit back to previous shell)
 * `sudo` (superuser do) = runs a program with another user's privilege (by default a superuser)
   * Useful to limit surface area by limiting direct root usage (ie disable direct login as root, especially remotely eg via ssh)
   * Incarnates least privilege principle: normal users (with admin rights) don't need superuser powers all the time
@@ -355,39 +359,3 @@
 * `mmap()` = maps a region of of a process virtual memory (address space) & a source of data (ie a file/device or anonymous memory via local pointer)
 * `wait()` = wait for first child to die
 * `waitpid({pid})` = wait for specific pid
-
-### Invocation, Pipes & Streams
-
-They all use `fork()` under the hood to spawn sub-processes.
-
-* `{command} $` = run in background
-* `{A} $ {B}` = run A in background and B in foreground immediately after
-* `{A};{B}` = runs commands one after the other
-* `(commands)` = runs one or more commands in a subshell
-* `$(commands)` = command substitution (ie captures command output as string, à la string interpolation)
-* `<(command)` = process substitution (when a command expects a filename, not a string, eg `diff`, `sort`, `uniq`)
-  * Uses a temporary named pipe or _/dev/fd/*_ under the hood, containing command output
-  * Eg `diff <(sort a.txt) <(sort b.txt)` = creates two temp files, diff them, then deletes them
-
-* File Redirection Operators
-  * They redirect _stdin_/_stdout_/_stderr_ of a (sub)process (spawned by shell) to other files
-  * `0< {file}` or just `< {file}` = redirects _stdin_ from a file
-  * `1> {file}` or just `> {file}` = redirects _stdout_ to file (this is processed _before_ that command runs & file is (re)created first)
-  * `> {file} 2>&1` = redirects _stdout_ to file, then redirects _stderr_ to same target
-  * `>> {file}` = append to file
-  * `2> {file}` = redirects _stderr_ to file
-  * `&> {file}` = redirects both _stdout_ & _standard_ error to same file (note: non-POSIX bash-specific)
-  * `&>> {file}` = same for append
-  * `<< {delimiter}{content}{delimiter}` = pass a here document (ie file literal) as _stdin_ to pointed command
-    * Useful to provide inline multi-line content (whether directly in prompt, or in a script)
-    * Delimiter is often _END_ or _EOF_ (but can be anything)
-    * Effectively creates a temporary file created from delimited content
-    * [Full explanation](https://old.reddit.com/r/bash/comments/132dgu9/comment/ji4ytg6)
-  * `<<< '{string}'` = here string (similar to `<< {delimiter}{string}{delmiter}`)
-  * `>|` & `&>|` = force-overwrite
-
-* It is important to understand that commands such as `cat` either read from a file(name) passed as argument, or from _stdin_, but **don't pass a filename via stdin**
-  * `cat <(echo file.txt)` won't work: output of subshell ( "_file.txt_") is written as-is in a temp file, and that content is passed as-is to `cat`
-  * `echo "file.txt" | cat` won't work: output of echo ("_file.txt_") is passed as-is to `cat`
-  * `cat "$(echo file.txt)"` works: echo output is string interpolated, and `cat` receives a filename as argument
-  * `cat` (without arguments) simply plugs _stdin_ into _stdout_, hence mirrors everything typed

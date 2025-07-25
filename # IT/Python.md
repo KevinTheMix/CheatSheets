@@ -61,6 +61,7 @@
 * `{v1} if {condition} else {v2}` = inline ternary operator
 * `[]` = False (list in a boolean context)
 * `[123]` = True (list in a boolean context)
+* `match {expression}: case {value}: … case _: …` = switch-case
 
 ### Collections
 
@@ -76,9 +77,10 @@ There is no built-in arrays (but tools like **NumPy** exist).
 * `[a, b, c] = {list|tuple}` = multi assign (similar to tuple unpacking), assign multiple variables at once
 * `[1, 2, 3] + [4, 5]` = concatenates lists
 * `[x for x in {list} if {condition}]` = list comprehension (returns a list with items satisfying a condition)
+* `list[(start):(end)]` = slices into a new sublist (_start_ and/or _end_ are optional, default to first/last item), safely empty if range outside bounds
 * `list[-{n}]` = nth-to-last element (eg `list[-1]` for last item)
 * `.append(item)` = add item at the end
-* `.insert(index, item)` = insert item at index (which can be negative)
+* `.insert(index, item)` = insert item at index (can be negative, where _-1_ actually means second-to-last)
 * `.remove(item)` = remove first matching item (by value)
 * `.pop((index))` = remove & return item at index (or last if not specified)
 * `.clear()` = delete all items
