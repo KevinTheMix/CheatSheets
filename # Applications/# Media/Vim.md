@@ -112,7 +112,6 @@ Spaces are optional.
 * `{location},{location}` = range
 * `:{range} co {location}` = copy
 * `:{range} mo {location}` = move
-* `:{range}s/{from}/{to}/g` = substitution
 * `:m±{n}` = move line up/down
 * `:{location}r {file}` = insert file content (below cursor line)
   * `:{location}r !{command}` = insert output of command

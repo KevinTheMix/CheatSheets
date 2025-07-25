@@ -11,10 +11,6 @@
 
 ## Glossary
 
-* **Bash** (Bourne Again Shell) = an interactive CLI & scripting language shell for UNIX-like OSs (1989)
-  * _.bashrc_ = personal script automatically configuring environment everytime a new terminal window is opened
-* **Bourne Shell** = shell CLI interpreter by Stephen Bourne at Bell Labs (1979)
-* **Dash** = `sh` shell (in _/bin/sh_)
 * **ELF** (Executable and Linkable Format) = a Unix executable file
 * **GNU** (GNU's Not Unix) = collection of free software launched by Richard Stallman in 1983, a set of user-space tools added to most Linux kernels (eg gcc, Bash) under GNU GPL
 * **Here Document** = file or input stream literal
@@ -28,27 +24,16 @@
   * **Anonymous Pipe** = stored in memory, exists only during lifetime of pipe-using processes (eg `a | b`)
   * **Named Pipe** (aka **FIFOs**) = appear as FS node but data actually also passed in memory via which unrelated processes can read/write (exist until deleted)
 * **POSIX** (Portable Operating System Interface) = family of standards for compatilibity between OSes (eg APIs, CLI shells commands, utility interfaces )
-* **REPL** (Read-Eval-Print Loop) = interactive programming environment taking single inputs, executes them & returns result to user (eg CLI shells)
 * **Root** = built-in/default administrative (super)user account in Unix/POSIX
   * All root users are superusers (with UID _0_) but the opposite is not true (they are all equivalent in power)
   * Home directory is _/root_ (kept outside of _/home_ so always available even if user partitions are not mounted)
 * **Shebang** = starting characters of a script used by OS kernel to determine which shell/utility will run that script
   * `#!/usr/bin/{command} -w` = specify command absolute location (with warnings `-w`)
   * `#!/usr/bin/env {command}` = use the environment to find command (can differ per user, and arguments eg `-w` cannot be provided)
-* **Shell** = technically, any outer layer that mediates between a user and a kernel's services
-  * **CLI Shell** = REPL command interpreter running inside a terminal that reads/parses/executes commands & print results
-    * Exposes built-in commands (eg `alias`, `cd`, `echo`), external utilities (`ls`, `cp`, `grep`, `ssh`) & kernel services (`read()`, `write()`, `open()`, `fork`, `clone`)
-  * **Login** = started when first logged in (eg console, `ssh`, `tty`), starting with a `-` (eg `-bash`), reads/sets global config (_etc/profile_, **$PATH**)
-  * **Non-Login** = started after already logged in (eg `bash`, or opened as a terminal window in desktop GUI environment eg _Gnome_)
-  * **Interactive** = connected to a TTY, not started with `-c {command}`, nor a script shebang
-  * **Non-interactive** = started via `cron`, `systemd`, `-c`, a script
-  * **Standard** = CLI interpreter conforming to widely accepted specification (typically POSIX shell standard)
-    * Must handle commands interactively or not, support scripting (flow) features, process/command substitution, provide a read-eval loop in interactive mode
 * [Signal](https://en.wikipedia.org/wiki/Signal_(IPC)#POSIX_signals) = asynchronous message/notification sent to process to trigger specific behavior (eg quitting, error handling)
   * _SIGINT_ = interrupts aprocess (like via `Ctrl + C`)
   * _SIGKILL_ = terminates immediately & forcibly, without time to cleanup
   * _SIGTERM_ = signal to terminate (can be ignored by the process)
-* **Sourcing** = load a file's content/execute script into current shell session (vs in a subshell as a new process, ie all changes present in file affect current shell)
 * **Standard I/O/Err** = special file descriptors associated with a (single) process (not actual disk files, actually connected to terminal, pipes, sockets, etc, but managed by OS like file handles so we can read/write)
 * **Stream** = continuous flow of data where programs can read/write (concurrently in some cases eg pipes) in real-time, typically through standard I/O, pipes & files
 * **Superuser** = any process running with special UID _0_ (eg **Root** or via `sudo`, but more can be added to _/etc/passwd_)
@@ -159,8 +144,6 @@
 * `cat` (con**cat**enate) = read & displays (to _stdout_) contents of files or _stdin_
   * `cat > {file}` = (re)create file in edit mode (`Ctrl + d` to finish, or `Enter` then `Ctrl + c`)
   * `koko1 koko2` = concatenate two text files and display the result in the terminal
-* `cd {path}` (change directory)
-  * `cd ~` or just `cd` (without argument) = go to user directory
 * `chattr` = change file attributes on a Linux file system (eg `+i`/`-i` toggle immutable so cannot be deleted/renamed, even by root)
 * `chmod` = change access rights (via octal value or specific right)
   * `chmod +x {file}` = adds execute rights for everyone (owner, group & others)
@@ -184,11 +167,8 @@
 * `diff` = content differences between two files files (see `cmp`)
 * `dir` = list directory contents (identical to `ls`)
 * `du {file}` = disk usage (`-h(uman-readable)` = adds unit (_K, M, G_))
-* `echo {text}` = display a line of text (`-e` enable interpretation of backslash escapes)
 * `env` = print current environment, or run a program in a modified environment (ie set environment variables then execute command in that altered context)
   * Used in scripts shebang (ie `#!/usr/bin/env {command}`) to let `env` find best fitting command
-* `exit` = close session
-* `fg ({job_id})` = brings background job to foreground (most recently backgrounded/stopped job if no argument given)
 * `file` = determine file type
 * `find {directories}` = recursively find all files/directories under one or more directories
   * `.` = current directory (default if none specified)
@@ -224,9 +204,6 @@
 * `info` = complete documentation about a command in Info format (more comprehensive than `man`)
 * `init` or `systemd` = system & service manager, acts as init system bringing up userspace services when run as first process on boot (as PID _1_)
 * `iptables` = firewall information (see `ufw`)
-* `jobs` = list jobs (`-l` adding process IDs, `-p` only process IDs)
-* `kill {pid}` or `kill %{job_id}` = sends a signal a process (see `pkill`)
-  * `kill -9` = SIGKILL signal
 * `ldd {file}` = print shared object/libraries dependencies
 * `less` = displays page by page (more efficient than `more`, used by `man` to display its help)
 * `ln {target} {name}` = creates a link file to an existing file/directory
@@ -280,7 +257,6 @@
   * `-u {user}` = select by user (eg `ps -u $USER` returns all current user processes)
   * `-y` = don't show flags
   * `--forest` = ASCII art process tree
-* `pwd` (print working directory) = displays current directory
 * `reboot` (with `sudo`)
 * `reset` = initialize/reset terminal state
 * `rm` (remove) = delete
@@ -300,7 +276,6 @@
 * `sleep {n}({suffix})` = delay for a specific amount of time (`s` second default suffix, `sleep {time} &` in background)
 * `socat` (SOckect CAT) = establishes bidirectional byte streams & transfers data between them
 * `sort {file}` = sort alphabetically
-* `source {script}` or `. {script}` = executes script in current shell context (not a subshell)
 * `ss` = dump socket statistics (similar to `netstat`)
 * `ssh {user}@{remote}` = connects to remote SSH server (interactively)
   * `-d` = SOCKS proxy
@@ -328,7 +303,6 @@
 * `tail` = displays just the end (see `head`)
 * `tar` = archiving utility
 * `tee` = read _stdin_, write to _stdout_ & files simultaneously (ie useful for logging, `-a` append)
-* `test` or `[` = check file types & compare values (returns _0_ for true, _1_ for false, see [Shell Scripting](#shell-scripting))
 * `timeout {duration} {command}` = run a command with a time limit (ie start command & kills it if still running after duration)
 * `tmux` = terminal multiplexer (create & access several terminals from a single screen, actually a shell itself)
   * `tmux ls` or `tmux list-sessions` = list all sessions managed by server
@@ -347,7 +321,6 @@
 * `tr {from} {to}` = (translate/delete) characters manipulation (eg `tr a-z A-Z` uppercase, `tr 'A-Za-z' 'N-ZA-Mn-za-m'` ROT13)
 * `traceroute`
 * `tty` = print file name of the terminal (if any) connected to (my program's) standard input
-* `type {command}` = display information about command type
 * `ufw` = sets firewall config (uses `iptables`)
 * `uname` = display system information (`-a`=all, `-n`=system (host) name, also see `neofetch` utility)
 * `uniq {file}` = report/omit repeated lines (`-u` only unique lines)
@@ -355,7 +328,6 @@
 * `vimtutor` = Vim tutorial
 * `vigr` = edit _/etc/group_
 * `vipw`= edit _/etc/passwd_
-* `wait` = blocks calling shell until one or more child processes (usually background jobs) have finished
 * `wall` = write a message to all users
 * `wc` = counts a file's total lines, words, bytes/characters, by default as a 4-columnar output
 * `wget` = web request
@@ -374,7 +346,7 @@
 #### System Calls
 
 * `brk()`/`sbrk()` = (_obsolete_) controls heap size
-* `exec()` = replaces shell with given command (ie no subshell is created, see standard C library `exec_` functions family)
+* `exec_()` = standard C library functions family
   * This creates a new process in same memory space, replacing existing segments in memory, but keeping original PID
 * `execve(file, argv, envp)` = executes program by path, replacing current process
 * `execvp(file, argv)`
@@ -419,87 +391,3 @@ They all use `fork()` under the hood to spawn sub-processes.
   * `echo "file.txt" | cat` won't work: output of echo ("_file.txt_") is passed as-is to `cat`
   * `cat "$(echo file.txt)"` works: echo output is string interpolated, and `cat` receives a filename as argument
   * `cat` (without arguments) simply plugs _stdin_ into _stdout_, hence mirrors everything typed
-
-### Variables
-
-* `read {var}` = reads a line from stdin into variable
-* `set` = display variables & functions
-* `unset {var}` = deletes both shell & environment copies (if present) of a variable
-
-* `var={value}` (no spaces) = defines a local variable (not inherited by children unless exported via `export var(={value})` or configured in _~/.bashrc_)
-* `$variable` = parameter expansion, use shell/environment variable (warning: interpolation requires double quotes)
-* `"$KOKO"` (and NOT `'$KOKO'`) = string interpolation only works with double quotes
-* `[ -z "${variable+x}" ]` = checks whether a variable is set (using parameter expansion incomprehensible syntax)
-* `$-` = special Bash variable containing current shell flags
-* `$?` = exit status/return code of last (foreground) command
-* `$!` = PID of last background command
-* `$$` = PID of current shell (or process)
-* `$0` = name of running shell or script (`$1` first argument, `$2` second argument, etc)
-* `$HOME` = user directory
-* `LANG` = character enchoding
-* `$LOGNAME` = username (alternatively `$(whoami)`)
-* `$PATH` = path environment variable
-* `$PS1` = primary shell prompt (use quotes `""` to use shorthands)
-  * `\$` = displays _$_ for regular users, _#_ for **root**
-  * `\d` = current date
-  * `\h` = hostname
-  * `\n` = newline
-  * `\t` = time (hh:mm:ss)
-  * `\u` = username
-  * `\w` = current working directory
-  * `\[\e[COLORm\]` = prefix to add color (_00m_ white, _32m_ green, _33m_ blue)
-* Eg for default _user@host:current path$_
-  * Basic = `"\u@\h:\w$ "`
-  * Colored = `"\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "`
-* `$PWD` = user directory path
-* `$SHELL` = displays login shell configured in _/etc/passwd_ (not necessarily currently running one)
-* `$TERM` = terminal (emulator) type (eg _xterm-256color_, _vt100_, _linux_, or _dumb_), affects how terminal-based programs behave (eg `more`)
-* `$UID` = user ID
-
-### Shell Scripting
-
-* `?` = exactly one character
-* `*` = zero or more characters
-* `[abc]` & `[!abc]` = chaacter classes (one of these & not one of these)
-* `{a,b,c}` = brace expansion
-* Eg `for f in * .[!.]* ..?*; do … done` = loop on entries in a directory, excluding current (_._) & parent (_.._)
-  * `.[!.]*` = all names starting with a single dot following by a char that is not a dot (then some stuff)
-  * `..?*` = all names starting with two dots and at least one character (then some stuff)
-* `[ expression ]` = POSIX-style test command (note: spaces are mandatory)
-  * `[` = a synonym (ie either a hard link, or just a copy) for `test`, returns _0_ for true, _1_ for false
-  * `]` = basically useless (but required) last argument to make `[` command look like a balanced expression
-  * `if` = shell keyword that uses exit status of `[` (_0_ means success, non-zero means failure)
-  * `-a` = logical AND (note: more legible to use `&&` with multiple `[…]` blocks)
-  * `-z` = check if string length is zero
-  * `=` = string equality (works in all shell, POSIX compliant)
-  * `==` = string equality (only in bash/ksh/zsh but not sh/dash)
-* `for v in range; do …; done` = for loop (_;_ can be replaced with newlines _\n_)
-  * `for i in 1 2 3 4 5; do echo $i; done`
-  * `for word in This is a sequence of words do … done`
-  * `for i in {1..10}`
-  * `for i in {0..32..4}` = 0 to 32 by steps of 4
-
-```bash
-#!/usr/bin/env bash
-exec more $1
-```
-
-#### Launch
-
-When a script is launched via `./script.sh`:
-
-1. current shell (eg `bash`) recognizes file as executable and a pathname (ie a custom not built-in script)
-2. current shell forks itself and `wait()` for child exit status
-3. child shell calls `execve("./script.sh", ["./script.sh", ...], env)`, effectively ceasing to exist as a shell
-4. OS kernel handles that call & takes over, reads shebang for interpreter, launches `{interpreter} script.sh` (with arguments)
-5. interpreter (eg `bash`/`python`) replaces child process image (keeping its PID) & execute script in parent inherited environment/FDs but in own process/working directory
-6. script ends (exit or EOF), original shell `wait()` reaps and sets `$?` (status of last fg command)
-
-When a script is launched via `bash script.sh`:
-
-1. current shell looks up `bash` command in _$PATH_
-2. current shell forks & `wait()` for child exit status
-3. child shell calls `execve("/usr/bin/bash", ["bash","script.sh",…], envp)`
-4. kernel loads `bash` ELF binary (but not _script.sh_ as an executable, which is instead passed as data)
-5. `bash` interpreter opens/reads _script.sh_ argument (which must be readable, but not executable)
-6. _script.sh_ is interpreted, shebang is seen as comment & ignored
