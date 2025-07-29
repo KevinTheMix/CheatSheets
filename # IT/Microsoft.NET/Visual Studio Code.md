@@ -22,6 +22,8 @@ Via _File > Preferences_.
     * **Insert Spaces** = insert spaces on `Tab` (see [indentation settings](https://stackoverflow.com/a/29972553))
     * **Bracket Pairs** = set parentheses matching coloured line guides (formerly an extension, now built-in)
     * **Sticky Scroll: Enabled** = keep current scope (eg class, namespace) breadcrumb at top
+  * **Security**
+    * **Allowed UNC Hosts** = add _wsl.localhost_ (allows opening WSL Ubuntu files from Windows)
   * **Workbench**
     * **List: Open Mode** = display file by single/double clicking Explorer files
     * **Editor: Enable Preview** = tab preview in italics

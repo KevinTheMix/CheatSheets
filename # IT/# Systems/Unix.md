@@ -135,6 +135,10 @@
   * Has true EOF effect only when on a new blank line (if not, press it twice so first one signals partial EOF for current non-empty line)
 
 * `adduser {user}` = create user on system
+* `apt` = high-level CLI to package management system (requires `sudo`)
+  * `sudo apt autoremove`
+  * `sudo apt install python-is-python3` = create symlink
+  * `sudo apt purge {packages}` = remove packages
 * [`AWK`](https://en.wikipedia.org/wiki/AWK) = full-fledged domain-specific progrmaming language and data extraction/reporting tool for text processing (filter & pattern search)
   * Flexible, handles conditionals, regex, calculated fields
 * `bash ({script})` = starts a new bash process (interactive shell, or interprets script if provided)

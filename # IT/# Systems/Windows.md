@@ -20,6 +20,7 @@
 * **Hypervisor** = soft/firm/hard-ware creates & runs a VM (eg _Oracle VirtualBox_, _VMWare Workstation (Pro)_, _Hyper-V_ by _Microsoft_)
 * `winget` (**Windows Package Manager**) = FOSS package manager CLI for Windows 10+ to install applications (2020)
 * **Windows Terminal** = a tabbed GUI-based terminal emulator (click the `v` to access various consoles/shells)
+  * `Ctrl + Shift + F` = search in terminal content
 
 ## Shortcuts
 

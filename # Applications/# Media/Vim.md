@@ -80,11 +80,11 @@ Can be used in Normal mode to jump at a position, or as an argument in a command
 * `Ctrl + d` = offer autocomplete suggestions
 * `{text}{Tab}` = autocomplete (cycle through shortlist if several, works for commands & files)
 * `:!{cmd}` = run (shell) command (note: autocomplete works too)
-* `:e {file}` = edit file (replaces current file, for content insertion see `:r` below)
-* `:w` = write buffer (ie save file)
+* `:e {file}` = edit file (replaces current file, for content insertion see `:{location}r` below)
 * `:q` = quit current window (eg Help page), or Vim itself
-* `:wq` = save & quit
 * `:q!` = quit without saving
+* `:w` = write buffer (ie save file)
+* `:wq` = save & quit
 * `:help ({subject})` or `F1` = help (eg `c_CTRL-D`, `insert-index`, full `user-manual`)
 * `:shell` = start an embedded shell (default one from _.passwd_ or overriden via set option _shell=/bin/bash_)
 * `:terminal` = built-in terminal emulator
@@ -92,20 +92,21 @@ Can be used in Normal mode to jump at a position, or as an argument in a command
   * _ai_ (_autoindent_) = autoindent (copy indent from current line on new line)
   * _bk_ (_backup_) = make a stickying around backup before overwriting an existing file (see _writebackup_ for temp while-writing backup)
   * _cp_ (_compatible_) = makes Vim Vi-compatible
+  * _et_ (_expandtab_) = use real tab character instead of spaces (default on)
   * _hls_ (_hlsearch_) = highlight all matches
   * _ic_ (_ignorecase_) = ignore case in searches
   * _is_ (_incsearch_) = incremental search (show partial matches, set by default)
-  * _number_ = lines numbering
-  * _wrapscan_ option = search cycling (wrap back around end of file)
-  * _et_ (_expandtab_) = use real tab character instead of spaces (default on)
+  * _nu_ (_number_) = lines numbering
   * _sw_ (_shiftwidth_) = number of spaces for each step of auto-indent (_>>_, _<<_, _==_, _o_)
   * _ts_ (_tabstop_) = width of tab character (eg `set ts=4`)
+  * _ws_ (_wrapscan_) = search cycling (wrap back around end of file)
 
 #### Edition
 
 Spaces are optional.
 
 * Locations
+  * Current cursor position if unspecified
   * `{n}` = n-th line
   * `.` = current line
   * `±{n}` = n-th line (`.` is implied)
@@ -144,7 +145,6 @@ This this mode, preceding text selection is used in place of a succeeding motion
 * `Ctrl + w, +` = increase  height by 1 line
 * `Ctrl + w, -` = decrease height by 1 line
 * `Ctrl + w, Ctrl + w` = jump from one window to another
-* `Ctrl + Shift + F` = modern text search
 
 ## Extensions
 

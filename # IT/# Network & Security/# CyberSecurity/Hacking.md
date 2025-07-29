@@ -32,7 +32,7 @@
 * _Flipper Zero_ = open-source & customizable portable multi-tool for hackers/pentesters (RFID, radio protocols, access control systems, GPIO pins hardware)
 * _Kali Linux_ = professional penetration testing (ie hacking) OS, with built-in [tools](https://www.kali.org/tools)
 * _KON-BOOT_ = Bypass Windows/Mac logon (_active_)
-* _Metasploit_ = provides information about find/exploit/validate vulnerabilities & pentesting, security auditing
+* _Metasploit_ = security testing & vulnerability management framework, provides information about find/exploit/validate vulnerabilities & pentesting, security auditing
 * _Nessus_ = (OS, network, hypervisors, DB, web servers) vulnerability scanner, plugins written in the Nessus Attack Scripting (NAS) language
 * _OpenVAS_ = vulnerability scanner, security issues, un/authenticated testing, detailed reports, free (GNU), plugins written in the Nessus Attack Scripting (NAS) language
 * _Parrot (Security) OS_ = FOSS portable Debian-based OS with 600 tools (for pentesting, security & development)

@@ -403,7 +403,7 @@ There are two built-in solutions: imperative **Navigator** (push/pop API that wo
 * Is it more like a drawing? => Image/Lottie/Rive
 * Does it repeat forever? Is it discontinuous? Do multiple widgets animate at same time? => Explicit
 
-* **AnimatedCrossFade** = cross-fade-in/out between two children of various sizes (_first/secondChild_, _crossFadeState_ showFirst|Second, _abcCurve_, _layoutBuilder_ to avoid layout jumps)
+* **AnimatedCrossFade** = fade in/out between two children of various sizes (_first/secondChild_, _crossFadeState_ showFirst|Second, _abcCurve_, _layoutBuilder_ to avoid layout jumps)
 * **AnimatedList** = list with built-in add/remove item animation (_initialItemCount_, _itemBuilder_, trigger via **AnimatedListState** either locally or via **GlobalKey**)
 * **AnimatedSwitcher** = transition between child widgets (set new _child_ via `setState()`, set _transitionBuilder_ to **Fade/Scale/Rotation-Transition**, set _layoutBuilder_, use keys if new widget is same type)
 * **Flow** = sizes/positions/animates children widgets according to **FlowDelegate** logic using transformation matrices
@@ -438,7 +438,7 @@ Performed automatically when a property updates (via `setState()`), for single n
 * **AnimatedOpacity** = opacity animation (_curve_, _duration_, _opacity_ via `setState()`)
 * **AnimatedPadding** = padding animation (_curve_, _duration_, _padding_ via `setState()`)
 * **AnimatedPhysicalModel** = animated _borderRadius_, _color_ & _elevation_
-* **AnimatedPositioned** = animated **Positioned** reacting to properties change, useful to implement custom slider
+* **AnimatedPositioned** = animated **Positioned** reacting to properties change (eg to implement custom slider)
 * **AnimatedPositionedDirectional** = **PositionedDirectional**
 * **AnimatedRotation** = `Transform.rotate()`
 * **AnimatedScale** = `Transform.scale()`

@@ -119,7 +119,7 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 * **rxdart** (_@fluttercommunity.dev_) = extends Dart **Streams** & **StreamControllers** with reactive programming
 * **searchfield** (_@maheshjamdade.com_) = simple customizable autocomplete search widget
 * **sensors_plus** (_@fluttercommunity.dev_) = accelerometer, gyroscope, magnetometer, barometer sensors
-* **share_plus** (_@fluttercommunity.dev_) = share (text/URL/images/files) content between apps, using platform's share dialog
+* **share_plus** (_@fluttercommunity.dev_) = share (text/URL/images/files) data between apps, using platform's share dialog
 * **showcaseview** (_@simform.com_) = small modal onboarding overlay arrows
 * **sliver_tools** (_@pietervanloon.com_) = missing sliver package (related: [SliverFooter](https://stackoverflow.com/a/49621060/3559724) by Rémy Rousselet)
 * **system_tray** (-) = design a system tray menu for desktop (Linux, macOS, Windows) opening from the system tray app icon

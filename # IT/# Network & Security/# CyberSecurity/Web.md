@@ -23,6 +23,7 @@
 
 ## Tools
 
+* _BeEF_ (The Browser EXploitation Framework) = pentesting tool focusing on web browser
 * _Burp Suite Scanner_ (by _PortSwigger_) = web app vulnerability testing/scanning graphical tool, server-side vulnerabilities, Interactive Application Security Testing (IAST), web proxy, web app crawler
 * _CeWL_ (Custom Word List generator) = crawls & extracts a website's keywords, to feed as contextal passwords fragments into a cracker
 * `dirb` (directory buster) = scans all (potentially nonreferenced) files/pages on a website via a dictionary/wordlist

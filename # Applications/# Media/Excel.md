@@ -18,6 +18,10 @@
 * Formulas > _Name Manager_ = CRUD cell names
 * Page Layout -> Page Setup -> Print Area -> _Set Print Area_
 
+* Change default format
+  * In Excel, File > Options > _When creating new workbooks_ (note: only for new wb created from within Excel itself)
+  * In Windows, replace **EXCEL12.XLSX** template in _C:\Program Files\Microsoft Office\root\vfs\Windows\SHELLNEW_ (make backup first)
+
 ## Shortcuts
 
 * `'` = Format cell value as string
@@ -63,6 +67,11 @@
 * `Ctrl + B(as)` = copy-paste up cell
 * `Ctrl + D` = copy-paste left cell
 * `Ctrl + N` = create new book
+
+## API (Formulas)
+
+* `INDIRECT({text})` = returns a reference (eg _C2_) given by text expression (eg `=INDIRECT("C" & ROW())`)
+* `ROW()` = current row
 
 ## Extensions
 
