@@ -50,6 +50,7 @@ Unlike a virtual machine, Docker does not virtualize hardware, but the operating
 * **Registry** = Docker Hub & co. Contains repositories. Companies often have a private registry to manage their own custom Images (e.g. using Azure Container Registry)
 * **Remote Storage** = external DB (SQL Server & co), Azure Cosmos DB (NoSQL), Azure SQL Database, Azure Storage
 * **Repository** = collection of related Images under common Tag
+* **Scratch** = special minimal OS-less image acting as a blank container (mainly for Rust/Go applications which don't require an OS)
 * **Tag** = label used to identify the specific platform (OS) and version (e.g. .NET version) of an Image when several of those are available
 * **Tmpfs Mounts** (Temp FS) = virtual folder stored in the host's memory (not persisted)
 * **Volumes** = area of the host filesystem where containers can write/persist information, via mapping Container directories to the Host OS directories

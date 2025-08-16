@@ -21,7 +21,7 @@
 * **Elliptic Curve Diffie-Hellman Ephemeral** (ECDHE) = improved Diffie-Hellman, used in TLS & SSH to derive a temporary shared session key
 * **Evaluation Assurance Level** (EAL) = methodological confidence in entire IT product/system (not only crypto)
 * **Federal Information Processing Standard** (FIPS) = security requirement for cryptographic modules (examines correct implementation of approved algorithms)
-* **HMAC** (Hardware-based Message Authentication Code) = specific type of MAC via a crypto hash function & secret crypto key
+* **HMAC** (Hash-based Message Authentication Code) = specific type of MAC via a crypto hash function & secret crypto key
 * **Hardware Security Module** (HSM) = dedicated device/PCIe card or cloud-based service to generate/store/use cryptographic keys (eg certificate private key)
 * **Key Derivation** = process to generate cryptographically strong keys from one or more values (eg keys, passphrases)
 * **Key Partitioning** = dividing a single key into a set of keys (eg splitting a 256-bit key into two keys of 128 bits each)

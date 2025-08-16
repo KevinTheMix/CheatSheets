@@ -87,6 +87,7 @@
 * `@type {file}` = gives information about file (ie file header metadata)
 * `cls` = clear screen
 * `date`
+* `dir` = lists files (`/B` only file names)
 * `certlm.msc` = Certificates
 * `copy /b {image} + {hidden} {output}` = hide file in an image file (output image must be same extension/type as input)
 * `echo koko`

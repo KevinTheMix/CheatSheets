@@ -39,7 +39,7 @@ Can be used in Normal mode to jump at a position, or as an argument in a command
 * `h`/`j`/`k`/`l` = left/down/up/right
 * `e`/`E` = end of current or next word through newlines (`E` non-alphabetic characters don't separate)
 * `b`/`w` = word backward/forward (ie place cursor at beginning of next/previous word)
-* `0`/`^^/`$` = line beginning/end
+* `0`/`^^`/`$` = line beginning/end
 * `#`/`*` = previous/next occurrence of word at cursor
 * `{`/`}` = previous/next paragraph
 * `gg`/`G` = beginning/end of file

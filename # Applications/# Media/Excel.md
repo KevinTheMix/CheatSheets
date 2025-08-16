@@ -22,6 +22,12 @@
   * In Excel, File > Options > _When creating new workbooks_ (note: only for new wb created from within Excel itself)
   * In Windows, replace **EXCEL12.XLSX** template in _C:\Program Files\Microsoft Office\root\vfs\Windows\SHELLNEW_ (make backup first)
 
+* Color rows depending on one column value (Conditional formatting)
+  * Select whole range/table
+  * _Home > Conditional Formatting > New Rule > formula_
+  * Enter formula (eg `=$C2="Value"`) & format to apply (eg font color)
+* Remove table = _Table Design > Tools (group) > Convert to Range_
+
 ## Shortcuts
 
 * `'` = Format cell value as string

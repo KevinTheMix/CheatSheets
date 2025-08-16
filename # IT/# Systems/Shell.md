@@ -85,7 +85,7 @@ Technically, any outer layer that mediates between a user and a kernel's service
   * Eg `while (IFS=) read (-r) {line}; do … done < {file}` = read file line (or fields) by line (common Bash idiom)
 * `readonly` = makes variables read-only
 * `return` = return from a shell function
-* `set ({option})` = display variables & functions, or set shell option/positional parameter
+* `set ({option})` = display variables & functions, or set shell option/positional parameter (ie _$1_, _$2_, _$#_, _$@_, _$*_)
 * `shift` = shift positional parameters
 * `source` or `.` = read/execute command in current shell environment (not a subshell)
 * `test` or `[` = (POSIX-compliant) evaluate conditional expression (returns _0_ for true, _1_ for false)
@@ -112,25 +112,30 @@ Technically, any outer layer that mediates between a user and a kernel's service
 
 * `var={value}` (no spaces) = defines a variable (not inherited by children unless exported via `export var(={value})` or configured in _~/.bashrc_)
 * **Parameter Expansion** = string interpolation
-  * `"$KOKO"` or `"${KOKO}"` (but not `'$KOKO'` single quotes, which treats it literally)
-  * `${KOKO+alt}` = use alt if variable is set (can be empty/null)
-  * `${KOKO:+alt}` = use alt if variable is set and not empty/null
-  * `${KOKO:-default}` = use default if variable is unset or null
-  * `${KOKO:=default}` = same as :- but also assigns default to variable
-  * `${KOKO:?message}` = print message and exit if variable is unset or null
-  * `${#KOKO}` = length of variable
-  * `${KOKO:offset}` = substring from variable starting at offset
-  * `${KOKO:offset:length}` = substring of length starting at offset
-  * `${KOKO#pattern}` = remove shortest match of pattern from start
-  * `${KOKO%pattern}` = remove shortest match of pattern from end
-  * `${KOKO##pattern}` = remove longest match of pattern from start
-  * `${KOKO%%pattern}` = remove longest match of pattern from end
+  * `"$var"` or `"${var}"` (but not `'$var'` single quotes, which treats it literally)
+  * `${var+alt}` = use alt if variable is set (can be empty/null)
+  * `${var:+alt}` = use alt if variable is set and not empty/null
+  * `${var:-default}` = use default if variable is unset or null
+  * `${var:=default}` = same as :- but also assigns default to variable
+  * `${var:?message}` = print message and exit if variable is unset or null
+  * `${#var}` = length of variable
+  * `${var:offset}` = substring from variable starting at offset
+  * `${var:offset:length}` = substring of length starting at offset
+  * `${var#pattern}` = remove shortest match of pattern from start
+  * `${var%pattern}` = remove shortest match of pattern from end
+  * `${var##pattern}` = remove longest match of pattern from start
+  * `${var%%pattern}` = remove longest match of pattern from end
 
 * `$-` = special Bash variable containing current shell flags
 * `$?` = exit status/return code of last (foreground) command
 * `$!` = PID of last background command
 * `$$` = PID of current shell (or process)
-* `$0` = name of running shell or script (`$1` first argument, `$2` second argument, etc)
+* Positional
+  * `$0` = name of running shell or script (`$1` first argument, `$2` second argument, etc)
+  * `$#` = number of positional parameters passed to a script/function
+  * `$@` = all positional parameters, treated as separate words
+  * `$*` = all positional parameters, treated as a single word (unless quoted)
+
 * `$HOME` = user directory
 * `$HOSTNAME` = host (computer) name
 * `$IFS` (Internal Field Separator) = controls how Bash splits strings into fields (default value <code> \t\n</code>)

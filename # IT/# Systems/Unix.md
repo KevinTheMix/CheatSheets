@@ -139,8 +139,27 @@
   * `sudo apt autoremove`
   * `sudo apt install python-is-python3` = create symlink
   * `sudo apt purge {packages}` = remove packages
-* [`AWK`](https://en.wikipedia.org/wiki/AWK) = full-fledged domain-specific progrmaming language and data extraction/reporting tool for text processing (filter & pattern search)
-  * Flexible, handles conditionals, regex, calculated fields
+* `awk` = flexible full-fledged domain-specific programming language & data extraction/reporting text processing tool (conditional, filter, regex pattern, calculated, à la C# Linq)
+  * `awk {file} 'criteria{action(s)}'` = reads input from file/stidin and perform action on filtered data
+  * Criteria = condition that can be empty (always true), _BEGIN_/_END_ before/after, comparison, regex, variables & (associative) arrays
+  * _$i_ are split fields (or words), and _$0_ is whole line
+  * _FILENAME_ = argument filename (if provided)
+  * _FNR_ = file record number
+  * _FS_ = field separator (` ` by default)
+  * _NF_ = field number
+  * _NR_ = record (aka line/row) number
+  * _OFS_ = field print output separator (` ` by default)
+  * _ORS_ = line print output separator (`\n` by default)
+  * `ls -l | awk 'BEGIN{print"Printing file names…"}{print $9}` = print file names
+  * `ls -l | awk 'BEGIN{print "Large files"}$5>100000{print}`
+  * `ls -l | awk 'NR%2==0{print}` = print all of even numbered lines
+  * `ls -l | awk 'NF>2{print}'`
+  * `ls -l | awk 'BEGIN{print "End of July large files"}(NF>2)&&($5>10000)&&($6="July")&&($7>15){print}'`
+  * `ls -l | awk 'BEGIN{printt "Les fichiers PDF"} $9 ~ /.*pdf/{print}'` = regex pattern search (ie `~ /{pattern}/`)
+  * `ls -l | awk 'BEGIN{sum=0}(NR>1){sum=sum+$2}END{print "Total = ",sum}'` = define variables
+  * `ls -l | awk 'NR>1{print $(NF-1)}'` = access fields by relative index
+  * `ls -l | awk 'BEGIN{i=0}(NR>1)&&(NR<=NF){print $(i+1); i++}'` = calculated variable & index
+  * `kill $(ps -aux | awk '$1="user"{print $2}')` = kills all processes linked to given user (ie awk can map/fetche PID per user)
 * `bash ({script})` = starts a new bash process (interactive shell, or interprets script if provided)
   * `-c '{string}'` = runs string in new Bash subprocess (environment is isolated, positional parameters _$i_ via eg `bash -c 'echo $1' -- "hello"`)
 * `base64` = base64 encode/decode
@@ -238,6 +257,7 @@
 * `mkdir` = make directory (`-p /a/b/c` = creates nested folders if they don't exist)
 * `mkfifo` = create FIFOs (ie named pipes)
 * `mktemp` = create temp file, or directory (`-d`)
+* `modprob` = add/remove modules from Linux Kernel
 * `more` = display file contents in a terminal with paging (read whole file upfront, see `less`)
 * `mount {path eg /dev/floppy}` & `unmount` = (un)mount a filesystem
 * `mv {source} {target}` = rename/move

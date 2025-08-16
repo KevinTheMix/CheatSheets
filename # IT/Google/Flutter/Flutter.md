@@ -62,6 +62,7 @@ Features:
   * **StatelessElement** = an **Element** that uses a **StatelessWidget** as its configuration
   * **ComponentElement** = container/host for other elements
 * [Flutter Create](http://flutter.dev/create) = a one-time coding competition in 2019
+* **FVM** (Flutter Version Management) = small CLI tool to manage several Flutter SDK relseases side-by-side
 * [Impeller](https://github.com/flutter/flutter/wiki/Impeller) = latest rendering enging replacing Skia (already on iOS since Flutter 3.10), eliminating costly runtime shader compiling
 * **Keys** — see [@Emily Fortuna - Keys! What are they good for?](https://medium.com/flutter/keys-what-are-they-good-for-13cb51742e7d)
   * A way to keep track of States (ie for Stateful Widgets only), useful when adding/reordering widgets on the screen
@@ -188,9 +189,10 @@ Use commands with either long/short names (eg `flutter --option=value` or just `
 
 * `flutter --version`
 * `flutter analyze` = inspect code and display all infos/warnings/errors
-* `flutter build {platform}` = build towards platform (ie _appbundle/apk/ios/web_)
+* `flutter build {platform}` = build towards platform (ie _appbundle/apk/ios/web/windows_)
   * `appbundle` = builds an [Android App Bundle (AAB)](../Android.md#glossary)
   * `web` = [Build for web deployment](https://docs.flutter.dev/deployment/web)
+    * `--base-href {path}` = [HTML \<base> href](https://www.w3schools.com/Tags/att_base_href.asp)
     * `--web-renderer {canvaskit|html|skwasm}` = specify renderer (ie _CanvasKit_, _HTML_ & _WebAssembly_)
     * _canvaskit_ & _skwasm_ both draw to a single HTML `<canva>`, can handle complex visual games/presentations
     * _html_ maps component to native HTML/CSS/JS elements (eg images as `<img>`), can handle basic CSS animations, better for SEO
@@ -198,9 +200,11 @@ Use commands with either long/short names (eg `flutter --option=value` or just `
   * `--obfuscate --split-debug-info={symbols_directory}` = obfuscate & save symbols mapping file to directory
   * `--release` = build in _build/app/outputs/_
   * `--split-per-abi` = produces multiple APK, each optimized to a specific [Application Binary Interface (ABI)](../Android.md#glossary)
-  * `flutter build web --base-href {path}` = [HTML \<base> href](https://www.w3schools.com/Tags/att_base_href.asp)
-* `flutter channel [master|beta|stable]` = pick release channel (_master_ = dev, _beta_ = finalized/tested, _stable_ = production)
+  * `--verbose`
+* `flutter channel [stable|beta|main]` = by inverse order of finalization (_stable_ = production release, _beta_ = latest finalized/tested release, _main_ = ongoing dev)
 * `flutter clean` = clear build & packages cache (very useful before archiving/zipping an app source code)
+* `flutter config`
+  * `--list` = displays all current settings values
 * `flutter create .` = bootstraps a new project, or regenerate all missing platform-specific directories (ie _android_, _ios_, _linux_, _web_)
   * Adding web support to existing app (see <https://docs.flutter.dev/get-started/web#add-web-support-to-an-existing-app>)
 * `flutter create kokoapp`
@@ -361,6 +365,7 @@ Use commands with either long/short names (eg `flutter --option=value` or just `
 
 Run apps actually without debugging (unless intended) for faster development/execution cycles.
 
+* Use special variable _kDebugMode_ is true in Debug mode
 * Use `toStringDeep()` = a string representation of this node and its descendants
 * Use _dart:convert_ `jsonEncode(…)` to encode & pass whole objects
 * For custom widgets, override `debugFillProperties()` to add custom information (**DiagnosticsProperty**) into Flutter widget tree inspector (especially when publishing packages)

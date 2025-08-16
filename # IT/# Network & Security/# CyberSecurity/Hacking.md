@@ -29,6 +29,7 @@
 ## Tools
 
 * _Burp Suite_ (by _PortSwigger_) = proprietary software for security assessment & penetration testing (eg brute-force boolean SQLi)
+* _Dirty COW_ (Copy-On-Write) = copy-on-write vulnerability existing in older (created before 2018) Linux kernels (eg Android earlier than version 7 Nougat)
 * _Flipper Zero_ = open-source & customizable portable multi-tool for hackers/pentesters (RFID, radio protocols, access control systems, GPIO pins hardware)
 * _Kali Linux_ = professional penetration testing (ie hacking) OS, with built-in [tools](https://www.kali.org/tools)
 * _KON-BOOT_ = Bypass Windows/Mac logon (_active_)
@@ -36,7 +37,9 @@
 * _Nessus_ = (OS, network, hypervisors, DB, web servers) vulnerability scanner, plugins written in the Nessus Attack Scripting (NAS) language
 * _OpenVAS_ = vulnerability scanner, security issues, un/authenticated testing, detailed reports, free (GNU), plugins written in the Nessus Attack Scripting (NAS) language
 * _Parrot (Security) OS_ = FOSS portable Debian-based OS with 600 tools (for pentesting, security & development)
+* _PEASS_ (Priviledge Escalation Awesome Scripts Suite) = scans & reports possible privilege escalation (due to misconfiguration) paths on Windows/Unix/MacOS
 * _Pwnbox_ = customized online Parrot Security Linux distribution with many hacking tools pre-installed
+* _PwnKit_ = Linunx systems' `pkexec` utilty privilege escalation vulnerability
 * _Teensy_ = a programmable USB board that can spoof any USB type of device (eg emulate a keyboard)
 * _Volatility_ = FOSS RAM forensic analysis tool
 

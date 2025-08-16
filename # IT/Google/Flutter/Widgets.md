@@ -11,6 +11,7 @@ Building blocks of Flutter.
   * [Material Design Icons](https://fonts.google.com/icons)
   * [Material Design Icons](https://pictogrammers.com/library/mdi)
   * [Material 3 Demo](https://flutter.github.io/samples/web/material_3_demo)
+* [Google Fonts Icons](https://fonts.google.com/icons) = find icon search engine
 * _Not everything is a widget_ (eg **BoxDecoration**, **ThemeData**, **TextStyle**)
 
 ## Misc
@@ -173,7 +174,7 @@ There are two built-in solutions: imperative **Navigator** (push/pop API that wo
   * **RawMaterialButton** = base for a button with a child widget (eg **Text**, _fillColor_, _splashColor_, _shape_)
   * **SegmentedButton\<T>** = pill/tabs-looking radio buttons (`style: SegmentedButton.styleFrom(…Color)`)
   * **TextButton** = basic text button (_onPressed_)
-  * **ToggleButtons** = on/off/radio buttons (_isSelected_ = `List<bool>`, _onPressed_ controls selection logic, _abcColor_, _abcBorder_)
+  * **ToggleButtons** (_obsolete_, use MD3 **SegmentedButton**) = on/off/radio buttons (_isSelected_ = `List<bool>`, _onPressed_ controls selection logic, _abcColor_, _abcBorder_)
   * Use `___Button.icon()` constructor to get a basic button with both text AND icon
   * **ButtonStyle** = _back/foregroundColor_
   * Deprecated
@@ -181,7 +182,7 @@ There are two built-in solutions: imperative **Navigator** (push/pop API that wo
     * _OutlineButton_ = replaced with **OutlinedButton**
     * _RaisedButton_ = replaced with **ElevatedButton**
     * Old buttons used many static properties for each color & state, this was replaced with dynamic methods handling complex interaction states (see **MaterialState**)
-* **CheckBox** = Material Design bi-/tri-states checkbox
+* **Checkbox** = Material Design bi-/tri-states checkbox
 * **Chip** = rounded rectangle bordered labeled icon (`_Button.icon()`-like without interactivity, _avatar_, _label_)
   * **ActionChip** = contextual dynamic button/trigger for toggle actions without navigation (ie filter, tag, smart suggestion eg 'Like' or 'Save'), less prominent than a **Button**
   * **ChoiceChip** = single choice among chips set (eg single select filter like **SegmentedButton**)
@@ -405,11 +406,11 @@ There are two built-in solutions: imperative **Navigator** (push/pop API that wo
 
 * **AnimatedCrossFade** = fade in/out between two children of various sizes (_first/secondChild_, _crossFadeState_ showFirst|Second, _abcCurve_, _layoutBuilder_ to avoid layout jumps)
 * **AnimatedList** = list with built-in add/remove item animation (_initialItemCount_, _itemBuilder_, trigger via **AnimatedListState** either locally or via **GlobalKey**)
-* **AnimatedSwitcher** = transition between child widgets (set new _child_ via `setState()`, set _transitionBuilder_ to **Fade/Scale/Rotation-Transition**, set _layoutBuilder_, use keys if new widget is same type)
+* **AnimatedSwitcher** = transition between child widgets (set new _child_ via `setState()`, set _transitionBuilder_ to **Fade/Scale/Rotation-Transition**, set _layoutBuilder_) use keys if new widget is same (runtime)Type
 * **Flow** = sizes/positions/animates children widgets according to **FlowDelegate** logic using transformation matrices
 * **Hero** = images/clips/etc morphing animation between **Navigator** routes (via common _tag_)
 * **HeroMode** = en/disables child **Hero** in widget subtree (_enabled_)
-* **Transform** = custom (PowerPoint-like) transitions (`rotate()`, `scale()`,, `skewX()` `translate()`, or 4x4 custom matrix)
+* **Transform** = custom (PowerPoint-like) transitions (`rotate()`, `scale()`, `skewX()` `translate()`, or 4x4 custom matrix)
 * Tweens = (linear) interpolation be**tween**
   * **Animatable\<T>** = base abstract class for tweens (`Animatable<T>.animate(controller)` is identical to `controller.drive(Animatable<T>)`)
   * **Tween** = _begin_ & _end_ values (base class for converting **AnimationController** to a range of values of other types)

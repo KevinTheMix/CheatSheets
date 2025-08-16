@@ -24,7 +24,10 @@
 
 * **Block** = smallest unit of data a FS or disk uses to read/write (like pages in a book)
 * **Block Pointer** = FS-level references to block of data within FS address space (can be direct/indirect ie linked-lists-like), mapped to LBAs by OS using FS specific layout information
-* **Bootloader** (or bootstrap loader) = program responsible for booting a computer & OS, possibly presenting multiple boot choices (aka a **Boot Manager**)
+* **Bootloader** (or bootstrap loader) = program that initializes system hardware, loads & transfers control to (one of possibly several installed) OS kernel, starts in boot sector (often extends beyond it)
+* **Boot Sector** = physical location (usually 1st sector) of a storage device (HDD, SSD, USB) containing machine code to begin boot process (typically 512 bytes for MBR-based systems), loaded by BIOS/UEFI
+  * **MBR** (Master Boot Record) = traditionam BIOS systems
+  * **VBR** (Volume Boot Record) = contains code for booting a specific partition
 * **Clobber(ing)** = overwriting (a file)
 * **File Handle** (Windows) = opaque pointer-sized HANDLE (`void*` or `uintptr_t`)
 * **File System** (FS) = file organization & access

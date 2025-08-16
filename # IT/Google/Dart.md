@@ -18,6 +18,7 @@ The same Dart code can run on multiple platforms (eg mobile/desktop via Flutter,
 * **AOT** (Ahead-of-Time) = used in Release Mode, Dart codebase is compiled beforehand (eg via `dart compile exe {file}`) to efficient native machine code (ie a _libapp.so_ shared object file that gets packed within an APK file for ARM/x86, or a Windows _.exe_ file), JavaScript or WebAssembly, thereby producing a native artifact that does not require Dart VM
   * Flutter Engine (in C++) itself gets compiled to native code (eg _libflutter.so_ packed in APK's _/lib/_ folder as well)
 * **APK** = an actual zip archive file containing an entire app, ie its source native code as well as assets (fonts, images, etc)
+* **ARB** (Application Resource Bundle) = file containing parameterizable/conditional localization strings, generating _.dart_ files upon building
 * **AST** (Abstract Syntax Tree) = data structure representing code flow/structure as static data (ie a tree, à la Linq expression tree)
 * **Common Front End** (CFE) = Lexer/Parser (into AST), Compiler (type inference/cheking, optimizations), Analyzer (code navigation/refactoring/linting), Analysis Server (exposes Analyzer features to client IDEs)
   * Output of CFE is Kernel blobs/files that are fed to JIT Compiler
@@ -169,7 +170,7 @@ Following examples work identically with either [Single vs Double quotes](https:
   * `s.replaceRange(start, end, replacement)`
   * `s.substring(start, [end])`
   * Custom `capitalize()` extension method = `String capitalize() { return "${this[0].toUpperCase()}${substring(1).toLowerCase()}"; }`
-* **StringBuffer** `write()`, `writeln()`, `writeAll()`, `clear()`, _isEmpty_, _length_
+* **StringBuffer** `write()`, `writeln()`, `writeAll()`, `clear()`, _isEmpty_, _length_ (à la C# **StringBuilder**)
 
 ### [Collections](https://api.flutter.dev/flutter/dart-collection/dart-collection-library.html)
 
@@ -279,6 +280,7 @@ Key-value object (aka a hash map). Both Key & Value can be any type. Keys are un
   * `var map = { 'koko' : 123, 'kontan' : 777 }` = create a new Map using type inference
   * `var map = Map<String, int>()` = create a new Map with explicit types
   * `map.map((key, value) {…})` = returns new key-value **Map** (not a List)
+  * `Map.fromIterable({iterable}, key: …, value: …)` = weak typing, use inline for … in instead (see <https://stackoverflow.com/a/66111935/3559724>)
 * Access
   * `map.entries` = a collection of KVPs => this is one way to use `map()` with **Map** (<https://www.codevscolor.com/dart-iterate-map>)
   * `map.keys`
@@ -291,7 +293,7 @@ Key-value object (aka a hash map). Both Key & Value can be any type. Keys are un
   * `map.containsKey(key)`
 * Manipulation
   * `map.addAll(other)`
-  * `map.putIfAbsent(key, () => value)` = add (only)
+  * `map.putIfAbsent(key, () => value)` = add (only) & return value immediately (so if eg value is a list, we can chain `map.putIfAbsent(key, () => []).add(item)`)
   * `map.remove(key)` = removes value and returns it
   * `map.update(key, (oldValue) => newValue)`
 

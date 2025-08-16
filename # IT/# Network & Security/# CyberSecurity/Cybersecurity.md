@@ -7,6 +7,7 @@
 
 ## Glossary
 
+* **Common Vulnerabilities & Exposures** (CVE) = US-based reference system for publicly known vulnerabilities & exposures
 * **Cyber Threat Intelligence** (CBI) = structured collection, analysis, and dissemination of data regarding potential/existing cyber threats
 * **Digital Forensics and Incident Response** (DFIR) = two discrete security disciplines
   * **Digital Forsensics** = postmortem investigate & gather evidence and establish facts (from FS, memory, system & network logs)

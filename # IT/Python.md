@@ -4,38 +4,20 @@
 
 * There is no brackets in python, indentation matters
 * Variables can be declared in a sub-scope and be used outside (eg declared locally within `if` block & used underneath)
-* `python - <<'PY'{Enter}{code}{Enter}PY` = enter some inline python code in Bash
 
 ## Glossary
 
-* **Django** = Python's web framework
+* **Django** = Python's full-fledged web framework
 * **Dunder Method** (Double Under) or **Magic Methods** = built-in methods starting with double leading & trailing underscores
   * Commonly overriden (eg `__init__`), listable via `dir({class})`
-* **Flask** = light & extensible web framework (`flask`)
-* **pip(3)** = Pyton (3) package manager
 * **PyPI** (Python Package Index) = official repository of Python packages (default for `pip`)
 * **Virtual Environment** = standalone self-contained local install including all versioned dependencies, sourced in command prompt, prevents intereference with global install
 * **Web Server Gateway Interface** (WSGI) = server-to-application calling/forwarding convention for Python applications
 
-## Environment
-
-* On Windows: _Settings > Apps > Advanced app settings > app execution aliases_ > toggle off **App Installer** (for both python.exe & python3.exe)
-
-### CLI
-
-* `pip freeze > {file}` (eg _requirements.txt_) = list every package currently importable/usable into a requirements file (one package per line)
-* `pip (un)install`
-  * `--upgrade-pip` = upgrades itself
-  * `-r {file}` = install from a requirements file
-  * `"pandas[excel]"` = install current Excel-related stack from PyPI (pandas, openpyxl, xslxwriter)
-* `python3 -m venv {directory}` = creates a virtual environment
-  * `source {directory}/bin/activate` = change prompt to virtual environment
-  * `deactivate` = exit virtual environment (return to system-wide python install)
-  * `python -m pip install --upgrade pip`
-* `python -c {command}` = executes inline Python code
-
 ### Libraries
 
+* **Flask** = light & extensible web framework (`flask`)
+* **http.server** = basic HTTP server
 * **NumPy** (Numerical Python) = arrays manipulation
 * **openpyxl** = read/write Excel 2010 xlsx/xlsm/xltx/xltm files
 * **pandas** (panel data) = data manipulation & analysis, especially data structures/operations for numerical tables & time series
@@ -43,9 +25,31 @@
   * `df.iloc[start:end]` = subset splicing
   * `df.isin({collection})` = check if DataFrame has values in collection (eg `df[~df.isin([excluded_values])]`)
   * `dg.reset_index(drop=True)`
+* **pip(3)** = Pyton (3) package manager
+  * `pip freeze > {file}` (eg _requirements.txt_) = list every package currently importable/usable into a requirements file (one package per line)
+  * `pip (un)install`
+    * `--upgrade-pip` = upgrades itself
+    * `-r {file}` = install from a requirements file
+    * `"pandas[excel]"` = install current Excel-related stack from PyPI (pandas, openpyxl, xslxwriter)
 * **pyinstaller** = (pre-)compile Python code (`-F` aka `--onefile` to create single file bundle exe)
+  * Eg `pyinstaller --onefile --windowed .\{script.py}` for building a GUI app (same as `--noconsole`)
+* **pyngrok** = Ngrok API
+* **Tkinter** = interface to Tcl/Tk (ie to build GUIs)
 * **timeit** = measure performances (eg `timeit.timeit(stmt={treatment}, number={n})`)
 * **xlsxwriter**
+
+## Environment
+
+* On Windows: _Settings > Apps > Advanced app settings > app execution aliases_ > toggle off **App Installer** (for both python.exe & python3.exe)
+
+### CLI
+
+* `python - <<'PY'{Enter}{code}{Enter}PY` = enter some inline python code in Bash
+* `python -m venv {directory}` = creates a virtual environment
+  * `source {venv}/bin/activate` (or `.\{venv}\Scripts\Activate.ps1` in PowerShell) = change prompt to virtual environment
+  * `deactivate` = exit virtual environment (return to system-wide python install)
+* `python -m pip install --upgrade pip`
+* `python -c {command}` = executes inline Python code
 
 ## API
 
@@ -55,7 +59,7 @@
   * `__name__` = name of current module, varies depending on whether executed directly (ie `__main__`) or imported
 
 * _None_ = **NoneType** (à la null)
-* `pass` = placeholder statement for contexts where a statement is required by syntax but not implemented yet (eg an empty if/else block)
+* `pass` = placeholder statement for contexts where a statement is required by syntax but not implemented yet (eg in a if/else block)
 * `_field` = meant informatively that an attribute/method is intended for use inside that class only
 * `field_` = single trailing underscore avoid conflicts with reserved keyword (by convention)
 * `__field` = name mangling (ie replaced with `_classname__field`)
@@ -86,9 +90,9 @@ Strings are list of (1-char long) strings.
 * `"text" + "text"` = concatenation
 * `"text * {n}"` = multiply a string (number can be before/after)
 * `f"{variable}"` = interpolation (using curly braces)
-* `text.split()` = split
+* `text.split((separator))` = split (default separator are whitespaces chars)
 * `text.isdigit()` = True if text represents a number
-* `text.join({list})` = concatenate (eg `', '.join(['a', 'b', 'c'])` gives _a, b, c_)
+* `separator.join(list)` = concatenate (eg `', '.join(['a', 'b', 'c'])` gives _a, b, c_)
 * `str({number})` = convert to string
 * `text.strip({characters})` = trim whitespaces (or any provided characters)
 
@@ -152,4 +156,8 @@ Returned by libraries such as SQL libraries (eg `fetchone()` & `fetchall()`).
 * `(name, age, bow) = ("Koko", 17, "bare")` = tuple unpacking, assign multiple variables at once
 * `tuple[index]` = returns item at index
 
-### OO
+### OOP
+
+* `class Koko({Parent})` = class inheritance
+* `__init__(self, {args})` = constructor
+* `method(self, {args})` = instance method, receiving instance as first argument (named _self_ by convention)

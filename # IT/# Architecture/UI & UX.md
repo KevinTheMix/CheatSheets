@@ -25,9 +25,12 @@
 * [Fitt's Law](https://en.wikipedia.org/wiki/Fitts%27s_law#Implications_for_UI_design) = place buttons at screen edges
 * **Flat design** = minimalist design language
 * **Fluent Design System** = a design language developed by Microsoft in 2017
+* **Graphics Design** = static visual content to communicate messages
 * **Hover** = change in color, shadow or animation of a button/link/icon in response to a mouseover
+* **Motion Design** = broad discipline including motion graphics, animation, cinematography, graphic design
+* **Motion Graphics** = animated graphics elements (text, shapes, icons)
 * **Mouseover** = mouse is over an element (just a state, no inherent associated animation/visuals)
-* **Reactivity** = how UI responds to changes in underlying data (aka `UI = f(state`))
+* **Reactivity** = how UI responds to changes in underlying data (aka `UI = f(state`)
   * Reacting to (input) change in real-time in a very clear, visible fashion, and possibly impacting several parts of an application
 * **Responsive** = responding to screen size change
 * **Rollover** = icon/image-based swap in response to a mouseover

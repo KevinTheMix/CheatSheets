@@ -13,7 +13,6 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 
 ## Glossary
 
-* _@dash-overflow.net_ = Rémi Rousselet
 * [Flutter Favorite program](https://docs.flutter.dev/packages-and-plugins/favorites) = high-quality first priority packages
 * **Package** = "pure Dart code" package, at a minimum it is a directory containing a _pubspec.yaml_ file
 * **Plugin** (aka _plugin package_) = a special kind of package part-native (Kotlin/JS/Swift) code wrapped as Dart making platform features available to an app
@@ -37,6 +36,7 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
   * **convert** = en/decode between different data representations (eg String to JSON `jsonDecode()`, UTF-8, Base64, HTML escape)
   * **dart:core**
   * **dart:math**
+  * **flutter_localizations** = internalization (i18n) & localization (i10n), permits parameterized & conditional output (generated via source ARB files)
   * **foundation**
   * **intl** = date formatting
   * **material**
@@ -45,186 +45,76 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 
 ## Plugins
 
-* [@flutter plugins](https://github.com/flutter/plugins#plugins)
+### Official
 
 * **async** (_@dart.dev_) = additions to built-in [dart:async](https://api.dart.dev/stable/3.5.0/dart-async/dart-async-library.html) (`StreamGroup.merge()`, `AsyncCache<T>()` time-based cacheing, **StreamQueue**)
-* **auto_route** (_@codeness.ly_) = navigation/routing with deep linking & code generation
 * **build_runner** (_@tools.dart.dev_) = generate files on disk using Dart code
   * `dart run build_runner build` = generate once (`--delete-conflicting-outputs`)
   * `dart run build_runner watch -d` = generate continusouly on files change/save
   * `flutter pub run build_runner build --delete-conflicting-outputs`
   * Don't include folders where generated files reside to a git repo (by mentioning them in _.gitignore_ config)
-* **camera** (_@flutter.dev_)
 * **collection** (_@dart.dev_) = collection utilities (eg _max_)
-* **connectivity_plus** (_@fluttercommunity.dev_) = discover network connectivity types (eg mobile, wifi, ethernet, vpn, bluetooth) for all platforms
 * **crypto** (_@dart.dev_) = cryptographic hashing functions for Dart
-* **device_info_plus** (_@fluttercommunity.dev_) = device/OS-specific information; `DeviceInfoPlugin()` then `.androidInfo` or `.iosInfo` ~ built-in `Platform.isAndroid|IOS`
-* **dio** (_@flutter.cn_) = HTTP networking (request cancel, file up/download, timeout)
-* **easy_localization** (-) = easy translations for many languages, supports other file formats (JSON, CSV, Yaml, XML)
-* **equatable** (_@fluttercommunity.dev_) = simplifies (value) equality comparison boilerplate (just define _props_ and remove `hashCode()` & `operator==()`)
-* **espresso** (_@flutter.dev_) = bindings for Espresso tests (for Android apps)
-* **extra_alignments** (_@gskinner.com_) = like **Center** but all other directions (eg **TopLeft** or **CenterRight**)
-* **file_selector** (_@flutter.dev_) = file dialogs interaction
-* **fl_chart** (_@flchart.dev_) = line/bar/pie/scatter/radar charts
-* **flutter_adaptive_scaffold** (_@flutter.dev_) = Material adaptive Scaffold
-* **flutter_gen** (_@wasabeek.jp_) = access assets programmatically instead of path strings (inspired by [SwiftGen](https://github.com/SwiftGen/SwiftGen))
-* **flutter_hooks** (_@dash-overflow.net_) = makes boilerplate lifecycle-tied logic more compact & reusable (eg **AnimationController** via `useAnimationController`)
-  * [Existing hooks](https://github.com/rrousselGit/flutter_hooks#existing-hooks)
-* **flutter_keyboard_visibility** (_@jasonrai.ca_) = react to virtual keyboard visibility changes
-* **flutter_lints** (_@flutter.dev_) = recommended set of lints for Flutter apps, packages, and plugins
-* **flutter_local_notifications** (_@dexterx.dev_) = display notifications on most platforms (desktop & mobile, not web)
-* **flutter_native_splash** (_jonhanson.net_) = splash screen before/while Flutter boots
-* **flutter_rating_bar** (_@sarbagyastha.com.np_) = "5-stars" (or other icons) fractional rating bar
-* **flutter_simple_treeview** (_@google.dev_) = tree structure of widget nodes
-* **flutter_slidable** (_@romainrastel.com_) ~= customizable **Dismissible** (`actionPane`, `actions: [IconSlideAction]`, `actionExtentRatio: 1/actions.length`)
-* **flutter_treeview** (_@kevinandre.com_) = customizable hierarchical tree of widgets
-* **flutter_zoom_drawer** (_@medyas.ml_) = custom drawer with rotation & shadow clones
-* **focusable_control_builder** = reacts to all sorts of inputs (focus, tab key, mouse events, keyboard shortcut)
-* **freezed** (_@dash-overflow.net_) = codegen for data/model/union classes (adds `copyWith()`, equality, JSON from/to, `toString()`), requires **build_runner** & **json_serializable**
-* **ftoast** (-) = toast pop-up messages (ie center screen notifications)
-* **geolocator** (_@baseflow.com_) = access native platforms specific geolocation services (last location, etc)
-* **go_router** (_@flutter.dev_) = declarative routing with deep links handling across multiple platforms (maintained by official Flutter team)
-* **google_maps_flutter** (_@flutter.dev_)
-* **google_sign_in** (_@flutter.dev_)
-* **graphql** (_@zino.company_) = GraphQL (data query & manipulation for declarative data fetching APIs, created by Facebook) client, also used for CQRS
-* **graphql_flutter** (_@zino.company_) = API & widgets for **graphql**
 * **grpc** (_@dart.dev_) = Google (HTTP/2 & Protobuf) protocol for connecting microservices or mobile clients to backends
 * **html** (_@tools.dart.dev_) = HTML 5 parser
 * **http** (_@dart.dev_)
-* **husky** (-) = manage git hooks (eg lint commit messages & code, run tests, etc in reaction to git commit/push)
-* **in_app_purchase** (_@flutter.dev_) = storefront-independent API for purchases
 * **intl** (_@dart.dev_) = Dates & Numbers (& Bidi) formatting methods
-* **intl_utils** (_@localizely.com_) = binding between your translations from .arb files and Flutter app
-* **introduction_screen** (-) = onboarding starting slideshow
-* **jaspr** = web framework for building websites in Dart (with both client-side & server-side rendering)
-* **json_serializable** (_@google.dev_) = generate to/fromJson code based on annotated class members
-* **local_auth** (_@flutter.dev_) = local on-device authentication
-* **location** (_@bernos.dev_) = device geographical location; `serviceEnabled()`, `requestService()`, `hasPermission`, `requestPermission()`, `getLocation()`
 * **logging** (_@dart.dev_)
-* **mason** (_@brickhub.dev_) = generates boilerplate code based on bricks (ie interactive customizable & community-shared manifest files), augments `flutter create` with more flexible `mason add|make {brick_name}`
 * **mockito** (_@dart.dev_) = mock library for unit tests (inspired by Java's Mockito)
-* **onboarding_overlay** (-) = large overlays
-* **package_info_plus** (_@fluttercommunity.dev_) = meta-information about application package (name, version, build number)
-* **panara_dialogs** (_@panarastudios.in_) = info/confirmation/warning/error modal dialogs
 * **path** (_@dart.dev_) = helper to combine/construct paths
+
+* **flutter_simple_treeview** (_@google.dev_) = tree structure of widget nodes
+* **json_serializable** (_@google.dev_) = generate to/fromJson code based on annotated class members
+* **vector_math** (_@google.dev_) = vector math for 2D/3D apps (distance calculation, vector/matrix, collision detection)
+
+* **dynamic_color** (_@material.io_) = Material color schemes based on platform dynamic color
+* **google_fonts** (_@material.io_) = use [Google Fonts](https://fonts.google.com) (_fontSize|Weight_, _height_)
+* **material_color_utilities** (_@material.io_) = low-level algorithms & utilities enabling Material Design 3 color system
+
+#### [@flutter plugins](https://github.com/flutter/plugins#plugins)
+
+* **animations** (_@flutter.dev_) = turnkey transitions pack (container (à la **Hero**), shared axis (h/v/zoom), fade/pop)
+* **camera** (_@flutter.dev_)
+* **espresso** (_@flutter.dev_) = bindings for Espresso tests (for Android apps)
+* **file_selector** (_@flutter.dev_) = files & file dialogs
+* **flutter_adaptive_scaffold** (_@flutter.dev_, _discontinued_) = Material 3 guidelines adaptive (reacts to inputs) Scaffold
+* **flutter_lints** (_@flutter.dev_) = recommended set of lints for Flutter apps, packages, and plugins
+* **flutter_svg** (_@flutter.dev_) = draw SVG files (`SvgPicture.asset('assets/icons/union.svg')` or from network)
+* **go_router** (_@flutter.dev_) = declarative routing with deep links handling across multiple platforms (maintained by official Flutter team)
+* **google_maps_flutter** (_@flutter.dev_)
+* **google_sign_in** (_@flutter.dev_)
+* **image_picker** (_@flutter.dev_) = pick image from library or take a new one with camera
+* **in_app_purchase** (_@flutter.dev_) = storefront-independent API for purchases
+* **ios_platform_images** (_@flutter.dev_) = share images between Flutter and iOS
+* **local_auth** (_@flutter.dev_) = local on-device authentication
 * **path_parsing** (_@flutter.dev_) = create & manipulate paths, parse Path from SVG data string
-* **path_provider** = find commonly used locations on the filesystem for different devices
+* **path_provider** (_@flutter.dev_) = find commonly used locations on the filesystem for different devices
 * **plugin_platform_interface** (_@flutter.dev_)
-* **pub_version_plus** (_@mrgnhnt.com_) = increment fragments of a version (& build) number via single command
-  * Usage = `dart run pub_version_plus:main {major|minor|patch|build} (--pre-release {beta|alpha|dev})`
-  * Works well with CI/CD **when installed as a dev-dependency**
 * **quick_actions** (_@flutter.dev_) = device home screen app custom quick actions (appearing when long-pressing app icon)
-* **rect_getter** (_@debuggerx.com_) = obtain a widget's rectangular coordinates
-* **rnd** (_@gskinner.com_) = makes working with random values easier (global **Random** instance + helpful extension methods)
+* **shared_preferences** (_@flutter.dev_) = simple key-value storage (works on all platforms!)
+* **url_launcher** (_@flutter.dev_) = open external URL/e-mail/phone number/SMS/any app with special URL handlers (e.g. YouTube). Check `canLaunch()` first
+* **video_player** (_@flutter.dev_)
+* **webview_flutter** (_@flutter.dev_) = WebView widget
+
+### Community
+
+* **connectivity_plus** (_@fluttercommunity.dev_) = discover network connectivity types (eg mobile, wifi, ethernet, vpn, bluetooth) for all platforms
+* **device_info_plus** (_@fluttercommunity.dev_) = device/OS-specific information; `DeviceInfoPlugin()` then `.androidInfo` or `.iosInfo` ~ built-in `Platform.isAndroid|IOS`
+* **equatable** (_@fluttercommunity.dev_) = simplifies (value) equality comparison boilerplate (just define _props_ and remove `hashCode()` & `operator==()`)
+* **flutter_launcher_icons** (_@fluttercommunity.dev_) = CLI to generate all platforms/sizes icons from a single image asset (`flutter pub run flutter_launcher_icons:main`)
+* **font_awesome_flutter** (_@fluttercommunity.dev_) = free [Font Awesome](https://fontawesome.com/icons) Icon pack as Flutter Icons
+* **get_it** (aka **GetIt**) (_@fluttercommunity.dev_) = simple DI container/service locator via global singleton
+* **package_info_plus** (_@fluttercommunity.dev_) = meta-information about application package (name, version, build number)
 * **rxdart** (_@fluttercommunity.dev_) = extends Dart **Streams** & **StreamControllers** with reactive programming
-* **searchfield** (_@maheshjamdade.com_) = simple customizable autocomplete search widget
 * **sensors_plus** (_@fluttercommunity.dev_) = accelerometer, gyroscope, magnetometer, barometer sensors
 * **share_plus** (_@fluttercommunity.dev_) = share (text/URL/images/files) data between apps, using platform's share dialog
-* **showcaseview** (_@simform.com_) = small modal onboarding overlay arrows
-* **sliver_tools** (_@pietervanloon.com_) = missing sliver package (related: [SliverFooter](https://stackoverflow.com/a/49621060/3559724) by Rémy Rousselet)
-* **system_tray** (-) = design a system tray menu for desktop (Linux, macOS, Windows) opening from the system tray app icon
-* **tflite_flutter** (_@tensorflow.org_) = TensorFlow Lite interpreter and perform interference, with multi-platform support (mobile & desktop)
-* **undo** (_@rodydavis.com_) = undo/redo
-* **universal_platform** (_@gskinner.com_) = platform detection (eg _isAndroid_, _isWeb_, _isWindows_) that works for web (unlike _dart.io.Platform_ at the time)
-* **url_launcher** (_@flutter.dev_) = open external URL/e-mail/phone number/SMS/any app with special URL handlers (e.g. YouTube). Check `canLaunch()` first
-* **uuid** (_@yuli.dev_) = generate UUIDs
-* **vector_math** (_@google.dev_) = vector math for 2D/3D apps (distance calculation, vector/matrix, collision detection)
-* **webview_flutter** (_@flutter.dev_) = WebView widget
-* **window_size** (-) = gets/sets desktop (Linux/macOS/Windows) apps window size (also see **desktop_window** package)
 * **workmanager** (_@fluttercommunity.dev_) = schedule tasks at OS-level (thus works even with app backgrounded/closed)
 
-* Text
-  * **fuzzy** (_@borges.dev_) = Fuzzy (Elastic) search
-  * **pdf_text** (_@aluc.dev_) =  PDF
-  * **stemmer** (-) = reduces word to their base form
-  * **string_similarity** (_@jeremylandon.com_) = string distance/similarity (à la Levenshtein)
-* DB, Storage, [Caching](https://docs.flutter.dev/get-started/fundamentals/local-caching)
-  * **drift** (previously _Moor_, _@simonbinder.eu_) = reactive persistence library for Dart & Flutter (works with desktop), builds on SQLite
-  * **graphql_flutter** (_@zino.company_)
-  * **get_storage** (_@getx.site_) = key-value in memory storage wit disk backup, alternative to **shared_preferences**
-  * **hive_flutter** (_@hivedb.dev_) = lightweight wrapper around **Isar**, key-value NoSQL DB, written in pure Dart
-  * **isar** (_@isar.dev_) = cross-plaform DB for flutter, (replaces Hive with full Web support via IndexedDB)
-  * **objectbox** (_@objectbox.io_) = high-performance offline-first (on-device data persistence & AI) edge vector search NoSQL DB with [Data Synchronization](https://sync.objectbox.io) (no Web)
-  * **shared_preferences** (_@flutter.dev_) = simple key-value storage (works on all platforms!)
-  * **sqflite** (_@tekartik.com_) = save structured data locally in SQLite DB (usual CRUD, or raw SQL). Enable foreign keys explicitely if they are needed
-  * **sqflite_ffi** (_@tekartik.com_) = makes sqflite work on desktop (Linux, MacOS, Windows) for both Flutter/Dart VM
+#### Rémi Rousselet
 
-### UI (Animations, Graphism, Sounds & Themes)
-
-* **boxy** (_@tst.sh_) = set of layout widgets to align/position widgets against other widgets (eg flex, multi-child, dynamic inflation, slivers)
-* **flutter_sticky_header** (_@romainrastel.com_) = section headers that sticks while section scrolled
-* **gap** (-) = adds space inside **Flex** widgets (ie **Column**/**Row** or scroll lists, see **MaxGap** & **SliverGap**)
-* **image_picker** (_@flutter.dev_) = pick image from library or take a new one with camera
-* **ios_platform_images** (_@flutter.dev_) = share images between Flutter and iOS
-* **motion** (_@cendre.me_) = gyroscope-based "wobbling" effect
-* **video_player** (_@flutter.dev_)
-
-* Animation & Clips
-  * **animate_do** (_@fernando-herrera.com_) = crisp bounce/in/out animations (à la jQuery, inspired by Animate.css)
-  * **animations** (_@flutter.dev_) = turnkey transitions pack (container (à la **Hero**), shared axis (h/v/zoom), fade/pop)
-    * [animations library API](https://pub.dev/documentation/animations/latest/animations/animations-library.html)
-  * **animated_clipper** (_@oodavid.com_) = clip transitions for interactive buttons & co
-  * **animated_text_kit** (_@ayushagarwal.ml_) = text animations (rotate/fade/type/scale/colorize/liquidfill/wavy/flicker)
-  * **clippy_flutter** (_deprecated_) = collection of clip shapes (arrows, rhombus)
-  * **flutter_adaptive_scaffold** (_@flutter.dev_, _discontinued_) = reacts to device/screen/user inputs, and renders according to Material 3 guidelines
-  * **flutter_animate** (_@gskinner.com_) = easy compositionable animated effects (blur, colors, fade, scale, shimmer, slide)
-    * Defines microseconds-based duration num extensions (eg `300.ms`)
-  * **flutter_custom_clippers** (_@dlohani.com.np_) = collection of clip shapes (wave, panels)
-  * **particles_flutter** (-) = interactive particles animation
-  * **flutter_shaders** (-) = makes working with FragmentProgram API easier
-    * Defines an **AnimatedSampler** class that is able to render a widget to an image on-the-fly
-  * **flutter_switch_clipper** (_@fluttercandies.com_) = fill/transition effects package
-  * [FlutterFX](https://github.com/flutterfx/flutterfx_widgets)
-  * **liquid_swipe** (_@sahdeepsingh.com_) = wave motion transition
-  * **particle_field** (_@gskinner.com_) = high performance custom particle effects
-  * **shimmer** (_@hunghd.dev_) = pulsating UI loading effect
-  * **wave_container** (-) = sine water-like wave animations
-  * **wave_transition** (-) = radial layer reveal effect
-  * **wave_transition_animation** (-) = radial layer reveal effect
-* Font & Themes
-  * **dynamic_color** (_@material.io_) = Material color schemes based on platform dynamic color
-  * **flex_color_scheme** (_@rydmike.com_) = Material Design 3 seeded generated color schemes
-  * **google_fonts** (_@material.io_) = use [Google Fonts](https://fonts.google.com) (_fontSize|Weight_, _height_)
-  * **material_color_utilities** (_@material.io_) = low-level algorithms & utilities enabling Material Design 3 color system
-  * **material_symbols_icons** (_@hiveright.tech_) = uses official Material Symbols Icons
-    * [Flutter-based Demo](https://timmaffett.github.io/material_symbols_icons)
-* Images
-  * **flutter_launcher_icons** (_@fluttercommunity.dev_) = CLI to generate all platforms/sizes icons from a single image asset (`flutter pub run flutter_launcher_icons:main`)
-  * **flutter_spinkit** (_@ogbomo.com_) = funky loading icons package
-  * **flutter_svg** (_@flutter.dev_) = draw SVG files (`SvgPicture.asset('assets/icons/union.svg')` or from network)
-  * **font_awesome_flutter** (_@fluttercommunity.dev_) = free [Font Awesome](https://fontawesome.com/icons) Icon pack as Flutter Icons
-  * **lottie** (_@xaha.dev_) = GIF-like After Effects (exported via bodymovin extension) JSON vector animations
-    * [Flutter Web: Lottie Animation issue](https://stackoverflow.com/a/73779834/3559724)
-  * **material_design_icons_flutter** (_@ziofat.dev_) = [Material Design Icons](https://pictogrammers.com/library/mdi) as Flutter Icons
-  * **rive** (_@rive.app_) (formerly **flare**) = state-machine-powered complex 2D interactive animation tool
-  * **transparent_image** (-) = (see **FadeInImage**)
-* Sounds
-  * **audio_service** (_@ryanhaise.com_) = play background audio while screen is off
-  * **audioplayers** (_@blue-fire.xyz_) = with [AudioCache](https://stackoverflow.com/a/52842613/3559724)
-  * **flutter_beep** (_@gonoter.com_) = play basic system sounds
-  * **flutter_sound** (_@tau.canardoux.xyz_)
-
-### DI & [State Management](https://docs.flutter.dev/data-and-backend/state-mgmt/options)
-
-State can have a broad definition; in a mostly immutable environment, that could mean any variable.
-Using some of these packages allows building an app without never actually using any **StatefulWidget** at all.
-
-* **bloc** (_@bloclibrary.dev_) = implementation of [BLoC](https://bloclibrary.dev/getting-started/#packages)  (Business Logic Component) state management pattern
-  * Has two modes: either extending simple **Cubit** (functions & states) or more advanced **Bloc** (event classes & states)
-  * `Bloc<Event, State>` = takes **Stream** of _Events_ in, transforms them as **Stream** of _States_ out
-* **flutter_bloc** (_@bloclibrary.dev_) = uses **bloc** package, adds widgets
-  * **BlocBuilder** = read state & rebuilds on change (à la **StreamBuilder**), possibly many times (_builder_ should be idempotent)
-  * **BlocConsumer** = _builder_ & _listener_ (à la nested **BlocListener** & **BlocBuilder**)
-  * **BlocListener** = like **BlockBuilder** but rebuilds only once per state change
-  * **BlocProvider** = provides a bloc (BL) to its children/descendants (_create_, _child_, _lazy_)
-  * **BlocObserver** = interface for observing behavior of `Bloc<Event, State>` instances (ie all app state changes)
-  * **BlocSelector** = more granular **BlocBuilder** for some value change (same logic as **provider** package)
-  * **MultiBlocListener** = multiple **BlocListener** into one
-  * **MultiBlocProvider** = multiple **BlocProvider** into one
-  * **ReposityProvider** & **MultiRepositoryProvider** = provides a repository to its children/descendants
-* **flutter_command** (-) = **ValueListenable**-based Command pattern (à la .NET)
-* **get** (_@getx.site_) = DI, Navigation, State Management all-in-one framework (à la WPF Prism, [GetX website](https://chornthorn.github.io/getx-docs))
-* **get_it** (aka **GetIt**) (_@fluttercommunity.dev_) = simple DI container/service locator via global singleton
+* **flutter_hooks** (_@dash-overflow.net_) = makes boilerplate lifecycle-tied logic more compact & reusable (eg **AnimationController** via `useAnimationController`)
+  * [Existing hooks](https://github.com/rrousselGit/flutter_hooks#existing-hooks)
+* **freezed** (_@dash-overflow.net_) = codegen for data/model/union classes (adds `copyWith()`, equality, JSON from/to, `toString()`), requires **build_runner** & **json_serializable**
 * **provider** (_@dash-overflow.net_) = state management wrapper/syntactic sugar around built-in **InheritedWidget**
   * [Making sense of all the (Provider) providers](https://medium.com/flutter-community/making-sense-all-of-those-flutter-providers-e842e18f45dd)
   * [create vs value](https://stackoverflow.com/a/61861315/3559724)
@@ -259,8 +149,136 @@ Using some of these packages allows building an app without never actually using
   * **StreamProvider**
   * `(Provider).autoDispose()` = destroy state when no longer used (eg closing Firebase connection or resetting state between screens transition)
   * See <https://medium.com/flutter-community/flutter-riverpod-tutorial-counter-app-ed3aa758f02f>
-* **stacked** (_@filledstacks.com_) = MvvM architectural framework for real-world scenarios
-  * See <https://medium.com/flutter-community/a-beginners-guide-to-architecting-a-flutter-app-1e9053211a74>
 * **state_notifier** (_@dash-overflow.net_) = exposes immutable, debuggable, undo-redoable **StateNotifier** abstract class
   * Uses _state_ setter property that notifies listeners when set (as opposed to manually calling `notifyListeners()` in case of vanilla mutable **ChangeNotifier**)
   * used in combination with Provider or Riverpod
+
+#### Misc
+
+* **auto_route** (_@codeness.ly_) = navigation/routing with deep linking & code generation
+* **dio** (_@flutter.cn_) = HTTP networking (request cancel, file up/download, timeout)
+* **easy_localization** (-) = easy translations for many languages, supports other file formats (JSON, CSV, Yaml, XML)
+* **extra_alignments** (_@gskinner.com_) = like **Center** but all other directions (eg **TopLeft** or **CenterRight**)
+* **file_picker** (_@miguelruivo.com_) = cross-platform native single/multi file explorer/saver (with extension filtering)
+* **file_saver** (_@hassanansari.dev_) = cross-platform file saving
+* **fl_chart** (_@flchart.dev_) = line/bar/pie/scatter/radar charts
+* **flutter_gen** (_@wasabeek.jp_) = access assets programmatically instead of path strings (inspired by [SwiftGen](https://github.com/SwiftGen/SwiftGen))
+* **flutter_keyboard_visibility** (_@jasonrai.ca_) = react to virtual keyboard visibility changes
+* **flutter_local_notifications** (_@dexterx.dev_) = display notifications on most platforms (desktop & mobile, not web)
+* **flutter_native_splash** (_jonhanson.net_) = splash screen before/while Flutter boots
+* **flutter_rating_bar** (_@sarbagyastha.com.np_) = "5-stars" (or other icons) fractional rating bar
+* **flutter_slidable** (_@romainrastel.com_) ~= customizable **Dismissible** (`actionPane`, `actions: [IconSlideAction]`, `actionExtentRatio: 1/actions.length`)
+* **flutter_treeview** (_@kevinandre.com_) = customizable hierarchical tree of widgets
+* **focusable_control_builder** = reacts to all sorts of inputs (focus, tab key, mouse events, keyboard shortcut)
+* **geolocator** (_@baseflow.com_) = access native platforms specific geolocation services (last location, etc)
+* **graphql** (_@zino.company_) = GraphQL (data query & manipulation for declarative data fetching APIs, created by Facebook) client, also used for CQRS
+* **graphql_flutter** (_@zino.company_) = API & widgets for **graphql**
+* **husky** (-) = manage git hooks (eg lint commit messages & code, run tests, etc in reaction to git commit/push)
+* **intl_utils** (_@localizely.com_) = binding between your translations from .arb files and Flutter app
+* **jaspr** (_@schultek.dev_) = web framework for building HTML/CSS websites in Dart (with both client-side & server-side rendering)
+* **location** (_@bernos.dev_) = device geographical location; `serviceEnabled()`, `requestService()`, `hasPermission`, `requestPermission()`, `getLocation()`
+* **pub_version_plus** (_@mrgnhnt.com_) = increment fragments of a version (& build) number via single command
+  * Usage = `dart run pub_version_plus:main {major|minor|patch|build} (--pre-release {beta|alpha|dev})`
+  * Works well with CI/CD **when installed as a dev-dependency**
+* **rect_getter** (_@debuggerx.com_) = obtain a widget's rectangular coordinates
+* **rnd** (_@gskinner.com_) = makes working with random values easier (global **Random** instance + helpful extension methods)
+* **searchfield** (_@maheshjamdade.com_) = simple customizable autocomplete search widget
+* **sliver_tools** (_@pietervanloon.com_) = missing sliver package (related: [SliverFooter](https://stackoverflow.com/a/49621060/3559724) by Rémy Rousselet)
+* **system_tray** (-) = design a system tray menu for desktop (Linux, macOS, Windows) opening from the system tray app icon
+* **tflite_flutter** (_@tensorflow.org_) = TensorFlow Lite interpreter and perform interference, with multi-platform support (mobile & desktop)
+* **undo** (_@rodydavis.com_) = undo/redo
+* **universal_platform** (_@gskinner.com_) = platform detection (eg _isAndroid_, _isWeb_, _isWindows_) that works for web (unlike _dart.io.Platform_ at the time)
+* **uuid** (_@yuli.dev_) = generate UUIDs
+* **window_size** (-) = gets/sets desktop (Linux/macOS/Windows) apps window size (also see **desktop_window** package)
+
+* Animation & Clip
+  * **animate_do** (_@fernando-herrera.com_) = crisp bounce/in/out animations (à la jQuery, inspired by Animate.css)
+    * [animations library API](https://pub.dev/documentation/animations/latest/animations/animations-library.html)
+  * **animated_clipper** (_@oodavid.com_) = clip transitions for interactive buttons & co
+  * **animated_text_kit** (_@ayushagarwal.ml_) = text animations (rotate/fade/type/scale/colorize/liquidfill/wavy/flicker)
+  * **confetti** (_@funwith.app_) = easy confetti particles
+  * **flutter_animate** (_@gskinner.com_) = easy compositionable animated effects (blur, colors, fade, scale, shimmer, slide)
+    * Defines microseconds-based duration num extensions (eg `300.ms`)
+  * **flutter_custom_clippers** (_@dlohani.com.np_) = collection of clip shapes (wave, panels)
+  * **particles_flutter** (-) = interactive particles animation
+  * **flutter_shaders** (-) = makes working with FragmentProgram API easier
+    * Defines an **AnimatedSampler** class that is able to render a widget to an image on-the-fly
+  * **flutter_switch_clipper** (_@fluttercandies.com_) = fill/transition effects package
+  * [FlutterFX](https://github.com/flutterfx/flutterfx_widgets)
+  * **liquid_swipe** (_@sahdeepsingh.com_) = wave motion transition
+  * **motion** (_@cendre.me_) = gyroscope-based "wobbling" effect
+  * **particle_field** (_@gskinner.com_) = high performance custom particle effects
+  * **shimmer** (_@hunghd.dev_) = pulsating UI loading effect
+  * **wave_container** (-) = sine water-like wave animations
+  * **wave_transition** (-) = radial layer reveal effect
+  * **wave_transition_animation** (-) = radial layer reveal effect
+* Font & Theme
+  * **flex_color_scheme** (_@rydmike.com_) = Material Design 3 seeded generated color schemes
+  * **material_symbols_icons** (_@hiveright.tech_) = uses official Material Symbols Icons
+    * [Flutter-based Demo](https://timmaffett.github.io/material_symbols_icons)
+* Image & Video
+  * **flutter_spinkit** (_@ogbomo.com_) = funky loading icons package
+  * **lottie** (_@xaha.dev_) = GIF-like After Effects (exported via bodymovin extension) JSON vector animations
+    * [Flutter Web: Lottie Animation issue](https://stackoverflow.com/a/73779834/3559724)
+  * **material_design_icons_flutter** (_@ziofat.dev_) = [Material Design Icons](https://pictogrammers.com/library/mdi) as Flutter Icons
+  * **rive** (_@rive.app_) (formerly **flare**) = state-machine-powered complex 2D interactive animation tool
+  * **transparent_image** (-) = (see **FadeInImage**)
+* Onboarding
+  * **introduction_screen** (-) = onboarding starting slideshow
+  * **onboarding_overlay** (-) = large overlays
+  * **showcaseview** (_@simform.com_) = small modal onboarding overlay arrows
+* Sound
+  * **audio_service** (_@ryanhaise.com_) = play background audio while screen is off
+  * **audioplayers** (_@blue-fire.xyz_) = with [AudioCache](https://stackoverflow.com/a/52842613/3559724)
+  * **flutter_beep** (_@gonoter.com_) = play basic system sounds
+  * **flutter_sound** (_@tau.canardoux.xyz_)
+* Text
+  * **diacritic** (_@agilord.com_) = removes common accents/diacritical signs from a string, replacing them with an equivalent character
+  * **fuzzy** (_@borges.dev_) = Fuzzy (Elastic) search
+  * **intl4x** (_@labs.dart.dev_) = dates/numbers/lists formatting, collation
+  * **native_collator** = locale-aware string sorting/collation (note: only handles basic strings)
+  * **pdf_text** (_@aluc.dev_) =  PDF
+  * **stemmer** (-) = reduces word to their base form
+  * **string_similarity** (_@jeremylandon.com_) = string distance/similarity (à la Levenshtein)
+* Turnkey Components
+  * **boxy** (_@tst.sh_) = set of layout widgets to align/position widgets against other widgets (eg flex, multi-child, dynamic inflation, slivers)
+  * **flutter_sticky_header** (_@romainrastel.com_) = section headers that sticks while section scrolled
+  * **flutter_zoom_drawer** (_@medyas.ml_) = custom drawer with rotation & shadow clones
+  * **ftoast** (-) = toast pop-up messages (ie center screen notifications)
+  * **gap** (-) = adds space inside **Flex** widgets (ie **Column**/**Row** or scroll lists, see **MaxGap** & **SliverGap**)
+  * **panara_dialogs** (_@panarastudios.in_) = info/confirmation/warning/error modal dialogs
+
+#### Codegen, DI, [State Management](https://docs.flutter.dev/data-and-backend/state-mgmt/options)
+
+State can have a broad definition; in a mostly immutable environment, that could mean any variable.
+Using some of these packages allows building an app without never actually using any **StatefulWidget** at all.
+
+* **bloc** (_@bloclibrary.dev_) = implementation of [BLoC](https://bloclibrary.dev/getting-started/#packages)  (Business Logic Component) state management pattern
+  * Has two modes: either extending simple **Cubit** (functions & states) or more advanced **Bloc** (event classes & states)
+  * `Bloc<Event, State>` = takes **Stream** of _Events_ in, transforms them as **Stream** of _States_ out
+* **flutter_bloc** (_@bloclibrary.dev_) = uses **bloc** package, adds widgets
+  * **BlocBuilder** = read state & rebuilds on change (à la **StreamBuilder**), possibly many times (_builder_ should be idempotent)
+  * **BlocConsumer** = _builder_ & _listener_ (à la nested **BlocListener** & **BlocBuilder**)
+  * **BlocListener** = like **BlockBuilder** but rebuilds only once per state change
+  * **BlocProvider** = provides a bloc (BL) to its children/descendants (_create_, _child_, _lazy_)
+  * **BlocObserver** = interface for observing behavior of `Bloc<Event, State>` instances (ie all app state changes)
+  * **BlocSelector** = more granular **BlocBuilder** for some value change (same logic as **provider** package)
+  * **MultiBlocListener** = multiple **BlocListener** into one
+  * **MultiBlocProvider** = multiple **BlocProvider** into one
+  * **ReposityProvider** & **MultiRepositoryProvider** = provides a repository to its children/descendants
+* **flutter_command** (-) = **ValueListenable**-based Command pattern (à la .NET)
+* **get** (_@getx.site_) = DI, Navigation, State Management all-in-one framework (à la WPF Prism, [GetX website](https://chornthorn.github.io/getx-docs))
+* **mason** (_@brickhub.dev_) = generates boilerplate code based on bricks (ie interactive customizable & community-shared manifest files), augments `flutter create` with more flexible `mason add|make {brick_name}`
+* **morphy** (-) = codegen tool (`copyWith`, `equals`, `toString`, constructors, json to & from)
+* **stacked** (_@filledstacks.com_) = MvvM architectural framework for real-world scenarios
+  * See <https://medium.com/flutter-community/a-beginners-guide-to-architecting-a-flutter-app-1e9053211a74>
+
+* DB, Storage, [Caching](https://docs.flutter.dev/get-started/fundamentals/local-caching)
+  * **drift** (previously _Moor_, _@simonbinder.eu_) = reactive persistence library for Dart & Flutter (works with desktop), builds on SQLite
+  * **graphql_flutter** (_@zino.company_)
+  * **get_storage** (_@getx.site_) = key-value in memory storage wit disk backup, alternative to **shared_preferences**
+  * **hive_flutter** (_@hivedb.dev_) = lightweight wrapper around **Isar**, key-value NoSQL DB, written in pure Dart
+  * **isar** (_@isar.dev_) = cross-plaform DB for flutter, (replaces Hive with full Web support via IndexedDB)
+  * **objectbox** (_@objectbox.io_) = high-performance offline-first (on-device data persistence & AI) edge vector search NoSQL DB with [Data Synchronization](https://sync.objectbox.io) (no Web)
+  * **sqflite** (_@tekartik.com_) = save structured data locally in SQLite DB (usual CRUD, or raw SQL). Enable foreign keys explicitely if they are needed
+  * **sqflite_ffi** (_@tekartik.com_) = makes sqflite work on desktop (Linux, MacOS, Windows) for both Flutter/Dart VM
