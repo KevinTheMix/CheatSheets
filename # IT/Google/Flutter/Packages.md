@@ -64,6 +64,7 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 * **path** (_@dart.dev_) = helper to combine/construct paths
 
 * **flutter_simple_treeview** (_@google.dev_) = tree structure of widget nodes
+* **google_moblie_ads** (_@google.dev_)
 * **json_serializable** (_@google.dev_) = generate to/fromJson code based on annotated class members
 * **vector_math** (_@google.dev_) = vector math for 2D/3D apps (distance calculation, vector/matrix, collision detection)
 
@@ -86,7 +87,7 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 * **image_picker** (_@flutter.dev_) = pick image from library or take a new one with camera
 * **in_app_purchase** (_@flutter.dev_) = storefront-independent API for purchases
 * **ios_platform_images** (_@flutter.dev_) = share images between Flutter and iOS
-* **local_auth** (_@flutter.dev_) = local on-device authentication
+* **local_auth** (_@flutter.dev_) = local on-device authentication (fingerprint reader, touch/face ID)
 * **path_parsing** (_@flutter.dev_) = create & manipulate paths, parse Path from SVG data string
 * **path_provider** (_@flutter.dev_) = find commonly used locations on the filesystem for different devices
 * **plugin_platform_interface** (_@flutter.dev_)
@@ -101,6 +102,7 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 * **connectivity_plus** (_@fluttercommunity.dev_) = discover network connectivity types (eg mobile, wifi, ethernet, vpn, bluetooth) for all platforms
 * **device_info_plus** (_@fluttercommunity.dev_) = device/OS-specific information; `DeviceInfoPlugin()` then `.androidInfo` or `.iosInfo` ~ built-in `Platform.isAndroid|IOS`
 * **equatable** (_@fluttercommunity.dev_) = simplifies (value) equality comparison boilerplate (just define _props_ and remove `hashCode()` & `operator==()`)
+* **flutter_blurhash** (_@fluttercommunity.dev_) = [BlurHash](https://blurha.sh) short string-based representation of an image to display while loading
 * **flutter_launcher_icons** (_@fluttercommunity.dev_) = CLI to generate all platforms/sizes icons from a single image asset (`flutter pub run flutter_launcher_icons:main`)
 * **font_awesome_flutter** (_@fluttercommunity.dev_) = free [Font Awesome](https://fontawesome.com/icons) Icon pack as Flutter Icons
 * **get_it** (aka **GetIt**) (_@fluttercommunity.dev_) = simple DI container/service locator via global singleton
@@ -156,12 +158,14 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 #### Misc
 
 * **auto_route** (_@codeness.ly_) = navigation/routing with deep linking & code generation
-* **dio** (_@flutter.cn_) = HTTP networking (request cancel, file up/download, timeout)
-* **easy_localization** (-) = easy translations for many languages, supports other file formats (JSON, CSV, Yaml, XML)
+* **device_preview** (_@aloisdeniel.com_) = approximate how an app looks & performs on another device (select devices, orientation, language, theme, custom resolution & safe areas)
+* **dio** (_@flutter.cn_) = HTTP networking (request cancel/intercept, file up/download with progress tracking, timeout)
+* **easy_localization** (-) = easy translations for many languages, supports other file formats (JSON, CSV, Yaml, XML), plurals, genders
 * **extra_alignments** (_@gskinner.com_) = like **Center** but all other directions (eg **TopLeft** or **CenterRight**)
 * **file_picker** (_@miguelruivo.com_) = cross-platform native single/multi file explorer/saver (with extension filtering)
 * **file_saver** (_@hassanansari.dev_) = cross-platform file saving
 * **fl_chart** (_@flchart.dev_) = line/bar/pie/scatter/radar charts
+* **flutter_blue** (_@pauldemarco.com_) = bluetooth LE (Low Energy)
 * **flutter_gen** (_@wasabeek.jp_) = access assets programmatically instead of path strings (inspired by [SwiftGen](https://github.com/SwiftGen/SwiftGen))
 * **flutter_keyboard_visibility** (_@jasonrai.ca_) = react to virtual keyboard visibility changes
 * **flutter_local_notifications** (_@dexterx.dev_) = display notifications on most platforms (desktop & mobile, not web)
@@ -177,6 +181,8 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 * **intl_utils** (_@localizely.com_) = binding between your translations from .arb files and Flutter app
 * **jaspr** (_@schultek.dev_) = web framework for building HTML/CSS websites in Dart (with both client-side & server-side rendering)
 * **location** (_@bernos.dev_) = device geographical location; `serviceEnabled()`, `requestService()`, `hasPermission`, `requestPermission()`, `getLocation()`
+* **permission_handler** (_@baseflow.com_) = cross-platform post-install granular app permission requests
+* **printing** (_@nfet.net_) = generate & print documents to mobile-compatible printers
 * **pub_version_plus** (_@mrgnhnt.com_) = increment fragments of a version (& build) number via single command
   * Usage = `dart run pub_version_plus:main {major|minor|patch|build} (--pre-release {beta|alpha|dev})`
   * Works well with CI/CD **when installed as a dev-dependency**
@@ -217,16 +223,20 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
   * **material_symbols_icons** (_@hiveright.tech_) = uses official Material Symbols Icons
     * [Flutter-based Demo](https://timmaffett.github.io/material_symbols_icons)
 * Image & Video
+  * **before_after** (_@xdsahil.dev_) = see difference between two images via draggable slider
+  * **cached_network_image** (_@baseflow.com_) = show images from internet, keep them in cache directory
   * **flutter_spinkit** (_@ogbomo.com_) = funky loading icons package
   * **lottie** (_@xaha.dev_) = GIF-like After Effects (exported via bodymovin extension) JSON vector animations
     * [Flutter Web: Lottie Animation issue](https://stackoverflow.com/a/73779834/3559724)
   * **material_design_icons_flutter** (_@ziofat.dev_) = [Material Design Icons](https://pictogrammers.com/library/mdi) as Flutter Icons
   * **rive** (_@rive.app_) (formerly **flare**) = state-machine-powered complex 2D interactive animation tool
   * **transparent_image** (-) = (see **FadeInImage**)
+  * **video_compress** (_@getx.site_) = (mobile-only) video compression, remove audios (_not_ using ffmpeg)
 * Onboarding
+  * **intro_slider** (-) = onboarding slideshow intro
   * **introduction_screen** (-) = onboarding starting slideshow
-  * **onboarding_overlay** (-) = large overlays
-  * **showcaseview** (_@simform.com_) = small modal onboarding overlay arrows
+  * **onboarding_overlay** (-) = large/fullscreen modal onboarding overlays
+  * **showcaseview** (_@simform.com_) = small modal onboarding overlaid arrowed boxes
 * Sound
   * **audio_service** (_@ryanhaise.com_) = play background audio while screen is off
   * **audioplayers** (_@blue-fire.xyz_) = with [AudioCache](https://stackoverflow.com/a/52842613/3559724)
@@ -278,7 +288,8 @@ Using some of these packages allows building an app without never actually using
   * **graphql_flutter** (_@zino.company_)
   * **get_storage** (_@getx.site_) = key-value in memory storage wit disk backup, alternative to **shared_preferences**
   * **hive_flutter** (_@hivedb.dev_) = lightweight wrapper around **Isar**, key-value NoSQL DB, written in pure Dart
-  * **isar** (_@isar.dev_) = cross-plaform DB for flutter, (replaces Hive with full Web support via IndexedDB)
+  * **hive_generator** (_@hivedb.dev_) = Hive TypeAdapters generator extension
+  * **isar** (_@isar.dev_) = cross-plaform DB for flutter (replaces Hive with full Web support via IndexedDB)
   * **objectbox** (_@objectbox.io_) = high-performance offline-first (on-device data persistence & AI) edge vector search NoSQL DB with [Data Synchronization](https://sync.objectbox.io) (no Web)
   * **sqflite** (_@tekartik.com_) = save structured data locally in SQLite DB (usual CRUD, or raw SQL). Enable foreign keys explicitely if they are needed
   * **sqflite_ffi** (_@tekartik.com_) = makes sqflite work on desktop (Linux, MacOS, Windows) for both Flutter/Dart VM

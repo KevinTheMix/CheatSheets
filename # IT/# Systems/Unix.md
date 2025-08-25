@@ -188,7 +188,7 @@
   * `-f {fields}` = select only these fields
 * `date` = system date
 * `DATE`
-* `dd` = convert & copy a file
+* `dd` = carve out, convert, copy a file
 * `deluser` & `delgroup` = remove a user or group from system
 * `df` (disk free) = displays disk space (`-h` for human-readable)
 * `diff` = content differences between two files files (see `cmp`)
