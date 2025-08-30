@@ -55,12 +55,12 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
   * Don't include folders where generated files reside to a git repo (by mentioning them in _.gitignore_ config)
 * **collection** (_@dart.dev_) = collection utilities (eg _max_)
 * **crypto** (_@dart.dev_) = cryptographic hashing functions for Dart
+* **dds** (_@tools.dart.dev_) = spawns Dart Developer Service used to communicate with Dart VM Service instance
 * **grpc** (_@dart.dev_) = Google (HTTP/2 & Protobuf) protocol for connecting microservices or mobile clients to backends
 * **html** (_@tools.dart.dev_) = HTML 5 parser
 * **http** (_@dart.dev_)
 * **intl** (_@dart.dev_) = Dates & Numbers (& Bidi) formatting methods
 * **logging** (_@dart.dev_)
-* **mockito** (_@dart.dev_) = mock library for unit tests (inspired by Java's Mockito)
 * **path** (_@dart.dev_) = helper to combine/construct paths
 
 * **flutter_simple_treeview** (_@google.dev_) = tree structure of widget nodes
@@ -160,6 +160,7 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 * **auto_route** (_@codeness.ly_) = navigation/routing with deep linking & code generation
 * **device_preview** (_@aloisdeniel.com_) = approximate how an app looks & performs on another device (select devices, orientation, language, theme, custom resolution & safe areas)
 * **dio** (_@flutter.cn_) = HTTP networking (request cancel/intercept, file up/download with progress tracking, timeout)
+* **dotted_border** (-) = easily add (rect/round/oval) dotted borders around widget
 * **easy_localization** (-) = easy translations for many languages, supports other file formats (JSON, CSV, Yaml, XML), plurals, genders
 * **extra_alignments** (_@gskinner.com_) = like **Center** but all other directions (eg **TopLeft** or **CenterRight**)
 * **file_picker** (_@miguelruivo.com_) = cross-platform native single/multi file explorer/saver (with extension filtering)
@@ -171,6 +172,7 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 * **flutter_local_notifications** (_@dexterx.dev_) = display notifications on most platforms (desktop & mobile, not web)
 * **flutter_native_splash** (_jonhanson.net_) = splash screen before/while Flutter boots
 * **flutter_rating_bar** (_@sarbagyastha.com.np_) = "5-stars" (or other icons) fractional rating bar
+* **sentry_flutter** (_@sentry.io_) = [Sentry](https://sentry.io) performance monitoring & error tracking
 * **flutter_slidable** (_@romainrastel.com_) ~= customizable **Dismissible** (`actionPane`, `actions: [IconSlideAction]`, `actionExtentRatio: 1/actions.length`)
 * **flutter_treeview** (_@kevinandre.com_) = customizable hierarchical tree of widgets
 * **focusable_control_builder** = reacts to all sorts of inputs (focus, tab key, mouse events, keyboard shortcut)

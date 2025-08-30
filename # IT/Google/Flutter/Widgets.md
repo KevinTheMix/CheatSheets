@@ -18,6 +18,7 @@ Building blocks of Flutter.
 
 * **Badges** = colored circular-shaped superscript text (_badgeColor|Content_, _position_, _animationDuration|Type_, _toAnimate_, _showBadge_), previously a 3rd-party package
 * **Divider** & **VerticalDivider** = basically HTML's `<hr>` (_thickness_, _(end)Indent_), set once for all via **MaterialApp**'s **ThemeData**'s _dividerTheme_
+* **GridPaper** = draws rectilinear grid of lines 1px wide (useful with **Stack** for visualizing grid layout, à la `debugShowMaterialGrid: true`)
 * **PreferredSizeWidget** = base interface for widget that have an ideal size when unconstrained, such as **AppBar**
 * **Rect** = can be assigned as `offset & size` (**Offset** & **Size**)
 * **WidgetSpan** = immutable widget embedded inline within text (eg to embed **InputChip**s within a **TextField**)
@@ -88,7 +89,7 @@ Building blocks of Flutter.
     * _child_ = typically a **ListView** with **DrawerHeader** (within **SizedBox** to set height) & **ListTile**s children
     * _drawerEdgeDragWidth_ = area within which a horizontal swipe will open **Drawer**
   * _bottomSheet_ = persistent bottom sheet (`Scaffold.of(context).showBottomSheet(…)` or `show(Modal)BottomSheet(context: …, builder: …, sheetAnimationStyle: …)` shorthand to nearest Scaffold)
-    * **DraggableScrollableSheet** = draggable container for scrollable content (**ScrollController** passed via _builder_, _initial|min|maxChildSize_)
+    * **DraggableScrollableSheet** = draggable (eg bottom) sheet that is also scrollable (**ScrollController** passed via _builder_, _initial|min|maxChildSize_)
   * _extendBody_ = make sure body background is seen around docked FAB
   * _extendBodyBehindAppBar_ = makes app bar transparent so content appears through it
   * _floatingActionButton_ = actually accepts any widget (eg **AnimatedIcon**) or subtree (eg a column with two **FAB**s)
@@ -101,15 +102,17 @@ Building blocks of Flutter.
 
 There are two built-in solutions: imperative **Navigator** (push/pop API that works as a stack) and/or declarative `MaterialApp.router()`.
 
-* **Dialog** = general-purpose Material Design dialog (_child_, awaitable `show[About|General]Dialog<T>(context: context, builder: (context) {…} )`)
+* **Dialog** = general-purpose Material Design dialog (_child_)
   * **AboutDialog** = boring legalese stuff (`showAboutDialog()`, `application`, `children`, `LicenseRegistry.addLicense()`)
   * **AlertDialog** = popup with a title, content and yes/no actions (_title_, _content_, _actions_, _elevation_, _backgroundColor_, _shape_, _barrierDismissible_), also **CupertinoAlertDialog**
-  * **SimpleDialog** = simplified popup with a basic list of choices (_contentPadding_, _children_ of **SimpleDialogOption**s)
-  * `show(Cupertino)Dialog()` = general, with Navigator
-  * `showGeneralDialog()` = full control over advanced animations & custom layout
-  * `showModalBottomSheet()` & `showCupertinoModalPopup()`
-  * `showLicensePage()` = prebuilt dialog showing open-sources licenses
-  * Awaitable result of `showDialog()` is passed via `Navigator.pop(c, result)`
+  * **SimpleDialog** = simplified popup with a list of clickable **SimpleDialogOption** _children_ choices (_contentPadding_)
+  * Awaitable result of `show…Dialog()` is passed via `Navigator.pop(c, result)`
+    * `showAboutDialog()`
+    * `show(OkCancel)AlertDialog()` = adaptive alert dialog
+    * `show(Cupertino)Dialog()` = general, with Navigator
+    * `showGeneralDialog()` = full control over advanced animations & custom layout
+    * `showModalBottomSheet()` & `showCupertinoModalPopup()`
+    * `showLicensePage()` = prebuilt dialog showing open-sources licenses
 * **MaterialPageRoute\<T>** = modal route replacing entire screen with a platform-adaptive transition
   * _fullscreenDialog_ = whether that route opens as a full-screen dialog (ie _X_ close button instead of a back arrow)
 * **PageRouteBuilder** = creates route & page (with _pageBuilder_) with transition effect (via _transitionsBuilder_)
@@ -348,6 +351,7 @@ There are two built-in solutions: imperative **Navigator** (push/pop API that wo
 * [Colors](https://api.flutter.dev/flutter/material/Colors-class.html)
   * `Colors.green[400]`
   * `Colors.transparent`
+  * `Colors.primaries` & `Colors.accents` = all color palettes
   * `Color.fromRGBO(r, g, b, opacity)` where _opacity_ is a **double** between _0.0_ and _1.0_
   * `Color.fromARGB(alpha, r, g, b)` where _alpha_ is an **int** between _0_ and _255_
   * `Color.lerp(colorA, colorB, ratio)` = calculate intermediate % color between two colors

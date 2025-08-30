@@ -32,7 +32,10 @@
     * `-r {file}` = install from a requirements file
     * `"pandas[excel]"` = install current Excel-related stack from PyPI (pandas, openpyxl, xslxwriter)
 * **pyinstaller** = (pre-)compile Python code (`-F` aka `--onefile` to create single file bundle exe)
-  * Eg `pyinstaller --onefile --windowed .\{script.py}` for building a GUI app (same as `--noconsole`)
+  * `--icon={icon.ico}` = add custom icon to final _.exe_
+  * `--noconfirm` = don't ask when overwriting _build_ & _dist_ folders
+  * `--noconsole` (alias `--windowed`) = no console window appears (for GUI apps)
+  * `--onefile` = bundle everything into a single _.exe_
 * **pyngrok** = Ngrok API
 * **Tkinter** = interface to Tcl/Tk (ie to build GUIs)
 * **timeit** = measure performances (eg `timeit.timeit(stmt={treatment}, number={n})`)

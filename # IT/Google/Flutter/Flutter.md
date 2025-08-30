@@ -208,14 +208,15 @@ Use commands with either long/short names (eg `flutter --option=value` or just `
 * `flutter create .` = bootstraps a new project, or regenerate all missing platform-specific directories (ie _android_, _ios_, _linux_, _web_)
   * Adding web support to existing app (see <https://docs.flutter.dev/get-started/web#add-web-support-to-an-existing-app>)
 * `flutter create kokoapp`
+  * `bug` = for bug report submissions
   * `--empty` = generates a (barebone minimal) empty app (without comments)
   * `--org "com.koko"` = organization in reverse domain name notation (used as namespace when developing/publishing plugin packages)
   * `--platforms android,ios,linux,web,windows` = target platforms
   * `--sample=widgets.SingleChildScrollView.1 mysample` = create new app from existing sample code
   * `--template` = specify project type
-    * `bug` = for bug report submissions
-    * `skeleton` = generate a List View / Detail View app that follows community best practices (incompatible with `-e`)
-    * `package {koko}` = [creates a package project](https://docs.flutter.dev/development/packages-and-plugins/developing-packages)
+    * `skeleton` (_deprecated_) = generate a List View / Detail View app that follows community best practices (incompatible with `-e`)
+    * `package {name}` = package
+    * `plugin(_ffi) {name}` = package plugin
 * `flutter devices` = list all connected devices
 * `flutter doctor -v(erbose)` (Tip: use PowerShell to get Unicode support)
 * `flutter doctor --android-licenses`
@@ -243,7 +244,6 @@ Use commands with either long/short names (eg `flutter --option=value` or just `
   * `--release` = compile to release mode (removes all debugging directives eg asserts)
   * `--v(erbose)`
   * [Fix "Parameter format not correct"](https://stackoverflow.com/a/69519005/3559724)
-* `flutter test` = run tests
 * `flutter upgrade` = install latest Flutter version
   * [Upgrade and clean cache](https://stackoverflow.com/a/64515721/3559724)
 
@@ -388,10 +388,3 @@ Run apps actually without debugging (unless intended) for faster development/exe
 * Performance overlay = `MaterialApp { showPerformanceOverlay: true }` (look for spikes in second graph, while running app in profile mode ie `flutter run --profile`)
 * Alignment grid = `MaterialApp { debugShowMaterialGrid: true }` or use a **GridPaper** (inside a **Stack** to use as overlay)
 * Before `runApp(…)`, set `ErrorWidget.builder` to a callback returning a custom (Material) widget to display in place of error default red screens, and taking in **FlutterErrorDetails** as parameters
-
-## Testing
-
-* **WidgetTester** = programmatically interact with widgets & test environment
-  * See [WidgetTester class](https://api.flutter.dev/flutter/flutter_test/WidgetTester-class.html) where a test uses `pumpWidget()` to load a widget tree
-* **TestWidgetsFlutterBinding** = base class for bindings used by widgets library tests (`ensuteInitialized()`)
-* **integration_test** package = automated testing of app UI
