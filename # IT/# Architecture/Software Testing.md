@@ -4,6 +4,7 @@
 
 * **Behavior-driven development** (BDD) = naming tests using domain language (DSL) & natural-language constructs (ie English) to describe code behavior
 * **Defect Rate/Density** = defect / KLOC (1000 lines of code)
+* **Fixture** = fixed state of a system/set of objects used as baseline for running tests in a consistent environment, data & conditions (eg DB, test files & folders with known data)
 * **Setup**/**Teardown** = work to accomplish before/after a test runs
 * **Software Inspection** = peer review/defect hunt using a well defined process
   * Advantages:

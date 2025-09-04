@@ -10,6 +10,9 @@ The same Dart code can run on multiple platforms (eg mobile/desktop via Flutter,
 * [Dart cheatsheet](https://dart.dev/resources/dart-cheatsheet)
 * [Effective Dart: Style](https://dart.dev/effective-dart/style)
 * Every Dart file is a library (meaning it can get `import`-ed in another file), even if it doesn't use any library directive explicitely
+* [10 reasons why you should learn Dart](https://medium.com/hackernoon/10-good-reasons-why-you-should-learn-dart-4b257708a332)
+  * _You might already know Dart_
+  * Isolates run on threads, without locking, they communicate via async message passing (inspired by Erlang)
 
 ## Glossary
 
@@ -28,12 +31,17 @@ The same Dart code can run on multiple platforms (eg mobile/desktop via Flutter,
 * **Dart SDK** = toolkit to write/compile/run Dart applications (ie Dart core/additional libraries (eg io, html), Dart VM, _dart2js_, _dart2native_, `dart compile`, _pub_, DevTools)
 * **Dart VM** = Common Front End + JIT (incremental) Compiler + Debug Service & Runtime
   * Provided by `dart run` CLI command, which launches a dedicated process (eg _dart.exe_ on Windows)
+* **Dot Shorthand** = eg `Column(crossAxisAlignment: .stretch)`
 * **Isolate** = independant unit of execution that does not share memory, making it safer for concurrency compared to thread-based models
   * Isolates run in parallel in separate processes (ie on separate CPUs), unaware of each other, and communicate via messages (inspired by Erlang)
 * **JIT** (Just-in-Time) = used in Debug Mode, compiles/executes code on-the-fly inside a **Dart VM** (running until program exits), enabling QoL features such as _Stateful Hot Reload/Restart_
   * Eg `dart run ({file})`
 * **FFI** (Foreign Function Interface) = interoperability with the C programming language (see [C interop using dart:ffi](https://dart.dev/guides/libraries/c-interop))
-* **Pattern** = matching (in refutable context, ie _if case_, _switch_ statement or expression) and/or destructuring data, can be of different (nested) types (const, list, map, Object, wildcard, record)
+* **Pattern** = a pattern may match a value (in refutable context, ie _if case_ & _switch_), destructure a value, or both
+  * Matches = checks whether value has certain shape, is a certain constant, is equal to something else, has a certain type
+  * Destructures = into its constitutent, possibly nested parts using different pattern types
+* **Pattern Types** = logical (`&&`, `||`), equality (`==`, `!=`, `<=`, `>=`), cast (`koko as {type}`), null-check (`case s?:` makes as non-null), null-assert (`case s!:`), constant, variable, wildcard (`_`), list/map/record, rest (`[a, ..., z]`)
+  * Shorthand: object pattern can infer getter name from variable subpattern (eg `for (var MapEntry(:key, value: count) in hist.entries)`)
 * **Record** = immutable structure of hybrid values (eg for returning more than one value in a function)
 * **Sound Null-Safety** = means non-nullable variables can never be attributed a null value at runtime, guarded at compile-time (it won't even compile)
   * Exceptions exists eg unsafe casting (eg `int? i; int j = i as int`) that's only checked at runtime, or misusing `!` operator

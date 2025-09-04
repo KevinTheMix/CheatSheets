@@ -68,6 +68,7 @@
 * **Lubuntu Desktop** = Lightweight Linux distribution based on Ubuntu
 * **Parrot OS** = Debian-based Linux distribution for cybersecurity/hackers/sysadmins (with 600+ tools for blue/read team operations)
 * **Tails** (aka _The Amnesic Incognito Live System_) = secure DVD/USB Debian Linux Tor network based OS, writes to RAM not HDD (_1300MB_)
+* **webOS** = Linux kernel-based multitasking OS developed by LG for smart devices (eg Smart TVs)
 
 ## File System
 

@@ -9,7 +9,7 @@
 ## Glossary
 
 * **Binding** = test environment setup singleton object, connects test code to Flutter engine & framework internals (rendering pipeline, frames pump, I/O events)
-* **Integration Test** = end-to-end GUI testing of combined individual parts as a whole (à la Earl Gray, Espresso, Protractor, Selenium, WebDriver)
+* **Integration Test** = end-to-end (with GUI showing) testing of combined individual parts as a whole (à la Earl Gray, Espresso, Protractor, Selenium, WebDriver)
   * **Performance Test** = integration test with (high speed) stress testing & performance profiling/tracing (see <https://docs.flutter.dev/cookbook/testing/integration/profiling>)
 * **Target Device** = device on which an integration test is run (ie mobile, browser or desktop)
 * **Unit Test** = test on a single entity (eg a class)
@@ -34,8 +34,9 @@
   * `--profile` = compile app for 'profile' rather than 'debug' mode, making benchmark closer to user real experience
   * `--no-dds` = disables Dart Development Services (when running on a mobile device/emulator) used to communicate with a Dart VM Service instance
 * `flutter test` = run all tests
-* `flutter test {path}` = run a specific test unit/widget/integration file
-* `flutter test --plain-name "{name}"` = runs all specific groups/test whose beginning of description string matches _name_
+  * `flutter test integration_test` = runs integration tests located in _integration\_test_ folder located at app root-level (ie same level as _lib_ & _test_)
+  * `flutter test {path}` = run a specific test unit/widget/integration file
+  * `flutter test --plain-name "{name}"` = runs all specific groups/test whose beginning of description string matches _name_
 * `flutter run {path}` = run a specific test file with a live GUI (on a device/emulator), enabling hot reload/Restart
 
 ### test

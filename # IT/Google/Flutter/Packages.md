@@ -1,23 +1,20 @@
 # [Flutter Packages & Plugins](https://pub.dev)
 
-Plugins make it easy to access platform services and hardware (eg accelerometer, camera, etc.) OS-independently.
-
 ## Quick Tips
 
-* Lots of packages require the full Flutter SDK, yet a few require only Dart SDK
-* Hot Reload/Restart are not enough to reload plugins with platform native device features => `flutter run` (or _F5_ equivalent) after adding
-* Blue tags under package name/version indicate which SDK (Dart or Flutter) & platform (Android, IOS, MACOS, WEB, WINDOWS) it targets/is compatible with
+* [Flutter Gems](https://fluttergems.dev) = collection of 6700+ curated Dart/Flutter packages (by feature)
 * [Using packages](https://docs.flutter.dev/development/packages-and-plugins/using-packages)
 * Quickly add plugins from within Visual Studio Code via Command Palette (`Ctrl + Shift + P`) > _Add Dependency_
-* [Flutter Gems](https://fluttergems.dev) = collection of 6700+ curated Dart/Flutter packages (by feature)
+* Hot Reload/Restart are not enough to reload plugins with platform native device features => `flutter run` (or _F5_ equivalent) after adding
+* Blue tags under package name/version indicate which SDK (Dart or Flutter) & platform (Android, IOS, MACOS, WEB, WINDOWS) it targets/is compatible with
 
 ## Glossary
 
 * [Flutter Favorite program](https://docs.flutter.dev/packages-and-plugins/favorites) = high-quality first priority packages
 * **Package** = "pure Dart code" package, at a minimum it is a directory containing a _pubspec.yaml_ file
-* **Plugin** (aka _plugin package_) = a special kind of package part-native (Kotlin/JS/Swift) code wrapped as Dart making platform features available to an app
+* **Plugin** (aka **Plugin Package**) = a special kind of package part-native (Kotlin/JS/Swift) code wrapped as Dart making platform features available to an app
   * Plugins can be written for Android (using Kotlin or Java), iOS (using Swift or Objective-C), web, macOS, Windows, Linux, or any combination thereof
-  * For example, a plugin might provide Flutter apps with the ability to use a device’s camera
+  * Plugins make it easy to access platform services and hardware (eg accelerometer, camera, etc.) OS-independently
 * **Pub** = name of a package manager, which takes care of fetching packages and package versioning information
   * Its CLI can be summoned either via `dart pub {pub_command}` or `flutter pub {pub_command}`
 * `as` = specifying an (arbitrary) local scope name of whole [library](https://dart.dev/language/libraries)
@@ -27,21 +24,21 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 * `part of` = indicates it's part of another library (mostly used by codegen packages)
 * `show` (& `hide` eg for overlapping names in multiple libs) = specifying granular objects to import/export within a library
 
-## Libraries
+## [Flutter SDK Package](https://api.flutter.dev/index.html)
 
-* From Dart's point of view, Flutter is actually a package like any other (ie it's referenced in _pubspec.yaml_, then imported via eg `import 'package:flutter/….dart';`)
-* [Flutter API libraries](https://api.flutter.dev/index.html) = libraries that are exported by Flutter SDK
-  * **async** = (eg `FutureOr<T>`)
-  * **collection** (array manipulation eg **IterableExtension** à la C# Linq)
-  * **convert** = en/decode between different data representations (eg String to JSON `jsonDecode()`, UTF-8, Base64, HTML escape)
-  * **dart:core**
-  * **dart:math**
-  * **flutter_localizations** = internalization (i18n) & localization (i10n), permits parameterized & conditional output (generated via source ARB files)
-  * **foundation**
-  * **intl** = date formatting
-  * **material**
-  * **services** = platform features eg clipboard
-  * **widgets** = no implementations, only (re-)exports all widget-related libraries
+From Dart's point of view, Flutter is actually a package like any other (ie it's referenced in _pubspec.yaml_, then imported via eg `import 'package:flutter/….dart';`).
+
+* **async** = (eg `FutureOr<T>`)
+* **collection** (array manipulation eg **IterableExtension** à la C# Linq)
+* **convert** = en/decode between different data representations (eg String to JSON `jsonDecode()`, UTF-8, Base64, HTML escape)
+* **dart:core**
+* **dart:math**
+* **flutter_localizations** = internalization (i18n) & localization (i10n), permits parameterized & conditional output (generated via source ARB files)
+* **foundation**
+* **intl** = date formatting
+* **material**
+* **services** = platform features (clipboard, system sounds eg `SystemSound.play(SystemSoundType.click);`)
+* **widgets** = no implementations, only (re-)exports all widget-related libraries
 
 ## Plugins
 
@@ -63,6 +60,7 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 * **logging** (_@dart.dev_)
 * **path** (_@dart.dev_) = helper to combine/construct paths
 
+* **built_value** (_@google.dev_) = popular value class codegen, similar to **freezed** (immutable value types, EnumClass, JSON serialization)
 * **flutter_simple_treeview** (_@google.dev_) = tree structure of widget nodes
 * **google_moblie_ads** (_@google.dev_)
 * **json_serializable** (_@google.dev_) = generate to/fromJson code based on annotated class members
@@ -110,6 +108,7 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 * **rxdart** (_@fluttercommunity.dev_) = extends Dart **Streams** & **StreamControllers** with reactive programming
 * **sensors_plus** (_@fluttercommunity.dev_) = accelerometer, gyroscope, magnetometer, barometer sensors
 * **share_plus** (_@fluttercommunity.dev_) = share (text/URL/images/files) data between apps, using platform's share dialog
+* **wakelock_plus** (_@fluttercommunity.dev_) = keep device screen awake
 * **workmanager** (_@fluttercommunity.dev_) = schedule tasks at OS-level (thus works even with app backgrounded/closed)
 
 #### Rémi Rousselet
@@ -159,7 +158,7 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 
 * **auto_route** (_@codeness.ly_) = navigation/routing with deep linking & code generation
 * **device_preview** (_@aloisdeniel.com_) = approximate how an app looks & performs on another device (select devices, orientation, language, theme, custom resolution & safe areas)
-* **dio** (_@flutter.cn_) = HTTP networking (request cancel/intercept, file up/download with progress tracking, timeout)
+* **dio** (_@flutter.cn_) = HTTP networking (request cancel/intercept to automatically attach JWT tokens, file up/download with progress tracking, timeout)
 * **dotted_border** (-) = easily add (rect/round/oval) dotted borders around widget
 * **easy_localization** (-) = easy translations for many languages, supports other file formats (JSON, CSV, Yaml, XML), plurals, genders
 * **extra_alignments** (_@gskinner.com_) = like **Center** but all other directions (eg **TopLeft** or **CenterRight**)
@@ -172,7 +171,8 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 * **flutter_local_notifications** (_@dexterx.dev_) = display notifications on most platforms (desktop & mobile, not web)
 * **flutter_native_splash** (_jonhanson.net_) = splash screen before/while Flutter boots
 * **flutter_rating_bar** (_@sarbagyastha.com.np_) = "5-stars" (or other icons) fractional rating bar
-* **sentry_flutter** (_@sentry.io_) = [Sentry](https://sentry.io) performance monitoring & error tracking
+* **sentry** = Sentry SDK for pure Dart ([Sentry](https://sentry.io) performance monitoring & error tracking)
+* **sentry_flutter** (_@sentry.io_) = Sentry SDK for Flutter
 * **flutter_slidable** (_@romainrastel.com_) ~= customizable **Dismissible** (`actionPane`, `actions: [IconSlideAction]`, `actionExtentRatio: 1/actions.length`)
 * **flutter_treeview** (_@kevinandre.com_) = customizable hierarchical tree of widgets
 * **focusable_control_builder** = reacts to all sorts of inputs (focus, tab key, mouse events, keyboard shortcut)
@@ -194,9 +194,10 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 * **sliver_tools** (_@pietervanloon.com_) = missing sliver package (related: [SliverFooter](https://stackoverflow.com/a/49621060/3559724) by Rémy Rousselet)
 * **system_tray** (-) = design a system tray menu for desktop (Linux, macOS, Windows) opening from the system tray app icon
 * **tflite_flutter** (_@tensorflow.org_) = TensorFlow Lite interpreter and perform interference, with multi-platform support (mobile & desktop)
-* **undo** (_@rodydavis.com_) = undo/redo
+* **undo** (_@rodydavis.com_) = undo/redo history stack to go back/forward
 * **universal_platform** (_@gskinner.com_) = platform detection (eg _isAndroid_, _isWeb_, _isWindows_) that works for web (unlike _dart.io.Platform_ at the time)
 * **uuid** (_@yuli.dev_) = generate UUIDs
+* **version** (_@dart.ninja_) = parse & compare semantic versions
 * **window_size** (-) = gets/sets desktop (Linux/macOS/Windows) apps window size (also see **desktop_window** package)
 
 * Animation & Clip
@@ -242,8 +243,10 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 * Sound
   * **audio_service** (_@ryanhaise.com_) = play background audio while screen is off
   * **audioplayers** (_@blue-fire.xyz_) = with [AudioCache](https://stackoverflow.com/a/52842613/3559724)
-  * **flutter_beep** (_@gonoter.com_) = play basic system sounds
-  * **flutter_sound** (_@tau.canardoux.xyz_)
+  * **flutter_beep** (_@gonoter.com_) = very lite module to play system beeps & sounds
+  * **flutter_sound** (_@tau.canardoux.xyz_) = play & record audio files/streams with various codecs
+  * **just_audio** (_@ryanheise.com_) = feature-rich audio player
+  * Also see Flutter **services.dart** libary for system sounds
 * Text
   * **diacritic** (_@agilord.com_) = removes common accents/diacritical signs from a string, replacing them with an equivalent character
   * **fuzzy** (_@borges.dev_) = Fuzzy (Elastic) search
@@ -264,8 +267,9 @@ Plugins make it easy to access platform services and hardware (eg accelerometer,
 
 State can have a broad definition; in a mostly immutable environment, that could mean any variable.
 Using some of these packages allows building an app without never actually using any **StatefulWidget** at all.
+[Flutter state management for minimalists](https://suragch.medium.com/flutter-state-management-for-minimalists-4c71a2f2f0c1).
 
-* **bloc** (_@bloclibrary.dev_) = implementation of [BLoC](https://bloclibrary.dev/getting-started/#packages)  (Business Logic Component) state management pattern
+* **bloc** (_@bloclibrary.dev_) = implementation of [BLoC](https://bloclibrary.dev/getting-started/#packages) (aka Business Logic Component) state management pattern
   * Has two modes: either extending simple **Cubit** (functions & states) or more advanced **Bloc** (event classes & states)
   * `Bloc<Event, State>` = takes **Stream** of _Events_ in, transforms them as **Stream** of _States_ out
 * **flutter_bloc** (_@bloclibrary.dev_) = uses **bloc** package, adds widgets
@@ -279,9 +283,11 @@ Using some of these packages allows building an app without never actually using
   * **MultiBlocProvider** = multiple **BlocProvider** into one
   * **ReposityProvider** & **MultiRepositoryProvider** = provides a repository to its children/descendants
 * **flutter_command** (-) = **ValueListenable**-based Command pattern (à la .NET)
+* **flutter_redux** (_@brianegan.com_) = utilities to consume a Redux store
 * **get** (_@getx.site_) = DI, Navigation, State Management all-in-one framework (à la WPF Prism, [GetX website](https://chornthorn.github.io/getx-docs))
 * **mason** (_@brickhub.dev_) = generates boilerplate code based on bricks (ie interactive customizable & community-shared manifest files), augments `flutter create` with more flexible `mason add|make {brick_name}`
 * **morphy** (-) = codegen tool (`copyWith`, `equals`, `toString`, constructors, json to & from)
+* **redux** (_@fluttercommunity.dev_) = Redux state management architecture library using a centralized single source of truth store, updated via actions (which can be logged/serialized/stored/replayed)
 * **stacked** (_@filledstacks.com_) = MvvM architectural framework for real-world scenarios
   * See <https://medium.com/flutter-community/a-beginners-guide-to-architecting-a-flutter-app-1e9053211a74>
 

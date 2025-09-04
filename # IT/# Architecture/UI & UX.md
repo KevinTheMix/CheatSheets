@@ -13,9 +13,9 @@
   8. Underlining stuff that isn't a link
   9. Telling people to click here
   10. Using justified text
-* [w3.org - Personal names around the world](https://www.w3.org/International/questions/qa-personal-names)
-* [Jakob Nielsen - Response Times: The 3 important Limits](https://www.nngroup.com/articles/response-times-3-important-limits) (Usability) = 0.1, 1 and 10
-* [Material Icons Guide](https://developers.google.com/fonts/docs/material_icons)
+* [w3.org: Personal names around the world](https://www.w3.org/International/questions/qa-personal-names)
+* [Jakob Nielsen: Response Times: The 3 important Limits](https://www.nngroup.com/articles/response-times-3-important-limits) (Usability) = 0.1, 1 and 10
+* [Trending Color palettes](https://coolors.co/palettes/trending)
 
 ## Glossary
 
@@ -27,6 +27,7 @@
 * **Fluent Design System** = a design language developed by Microsoft in 2017
 * **Graphics Design** = static visual content to communicate messages
 * **Hover** = change in color, shadow or animation of a button/link/icon in response to a mouseover
+* **Material Design** = design language developed by Google in 2014
 * **Motion Design** = broad discipline including motion graphics, animation, cinematography, graphic design
 * **Motion Graphics** = animated graphics elements (text, shapes, icons)
 * **Mouseover** = mouse is over an element (just a state, no inherent associated animation/visuals)
@@ -39,10 +40,6 @@
 * **Staggered animation** = a human-friendly way to introduce new UI elements on screen, one by one
 * **Typeface** (aka **font family**) = design for alphanumerics & symbols used in printing/electronic display
 * **Viewport** = a box that is bigger on the inside, ie children outside bounds can be scrolled into view
-
-### [Material](https://m3.material.io)
-
-* **Material Design** = design language developed by Google in 2014
 
 ### Graphics
 

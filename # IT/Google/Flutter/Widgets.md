@@ -4,21 +4,27 @@ Building blocks of Flutter.
 
 ## Quick Tips
 
-* [Appainter](https://appainter.dev) = play with theme settings (also see <https://rxlabz.github.io/panache/#>)
 * [Flutter Samples](https://flutter.github.io/samples)
 * [Widgets](https://docs.flutter.dev/ui/widgets)
-  * [Material](https://docs.flutter.dev/ui/widgets/material)
-  * [Material Design Icons](https://fonts.google.com/icons)
-  * [Material Design Icons](https://pictogrammers.com/library/mdi)
-  * [Material 3 Demo](https://flutter.github.io/samples/web/material_3_demo)
-* [Google Fonts Icons](https://fonts.google.com/icons) = find icon search engine
+* [Material](https://docs.flutter.dev/ui/widgets/material)
 * _Not everything is a widget_ (eg **BoxDecoration**, **ThemeData**, **TextStyle**)
+
+### [Material](https://m3.material.io)
+
+* [Appainter](https://appainter.dev) = play with theme settings (also see <https://rxlabz.github.io/panache/#>)
+* [Flutter Material Icons](https://api.flutter.dev/flutter/material/Icons-class.html)
+* [Google Fonts Icons](https://fonts.google.com/icons) = find icon search engine
+* [Material Icons Guide](https://developers.google.com/fonts/docs/material_icons)
+* [Material Design Icons](https://fonts.google.com/icons)
+* [Material Design Icons](https://pictogrammers.com/library/mdi)
+* [Material 3 Demo](https://flutter.github.io/samples/web/material_3_demo) (_removed_)
 
 ## Misc
 
 * **Badges** = colored circular-shaped superscript text (_badgeColor|Content_, _position_, _animationDuration|Type_, _toAnimate_, _showBadge_), previously a 3rd-party package
 * **Divider** & **VerticalDivider** = basically HTML's `<hr>` (_thickness_, _(end)Indent_), set once for all via **MaterialApp**'s **ThemeData**'s _dividerTheme_
 * **GridPaper** = draws rectilinear grid of lines 1px wide (useful with **Stack** for visualizing grid layout, à la `debugShowMaterialGrid: true`)
+* **KeyboardListener** = calls a callback whenever user presses/releases a key
 * **PreferredSizeWidget** = base interface for widget that have an ideal size when unconstrained, such as **AppBar**
 * **Rect** = can be assigned as `offset & size` (**Offset** & **Size**)
 * **WidgetSpan** = immutable widget embedded inline within text (eg to embed **InputChip**s within a **TextField**)
@@ -205,6 +211,7 @@ There are two built-in solutions: imperative **Navigator** (push/pop API that wo
 * **Switch** = radio button (`Switch.adaptive()`)
 * Text
   * **AutoComplete** = completes as you type (_optionsBuilder_, _displayStringForOption_, _optionsViewBuilder_, _onSelected_, _fieldViewBuilder_)
+  * **DefaultTextStyle** = applies a text style to all **Text** descendants that don't have an explicit style
   * **SelectionArea** = platform-adaptive selectable area
   * **SelectableText** = select a single run of text (_showCursor_, _cursorWidth_, _cursorColor_, _cursorRadius_, _toolbarOptions_, _onTap_, _scrollPhysics_, `.rich()`)
   * **Text** = basic text instance (_TextOverflow.ellipsis_ longtex…)
@@ -438,8 +445,8 @@ Performed automatically when a property updates (via `setState()`), for single n
 
 * **AnimatedAlign** = alignment update transition
 * **AnimatedContainer** = versatile linear interpolation (_border_, _color_, _decoration_, _height/width_, _shadow_, with _curve_)
-  * Eg `transform: Matrix4.identity()..translate()..multiply()`)
-* **AnimatedDefaultTextStyle** = **DefaultTextStyle**
+  * Eg `transform: Matrix4.identity()..translate()..multiply()`
+* **AnimatedDefaultTextStyle** = animated version of **DefaultTextStyle**, transitions text style of descendant **Text**s (eg font family/size/weight)
 * **AnimatedOpacity** = opacity animation (_curve_, _duration_, _opacity_ via `setState()`)
 * **AnimatedPadding** = padding animation (_curve_, _duration_, _padding_ via `setState()`)
 * **AnimatedPhysicalModel** = animated _borderRadius_, _color_ & _elevation_

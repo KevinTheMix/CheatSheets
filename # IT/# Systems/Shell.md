@@ -113,10 +113,12 @@ Technically, any outer layer that mediates between a user and a kernel's service
 * `var={value}` (no spaces) = defines a variable (not inherited by children unless exported via `export var(={value})` or configured in _~/.bashrc_)
 * **Parameter Expansion** = string interpolation
   * `"$var"` or `"${var}"` (but not `'$var'` single quotes, which treats it literally)
-  * `${var+alt}` = use alt if variable is set (can be empty/null)
-  * `${var:+alt}` = use alt if variable is set and not empty/null
-  * `${var:-default}` = use default if variable is unset or null
-  * `${var:=default}` = same as :- but also assigns default to variable
+  * `${var+override}` = use override only if variable is set (can be empty/null)
+  * `${var:+override}` = use override only if variable is set and not empty/null
+  * `${var-alt}` = use alt if variable is unset (but not null)
+  * `${var:-alt}` = use alt if variable is unset or null
+  * `${var:=alt}` = same as - but also assigns alt to variable
+  * `${var:=alt}` = same as :- but also assigns alt to variable
   * `${var:?message}` = print message and exit if variable is unset or null
   * `${#var}` = length of variable
   * `${var:offset}` = substring from variable starting at offset

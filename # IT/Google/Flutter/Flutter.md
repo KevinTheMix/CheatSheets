@@ -22,6 +22,7 @@ Features:
 
 ## Quick Tips
 
+* [Flutter: Cookbook](https://docs.flutter.dev/cookbook)
 * [@Wm Leler](https://leler.com/wm/bio.html#flutter) = Flutter-promoting articles (eg _what's revolutionary?_, _why Dart?_ UX study with eight developers, _company pitch_)
   * Most of the time, Flutter can do layout in a single pass (or even none, through cacheing), aka linear time, so it can even be used for scrolling & any animations
 * [Matthew Smith - Why we chose Flutter and how it's changed our company](https://medium.com/@matthew.smith_66715/why-we-chose-flutter-and-how-its-changed-our-company-for-the-better-271ddd25da60)
@@ -159,11 +160,12 @@ Features:
 
 ## Environment
 
+* Flutter Material framework constants are defined in _%USER\_APPDATA%/Local/flutter/packages/flutter/lib/src/material/constants.dart_
+
 ### [Install](https://docs.flutter.dev/get-started/install)
 
 * **Android Studio**
-  *
-  * Install under _Customize > All settings… > Languages & Frameworks > Android SDK > SDK Tools_:
+  * Install these via _Customize > All settings… > Languages & Frameworks > Android SDK > SDK Tools_:
     * Android SDK Build-Tools (check _Show Package Details_ to install specific/older version)
     * [Android SDK Command-line Tools](https://developer.android.com/studio/intro/update#sdk-manager)
     * (Android Emulator)
@@ -197,7 +199,7 @@ Use commands with either long/short names (eg `flutter --option=value` or just `
     * _canvaskit_ & _skwasm_ both draw to a single HTML `<canva>`, can handle complex visual games/presentations
     * _html_ maps component to native HTML/CSS/JS elements (eg images as `<img>`), can handle basic CSS animations, better for SEO
   * `--build-name` & `--build-number` = override version & build numbers, respectively
-  * `--obfuscate --split-debug-info={symbols_directory}` = obfuscate & save symbols mapping file to directory
+  * `--obfuscate --split-debug-info={symbols_directory}` = obfuscate & save symbols mapping file to directory (for later de-obfuscating eg for debugging & stack trace)
   * `--release` = build in _build/app/outputs/_
   * `--split-per-abi` = produces multiple APK, each optimized to a specific [Application Binary Interface (ABI)](../Android.md#glossary)
   * `--verbose`
@@ -223,17 +225,17 @@ Use commands with either long/short names (eg `flutter --option=value` or just `
 * `flutter format {filename}` = Format document
 * `flutter install` = install app to attached device
 * `flutter pub` = manages the _pubspec.yaml_ file, which contains assets & dependencies, downloaded from <pub.dev>
-* `flutter pub add {package}` = downloads & add package to _pubspec.yaml_
-* `flutter pub add dev:{package}` = add package under _dev\_dependencies_ section
-* `flutter pub cache list` = lists cache locations (warning: large string)
-* `flutter pub cache repair`
-  * eg [Install intl](https://stackoverflow.com/a/51706630/3559724)
-* `flutter pub get` = explicitely pulls packages into the project & generates _pubspec.lock_ (implied with `flutter run`)
-  * `flutter packages get` = [alias for the above](https://stackoverflow.com/a/61038022/3559724)
-* `flutter pub outdated` = display current/upgradable/latest versions for each dependency
-* `flutter pub run {executable} {options}` = runs a Dart script (with a `main()`) or a package that provides CLI (eg **build_runner**, **flutter_launcher_icons**, **native_splash_screen**)
-* `flutter pub upgrade` (+ `--major-versions` to force absolute latest)
-* `flutter run` = run app (without debugging, equivalent to `Ctrl + F5` in **Visual Studio Code** with _Flutter_ extension installed)
+  * `add {package}` = downloads & add package to _pubspec.yaml_
+  * `add dev:{package}` = add package under _dev\_dependencies_ section
+  * `cache list` = lists cache locations (warning: large string)
+  * `cache repair`
+    * eg [Install intl](https://stackoverflow.com/a/51706630/3559724)
+  * `get` = explicitely pulls packages into the project & generates _pubspec.lock_ (implied with `flutter run`)
+    * `flutter packages get` = [alias for the above](https://stackoverflow.com/a/61038022/3559724)
+  * `outdated` = display current/upgradable/latest versions for each dependency
+  * `run {executable} {options}` = runs a Dart script (with a `main()`) or a package that provides CLI (eg **build_runner**, **flutter_launcher_icons**, **native_splash_screen**)
+  * `upgrade` (+ `--major-versions` to force absolute latest)
+* `flutter run` = run app (on currently attached device)
   * `r` = Hot reload, `R` = Hot restart (resets state), `h` = List commands, `d` = Detach (terminates run but app lives on), `c` = clrscr, `q` = Quit
   * `-d(evice-id) {device}` = run to chosen device
     * `chrome`
@@ -279,9 +281,9 @@ Use commands with either long/short names (eg `flutter --option=value` or just `
   * Dart: **Add Dependency** = add (comma-separated) package(s) in one go
   * Flutter: **Toggle Repaint Rainbow** = highlights repainted areas
   * Flutter: **Toggle Debug Paint** (_deprecated_ was [replaced with DevTools](https://stackoverflow.com/a/55121731))
-* Keyboard shortcuts
+* Keyboard shortcuts (with _Flutter_ extension installed)
   * `F5` = Start Debugging
-  * `Ctrl + F5` = Run Without Debugging
+  * `Ctrl + F5` = Run Without Debugging (runs without debugging but still in unoptimized JIT)
   * `Ctrl + ;` = Quick Fix… (also displays _Refactor_ options)
   * `Ctrl + I|Space` = Trigger Suggestions
   * `Ctrl + Shift + R` = Refactor
@@ -369,7 +371,7 @@ Run apps actually without debugging (unless intended) for faster development/exe
 * Use `toStringDeep()` = a string representation of this node and its descendants
 * Use _dart:convert_ `jsonEncode(…)` to encode & pass whole objects
 * For custom widgets, override `debugFillProperties()` to add custom information (**DiagnosticsProperty**) into Flutter widget tree inspector (especially when publishing packages)
-* Toggle Repaint Rainbow tool to identify superfluous repaints (via **DevTools** or setting _debugRepaintRainbowEnabled_ in main)
+* Toggle Repaint Rainbow tool to identify superfluous repaints (via **DevTools** or setting _debugRepaintRainbowEnabled_ in main by importing _rendering.dart_)
 * **DevTools**: add log to Logging view (or system console)
   * Print to _sdout_ & _stderr_ via `print(…)` or `stderr.writeln(…)` (from _dart:io_)
   * Use `debugPrint()` to wrap `print(…)` and avoid Android throttling log lines due to too high a volume

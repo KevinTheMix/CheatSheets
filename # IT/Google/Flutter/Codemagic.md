@@ -4,6 +4,10 @@ CI/CD for Android, iOS, Flutter & React Native.
 
 ## Quick Tips
 
+## Glossary
+
+* **Workflow Editor** = GUI alternative to configuring _codemagic.yaml_
+
 ## Configuration
 
 ### Repository settings
@@ -20,13 +24,19 @@ CI/CD for Android, iOS, Flutter & React Native.
 * Build for platforms = _Android_
 * Publish updates to user devices using Shorebird = _Disabled/Release/Patch_
 * Build triggers = _Trigger on tag creation_ (same as GitHub)
-* Environment variables = (none)
+* Environment variables
+  * `CM_CLONE_UNSHALLOW: true` = provides git commit history (for Sentry commit association to work, because in shallow mode there are no provided commits)
+  * (`CM_CLONE_DEPTH: 100` = alternatively, specify an arbitrary git history depth)
 * Dependency caching
   * `$HOME/.pub-cache` = Flutter/Dart
   * `$HOME/.gradle/caches` = Android (Gradle)
   * `$HOME/Library/Caches/CocoaPods` = iOS/CocoaPods
 * Pre-build script = (see dedicated section below)
-* Shorebird Build arguments = `--artifact apk` (specifies an _apk_ must be generated in addition to default _aab_)
+* Shorebird (aka Build step)
+  * Flutter version = (choose Shorebird default or specific if more advanced)
+  * Build arguments
+    * `--artifact apk` (specifies an _apk_ must be generated in addition to default _aab_)
+    * `-- --obfuscate --split-debug-info=build/symbols` (mind leading `--` to separate/indicate those are `flutter build` arguments, not shorebird's) = obfuscate and produce debug symbols
 * Post-build script = (removed renaming _apk_, as that removes it from result artifacts)
 * Distribution > Android code signing = (enabled)
   * Keystore = _upload-keystore.jks_
