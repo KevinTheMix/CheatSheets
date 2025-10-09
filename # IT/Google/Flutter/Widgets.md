@@ -23,6 +23,7 @@ Building blocks of Flutter.
 
 * **Badges** = colored circular-shaped superscript text (_badgeColor|Content_, _position_, _animationDuration|Type_, _toAnimate_, _showBadge_), previously a 3rd-party package
 * **Divider** & **VerticalDivider** = basically HTML's `<hr>` (_thickness_, _(end)Indent_), set once for all via **MaterialApp**'s **ThemeData**'s _dividerTheme_
+* **ErrorWidget** = renders an exception's message (also logged to console)
 * **GridPaper** = draws rectilinear grid of lines 1px wide (useful with **Stack** for visualizing grid layout, à la `debugShowMaterialGrid: true`)
 * **KeyboardListener** = calls a callback whenever user presses/releases a key
 * **PreferredSizeWidget** = base interface for widget that have an ideal size when unconstrained, such as **AppBar**
@@ -119,26 +120,27 @@ There are two built-in solutions: imperative **Navigator** (push/pop API that wo
     * `showGeneralDialog()` = full control over advanced animations & custom layout
     * `showModalBottomSheet()` & `showCupertinoModalPopup()`
     * `showLicensePage()` = prebuilt dialog showing open-sources licenses
-* **MaterialPageRoute\<T>** = modal route replacing entire screen with a platform-adaptive transition
-  * _fullscreenDialog_ = whether that route opens as a full-screen dialog (ie _X_ close button instead of a back arrow)
-* **PageRouteBuilder** = creates route & page (with _pageBuilder_) with transition effect (via _transitionsBuilder_)
-* **Page\<T>** = describes configuration of a Route
-* **Route<T>** = abstraction for an entry managed by a Navigator, ie an abstract interface between navigator & routes that get pushed/popped off
-* **Router\<T>** = dispatcher for opening/closing pages, parses route information into data & converts data into Pages passed to Navigator
-* **Navigator** = widget managing a set of children with a stack discipline (_pages_ turned into `Route<T>`s via `Page.createRoute()`, `(maybe)Pop()`)
-  * (awaitable) `push(c, {route})`, `pop(c, ({result}))` (closes bottom sheets, drawer, snackbar, dialogs)
-  * _navigatorKey_ (in **MaterialApp** or **GoRouter.configuration**) = gets access to Navigator (push/pop) or context (via `currentState!.context`) without BuildContext
-* **NavigatorState** as in `GlobalKey<NavigatorState>`
 * **MaterialApp**
   * _home_ = single route, maps to `/`
   * _initialRoute_ = name of first route to show if a Navigator is built (ie via _home_, _routes_, _onGenerateRoute_, _UnknownRoute_)
   * _routes_ = statically named routes (has priority over _onGenerateRoute_ in case of duplicates)
   * _onGenerateRoute_ = dynamic route generator callback when app is navigated to a named route, able to use **RouteSettings** to build them
   * `MaterialApp.router()` = uses more advanced **Router** (with deep linking capabilities eg for web) instead of a **Navigator** (_routerConfig_ eg a **GoRouter**)
-* `ModalRoute.of(context).settings.arguments` = access arguments provided via **MaterialPageRoute** builder _settings_
-* `[await] Navigator.of(context).pushNamed({route_name}[, arguments: {args}])` = navigate to named route
-* `[await] Navigator.of(context).pushReplacementNamed({route_name}[, arguments: {args}])` = replace current navigator route (with named route) and disposes it afterwards
-* `Navigator.restorablePushNamed(context, {route_name}[, arguments: {args}])` = navigate to named route (with restoration in case of backgrounded app kill)
+* **MaterialPageRoute\<T>** = modal route replacing entire screen with a platform-adaptive transition
+  * _fullscreenDialog_ = whether that route opens as a full-screen dialog (ie _X_ close button instead of a back arrow)
+* `ModalRoute.of(context).settings.arguments` = access navigation passed via a `pushName()`'s _arguments_ property, or a `push()`'s explicit **MaterialPageRoute** parameter's _settings_ property
+* **Navigator** = widget managing a set of children with a stack discipline (_pages_ turned into `Route<T>`s via `Page.createRoute()`, `(maybe)Pop()`)
+  * (awaitable) `Navigator.of(context)` stack methods
+    * `pop(c, ({result}))` (closes bottom sheets, drawer, snackbar, dialogs)
+    * `pushNamed({route_name}[arguments: {args}])` = add named route to stack & navigate to it
+    * `pushReplacementNamed({route_name}[arguments: {args}])` = replace current navigator route with named route (and disposes it afterwards)
+    * `restorablePushNamed(context, {route_name}[arguments: {args}])` = navigate to named route (with restoration in case of backgrounded app kill)
+  * _navigatorKey_ (in **MaterialApp** or **GoRouter.configuration**) = gets access to Navigator (push/pop) or context (via `currentState!.context`) without BuildContext
+* **NavigatorState** as in `GlobalKey<NavigatorState>`
+* **PageRouteBuilder** = creates route & page (with _pageBuilder_) with transition effect (via _transitionsBuilder_)
+* **Page\<T>** = describes configuration of a Route
+* **Route<T>** = abstraction for an entry managed by a Navigator, ie an abstract interface between navigator & routes that get pushed/popped off
+* **Router\<T>** = dispatcher for opening/closing pages, parses route information into data & converts data into Pages passed to Navigator
 
 ## Display, Images, Painting
 
@@ -193,10 +195,10 @@ There are two built-in solutions: imperative **Navigator** (push/pop API that wo
     * Old buttons used many static properties for each color & state, this was replaced with dynamic methods handling complex interaction states (see **MaterialState**)
 * **Checkbox** = Material Design bi-/tri-states checkbox
 * **Chip** = rounded rectangle bordered labeled icon (`_Button.icon()`-like without interactivity, _avatar_, _label_)
-  * **ActionChip** = contextual dynamic button/trigger for toggle actions without navigation (ie filter, tag, smart suggestion eg 'Like' or 'Save'), less prominent than a **Button**
+  * **ActionChip** = contextual dynamic button/trigger for toggle actions without navigation (ie filter, tag, smart suggestion eg _Like_ or _Save_), less prominent than a **Button**
   * **ChoiceChip** = single choice among chips set (eg single select filter like **SegmentedButton**)
   * **FilterChip** = multi-selection filter among chips set
-  * **InputChip** = more complex piece of information, dismissible, with an optional avatar (eg label or several to/cc e-mail fields)
+  * **InputChip** = more complex piece of information (eg a Person entity) in compact form, dismissible, with an optional avatar (eg label or several to/cc e-mail fields)
 * **Circular/LinearProgressIndicator** = Material progress bar (_value_, _backgroundColor_, `ThemeData.accentColor` by default)
   * _valueColor_ takes in an **Animation\<T>** instance, which can be result of controlled Tween (via `drive()` or `animate()`)
 * Date Picking = `Future<DateTime?> dateFuture = showDatePicker(context, initialDate, firstDate, lastDate)`
@@ -296,7 +298,7 @@ There are two built-in solutions: imperative **Navigator** (push/pop API that wo
 * **Align** = position a child in parent or **Stack** (_heightFactor_, _t/b/r/l_  or specific _alignment_ within [-1,1] range, see **AlignmentTween** & **AnimatedAlign**)
 * **Alignment** = point within a rectangle (top-left _(-1.0,-1.0)_ to bottom-right _(1.0,1.0)_ but values can be outside those bounds)
 * **AspectRatio** = formats _child_ to be a specific box ratio (_aspectRatio_ as `width / height` for readability), incompatible with (parent) **Expanded** (unless using **Align** between)
-* **Baseline** = positions child widget according to child baseline (ie its bottom)
+* **Baseline** = positions child widget according to child baseline (ie its bottom), helps aligning text vertically when font itself is improperly padded
 * **BoxConstraint** = class with immutable layout constraints for **RenderBox** layout (notable properties: _minHeight_, _minWidth_, _maxHeight_, _maxWidth_)
   * `BoxConstraints.loose()` (**min<max**), `BoxConstraints.tightFor[Finite]()` (**min==max**), `BoxConstraints.expand()` (**max**)
 * **Card** = Material circle/rectangle (_shape_) with rounded corners and z-axis (_elevation_) shadow, size depends on child unless parent specifies
@@ -352,7 +354,7 @@ There are two built-in solutions: imperative **Navigator** (push/pop API that wo
   * **StadiumBorder** = pill-shaped
   * **StarBorder** = star or polygon-shaped border (_points_, _pointsRounding_, _valleyRounding_)
 * **BorderSide** = one side of a border (`merge()`)
-* **BoxDecoration** = box immutable description (_border_, _boxShadow_ = collection of **BoxShadow**'s, _gradient_, circle/rectangle _shape_, _borderRadius_)
+* **BoxDecoration** = box immutable description (_border_, _borderRadius_, _boxShadow_ = collection of **BoxShadow**'s, _gradient_, _image_ as **DecorationImage**, circle/rectangle _shape_)
 * **InputDecoration** = border/labels/icons/styles decorating a Material Design text field (_(enabled|disabled|focused|error)border_, _counter(Text)_, _enabled_, _filled_, _fillColor_, _(prefix|suffix)icon_, _helper|hint|labelText_)
 * **BoxShadow** = shadow cast by a box (rectangular or not, _blurRadius_, _spreadRadius_)
 * [Colors](https://api.flutter.dev/flutter/material/Colors-class.html)

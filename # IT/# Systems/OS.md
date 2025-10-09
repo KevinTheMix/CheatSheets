@@ -8,33 +8,97 @@
     * That is because most fork children do not modify any memory and immediately execute a new process, so they often can just read(-only) from their parent's memory, thereby avoiding unnecessary memory allocation
   * For storage = similar to journaling, instead of overwriting existing data immediately, first create a new copy when changes are made, while keeping original (allows snapshot-like history)
 * **Fork** = clones a new process (returns new child _PID_ in parent and _0_ in child itself)
+* **Hypervisor** = soft/firm/hard-ware creates & runs a VM (eg _Oracle VirtualBox_, _VMWare Workstation (Pro)_, _Hyper-V_ by _Microsoft_)
 * **Kernel** = OS core with complete control over everything, always resides in memory, handles hardware resources via device drivers, file system, network sockets
 * **Kernel Space** = strictly protected to run a privileged OS kernel, kernel extensions & device drivers
 * **Kernel Stack** = OS memory space where interrupted process context gets saved to be restored eventually
+* **Operating System** = interaction between hardware components, common platform for applications, human interfaces, files/memory/applications management
 * **Process** = program instance being executed in memory
   * **Daemon** = program running as a background process (eg Windows service, Unix utilities _syslogd_, _sshd_, _cron_)
   * **Orphan** = process whose parent has finished/terminated but remains running itself
   * **Zombie** = completed execution (via `exit` syscall) but still has entry in process table, (cannot be `kill`ed)
-
+* **PXE** (Preboot eXecution Environment) = install an OS remotely from network
+* **Secure Boot** = UEFI process to ensure a device/PC has not been tampered with using a hash chain, requires dedicated hardware (eg motherboard UEFI firmware chip or Apple T2 security chip acting as hardware root of trust)
 * **System Call** (syscall) = how a program requests a service from OS (eg hardware HDD or camera, creating new processes, kernel services such as process scheduling)
+* **TPM** (Trusted Platform Module) = hardware chip to store cryptographic keys (notably for BitLocker & Windows Hello) outside of the OS and reduce malware by 60%
 * **Trap** = a way (imilar to interrupts) for kernel to regain control when a process performs an illegal operation (eg divide by 0) so that it can handle it (eg kill it)
 * **User Space** (or **User-land** or **User Mode**) = everything a program can touch while CPU is running in _user_ mode (ring 3 on x86 ie lower priviledges)
+
+* _ReactOS_ = FOSS OS binary-compatible with programs & drivers developed for Windows (Server 2003)
+
+### Hardware & Drivers
+
+* **BIOS** (Basic Input/Output System) = firmware that configures/initializes hardware devices, startup sequence, loads & runs booloader of the designated startup drive, provides runtime services to OS & programs
+  * **EFI** (Extensible Firmware Interface) = predecessor of UEFI
+  * **POST** (Power-On Self-Test) = process performed by firmware/software immediately after computer is powered on
+  * **UEFI** (Unified Extensible Firmware Interface) = firmware architecture open standard/specification, does not rely on boot sectors but on EFI System Partition (ESP)
+* **Bootloader** (Bootstrap Loader) = program located on boot sector (and often extends beyond it) that initializes system hardware, loads & transfers control to (one of possibly several installed) OS kernel
+* **Bus** = data communication system between components inside or between computers
+* **Controller** = hardware chip/component managing communication between CPU (high-level operation) & peripheral (device-specific) operations, handling low-level details (timing, buffering, protocol management)
+* **CPU Ring** = privilege level (eg _0_ for full hardware authority for kernel code, less for higher numbers)
+* **DDR** (Double Data Rate) = transfers information twice as fast as **SDR** (on each clock cycle ups & downs)
+  * Successive versions of DDR increase chips capacity and/or transfer speeds, and are not backwards compatible
+* **DIMM** (Dual In-line Memory Module) = recto/verso memory bar of memory chips
+  * **SO-DIMM** (Small Outline DIMM) = about half-sized DIMM for laptops
+* **Driver** = software program allowing OS communication with hardware devices through their controller, exposing a standard interface for OS to pilot device-specific details
+* **Firmware** = a device's controller embedded software
+* **Peripheral** = device such as disk & USB controllers, peripherals, network cards
+* **System Bus** = single BUS connecting marjor components, combiging functions of data (information), address (where from/to) & control (which operation)
+  * **Address** = address of RAM or I/O devices for usage by CPU
+  * **Data** = data words being read/written between CPU & RAM/devices
+  * **Control** = timing & control signals (read/write, interrupts, clock, etc)
+
+* _Arduino_ = single-board microcontrollers (by open-source hard/software Italian company)
+* _Raspberry Pi_ = single board computers (SBC)
+
+#### Disk Storage & Partitions
+
+* **Boot Sector** = (usually first) sector of a persistent storage device (CD, DVD, HDD, SSD, USB) containing machine code to be loaded into RAM then executed by BIOS/UEFI to begin boot process
+  * **MBR** (Master Boot Record) = **Boot Sector** type in first block of partitioned mass storage devices for IBM PC/BIOS-compatible systems
+    * 32-bit, up to 4 primary partitions + 1 extended with multiple logical partitions, max partition size of 2TB
+  * **VBR** (Volume Boot Record) = contains code for booting a specific partition
+* **Cluster** (aka **Block**) = contiguous aggregation of sectors (as a unit of disk space allocation)
+* **Cylinder** = division of data in disk drive
+* **GPT** (GUID Partition Table) = SSD/HDD partition tables layout standard (part of UEFI, up to 128 partitions, each over 9 billion TB or 256TB on Windows)
+* **Head** = I/O device that reads/writes data to disks
+* **IOPS** (Input/Ouput Operations per Second) = broad metric of maximum performance of a disk
+* **NVMe** (Non-Volatile Memory express) = open logical-device interface specification for accessing a computer's non-volatile storage media (usually NAND flash memory) via PCIe bus
+* **RAID** (Redundant Array of Independent Disks) = data storage virtualization technology combining multiple physical components into logical units for performance and/or redundancy
+  * **RAID 0** = striping (performance only)
+  * **RAID 1** = mirroring (redundancy only)
+  * **RAID 2** = bit-level splitting with Hamming code (performance only)
+  * **RAID 3** = bit-level striping with dedicated parity disk
+  * **RAID 4** = block-level striping with a dedicated parity disk (ie a worse RAID 5)
+  * **RAID 5** = block-level striping with distributed parity (single disk failure can be recovered, by revert-XORing parity)
+  * **RAID 6** = RAID 5 + second parity block (double disk failure can be recovered)
+  * **RAID 10** = RAID 1 + RAID 0
+* **S.M.A.R.T** (Self-Monitoring, Analysis and Reporting Technology) = disk's vitals (eg temperature, spins retries, error rate)
+* **SATA** (Serial AT Attachment) = computer bus interface connecting motherboard (specifically host bus adapter or HBA) to storage devices
+  * **eSATA** (external SATA) = SATA connection for external storage devices
+  * **mSATA** (mini SATA) = smaller SATA for laptops
+  * **m.2** = (replaces older mSATA), specification for internally mounted computer expansion cards and connectors
+  * **SATAe** (SATA express) = computer bus interface supporting both SATA & PCIe
+* **Sector** = **Track** subdivision (ie an arc), minimum storage unit of a hard drive (4096 bytes for newer HDD/SDDs)
+* **Track** = circular path on a disk surface
+* **Volume** = a formatted partition
+* **Wear Leveling** = technique used by SSDs type drive to spread write/erase cycles over all physical flash cells
 
 ### File System
 
 * **Block** = smallest unit of data a FS or disk uses to read/write (like pages in a book)
 * **Block Pointer** = FS-level references to block of data within FS address space (can be direct/indirect ie linked-lists-like), mapped to LBAs by OS using FS specific layout information
-* **Bootloader** (or bootstrap loader) = program that initializes system hardware, loads & transfers control to (one of possibly several installed) OS kernel, starts in boot sector (often extends beyond it)
-* **Boot Sector** = physical location (usually 1st sector) of a storage device (HDD, SSD, USB) containing machine code to begin boot process (typically 512 bytes for MBR-based systems), loaded by BIOS/UEFI
-  * **MBR** (Master Boot Record) = traditionam BIOS systems
-  * **VBR** (Volume Boot Record) = contains code for booting a specific partition
 * **Clobber(ing)** = overwriting (a file)
 * **File Handle** (Windows) = opaque pointer-sized HANDLE (`void*` or `uintptr_t`)
 * **File System** (FS) = file organization & access
-  * **FAT** (File Allocation Table) = MS-DOS & Windows 9x PC file system, originally for use on flopy disks
-  * **exFAT** (Extensible File Allocation Table) = 2006 Microsoft file system optimized for flash memory (eg USB flash drives, SD cards)
-  * **NTFS** = proprietary Microsoft journaling file system (à la DB transaction log)
-* **GPT** (GUID Partition Table) = standard for layout of partition tables of physical storage devices (part of UEFI)
+  * **APFS** (Apple FS) = designed/optimized for SSDs speed, security & reliability, strong encryption, snapshot (system restore), cloning (~ CoW hard link), single container free space sharing among multiple enlarging volumes
+  * **EFS** (Encrypting FS) = feature of NTFS that provides transparent FS-level (ie individual files & folders) encryption
+  * **exFAT** (Extensible File Allocation Table) = (2006) Microsoft file system optimized for (USB, SD cards) flash drives (files can be larger than 4Go), compatible across many OSes
+  * **ext4** = journaling FS for Linux & Android OS (update to ext3)
+  * **FAT** (File Allocation Table) = MS-DOS/Window 9x-era file system, originally for use on flopy disks (up to 2To disk, 4Go file)
+  * **HFS+** (Hierarchical File System Plus, aka Mac OS Extended) = older (1998-2017) macOS FS before APFS, journaling, permissions, fixed partitions (no space sharing, cloning, snapshots)
+  * **NTFS** (Windows NT FS) = proprietary Microsoft journaling FS, extensive improvements over FAT32 (compression, encryption, large files), originally not very compatible
+  * **ReFS** (Resilient FS) = modern update to NTFS, very large drives, self-repairing (no more `chkdsk`)
+  * **XFS** (Extended FS) = high-performance (large-scale computing) 64-bit journaling FS used in data centers, supported by most Linux distributions (created by Silicon Grapics in 1993)
 * **Inode** = Unix-style file system data structure describing file & directory objects (ID, (timestamp) metadata, permissions, physical disk location)
   * Physical disk location is indirectly provided via Inode **Block Pointer**s referencing a **Logical Block Address**es (LBA) usable by disk firmware
   * File names are not stored in Inode but in file parent folder/directory (ie a special type of file mapping files names to Inode IDs)
@@ -64,7 +128,7 @@
   * **Data** = initialized static variables
   * **BSS** (Block Starting Symbol) = uninitialized static variables & constants
   * **Heap** = dynamically allocated memory (starts after BSS)
-  * **Stack** = LIFO structure (grows towards heap) where local (function) variables are saved (eg fixed-sized array buffers)
+  * **Stack** = LIFO structure (grows towards heap) where local (function) variables are saved (eg value-types, reference-types heap addresses, fixed-sized array buffers)
     * **Stack Frame** = block of data created when a function is called (return address, local variables, arguments, etc)
 * **Memory Management Unit** (MMU) = CPU electronic component that translates virtual into physical addresses (using mapping page tables in RAM pointed to via a register)
   * Only the CPU can touch wires this fast—nanoseconds per memory access—so the MMU has to live right inside the core
@@ -79,7 +143,6 @@
 * **Virtual Byte** = a byte of virtual memory (ie from viewpoint of a process)
 * **Virtual Memory** = mechanism which lets a process manage its internal address space as a contiguous address space, independently from their physical locations
   * Uses pagination/segmentation techniques to map to either physical RAM or HDD, or nothing yet (page is not present, first access will cause kernel to allocate or load it)
-* **Wear Leveling** = technique used by SSDs type drive to spread write/erase cycles over all physical flash cells
 
 #### Paging
 

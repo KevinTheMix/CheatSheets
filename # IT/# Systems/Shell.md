@@ -2,6 +2,19 @@
 
 Technically, any outer layer that mediates between a user and a kernel's services.
 
+## Quick Tips
+
+* [Carlos Fenollosa - Tips](https://cfenollosa.com/misc/tricks.txt)
+* `Escape + -.` = fetches last parameter of previous command
+* `Ctrl + Q` = unfreezes terminal frozen by accidental `Ctrl-s`
+* `Ctrl + R` = search command history
+* `Ctrl + X, Ctrl + E` = opens an (GNU nano) editor to work with long or complex command lines
+* `!!` = repeats last command (useful for quickly retrying failed command as admin eg `cat /etc/...` -> _permission denied_ -> `sudo !!`)
+  * `!!:{n}` = selects nth argument of last command
+  * `!$` = selects last argument of last command
+  * Eg `ls file1 file2 file3; cat !!:1-2` = shows all files & _cats_ only 1 and 2
+* '^' = sed-like operator to replace chars from last command (eg `ls docs; ^docs^web^` is equal to `ls web`, second argument can be empty)
+
 ## Glossary
 
 * **Bash** (Bourne Again Shell) = an interactive CLI & scripting language shell for UNIX-like OSs (1989)
@@ -15,6 +28,8 @@ Technically, any outer layer that mediates between a user and a kernel's service
   * `[abc]` = any one of those characters
   * `[!abc]` = none of those characters
   * `[a-z]` = characters in range
+* **Here Document** = file or input stream literal
+* **Here String** = one-line heredoc
 * **Interactive Shell** = connected to a TTY, not started with `-c {command}`, nor a script shebang
 * **Login Shell** = started when first logged in (eg console, `ssh`, `tty`), starting with a `-` (eg `-bash`), reads/sets global config (_etc/profile_, **$PATH**)
 * **Non-Interactive Shell** = started via `cron`, `systemd`, `-c`, a script
@@ -60,6 +75,7 @@ Technically, any outer layer that mediates between a user and a kernel's service
 * `bg` = resume a suspended background job
 * `break` = exit a loop
 * `cd {path}` (change directory)
+  * `cd -` = go to _$OLDPWD_ (ie previous directory)
   * `cd ~` or just `cd` (without argument) = go to user directory
 * `continue` = resume next iteration of a loop
 * `declare` = declare variables (Bash-specific)
@@ -75,6 +91,7 @@ Technically, any outer layer that mediates between a user and a kernel's service
 * `jobs` = list jobs (`-l` adding process IDs, `-p` only process IDs)
 * `kill {pid}` or `kill %{job_id}` = sends a signal a process (see `pkill`)
   * `kill -9` = SIGKILL signal
+* `fillall {name}` = kill all processes by name (`-r` interprets name as regex)
 * `let` = evaluate arithmetic expressions
 * `local` = declares a local variable in a function
 * `pwd` (print working directory) = displays current directory
@@ -87,6 +104,8 @@ Technically, any outer layer that mediates between a user and a kernel's service
 * `return` = return from a shell function
 * `set ({option})` = display variables & functions, or set shell option/positional parameter (ie _$1_, _$2_, _$#_, _$@_, _$*_)
 * `shift` = shift positional parameters
+* `shopt ({options})` = display all (or specified) shell options (`-s/-u` to set/unset provided shell option(s))
+  * _cdspell_ = automatically fixes `cd {folder}` spelling mistakes
 * `source` or `.` = read/execute command in current shell environment (not a subshell)
 * `test` or `[` = (POSIX-compliant) evaluate conditional expression (returns _0_ for true, _1_ for false)
   * `[ expression ]` (spaces are mandatory) = POSIX-style test command
@@ -129,7 +148,7 @@ Technically, any outer layer that mediates between a user and a kernel's service
   * `${var%%pattern}` = remove longest match of pattern from end
 
 * `$-` = special Bash variable containing current shell flags
-* `$?` = exit status/return code of last (foreground) command
+* `$?` = exit status/return code of last (foreground) command (conventionally _0_ for success)
 * `$!` = PID of last background command
 * `$$` = PID of current shell (or process)
 * Positional
@@ -143,6 +162,7 @@ Technically, any outer layer that mediates between a user and a kernel's service
 * `$IFS` (Internal Field Separator) = controls how Bash splits strings into fields (default value <code> \t\n</code>)
 * `$LANG` = character enchoding
 * `$LOGNAME` = username (alternatively `$(whoami)`)
+* `$OLDPWD` = previous _$PWD_
 * `$PATH` = path environment variable
 * `$PS1` = primary shell prompt (use quotes `""` to use shorthands)
   * `\$` = displays _$_ for regular users, _#_ for **root**

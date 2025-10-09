@@ -11,9 +11,13 @@
 * [Aggregate functions](https://learn.microsoft.com/en-us/sql/t-sql/functions/aggregate-functions-transact-sql) = (eg `COUNT`, `MIN`/`MAX`, `AVG`, `SUM`)
 * **Candidate Key** (aka Natural key, or Domain key or Business key) = a key that _could_ be used as PK instead of the PK (ie it is also unique for each rows/values in the set)
 * **Clause** = built-in functions/operators (such as `SELECT`, `WHERE`, `AND`, `OR`, `LIKE`, `TOP`)
+* **Column-Oriented** = pivot a row of data into horizontal columns (efficient homogenous column-based compression, slower writes, much faster aggregated reads)
 * **CTE** (Common Table Expression) = intermediary virtual tables whose data are piped/reusable to the following DML statement/CTE, also enables recursion
 * **Cursor** = a type of variable that can keep browse a query result set (eg `DECLARE CURSOR {name} FOR SELECT …`)
   * Avoid cursors by thinking less in terms of loops and more in terms of sets (as SQL was intended)
+* **Data Lake** = large storage space of hybrid mess (no DB engine, just files storage)
+* **Data Warehouse** = structured queryable nearly always column-oriented DB
+* **Data Lakehouse** = consistency/structural layer on top of a Data Lake to make it queryable like a Data Warehouse
 * **Eager Read Derivation** = preparing report (DBs) on writes rather than reads (à la Facebook homepage)
   * See <https://martinfowler.com/bliki/EagerReadDerivation.html>
 * **Eventual Consistency** = distributed DB model to achieve high availability at the cost (and guarantee) of eventual consistency
@@ -26,7 +30,7 @@
   * **Composite Index** = composed of multiple columns
 * **Joins** = composes columns originating from multiple tables (`INNER`, `LEFT`/`RIGHT`/`FULL OUTER`, `CROSS` aka Cartesian product)
   * Joins can be performed between tables in different DBs (but on the same server)
-* [N + 1 problem](https://stackoverflow.com/q/97197/861716) = performing a separate query for getting each child item vs loading both collection and performing lookups there in memory
+* **N+1 Select Problem** = separate queries for a main entity then each of its children vs loading both collections and performing lookups there in memory (or better, a single JOIN)
 * **Normalization** = structure relational DB data to reduce redundancy & improve integrity
   1. no repetitive attributes, Primary Key
   2. 1NF + non-key attributes cannot depend on part of a key
@@ -52,6 +56,7 @@
 
 * **Apache TinkerPop** = graph computing framework for graph DB (OLTP) & graph analytic systems (OLAP), using Gremlin Query Language (GQL) for graph traversal
 * **Cassandra** (by **Apache**) = FOSS distributed wide-column store NoSQL DB designed to handle large amounts of data across servers (high availability with no SPoF)
+* Data Bricks
 * [dbdiagram.io](https://dbdiagram.io) = online DB diagrams
 * **DB Browser for SQLite** = SQLite DB IDE
 * **GraphQL** = DB-agnostic data query/manipulation language for APIs, letting a client specify data to fetch (possibly from separate sources as one unified result)

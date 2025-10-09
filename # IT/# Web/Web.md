@@ -3,6 +3,7 @@
 ## Quick Tips
 
 * Include a referrer URL catcher (to index.php/master page) to find out where people come from (+ good for CSRF)
+* [Web Standard Project](https://www.webstandards.org) (WaSP) = was a web standardization (accessibility, uniformity) effort
 
 ## Glossary
 
@@ -26,7 +27,6 @@
 * [HTML-Kit](http://www.htmlkit.com) (build 292 = last free version)
 * _HTTrack_ = Web crawler/copier (also as no install)
 * _Jekyll_ = open-source static site generator (written in Ruby)
-* _Nginx_ = FOSS **web server** (à la Apache HTTP) that can be used as a reverse proxy, load balancer (used for this by large fraction of web servers), mail proxy & HTTP cache
 * [Opquast Web Quality Assurance Checklist](https://checklists.opquast.com/en/web-quality-assurance) = web page guidelines/rules
 * _Plausible_ = Google Analytics alternative
 * _Selenium_ = open-source scripting/record/playback tools for automating web apps/browser tasks (eg for testing, debugging), for a variety of languages (eg C#, Java, JS, Python)

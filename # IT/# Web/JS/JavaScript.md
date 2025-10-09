@@ -155,7 +155,7 @@ See <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statement
 * **React Native** = open-source cross-platform (mobile, web, desktop, VR) UI framework, native components for each platform via JS bridge, provides base components & leaves community implement (3rd party) packages
   * Uses a virtual-DOM-like virtual widgets tree, which helps not going through the costly JS bridge
   * Uses a _bridge_, ie some kind of adapter that exposes native UI components/widgets to let JavaScript (ie app logic) _pilot_ them
-* **Redux** = state container for JavaScript apps
+* **Redux** = open-source state management JS library (written in TypeScript)
 * **RxJS** (_ReactiveX_) = reactive extensions, for composing asynchronous or callback-based code by using Observable sequences (RxJs is _Lodash_ for events)
   * See [ReactiveX](https://reactivex.io) = cross-platform asynchronous programming (eg debounce) with observable streams API (for eg .NET, Java, JavaScript)
 * **Socket.IO** = bi-directional client-server communication (via WebSocket or HTTP long-polling as a fallback)

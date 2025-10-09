@@ -13,16 +13,20 @@
 * [Flow Field Pathfinding for Tower Defense](https://www.redblobgames.com/pathfinding/tower-defense) = A* visualization
 * [What is the alphanumeric id in a reddit URL?](http://stackoverflow.com/questions/410485/whats-the-5-character-alphanumeric-id-in-reddit-url) = base 36 (ie lowercase alphanumeric)
 * [Visualizing algorithmes](https://bost.ocks.org/mike/algorithms)
+* [Google RGB-hidden phrase](https://www.reddit.com/r/Android/comments/2k4qjs/comment/clhypmg) = RGB is a set of three ASCII letters, normalized by subtracting min value
+* `({number} & 1) == 0/1` = check whether a number is even/odd
 
 ## Glossary
 
 * **Alpha-beta pruning** = search algorithm that stops evaluating a move (and its search path subtree) when it is estimated to be worse than a previously examined move
+* **Backus-Naur Form** (BNF) & **Extended BNF** = meta-syntax describing a programming language's syntax
 * **Bellman-Ford** = shortest path in a weighted graph
 * **Complément à 2**
   1. Use 1st bit as sign = `[-127,127]` on 8 bits, `[-32767,32767]` on 16 bits, but zero appears twice: _0000_ & _1000_
   2. Complément à 1 = invert all bits (still two zero's: 0000 & 1111)
   3. Complément à 2 = C1 + 1 => only one zero and add/sub also works (eg `1 - 1` = `0001 + (1110+1)` = `0000`)
 * **Dijkstra's algorithm** = find shortest path between nodes in a weighted graph
+* **Huffman Coding** = frequency-table-based lossless compression algorithm
 * **Loop invariant** = a property of a loop true before & after each iteration (eg an overall expression that stays true even though its constituting variables get updated)
 * String distances = for spelling correction, DNA ACGT proteins similarity
   * **Levenshtein distance** = string metric measuring difference between two sequences, ie minimum number of single-character edits (insertions, deletions or substitutions)

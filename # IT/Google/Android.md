@@ -20,6 +20,7 @@
 ## Glossary
 
 * [Activities](https://developer.android.com/guide/components/activities/intro-activities) = one app entry point, defined in _AndroidManifest.xml_
+* **Android** = open-source OS based on Linux, supported by many different manufacturer's devices
 * **Android App Bundle** (AAB) = device-agnostic package format containing compiled code & resources, used by Play Stores to eventually generate/distribute (smaller) device-specific APKs
 * **Android SDK** = can be installed via Android Studio's SDK Manager (at `%USERPROFILE%\AppData\Local\Android\Sdk`)
   * [Platform Tools](https://developer.android.com/tools/releases/platform-tools) = primarily **adb** & **fastboot** exe (see section below)
@@ -42,6 +43,7 @@
 * **Image** = _.img_ file, part of the OS, to be flashed (installed) to the partition matching its name on the device
 * **Odin** = utility used by Samsung to reset (or flash) their smartphones
 * **OEM** (Original Equipment Manufacturer) = a company that constructed an original component sold to end users by another company
+* **OHA** (Open Handset Alliance) = consortium (eg HTC, Sony, Dell, Motorola, Samgsung, LG) led by Google that develops Android
 * **OTA Updates** = Over-the-air updates, the upgrades to the current OS
 * **ProGuard** = open source CLI to shrink/optimize/obfuscate Java code (distributed as part of Android SDK)
 * **ROM** (aka Firmware) = basically the OS installed on the device, in its read-only memory. It is a bit ambiguous whether this refers to all images (most likely), or just the _system_ one
@@ -58,24 +60,29 @@
 
 ### Versions
 
-| Name        | Major | Original |
-| ----        | ----- | -------- |
-| Gingerbread | 2.3   | 7        |
-| Honeycomb   | 3.2   | 8        |
-| ICS         | 4     | 9        |
-| Jelly Bean  | 4.1   | 10       |
-| Jelly Bean  | 4.2   | 10       |
-| Jelly Bean  | 4.3   | 10       |
-| Jelly Bean  | 4.3.1 | 10       |
-| KitKat      | 4.4   | 11       |
-| Lollipop    | 5     | 12       |
-| Marshmallow | 6     | 13       |
-| Nougat      | 7     | 14       |
-| Oreo        | 8     | 15       |
-| Pie         | 9     | 16       |
-| Q           | 10    | 17       |
-| Android 11  | 11    | 18       |
-| Android 12  | 12    | 19       |
+| Name        | Major | V  | Year |
+| ----        | ----- | -- | ---- |
+| Gingerbread | 2.3   | 7  | 2010 |
+| Honeycomb   | 3.2   | 8  | 2011 |
+| ICS         | 4     | 9  | 2011 |
+| Jelly Bean  | 4.1   | 10 | 2012 |
+| Jelly Bean  | 4.2   | 10 | 2012 |
+| Jelly Bean  | 4.3   | 10 | 2013 |
+| Jelly Bean  | 4.3.1 | 10 | 2013 |
+| KitKat      | 4.4   | 11 | 2013 |
+| Lollipop    | 5     | 12 | 2014 |
+| Marshmallow | 6     | 13 | 2015 |
+| Nougat      | 7     | 14 | 2016 |
+| Oreo        | 8     | 15 | 2017 |
+| Pie         | 9     | 16 | 2018 |
+| Q           | 10    | 17 | 2019 |
+| Android 11  | 11    | 18 | 2020 |
+| Android 12  | 12    | 19 | 2021 |
+| Android 12L | 12.1  | 19 | 2022 |
+| Android 13  | 13    | 20 | 2022 |
+| Android 14  | 14    | 21 | 2023 |
+| Android 15  | 15    | 22 | 2024 |
+| Android 16  | 16    | 23 | 2025 |
 
 ### [Partitions](https://source.android.com/devices/bootloader/partitions)
 

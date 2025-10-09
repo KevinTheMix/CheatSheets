@@ -27,6 +27,8 @@
   * _Home > Conditional Formatting > New Rule > formula_
   * Enter formula (eg `=$C2="Value"`) & format to apply (eg font color)
 * Remove table = _Table Design > Tools (group) > Convert to Range_
+* Microsoft Word
+  * `Ctrl + Alt + {n}` = creates a header-level text
 
 ## Shortcuts
 

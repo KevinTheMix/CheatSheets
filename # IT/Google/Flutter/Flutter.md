@@ -22,6 +22,7 @@ Features:
 
 ## Quick Tips
 
+* [Medium blogs](https://blog.flutter.dev)
 * [Flutter: Cookbook](https://docs.flutter.dev/cookbook)
 * [@Wm Leler](https://leler.com/wm/bio.html#flutter) = Flutter-promoting articles (eg _what's revolutionary?_, _why Dart?_ UX study with eight developers, _company pitch_)
   * Most of the time, Flutter can do layout in a single pass (or even none, through cacheing), aka linear time, so it can even be used for scrolling & any animations
@@ -51,9 +52,6 @@ Features:
 * [CanvasKit](https://skia.org/docs/user/modules/canvaskit) = lightweight version of Skia compiled to WebAssembly optimized for web browser (paint to HTML canvas/SVG) via WebGL
 * [Casual Games Toolkit](https://docs.flutter.dev/resources/games-toolkit) = mobile games development resources
 * **Configuration** = refers to a widget's input parameters/properties provided by its parent, or to a Widget in relation to its corresponding Element
-* [DevTools](https://docs.flutter.dev/development/tools/devtools/overview) = debugging & performance tools
-  * [Flutter Inspector](https://docs.flutter.dev/development/tools/devtools/inspector)
-    * **Layout Explorer** = debug/inspect/edit layout properties in real-time
 * **Element** (implements **BuildContext**) = instantiation of a Widget at a particular location in the _Element Tree_ (that Widget is considered that Element's _configuration_)
   * An elements is very simple, holding just a reference to associated widget (& its original type), its children elements, and potential State
   * Elements are mutable and modified in place to reflect changes in Widgets tree, hence Elements tree is seldom rebuilt & more stable, and acts as a buffer/**cache** between configuration & rendering
@@ -65,6 +63,7 @@ Features:
 * [Flutter Create](http://flutter.dev/create) = a one-time coding competition in 2019
 * **FVM** (Flutter Version Management) = small CLI tool to manage several Flutter SDK relseases side-by-side
 * [Impeller](https://github.com/flutter/flutter/wiki/Impeller) = latest rendering enging replacing Skia (already on iOS since Flutter 3.10), eliminating costly runtime shader compiling
+* [Internationalization](https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization)
 * **Keys** — see [@Emily Fortuna - Keys! What are they good for?](https://medium.com/flutter/keys-what-are-they-good-for-13cb51742e7d)
   * A way to keep track of States (ie for Stateful Widgets only), useful when adding/reordering widgets on the screen
   * **LocalKey** = match elements in their local tree (ie among its siblings), so put them at top of (sub)tree to preserve
@@ -199,6 +198,7 @@ Use commands with either long/short names (eg `flutter --option=value` or just `
     * _canvaskit_ & _skwasm_ both draw to a single HTML `<canva>`, can handle complex visual games/presentations
     * _html_ maps component to native HTML/CSS/JS elements (eg images as `<img>`), can handle basic CSS animations, better for SEO
   * `--build-name` & `--build-number` = override version & build numbers, respectively
+  * `--dart-define={VAR}={value}` = define a local environment variable (eg `BUILD_MS=$(date +%s000)`, read via `int.fromEnvironment('{VAR}', defaultValue: {value})`)
   * `--obfuscate --split-debug-info={symbols_directory}` = obfuscate & save symbols mapping file to directory (for later de-obfuscating eg for debugging & stack trace)
   * `--release` = build in _build/app/outputs/_
   * `--split-per-abi` = produces multiple APK, each optimized to a specific [Application Binary Interface (ABI)](../Android.md#glossary)
@@ -224,6 +224,7 @@ Use commands with either long/short names (eg `flutter --option=value` or just `
 * `flutter doctor --android-licenses`
 * `flutter format {filename}` = Format document
 * `flutter install` = install app to attached device
+* `flutter logs` = display console logs from target device
 * `flutter pub` = manages the _pubspec.yaml_ file, which contains assets & dependencies, downloaded from <pub.dev>
   * `add {package}` = downloads & add package to _pubspec.yaml_
   * `add dev:{package}` = add package under _dev\_dependencies_ section
@@ -309,84 +310,8 @@ Use commands with either long/short names (eg `flutter --option=value` or just `
 * `stfu` = Stateful widget
 * Don't forget you can auto-complete via camelCase initials (eg `sichsc + Tab` => **SingleChildScrollView**)
 
-## [Troubleshooting](https://docs.flutter.dev/testing/common-errors)
+## Extensions
 
-* Red text with yellow double underline = a Material Design based widget (eg **Text**, **Slider**, etc) does not have an ancestor providing default styling (eg **DefaultTextStyle**)
-  * Usually, that ancestor is included in another widget (eg **Scaffold** which adds a **Material** widget that applies that styling)
-  * Same goes for widgets that require a **MediaQuery** ancestor (provided via **MaterialApp**)
-
-* _Vertical viewport was given unbounded height_
-  * A space-hungry misbehaving **ListView** is inside an unbounded constraints permissive (**Flex**) **Column**
-  * Read [Column class Troubleshooting](https://api.flutter.dev/flutter/widgets/Column-class.html#troubleshooting)
-  * Watch [Decoding Fluter: Unbounded height/width](https://www.youtube.com/watch?v=jckqXR5CrPI)
-  * Solution = be specific as possible in intended layout and bounds given to ListView
-    * => wrap the ListView in either flex-space-sharing-friendly **Expanded**/**Flexible**, or a **SizedBox** with a pre-fixed height
-  * [shrinkWrap](https://api.flutter.dev/flutter/widgets/ScrollView/shrinkWrap.html) fixes the error, but do not use it with **Nested ListViews**
-    * _shrinkWrap_ forces (sub-)lists to render upfront instead of lazily, which is costly performance-wise
-    * Watch [Decoding Flutter: ShrinkWrap vs Slivers](https://www.youtube.com/watch?v=LUqDNnv_dh0)
-    * => to handle nested lists, replace them instead with a **CustomScrollView** with **SliverList** children
-
-* _RenderFlex children have non-zero flex but incoming height constraints are unbounded_
-  * Caused when a (non-zero flex) **Flexible** child ask to take all of remaining available space in an unbounded (ie infinite) context (eg **Expanded** within a **Column** within a **Column**)
-  * There are two related but distinct notions associated with this error: **Flex** & **Flexible**
-  * Outer Column receives bounded constraints from its parent (eg screen/Scaffold)
-  * Inner Column receives unbounded constraints, as Columns are fixed size: they are (**Flex** but) not **Flexible** (ie no flex-factor property)
-  * Inner Expanded now has unbounded constraints and wants all of infinity, which is bad
-  * Solution = either wrap inner Column inside an(other) **Expanded**, or set inner **Expanded**'s _flex_ factor to zero, thereby making it non-flex (_tested & confirmed_)
-  * Read [Column > Column > Expanded Explanation](https://stackoverflow.com/a/66718208/3559724)
-  * Read [Column class Troubleshooting](https://api.flutter.dev/flutter/widgets/Column-class.html#troubleshooting)
-
-* Virtual keyboard causing yellow/black pattern
-  * When the keyboard comes up, it adds some height padding at the bottom of the screen with the goal of keeping the target input field in view. But if the height is fixed and there no scrollable parent wraps the input field, this just pushes that padding outside the view
-  * => Set **Scaffold**'s _resizeToAvoidBottomInset_ property to _false_ (and possibly wrap some areas with **SingleChildScrollView**)
-  * `Scaffold(resizeToAvoidBottomInset: false` = [fix virtual keyboard overflow](https://stackoverflow.com/a/57441971/3559724)
-
-* _Incorrect use of ParentDataWidget Error in Flutter_
-  * **Flexible**, **Expanded**, **Positioned** & **TableCell** each require a specific type of parent (namely: **Column/Row**, **Flex**, **Stack**, **Table**)
-  * <https://www.fluttercampus.com/guide/229/incorrect-use-of-parentdatawidget-error/#solution-of-the-error>
-
-* Lazy GridView.builder() or ListView.builder() does not update properly even with keys
-  * This occurs because lazy loading makes it impossible to refresh references at build time (builder does not know which items will get built).
-  * Use keys with `findChildIndexCallback` to help Flutter update the widget references upon rebuild.
-
-* _SizedBox for whitespace_
-  * Problem: a **Container** is used, but we only use its _height_/_width_ properties
-  * Solution: it could be advantageously replaced with the leaner **SizedBox** widget, which also has the benefit of a _const_ constructor
-  * See <https://www.flutteroverflow.dev/sized-box-for-whitespace/>
-
-* Faint border lines above/below some widgets
-  * **DrawerHeader** = set **Divider** `color` (to _transparent_) or `width` (to _0_) via (global/local) themeing
-  * **Material/Card** = set the _shape_'s _side_'s `color` (to _transparent_) or `width` (to _0_)
-
-* Web
-  * Hack: set `<base href>` manually to _./_ relative path to deploy in a (non-root) subfolder
-    * note that _index.html_ contains a unique service worker version ID changing at each build so don't replace the whole file
-  * run `flutter clean` then rebuild if _flutter.js_ is not regenerated each time (see <https://stackoverflow.com/a/73780022/3559724>)
-
-## [Debugging](https://docs.flutter.dev/testing/code-debugging)
-
-Run apps actually without debugging (unless intended) for faster development/execution cycles.
-
-* Use special variable _kDebugMode_ is true in Debug mode
-* Use `toStringDeep()` = a string representation of this node and its descendants
-* Use _dart:convert_ `jsonEncode(…)` to encode & pass whole objects
-* For custom widgets, override `debugFillProperties()` to add custom information (**DiagnosticsProperty**) into Flutter widget tree inspector (especially when publishing packages)
-* Toggle Repaint Rainbow tool to identify superfluous repaints (via **DevTools** or setting _debugRepaintRainbowEnabled_ in main by importing _rendering.dart_)
-* **DevTools**: add log to Logging view (or system console)
-  * Print to _sdout_ & _stderr_ via `print(…)` or `stderr.writeln(…)` (from _dart:io_)
-  * Use `debugPrint()` to wrap `print(…)` and avoid Android throttling log lines due to too high a volume
-  * Use _dart:developer_ `log(…)`, eg with object as error `developer.log(…, name: …, error: jsonEncode(koko)`
-  * Use Inspector (with mouse) to locate both widget in tree and also widget location in source code file
-  * View Network Response tab to investigate API HTTP calls (instead of printing them to terminal)
-* Set breakpoints (programmatic breakpoints via _dart:developer_ `debugger(when: condition)` statement)
-* Print widget tree via `debugDumpApp()` (from _package:flutter/rendering.dart_) from within `runApp()` (calls `toStringDeep()` recursively)
-* Print render tree via `debugDumpRenderTree()` not during layout/paint (in a callback/event handler), displays all constraints
-* Print layer tree via `debugDumpLayerTree()`
-* Print focus tree via `debugDumpFocusTree()`
-* Print semantics tree via `debugDumpSemanticsTree()`
-* Highlight layout issues via `debugPaintSizeEnabled` from _package:flutter/rendering.dart_ set to true (boxes, padding, alignment, spacers)
-* Slow down animations via **DevTools** Inspector view, or set `timeDilation` from _scheduler.dart_ to number greater than 1.0
-* Tracing = **Timeline** utilities in _dart:developer_ (`startSync(…)` & `finishSync()`)
-* Performance overlay = `MaterialApp { showPerformanceOverlay: true }` (look for spikes in second graph, while running app in profile mode ie `flutter run --profile`)
-* Alignment grid = `MaterialApp { debugShowMaterialGrid: true }` or use a **GridPaper** (inside a **Stack** to use as overlay)
-* Before `runApp(…)`, set `ErrorWidget.builder` to a callback returning a custom (Material) widget to display in place of error default red screens, and taking in **FlutterErrorDetails** as parameters
+* **Flame** (Engine) = cross-platform open-source game engine built on top of Flutter
+* **Flock** (possibly abandoned) = a community-powered fork of Flutter aspiring to deliver quicker maintenance
+* **FlutterFlow** = build widgets via a GUI, import themes from Figma

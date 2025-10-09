@@ -2,7 +2,7 @@
 
 ## Quick Tips
 
-* Facebook bait using CRSF = Get someone's name
+* Facebook bait using CRSF = get someone's name
 * "Forgot Password?" = grab last digits of email/phone
 * [Google Dorks](https://www.exploit-db.com/google-hacking-database) = Google search hacks (also Bind, Yandex, DuckDuckGo may turn up different results)
   * `inurl:"ViewerFrame?Mode=" -inurl -intitle` = unsecured network cameras
@@ -25,6 +25,7 @@
 * [Have I Been Pwned](https://haveibeenpwned.com) (HIBP) = enter target email
 * _Maltego_ = OSINT tool for link analysis & data visualization of relationships between people/groups/websites/domains/networks, real-time data mining, information as node-based graph to identify patterns
 * _Shodan_ = IoT search engine (servers, routers, webcams, unprotected devices)
+* [TinEye](https://www.tineye.com) = reverse image search
 * _Wayback Machine_ (by _Internet Archive_) = investigate (now possibly erased) past
 * [WiGLE](https://wigle.net) = information about wireless hotspots around world
 * _Zoomeye_ = analyze devices connected to internet (dynamic maps of assets, ports & protocols)

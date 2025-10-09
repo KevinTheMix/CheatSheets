@@ -8,13 +8,12 @@
 * [GNU Core Utilities](https://github.com/coreutils/coreutils)
 * [Bash Prompt HOWTO](https://tldp.org/HOWTO/Bash-Prompt-HOWTO/index.html)
 * `({cmd1}; {cmd2})` = creates new shell (_sh_), executes both commands, close shell
+* [Unix Tricks](https://cfenollosa.com/misc/tricks.txt) (by Carlos Fenollosa 2017)
 
 ## Glossary
 
 * **ELF** (Executable and Linkable Format) = a Unix executable file
 * **GNU** (GNU's Not Unix) = collection of free software launched by Richard Stallman in 1983, a set of user-space tools added to most Linux kernels (eg gcc, Bash) under GNU GPL
-* **Here Document** = file or input stream literal
-* **Here String** = one-line heredoc
 * **EUID** (Effective User ID) = actual user ID a process is running under, usually same as UID (but can be different when eg `sudo`)
 * **IPC** (Inter-Process Communication) = eg pipes
 * **Linux** = independant open-source re-implementation of Unix-like kernel by Linus Torvalds in 1991, released under GNU GPL
@@ -82,12 +81,15 @@
   * Every new process starts with three already-open descriptors (stdin _0_, stdout _1_, and stderr _2_ as a parallel channel to provide non-necessarily error-related feedback)
 * **File Object** = anything that implements byte-stream interface (eg file, directory, block/character devices, pipes/fifos, sockets)
 * **File-type Indicator** = file (_-_), directory (_d_), symlink (_l_), devices (_c_ & _b_), FIFO/pipe (_p_), socket (_s_)
-* **File Mode (String)** = User/Group/Other `rwx` Permissions + Optional attribute
-  * **User** = creator, **Group** = group User belongs to, **Other** = everyone who has access (ie an account) on the system
+* **File Mode (String)** = _rwx_ (and optional _st_) Permissions for _ugoa_
+  * **User** (or **Owner**) = creator
+  * **Group** = group User belongs to
+  * **Other** (or **World**) = everyone who has access (ie an account) on the system
+  * **All** = all users (used if no specific ugoa is given)
   * **Read** = can view & copy contents
   * **Write** = can modify & delete (needs execute permission as well) content
-  * Eg `d-wx` = mailbox-style, can add new files or move/delete existing ones by name (if known) and `cd` to it, but `ls` not permitted
   * **Execute** = can run an exe file, enter directory (`cd`), and list their permissions (`ls -l`)
+  * Eg `d-wx` = mailbox-style, can add new files or move/delete existing ones by name (if known) and `cd` to it, but `ls` not permitted
   * _s_ (eg _-rwsr-xr-x_) = **Owner/Group Execute** (set-UID/GID) = (if user can execute) use owner/group permissions when executing this file
     * Set via octal value _2000_ (group) & _4000_ (owner)
   * _t_ (eg _drwxrwxrwt_) = **Sticky Bit** = special mode for directories (& rarely files) that restricts unlinking (aka deleting) & renaming its entries
@@ -102,10 +104,14 @@
   * _/dev/null_ = special device that discards anything written to it and immediately returns EOF when read
   * _/dev/sda_ = device-file handle for first SCSI-class block disk Linux kernel discovers at boot/when hot-plugged
 * _etc_ = host-specific system-wide configuration files & startup scripts (_/etc/ssh/sshd\_config_)
+  * _/etc/fstab_ (File System Table) = lists all system disks & partitions
   * _/etc/group_ = plain-text mapping DB of group names to IDs & defaults, only editable by **root** (via `vigr`)
+  * _/etc/hosts_ = resolves FQDNs to IP addresses locally (overrides global DNS settings, à la Windows _hosts_ file)
   * _/etc/nologin_ = presence of this file prevents unprivileged users from logging into the system (useful to temporarily disable all unprivileged login ie non-root users)
   * _/etc/passwd_ = plain-text mapping DB of user names to IDs & defaults (home dir, login shell), only editable by **root** (via `vipw`)
   * _/etc/os-release_ =  OS version information
+  * _/etc/resolv.conf_ = contains list of DNS servers (aka _nameserver_) used by this machine
+  * _/etc/shadow_ = protected file containing user names (similar to _/etc/passwd_), this time with their (hashed) passwords
   * _/etc/shells_ = list of valid login shells (any script can be added here, even those that exit immediately)
 * _home_ = default location for regular users personal directories & data (ie _/home/{user}_)
 * _lib_ & _lib64_ = shared libraries & kernel modules needed by programs in _/bin_ & _/sbin_
@@ -117,13 +123,15 @@
   * _/proc/{PID}_ = per-process information
   * _/proc/{PID}/maps_ = live view of every virtual memory region mapped by Kernel into process' address space
   * _/proc/cpuinfo_ = CPU cores information
+  * _/proc/meminfo_ = memory information
 * _root_ =  home directory for the _root_ user (keep separate from _/home_ for security & availability during single-user maintenance reasons)
 * _run_ = early-boot temporary state like PID files & sockets, actually a tmpfs (ie stored in RAM) so cleared at reboot
 * _srv_ = system-served data (eg web, FTP, rsync repos)
 * _sys_ = another virtual filesystem presenting hardware/driver details, reflecting the kernel's device-model tree
 * _tmp_ = temporary files that may be deleted at reboot
 * _usr_ = read-only shareable data & programs for normal operation
-  * _/usr/bin_ contains ordinary user programs (not required for boot/rescue)
+  * _/usr/bin_ = contains ordinary user programs (not required for boot/rescue)
+  * _/usr/(share/)dict/words_ = newline-delimited list of dictionary words (eg for spell-checking programs)
 * _var_ = variable data that changes at run-time (eg logs, spool files, caches, mail queues, DBs, PID files)
   * _/var/spool_ = location where producer-consumer can meet & queue/consume data, surviving reboots (unlike _/tmp_)
 
@@ -131,9 +139,13 @@
 
 ### [Commands](https://en.wikipedia.org/wiki/List_of_Unix_commands)
 
-* `Ctrl + c` = kill current process (sends _SIGINT_ interrupt to foreground process), except shell itself designed to stay running
-* `Ctrl + d` = end of input (EOF), actually lets shell exit since it considers session is over
-  * Has true EOF effect only when on a new blank line (if not, press it twice so first one signals partial EOF for current non-empty line)
+* `Ctrl + C` = halts/kills current process (sends _SIGINT_ interrupt to foreground process), except shell itself designed to stay running
+* `Ctrl + D` = end of input (EOF), actually lets shell exit since it considers session is over
+  * EOF effect only from a blank new line (if not, press it twice so first one signals partial EOF for current non-empty line)
+* `Ctrl + R` = reverses lookup of previous commands
+* `Ctrl + U` = erases from cursor until beginning line (similar to `Shift + Home, Delete`)
+* `Ctrl + W` = erases from cursor until beginning of current word (similar to `Ctrl + Backspace`)
+* `Ctrl + Z` = stops current command
 
 * `adduser {user}` = create user on system
 * `apt` = high-level CLI to package management system (requires `sudo`)
@@ -166,13 +178,13 @@
 * `base64` = base64 encode/decode
 * `bc` (basic calculator) = arbitrary-precision arithmetic language
 * `bzip2` = (_bz2_) file compressor (Burrows-Wheeler block sorting text compression algorithm), better than gzip
-* `cal` = calendar (eg `cal 9 1752` = specific month)
+* `cal` (installable) = calendar (eg `cal 9 1752` = specific month)
 * `cat` (con**cat**enate) = read & displays (to _stdout_) contents of files or _stdin_
-  * `cat > {file}` = (re)create file in edit mode (`Ctrl + d` to finish, or `Enter` then `Ctrl + c`)
+  * `cat > {file}` = (re)create file in edit mode (`Ctrl + D` to finish, or `Enter` then `Ctrl + D`)
   * `koko1 koko2` = concatenate two text files and display the result in the terminal
 * `chattr` = change file attributes on a Linux file system (eg `+i`/`-i` toggle immutable so cannot be deleted/renamed, even by root)
-* `chmod` = change access rights (via octal value or specific right)
-  * `chmod +x {file}` = adds execute rights for everyone (owner, group & others)
+* `chmod` (change mode) = change access rights (via octal value or specific right)
+  * `{ugoa}+{rwx}` = change for specific user (user/group/others/all by default), eg `chmod +x {file}` (adds execute rights for all)
 * `chown {user} {file}` = change owner
 * `chsh` = change user login shell (only for own account, unless superuser)
 * `cmp` = compare two files byte by byte (see `diff`)
@@ -188,13 +200,13 @@
 * `cut` = split (`-d '{delimiter}'`) & splice (`-b {byte_range}`, `-c {char_range}`, `-f {fieldid_range}`)
   * `-f {fields}` = select only these fields
 * `date` = system date
-* `DATE`
 * `dd` = carve out, convert, copy a file
 * `deluser` & `delgroup` = remove a user or group from system
-* `df` (disk free) = displays disk space (`-h` for human-readable)
+* `df` (disk free) = reports FS space usage (`-h` for human-readable, `-s(ummarize)` for only total for each argument)
 * `diff` = content differences between two files files (see `cmp`)
+* `dig {domain}` (installable) = DNS lookup (`-x {host}` reverse lookup)
 * `dir` = list directory contents (identical to `ls`)
-* `du {file}` = disk usage (`-h(uman-readable)` = adds unit (_K, M, G_))
+* `du {file}` = estimate file/directory space usage (`-h(uman-readable)` = adds unit (_K, M, G_))
 * `env` = print current environment, or run a program in a modified environment (ie set environment variables then execute command in that altered context)
   * Used in scripts shebang (ie `#!/usr/bin/env {command}`) to let `env` find best fitting command
 * `file` = determine file type
@@ -205,6 +217,7 @@
   * `{dir}` = local directory
   * `-delete` = delete found files (warning: deletes everything that matches, if permission to do so)
   * `-empty` = find empty directory
+  * `-exec {command}` = executes command on found files (eg a `chmod`)
   * `-group {gname}` = belonging to group gname (numeric group ID allowed)
   * `-user {uname}` = owned by uname (numeric user ID allowed)
   * `-perm` = find by permission
@@ -214,19 +227,20 @@
     * `/a+x` = executable by all
   * `-type` = find by type (`d` directory, `f` regular file, `l` symbolic link)
 * `finger` = inspects user (eg last logged in)
-* `free` = displays available (RAM/swap) memory
+* `free` = displays amount of free/used system memory (RAM & swap)
 * `fsck` (File System Consistency Check) = check & repair Linux filesystems
 * `gdb` = GNU Debugger
 * `gpasswd` = administer _/etc/group_ & _/etc/gshadow_
 * `grep {pattern} {file}` (g/re/p aka global regular expression print) = match lines using regular expression patterns
   * `-i` = ignore case
   * `-P` = use regular expressions
+  * `-r` = search recursively in directories
   * `-x` = pattern must match whole line (eg regex `^pattern$`)
-* `gzip` = (_gz_) compress/expand files (Lempel-Ziv coding LZ77)
-* `head` = displays just the beginning (see `tail`)
+* `gzip (-d) {file}` = compress/expand files (using lossless LZ77 & Huffman coding)
+* `head` = displays first 10 lines (see `tail`)
 * `help {command}` = (shell builtin) help about a command
 * `history` = CLI history
-* `htop` = like `top` with more colors
+* `htop` (installable) = like `top` with more colors
 * `id ({users})` = print user & group information for user(s) (or current process when none provided)
 * `ifconfig` or `ip address` = displays network interfaces (IP address & co)
 * `info` = complete documentation about a command in Info format (more comprehensive than `man`)
@@ -234,8 +248,10 @@
 * `iptables` = firewall information (see `ufw`)
 * `ldd {file}` = print shared object/libraries dependencies
 * `less` = displays page by page (more efficient than `more`, used by `man` to display its help)
+  * `/` = search
 * `ln {target} {name}` = creates a link file to an existing file/directory
   * `-s` aka `--symbolic` = creates a soft link
+* `locate {file}` (installable) = find all instances of file
 * `login` = begin session on system (should be invoked via `exec login` from shell, so shell gets replaced and newly logged user does not return to caller previous shell session after exiting)
   * `nologin` = politely refuse a login
 * `ls` = liste folder content
@@ -246,8 +262,8 @@
   * `-i` = inode number
   * `-l` = long format (file type - file mode bits - # hard links - owner - group - size - timestamp - filename)
   * `abc*` = lists files starting with _abc_
-* `man ({section}) {command}` or `man {command}(.{section})` = help on command (section number indicate category, not priority/popularity)
-  * `1` = user commands & programs (eg `crontab(1)`)
+* `man {#} {command}` or `man {command}.{#}` = help on command (section number indicate category, not priority/popularity)
+  * `1` = executable programs or shell commands (eg `crontab(1)`)
   * `2` = system calls (eg `open(2)`)
   * `3` = C library functions (eg `printf(3)`)
   * `4` = special files & device drivers (eg `radom(4)`)
@@ -269,13 +285,14 @@
 * `netstat` (Net Statistics) or `ss` (Socket Statistics, see below) = displays open ports
   * `-tulpn` = TCP/UDP, listening, PID/Program name for sockets, don't resolve names
 * `nmap` (Network Mapper) = network exploration & port scanner
+* `nohup ./{long_script}` = runs a command ignoring/immune to hangups signals & logouts, outputs to a non-tty
 * `od` = (octal) dumping aka display file content in DUMP format (`-tx1` for hexadecimal)
 * `passwd` = change password
 * `pgrep` = look up processes by name
 * `pidwait` = wait processes by name
 * `ping` = sends ICMP ECHO_REQUEST to hosts (`-c` max count, `-q` quiet, `-s` packet size, `-W` timeout in seconds)
 * `pkill {name}` = kill processes by name
-* `ps` = lists processes
+* `ps` = lists current processes
   * `aux(ww)` = every process on system (BSD syntax, _ww_ prevents truncation)
   * `-a` = all processes (except session leaders and those not associated with a terminal)
   * `-e` = every process on system
@@ -288,9 +305,9 @@
   * `--forest` = ASCII art process tree
 * `reboot` (with `sudo`)
 * `reset` = initialize/reset terminal state
-* `rm` (remove) = delete
-  * `{file/dir} -f` (force) = without confirmation
-  * `{dir} -r` (recursive) = delete directory & its content
+* `rm {file/dir}` (remove) = delete
+  * `-f` (force) = without confirmation
+  * `-r` (recursive) = delete directory & its content
 * `rmdir` = remove directory
 * `scp` = OpenSSH secure file copy (`-P {port}` with uppercase P unlike `ssh -p {port}`)
 * `screen` = full-screen window manager multi-plexing physical terminal between several processes (ie interactive shells)
@@ -306,7 +323,7 @@
 * `socat` (SOckect CAT) = establishes bidirectional byte streams & transfers data between them
 * `sort {file}` = sort alphabetically
 * `ss` = dump socket statistics (similar to `netstat`)
-* `ssh {user}@{remote}` = connects to remote SSH server (interactively)
+* `ssh {user}@{host}` = connects to SSH server (interactively)
   * `-d` = SOCKS proxy
   * `-i {rsa_private_key}` = authenticate using a private key (ie receive a challenge that only it can meet)
   * `-p {port}`
@@ -329,15 +346,25 @@
   * Incarnates least privilege principle: normal users (with admin rights) don't need superuser powers all the time
   * sudo calls are logged, so there's built-in auditability/traceability
 * `systemctl` = manage services (`start`, `stop`, `status`)
-* `tail` = displays just the end (see `head`)
+* `systemd` = manages all system daemons, it (or its children) launches all other processes
+* `tail` = displays last 10 lines (see `head`, `-f` output contents of file as it grows)
 * `tar` = archiving utility
+  * `-c` = create archive
+  * `-f {file}` = specify file name
+  * `-j` = applies _bzip2_ compression
+  * `-k` = do not overwrite existing files
+  * `-t` = list archive contents
+  * `-T {file}` = get names to create/extract from file (ie containing line-feed-separated list of names)
+  * `-w` = ask for confirmation for every action
+  * `-x` = extract/untars
+  * `-z` = applies _gzip_ compression
 * `tee` = read _stdin_, write to _stdout_ & files simultaneously (ie useful for logging, `-a` append)
 * `timeout {duration} {command}` = run a command with a time limit (ie start command & kills it if still running after duration)
 * `tmux` = terminal multiplexer (create & access several terminals from a single screen, actually a shell itself)
   * `tmux ls` or `tmux list-sessions` = list all sessions managed by server
   * `tmux attach -t {session_id}` = re-enter a session
   * `tmux kill-session -t {session_id}` = kill a session
-  * `Ctrl + b` = prefix key to launch a control commands
+  * `Ctrl + B` = prefix key to launch a control commands
     * `"` = split window vertically
     * `{arrow}` or `o` = select pane
     * `d` = detach current client (session keeps on running)
@@ -348,26 +375,30 @@
   * `prefix{i..n}` (literal curly braces) = creates multiple files
   * `-d tomorrow koko` = creates file with given creation date
 * `tr {from} {to}` = (translate/delete) characters manipulation (eg `tr a-z A-Z` uppercase, `tr 'A-Za-z' 'N-ZA-Mn-za-m'` ROT13)
-* `traceroute`
+* `traceroute` = determines route a packet takes to a destination (uses ICMP)
 * `tty` = print file name of the terminal (if any) connected to (my program's) standard input
 * `ufw` = sets firewall config (uses `iptables`)
-* `uname` = display system information (`-a`=all, `-n`=system (host) name, also see `neofetch` utility)
+* `uname` = display system information (`-a` all, `-n` system (host) name, also see `neofetch` utility)
 * `uniq {file}` = report/omit repeated lines (`-u` only unique lines)
+* `uptime` = show session uptime
 * `vi(m)` = Vi IMproved
 * `vimtutor` = Vim tutorial
 * `vigr` = edit _/etc/group_
 * `vipw`= edit _/etc/passwd_
+* `w` = shows who is logged and what they are doing
 * `wall` = write a message to all users
 * `wc` = counts a file's total lines, words, bytes/characters, by default as a 4-columnar output
-* `wget` = web request
+* `wget {file}` = downloads file
+  * `-c {file}` = continue stopped download
+  * `-r {url}` = recursively downloads files from url
 * `whatis {command}` = one-line summary of command
-* `whereis {command}` = displays all locations where command is located
+* `whereis {command}` = locate binary, source & man pages for a command
 * `which {command}` = locate a command (eg `which $SHELL`)
 * `who` = information about users currently logged in
   * `-q` = all login names + number of users logged on
   * Eg `who | awk '{print $1}' | sort | uniq` = display sorted unique login names
 * `whoami` = user name associated with current effective user ID
-* `whois` = opens a TCP socket, calls a WHOIS server, and prints result
+* `whois {domain}` (installable) = opens a TCP socket, calls a WHOIS server, and prints result
 * `write` = sends a message to another user
 * `xxd` = hex dump (& reverse)
 * `(un)zip`

@@ -7,6 +7,7 @@
 * **Bypass company firewall** (2014.04)
   * Remote desktop to home computer
   * SSH Tunnel + Proxy Socks via PuTTY (_Laurent D'Havé_ & _Frédéric Branger_)
+  * [Warning: following this advice may get you fired](https://old.reddit.com/r/bestof/comments/d4hl1/comment/c0xibzi)
 * [Sticky notes for pentesting](https://exploit-notes.hdks.org)
 * [Active Directory Security](https://adsecurity.org)
 
@@ -21,6 +22,7 @@
 * **Man-in-the-Middle** (MitM) = more than just snooping on a line, can intercept and pretend to be the other party (ie a secure channel with an attacker isn't secure at all)
 * **Reverse shell** = remote shell execution, from target to attacker thus bypassing protection measures blocking ingoing-only requests (eg firewalls, IDS, IPS)
   * Precondition = attacker has access to target's shell, launching an interactive `bash` listening to commands served by attacker (via _ncat_)
+ **Supply Chain Attack** = targets less secure (software or hardware) elements in supply chain (eg software 3rd party libraries)
 * **Threat** = potential negative action/event enabled by a vulnerability, resulting in unwanted impact
 * **Virus** = replicates itself when executed by modifying other programs with its own code
 * **Vulnerability** = flaw/weakness in a system's design/implementation/management that can be exploited

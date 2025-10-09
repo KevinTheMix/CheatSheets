@@ -4,13 +4,15 @@ Windows inputs (keyboard & mouse) macros/scripting.
 
 ## API
 
-* `{#}`
-* `{Left}`, `{Right}`, `{Up}`, `{Down}`
-* `{Delete}`
-* `{BackSpace}`
-* `{Space}`
-* `{Tab}`
-* Modifiers = aply to the following key/input
+* Key selector = `ScrollLock::` (no curly braces) or `^j::`
+* Special characters
+  * `{#}`
+  * `{Left}`, `{Right}`, `{Up}`, `{Down}`
+  * `{Delete}`
+  * `{BackSpace}`
+  * `{Space}`
+  * `{Tab}`
+* Modifiers = apply to the following key/input
   * Alt = `!`
   * Ctrl = `^`
   * Shift = `+`

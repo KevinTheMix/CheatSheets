@@ -97,6 +97,8 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
   * Type `@` to search local blocks/headers/sections/symbols
 * `Ctrl + R` = open Recent
 * `Ctrl + T` = search global symbols (eg classes, properties, methods, and also Markdown headers), works with camelCase initials search
+* `Ctrl + Alt + Left/Right` = send tab to other view
+* `Ctrl + Alt + Up/Down` = start multi-select
 * `Ctrl + Shift + .` = local blocks
 * `Ctrl + Shift + Enter` = Insert line above
 * `Ctrl + Shift + F` = Search

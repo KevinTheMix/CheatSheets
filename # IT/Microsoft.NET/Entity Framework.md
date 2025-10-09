@@ -2,7 +2,7 @@
 
 ## Glossary
 
-* **DbContext** = acts as a Unit Of Work pattern
+* **DbContext** = acts as a Unit Of Work pattern (inject it as _Scoped_ ie existing during entire single web request, or as _Pooled_ via **AddDbContextPool**)
 * **ObjectContext** = represents a connection between the CLR & the DB (for CRUD operations)
 * **DbFunctions** = CLR (DateTime/Numbers/String manipulation) methods to be executed on (`IQueryable`) `DbContext` or `ObjectContext` entities (Linq to Entities queries)
   * They are executed as **CLR code at the DB-level, not in memory**

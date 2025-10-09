@@ -2,6 +2,10 @@
 
 Ruby in written in C and thus allows the inclusion of C libraries. There exists implementations in other languages
 
+## Quick Tips
+
+* [Learn to Program (with Ruby)](https://pine.fm/LearnToProgram)
+
 ## Glossary
 
 * **Bang method** = signifies a version of a method that mutates its instance (eg `koko.do!`)

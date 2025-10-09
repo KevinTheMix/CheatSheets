@@ -51,7 +51,11 @@ The same Dart code can run on multiple platforms (eg mobile/desktop via Flutter,
 
 * `dart --version`
 * `dart analyze` = code static analyzer that identifies issues (good idea to plug into CI/CD pipeline)
-* `dart compile exe {source}.dart`
+* `dart compile exe {source}.dart (-o {target})`
+* `dart create`
+  * `--force` = override if target directory already exists
+  * `--(no-)pub` = runs or not `pub get` after project has been created (default on)
+  * `--template` = _cli_, _console_ (default), _package_, _server-shelf_, _web_
 * `dart fix` = automatically applies fixes for issues such as:
   * those revealed by the static analyzer that have an associated automated solution
   * depreciated APIs that can be auto-migrated to their newest counterpart
@@ -69,6 +73,7 @@ The same Dart code can run on multiple platforms (eg mobile/desktop via Flutter,
 
 ## Declaration
 
+* `kName` = naming convention for (globally shared) constants
 * `#koko` = [Symbol](https://dart.dev/language/built-in-types#symbols)
 * `_` (identifier prefix) = internal member only visible inside (entire) file/library (not a particular class)
 * `as` = cast
@@ -240,8 +245,8 @@ In Dart, arrays are List objects, so most people just call them _lists_.
   * `addAll(other)`
   * `insert(index, item)` eg `list.insert(0, item)` to add at the beginning (unlike `add()`)
   * `remove(item)` = remove first occurence by reference, returns true if found
-  * `removeAt(index)` = remove item by index & returns it
-  * `removeLast()` = remove last item & returns it
+  * `removeAt(index)` = remove item by index, returns it
+  * `removeLast()` = remove last item, returns it
   * `removeWhere(condition)` = remove by condition
   * _reversed_ = `Iterable<E>` basically the reverse of _iterator_
     * can be used to reverse Strings in a single statement ie `s.split('').reversed.join()` (or `s.characters.reversed.join()` with _characters/characters.dart_ package added)
@@ -301,7 +306,7 @@ Key-value object (aka a hash map). Both Key & Value can be any type. Keys are un
   * `map.containsKey(key)`
 * Manipulation
   * `map.addAll(other)`
-  * `map.putIfAbsent(key, () => value)` = add (only) & return value immediately (so if eg value is a list, we can chain `map.putIfAbsent(key, () => []).add(item)`)
+  * `map.putIfAbsent(key, () => value)` = add a value if a key is not present, return that value
   * `map.remove(key)` = removes value and returns it
   * `map.update(key, (oldValue) => newValue)`
 
@@ -509,3 +514,13 @@ enum Color {
 * [Packages](https://pub.dev/publishers/tools.dart.dev/packages)
   * **Markdown**
 * [Invertase Melos](https://melos.invertase.dev) = manage projects split into mutliple packages
+
+## Sample Code
+
+Split a string containing equal-sign separated lines into a map:
+
+```Dart
+final map = { for (final l in lines) l.split('=').first.trim() : l.split('=').skip(1).join('=').trim() };
+```
+
+Where `join('=')` is for handling right value containing equal sign literals

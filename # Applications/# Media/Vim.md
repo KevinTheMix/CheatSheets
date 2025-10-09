@@ -22,7 +22,6 @@
 
 * `{Escape}` = switch to **Normal** mode
 * `:` = switch to **Execution** mode
-* `R` = switch to **Replace** mode (à la Windows Insert)
 * `gh`/`gH` = select next char/whole line & switch to **Select** mode (use arrows to expand selection)
 * `v` = switch to **Visual** mode
 * `q:` or `q/` or `q?`  = command-line window
@@ -37,18 +36,21 @@ Can be used in Normal mode to jump at a position, or as an argument in a command
 
 * `(Mouse) Wheel` = move cursor up/down
 * `h`/`j`/`k`/`l` = left/down/up/right
-* `e`/`E` = end of current or next word through newlines (`E` non-alphabetic characters don't separate)
-* `b`/`w` = word backward/forward (ie place cursor at beginning of next/previous word)
+* `e`/`E` = end of current or next (`E` blank-delimited) word (ignoring/jumping over newlines)
+* `b`/`B` = move to beginning of previous (`B` blank-delimited) word
+* `w`/`W` = move to beginning of next (`W` blank-delimited) word
+* `H`/`M`/`L` = move to top/middle/bottom of content
 * `0`/`^^`/`$` = line beginning/end
 * `#`/`*` = previous/next occurrence of word at cursor
+* `(`/`)` = previous/next sentence
 * `{`/`}` = previous/next paragraph
 * `gg`/`G` = beginning/end of file
-* `{n}gg`/`{n}G` = line _n_
-* `F{char}`/`f{char}` = find previous/next character on current line
-* `?` or `/` = find text back/forward (add `\c` for one-time ignore case)
+* `{n}gg`/`{n}G`/`:{n}` = line _n_
+* `f{char}`/`F{char}` = jump to next/previous given character on current line
+* `?`/`/` = find text back/forward (add `\c` for one-time ignore case)
   * `n`/`N` previous/next occurence
-  * `Ctrl + i` or `Ctrl + o` = previous/next search location (_not a motion_)
-* `%` = matching (start/end) character in a parenthesis or bracket pair (ie _()_, _[]_, _{}_)
+  * `Ctrl + I` or `Ctrl + O` = previous/next search location (_not a motion_)
+* `%` = jump to matching (start/end) character in a parenthesis or bracket pair (ie _()_, _[]_, _{}_)
 
 ### Normal Mode
 
@@ -68,7 +70,7 @@ Can be used in Normal mode to jump at a position, or as an argument in a command
   * `yap`/`dap` = copy/cut whole paragrah (no matter cursor position within)
   * `x`/`X` = cut character at/before cursor (à la backspace/delete)
   * `p`/`P` = paste (put) after/at cursor
-  * `r{char}` = replace character at cursor with _char_
+  * `r`/`R` = replace one or more characters at cursor (`R` enters **Replace** mode, à la Windows Insert)
   * `J` = join lines (removes newlines, adding trailing space if next line is not empty)
 * Undo/redo
   * `.` = redo last manipulation
@@ -77,14 +79,18 @@ Can be used in Normal mode to jump at a position, or as an argument in a command
 
 ### Execution Mode
 
-* `Ctrl + d` = offer autocomplete suggestions
+ Autocomplete works here.
+
+* `Ctrl + D` = offer autocomplete suggestions
 * `{text}{Tab}` = autocomplete (cycle through shortlist if several, works for commands & files)
-* `:!{cmd}` = run (shell) command (note: autocomplete works too)
-* `:e {file}` = edit file (replaces current file, for content insertion see `:{location}r` below)
+* `:!{cmd}` = hides Vim & runs (shell) command in shell (see `:r` below to insert its content)
+* `:e {file}` = replace currently edited file (see `:r` below to insert its content)
+* `:n` = go to next file (in a multi-files editing session, ie via `vim {file1} {file2}`)
 * `:q` = quit current window (eg Help page), or Vim itself
-* `:q!` = quit without saving
-* `:w` = write buffer (ie save file)
+* `:w {file}` = save/write buffer (to file)
 * `:wq` = save & quit
+* `:x` = save & quit
+* `:[qwx]!` = force-quit immediately without saving & skipping other files to edit
 * `:help ({subject})` or `F1` = help (eg `c_CTRL-D`, `insert-index`, full `user-manual`)
 * `:shell` = start an embedded shell (default one from _.passwd_ or overriden via set option _shell=/bin/bash_)
 * `:terminal` = built-in terminal emulator
@@ -101,27 +107,26 @@ Can be used in Normal mode to jump at a position, or as an argument in a command
   * _ts_ (_tabstop_) = width of tab character (eg `set ts=4`)
   * _ws_ (_wrapscan_) = search cycling (wrap back around end of file)
 
-#### Edition
+#### Editing
 
-Spaces are optional.
-
-* Locations
-  * Current cursor position if unspecified
+* Locations (current cursor position if unspecified)
   * `{n}` = n-th line
   * `.` = current line
   * `±{n}` = n-th line (`.` is implied)
-* `{location},{location}` = range
+* Range = `{location},{location}`
+* Edition (spaces in commands are optional)
+* `:m±{n}` = move line up/down
+* `:{range} d` = delete current line
 * `:{range} co {location}` = copy
 * `:{range} mo {location}` = move
-* `:m±{n}` = move line up/down
 * `:{location}r {file}` = insert file content (below cursor line)
-  * `:{location}r !{command}` = insert output of command
-* Substitution
-  * `:s/{old}/{new}` = substitute once
-  * `:s/{old}/{new}/c` = substitute with confirmation
-  * `:s/{old}/{new}/g` = substitute whole line
-  * `:%s/{old}/{new}/g` = substitute in whole file
-  * `:{range}s/{old}/{new}` = substitute between range
+* `:{location}r !{command}` = insert output of command
+* Substitution = `:({range})s/{old}/{new}(/{flags})`, with optional flags:
+  * Where _old_ is a pattern (accepting char classes `[]`), _new_ is a literal, and _flags_ are:
+  * `c` = with confirmation
+  * `g` = replace all occurences on current line (`:%s/…/…/g` for in whole file)
+  * `i` = ignore case
+* `&` = repeat last `:s` command
 
 ### Visual Mode
 

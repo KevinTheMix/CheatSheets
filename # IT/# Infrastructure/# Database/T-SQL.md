@@ -9,7 +9,6 @@ Microsoft's and Sybase's proprietary extension to SQL.
 * [Column Description](https://stackoverflow.com/a/9018619) = comment on a column
 * `ORDER BY i` = ordering by ith column
 * `ORDER BY NEWID()` = (incombination with `TOP 1`) obtain a random row
-* [1+N problem](https://stackoverflow.com/q/97197/861716) = 1+N query vs a single Join
 
 ## Glossary
 

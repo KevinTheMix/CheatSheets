@@ -15,6 +15,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * Use trailing (_dangling_) commas whenever possible at the end of source code lines in order to reduce the number of lines marked as modified
 * [A Hacker's Guide to Git](https://wildlyinaccurate.com/a-hackers-guide-to-git)
 * [Scott Chacon - Git Tips and Tricks](https://blog.gitbutler.com/git-tips-and-tricks) = also a FOSDEM 2024 talk (by GitHub cofounder)
+* Commit messages should complete the sentence: "_if applied, this commit will …_"
 
 ## Glossary
 
@@ -26,7 +27,8 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * **Tip of a branch** = the specific (latest) commit that the branch points to
   * See [Branchig & Merging](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging)
 * **Cache** = another term for the staging area
-* **Cherry picking** = applying specific commits from one branch to another, actually creating new commits (à la copy-paste, with different hashes), forming a new parallel commit history
+* **Cherry picking** = applying specific commit(s) from one branch onto another without merging full branch history (eg to apply a _main_ fix to an older _release_ branch)
+  * Basically re-applies all changes tied to referenced commit(s) as a new commit (with new hash ID) to current branch, forming a new parallel commit history
 * **Cloning** = creating a local repository based on a remote repository, still associated to it (via push/pull commands)
   * **Shallow Cloning** = cloning only a limited portion of the commit history, which reduces the number of objects and improves performance
 * **Commit** = fundamental building blocks of a Git repository recording a snapshot of a project at a specific point in time (saved in local repo DB in `.git/objects/`)
@@ -42,13 +44,13 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * **Fetching** = re-synching from remote repository into local repository
 * **Fork** = on platforms like GitHub, duplicates an existing repository/project along with its full history towards the user's own account
   * This is typically followed by a cloning (to work locally), pushing changes to (_origin_) remote, and ending with a pull request back to the original (_upstream_) repo
-* **Gitflow** = a Git branches management strategy/workflow, now abandoned in favor of **Trunk-based development**, which suits larger releases cycle of multiple features
-  * Uses a _develop_ branch (for features integration) in addition to _main_ (for releases, commits with version number tags)
-  * _develop_ is initially empty (not created off an existing branch) so it contains full repo history (not an abridged version like _main_)
-  * Features get pushed to _develop_, never directly to _main_ (features + _develop_ = basically Feature Branch Workflow)
-  * A dedicated _release_ branch is created once enough features have accumulated in _develop_, to which new commits can be added but only for release-oriented features (eg bug fixing, doc)
-  * When ready, _release_ branch gets merged into _main_ (with a version tag) **and** _develop_ (preferably via a pull request approved only by senior members), then deleted
-  * _hotfix_ branches can be created off _main_ for quick production patches, also increment _main_ (minor) version number, and also merge to _develop_ (or current _release_)
+* **Gitflow** = a Git branching strategy/workflow suited for projects with larger releases cycles (rather abandoned in favor of **Trunk-based development**)
+  * _main_/_master_ branch holds stable, production-ready releases
+  * _develop_ branches off _main_ (at very start, ie immediately after initial commmit), living a parallel life ahead of it, always busy integrating & accumulating features
+  * Feature branches branch off _develop_ and are merged back into _develop_ only, never directly to _main_ (features + _develop_ = basically Feature Branch Workflow)
+  * A dedicated _release_ branch is created from _develop_ once enough features have accumulated in it, which can receive bug fixes or release-oriented changes
+  * Once finalized, _release_ is merged into both _main_ (tagged) and _develop_ (to integrate latest bugfixes & releases changes), then deleted
+  * _hotfix_ branches can be created off _main_ for quick production patches, they are merged into both _main_ and _develop_ (or the current _release_)
 * **HEAD** = a special reference (stored in the `.git/HEAD` file) to either a branch (via a symbolic reference eg `ref: refs/heads/main`) or specific commit (then said to be in a **detached HEAD** state)
   * **Detached HEAD** is useful to make experimental changes and create easily discardable **detached/orphaned commits** (ie that don't belong to any branch)
 * **Hooks** = set of dedicated files (in _.git/hooks/_) that can be edited to perform some scripted treatments at some specific lifecycle events (eg _pre-commit_, _pre-push_, _pre-rebase_)
@@ -152,8 +154,9 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * `git checkout -b {branch}` = creates a branch and checks it out
 * `git clean -fdx` = deletes all gitignored/untracked files (add `-n` option to preview but not do) (**warning**: destructive)
 * `git commit` = when a message is not provided, the default text editor is launched and its result fed as message
-* `git commit -m "{message}"`
-* `git commit -a` = stages all (already/previously) tracked files then commit ine one go
+  * `git commit -m "{message}"`
+  * `git commit -a` = stages all (already/previously) tracked files then commit ine one go
+  * `git commit --amend` = reopens & saves last commit to add files or change commit message, or both (note: rewrites history so only do it locally)
 * `git merge {branch}` = merges changes from given into current branch, creating a (merge) commit
 * `git merge --abort/--continue` = abort/continues the latest merge operation paused due to conflicts
 * `git merge --ff`
@@ -175,6 +178,9 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * `git rm {file} --cached` = un-tracks a file during next commit
 * `git rm {directory} --r` = deletes a a directory during next commit
 * `git show {object}` = display information about a commit, tag, blob (file), tree (directory)
+* `git stash (save "{message})` = shelves current work (except untracked files, unless specifying `--include-untracked` or `-u` for short)
+  * `git stash pop` = pops latest stash (removes it from stash list)
+  * `git stash appli` = applies latest stash (keeps it from stash list)
 * `git switch -` (with hyphen === `@{-1}`) = switch to previous branch (more precisely the previous location in _HEAD_ reflog, non-destructive)
 * `git switch --detach` = detaches HEAD from the current branch (the content of the _HEAD_ file changes from a symbolic branch ref to a commit hash)
 * `git switch {branch}` = switches to branch (by moving HEAD to (latest commit of) that branch), or does nothing if already on that branch
@@ -232,7 +238,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 GitHub is a web platform hosting (mostly software) projects using Git.
 
 * Uploading an (existing) local repo to GitHub:
-  1. create a repo on GitHub via the website (or [CLI](https://cli.github.com/))
+  1. create a repo on GitHub via website or [CLI](https://cli.github.com)
   2. add a remote using the URL provided by GitHub on creation (eg `git remote add origin "https://github.com/{user}/{repository}"`)
   3. push local onto remote repo (eg `git push origin master`)
 * If a **README** file is present in the repo, its content gets displayed (with homonyms priority: _README.md_ > _README_ > _README.txt_)
@@ -240,5 +246,5 @@ GitHub is a web platform hosting (mostly software) projects using Git.
 * **GitHub Codespace** = shared online IDE (eg Visual Studio Code, JetBrains, GitHub CLI)
 * **GitHub Desktop** = Git desktop GUI
 * [GitHub Pages](https://pages.github.com) = public website hosting service for GitHub repositories
-  * Set Repository name as `{username}.github.io` (its name can be changed _once_ the website is published for the first time **confirmed**)
+  * Set Repository name as `{username}.github.io`, as its name can be changed _once_ the website is published for the first time (_confirmed_)
   * Configure it further (or unpublish it) via repository Settings > _Pages_

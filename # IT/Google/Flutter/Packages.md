@@ -53,10 +53,12 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
 * **collection** (_@dart.dev_) = collection utilities (eg _max_)
 * **crypto** (_@dart.dev_) = cryptographic hashing functions for Dart
 * **dds** (_@tools.dart.dev_) = spawns Dart Developer Service used to communicate with Dart VM Service instance
+* **fake_async** (_@dart.dev_) = provides a **FakeAsync** class to deterministically test code using asynchronous features (Future, Stream, Timer, microtasks)
 * **grpc** (_@dart.dev_) = Google (HTTP/2 & Protobuf) protocol for connecting microservices or mobile clients to backends
 * **html** (_@tools.dart.dev_) = HTML 5 parser
 * **http** (_@dart.dev_)
 * **intl** (_@dart.dev_) = Dates & Numbers (& Bidi) formatting methods
+* **leak_tracker** (_@tools.dart.dev_) = framework for detecting memory issues
 * **logging** (_@dart.dev_)
 * **path** (_@dart.dev_) = helper to combine/construct paths
 
@@ -88,10 +90,11 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
 * **local_auth** (_@flutter.dev_) = local on-device authentication (fingerprint reader, touch/face ID)
 * **path_parsing** (_@flutter.dev_) = create & manipulate paths, parse Path from SVG data string
 * **path_provider** (_@flutter.dev_) = find commonly used locations on the filesystem for different devices
+* **pigeon** (_@flutter.dev_) = code generator tool making communication between Flutter & host platform easier/faster/type-safe (eg for creating plugins)
 * **plugin_platform_interface** (_@flutter.dev_)
 * **quick_actions** (_@flutter.dev_) = device home screen app custom quick actions (appearing when long-pressing app icon)
 * **shared_preferences** (_@flutter.dev_) = simple key-value storage (works on all platforms!)
-* **url_launcher** (_@flutter.dev_) = open external URL/e-mail/phone number/SMS/any app with special URL handlers (e.g. YouTube). Check `canLaunch()` first
+* **url_launcher** (_@flutter.dev_) = open external URL/e-mail/phone number/SMS/any app with special URL handlers (eg YouTube). Check `canLaunch()` first
 * **video_player** (_@flutter.dev_)
 * **webview_flutter** (_@flutter.dev_) = WebView widget
 
@@ -118,7 +121,7 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
 * **freezed** (_@dash-overflow.net_) = codegen for data/model/union classes (adds `copyWith()`, equality, JSON from/to, `toString()`), requires **build_runner** & **json_serializable**
 * **provider** (_@dash-overflow.net_) = state management wrapper/syntactic sugar around built-in **InheritedWidget**
   * [Making sense of all the (Provider) providers](https://medium.com/flutter-community/making-sense-all-of-those-flutter-providers-e842e18f45dd)
-  * [create vs value](https://stackoverflow.com/a/61861315/3559724)
+  * [create vs value](https://stackoverflow.com/a/61861315/3559724) = _create_ for creating a new instance, _value_ to use an already created instance
   * **ChangeNotifierProvider** = provides a **ChangeNotifier** (from Flutter SDK, able to call `notifyListeners()` rather than `setState()`) instance that will rebuild its Consumers upon change
   * **Consumer** = accesses a provided instance
   * **FutureProvider** = wrapper around **FutureBuilder**
@@ -161,6 +164,7 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
 * **dio** (_@flutter.cn_) = HTTP networking (request cancel/intercept to automatically attach JWT tokens, file up/download with progress tracking, timeout)
 * **dotted_border** (-) = easily add (rect/round/oval) dotted borders around widget
 * **easy_localization** (-) = easy translations for many languages, supports other file formats (JSON, CSV, Yaml, XML), plurals, genders
+* **external_path** (-) = internal/external/public storage paths (ie paths that require explicit permissions, unlike **path_provider** that handles always-accessible directories)
 * **extra_alignments** (_@gskinner.com_) = like **Center** but all other directions (eg **TopLeft** or **CenterRight**)
 * **file_picker** (_@miguelruivo.com_) = cross-platform native single/multi file explorer/saver (with extension filtering)
 * **file_saver** (_@hassanansari.dev_) = cross-platform file saving
@@ -196,27 +200,33 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
 * **tflite_flutter** (_@tensorflow.org_) = TensorFlow Lite interpreter and perform interference, with multi-platform support (mobile & desktop)
 * **undo** (_@rodydavis.com_) = undo/redo history stack to go back/forward
 * **universal_platform** (_@gskinner.com_) = platform detection (eg _isAndroid_, _isWeb_, _isWindows_) that works for web (unlike _dart.io.Platform_ at the time)
+* **upgrader** (_@larryaassen.com_) = informs users there is a newer app store version of the app
 * **uuid** (_@yuli.dev_) = generate UUIDs
 * **version** (_@dart.ninja_) = parse & compare semantic versions
 * **window_size** (-) = gets/sets desktop (Linux/macOS/Windows) apps window size (also see **desktop_window** package)
 
+* Animateed Containers
+  * **drag_and_drop_lists** (-) = drag & drop items between multiple lists
+  * **reorderables** (-) = drag & drop lists, rows/columns, wraps
 * Animation & Clip
   * **animate_do** (_@fernando-herrera.com_) = crisp bounce/in/out animations (à la jQuery, inspired by Animate.css)
     * [animations library API](https://pub.dev/documentation/animations/latest/animations/animations-library.html)
   * **animated_clipper** (_@oodavid.com_) = clip transitions for interactive buttons & co
   * **animated_text_kit** (_@ayushagarwal.ml_) = text animations (rotate/fade/type/scale/colorize/liquidfill/wavy/flicker)
   * **confetti** (_@funwith.app_) = easy confetti particles
-  * **flutter_animate** (_@gskinner.com_) = easy compositionable animated effects (blur, colors, fade, scale, shimmer, slide)
+  * **flutter_animate** (_@gskinner.com_) = easy compositionable animated effects (blur, colors, fade, flip, scale, shimmer, slide)
     * Defines microseconds-based duration num extensions (eg `300.ms`)
+    * Eg [flip tiles game](https://guillaume.bernos.dev/using-flutter_animate-for-a-flutter-game-animation)
   * **flutter_custom_clippers** (_@dlohani.com.np_) = collection of clip shapes (wave, panels)
-  * **particles_flutter** (-) = interactive particles animation
   * **flutter_shaders** (-) = makes working with FragmentProgram API easier
     * Defines an **AnimatedSampler** class that is able to render a widget to an image on-the-fly
+  * **flutter_spinkit** (_@jogboms.xyz_) = collection of loading indicators/spinners (instapired by [CSS SpinKit](https://github.com/tobiasahlin/SpinKit))
   * **flutter_switch_clipper** (_@fluttercandies.com_) = fill/transition effects package
   * [FlutterFX](https://github.com/flutterfx/flutterfx_widgets)
   * **liquid_swipe** (_@sahdeepsingh.com_) = wave motion transition
   * **motion** (_@cendre.me_) = gyroscope-based "wobbling" effect
   * **particle_field** (_@gskinner.com_) = high performance custom particle effects
+  * **particles_flutter** (-) = interactive particles animation
   * **shimmer** (_@hunghd.dev_) = pulsating UI loading effect
   * **wave_container** (-) = sine water-like wave animations
   * **wave_transition** (-) = radial layer reveal effect
@@ -225,6 +235,7 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
   * **flex_color_scheme** (_@rydmike.com_) = Material Design 3 seeded generated color schemes
   * **material_symbols_icons** (_@hiveright.tech_) = uses official Material Symbols Icons
     * [Flutter-based Demo](https://timmaffett.github.io/material_symbols_icons)
+  * **tiny_color** (_@tinycommunity.dev_) = color manipulation/conversion
 * Image & Video
   * **before_after** (_@xdsahil.dev_) = see difference between two images via draggable slider
   * **cached_network_image** (_@baseflow.com_) = show images from internet, keep them in cache directory
@@ -232,6 +243,7 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
   * **lottie** (_@xaha.dev_) = GIF-like After Effects (exported via bodymovin extension) JSON vector animations
     * [Flutter Web: Lottie Animation issue](https://stackoverflow.com/a/73779834/3559724)
   * **material_design_icons_flutter** (_@ziofat.dev_) = [Material Design Icons](https://pictogrammers.com/library/mdi) as Flutter Icons
+  * **photo_view** (_@blue-fire.xyz_) = simple pannable, rotatable zoomable image widget
   * **rive** (_@rive.app_) (formerly **flare**) = state-machine-powered complex 2D interactive animation tool
   * **transparent_image** (-) = (see **FadeInImage**)
   * **video_compress** (_@getx.site_) = (mobile-only) video compression, remove audios (_not_ using ffmpeg)
@@ -284,7 +296,7 @@ Using some of these packages allows building an app without never actually using
   * **ReposityProvider** & **MultiRepositoryProvider** = provides a repository to its children/descendants
 * **flutter_command** (-) = **ValueListenable**-based Command pattern (à la .NET)
 * **flutter_redux** (_@brianegan.com_) = utilities to consume a Redux store
-* **get** (_@getx.site_) = DI, Navigation, State Management all-in-one framework (à la WPF Prism, [GetX website](https://chornthorn.github.io/getx-docs))
+* **get** (_@getx.site_) = GetX (state management + DI + route management all-in-one framework à la WPF Prism)
 * **mason** (_@brickhub.dev_) = generates boilerplate code based on bricks (ie interactive customizable & community-shared manifest files), augments `flutter create` with more flexible `mason add|make {brick_name}`
 * **morphy** (-) = codegen tool (`copyWith`, `equals`, `toString`, constructors, json to & from)
 * **redux** (_@fluttercommunity.dev_) = Redux state management architecture library using a centralized single source of truth store, updated via actions (which can be logged/serialized/stored/replayed)
@@ -292,12 +304,12 @@ Using some of these packages allows building an app without never actually using
   * See <https://medium.com/flutter-community/a-beginners-guide-to-architecting-a-flutter-app-1e9053211a74>
 
 * DB, Storage, [Caching](https://docs.flutter.dev/get-started/fundamentals/local-caching)
-  * **drift** (previously _Moor_, _@simonbinder.eu_) = reactive persistence library for Dart & Flutter (works with desktop), builds on SQLite
+  * **drift** (previously _Moor_, _@simonbinder.eu_) = offline-first reactive (ie streaming changes) persistence library with type-safe queries for Dart & Flutter (works with desktop), built on top of SQLite
   * **graphql_flutter** (_@zino.company_)
   * **get_storage** (_@getx.site_) = key-value in memory storage wit disk backup, alternative to **shared_preferences**
-  * **hive_flutter** (_@hivedb.dev_) = lightweight wrapper around **Isar**, key-value NoSQL DB, written in pure Dart
+  * **hive_flutter** (_@hivedb.dev_) = lightweight wrapper around **Isar** key-value NoSQL DB, simple for small apps, written in pure Dart
   * **hive_generator** (_@hivedb.dev_) = Hive TypeAdapters generator extension
-  * **isar** (_@isar.dev_) = cross-plaform DB for flutter (replaces Hive with full Web support via IndexedDB)
+  * **isar** (_@isar.dev_) = cross-plaform DB for flutter (replaces Hive with full Web support via IndexedDB), amazing for offline-first, sync-ready use cases
   * **objectbox** (_@objectbox.io_) = high-performance offline-first (on-device data persistence & AI) edge vector search NoSQL DB with [Data Synchronization](https://sync.objectbox.io) (no Web)
   * **sqflite** (_@tekartik.com_) = save structured data locally in SQLite DB (usual CRUD, or raw SQL). Enable foreign keys explicitely if they are needed
   * **sqflite_ffi** (_@tekartik.com_) = makes sqflite work on desktop (Linux, MacOS, Windows) for both Flutter/Dart VM

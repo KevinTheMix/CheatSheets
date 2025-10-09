@@ -2,7 +2,7 @@
 
 Created by Flutter creators (ex-Google engineers).
 Pushes small Dart VM-related patches via OTA updates.
-Cannot update native changes (such as plugins using platform channels).
+Cannot update native changes (such as plugins using platform channels, as well as _pubspec.yaml_).
 
 ## Quick Tips
 

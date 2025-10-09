@@ -1,5 +1,10 @@
 # Software Testing
 
+## Quick Tips
+
+* In multiple unit tests, instead of recreating an object and having to set all their properties, have a general centralized setup method to create a valid object (eg `ValidCustomer()`), then override specific properties we want to test as needed
+  * Actually, most testing frameworks (ie xUnit) instantiate classes each time for each test, so just initialize a local variable (eg `_customer`) in constructor
+
 ## Glossary
 
 * **Behavior-driven development** (BDD) = naming tests using domain language (DSL) & natural-language constructs (ie English) to describe code behavior
@@ -15,8 +20,11 @@
 * **Verification & Validation** (V&V, aka **Testing**)
   * Demonstrates to developer & customer Software meets its requirements (at least 1 test / 1 requirement)
   * Attempts to discover faults or defects int the software (incorrect, indesirable, not conform to spec)
-  * **Validation** = ensures the system conforms to the customer's expectations including emergent properties (ie green light), ie are we building the right product?
-  * **Verification** = checking the software conforms to specification & meets functional & non-functional requirements, ie are we building the product right?
+  * **Validation** = ensures a system conforms to the customer's expectations (ie green light), including emergent properties (ie are we building the right product?)
+  * **Verification** = checking the software conforms to specification & meets functional & non-functional requirements (ie are we building the product right?)
+
+## Types
+
 * [Types of Software Testing](https://www.javatpoint.com/types-of-software-testing)
   * **Unit** = does a unit of code work as intended (path, **structural**, whitebox, interface consistent, coverage analysis)
   * **Acceptance/Release** = does a codebase conform to its specification (blackbox, Functional, Acceptance, Validation, Requirements Testing)
@@ -36,5 +44,7 @@
 
 ## Tools
 
-* **Robot framework** = Python-based generic test automation framework for acceptance testing & test-driven development, a keyword-driven testing framework using tabular test data syntax
+* _Robot framework_ = Python-written generic keyword-driven test automation framework for acceptance testing/test-driven development, using a tabular test data syntax
   * [RIDE](https://github.com/robotframework/RIDE) = Robot Framework IDE (edit _.robot_ files)
+* _xUnit_ = automated testing software framework/label/architecture composed of defined components: test cases & suites (ie groups), assertions, fixtures (environment), runner to report results
+  * Notably used by Microsoft (in place of their self-developed _mstest_)

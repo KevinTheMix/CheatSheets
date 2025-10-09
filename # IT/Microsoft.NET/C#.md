@@ -4,8 +4,7 @@
 
 * `Console.ReadKey()` = pause
 * `System.Diagnostics.Debugger.Break();` is a programmatic breakpoint (F9)
-* `System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop);`
-* Environment I/O = `Environment.GetFolderPath()`, `Environment.SpecialFolder.LocalApplicationData`
+* Environment I/O = `System.Environment.GetFolderPath(…)` (eg `Environment.SpecialFolder.Desktop`, `Environment.SpecialFolder.LocalApplicationData`)
 * Logging
   * `System.Diagnostics` (**EventLog**, **Debug** & **Trace** classes)
   * `FileStream logFileStream = File.OpenWrite(LogFilePath); StreamWriter log = new StreamWriter(logFileStream); log.WriteLine(e.Message);  log.Flush(); log.Close();`
@@ -13,7 +12,7 @@
   * `<see cref="Koko">` = Class reference
   * `<see href="http://www.koko.com">` = external link (URL)
   * `<para/>` or `<para>...</para>` = paragraph (with line break)
-* The **IFormattable** interface can be inherited from to format the value of an object into a string representation, i.e. a richer ToString() method
+* **IFormattable** can be inherited from to format an object value into a string representation (ie a richer `ToString()` method)
   * `public string ToString(string format, IFormatProvider provider) { if (provider == null) provider = CultureInfo.CurrentCulture; switch(format) { .. } }` with _format_ equal to eg "full" or "short", or even a pattern
 * Don't instantiate `HttpClient` multiple times; inject it from startup in classes that use it
 * Don't forget to apply a `ToArray()`/`ToList()` on cached variables (so they're calculated/queryed only once)
@@ -36,11 +35,13 @@
 * **Finalizer** (or **Destructor**) = for cleaning unmanaged resources before a class instance gets collected by the garbage collector `~Koko() { }`
   * Called when calling `Dispose()` on that instance
   * `WeakReference` = a reference that still allows the referenced (typically a memory intensive but easily recreatable) object to be collected by the GC
+* **Indexer** = special operator/method definition for indexing (eg `public {type} this[int index` where _type_ can be a concrete or generic type)
 * **Property**
   * **Automatically implemented property** = syntactic sugar, compiler actually creates private variable (but not usable in code; not called "lowercaseProperty")
     * Eg. `public string Name {get; set;}`
   * Private Setter acts as a private variable, yet publicily (read-only) visible
     * Eg. `public string Name {get; private set; }` or `public ILimits<SimpleOverrideValue> Limits { get; private set; }`
+* **Tuple Patterns** = switch-case with multiple values (`(a, b) switch { ("abc", "123") => "This value", (_, _) => "That default" }`)
 * **Variance** (covariant & contravariant) = essentially polymorphism for generic types
 
 ### Versions
@@ -63,7 +64,7 @@ Credit: _Tech World With Milan Milanović_
 ### Keywords
 
 * `abstract` = interface-like, but the class can contain methods that are implemented (non-abstract). The class must be abstract if it contains one abstract member. Abstract members must be overriden in children. See <https://msdn.microsoft.com/en-us/library/sf985hc5.aspx>, <http://stackoverflow.com/questions/747517/interfaces-vs-abstract-classes>, <http://forums.asp.net/t/1411490.aspx?Can+the+C+Abstract+Methods+have+Implementation+>
-* `checked` = check overflow that the compiler misses (i.e. addition with variable arguments)
+* `checked`/`unchecked` = method or code block to set overflow checking runtime context (default is unchecked, `checked` raise exceptions, `unchecked` wraps around)
 * `constant` = can only be initialized at declaration (=> static compile time)
 * `default`
   * Either a [default value](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/default-values) for a given type (either as an operator `default(int?)` or a literal `int? i = default`)
@@ -86,9 +87,10 @@ Credit: _Tech World With Milan Milanović_
 * `sealed` = disable further inheritance of a class or overriding of a method (eg for Singleton classes)
 * `static constructor` = initializes static data or do something only once. Run once before the first instance is constructed. See <https://msdn.microsoft.com/en-us/library/k9x6w0hc.aspx>
 * `static readonly` = runtime constant (Can only be set at declaration or in static constructors)
+* `string` = alias for fully qualified .NET type name `System.String`
 * `T` = generic type parameter. Actually a **prefix** (eg `TKey`, `TValue`, `TKoko`) which is `T` (for **T**ype) by convention (but can be anything)
 * `unsafe` = required on sections that use pointers in C#. Also must set compiler to run in unsafe mode.
-* `using` = wrap `IDisposable` objects with a _using_ statement to ensure their proper automatic `Dispose()`-al
+* `using` = wrap objects inheriting from `IDisposable` within such a statement to ensure their proper automatic `Dispose()`-al
 * `var` = type inference => lets the compiler figure out the type (note: still **strongly typed** ie at compile-time)
   * Value cannot be null and cannot be used at class-level (class variable) or as method return type
   * Eg `var i = 5;` compiles/built into `int i = 5;` (checkable with ILSpy)
@@ -111,6 +113,7 @@ Credit: _Tech World With Milan Milanović_
 * `&` and ``&&` can actually [both be used to join boolean expressions in condition](https://stackoverflow.com/a/4163509/3559724)
   * `&` can be used both for integer type operands for bitwise-AND, and for boolean operands logical-and, which is the same (eg `011` & `101` = `001`)
   * `&&` only operates on boolean operands, with the added property of short-circuiting upon the first _false_ statement
+* Priority = _parentheses_ > _unary_ (binary, `new`, cast) > _arithmetic_ > _L/R shift_ > _inequality_ > _equality_ > _binary/boolean_ > _ternary_ > _assign_
 
 ## Types
 
@@ -123,18 +126,55 @@ Credit: _Tech World With Milan Milanović_
 
 ### Numbers
 
-* `0b_1111_1000`
-* `int` is a struct
-* `byte` aka `System.Byte` = 8 bits unsigned (0 to 255), basically the shortest integer longer than a boolean bit
-* `short` aka `System.Int16` = 16 bits integer (-32,768 to 32,767)
+* _0b11111000_ or _0b1111\_1000_ = Binary
+* _0xFF_ = Hexadecimal
+* _123_ = Unsigned integer
+* _123L_ = Long integer
+* _123UL_ = Unsigned Long integer
+* _12.34_ or _12.34e1_ = Double
+* _12.34F_ = Float
+* _12.34M_ = Decimal
 
-### System.String
+### Value Structs
 
-* `CompareTo()` retrns an integer
-* `Graphics.MeasureString(String, Font)` returns the size of a string in pixels in a given Font
-* `ToString("0000")` displays a number on 4 positions with 0 filling)
-* If two strings are equal, `GetHashCode()` returns the same value, however different string can return the same hash code (=> don't use it if unicity must be garanteed)
-* Avoid hidden string allocations (e.g. `.ToLower()`) within a loop. Use `String.Compare()` for case-sensitive
+* Signed
+  * `sbyte` = 1 byte
+  * `short` = 2 bytes
+  * `int` = 4 bytes
+  * `long` = 8 bytes
+* Unsigned
+  * `bool` = 1 bit
+  * `byte` = 1 byte
+  * `ushort` = 2 bytes
+  * `uint` = 4 bytes
+  * `ulong` = 8 bytes
+* Decimal
+  * `float` = 4 bytes
+  * `double` = 8 bytes
+  * `decimal` = 16 bytes
+
+### Reference Types
+
+* `System.Boolean` = bool
+* `System.Byte` = byte
+* `System.Int16` = short
+* `System.Int32` = int
+* `System.Int64` = long
+* `System.Float` = float
+* `System.Double` = double
+* `System.Decimal` = decimal
+
+### Strings
+
+`string` aka `System.String` is a reference type, and are immutable (ie original literal in memory is never modified).
+Note that due to String Interning, multiple string variables sharing same value will point to same unique literal in memory (ie even `object.ReferenceEquals()` will return true).
+
+* `char` = 2 bytes Unicode character
+* `CompareTo()` = returns an integer
+* `Graphics.MeasureString(String, Font)` = size of a string in pixels in a given Font
+* `ToString("0000")` = displays a number on 4 positions with 0 filling
+* `GetHashCode()` = returns same value for equal strings, however it is possible that differents strings return same hash code (=> don't use it if unicity must be garanteed)
+* Avoid hidden string allocations (eg `.ToLower()`) within a loop (use `String.Compare()` for case-sensitivity)
 * String is an Enumerable of chars (it inherits from `IEnumerable, IEnumerable<char>`) => `foreach(var c in text)`
 
 ### Dates
@@ -181,7 +221,7 @@ In reality, it is syntactic sugar for a generated class with typed methods e.g. 
   * `SortedDictionary<TKey,TValue>` = binary tree (_O(log(n)_) and items are sorted)
   * `SortedList<TKey,TValue>` = sorted array (_O(n)_ and items are sorted but little faster than `SortedDictionary` if more lookups and fewer inserts/deletes)
 * Non-Associative
-  * `List<T>` = contiguous array
+  * `List<T>` = contiguous array (`BinarySearch(item)` = returns index in a sorted (or sorted portion of a) list, returns corresponding negative index when not found)
   * `LinkedList<T>` = doubly-linked list
   * `HashSet<T>` = unordered collection of unique items => see `Dictionary<TValue,TValue>` (Hash)
   * `SortedSet<T>` = orderered collection of unique items => see `SortedDictionary<TValue,TValue>` (Binary tree)
@@ -199,7 +239,7 @@ In reality, it is syntactic sugar for a generated class with typed methods e.g. 
 #### Legacy
 
 These are not generic (they're in the `System.Collection` namespace instead of `System.Collection.Generic` for all newer collections) and not type-safe because their items are `System.Object` => objects with inconsistent types can be inserted, for which a common ('polymorphic') treatment won't necessarily work. There is also the `System.Collections.Specialized` namespace for **Specialized Collections** (eg linked list dictionary), that also predates generic types.
-Even if we define our custom type e.g. that has an `ArrayList` of `Person` that has method `Add(Person person)` => Type safe but, still, the conversion cost in time and memory is high between reference and value types (=> boxing of `int` & co is _slow_).
+Even if we define our custom type eg that has an `ArrayList` of `Person` that has method `Add(Person person)` => Type safe but, still, the conversion cost in time and memory is high between reference and value types (=> boxing of `int` & co is _slow_).
 
 * [CollectionBase](https://learn.microsoft.com/fr-fr/dotnet/api/system.collections.collectionbase?view=net-7.0) = `abstract` base class for a strongly typed non-generic collection
 * `ArrayList` (use `List<T>` instead) = list of objects; this is the type of the `InnerList` property for custom collections inheriting from `CollectionBase`
