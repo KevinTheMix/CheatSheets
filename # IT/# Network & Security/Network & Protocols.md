@@ -4,29 +4,42 @@
 
 * [DNSstuff tools](https://www.dnsstuff.com/freetools)
 * Florent = HTTP requests handled by local _Nginx_-served Vue app through bi-directional VPN tunnel via _WireGuard_ (adding OS-level virtual network I/Os) between local (dynamic IP) machine and public remote (fixed IP) _DigitalOcean Droplet_ VM
-* **TCP Ports** (permanent/non-ephemeral)
+* **TCP Ports** (non-ephemeral)
   * 20/21 = FTP
-  * 22 = SSH
+  * 22 = SSH, SFTP
   * 23 = Telnet
   * 25 = SMTP (e-mails)
+  * 53 = DNS (zone transfers)
   * 80/8008/8080 = HTTP
   * 110 = POP3
-  * 137/139 = NetBIOS SMB
-  * 143 = IMAP4
-  * 389 = LDAP(S)
+  * 143 = IMAP(4)
+  * 179 = BGP
+  * 194 = IRC
+  * 389 = LDAP
   * 443 = HTTPS
-  * 445 = NetBIOS-less SMB
+  * 465 = SMTPS
+  * 636 = LDAPS
+  * 989-990 = FTPS
+  * 995 = POP3S
   * (3389 = RDP)
-* **UDP Ports** (permanent/non-ephemeral)
-  * 53 = DNS (address to name translation)
-  * 67 & 68 = DHCP (automatic configuration of IPs, subnet mask)
+* **UDP Ports** (non-ephemeral)
+  * 53 = DNS (address to name translation queries)
+  * 67 = DHCP (server)
+  * 68 = DHCP (client)
+  * 123 = NTP
+  * 137/139 = NetBIOS
+  * 161 = SNMP
 
 ## Glossary
 
-* **Directory Service** = maps network resources names to their respective network (eg IP) addresses (eg DNS)
+* **AAA** (Authentication, Authorization, and Accounting) = framework to control/track access within a computer network
+  * Authentication proves identity, authorization grants permissions, accounting maintains continuous & robust audit trail via logging
+* **Directory Service** = single DB of everything (computers, user accounts, file shares, printers, groups) on network, maps network resources names to their respective (IP) addresses (via DNS), providing centralized authentication/access control
+  * Eg used by help desk to reset passwords & add/remove accounts
 * **DMZ** (De-Militarized Zone) = network area that's neither internal or public, where public-facing (email/web) servers get placed
   * Traffic with a DMZ is mostly one-way towards it, ie it has very limited connectivity towards the internal network (as much as the firewall allows basically)
   * Clients connect _directly_ (through the firewall) to different servers **within the DMZ**; that is unlike a reverse proxy that hides all the internal servers behind it
+* **Ethernet** = family of wired technologies used in LAN (local), MAN (metropolitan) & WAN (wide)
 * **gRPC** = Google cross-platform open source bi-directional real-time RPC framework using HTTP/2 for transport & **Protobuf** to encode data, usually connecting microservices or mobile clients to backends
   * **Interceptors** = both at client & server endpoints enable inspection & modification (à la middleware, ie logging,metrics, authentication, retries, rate limiting)
   * Ideal for communication between internal tightly-coupled (micro)services sharing a strict common IDL contract (faster than HTTP1.1+REST overhead)
@@ -36,30 +49,31 @@
 * **HTTPd** (HTTP daemon) = any software running as background process and playing server in a client-server model, using HTTP(S) protocol (eg Apache HTTP Server)
 * **HTTPS** (HTTP Secure) = TLS layer between HTTP & TCP, attested via a digitally signed server certificate, initiated via public crypto key handshake
 * **IDL** (Interface Description Language) = WSDL-like contract/model description for gRPC
-* **IEEE 802** = family of standards for LAN (local), PAN (personal) & MAN (metropolitan)
-  * **IEEE 802.03** = Ethernet cable type
-  * **IEEE 802.11** = WLAN (Wi-Fi)
-  * **IEEE 802.16** = WirelessMAN aka WiMAX
 * **Jitter** = time gap consistency between data packets, becomes chaotic in case of congestion (eg choppy voice/video call)
 * **LDAP(S)** (Lightweight Directory Access Protocol (Secure)) = open vendor-neutral application protocol (OSI model layer 7) for accessing/maintaining distributed directory (ie centralized authentication) service over IP network
 * **Marshalling** = ensuring data gets from point A to point B (broader than serialization)
+* **NetBIOS** (Network Basic Input/Output System) = obsolete session layer API/services/name resolution system letting applications on different computers in same LAN communicate
+  * Uses/registers simple names (eg _SERVER1_) to identify computers without an IP address (this predates widespread use of DNS in LANs)
+  * **WINS** (Windows Internet Name Service) = network service mapping NetBIOS names to IP addresses (circa Windows NT)
 * **NTP** (Network Time Protocol) = time provider, usually from a centralized server (NTP Server accessed from NTP Clients)
 * **Packet Switching** = grouping data into short messages in fixed format transmitted over a network (a channel is occupied during transmission of a packet only, and made available afterwards)
 * **PAN** (Personal Area Network) = own private network (bluetooth, IR, NFC eg automotile, wireless headset, connected watch)
 * **PAT** (Port Address Translation, or NAT Overload) = router mechanism enabling local network device to send/receive corresponding traffic (initiated locally) from internet, from a single shared public IP
 * **Port** = communication endpoint, can be non-ephemeral/permanent (_0 to 1023_) or ephemeral (_1024 to 65535_)
 * **Port Forwarding** (or **Port Mapping**) = redirects traffic from one port to another (used in PAT or reverse SSH tunneling)
-  * **Remote Port Forwarding** = redirecting network traffic from one local device's port to a remote device's port
-  * **Static Port Forwarding** = manual router NAT rule configuration enabling unsolicited inbound connections to a specific local device's IP & port, making it accessible from internet
+  * **Local** = binds a local port to a remote one (eg `ssh -L` starts a local SSH client, creates a TCP-listening socket on local port, and forwards data to final destination via a SSH server)
+  * **Remote** or **Reverse** = binds remote port to local one (eg `ssh -R` starts a local SSH client and creates a TCP-listening socket on remote machine forwarding data to local machine)
+  * **Static NAT** = router manual rule/configuration enabling uninitiated inbound connections to a specific local device's IP & port, making it accessible from internet
 * **Protocol Buffers** (aka _Protobuf_) = FOSS Google cross-platform (efficient binary) data format used to serialize strongly-typed/structured data (described via IDL)
 * **Proxy (Server)** = application-layer intermediary in a client-server network, can be forward (at client) or reverse (at server)
+* **RADIUS** (Remote Authentication Dial-in User Service) = client-server application layer networking protocol providing centralized AAA management for users connecting/using a network service
 * **RDP** (Remote Desktop Protocol)
 * **Reverse Proxy** = accepts incoming client connections on behalf of server, hiding & representing it to outside world, for load balancing, security (eg DMZ), caching, logging, monitoring user activty
-* **Reverse SSH Tunneling** = have a (hard to reach/well-protected) remote computer open a connection back to local/public machine
-  * Remote starts by `ssh -R {local_port}:localhost:22 {user}@{local_server}` = remote's SSH client calls local's SSHD (configured to accept this) and binds local's port to the tunnel linked to remote's SSHD port 22
-  * Local can now `ssh -p {local_port} {user}@localhost` = local's SSH client connects _locally_ to alternate port, with TCP traffic tunneled to remote via remote port forwarding
+* **Reverse SSH Tunneling** = have a (hard to reach/well-protected behind NAT/firewall) computer grant access to itself from outside by initiating an outbound SSH connection using port forwarding
+  * Outside machine is pre-configured to accept SSH connections (via SSHD), and allow remote/reverse port forwarding
 * **RPC** (Remote Procedure Call) = client-server stubs serialize local method call (ie strongly-typed) to remote handler and back (eg over HTTP/2 for gRPC)
 * **SFTP** = file transfer over ssh
+* **Spanning Tree Protocol** (SPT) = network protocol that builds loop-free logical topology for Ethernet networks, prevents bridge loops (resuliting in broadcast storms)
 * **SSH** (Secure Shell) = application-layer client-server crypto protocol for network services over unsecured network (first remote login, then either CLI or GUI via X11 Forwarding-compatible apps)
   1. establish plain TCP channel (over port 22 by convention, via three-way ACK/SYN-ACK/ACK handshake)
   2. agree on SSH protocol version & key exchange algorithms (aka KEX, eg _curve25519_/_ECDH_/_DH_)
@@ -71,7 +85,12 @@
   8. further communication now symmetrically encrypted & MAC-signed
   9. server finally authenticates client (now that server validity was assured and a secure communication channel was established between parties) via either public key (ie a challenge) or password (less secure)
   * Public key is the preferred choice, as it eliminates passing password over channel (even hashed, can be brute-forced, replayed), and human factor (must be remembered, rotated)
-* **SMB** (Server Message Block) aka **CIFS** (Common Internet File System) = Windows communication protocol used to share eg files, printers, serial ports (with Kerberos/NTLM authentication)
+* **SMB** (Server Message Block) = family of protocols to share resources (eg files, printers, serial ports) over a network, with Kerberos or NTLM authentication, originally by Microsoft (no longer relying on NetBIOS)
+  * **CIFS** (Common Internet File System) = a specific implementation of SMB (1.0) considered inefficient, insecure & deprecated
+* **Socket** = bidirectional OS-managed TCP or UDP communication endpoint, enabling interprocess data exchange via standard I/O semantics (à la shared file)
+  * It is essentially an OS-level abstraction encapsulating several concrete resources & state (2 send/receive buffers, a file descriptor, a network IP address, TCP/UDP protocol control & queueing)
+  * A **Listening** = created locally (with a local IP address & Port pair) and listens to incoming connection requests (one such socket to one local Port)
+  * A **Accepted**/**Connected** = identifies a unique established TCP connection (as two local & remote IP/Port pairs, so possibly many such sockets to one local Port and listening Socket)
 * **SSL** (Secure Sockets Layer) = deprecated encryption protocol replaced with **TLS**
 * **SSL/TLS Handshake** = client initiates an asymmetric connexion, then sends a (faster & more efficient for large amounts of data) symmetric key encrypted using server public key found in its certificate
   * Client initiates connection to the server on port 443 (the default port for HTTPS)
@@ -84,10 +103,11 @@
 * **SOCKS** = application-layer lightweight general-purpose proxy protocol, facilitates client-server communication through a firewall
   * SOCKS-compatible programs (such as Firefox) usually exhibit some sort of "network settings" where a SOCKS proxy can be entered through which all traffic is directed
   * Convenient with `ssh -d`, but any program that can accept a TCP connection and speak the few-byte SOCKS handshake can be a SOCKS server
+* **TACACS** (Terminal Access Controller Access-Control System) = older (ARPANET-era) authentication framework (associated with Cisco switches/routers), modernized as TACACS+
 * **Telnet** (Telecommunication Network) = older (abandoned in favor of **SSH**) bi-directional client-server application protocol to access virtual terminals of remote system on LAN/Internet
 * **TLS** (Transport Layer Security) = cryptographic protocol to provide communications security over a network
-* **TTL** (Time To Live) = mechanism which limits lifespan or lifetime of data in a computer or network so it does not circulate indefinitely
-* **WWAN** (Wireless Wide Area Network) = using mobile device as gateway (via USB tether or 802.11 Wi-Fi hotspot)
+* **TTL** (Time To Live) = mechanism using a number of (router) hops to limits lifespan/lifetime of data in a computer or network so it does not circulate indefinitely
+* **WWAN** (Wireless Wide Area Network aka Mobile Broadband) = using mobile telecom cellular network (2G, 3G, 4G, LTE, 5G) to transfer data (eg using phone or dedicated WWAN card as gateway)
 * **X.500** = series of networking standards covering electronic directory services
 
 * _Apache HTTP Server_
@@ -106,19 +126,33 @@
 * _PuTTY_ = FOSS (ssh/scp, telnet/rlogin, etc) terminal client for administration over networks, (originally) for Windows (1999)
 * _Wget_ = HTTP(S)/FTP CLI to GET files from web servers
 * _WireGuard_ = FOSS VPN communication protocol (native on Ubuntu) for creating secure point-to-point encrypted tunnels between machines (adding OS-level virtual network interface)
+* _Wireshark_ = FOSS network packets analyzer (uses WinPcap or Npcap)
+  * Protocol inspection, live capture & offline analysis, rich VoIP analysis, multi-platform, multiple capture file formats, decryption support, GUI & CLI (TShark)
 
 ### Enterprise Devices
 
 * **Access Point** = single bridge device extending a wired network onto wireless network
+* **BSSID** (Basic Service Set Identifier) = 48-bit label confirming to MAC-48 to identify a Wi-Fi AP (eg for local network devices communication through a L2 switch/router)
 * **Concentrator** = company-wide VPN access device (or software) that encrypts/decrypts outbound/inbound data, with firewall
 * **COPE** (Corporate Owned, Personally Enabled) = mobile devices owned by company but configured as both a personal/corporate device
 * **DOCSIS** (Data Over Cable Service Interface Specification) = internet via cable television modem
-* **Ethernet** = family of wired technologies used in LAN (local), MAN (metropolitan) & WAN (wide)
 * **F Connector** = associated with cable television & cable model links
 * **Firewall** = filters by either port or application, encrypt/decrypts traffic between sites
 * **Hub** (or Repeater Hub) = connects multiple Ethernet devices together acting as a single network segment, broadcasting one input of any port to all other ports (which filter in incoming data as needed)
-* **MAC** (Media Access Control) Address = unique ID assigned to a NIC for use as address within a network segment
-* **Network Interface Card** (NIC) = a device's network card (associated with a MAC)
+* **IEEE 802** = family of standards for LAN (local), PAN (personal) & MAN (metropolitan)
+  * **IEEE 802.03** = Ethernet
+  * **IEEE 802.11** = WLAN (Wi-Fi)
+  * **IEEE 802.16** = WirelessMAN aka WiMAX
+  * **IEEE 802.1X** = network port-based (physical or logical, not an IP port) access control standard to authenticate devices before they are allowed on network (typically via a RADIUS authentication server)
+* **MAC** (Media Access Control) Address = unique identifier assigned to a NIC for use as a network address in communications within a network segment
+  * **MAC-48** (aka **EUI-48** usually) = 48-bit identifier usually represented as 2x6 hexadecimals (6 bytes) split into two parts
+  * **MAC-64** = extension of EUI-48, lengthened to 64 bits (by inserting _FF:FE_ in middle and flipping U/L bit)
+  * **NIC** (Network Interface Controller) = last 24 bits uniquely identify device within vendor's allocation
+  * **OUI** (Organizationally Unique Identifier) = first 24 bits identify manufactured/vendor, its last 2 bits carry special meaning (factory default to _0_)
+    * I/G (Individual/Group) = indicate a destination address is multi/broadcast
+    * U/L (Universal/Local) = is this address a factory one part of the hardware NIC (ie universally unique), or was it reconfigured/overriden by OS/admin in software (unique only locally)
+* **MDM** (Mobile Device Manager) = central policy-controlled management of an enterprise's mobile company-owned and user-owned (aka BYOD) devices fleet
+* **NIC** (Network Interface Card) = a device's network card (associated with a MAC)
 * **ONT** (Optical Network Terminal) = converts an ISP's fiber optics to customer's copper Ethernet devices
 * **Patch Panel** = hardware device onto which employees computers are statically connected, then individually linked to a switch over RJ45 cables
 * **Port Replicator** = external connectivity hub (à la single plug docking station)
@@ -132,24 +166,47 @@
 * **SNMP** (Simple Network Management Protocol) = internet standard for configuring/organizing hardware network devices (routers, switchs, modems, printers) behavior
 * **SOHO** (Small Office/Home Office) = characterizes a network of modest size (1-1000 users), and associated hardware (eg basic home router)
 * **Switch** = multiport bridging hardware connecting devices via from/to packet switching
-  * **L2 Switch** = routing within a VLAN (not between VLANs), using MAC addresses to forward data at data link layer
+  * **L2 Switch** = routing within a VLAN (not between VLANs), using MAC addresses to forward data at data link layer (does not have a MAC address itself, just forwards frames)
   * **L3 Switch** = L2 switch with build-in network layer routing capabilities (eg for campus or data center)
 * **Toner Probe** = helps identifying one cable corresponding ends
 * **VLAN** (Virtual Local Area Network) = a logical network configured at one (or more) Switch's level (eg splitting interfaces/ports available on a Switch into two separate seggregated networks)
 * **VPN** (Virtual Private Network) = network layer encrypted data traversing a public network (through a VPN server ie a Concentrator), optionally with firewall/NAT
 * **VPS** (Virtual Private Server) = VM simulating a dedicated physical server environment (but actually shared with other users)
 
+### OSI Model
+
+Abstract conceptual division of responsibilities.
+Multiple layers capabilities can be taken care by a single layer (eg Session & Presentation Layer can be made at Application-level).
+Layers sometimes shortened to _Ln_ (eg _L2_ for Transport Layer 2)
+
+* Layer 1 (**Physical**) = raw **bits/symbols** over cable, radio, fiber, electrical connectors, frequencies & isolation
+* Layer 2 (**Data Link**) = IEEE 802.3 Ethernet or IEEE 802.11 Wi-Fi protocols **frames**, MAC address, error checking, basic sending & receiving
+* Layer 3 (**Network**) = **packets** (or **datagrams**) routing between VLANs, breaking down long data streams into segments shorter than network MTU
+* Layer 4 (**Transport**) = UDP **user datagrams** or variable-length TCP **segments** sequences end-to-end with QoS functions
+* Layer 5 (**Session**) = creates setup, controls connection, ends teardown (disconnect) between computers
+* Layer 6 (**Presentation**) = data formatting/translation into application layer specified format (ie encoding/decoding)
+* Layer 7 (**Application**) = user software (eg a browser)
+* **Datagram** = PDU of a connectionless protocol (independent of layers, ie L3 routed packets or L4 UDP)
+* **MTU** (Maximum Transmission Unit) = (size of) largest PDU that can be communicated in a single network layer transaction
+* **PDU** (Protocol Data Unit) = single unit of information transmitted among peers in a network, composed of layer-specific control information & encapsulated SDU from higher level
+* **SDU** (Service Data Unit) = unit of data passed down from a higher to a lower layer, which treats it as its payload (to encapsulate with its own control data, in an onion fashion)
+
 ### Internet
 
 * **Address Block** (or IP Prefix) = contiguous range of public (delegated top-down via RIR -> LIR/ISP -> customer) or private IP addresses
 * [Addressing Methods](https://en.wikipedia.org/wiki/Broadcasting_(networking)#Addressing_methods)
   * **Anycast** = one-to-one-of-many (any one out of a group of nodes, typically nearest)
-  * **Broadcast** = one-to-many (all recipients/everyone, represented by an IP address with host bits all set to _1_)
-  * **Multicast** = one-to-many (group of destination that have expressed interest in receiving)
+  * **Broadcast** = one-to-many (everyone, ie a L2 ARP request MAC _FF:FF:FF:FF:FF:FF_, or L3 IPv4 with host portion bits all set to _1_ or special _255.255.255.255_ when sender doesn't know its network eg DHCP discover)
+  * **Multicast** = one-to-many (group of destination that have expressed interest in receiving, ie L2 MAC address with I/G set ie starting with _01:…_)
   * **Unicast** = one-to-one transmission (specific node)
+* **Address Resolution Protocol** (ARP) = maps L3 IP(v4)s to L2 MAC addresses
+  * An host broadcasts an IPv4 address, and intended target (when present) broadcasts its MAC address back
+  * ARP Broadcast = broadcast (Ethernet whole subnet ie destination MAC _FF:FF:FF:FF:FF:FF_) message to look up a specific IP address among all network hosts
+  * ARP Reply = unicast message containing a MAC address sent back by IP owner (if present)
 * **APIPA** (Automatic Private IP Addressing) = scheme to let a device configure its own **link-local IP** in absence of any DHCP Server
-  * **Link-Local Address** = self-assigned random IP (in range _169.254.1.0 - 169.254.254.255_ with 2x256 reserved addresses), cannot be used to route outside local subnet (so, no internet connectivity)
-  * Sends a broadcast **ARP** request to whole subnet to confirm randomly chosen address does not conflict with an existing IP of another device
+  * **Link-Local Address** = self-assigned random IP which cannot be used to route outside local subnet (so, no internet connectivity)
+    * IPv4 in range _169.254.1.0 - 169.254.254.255_ (excluding 2x256 reserved addresses), IPv6 starting with _fe80::_ (with trailing _%n_ zone index to differentiate potentially identical addresses on multiple NICs)
+    * Uses a Broadcast ARP request to make sure self-assigned random IP does not conflict with an existing IP of another device on network
 * **Autonomous System** (AS) = collection of IP networks (ie routing prefixes) operated under one (or more) organization (eg ISPs, GAFAMs, universities, governments, CDNs), presenting a unified routing policy to the internet
 * **Autonomous System Number** (ASN)
 * **Border Gateway Protocol** (BGP) = exterior gateway global routing/reachability tables
@@ -161,7 +218,7 @@
   * Masks are kept simple and with a full-octet boundary (ie 255.0.0.0, 255.255.0.0 and 255.255.255.0, ie not in between bits like /7)
   * Class **A** = _0.0.0.0 - 127.255.255.255_ (ie first bit is 0, mask 255.0.0.0 or /8)
     * Actually less than that:
-      * _0.0.0.0_ (default unspecified address) to _0.255.255.255_ are reserved (named "this network" block)
+      * _0.0.0.0_ (default unspecified address) to _0.255.255.255_ are reserved ("this network" block)
       * _10.0.0.0/8_ = private addresses (24-bit block, see below)
       * _127.0.0.0/8_ = loopback adresses that cannot be assigned to a network (16M unusable addresses)
   * Class **B** = _128.0.0.0 - 191.255.255.255_ (mask 255.255.0.0 or /16)
@@ -186,7 +243,7 @@
 * **DNS Root Zone** = top-level DNS zone in hierarchical namespace of internet DNS
 * **FQDN** (Fully Qualified Domain Name) = exact location in DNS tree hierarchy, including top-level domain (eg _.com_) & root zone (eg _example_)
 * **Host Identifier** (or Rest Field) = host portion of an IP address following network prefix
-* **ICMP** (Internet Control Message Protocol) = Network-layer supporting IP suite protocol, used by routers (and some by users eg `ping`, `traceroute`) to send error messages and OK/NOK statuses
+* **ICMP** (Internet Control Message Protocol) = Network-layer supporting IP suite protocol, used by users (eg `ping`, `traceroute`) and by routers to send error messages and OK/NOK statuses
 * **IANA** (Internet Assigned Numbers Authority) = standards organization overseeing global IP addresses & ASN allocation, root zone management in DNS, media types & other protocols
 * **ICANN** (Internet Corporation for Assigned Names and Numbers) = global multistakeholder group & nonprofit US organization responsible for coordinating maintenance of internet name & numerical spaces DBs
 * **IETF** (Internet Engineering Task Force) = standards (originally US government-backed, now under Internet Society) organization for internet, responsible for technical standards making up the Internet Protocol Suite
@@ -196,10 +253,11 @@
 * **IPSec** (Internet Protocol Security) = network-layer protocol suite that secures IP packets by authenticating/encrypting each of them in a session
   * Uses **IKE** (Internet Key Exchange) to negotiate keys & settings
 * **IPv6** = 128-bit addresses, represented as 8 colon-separated groups of 4 hexa digits (drafted 1998, ratified 2017)
-  * Shortening rule = remove leading zero, then compresses one more successive 0 groups into a single `::` (only once to avoid confusion, eg _::1_ is loopback address)
+  * Shorten by removing each group's leading zeros, then compress a single group of successive 0 into a single `::` (only once to avoid confusion, eg _::1_ is loopback address)
+  * Cannot be directly converted to an IPv4 (except mapped IPv4 format eg `::ffff:192.0.2.128`), can be translated/transitioned (via eg _NAT64_ translation, _dual stack_ coexistence, _tunneling_ encapsulation)
 * **Local Internet Registry** (LIR) = organization (usually an ISP/entreprise/academic institution) that was allocated an IP Address Block by a RIR to assign to its own customers
 * **Loopback** = routes back to source without intentional modification, primarily to test communication infrastructure (eg _127.0.0.1_ or _http://[::1]_)
-* **MTU** (Maximum Transmission Unit) = largest protocol data unit (PDU) that can be communicated in a single network layer transaction
+* **Neighbor Discovery Protocol** (NDP) = IPv6 equivalent of the ARP protocol
 * **Network Prefix** (or Network Number or Routing Prefix) = network portion of an IP address
 * **Private Network** = subnet with addresses in private IP ranges, for LANs in residential/office/enterprise environments
   * IETF has directed IANA to reserve following IPv4 address ranges for private networks(RFC 1918):
@@ -213,25 +271,12 @@
   * Number of attributable host addresses in a (sub)network = 2^number of bits in host portion (minus two: (sub)network & broadcasting addresses, ie all host bits to _0_ & _1_ respectively)
   * Subnetting is not just for private networks, RIR/LIR/ISPs all need to subnet their allocated address block
 * **Subnet Mask** (or **Net Mask**) = bitwise-AND bitmask revealing network portion of an IP in quad-dotted notation (ie keep network & nullify host eg `255.255.255.0`)
-* **TCP/IP** (Internet Protocol Suite) = framework for organizing communication protocols used in internet & similar computer networks
+* **TCP/IP** (Internet Protocol Suite) = framework predating OSI model for organizing communication protocols used in internet & similar computer networks
+  1. Link (or Network Interface) = L1 + L2
+  2. Internet = L3
+  3. Transport = L4
+  4. Application = L5 + L6 + L7
 * **VLSM** (Variable-Length Subnet Mask(ing)) = designing internal networks with variable-size subnets using CIDR rules (dichotomically dividing allocating largest networks first)
-
-#### OSI Model
-
-Abstract conceptual division of responsibilities.
-Multiple layers capabilities can be taken care by a single layer (eg Session & Presentation Layer can be made at Application-level).
-Layers sometimes shortened to _Ln_ (eg _L2_ for Transport Layer 2)
-
-* Layer 1 (**Physical**) = raw bits over cable/radio/fiber
-* Layer 2 (**Data Link**) = Ethernet/(W)LAN frames, MAC address, error checking, basic sending & receiving
-* Layer 3 (**Network**) = packets routing between VLANs, breaking down long data streams into segments shorter than network MTU
-* Layer 4 (**Transport**) = variable-length TCP segment sequences end-to-end with QoS functions
-* Layer 5 (**Session**) = creates setup, controls connection, ends teardown (disconnect) between computers
-* Layer 6 (**Presentation**) = data formatting/translation into application layer specified format (ie encoding/decoding)
-* Layer 7 (**Application**) = user software (eg a browser)
-* **MTU** (Maximum Transmission Unit) = size of largest PDU that can be communicated in a single network layer transaction
-* **PDU** (Protocol Data Unit) = single unit of information transmitted among peers in a network, composed of layer-specific control information & encapsulated SDU from higher level
-* **SDU** (Service Data Unit) = unit of data passed down from a higher to a lower layer, which treats it as its payload (to encapsulate with its own control data, in an onion fashion)
 
 ### E-mail
 
@@ -273,15 +318,15 @@ Layers sometimes shortened to _Ln_ (eg _L2_ for Transport Layer 2)
 * **PTK** (Pairwise Transient Key)
 * **STA** (Station) = a WiFi client
 * **SNonce** (STA Nonce)
-* **TKIP** (Temporal Key Integrity Protocol, _deprecated_ in 2012) = security protocol as an interim solution to replace WEP without replacing hardware
+* **TKIP** (Temporal Key Integrity Protocol, _deprecated_ in 2012) = encryption security protocol as an interim solution to replace WEP without replacing hardware
 * **WEP** (Wireless Equivalent Privacy) = early encryption protocol to secure WLAN (started as _802.11_ in 1985, used a single key for everything)
 * **WiFi** = implementation of WLAN
 * **WLAN** (Wide Local Area Network) = wireless LAN (eg WiFi), as defined by various protocols in _IEEE 802.11_ (a, b, j, y, ac, …, specifying frequency & bandwidth)
-* **WPA** (Wi-Fi Protected Access) = Wi-Fi Alliance security protocols (implements a subset of a _802.11i_ draft ie early WPA2 in 1999), introduces 4-way handshake and a hierarchy of keys
+* **WPA** (Wi-Fi Protected Access) = security protocol using TKIP and developed as intermediary mesure by Wi-Fi Alliance to replace WEP (introduces 4-way handshake & a hierarchy of keys)
 * **WPA2** (Wi-Fi Protected Access II) = replaces WPA (defined in 2004 in _IEEE 802.11i-2004_ as an amendment to original _IEEE 802.11_), introduces **AES**
 * **WPA3** (Wi-Fi Protected Access III) = replaces WPA2 (mandates stronger cryptographic algorithms, announced in 2018)
 * **WPA-Personal** (aka WPA-PSK) = PSK-encrypted WiFi
-* **WPA-Enterprise** = requires additional (so called _802.1X_-defined _RADIUS_) authentication server
+* **WPA-Enterprise** = individual/per-user authentication, requires additional (_802.1X RADIUS_) authentication server
 * **Yagi(–Uda) antenna** = directional antenna
 
 * _ESP32_ (_Espressif Systems_) = low-cost low-power Wi-Fi & Bluetooth system-on-a-chip (SoC) MCU (Microcontroller Unit, ie an electronic board/chip)

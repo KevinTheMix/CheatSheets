@@ -39,6 +39,7 @@ Technically, any outer layer that mediates between a user and a kernel's service
 * **Standard Shell** = CLI interpreter conforming to widely accepted specification (typically POSIX shell standard)
   * Must handle commands interactively or not, support scripting (flow) features, process/command substitution, provide a read-eval loop in interactive mode
 * **Trap** = command set up to run automatically in response to signals or shell events (eg `trap 'echo "exiting now"' EXIT` on _EXIT_)
+* **Z Shell** (Zsh) = interactive login or CLI shell scripting Unix shell (default shell of eg macOS, Kali Linux)
 
 ## Environment
 
@@ -74,9 +75,9 @@ Technically, any outer layer that mediates between a user and a kernel's service
 * `alias {command}`/`unalias {command}` = create/remove alias for a command
 * `bg` = resume a suspended background job
 * `break` = exit a loop
-* `cd {path}` (change directory)
+* `cd {path}` = change directory
+  * `cd (~)` = go to user directory
   * `cd -` = go to _$OLDPWD_ (ie previous directory)
-  * `cd ~` or just `cd` (without argument) = go to user directory
 * `continue` = resume next iteration of a loop
 * `declare` = declare variables (Bash-specific)
 * `echo {arg(s)}` (quotes optional, arg can have newlines) = display a line of text (`-e` enable interpretation of backslash escapes eg `\n`)
@@ -85,7 +86,7 @@ Technically, any outer layer that mediates between a user and a kernel's service
 * `exit` = exit shell with status code
 * `export {variable(=value)}` = set environment variable to be inherited by child processes
 * `fg ({job_id})` = brings background job to foreground (most recently backgrounded/stopped job if no argument given)
-* `hash` = remember/display commands location (avoid repetitive _$PATH_ lookups - a marginal performance gain)
+* `hash` = remember/display _hashed_ commands location (avoid repetitive _$PATH_ lookups as a marginal performance gain, `-r` to clear that cache)
 * `help` = help for builtin commands (bash-specific)
 * `history` = access shell history (from _.bash\_history_)
 * `jobs` = list jobs (`-l` adding process IDs, `-p` only process IDs)
@@ -103,7 +104,7 @@ Technically, any outer layer that mediates between a user and a kernel's service
 * `readonly` = makes variables read-only
 * `return` = return from a shell function
 * `set ({option})` = display variables & functions, or set shell option/positional parameter (ie _$1_, _$2_, _$#_, _$@_, _$*_)
-* `shift` = shift positional parameters
+* `shift ({#})` = shift positional parameters (1 by default, eg `shift 1` translates _$3/$2_ to _$2/$1_)
 * `shopt ({options})` = display all (or specified) shell options (`-s/-u` to set/unset provided shell option(s))
   * _cdspell_ = automatically fixes `cd {folder}` spelling mistakes
 * `source` or `.` = read/execute command in current shell environment (not a subshell)

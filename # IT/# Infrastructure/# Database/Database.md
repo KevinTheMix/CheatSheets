@@ -11,7 +11,7 @@
 * [Aggregate functions](https://learn.microsoft.com/en-us/sql/t-sql/functions/aggregate-functions-transact-sql) = (eg `COUNT`, `MIN`/`MAX`, `AVG`, `SUM`)
 * **Candidate Key** (aka Natural key, or Domain key or Business key) = a key that _could_ be used as PK instead of the PK (ie it is also unique for each rows/values in the set)
 * **Clause** = built-in functions/operators (such as `SELECT`, `WHERE`, `AND`, `OR`, `LIKE`, `TOP`)
-* **Column-Oriented** = pivot a row of data into horizontal columns (efficient homogenous column-based compression, slower writes, much faster aggregated reads)
+* **Column-Oriented** = pivot a row of data into horizontal columns (efficient homogenous column-based compression, slower writes, much faster aggregated reads for analytics)
 * **CTE** (Common Table Expression) = intermediary virtual tables whose data are piped/reusable to the following DML statement/CTE, also enables recursion
 * **Cursor** = a type of variable that can keep browse a query result set (eg `DECLARE CURSOR {name} FOR SELECT …`)
   * Avoid cursors by thinking less in terms of loops and more in terms of sets (as SQL was intended)

@@ -256,8 +256,9 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
   * **audio_service** (_@ryanhaise.com_) = play background audio while screen is off
   * **audioplayers** (_@blue-fire.xyz_) = with [AudioCache](https://stackoverflow.com/a/52842613/3559724)
   * **flutter_beep** (_@gonoter.com_) = very lite module to play system beeps & sounds
+  * **flutter_soloud** (_@marcobavagnoli.com_) = low-latency audio for games & immersive apps
   * **flutter_sound** (_@tau.canardoux.xyz_) = play & record audio files/streams with various codecs
-  * **just_audio** (_@ryanheise.com_) = feature-rich audio player
+  * **just_audio** (_@ryanheise.com_) = feature-rich full audio player
   * Also see Flutter **services.dart** libary for system sounds
 * Text
   * **diacritic** (_@agilord.com_) = removes common accents/diacritical signs from a string, replacing them with an equivalent character

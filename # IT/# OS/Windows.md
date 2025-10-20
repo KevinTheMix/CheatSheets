@@ -16,10 +16,16 @@
 
 ## Glossary
 
-* **BitLocker** = full disk encryption (FDE), ie everything is encrypted including OS itself
+* **BitLocker** = logical volume & full disk encryption (FDE) using a Volume Master Key (VMK), ie everything is encrypted including OS itself
+* **BitLocker To Go** = encrypt removable USB flash drives
 * **Chocolatey** = machine-level CLI package manager using NuGet package infrastructure and PowerShell to download/install (2011)
+* **Encrypting File System** (EFS) = NTFS 3.0 feature providing FS-level encryption to specific files/folders (using user username/password, while OS is running, in file/folder Properties > (Attributes:) Advanced)
 * **Hyper-V** = native hypervisor for Pro & Enterprise editions
+* **User Account Control** (UAC) = popup dialog when an action requires elevated privilege (user must be logged as admin or be presented with credentials, exactly à la Unix `sudo`)
 * **Windows Features** = turn Windows features on/off (Windows Media Player Legacy, MSMQ, Print to PDF, XPS, PowerShell, WSL)
+* **Windows Hello** = sign-in options (facial, fingerprint, PIN, physical security key, password, picture)
+* **Windows Recovery Environment** = GUI-based recovery menu loaded before OS is loaded (eg repair startup, restore system, uninstall updates, Command Prompt **warning** with full FS access)
+  * Access via _Settings > System > Recovery > Advanced startup > Restart now_ (or hold `Shift` while clicking Restart)
 * **Windows Terminal** = a tabbed GUI-based terminal emulator (click the `v` to access various consoles/shells)
   * `Ctrl + Shift + F` = search in terminal content
 
@@ -27,8 +33,12 @@
 
 * Shares ending with _$_ are hidden (from discovery, but can be still accessed by name)
 * **Active Directory** (AD) = LDAP-based directory service for Windows domain networks using a number of standardized protocols to provide a variety of network services (eg DNS-based naming)
-* **NetBIOS** (Network Basic Input/Output System) = session layer services (eg name registration/resolution)
+* **Active Directory Federation Services** (ADFS) = provides claims-based SSO across organizational boundaries
+* **NTFS** = per user/group permissions on local file system (in file/folder Properties > Security)
+  * Same file/folder may be accessed from outside as a network share, and therefore have share permission (more restrictive permissions win)
 * **NTLM** (New Technology LAN Manager) = obsolete Microsoft security protocols suite providing authentication, security, confidentiality (vulnerable to brute-force attacks)
+* **Organizational Unit** (OU) = keep very large DB organized by subdividing related entities into groups (appearing as folders) of users, computers, countries, states, buildings, departments
+* **Security Group** = logical grouping of users together to simplify their permission attribution (ie by whole group)
 * **SID** (Security IDentifier) = Windows NT OS family unique, immutable identifier of a user account, user group, or other security principal
 * **Windows Domain** = business network configuration, with centralized authentication & device access
 * **Windows Workgroups** = home network configuration, logical groups of network devices that act as standalone systems, each peers connecting with their own set of ID/password
@@ -40,7 +50,7 @@
 * **Windows 10**
   * End of support = 10/10/2025
 * **Windows 11 Home** = core Windows experience, app store, gaming (S mode restricts app installation to app store)
-* **Windows 11 Pro** = Bitlocker, Group Policy management, Hyper-V, Remote Desktop host (**Pro for Workstations** for server-grade hardware support)
+* **Windows 11 Pro** = Bitlocker, Domains/Group Policy management, Hyper-V, Remote Desktop host (**Pro for Workstations** for server-grade hardware support)
 * **Windows 11 Enterprise** = all Pro features plus advanced security, mangement, deployment, update controls
 * **Windows 11 Education** = similar to Enterprise
 * **Windows 11 SE** (deprecated) = low-cost devices in education (support end 2026.10)
@@ -72,15 +82,28 @@
 * `Winkey + (Shift +) Tab` = window switching & virtual desktops
 * `Winkey + Pause/Break` = System Properties
 * `Winkey + Space` = Change language (à la `Alt + Shift`)
+* `Winkey + ,` = peek at desktop (while Winkey is held)
+* `Winkey + ;` = emojis & more
+* `Winkey + A` = quick settings (Wi-Fi, Flight mode, Night light, Mobile hotspot, Accessibility, Volume, Project)
+* `Winkey + B` = focus on system tray
+* `Winkey + C` = Copilot
+* `Winkey + D` = show Desktop
 * `Winkey + G` = Game capturing
+* `Winkey + H` = Microsoft Speech Services (voice typing)
 * `Winkey + I` = Settings
+* `Winkey + K` = Miracast
 * `Winkey + L` = lock workstation
+* `Winkey + M` = minimize all windows (except full-screen)
+* `Winkey + N` = Notifications
 * `Winkey + P` = Project (quick selection)
 * `Winkey + R` = Run
 * `Winkey + S` = Search
-* `Winkey + T` = use arrows to navigate dock
+* `Winkey + T` = focus on dock applications
 * `Winkey + U` = Accessibility settings
-* `Winkey + X` = start shortcut menus
+* `Winkey + V` = Clipboard history
+* `Winkey + W` = window tiling
+* `Winkey + X` = Start Menu shortcuts
+* `Winkey + Z` = desktop Widgets
 * `Winkey + Ctrl + Left/Right` = Switch Virtual Desktop
 * `Winkey + Shift + S` = Screenshot
 * `Multi-select Files > Rename` = group renaming
@@ -215,9 +238,9 @@ Commands are fully case-insensitive.
   * `/release(6) ({connection})` = release IPv4(/6) addresses for matching (with `*` wildcard) or all adapters
   * `/renew(6) {adapter}` = renew IPv4(/6) addresses for matching (with `*` wildcard) or all adapters
 * `net` = Windows network commands
-  * `send {message}` = send messages to other users/computers (until Windows XP)
+  * `send {message}` = send messages (via NetBIOS) to other users/computers (until Windows XP)
   * `stop spooler` = stops printer jobs queue (then `cd \windows\system32\spool\printers`, then  `del *.*`, then `net start spooler`, then go to Printers window & hit `F5` to refresh)
-  * `use {new_volume} \\{share}` = map network share to a drive letter (ie set shared network folder as local volume)
+  * `use {new_volume} \\{share}` = maps/mounts a network share to a drive letter (ie set shared network folder as local volume)
   * `user ({user}) (* /domain)` = view user account information & reset passwords
   * `view \\{server}` or `view /workgroup:{workgroup}` = view network resources
 * `netsh` (Network Shell) = CLI to reset config, change IP address, or edit wireless settings (eg SSID)
@@ -239,3 +262,4 @@ Commands are fully case-insensitive.
 * `ping {host}` = ping host to determine round-trip time (uses ICMP, `-t` indefinitely)
 * `tracert` = determines route a packet takes to a destination (uses ICMP)
   * `-h {#}` = specifies TTL (ie number of hops/routers)
+  * For each hop/router, (by default) three round-trip measurements are sent (_*_ is a lost packet, as some routers don't reply to ICMP requests - but it still goes through them)

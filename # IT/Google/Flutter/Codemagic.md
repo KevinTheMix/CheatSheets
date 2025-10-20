@@ -4,6 +4,18 @@ CI/CD for Android, iOS, Flutter & React Native.
 
 ## Quick Tips
 
+* [Codemagic - Android Code Signing](https://docs.codemagic.io/flutter-code-signing/android-code-signing)
+  * **upload key** = to sign app before uploading to Codemagic or Google Play Store, associated with a certificate
+    * Stored within a **keystore** (that can hold multiple keys), both generated (using same password) via either:
+      * `keytool` Java command (installed with Android Studio)
+      * Android Studio > Build > _Generate Signed Bundle/APK_ dialog
+    * For Flutter, once an _upload-keystore.jks_ file is generated:
+      * Reference it from a _key.properties_ file (in _android_ folder, `/!\` both files must be excluded from git public source version control)
+      * Modify _android/app/build.gradle.kts_ to setup signing whenever building for release (ie `flutter build apk --release`)
+        * See <https://docs.flutter.dev/deployment/android#sign-the-app>
+  * Requires an **app signing key** (to let Google sign app to Users)
+    * This step is only mandatory when actually registering the app to Google Play Store
+
 ## Glossary
 
 * **Workflow Editor** = GUI alternative to configuring _codemagic.yaml_

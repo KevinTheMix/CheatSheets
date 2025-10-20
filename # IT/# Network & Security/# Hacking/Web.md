@@ -18,7 +18,7 @@
   * **Remote File Inclusion** (RFI) = any remote file/page can be included (eg `index.php?page=http://www.google.com`, google them via `inurl:"index.php?page="`)
 * **XSS** (Cross-Site Scripting) = abuses a legit page's lack of input (URL, form field) sanitization to insert a malicious (JS) script, accounts for 84% of all security vulnerabilities
   * **Persistent** = the script is saved and served back to the victim when she browses a page displaying unsanitized content (eg _MMQ_)
-  * **Non-Persistent** = coerces a victim into browsing a volatile forged (**GET/POST**) URL holding payload as parameter which get displayed on a page without sanitization
+  * **Non-Persistent** or **Reflected** = coerces a victim into browsing a volatile crafted/forged (**GET/POST**) URL holding payload as parameter which get displayed on a page without sanitization
     * Eg a (lousy) search engine results page: _You searched: `javascript:alert('oh no');`_
 
 ## Tools

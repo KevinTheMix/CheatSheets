@@ -4,28 +4,32 @@
 
 * There is no brackets in python, indentation matters
 * Variables can be declared in a sub-scope and be used outside (eg declared locally within `if` block & used underneath)
+* On Windows, disable default aliases/redirections to Microsoft Store to avoid interferences with local install (eg in **PowerShell** & virtual environment)
+  * In _Settings > Apps > Advanced app settings > App execution aliases_ > toggle off **App Installer** (for both python.exe & python3.exe)
 
 ## Glossary
 
 * **Django** = Python's full-fledged web framework
 * **Dunder Method** (Double Under) or **Magic Methods** = built-in methods starting with double leading & trailing underscores
   * Commonly overriden (eg `__init__`), listable via `dir({class})`
+* **Flask** = light & extensible web framework (`flask`)
 * **PyPI** (Python Package Index) = official repository of Python packages (default for `pip`)
+* **Tkinter** = interface to Tcl/Tk (ie to build GUIs)
 * **Virtual Environment** = standalone self-contained local install including all versioned dependencies, sourced in command prompt, prevents intereference with global install
 * **Web Server Gateway Interface** (WSGI) = server-to-application calling/forwarding convention for Python applications
 
-### Libraries
+## CLI
 
-* **Flask** = light & extensible web framework (`flask`)
-* **http.server** = basic HTTP server
-* **NumPy** (Numerical Python) = arrays manipulation
-* **openpyxl** = read/write Excel 2010 xlsx/xlsm/xltx/xltm files
-* **pandas** (panel data) = data manipulation & analysis, especially data structures/operations for numerical tables & time series
-  * `df.dropna(how='all')` = remove missing values
-  * `df.iloc[start:end]` = subset splicing
-  * `df.isin({collection})` = check if DataFrame has values in collection (eg `df[~df.isin([excluded_values])]`)
-  * `dg.reset_index(drop=True)`
-* **pip(3)** = Pyton (3) package manager
+* **python**
+  * `python - <<'PY'{Enter}{code}{Enter}PY` = execute inline Python code from a Bash here-document
+  * `python -c {command}` = executes inline Python code passed as a string argument to `-c`
+  * `python -m {module}` = runs Python _.py_ module file as a script (eg _pip_, _venv_)
+  * Eg `python -m venv {directory}` = creates a virtual environment
+    * `source {venv}/bin/activate` (or `.\{venv}\Scripts\Activate.ps1` in PowerShell) = change prompt to virtual environment
+    * `deactivate` = exit virtual environment (return to system-wide python install)
+  * Eg `python -m pip install {package}`
+* **python-is-python3** = small Debian/Ubuntu system package that creates a symlink for convenience
+* **pip(3)** = Python (3) package manager (installed as part of Python environment)
   * `pip freeze > {file}` (eg _requirements.txt_) = list every package currently importable/usable into a requirements file (one package per line)
   * `pip (un)install`
     * `--upgrade-pip` = upgrades itself
@@ -36,23 +40,6 @@
   * `--noconfirm` = don't ask when overwriting _build_ & _dist_ folders
   * `--noconsole` (alias `--windowed`) = no console window appears (for GUI apps)
   * `--onefile` = bundle everything into a single _.exe_
-* **pyngrok** = Ngrok API
-* **Tkinter** = interface to Tcl/Tk (ie to build GUIs)
-* **timeit** = measure performances (eg `timeit.timeit(stmt={treatment}, number={n})`)
-* **xlsxwriter**
-
-## Environment
-
-* On Windows: _Settings > Apps > Advanced app settings > app execution aliases_ > toggle off **App Installer** (for both python.exe & python3.exe)
-
-### CLI
-
-* `python - <<'PY'{Enter}{code}{Enter}PY` = enter some inline python code in Bash
-* `python -m venv {directory}` = creates a virtual environment
-  * `source {venv}/bin/activate` (or `.\{venv}\Scripts\Activate.ps1` in PowerShell) = change prompt to virtual environment
-  * `deactivate` = exit virtual environment (return to system-wide python install)
-* `python -m pip install --upgrade pip`
-* `python -c {command}` = executes inline Python code
 
 ## API
 
@@ -164,3 +151,17 @@ Returned by libraries such as SQL libraries (eg `fetchone()` & `fetchall()`).
 * `class Koko({Parent})` = class inheritance
 * `__init__(self, {args})` = constructor
 * `method(self, {args})` = instance method, receiving instance as first argument (named _self_ by convention)
+
+### Libraries
+
+* **http.server** = basic HTTP server
+* **NumPy** (Numerical Python) = arrays manipulation
+* **openpyxl** = read/write Excel 2010 xlsx/xlsm/xltx/xltm files
+* **pandas** (panel data) = data manipulation & analysis, especially data structures/operations for numerical tables & time series
+  * `df.dropna(how='all')` = remove missing values
+  * `df.iloc[start:end]` = subset splicing
+  * `df.isin({collection})` = check if DataFrame has values in collection (eg `df[~df.isin([excluded_values])]`)
+  * `dg.reset_index(drop=True)`
+* **pyngrok** = Ngrok API
+* **timeit** = measure performances (eg `timeit.timeit(stmt={treatment}, number={n})`)
+* **xlsxwriter**

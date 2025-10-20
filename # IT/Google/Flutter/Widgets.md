@@ -196,9 +196,9 @@ There are two built-in solutions: imperative **Navigator** (push/pop API that wo
 * **Checkbox** = Material Design bi-/tri-states checkbox
 * **Chip** = rounded rectangle bordered labeled icon (`_Button.icon()`-like without interactivity, _avatar_, _label_)
   * **ActionChip** = contextual dynamic button/trigger for toggle actions without navigation (ie filter, tag, smart suggestion eg _Like_ or _Save_), less prominent than a **Button**
-  * **ChoiceChip** = single choice among chips set (eg single select filter like **SegmentedButton**)
-  * **FilterChip** = multi-selection filter among chips set
-  * **InputChip** = more complex piece of information (eg a Person entity) in compact form, dismissible, with an optional avatar (eg label or several to/cc e-mail fields)
+  * **ChoiceChip** = single choice among chips set (à la radio, toggle button, single select menu, eg **SegmentedButton**)
+  * **FilterChip** = multi-selection filter among chips set (à la checkboxes or toggle buttons)
+  * **InputChip** = complex entity (eg a Person in _To/CC_ e-mail fields) in an inline compact dismissible form, dismissible with an optional avatar
 * **Circular/LinearProgressIndicator** = Material progress bar (_value_, _backgroundColor_, `ThemeData.accentColor` by default)
   * _valueColor_ takes in an **Animation\<T>** instance, which can be result of controlled Tween (via `drive()` or `animate()`)
 * Date Picking = `Future<DateTime?> dateFuture = showDatePicker(context, initialDate, firstDate, lastDate)`

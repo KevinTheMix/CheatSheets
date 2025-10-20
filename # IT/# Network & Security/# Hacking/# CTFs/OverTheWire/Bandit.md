@@ -99,7 +99,7 @@
   * (logged as bandit25) `cat /etc/passwd | grep bandit26` (shell _/usr/bin/showtext_)
   * (logged as bandit25) `cat /usr/bin/showtext` = startup shell script
   * `ls -l /usr/bin/showtext /home/bandit26/text.txt`
-  * (locally) resize terminal windows until it is smaller than ASCII logo, redo ssh = `more` now pauses "interactively
+  * (locally) resize terminal windows until it is smaller than ASCII logo, redo ssh, `more` now pauses "interactively
   * `v` = launches Vim
   * `:e /etc/bandit_pass/bandit26` = edit given file, ie bandit26 password (**s0773xxkk0MXfdqOfPRVr9L3jJBUOgCZ**)
 * Level 26

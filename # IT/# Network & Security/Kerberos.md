@@ -1,18 +1,30 @@
 # Kerberos
 
-Ticket-based client-server mutual authentication protocol designed for open networks (ie protects against eavesdropping - as well as replay attacks).
+Ticket-based client-server mutual authentication protocol designed for open networks (ie protects against eavesdropping - as well as on-path or replay attacks).
+
+Authenticate once, trusted by system, no need to re-authenticate to everything.
+Mutual autentication, client & server.
+De facto protocol for Windows authentication.
+
 Although designed a while ago at MIT, it still holds up to this day.
 
-The Kerberos protocol is very good for entreprise level network (LAN), where one entity (the AS) is able to hold all the client keys in a single location.
-This would obviously not be possible over the entire internet, where public-key & certificates based solutions are more suitable.
+## Quick Tips
 
+* The Client enters her password at the start of the exchange, but it is only actually used a little later when decrypting the AS response message (**ndKevin: This is key!** 2024.03)
+* The Client secret key is (1-way) hashed from the user's password at both the Client and the AS, and then used as a symmetric key
+  * The AS has access to the password via the AD (AD can be configured in plain text or hashed I believe)
+* Kerberos is very good for entreprise level network (LAN), where one entity (the AS) is able to hold all client keys in a single location
+  * This would obviously not be possible over entire internet, where public-key & certificates based solutions are more suitable
+  
 ## Glossary
 
 * **Principal** = something with an identity that can be protected (User, service or application)
 * Entities
+  * **AS** (Authentication Server) = checks authentication
   * **Client**
-  * **KDC** (Key Distribution Center) = **AS** (Authentication Server, checks authentication) + **TGS** (Ticket-Granting Service, issues (authorization) ticket)
+  * **KDC** (Key Distribution Center) = **AS** + **TGS**
   * **SS** (Service Server) = file server, service, etc.
+  * **TGS** (Ticket-Granting Service) = issues (authorization) ticket
 * **TGT** (Ticket-Granting Ticket) = the ticket provided by the AS to query the TGS and obtain more tickets (session tickets) to different services.
 * **SPN** (Service Principal Name)
 
@@ -41,13 +53,3 @@ Messages carry a timestamp, and random number to prevent replay attacks (the sam
 The Service sends the final exchange message back to the Client, with the timestamp increased by one, thus proving it can actually read the message, or something.
 
 Windows AD is based on Kerberos.
-
-## Resources
-
-* [Kerberos Authentication Explained](https://www.youtube.com/watch?v=5N242XcKAsM)
-  * Very good technical explanation starting at 5 minutes mark
-  * Doesn't detail very well the chronology & multiplicity of messages, neither the secret key generation
-  * The Client enters her password at the start of the exchange, but it is only actually used a little later when decrypting the AS response message (**ndKevin: This is key!** 2024.03)
-  * The Client secret key is (1-way) hashed from the user's password at both the Client and the AS, and then used as a symmetric key
-    * The AS has access to the password via the AD (AD can be configured in plain text or hashed I believe)
-* [Wikipedia](https://en.wikipedia.org/wiki/Kerberos_(protocol)#Protocol)

@@ -2,8 +2,8 @@
 
 ## Quick Tips
 
-* `~{user}` = shortcut for _/home/{user}_ (of course `~` is shorter for self)
-* `~/.bash_history` = user history of Bash commands
+* `~{user}` = shortcut for _/home/{user}_ (or `~` even shorter for current user)
+* `~/.bash_history` = current user history of Bash commands
 * [bash](https://git.savannah.gnu.org/git/bash.git)
 * [GNU Core Utilities](https://github.com/coreutils/coreutils)
 * [Bash Prompt HOWTO](https://tldp.org/HOWTO/Bash-Prompt-HOWTO/index.html)
@@ -23,9 +23,8 @@
   * **Anonymous Pipe** = stored in memory, exists only during lifetime of pipe-using processes (eg `a | b`)
   * **Named Pipe** (aka **FIFOs**) = appear as FS node but data actually also passed in memory via which unrelated processes can read/write (exist until deleted)
 * **POSIX** (Portable Operating System Interface) = family of standards for compatilibity between OSes (eg APIs, CLI shells commands, utility interfaces )
-* **Root** = built-in/default administrative (super)user account in Unix/POSIX
-  * All root users are superusers (with UID _0_) but the opposite is not true (they are all equivalent in power)
-  * Home directory is _/root_ (kept outside of _/home_ so always available even if user partitions are not mounted)
+* **Root** = built-in/default administrative user account in Unix/POSIX, with special UID _0_ (usually only one for security purposes, but more can be added to _/etc/passwd_), that carry superuser role
+  * Its home directory is _/root_ (kept outside of _/home_ so always available even if user partitions are not mounted)
 * **Shebang** = starting characters of a script used by OS kernel to determine which shell/utility will run that script
   * `#!/usr/bin/{command} -w` = specify command absolute location (with warnings `-w`)
   * `#!/usr/bin/env {command}` = use the environment to find command (can differ per user, and arguments eg `-w` cannot be provided)
@@ -35,8 +34,8 @@
   * _SIGTERM_ = signal to terminate (can be ignored by the process)
 * **Standard I/O/Err** = special file descriptors associated with a (single) process (not actual disk files, actually connected to terminal, pipes, sockets, etc, but managed by OS like file handles so we can read/write)
 * **Stream** = continuous flow of data where programs can read/write (concurrently in some cases eg pipes) in real-time, typically through standard I/O, pipes & files
-* **Superuser** = any process running with special UID _0_ (eg **Root** or via `sudo`, but more can be added to _/etc/passwd_)
-  * Any user/process with UID _0_ has full control over the system (ie can read/write/execute anything and change any system setting)
+* **Superuser** = role/level of privilege that has full control over the system (ie can read/write/execute anything and change any system setting)
+  * Not necessarily tied to a single account, can be any process with UID _0_ (ie **root**) or any user with temporary elevated administrative privilege (via `sudo`)
 * **Syscall** = request by a user-space program to a kernel service (eg `read()`, `write()`, `fork()`, `execve()`, `mmap()` memory allocation, `open()`, `unlink()`, `socket()`, `bind()`)
 * **Teletypewriter** = an ancient electromechanical printer-keyboard device
 * Terminals
@@ -44,8 +43,8 @@
   * **TTY** (Teletypewriter) = any (hardware or software) text terminal, a special kernel device file (eg _/dev/tty_, _/dev/tty1_, _/dev/pts/3_, etc) from which shells can read/write
   * **Terminal Emulator** = software GUI that imitates vintage hardware terminals by opening a pseudo-terminal so programs think they interact with a real tty, translating stream of I/O control codes into pixels
   * **Pseudo-Terminal** (PTY) = pair of kernel objects making (master) applications (eg `ssh`, `tmux`, a new terminal tab) believe they interact with a human (TTY) whereas it is another (slave) program
-    * Master end  (_/dev/ptmx_) = owned by terminal emulator
     * Slave end  (_/dev/pts/N_) = looks exactly like a real tty device but real I/O originates from another program launched by user (eg `shell`, `ssh`, `top`, `vim`)
+    * Master end  (_/dev/pts/ptmx_) = owned by terminal emulator
 * **tmpfs** = RAM-based filesystem (stores files in memory, not disk)
 * **Unix** = original OS family developed by AT&T Bell Labs in 1970, with most variants being propriertary (eg Solaris)
 * **Useless Use Of Cat** (UUOC) = jargon describing piping a cat command (`cat file | cmd`) in place of a more efficient yet less legible shell open (`cmd < file`)
@@ -71,7 +70,9 @@
 
 ## File System
 
-* _.{file}_ = hidden file
+* **Block Device** = provides buffered access & abstraction to harware devices
+* **Device File** = interface to a device driver that appears in a FS as if it were an ordinary file
+* **Device Mapper** = kernel component that provides a generic way to create virtual block devices
 * **ext** = informal shorthand for Linux extended-filesystem family
   * **ext** (**extfs**) = first native, 16MB files, no journaling (1992)
   * **ext2** = 2TB volumes, 4GB files, stable but not journaled (1993)
@@ -96,12 +97,18 @@
     * Only file owner, directory owner or _root_ can delete/rename entries (no other users even with write persmissions)
     * Eg world-writable directories such as _/tmp_ or _/var/tmp_ where everyone can write but not tamper with others files
     * Set via octal value _1000_
+* **Linux Unified Key Setup** (LUKS) = disk encryption specification to encrypt a block device
+* **Logical Volume Manager** (LVM) = device mapper framework providing logical volume management for Linux Kernel
+* **Virtual Block Device** = pretend disk that can be used like a physical piece of hardware (format, mount, store files)
+
+* _.{file}_ = hidden file
 * _/_ (root) = top
 * _boot_ = static files needed for initial boot stage (ie kernel images, bootloader configuration)
 * _bin_ & _sbin_ = minimal set of essential user command binaries (eg `ls`, `cp`, `sh`) & system binaries (eg `fsck`, `iptables`), available during boot/rescue
 * _dev_ = devices nodes providing user-space interfaces to kernel devices (ie they can be read/written to like a regular file)
   * _/dev/fd0_ = floppy drive
   * _/dev/null_ = special device that discards anything written to it and immediately returns EOF when read
+  * _/dev/pts_ = slave end of a pseudo-terminal
   * _/dev/sda_ = device-file handle for first SCSI-class block disk Linux kernel discovers at boot/when hot-plugged
 * _etc_ = host-specific system-wide configuration files & startup scripts (_/etc/ssh/sshd\_config_)
   * _/etc/fstab_ (File System Table) = lists all system disks & partitions
@@ -142,16 +149,20 @@
 * `Ctrl + C` = halts/kills current process (sends _SIGINT_ interrupt to foreground process), except shell itself designed to stay running
 * `Ctrl + D` = end of input (EOF), actually lets shell exit since it considers session is over
   * EOF effect only from a blank new line (if not, press it twice so first one signals partial EOF for current non-empty line)
+* `Ctrl + L` = clear screen
 * `Ctrl + R` = reverses lookup of previous commands
 * `Ctrl + U` = erases from cursor until beginning line (similar to `Shift + Home, Delete`)
 * `Ctrl + W` = erases from cursor until beginning of current word (similar to `Ctrl + Backspace`)
 * `Ctrl + Z` = stops current command
 
-* `adduser {user}` = create user on system
-* `apt` = high-level CLI to package management system (requires `sudo`)
-  * `sudo apt autoremove`
-  * `sudo apt install python-is-python3` = create symlink
-  * `sudo apt purge {packages}` = remove packages
+* `adduser {user}` = create user on system (see `deluser`)
+* `apt` (Advanced Packaging Tool) = high-level CLI to package management system (requires `sudo`), able to install visual packages (eg Wireshark)
+  * `apt list -- installed` = display installed packages (long list, grep as needed)
+  * `sudo apt update` = updates package list
+  * `sudo apt install {package}` = installs a package (`--only-upgrade` for update)
+  * `sudo apt autoremove` = remove packages installed as dependencies and no longer needed
+  * `sudo apt purge {packages}` = completely remove specified packages and their configuration files
+  * `sudo apt full-upgrade` = remove unnecessary packages and update automatically (**more aggressive**)
 * `awk` = flexible full-fledged domain-specific programming language & data extraction/reporting text processing tool (conditional, filter, regex pattern, calculated, à la C# Linq)
   * `awk {file} 'criteria{action(s)}'` = reads input from file/stidin and perform action on filtered data
   * Criteria = condition that can be empty (always true), _BEGIN_/_END_ before/after, comparison, regex, variables & (associative) arrays
@@ -163,16 +174,16 @@
   * _NR_ = record (aka line/row) number
   * _OFS_ = field print output separator (` ` by default)
   * _ORS_ = line print output separator (`\n` by default)
-  * `ls -l | awk 'BEGIN{print"Printing file names…"}{print $9}` = print file names
-  * `ls -l | awk 'BEGIN{print "Large files"}$5>100000{print}`
-  * `ls -l | awk 'NR%2==0{print}` = print all of even numbered lines
+  * `ls -l | awk 'BEGIN{print"Printing file names…"}{print $9}'` = print file names
+  * `ls -l | awk 'BEGIN{print "Large files"}$5>100000{print}'`
+  * `ls -l | awk 'NR%2==0{print}'` = print all of even numbered lines
   * `ls -l | awk 'NF>2{print}'`
   * `ls -l | awk 'BEGIN{print "End of July large files"}(NF>2)&&($5>10000)&&($6="July")&&($7>15){print}'`
   * `ls -l | awk 'BEGIN{printt "Les fichiers PDF"} $9 ~ /.*pdf/{print}'` = regex pattern search (ie `~ /{pattern}/`)
   * `ls -l | awk 'BEGIN{sum=0}(NR>1){sum=sum+$2}END{print "Total = ",sum}'` = define variables
   * `ls -l | awk 'NR>1{print $(NF-1)}'` = access fields by relative index
   * `ls -l | awk 'BEGIN{i=0}(NR>1)&&(NR<=NF){print $(i+1); i++}'` = calculated variable & index
-  * `kill $(ps -aux | awk '$1="user"{print $2}')` = kills all processes linked to given user (ie awk can map/fetche PID per user)
+  * `kill $(ps -aux | awk '$1="<user>"{print $2}')` = kills all processes linked to given user (ie awk can map/fetche PID per user)
 * `bash ({script})` = starts a new bash process (interactive shell, or interprets script if provided)
   * `-c '{string}'` = runs string in new Bash subprocess (environment is isolated, positional parameters _$i_ via eg `bash -c 'echo $1' -- "hello"`)
 * `base64` = base64 encode/decode
@@ -183,15 +194,16 @@
   * `cat > {file}` = (re)create file in edit mode (`Ctrl + D` to finish, or `Enter` then `Ctrl + D`)
   * `koko1 koko2` = concatenate two text files and display the result in the terminal
 * `chattr` = change file attributes on a Linux file system (eg `+i`/`-i` toggle immutable so cannot be deleted/renamed, even by root)
-* `chmod` (change mode) = change access rights (via octal value or specific right)
-  * `{ugoa}+{rwx}` = change for specific user (user/group/others/all by default), eg `chmod +x {file}` (adds execute rights for all)
-* `chown {user} {file}` = change owner
+* `chmod {permissions} {file}` (change mode) = change access rights (via octal value or specific right)
+  * `{ugoa}±{rwx}` = change for specific user (user/group/others/all by default), eg `chmod +x {file}` (adds execute rights for all)
+* `chown {user} {file}` (as admin) = change owner
 * `chsh` = change user login shell (only for own account, unless superuser)
+* `clear` = clear screen
 * `cmp` = compare two files byte by byte (see `diff`)
 * `cp {file} {target}` = copy (target may be a file, or directory in which case source file is added to that directory)
 * `cron` = job scheduler (_minute hour day month weekday_ (as 0-6), `@reboot` once at reboot)
 * `crontab` = maintain crontab files for individual users
-* `curl` = transfer data from/to a (mail or web) server using URLs
+* `curl` (client URL) = transfer data from/to a (mail or web) server using URLs
   * `-d` = data to send in a HTTP POST request
   * `-s` = silent/quiet mode (no progress/error messages)
   * `-H {header}` = header (eg `accept: application/json` or `Content-Type: application/json`)
@@ -202,36 +214,36 @@
 * `date` = system date
 * `dd` = carve out, convert, copy a file
 * `deluser` & `delgroup` = remove a user or group from system
-* `df` (disk free) = reports FS space usage (`-h` for human-readable, `-s(ummarize)` for only total for each argument)
+* `df` (disk free) = reports FS space usage (`-h` for human-readable)
 * `diff` = content differences between two files files (see `cmp`)
 * `dig {domain}` (installable) = DNS lookup (`-x {host}` reverse lookup)
 * `dir` = list directory contents (identical to `ls`)
-* `du {file}` = estimate file/directory space usage (`-h(uman-readable)` = adds unit (_K, M, G_))
+* `dnf` (Dandified YUM) = another package manager for Linux (an upgrade of _Yellowdog Updater, Modified_ Linux package manager)
+* `du ({file})` = estimate file/directory space usage (`-h(uman-readable)` adds unit (_K, M, G_))
 * `env` = print current environment, or run a program in a modified environment (ie set environment variables then execute command in that altered context)
   * Used in scripts shebang (ie `#!/usr/bin/env {command}`) to let `env` find best fitting command
 * `file` = determine file type
-* `find {directories}` = recursively find all files/directories under one or more directories
+* `find ({directory(s)}) ({options})` = recursively find files/directories under one or more directories
   * `.` = current directory (default if none specified)
-  * `/` = everything
-  * `/{path}` = a directory by absolute path
-  * `{dir}` = local directory
+  * `/` = everything (takes a while)
   * `-delete` = delete found files (warning: deletes everything that matches, if permission to do so)
   * `-empty` = find empty directory
   * `-exec {command}` = executes command on found files (eg a `chmod`)
   * `-group {gname}` = belonging to group gname (numeric group ID allowed)
-  * `-user {uname}` = owned by uname (numeric user ID allowed)
+  * `-name {pattern}` = find all files/directory matches by pattern
   * `-perm` = find by permission
     * `664` = match exactly (_-rw-rw-r--_)
     * `-664` = match those and the rest can be whatever (_.rw.rw.r.._)
     * `/222` = any of those match (either user, group or other must have read permission)
     * `/a+x` = executable by all
   * `-type` = find by type (`d` directory, `f` regular file, `l` symbolic link)
+  * `-user {uname}` = owned by uname (numeric user ID allowed)
 * `finger` = inspects user (eg last logged in)
 * `free` = displays amount of free/used system memory (RAM & swap)
-* `fsck` (File System Consistency Check) = check & repair Linux filesystems
+* `fsck` (FS Check) = check & repair Linux filesystems (à la Windows _chkdsk_, runs during startup)
 * `gdb` = GNU Debugger
 * `gpasswd` = administer _/etc/group_ & _/etc/gshadow_
-* `grep {pattern} {file}` (g/re/p aka global regular expression print) = match lines using regular expression patterns
+* `grep {pattern} {file(s)}` (g/re/p aka global regular expression print) = match lines using regular expression patterns
   * `-i` = ignore case
   * `-P` = use regular expressions
   * `-r` = search recursively in directories
@@ -245,12 +257,15 @@
 * `ifconfig` or `ip address` = displays network interfaces (IP address & co)
 * `info` = complete documentation about a command in Info format (more comprehensive than `man`)
 * `init` or `systemd` = system & service manager, acts as init system bringing up userspace services when run as first process on boot (as PID _1_)
+* `ip` = show/edit routing, network devices, interfaces, tunnels
+  * `address` = view interface addresses
+    * `add 192.168.121.241/24 dev eth0` (as `sudo`) = configures IP address of an interface
+  * `route` = view IP routing
 * `iptables` = firewall information (see `ufw`)
-* `ldd {file}` = print shared object/libraries dependencies
-* `less` = displays page by page (more efficient than `more`, used by `man` to display its help)
-  * `/` = search
-* `ln {target} {name}` = creates a link file to an existing file/directory
-  * `-s` aka `--symbolic` = creates a soft link
+* `ldd {exe_file}` = print shared object/libraries dependencies
+* `less` = displays page by page (`/` to search & `(Shift +) n` for back/next, more efficient than `more`, used by `man` to display its help)
+* `ln {file/directory} {link}` = create a link between files/directory
+  * `-s` aka `--symbolic` = creates a soft/symbolic link
 * `locate {file}` (installable) = find all instances of file
 * `login` = begin session on system (should be invoked via `exec login` from shell, so shell gets replaced and newly logged user does not return to caller previous shell session after exiting)
   * `nologin` = politely refuse a login
@@ -275,15 +290,16 @@
 * `mkfifo` = create FIFOs (ie named pipes)
 * `mktemp` = create temp file, or directory (`-d`)
 * `modprob` = add/remove modules from Linux Kernel
-* `more` = display file contents in a terminal with paging (read whole file upfront, see `less`)
-* `mount {path eg /dev/floppy}` & `unmount` = (un)mount a filesystem
+* `more` = display stdin with (`(Page) Down`/`Space` screen, `Enter` line) paging (`q` to exit, `v` to launch Vim, reads whole file upfront, see `less`)
+  * A popular usage is paging output of a previous command eg `{command} | more`
+* `mount ({path})` = manually (un)mount a storage device (eg USB or _/dev/floppy_, à la Windows `net use`)
 * `mv {source} {target}` = rename/move
-* `nano` = small friendly editor
-* `nc` (aka `netcat`) = open/send/listen to TCP/UDP/sockets connections, scan ports
-  * `-l (-p) {port}` = listens on a given port (if data is sitting in inbound pipe buffer, it is sent as soon as client connects & a socket opens)
+* `nano ({file})` = small friendly editor
+* `netcat` (aka `nc`, also see `ncat` richer rewrite) = open/send/listen to TCP/UDP/sockets connections, scan ports
+  * `-l (-p) {port}` = listens on a given port (if data is sitting in inbound pipe buffer, it is sent as soon as client connects & socket opens)
   * `-l -k` = keep listening (when a connection is completed, listen for another one)
-* `netstat` (Net Statistics) or `ss` (Socket Statistics, see below) = displays open ports
-  * `-tulpn` = TCP/UDP, listening, PID/Program name for sockets, don't resolve names
+* `netstat` (Net Statistics) = displays open ports (similar to `ss`)
+  * `-tulpn` = TCP, UDP, listening, PID/Program name for sockets, don't resolve names
 * `nmap` (Network Mapper) = network exploration & port scanner
 * `nohup ./{long_script}` = runs a command ignoring/immune to hangups signals & logouts, outputs to a non-tty
 * `od` = (octal) dumping aka display file content in DUMP format (`-tx1` for hexadecimal)
@@ -292,9 +308,8 @@
 * `pidwait` = wait processes by name
 * `ping` = sends ICMP ECHO_REQUEST to hosts (`-c` max count, `-q` quiet, `-s` packet size, `-W` timeout in seconds)
 * `pkill {name}` = kill processes by name
-* `ps` = lists current processes
+* `ps` = lists current processes (of current user without further options)
   * `aux(ww)` = every process on system (BSD syntax, _ww_ prevents truncation)
-  * `-a` = all processes (except session leaders and those not associated with a terminal)
   * `-e` = every process on system
   * `-f` = full-format (adds columns, displays command arguments)
   * `-l` = long format
@@ -322,12 +337,14 @@
 * `sleep {n}({suffix})` = delay for a specific amount of time (`s` second default suffix, `sleep {time} &` in background)
 * `socat` (SOckect CAT) = establishes bidirectional byte streams & transfers data between them
 * `sort {file}` = sort alphabetically
-* `ss` = dump socket statistics (similar to `netstat`)
+* `ss` (Socket Statistics) = dump socket statistics (similar to `netstat`)
 * `ssh {user}@{host}` = connects to SSH server (interactively)
   * `-d` = SOCKS proxy
   * `-i {rsa_private_key}` = authenticate using a private key (ie receive a challenge that only it can meet)
   * `-p {port}`
   * `-v(v(v))` = (increasingly) verbose mode
+  * `-L ({local_ip}:){tcp_local_port}:{destination_ip}:{destination_port} {username}@{remote_ssh_server}` = local port forwarding (default `local_ip` is _127.0.0.1_ which means only local applications could connect)
+  * `-R {tcp_remote_port}:{local_name}:{local_port} {username}@{remote_ssh_server}` = remote/reverse port forwarding (eg reverse SSH tunneling)
   * `--noprofile --norc --rcfile {file}` = skips remote _.profile_/_.bashrc_ launch configuration
   * `{command}` = does not create a terminal, runs command immediately, exits (unless `-t` is specified which creates a terminal)
   * Transmits data securely, byte-for-byte (therefore binary data works too)
@@ -346,7 +363,7 @@
   * Incarnates least privilege principle: normal users (with admin rights) don't need superuser powers all the time
   * sudo calls are logged, so there's built-in auditability/traceability
 * `systemctl` = manage services (`start`, `stop`, `status`)
-* `systemd` = manages all system daemons, it (or its children) launches all other processes
+* `systemd` = manages all system daemons, it (or its children) launches all other processes (see `init`)
 * `tail` = displays last 10 lines (see `head`, `-f` output contents of file as it grows)
 * `tar` = archiving utility
   * `-c` = create archive
@@ -374,12 +391,14 @@
   * `f1 f2 f3` = creates multiple files
   * `prefix{i..n}` (literal curly braces) = creates multiple files
   * `-d tomorrow koko` = creates file with given creation date
+* `tput` = use terminal capabilities (eg clear screen, move cursor, indicate number of lines/columns, bolden text if terminal supports it)
 * `tr {from} {to}` = (translate/delete) characters manipulation (eg `tr a-z A-Z` uppercase, `tr 'A-Za-z' 'N-ZA-Mn-za-m'` ROT13)
-* `traceroute` = determines route a packet takes to a destination (uses ICMP)
+* `traceroute` (installable) = determines route a packet takes to a destination (uses ICMP)
 * `tty` = print file name of the terminal (if any) connected to (my program's) standard input
 * `ufw` = sets firewall config (uses `iptables`)
 * `uname` = display system information (`-a` all, `-n` system (host) name, also see `neofetch` utility)
 * `uniq {file}` = report/omit repeated lines (`-u` only unique lines)
+* `unmount` (installable)
 * `uptime` = show session uptime
 * `vi(m)` = Vi IMproved
 * `vimtutor` = Vim tutorial

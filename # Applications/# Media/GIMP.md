@@ -4,6 +4,8 @@ GNU Image Manipulation Program
 
 ## Quick Tips
 
+* When adding transparency to an existing image, make sure image has a format that handles alpha (ie not an Indexed colors, which typically doesn't support alpha transparency, and must be converted to a RGB)
+
 ## Glossary
 
 ## Commands

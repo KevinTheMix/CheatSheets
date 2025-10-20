@@ -3,25 +3,12 @@
 ## Quick Tips
 
 * URLs can be configured to be opened via designated apps (instead of the browser by default)
-
-* [Codemagic - Android Code Signing](https://docs.codemagic.io/flutter-code-signing/android-code-signing)
-  * **upload key** = to sign app before uploading to Codemagic or Google Play Store, associated with a certificate
-    * Stored within a **keystore** (that can hold multiple keys), both generated (using same password) via either:
-      * `keytool` Java command (installed with Android Studio)
-      * Android Studio > Build > _Generate Signed Bundle/APK_ dialog
-    * For Flutter, once an _upload-keystore.jks_ file is generated:
-      * Reference it from a _key.properties_ file (in _android_ folder, `/!\` both files must be excluded from git public source version control)
-      * Modify _android/app/build.gradle.kts_ to setup signing whenever building for release (ie `flutter build apk --release`)
-        * See <https://docs.flutter.dev/deployment/android#sign-the-app>
-  * Requires an **app signing key** (to let Google sign app to Users)
-    * This step is only mandatory when actually registering the app to Google Play Store
 * [Rooting, Bootloader, Recovery](https://android.stackexchange.com/a/117593)
 
 ## Glossary
 
 * [Activities](https://developer.android.com/guide/components/activities/intro-activities) = one app entry point, defined in _AndroidManifest.xml_
 * **Android** = open-source OS based on Linux, supported by many different manufacturer's devices
-* **Android App Bundle** (AAB) = device-agnostic package format containing compiled code & resources, used by Play Stores to eventually generate/distribute (smaller) device-specific APKs
 * **Android SDK** = can be installed via Android Studio's SDK Manager (at `%USERPROFILE%\AppData\Local\Android\Sdk`)
   * [Platform Tools](https://developer.android.com/tools/releases/platform-tools) = primarily **adb** & **fastboot** exe (see section below)
 * [Android Studio](https://developer.android.com/studio) = full Android development SDK, for building apps on Android devices
@@ -31,7 +18,6 @@
   * By extension, an architecture (instructions set) for low-power scalable CPUs used in mobile devices (**ARM Code** is basically a name for (mobile native) machine code)
   * Architecture/Platform = _arm_ or _arm64_ (less commonly _x86_ or _x86\_64_) - see [Open GApps](https://opengapps.org)
 * [AOSP](https://source.android.com) = Android Open Source Project
-* apk = file containing an app ([How to install apk files from a PC](https://www.wikihow.com/Install-APK-Files-from-a-PC-on-Android))
 * [Bootloader](https://source.android.com/devices/bootloader) = basically a BIOS & MBR (vendor-proprietary image), which brings up the kernel, launching recovery mode, etc
   * Low-level interface used to flash images on a partition via `fastboot` commands
   * Responsible for the base layer of security (prevents _system_ change), as unlocking the bootloader erases all previous data
@@ -41,6 +27,8 @@
 * **Google Play Services** = Google background services & libraries for use by mobile apps for gaming, geofencing, SSO, maps, ads, pay, analytics
 * **Heimdall** = a cross-platform tool for interacting with Download mode on Samsung devices
 * **Image** = _.img_ file, part of the OS, to be flashed (installed) to the partition matching its name on the device
+* **IMEI** (International Mobile Equipment Identity) = uniquely identifies a hardware mobile device (actually one per fixed SIM card slot)
+* **IMSI** (International Mobile Subscriber Identity) = uniquely identifies a mobile network subscriber/SIM card (stored in SIM card itself)
 * **Odin** = utility used by Samsung to reset (or flash) their smartphones
 * **OEM** (Original Equipment Manufacturer) = a company that constructed an original component sold to end users by another company
 * **OHA** (Open Handset Alliance) = consortium (eg HTC, Sony, Dell, Motorola, Samgsung, LG) led by Google that develops Android
@@ -57,6 +45,12 @@
   * Circumventable via microG DroidGuard Helper
 * **Sideloading** = installing an image onto the phone directly from a file located on the PC
 * **Vendor image** = image containing device-specific drivers for controlling GPS, gyro, proximity & co
+
+### File Types
+
+* _.aab_ (Android App Bundle) = device-agnostic package format containing compiled code & resources
+  * Used by Play Stores to eventually generate/distribute (smaller) device-specific APK files (not itself executable)
+* _.apk_ = Android app installation file as a compressed archive (its content can be un-zipped) containing compiled code, resources & manifest
 
 ### Versions
 

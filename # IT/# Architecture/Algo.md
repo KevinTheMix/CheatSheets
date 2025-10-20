@@ -15,6 +15,7 @@
 * [Visualizing algorithmes](https://bost.ocks.org/mike/algorithms)
 * [Google RGB-hidden phrase](https://www.reddit.com/r/Android/comments/2k4qjs/comment/clhypmg) = RGB is a set of three ASCII letters, normalized by subtracting min value
 * `({number} & 1) == 0/1` = check whether a number is even/odd
+* To check distances (inequality), you don't have to sqrt() the variable side each time, simply pwr(2) the constant side one time
 
 ## Glossary
 
@@ -32,6 +33,9 @@
   * **Levenshtein distance** = string metric measuring difference between two sequences, ie minimum number of single-character edits (insertions, deletions or substitutions)
   * **Damerau-Levenshtein distance** = Levenshtein distance + substitutions & transpositions (aka permutations)
 * **Memoization** = optimization technique that stores result of expensive function calls to produce same outputs for same future inputs
+* **Monte Carlo Method** = empiric randomness backdoor into a problem to approximate a solution, leveraging law of large numbers stating average converges to true value
+  * Eg generate random points in a (2x2) square, and check which ones fall within (1 unit-long radius) circle within it to approximate π/4
+  * Related to **resampling** (also relying on random sampling to approximate) = create new sets from a fixed sample set (by cloning elements, removing them, etc)
 * **Rope** = binary tree data structure used to store longer strings as smaller linked ones (eg used by text editors)
 * **Sort**
   * **Merge** = O(n log n)
@@ -53,6 +57,6 @@
 * Algo = top left -> right down
   * `V[i,0] = 0` (header column)
   * `V[0,j] = j` (header row)
-  * `V[1,j] = j` ($1 coins)
+  * `V[1,j] = j` ($1 coins-only is trivial)
   * `V[i,j] = min(V[i-1,j], V[i,j-Ci]+1)` = either take the current minimum (one line above), or find a new minimum for this coin
 * Calculate = Pascal triangle, (Path finding), Summed, Shortest path
