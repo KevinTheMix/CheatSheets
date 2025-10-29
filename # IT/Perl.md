@@ -1,10 +1,19 @@
 # Perl
 
+## Quick Tips
+
+## Glossary
+
+* **Bareword** = quote-less string literal (using characters suitable for an identifier, ie alphanumeric & underscore), precluded by using `strict`
+
+## API
+
 * [Perl debugging](https://perldoc.perl.org/perldebug)
 * `` `command` `` = execute the given shell command
 
 ```perl
 perldoc # Manual page (q to exit)
+perldoc perlintro # Introduction Manual page (or online: https://perldoc.perl.org/perlintro)
 
 #!/usr/bin/perl -w  # Must be the first line of the file. See `which perl` shell command for Perl local installation directory.
 "./script.pl"       # Run
@@ -18,6 +27,9 @@ my ($a, $b);    # Multideclaration. my $a, $b; incorrect (cfr Erlang tuple)
 
 undef
 defined()
+
+left || right # || bar bar operator returns left if true, right otherwise
+left // right # // slash slash operator returns left if defined, right side otherwise
 ```
 
 ## {}
@@ -57,7 +69,11 @@ $$href{key}; $href->{key};  # Reference value
 ## Pragma (Preprocessor)
 
 ```perl
-use strict;
+use strict; # tells compiler to change to turn on 3 following areas (which is recommended https://perlmaven.com/strict):
+use strict 'subs'; # generates compile-time error when using a bareword identifier improperly 
+use strict 'refs'; # generates a runtime error if using a symbolic reference
+use strict 'vars'; # generates compile-time error if accessing a variable without a declaration
+
 use constant NAME => value;
 use constant PI => 4 * atan2(1, 1);
 use constant DEBUG => 0;    # instruction if DEBUG;
@@ -505,6 +521,7 @@ Create a local variable in a function and return its adress => local variable de
 
 ## Modules (CPAN)
 
+* [Config::General](https://metacpan.org/pod/Config::General) = open & parse a config file
 * [Tree-Simple](https://metacpan.org/pod/Tree::Simple) (2015.01)
 
 ### Definition

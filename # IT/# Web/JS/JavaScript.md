@@ -4,6 +4,7 @@
 
 * Unblock/jailbreak right-click = `document.oncontextmenu = true`
 * Use `| 0` on a (non-negative) floating point value to convert it to a 32-bit signed integer, effectively math flooring it quickly
+* [JavaScript Garden](https://shamansir.github.io/JavaScript-Garden) = documentation about the most quirky parts of JavaScript
 
 ## Glossary
 
@@ -27,7 +28,7 @@
 
 * `typeof(variable)` = (name of) type of variable
 * `{}` = [Destructuring Objects](https://wesbos.com/destructuring-objects) = decomposes an object's properties in the order they were defined (eg `{ first, second } = koko;`, where _koko_ could have more properties eg `third`)
-* `f(...parameters)` = [Rest parameter](https://www.geeksforgeeks.org/javascript-rest-operator/), turns a list of (indefinite number of) function parameters into a single array
+* `f(...parameters)` = [Rest parameter](https://www.geeksforgeeks.org/javascript-rest-operator), turns a list of (indefinite number of) function parameters into a single array
   * Then `const [first, second] = parameters` using [Destructuring](https://www.samanthaming.com/tidbits/20-destructuring-function-arguments)
 
 * [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)
@@ -121,86 +122,56 @@ See <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statement
 `export default class`
 `export default function()`
 
-## Extensions
+## [Extensions](https://www.npmjs.com/package)
 
 * **Adonis.js** = Typescript-oriented backend framework
-* **Alpine.js** = HTML-centric tiny _JavScript_ framework (presented as "Tailwind fof JavaScript", with jQuery-like effects)
+* **Alpine.js** = HTML-centric tiny _JavScript_ framework (presented as "Tailwind for JavaScript", with jQuery-like effects)
 * **Astro** = builds/pre-renders JS-powered apps into static HTML pages with less client-side JS (à la _Hugo_ or _Jekyll_), but with ability to render/hydrate dynamic JS components
-* **Blitz.js** = _Next.js_ fullstack toolkit
 * **CodePress** = JavaScript languages syntax highlighter
 * **date-fns** = dates manipulation library
-* **Deno** = JavaScript runtime similar to _Node.js_ (by its creator), built for TypeScript natively (& WebAssembly) based on V8 engine & Rust
-* **Electron** = build cross-platform desktop apps with JavaScript/HTML/CSS
 * **Handlebars.js** = string templating (à la `String.Format`) engine library
 * **HTMX** = HTML-augmenting (JavaScript) UI library (providing access to AJAX, CSS transitions, WebSockets, Server-sent events, form validation)
-* [JSON Server](https://github.com/typicode/json-server) = fake REST API (with zero coding, for front-end developers who need a quick back-end for prototyping & mocking)
+* [Intence](https://github.com/asvd/intence) = scroll-aware minimap as a scrollbar replacement
+* **JSFuck** = esoteric/educational programming style based on atomic parts of JavaScripts, uses only six different characters to write/execute code (`[]()!+`)
 * **JSX** (JavaScript XML, formally JavaScript Syntax eXtension) = syntactic sugar enabling creation of DOM trees via XML-like syntax, transpiled to nested JS functions, initially created by Facebook for React
+* **Knockout** = library for building dynamic UIs using MvvM
+* **Lightbox** = image viewer with frame resizing & fade transition
 * **Lodash** = extension toolkit (eg LINQ-style collection manipulation methods, deep cloning, debouncing, etc.)
 * **Moment.js** = dates library
-* **nestedSortable** = jQuery plugin for manipulating nested lists
-* **NestJS** = Node.js backend framework
-* **Next.js** = _React_-based open-source web development framework for server-side (universal App-to-plain-HTML on the server side instead of the client) rendering & static website generation (by _Vercel_)
-* **Nuxt.js** = _Vue.js_ FOSS library similar to _Next.js_ (but based on , _Nitro_ & _Vite_)
-  * **Nuxt UI** = UI library for Nuxt
-* **Polymer** = open-source JavaScript library (by Google) for building web applications via **Web Components**
-* **Proton Native** = create desktop applications (ie like **Electron**) using React (Native) syntax, with Hot reload
-* **Quasar** = _Vue.js_ cross-platform framework
-* **React** = FOSS front-end (JavaScript) library for building UIs based on components, can be used to develop SPAs, mobile or server-rendered apps (via additional frameworks eg _Next.js_), uses virtual DOM
-  * [JSConf - Rethinking best practices](https://www.youtube.com/watch?v=x7cQ3mrcKaY) = loosely coupled UI, components are idempotent (_render_) functions
-  * [Dan Abramov - Making Sense of React Hooks](https://medium.com/@dan_abramov/making-sense-of-react-hooks-fdbde8803889)
-  * Class component = à la Flutter StatefulWidget
-  * Functional component = à la Flutter StatelessWidget (except with hooks, they become stateful as well)
-* **React Capacitor** = native mobile apps with web technology & React
-* [React Hooks](https://medium.com/@dan_abramov/making-sense-of-react-hooks-fdbde8803889) = compressing/defragmenting/regrouping lifecycle-tied logic
-* **React Native** = open-source cross-platform (mobile, web, desktop, VR) UI framework, native components for each platform via JS bridge, provides base components & leaves community implement (3rd party) packages
-  * Uses a virtual-DOM-like virtual widgets tree, which helps not going through the costly JS bridge
-  * Uses a _bridge_, ie some kind of adapter that exposes native UI components/widgets to let JavaScript (ie app logic) _pilot_ them
+* **Polymer** = open-source JavaScript library (by Google) for building web applications using Web Components standard model (custom elements, shadow DOM, HTML templates)
 * **Redux** = open-source state management JS library (written in TypeScript)
 * **RxJS** (_ReactiveX_) = reactive extensions, for composing asynchronous or callback-based code by using Observable sequences (RxJs is _Lodash_ for events)
   * See [ReactiveX](https://reactivex.io) = cross-platform asynchronous programming (eg debounce) with observable streams API (for eg .NET, Java, JavaScript)
 * **Socket.IO** = bi-directional client-server communication (via WebSocket or HTTP long-polling as a fallback)
 * **Solid.js** (2018) = lightweight, highly performant, (truely surgically) reactive UI framework, transpiles to _JavaScript_, uses JSX (like React), loved by developers
-* **SST** = _Next.js, Svelte or Astro_ AWS front/backend platform
-* **Svelte** =
-* **SvelteKit** =
 * **Kendo UI** (Telerik) = JavaScript UI library for jQuery, Angular, React & Vue
 * **TodoMVC** = same to-do web application implemented in a variety of JavaScript-affine UI frameworks (eg Angular, React, Vue), to use as guide/examples
-* **Vite** = build tool
 * **WYMeditor** = JavaScript WYSIWYM XHTML editor (_discontinued_)
-
-### PWA
-
-* **Progressive Web Application** (PWA) = delivered via the web, for browsers or as a mobile app with near-full native capabilities (eg push notif, desktop icon, work offline, phone API access)
-* _Bubblewrap_ = set of CLI tools & libraries to create an Android app launching a PWA (via a Trusted Web Activity)
-* _HNPWA_ (Hacker News Progressive Web App) = list of unofficial Hacker News client PWA in a variety of JavaScript-affine UI frameworks, to use as guide/examples
-* _Lightouse_ = open-source Chrome DevTools extension (or Node module) that audits/scores a web page/app quality (with metrics, diagnostics, accessibility)
-* [pwa-asset-generator](https://github.com/elegantapp/pwa-asset-generator) = generates (fav)icons/images for all size & their HTML/manifest declaration snippets
-* **Trusted Web Activity** = way for an Android app to open a PWA (ie a PWA _is not_ the Android app, but gets launched by it)
-* _Workbox_ = Chrome's boilerplate Service Worker library
 
 ### jQuery
 
-* **jQuery Mobile** = touch-optimized mobile/web framework as a JavaScript library
-* **jQuery UI** = UI interactions, effects, widgets & themes for jQuery
 * (element)[.scrollTop()](https://api.jquery.com/scrolltop) = gets/sets vertical position of the scroll bar (also: `element.scrollLeft()`)
 * (element)[.offset()](https://api.jquery.com/offset) = gets/sets the relative coordinates (`.top`)
+* **jQuery Mobile** = touch-optimized mobile/web framework as a JavaScript library
+* **jQuery UI** = UI interactions, effects, widgets & themes for jQuery (eg **Sortable** = reorder elements in a list/frid using mouse)
+* **nestedSortable** = jQuery plugin for manipulating nested lists
 
-### [ag-Grid](https://www.ag-grid.com/javascript-grid-cell-editing/)
+### [ag-Grid](https://www.ag-grid.com/javascript-grid-cell-editing)
 
-* [Rendering Flow](https://www.ag-grid.com/javascript-grid-rendering-flow/)
+* [Rendering Flow](https://www.ag-grid.com/javascript-grid-rendering-flow)
   * Field = Direct value.
   * Value Getter = Calculate displayed value based on anything e.g. multiple fields. Replaces direct field value
   * Value Formatter = WPF's Converter e.g. parsing a date or formatting numbers
-  * [Cell Renderer](https://www.ag-grid.com/javascript-grid-cell-rendering/) = controls inner HTML
-    * [Cell Renderer Class](https://www.ag-grid.com/javascript-grid-cell-rendering-components/)
+  * [Cell Renderer](https://www.ag-grid.com/javascript-grid-cell-rendering) = controls inner HTML
+    * [Cell Renderer Class](https://www.ag-grid.com/javascript-grid-cell-rendering-components)
     * [Many Renderers, One Column](https://www.ag-grid.com/javascript-grid-cell-rendering/#many-renderers-one-column)
-* [Input Flow](https://www.ag-grid.com/javascript-grid-editing-flow/)
+* [Input Flow](https://www.ag-grid.com/javascript-grid-editing-flow)
   * Value Setter = Inverse of Getter, called when the user edits a cell e.g. the cell displays a fullname (but there's no such column in the data itself) bound to 2 different actual data (firstname + lastname)
   * Value Parser = WPF's Converter in the other direction, from the grid's user input to the data e.g. parsing a string into a number.
-* [Row Styles](https://www.ag-grid.com/javascript-grid-row-styles/)
+* [Row Styles](https://www.ag-grid.com/javascript-grid-row-styles)
   * Row style = Provide entire style (conditionally or not)
   * Row class = Provide CSS class (conditionally or not)
   * Row class rules = Apply a set of CSS classes according to boolean expression
-* [Cell Styles](https://www.ag-grid.com/javascript-grid-cell-styles/)
+* [Cell Styles](https://www.ag-grid.com/javascript-grid-cell-styles)
   * cellClassRules = an object containing CSS rules to apply to a cell according to a boolean expression using its value.
   * cellStyle = function that returns the complete inline style of a cell based on its value.

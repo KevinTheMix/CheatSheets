@@ -5,6 +5,7 @@
 * `~{user}` = shortcut for _/home/{user}_ (or `~` even shorter for current user)
 * `~/.bash_history` = current user history of Bash commands
 * [bash](https://git.savannah.gnu.org/git/bash.git)
+* [Linux Kernel source code](https://www.kernel.org)
 * [GNU Core Utilities](https://github.com/coreutils/coreutils)
 * [Bash Prompt HOWTO](https://tldp.org/HOWTO/Bash-Prompt-HOWTO/index.html)
 * `({cmd1}; {cmd2})` = creates new shell (_sh_), executes both commands, close shell
@@ -14,6 +15,7 @@
 
 * **ELF** (Executable and Linkable Format) = a Unix executable file
 * **GNU** (GNU's Not Unix) = collection of free software launched by Richard Stallman in 1983, a set of user-space tools added to most Linux kernels (eg gcc, Bash) under GNU GPL
+* **GNU GRUB** = multi-boot loader package for GNU Project
 * **EUID** (Effective User ID) = actual user ID a process is running under, usually same as UID (but can be different when eg `sudo`)
 * **IPC** (Inter-Process Communication) = eg pipes
 * **Linux** = independant open-source re-implementation of Unix-like kernel by Linus Torvalds in 1991, released under GNU GPL
@@ -47,11 +49,12 @@
     * Master end  (_/dev/pts/ptmx_) = owned by terminal emulator
 * **tmpfs** = RAM-based filesystem (stores files in memory, not disk)
 * **Unix** = original OS family developed by AT&T Bell Labs in 1970, with most variants being propriertary (eg Solaris)
-* **Useless Use Of Cat** (UUOC) = jargon describing piping a cat command (`cat file | cmd`) in place of a more efficient yet less legible shell open (`cmd < file`)
+* **Useless Use Of Cat** (UUOC) = jargon describing piping a cat command (eg `cat file | cmd`) in place of a more efficient yet less legible shell open (`cmd < file`)
 * **Zombie Process** = completed but its entry still exists in process table (until parent uses `wait()`)
 
 * _BusyBox_ = several (300) Unix common command utilities in a single executable file (aka _"The Swiss Army knife of Embedded Linux"_)
 * _Cygwin_ = FOSS & Linux-like tools for Windows
+* _NDISwrapper_ = free driver wrapper enabling use of Windows XP network device drivers (eg PCI card, USB model, router) on Linux
 * _WebMin_ = web-based (ie webpages) server management control panel for Unix systems (eg users, disk quotas, services, config files)
 * _Wine_ = FOSS compatibility layer between Windows applications/games and Unix-like OSes (ie Linux & macOS)
 
@@ -62,8 +65,9 @@
 * **CentOS** = Linux distribution (_discontinued_)
 * **Gnome** = FOSS desktop environment for Linux/Unix-like OS used by many distributions
 * **Kali Linux** = Debian-based Linux distribution designed for digital forensics & pentesting
-* **Lubuntu Alternate** = Even lighter Lubuntu for low-RAM PC/laptops
-* **Lubuntu Desktop** = Lightweight Linux distribution based on Ubuntu
+* **Lubuntu Alternate** = even lighter Lubuntu for low-RAM PC/laptops
+* **Lubuntu Desktop** = lightweight Linux distribution based on Ubuntu
+* **MINIX 3** = FOSS Unix-like microkernel OS (for embedded systems & educative purposes)
 * **Parrot OS** = Debian-based Linux distribution for cybersecurity/hackers/sysadmins (with 600+ tools for blue/read team operations)
 * **Tails** (aka _The Amnesic Incognito Live System_) = secure DVD/USB Debian Linux Tor network based OS, writes to RAM not HDD (_1300MB_)
 * **webOS** = Linux kernel-based multitasking OS developed by LG for smart devices (eg Smart TVs)
@@ -118,7 +122,7 @@
   * _/etc/passwd_ = plain-text mapping DB of user names to IDs & defaults (home dir, login shell), only editable by **root** (via `vipw`)
   * _/etc/os-release_ =  OS version information
   * _/etc/resolv.conf_ = contains list of DNS servers (aka _nameserver_) used by this machine
-  * _/etc/shadow_ = protected file containing user names (similar to _/etc/passwd_), this time with their (hashed) passwords
+  * _/etc/shadow_ = protected file containing user names (similar to _/etc/passwd_), this time with their (hashed) passwords (can be a high priority target for hackers)
   * _/etc/shells_ = list of valid login shells (any script can be added here, even those that exit immediately)
 * _home_ = default location for regular users personal directories & data (ie _/home/{user}_)
 * _lib_ & _lib64_ = shared libraries & kernel modules needed by programs in _/bin_ & _/sbin_
@@ -144,16 +148,22 @@
 
 ## API
 
-### [Commands](https://en.wikipedia.org/wiki/List_of_Unix_commands)
+### Terminal
 
+* `Escape + -.` = fetches last parameter of previous command
 * `Ctrl + C` = halts/kills current process (sends _SIGINT_ interrupt to foreground process), except shell itself designed to stay running
 * `Ctrl + D` = end of input (EOF), actually lets shell exit since it considers session is over
   * EOF effect only from a blank new line (if not, press it twice so first one signals partial EOF for current non-empty line)
 * `Ctrl + L` = clear screen
-* `Ctrl + R` = reverses lookup of previous commands
+* `Ctrl + Q` = unpauses terminal output (XON signal, unfreezes terminal frozen by accidental `Ctrl + S`)
+* `Ctrl + R` = reverse search previous commands history
+* `Ctrl + S` = pauses terminal output (XOFF signal)
 * `Ctrl + U` = erases from cursor until beginning line (similar to `Shift + Home, Delete`)
 * `Ctrl + W` = erases from cursor until beginning of current word (similar to `Ctrl + Backspace`)
 * `Ctrl + Z` = stops current command
+* `Ctrl + X, Ctrl + E` = opens an (GNU nano) editor to work with long or complex command lines
+
+### [Commands](https://en.wikipedia.org/wiki/List_of_Unix_commands)
 
 * `adduser {user}` = create user on system (see `deluser`)
 * `apt` (Advanced Packaging Tool) = high-level CLI to package management system (requires `sudo`), able to install visual packages (eg Wireshark)
@@ -215,7 +225,7 @@
 * `dd` = carve out, convert, copy a file
 * `deluser` & `delgroup` = remove a user or group from system
 * `df` (disk free) = reports FS space usage (`-h` for human-readable)
-* `diff` = content differences between two files files (see `cmp`)
+* `diff {filea} {fileb}` = content differences between two files files (`-u` for context, see `cmp`)
 * `dig {domain}` (installable) = DNS lookup (`-x {host}` reverse lookup)
 * `dir` = list directory contents (identical to `ls`)
 * `dnf` (Dandified YUM) = another package manager for Linux (an upgrade of _Yellowdog Updater, Modified_ Linux package manager)
@@ -332,6 +342,7 @@
 * `setuid` (Set User Identity) = access rights flags allowing to run executable with owner permissions
 * `sftp` = OpenSSH secure file transfer
 * `sh` = (opens a new) dash process (_/bin/sh_)
+* `sha256sum {file(s)}` = compute/check SHA256 message digest
 * `shred {file}` = replaces file content with random data (`-n 1` for single pass)
 * `shutdown` (with `sudo`) = turn off computer (`-h now` for immediately)
 * `sleep {n}({suffix})` = delay for a specific amount of time (`s` second default suffix, `sleep {time} &` in background)
@@ -339,10 +350,10 @@
 * `sort {file}` = sort alphabetically
 * `ss` (Socket Statistics) = dump socket statistics (similar to `netstat`)
 * `ssh {user}@{host}` = connects to SSH server (interactively)
-  * `-d` = SOCKS proxy
   * `-i {rsa_private_key}` = authenticate using a private key (ie receive a challenge that only it can meet)
   * `-p {port}`
   * `-v(v(v))` = (increasingly) verbose mode
+  * `-D {local_port} {username}@{remote_ssh_server}` = SOCKS proxy
   * `-L ({local_ip}:){tcp_local_port}:{destination_ip}:{destination_port} {username}@{remote_ssh_server}` = local port forwarding (default `local_ip` is _127.0.0.1_ which means only local applications could connect)
   * `-R {tcp_remote_port}:{local_name}:{local_port} {username}@{remote_ssh_server}` = remote/reverse port forwarding (eg reverse SSH tunneling)
   * `--noprofile --norc --rcfile {file}` = skips remote _.profile_/_.bashrc_ launch configuration

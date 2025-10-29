@@ -30,6 +30,11 @@
 * Microsoft Word
   * `Ctrl + Alt + {n}` = creates a header-level text
 
+## Glossary
+
+* **VLOOKUP** = find things in a table or a range by row
+* **XLOOKUP** = improved VLOOKUP (any direction and returns exact matches by default, making it easier and more convenient to use)
+
 ## Shortcuts
 
 * `'` = Format cell value as string

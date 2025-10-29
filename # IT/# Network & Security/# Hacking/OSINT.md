@@ -2,7 +2,7 @@
 
 ## Quick Tips
 
-* Facebook bait using CRSF = get someone's name
+* Facebook bait using CSRF = get someone's name
 * "Forgot Password?" = grab last digits of email/phone
 * [Google Dorks](https://www.exploit-db.com/google-hacking-database) = Google search hacks (also Bind, Yandex, DuckDuckGo may turn up different results)
   * `inurl:"ViewerFrame?Mode=" -inurl -intitle` = unsecured network cameras
@@ -22,7 +22,8 @@
 * _Censys_ = scanned entire internet to provide information about Internet-connected hosts, websites, certificates, and other Internet assets (IP, hostname, services & protocols)
 * [Facebook ExtractFace](https://github.com/mrpnkt/ExtractFace)
 * [Facebook Sleep Stats](https://github.com/sorenlouv/fb-sleep-stats)
-* [Have I Been Pwned](https://haveibeenpwned.com) (HIBP) = enter target email
+* [Forensically](https://29a.ch/photo-forensics/#forensic-magnifier) = free online photo analysis tools
+* [Have I Been Pwned?](https://haveibeenpwned.com) (HIBP, by Troy Hunt) = enter target email
 * _Maltego_ = OSINT tool for link analysis & data visualization of relationships between people/groups/websites/domains/networks, real-time data mining, information as node-based graph to identify patterns
 * _Shodan_ = IoT search engine (servers, routers, webcams, unprotected devices)
 * [TinEye](https://www.tineye.com) = reverse image search

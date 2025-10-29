@@ -38,10 +38,10 @@
 * `F3` = draw tool
 * `F4` = multi-tool
 * `P` = play/pauses _play head_
-* `X` = starts from cursor, or move cursor/selection start at _play head_ and stop
-* `Space` = play from cursor (with looping), or stop
+* `X` = (stopped) starts from bar, (playing) move bar to play head & stop, (playing & with bar ahead) select from play head to cursor & stop
+* `Space` = play from bar (with looping), or stop
 * `Delete` = removes portion of audio & shifts left the part after
-* `Shift + Space` = play from cursor, or stop
+* `Shift + Space` = play from bar, or stop
 * `Shift + Click` = set beginning/end of selection
 * `Alt + ,` = previous Clip
 * `Alt + .` = next Clip

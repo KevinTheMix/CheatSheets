@@ -3,12 +3,13 @@
 ## Quick Tips
 
 * Include a referrer URL catcher (to index.php/master page) to find out where people come from (+ good for CSRF)
-* [Web Standard Project](https://www.webstandards.org) (WaSP) = was a web standardization (accessibility, uniformity) effort
 
 ## Glossary
 
+* **ARIA** (Accessible Rich Internet Applications) = roles/attributes defining ways to make web applications more accessible
 * **GraphQL** (by _Meta_) = open-source data query/manipulation language for APIs
 * **Microfrontend** = web development pattern in which a single app may be built from disparate builds, à la microservices for client-side SPAs written in JavaScript (eg Spotify)
+* **Progressive Web Application** (PWA) = delivered via the web, for browsers or as a mobile app with near-full native capabilities (eg push notif, desktop icon, work offline, phone API access)
 * **REST** (Representational state transfer) = software architectural style with the following communication constraints/properties: Client-server, Stateless, Caching, Layered
 * **REST vs SOAP**
   * REST is an architecture whilst SOAP is a protocol
@@ -22,14 +23,17 @@
 * **URL Slug** = human-readable last part of a URL address explaining its content as a non-technical ID
 * **WebDAV** = HTTP extension methods on resources (_COPY_, _LOCK_, _MOVE_)
 * **Web Components** = features supporting a standard web component model, allowing encapsulation & interoperability of HTML elements (Custom Elements, Shadow DOM, HTML Templates)
-* **Web sockets** = communication protocol for two-way simultaneous channel over a single TCP connection
+* **Web Sockets** = communication protocol for two-way simultaneous channel over a single TCP connection
+* [Web Standard Project](https://www.webstandards.org) (WaSP) = was a web standardization (accessibility, uniformity) effort
+  * **Acid3** = web test oage checking web browser's compliance with various web standards
 
 * [HTML-Kit](http://www.htmlkit.com) (build 292 = last free version)
 * _HTTrack_ = Web crawler/copier (also as no install)
 * _Jekyll_ = open-source static site generator (written in Ruby)
 * [Opquast Web Quality Assurance Checklist](https://checklists.opquast.com/en/web-quality-assurance) = web page guidelines/rules
 * _Plausible_ = Google Analytics alternative
-* _Selenium_ = open-source scripting/record/playback tools for automating web apps/browser tasks (eg for testing, debugging), for a variety of languages (eg C#, Java, JS, Python)
+* **Selenium** = open-source tools & libraries for browser tasks automation (ie script/record/playback à la DOM AutoHotKey, eg for testing & debugging)
+  * Uses a DSL (Selenese) to write tests for various languages (C#, Java, JS, Python)
 * _Swagger_ = framework & tools for designing/documenting/consuming RESTful web services
   * **OpenAPI Specification** (OAS) = core of Swagger, a language-agnostic format describing APIs
   * _Swagger Codegen_ = generates client libraries, server stubs, API documentation from an OAS
@@ -38,6 +42,15 @@
   * _Swagger UI_ = web-based UI automatically generated from a OAS, that documents an API and is able to make direct request/response to it
 * [web.dev](https://web.dev) = guidance by the Chrome team to build modern cross-browser web apps (eg accessibility, CSS, HTML, performance, privacy, PWA)
 * [Wix](https://www.wix.com) = build a website
+
+### PWA
+
+* _Bubblewrap_ = set of CLI tools & libraries to create an Android app launching a PWA (via a Trusted Web Activity)
+* _HNPWA_ (Hacker News Progressive Web App) = list of unofficial Hacker News client PWA in a variety of JavaScript-affine UI frameworks, to use as guide/examples
+* _Lightouse_ = open-source Chrome DevTools extension (or Node module) that audits/scores a web page/app quality (with metrics, diagnostics, accessibility)
+* [pwa-asset-generator](https://github.com/elegantapp/pwa-asset-generator) = generates (fav)icons/images for all size & their HTML/manifest declaration snippets
+* **Trusted Web Activity** = way for an Android app to open a PWA (ie a PWA _is not_ the Android app, but gets launched by it)
+* _Workbox_ = Chrome's boilerplate Service Worker library
 
 ### Storage
 

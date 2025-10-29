@@ -1,8 +1,14 @@
 # RabbitMQ
 
-RabbitMQ is a message broker/distribution middleware, that is used to soften ties between applications.
+RabbitMQ is a message broker/distribution middleware (implementing AMQP), that is used to soften ties between applications.
 It provides applications with features such as broadcasting, programmable routing and message persistence.
 It is written in Erlang as an open-source implementation of the AQMP protocol.
+
+* _Programmable network_ protocol, which means message routing configuration (exchanges, queues, bindings) can be created (or _declared_) by client nodes  (publisher or consumer) themselves, not just via centralized administration
+* Besides, those declarations are _idempotent_: they can be declared multiple times without side-effects (_created once_)
+* Therefore the applications themselves can declare all the AMQP entities and routing schemes they need
+* Therefore a single entity can validly be declared multiple times at different locations (nodes), as long as the same parameters are provided in its creation
+* Beware though of configuration conflicts between different applications, e.g. declaring the same exchange/queue with different parameters
 
 ## Glossary
 
@@ -11,12 +17,6 @@ It is written in Erlang as an open-source implementation of the AQMP protocol.
   * Automatic Acknowledgement = Messages are removed from their Queue as soon as they are consumed
   * Explicit Acknowledgement = An Ack must be manually sent to the broker in order for the message to be removed from its Queue
   * Negative Acknowledgement = Allows to reject messages, and can also requeue them
-* **AMQP** (Advanced Message Queuing Protocol) = open standard for message-oriented middleware, features message orientation, queueing, roting, reliability & security
-  * _Programmable network_ protocol, which means message routing configuration (exchanges, queues, bindings) can be created (or _declared_) by client nodes  (publisher or consumer) themselves, not just via centralized administration
-  * Besides, those declarations are _idempotent_: they can be declared multiple times without side-effects (_created once_)
-  * Therefore the applications themselves can declare all the AMQP entities and routing schemes they need
-  * Therefore a single entity can validly be declared multiple times at different locations (nodes), as long as the same parameters are provided in its creation
-  * Beware though of configuration conflicts between different applications, e.g. declaring the same exchange/queue with different parameters
 * **Binding** = named link between an Exchange and a Queue
   * Its name constitutes a Routing Key, part of the routing configuration to deliver Messages to the appropriate Queues
   * A Binding is necessary for any Queue to receive any Messages, but the routing key it specifies may be disregarded by some Exchange types (i.e. fanout)

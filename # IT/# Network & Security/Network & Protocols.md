@@ -3,75 +3,53 @@
 ## Quick Tips
 
 * [DNSstuff tools](https://www.dnsstuff.com/freetools)
+* [TCP & UDP Port numbers](https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers) = Well-knownn Registered, Dynamic/Private/Ephemeral
+* [Notable well-known Port numbers](https://en.wikipedia.org/wiki/Port_(computer_networking)#Common_port_numbers)
 * Florent = HTTP requests handled by local _Nginx_-served Vue app through bi-directional VPN tunnel via _WireGuard_ (adding OS-level virtual network I/Os) between local (dynamic IP) machine and public remote (fixed IP) _DigitalOcean Droplet_ VM
-* **TCP Ports** (non-ephemeral)
-  * 20/21 = FTP
-  * 22 = SSH, SFTP
-  * 23 = Telnet
-  * 25 = SMTP (e-mails)
-  * 53 = DNS (zone transfers)
-  * 80/8008/8080 = HTTP
-  * 110 = POP3
-  * 143 = IMAP(4)
-  * 179 = BGP
-  * 194 = IRC
-  * 389 = LDAP
-  * 443 = HTTPS
-  * 465 = SMTPS
-  * 636 = LDAPS
-  * 989-990 = FTPS
-  * 995 = POP3S
-  * (3389 = RDP)
-* **UDP Ports** (non-ephemeral)
-  * 53 = DNS (address to name translation queries)
-  * 67 = DHCP (server)
-  * 68 = DHCP (client)
-  * 123 = NTP
-  * 137/139 = NetBIOS
-  * 161 = SNMP
 
 ## Glossary
 
-* **AAA** (Authentication, Authorization, and Accounting) = framework to control/track access within a computer network
-  * Authentication proves identity, authorization grants permissions, accounting maintains continuous & robust audit trail via logging
+* **AMQP** (Advanced Message Queuing Protocol) = open standard binary application layer protocol for message-oriented middleware (with message orientation, queueing, routing, reliability & security)
 * **Directory Service** = single DB of everything (computers, user accounts, file shares, printers, groups) on network, maps network resources names to their respective (IP) addresses (via DNS), providing centralized authentication/access control
   * Eg used by help desk to reset passwords & add/remove accounts
 * **DMZ** (De-Militarized Zone) = network area that's neither internal or public, where public-facing (email/web) servers get placed
   * Traffic with a DMZ is mostly one-way towards it, ie it has very limited connectivity towards the internal network (as much as the firewall allows basically)
   * Clients connect _directly_ (through the firewall) to different servers **within the DMZ**; that is unlike a reverse proxy that hides all the internal servers behind it
 * **Ethernet** = family of wired technologies used in LAN (local), MAN (metropolitan) & WAN (wide)
-* **gRPC** = Google cross-platform open source bi-directional real-time RPC framework using HTTP/2 for transport & **Protobuf** to encode data, usually connecting microservices or mobile clients to backends
-  * **Interceptors** = both at client & server endpoints enable inspection & modification (à la middleware, ie logging,metrics, authentication, retries, rate limiting)
-  * Ideal for communication between internal tightly-coupled (micro)services sharing a strict common IDL contract (faster than HTTP1.1+REST overhead)
-  * Not ideal for loosely-coupled public/external/universal facing services (cannot use cURL, Postman, IIS)
+* **FTP** (File Transfer Protocol) = can be active (client start control connection, server starts data connection) or passive (client starts both, so works better with client-side firewalls)
 * **HTTP** (HyperText Transfer Protocol)
 * **HTTP/2** = major revision of HTTP (developed by Google), derived from (obsolete) SPDY communication protocol, supported by nearly 100% of browsers
 * **HTTPd** (HTTP daemon) = any software running as background process and playing server in a client-server model, using HTTP(S) protocol (eg Apache HTTP Server)
 * **HTTPS** (HTTP Secure) = TLS layer between HTTP & TCP, attested via a digitally signed server certificate, initiated via public crypto key handshake
-* **IDL** (Interface Description Language) = WSDL-like contract/model description for gRPC
+* **IDL** (Interface Description Language) = contract/model format description (à la WSDL)
 * **Jitter** = time gap consistency between data packets, becomes chaotic in case of congestion (eg choppy voice/video call)
-* **LDAP(S)** (Lightweight Directory Access Protocol (Secure)) = open vendor-neutral application protocol (OSI model layer 7) for accessing/maintaining distributed directory (ie centralized authentication) service over IP network
+* **LDAP(S)** (Lightweight Directory Access Protocol (Secure)) = open vendor-neutral application protocol (OSI model layer 7) for accessing/maintaining distributed directory service (ie centralized authentication) over IP network
 * **Marshalling** = ensuring data gets from point A to point B (broader than serialization)
 * **NetBIOS** (Network Basic Input/Output System) = obsolete session layer API/services/name resolution system letting applications on different computers in same LAN communicate
   * Uses/registers simple names (eg _SERVER1_) to identify computers without an IP address (this predates widespread use of DNS in LANs)
-  * **WINS** (Windows Internet Name Service) = network service mapping NetBIOS names to IP addresses (circa Windows NT)
+  * **WINS** (Windows Internet Name Service) = Microsoft network service mapping NetBIOS names to IP addresses (circa Windows NT)
 * **NTP** (Network Time Protocol) = time provider, usually from a centralized server (NTP Server accessed from NTP Clients)
 * **Packet Switching** = grouping data into short messages in fixed format transmitted over a network (a channel is occupied during transmission of a packet only, and made available afterwards)
 * **PAN** (Personal Area Network) = own private network (bluetooth, IR, NFC eg automotile, wireless headset, connected watch)
 * **PAT** (Port Address Translation, or NAT Overload) = router mechanism enabling local network device to send/receive corresponding traffic (initiated locally) from internet, from a single shared public IP
-* **Port** = communication endpoint, can be non-ephemeral/permanent (_0 to 1023_) or ephemeral (_1024 to 65535_)
+* **Port** = transport layer (L4) communication endpoint, can be Well-known (_0-1023_), Registered (_1024-49151_) or Dynamic/Private/Ephemeral (_49152-65535_)
 * **Port Forwarding** (or **Port Mapping**) = redirects traffic from one port to another (used in PAT or reverse SSH tunneling)
   * **Local** = binds a local port to a remote one (eg `ssh -L` starts a local SSH client, creates a TCP-listening socket on local port, and forwards data to final destination via a SSH server)
   * **Remote** or **Reverse** = binds remote port to local one (eg `ssh -R` starts a local SSH client and creates a TCP-listening socket on remote machine forwarding data to local machine)
+  * **Dynamic** = eg SOCKS
   * **Static NAT** = router manual rule/configuration enabling uninitiated inbound connections to a specific local device's IP & port, making it accessible from internet
-* **Protocol Buffers** (aka _Protobuf_) = FOSS Google cross-platform (efficient binary) data format used to serialize strongly-typed/structured data (described via IDL)
+* **Protocol Buffers** (aka _Protobuf_) = FOSS Google cross-platform (efficient binary) IDL used to serialize strongly-typed/structured data
 * **Proxy (Server)** = application-layer intermediary in a client-server network, can be forward (at client) or reverse (at server)
 * **RADIUS** (Remote Authentication Dial-in User Service) = client-server application layer networking protocol providing centralized AAA management for users connecting/using a network service
 * **RDP** (Remote Desktop Protocol)
 * **Reverse Proxy** = accepts incoming client connections on behalf of server, hiding & representing it to outside world, for load balancing, security (eg DMZ), caching, logging, monitoring user activty
 * **Reverse SSH Tunneling** = have a (hard to reach/well-protected behind NAT/firewall) computer grant access to itself from outside by initiating an outbound SSH connection using port forwarding
   * Outside machine is pre-configured to accept SSH connections (via SSHD), and allow remote/reverse port forwarding
-* **RPC** (Remote Procedure Call) = client-server stubs serialize local method call (ie strongly-typed) to remote handler and back (eg over HTTP/2 for gRPC)
+* **RPC** (Remote Procedure Call) = serialize (strongly-typed) local method call to remote handler and back
+  * **gRPC** = Google cross-platform open source bi-directional (with codegened client-server stubs) real-time RPC framework using HTTP/2 for transport & Protobuf to encode data
+  * **Interceptors** = both at client & server endpoints enable inspection & modification (à la middleware, ie logging, metrics, authentication, retries, rate limiting)
+  * Strict common IDL contract (faster than HTTP1.1+REST overhead) promotes reliability/speed at scale between internal tightly-coupled microservices, or mobile clients & backends
+  * Not ideal for loosely-coupled public/external/universal facing services (cannot use cURL, Postman, IIS), where human-friendly HTTP REST or GraphQL can still be used
 * **SFTP** = file transfer over ssh
 * **Spanning Tree Protocol** (SPT) = network protocol that builds loop-free logical topology for Ethernet networks, prevents bridge loops (resuliting in broadcast storms)
 * **SSH** (Secure Shell) = application-layer client-server crypto protocol for network services over unsecured network (first remote login, then either CLI or GUI via X11 Forwarding-compatible apps)
@@ -83,14 +61,20 @@
   6. in case of a valid new connection, client saves (based64-encoded) server public key along with (salted & HMAC-hashed because also treated as sensitive) hostname in _~/.ssh/known\_hosts_
   7. key exchange occurs using one of KEX algorithms established earlier, and mutiple symmetric keys (eg _AES_) are derived (one per direction & for MAC)
   8. further communication now symmetrically encrypted & MAC-signed
-  9. server finally authenticates client (now that server validity was assured and a secure communication channel was established between parties) via either public key (ie a challenge) or password (less secure)
+  9. server finally authenticates client (now that server validity was assured and a secure communication channel was established between parties)
+  * Client authentication can be performed via either public key challenge (client public key is stored in that already existing user's _.ssh/authorized\_keys_ folder) or password (less secure)
   * Public key is the preferred choice, as it eliminates passing password over channel (even hashed, can be brute-forced, replayed), and human factor (must be remembered, rotated)
+* **SSH Server** = runs a SSH daemon, has root priviledges
 * **SMB** (Server Message Block) = family of protocols to share resources (eg files, printers, serial ports) over a network, with Kerberos or NTLM authentication, originally by Microsoft (no longer relying on NetBIOS)
   * **CIFS** (Common Internet File System) = a specific implementation of SMB (1.0) considered inefficient, insecure & deprecated
+* **Single Sign-On** (SSO) = login once and use multiple systems/applications, improving user experience (eg OAuth 2.0 google/facebook, or entreprise-wide SAML-based SSO eg Azure AD or Okta)
 * **Socket** = bidirectional OS-managed TCP or UDP communication endpoint, enabling interprocess data exchange via standard I/O semantics (à la shared file)
   * It is essentially an OS-level abstraction encapsulating several concrete resources & state (2 send/receive buffers, a file descriptor, a network IP address, TCP/UDP protocol control & queueing)
   * A **Listening** = created locally (with a local IP address & Port pair) and listens to incoming connection requests (one such socket to one local Port)
   * A **Accepted**/**Connected** = identifies a unique established TCP connection (as two local & remote IP/Port pairs, so possibly many such sockets to one local Port and listening Socket)
+* **SOCKS** = application-layer lightweight general-purpose dynamic port forwarding proxy protocol, facilitates client-server communication through a firewall
+  * SOCKS-compatible programs (such as Firefox) usually exhibit some sort of "network settings" where a SOCKS proxy can be entered through which all traffic is directed
+  * (Convenient with `ssh -D`, but any program that can accept a TCP connection and speak the few-byte SOCKS handshake can be a SOCKS server)
 * **SSL** (Secure Sockets Layer) = deprecated encryption protocol replaced with **TLS**
 * **SSL/TLS Handshake** = client initiates an asymmetric connexion, then sends a (faster & more efficient for large amounts of data) symmetric key encrypted using server public key found in its certificate
   * Client initiates connection to the server on port 443 (the default port for HTTPS)
@@ -99,10 +83,6 @@
   * Server must sign that key exchange using its certificate private key (only that key is able to complete that challenge)
   * An attacker possessing only the public certificate cannot forge a signature, nor decrypt handshake messages
   * The client and server have now established a secure connection, and use exchanged key to encrypt future communication
-* **Single Sign-On** (SSO) = login once and use multiple systems/applications, improving user experience (eg OAuth 2.0 google/facebook, or entreprise-wide SAML-based SSO eg Azure AD or Okta)
-* **SOCKS** = application-layer lightweight general-purpose proxy protocol, facilitates client-server communication through a firewall
-  * SOCKS-compatible programs (such as Firefox) usually exhibit some sort of "network settings" where a SOCKS proxy can be entered through which all traffic is directed
-  * Convenient with `ssh -d`, but any program that can accept a TCP connection and speak the few-byte SOCKS handshake can be a SOCKS server
 * **TACACS** (Terminal Access Controller Access-Control System) = older (ARPANET-era) authentication framework (associated with Cisco switches/routers), modernized as TACACS+
 * **Telnet** (Telecommunication Network) = older (abandoned in favor of **SSH**) bi-directional client-server application protocol to access virtual terminals of remote system on LAN/Internet
 * **TLS** (Transport Layer Security) = cryptographic protocol to provide communications security over a network
@@ -124,6 +104,8 @@
 * _OpenSSL_ = implements TLS/SSL & other crypto functions (AES, RSA, SHA), with certificate handling (X.509), key generation/signing/verification
 * _OpenVPN_ = FOSS client/server VPN using OpenSSL encryption library
 * _PuTTY_ = FOSS (ssh/scp, telnet/rlogin, etc) terminal client for administration over networks, (originally) for Windows (1999)
+* _Samba_ = free re-implementation of SMB, providing file & print services for Windows clients, running on Unix-like systems (including macOS)
+  * `smbclient` = ftp-like client to access SMB/CIFS resources on servers
 * _Wget_ = HTTP(S)/FTP CLI to GET files from web servers
 * _WireGuard_ = FOSS VPN communication protocol (native on Ubuntu) for creating secure point-to-point encrypted tunnels between machines (adding OS-level virtual network interface)
 * _Wireshark_ = FOSS network packets analyzer (uses WinPcap or Npcap)
@@ -171,7 +153,6 @@
 * **Toner Probe** = helps identifying one cable corresponding ends
 * **VLAN** (Virtual Local Area Network) = a logical network configured at one (or more) Switch's level (eg splitting interfaces/ports available on a Switch into two separate seggregated networks)
 * **VPN** (Virtual Private Network) = network layer encrypted data traversing a public network (through a VPN server ie a Concentrator), optionally with firewall/NAT
-* **VPS** (Virtual Private Server) = VM simulating a dedicated physical server environment (but actually shared with other users)
 
 ### OSI Model
 
@@ -196,17 +177,20 @@ Layers sometimes shortened to _Ln_ (eg _L2_ for Transport Layer 2)
 * **Address Block** (or IP Prefix) = contiguous range of public (delegated top-down via RIR -> LIR/ISP -> customer) or private IP addresses
 * [Addressing Methods](https://en.wikipedia.org/wiki/Broadcasting_(networking)#Addressing_methods)
   * **Anycast** = one-to-one-of-many (any one out of a group of nodes, typically nearest)
-  * **Broadcast** = one-to-many (everyone, ie a L2 ARP request MAC _FF:FF:FF:FF:FF:FF_, or L3 IPv4 with host portion bits all set to _1_ or special _255.255.255.255_ when sender doesn't know its network eg DHCP discover)
+  * **Broadcast** = one-to-many (everyone)
+    * At L2, an MAC broadcast can be sent to all devices on local network segment (MAC _FF:FF:FF:FF:FF:FF_ eg ARP request or DHCP Discover)
+    * At L3, an IPv4 limited to local subnet (eg DHCP discover _255.255.255.255_ when sender doesn't know its network) or directed to a specific subnet (with just host portion bits all set to _1_) can be sent
   * **Multicast** = one-to-many (group of destination that have expressed interest in receiving, ie L2 MAC address with I/G set ie starting with _01:…_)
   * **Unicast** = one-to-one transmission (specific node)
 * **Address Resolution Protocol** (ARP) = maps L3 IP(v4)s to L2 MAC addresses
   * An host broadcasts an IPv4 address, and intended target (when present) broadcasts its MAC address back
   * ARP Broadcast = broadcast (Ethernet whole subnet ie destination MAC _FF:FF:FF:FF:FF:FF_) message to look up a specific IP address among all network hosts
   * ARP Reply = unicast message containing a MAC address sent back by IP owner (if present)
-* **APIPA** (Automatic Private IP Addressing) = scheme to let a device configure its own **link-local IP** in absence of any DHCP Server
-  * **Link-Local Address** = self-assigned random IP which cannot be used to route outside local subnet (so, no internet connectivity)
+* **APIPA** (Automatic Private IP Addressing) = auto-addressing scheme that lets a device configure its own **link-local IP** in absence of any DHCP Server
+  * **Link-Local Address** = self-assigned a pseudo-random IP which cannot be used to route outside local subnet (so, no internet connectivity)
     * IPv4 in range _169.254.1.0 - 169.254.254.255_ (excluding 2x256 reserved addresses), IPv6 starting with _fe80::_ (with trailing _%n_ zone index to differentiate potentially identical addresses on multiple NICs)
     * Uses a Broadcast ARP request to make sure self-assigned random IP does not conflict with an existing IP of another device on network
+    * Automatically used when a DHCP server is not available, unless a static address was configured manually locally (in Windows connection IP Properties)
 * **Autonomous System** (AS) = collection of IP networks (ie routing prefixes) operated under one (or more) organization (eg ISPs, GAFAMs, universities, governments, CDNs), presenting a unified routing policy to the internet
 * **Autonomous System Number** (ASN)
 * **Border Gateway Protocol** (BGP) = exterior gateway global routing/reachability tables
@@ -226,10 +210,10 @@ Layers sometimes shortened to _Ln_ (eg _L2_ for Transport Layer 2)
   * Class **D** (multi cast) & Class E (reserved) = _224.0.0.0 - 255.255.255.255_ (broadcast)
   * Some ranges within those classes are permanentely carved out of public usage because they are reserved for **private networks**
   * Networks established with this scheme were either too small or way too large for actual organization needs, leading to exhaustion of IPv4 addresses
-* **DHCP** (Dynamic Host Configuration Protocol) = IP network management protocol for automatically assigning IP addresses & other communication parameters to devices, using a client-server architecture
+* **DHCP(v6)** (Dynamic Host Configuration Protocol) = IP network management protocol for automatically assigning IP addresses & other communication parameters to devices, using a client-server architecture
   * IP-less computers looking to connect start by sending a UDP DHCP probe to the entire network (ie _255.255.255.255:67_), to which any DHCP servers respond with an IP offer
 * **DHCP IP Reservation** = an IP address reserved to be always associated with a specific machine (via its MAC) as it connects
-  * Not to be confused with **Static IP Addressing**, which is simply manually setting an IP on each device
+  * Not to be confused with manually assigning a static IP address on each device
 * **DNS** (Domain Name System) = phonebook of the Internet, hierarchical maps of readable URLs to IP addresses
 * **DNS Record** = information about domains provided by authoritative DNS Servers, of different types:
   * A server's records information is viewable via Unix/Mac command `dig` or Windows `nslookup` (with option eg `-type=txt`)
@@ -243,7 +227,7 @@ Layers sometimes shortened to _Ln_ (eg _L2_ for Transport Layer 2)
 * **DNS Root Zone** = top-level DNS zone in hierarchical namespace of internet DNS
 * **FQDN** (Fully Qualified Domain Name) = exact location in DNS tree hierarchy, including top-level domain (eg _.com_) & root zone (eg _example_)
 * **Host Identifier** (or Rest Field) = host portion of an IP address following network prefix
-* **ICMP** (Internet Control Message Protocol) = Network-layer supporting IP suite protocol, used by users (eg `ping`, `traceroute`) and by routers to send error messages and OK/NOK statuses
+* **ICMP** (Internet Control Message Protocol) = network-layer (L3, so no assigned port) supporting IP suite protocol, used by users (eg `ping`, `traceroute`) or by routers to send error messages and OK/NOK statuses
 * **IANA** (Internet Assigned Numbers Authority) = standards organization overseeing global IP addresses & ASN allocation, root zone management in DNS, media types & other protocols
 * **ICANN** (Internet Corporation for Assigned Names and Numbers) = global multistakeholder group & nonprofit US organization responsible for coordinating maintenance of internet name & numerical spaces DBs
 * **IETF** (Internet Engineering Task Force) = standards (originally US government-backed, now under Internet Society) organization for internet, responsible for technical standards making up the Internet Protocol Suite
@@ -264,9 +248,12 @@ Layers sometimes shortened to _Ln_ (eg _L2_ for Transport Layer 2)
   * 24-bit block = _10.0.0.0/8_ (ie _10.0.0.0 - 10.255.255.255_)
   * 20-bit block = _172.16.0.0/12_ (ie _172.16.0.0 - 172.31.255.255_)
   * 16-bit block = _192.168.0.0/16_ (ie _192.168.0.0 - 192.168.255.255_)
+* **Punycode** = Unicode hostnames using limited ASCII character subset (letters, digits, and hyphens), used for non-English alphabets (or emojis, see Dev Detour video)
 * **Quad-Dotted Notation** = 4 number specific case of Dot-decimal notation (decimal numbers separated by _._ dots)
 * **Regional Internet Registry** (RIR) = organization managing allocation & registration of (public) internet number resources within a world region
 * **Routing Prefix** (aka **Network Number**) = network part of an IP address
+* **SLAAC** (Stateless Address Autoconfiguration) = allows a device to automatically configure its own IP address without needing a DHCP server (à la APIPA + RA for IPv6)
+  * **Router Advertisement** (RA) = part of NDP (Neighbor Discovery Protocol) sends messages containing network parameters periodically or in response to a host's RS (Router Solicitation) discovery
 * **Subnet** = mathematical/logical prefix-length-based subdivision of an IP network, defining two parts to IP addresses (a network prefix & host identifier)
   * Number of attributable host addresses in a (sub)network = 2^number of bits in host portion (minus two: (sub)network & broadcasting addresses, ie all host bits to _0_ & _1_ respectively)
   * Subnetting is not just for private networks, RIR/LIR/ISPs all need to subnet their allocated address block
@@ -294,10 +281,11 @@ Layers sometimes shortened to _Ln_ (eg _L2_ for Transport Layer 2)
 * **MX** (Mail eXchanger) = e-mails routing information queryed by MTAs to accomplish SMTP
 * **POP(3)** (Post Office Protocol) = basic application-layer Internet standard protocol used by e-mail clients to retrieve e-mail from a mail server
 * **S/MIME** = standard for public-key encryption/signing of MIME data
+* **SLD** or **2LD** (Second-Level Domain) = domain directly below TLD (eg _example_)
 * **SMTP** (Simple Mail Transfer Protocol) = Internet standard communication protocol for electronic mail transmission used by servers and MTAs
 * **SPF** (Sender Policy Framework) = protocol to let e-mail sending domains publish a record list of authorized source address to send and avoid getting flagged as spam by receivers
   * Authorized servers can be external services and don't have to be subdomains (eg authorize _mailgun.org_)
-* **TLD** (Top-Level Domain) = root (eg _.com_)
+* **TLD** (Top-Level Domain) = one of domains at highest level in hierarchical DNS (eg _com_, and TLD Root Zone _com._ where trailing dot represents DNS root)
 
 * _FEI_ (Forensic Email Intelligence, by _Metaspike_) = commercial desktop tool to dissect raw e-mail evidence for investigations
 * _Mailgun_ = one of the best known ESPs, using REST/SMTP API (rather than a drag&drop GUI)

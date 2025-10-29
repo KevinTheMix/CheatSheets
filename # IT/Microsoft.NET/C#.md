@@ -22,8 +22,6 @@
 * **MSTest**
   * Check that invalid scenarios return expected error messages = `try {…} catch { Assert.IsTrue(ex.Message == String.Format("{format}", param)) }`
 * [Explicit interface implementation hiding](https://stackoverflow.com/a/5284799)
-* Reflection
-  * `typeof(Type).IsAssignableFrom(t)` = is _t_ assignable to variable of type _Type_
 
 ## Glossary
 
@@ -44,6 +42,51 @@
 * **Tuple Patterns** = switch-case with multiple values (`(a, b) switch { ("abc", "123") => "This value", (_, _) => "That default" }`)
 * **Variance** (covariant & contravariant) = essentially polymorphism for generic types
 
+### Keywords
+
+* `abstract` = interface-like, but the class can contain methods that are implemented (non-abstract). The class must be abstract if it contains one abstract member. Abstract members must be overriden in children. See <https://msdn.microsoft.com/en-us/library/sf985hc5.aspx>, <http://stackoverflow.com/questions/747517/interfaces-vs-abstract-classes>, <http://forums.asp.net/t/1411490.aspx?Can+the+C+Abstract+Methods+have+Implementation+>
+* `checked`/`unchecked` = method or code block to set overflow checking runtime context (default is unchecked, `checked` raise exceptions, `unchecked` wraps around)
+* `constant` = can only be initialized at declaration (=> static compile time)
+* `default`
+  * Either a [default value](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/default-values) for a given type (either as an operator `default(int?)` or a literal `int? i = default`)
+  * Or a means to distinguish which one of two methods with same name to override (derived method with `where T : default` means overriding the method without `where` constraints in the base class)
+* `dynamic` = disable compile-time type checking
+  * Usually a code smell but can be used for objects with common members instead of a full-fledged polymorphic solution (for quick prototyping or handling legacy code)
+* `implicit` = implicit casting operator (use a Type in place of another with automatic casting), implementation defines how source type is transformed into (local class) destination Type, typically by calling one of its constructor
+* `in` = readonly reference parameter entering a method
+* `interface` = interface members must be implemented `public`ly (prefer interfaces over abstract classes)
+* `internal` = accessible only within same assembly
+* `is` = check type compatibility (but not identity as in `koko.getType() == typeof(Koko)` or `typeof(Koko).IsAssignableFrom(koko.GetType())`, see <https://stackoverflow.com/a/10416231/3559724>)
+* `lock` = only lock on a private (static or not) object, and avoid locking on the current object instance (ie don't use _this_)
+* `new` = redefines a method in a child class. See <https://msdn.microsoft.com/en-us/library/ms173153.aspx>
+* `operator` = operators overload
+* `out` = reference parameter exiting a method
+* `override` = overrides a method in a child class. You cannot override non-virtual methods.
+* `private` = default access modifier. See <http://stackoverflow.com/questions/2521459/what-are-the-default-access-modifiers-in-c>
+* `readonly` = can only be initialized at declaration AND in constructors (=> at runtime)
+* `ref` = reference parameter entering & exiting a method (needs the parameter to be initialized beforehand)
+  * Useful even for reference types (see <http://stackoverflow.com/questions/961717/what-is-the-use-of-ref-for-reference-type-variables-in-c>)
+* `sealed` = disable further inheritance of a class or overriding of a method (eg for Singleton classes)
+* `static constructor` = initializes static data or do something only once. Run once before the first instance is constructed. See <https://msdn.microsoft.com/en-us/library/k9x6w0hc.aspx>
+* `static readonly` = runtime constant (Can only be set at declaration or in static constructors)
+* `string` = alias for fully qualified .NET type name `System.String`
+* `struct` = declares a **value-type** struct (without inheritance from/to, but can implement interfaces), ie a simple (one-level) collections of related properties that are immutable once created
+* `T` = generic type parameter. Actually a **prefix** (eg `TKey`, `TValue`, `TKoko`) which is `T` (for **T**ype) by convention (but can be anything)
+* `unsafe` = required on sections that use pointers in C#. Also must set compiler to run in unsafe mode.
+* `using` = wrap objects inheriting from `IDisposable` within such a statement to ensure their proper automatic `Dispose()`-al
+* `var` = type inference => lets the compiler figure out the type (note: still **strongly typed** ie at compile-time)
+  * Value cannot be null and cannot be used at class-level (class variable) or as method return type
+  * Eg `var i = 5;` compiles/built into `int i = 5;` (checkable with ILSpy)
+* `virtual` = makes function child-overridable, actual function to be called is determined at runtime based on objet instance (dynamic) type (methods are non-virtual by default)
+* `where T:` = generic conditions
+  * Values = `struct`, `class`, `IKoko<T>`, `KokoClass`, `new()` (meaning it must have a default constructor, let alone it also has to be a _reference_ type)
+  * Multiple conditions = `where T : FirstCondition, SecondCondition`
+  * Multiple generic type parameters `where TA : ConditionA where TB : ConditionB`
+* `yield` = in an iterator, obtains the next value (`yield return koko` or `yield return await KokoAsync()`), or signals the iteration's end (`yield break`)
+  * An iterator is an object that traverses a container (ie lists), ie a method returning `IEnumerable<T>`/`IAsyncEnumerable<T>`, or the method `IEnumerator<T> GetEnumerator` for classes implementing `IEnumerable<T>`
+  * Successive yields are requested at each iteration within a `foreach` loop, or by calling `IEnumerator.MoveNext()`
+  * Can be used eg as an "infinite production" method (on demand, à la Flutter builders/generators), since they're not necessarily iterated from start to finish; it's up to the consumer to know where to stop
+
 ### Versions
 
 Credit: _Tech World With Milan Milanović_
@@ -61,48 +104,7 @@ Credit: _Tech World With Milan Milanović_
 * 2021.11. **C# 10.0** = record structs, global usings
 * 2022.11. **C# 11.0** = file-scoped types, required members, auto-default structs
 
-### Keywords
-
-* `abstract` = interface-like, but the class can contain methods that are implemented (non-abstract). The class must be abstract if it contains one abstract member. Abstract members must be overriden in children. See <https://msdn.microsoft.com/en-us/library/sf985hc5.aspx>, <http://stackoverflow.com/questions/747517/interfaces-vs-abstract-classes>, <http://forums.asp.net/t/1411490.aspx?Can+the+C+Abstract+Methods+have+Implementation+>
-* `checked`/`unchecked` = method or code block to set overflow checking runtime context (default is unchecked, `checked` raise exceptions, `unchecked` wraps around)
-* `constant` = can only be initialized at declaration (=> static compile time)
-* `default`
-  * Either a [default value](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/default-values) for a given type (either as an operator `default(int?)` or a literal `int? i = default`)
-  * Or a means to distinguish which one of two methods with same name to override (derived method with `where T : default` means overriding the method without `where` constraints in the base class)
-* `dynamic` = disable compile-time type checking
-  * Usually a code smell but can be used for objects with common members instead of a full-fledged polymorphic solution (for quick prototyping or handling legacy code)
-* `implicit` = implicit casting operator (use a Type in place of another with automatic casting), implementation defines how source type is transformed into (local class) destination Type, typically by calling one of its constructor
-* `in` = readonly reference parameter entering a method
-* `interface` = interface members must be implemented `public`ly (prefer interfaces over abstract classes)
-* `internal` = accessible only within same assembly
-* `lock` = only lock on a private (static or not) object, and avoid locking on the current object instance (ie don't use _this_)
-* `new` = redefines a method in a child class. See <https://msdn.microsoft.com/en-us/library/ms173153.aspx>
-* `operator` = operators overload
-* `out` = reference parameter exiting a method
-* `override` = overrides a method in a child class. You cannot override non-virtual methods.
-* `private` = default access modifier. See <http://stackoverflow.com/questions/2521459/what-are-the-default-access-modifiers-in-c>
-* `readonly` = can only be initialized at declaration AND in constructors (=> at runtime)
-* `ref` = reference parameter entering & exiting a method (needs the parameter to be initialized beforehand)
-  * Useful even for reference types (see <http://stackoverflow.com/questions/961717/what-is-the-use-of-ref-for-reference-type-variables-in-c>)
-* `sealed` = disable further inheritance of a class or overriding of a method (eg for Singleton classes)
-* `static constructor` = initializes static data or do something only once. Run once before the first instance is constructed. See <https://msdn.microsoft.com/en-us/library/k9x6w0hc.aspx>
-* `static readonly` = runtime constant (Can only be set at declaration or in static constructors)
-* `string` = alias for fully qualified .NET type name `System.String`
-* `T` = generic type parameter. Actually a **prefix** (eg `TKey`, `TValue`, `TKoko`) which is `T` (for **T**ype) by convention (but can be anything)
-* `unsafe` = required on sections that use pointers in C#. Also must set compiler to run in unsafe mode.
-* `using` = wrap objects inheriting from `IDisposable` within such a statement to ensure their proper automatic `Dispose()`-al
-* `var` = type inference => lets the compiler figure out the type (note: still **strongly typed** ie at compile-time)
-  * Value cannot be null and cannot be used at class-level (class variable) or as method return type
-  * Eg `var i = 5;` compiles/built into `int i = 5;` (checkable with ILSpy)
-* `virtual` = makes function child-overridable, actual function to be called is determined at runtime based on objet instance (dynamic) type (methods are non-virtual by default)
-* `where T:` = generic conditions
-  * Values = `struct`, `class`, `IKoko<T>`, `KokoClass`, `new()` (meaning it must have a default constructor, let alone it also has to be a _reference_ type)
-  * Multiple conditions = `where T : FirstCondition, SecondCondition`
-  * Multiple generic type parameters `where TA : ConditionA where TB : ConditionB`
-* `yield` = in an iterator, obtains the next value (`yield return koko` or `yield return await KokoAsync()`), or signals the iteration's end (`yield break`)
-  * An iterator is an object that traverses a container (ie lists), ie a method returning `IEnumerable<T>`/`IAsyncEnumerable<T>`, or the method `IEnumerator<T> GetEnumerator` for classes implementing `IEnumerable<T>`
-  * Successive yields are requested at each iteration within a `foreach` loop, or by calling `IEnumerator.MoveNext()`
-  * Can be used eg as an "infinite production" method (on demand, à la Flutter builders/generators), since they're not necessarily iterated from start to finish; it's up to the consumer to know where to stop
+## API
 
 ### Operators
 

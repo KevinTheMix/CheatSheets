@@ -240,7 +240,7 @@ Commands are fully case-insensitive.
 * `net` = Windows network commands
   * `send {message}` = send messages (via NetBIOS) to other users/computers (until Windows XP)
   * `stop spooler` = stops printer jobs queue (then `cd \windows\system32\spool\printers`, then  `del *.*`, then `net start spooler`, then go to Printers window & hit `F5` to refresh)
-  * `use {new_volume} \\{share}` = maps/mounts a network share to a drive letter (ie set shared network folder as local volume)
+  * `use {new_volume} \\{share}` = maps/mounts a network share to a drive letter (ie set shared network folder as local volume, à la Unix `mount`)
   * `user ({user}) (* /domain)` = view user account information & reset passwords
   * `view \\{server}` or `view /workgroup:{workgroup}` = view network resources
 * `netsh` (Network Shell) = CLI to reset config, change IP address, or edit wireless settings (eg SSID)

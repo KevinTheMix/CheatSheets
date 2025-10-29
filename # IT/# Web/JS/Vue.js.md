@@ -400,6 +400,9 @@ Read on about scoped slots datacontext...: <https://developer.mozilla.org/en-US/
 
 ## Extensions
 
+* **Nuxt.js** = _Vue.js_ FOSS library similar to _Next.js_ (but based on , _Nitro_ & _Vite_)
+  * **Nuxt UI** = UI library for Nuxt
+* **Quasar** = enterprise-ready cross-platform _Vue.js_ framework (provides a library of Material Design web components, deploys to multiple platforms)
 * [VeeValidate](https://logaretm.github.io/vee-validate)
 * [Vue Devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools) = Browser extension
   * Debug & manipulate the data model in real time (add/remove objects and set properties)

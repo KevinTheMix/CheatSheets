@@ -144,7 +144,7 @@ There are two built-in solutions: imperative **Navigator** (push/pop API that wo
 
 ## Display, Images, Painting
 
-* **BackdropFilter** = applies an **ImageFilter** to everything beneath/behind its _child_ z-axis, use with parent **Stack** & _fill_
+* **BackdropFilter** = background image with an **ImageFilter** effect underneath _child_ (use inside a parent **Stack** with `Positioned.fill()` to use all area)
 * **CachedNetworkImage**
 * **Canvas** = eg `canvas.drawArc()` draws circle (arc)
 * **CircleAvatar** = circle container (_radius_, _back/foreground-Image_ with child text initial fallback, append `.image` to **Image**), adequate for user pfp

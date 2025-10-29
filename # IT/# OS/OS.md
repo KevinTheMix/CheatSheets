@@ -36,7 +36,7 @@
   * **UEFI** (Unified Extensible Firmware Interface) = firmware architecture open standard/specification, does not rely on boot sectors but on EFI System Partition (ESP)
     * Offers faster/flexible booting, booting from large disks, more/larger partitions, better hardware initialization (handles 64-bit drivers), Secure Boot, graphical (not just text-based) & network capabilities, extensibility
 * **Bootloader** (Bootstrap Loader) = program located on boot sector (and often extends beyond it) that initializes system hardware, loads & transfers control to (one of possibly several installed) OS kernel
-* **Bus** = data communication system between components inside or between computers
+* **Bus** = data communication system inside (eg non-directional internal CPU registers bus) or between components inside or between computers
 * **Controller** = hardware chip/component part of/piloting a device, manages communication between CPU (high-level operations issued from OS/driver) & peripheral (low-level device-specific) operations (eg timing, buffering, protocol)
 * **CPU Ring** = privilege level (eg _0_ for full hardware authority for kernel code, less for higher numbers)
 * **DDR** (Double Data Rate) = transfers information twice as fast as **SDR** (on each clock cycle ups & downs)

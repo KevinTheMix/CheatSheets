@@ -237,6 +237,7 @@ Use `background-color` when using `background-image`.
 
 ## Extensions
 
+* [98.css](https://jdan.github.io/98.css) = build Windows 98 looking UIs
 * [Difference between SASS & SCSS](https://responsivedesign.is/articles/difference-between-sass-and-scss/)
 * [Difference between SASS & SCSS](https://stackoverflow.com/a/5732683)
 * **SASS** (Syntactically Awesome Style Sheets) = augments regular CSS syntax with programming concepts (eg variables, OO, nesting, Mixins), transpiled to regular CSS
@@ -246,5 +247,5 @@ Use `background-color` when using `background-image`.
   * [Mixins](https://responsivedesign.is/articles/helpful-sass-mixins)
 * **SCSS**
   * Prefixing `.elem { &-sub {} }` equals `.elem {}` + `.elem-sub {}`
-* **Tailwind CSS** = FOSS CSS framework providing a list of composable utility classes
+* **Tailwind CSS** = FOSS CSS framework providing a list of composable utility classes (eg _flex_, _pt-4_, _text-center_ and _rotate-90_)
   * **daisyUI** = **Tailwind CSS** components library (eg accordions, alerts, avatars, carousel)

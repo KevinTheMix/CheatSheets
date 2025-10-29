@@ -4,15 +4,18 @@
 * **SaaS** = Software as a Service aka Software on demand. Subscription-based web app
 * **IaaS** = Infrastructure as a Service, a cloud-based VM to setup & install apps on
 * **BaaS** = Backend as a Service (eg **FireBase**)
+* **No-code** = application creation via visual-based GUIs rather than programming, aimed at businesses
 * **PaaS** = Platform as a Service, a (DB/.NET/Java) platform space/repo on which to deploy such apps
 * **Serverless computing** = cloud servers that are virtualized and treated as a single pay-per-use platform instead of discrete units
-* **No-code** = application creation via visual-based GUIs rather than programming, aimed at businesses
+* **VPS** (Virtual Private Server) = VM sold as a service by Internet hosting company (simulating a dedicated physical server environment but actually shared with other users)
+  * [Hostinger VPS](https://www.hostinger.com/fr/vps)
 
 * _Amazon_
   * _Amazon Web Services_ (AWS) = cloud platform & API
   * _Elastic Compute Cloud_ (EC2) = IaaS (virtual machines)
   * _Simple Storage Service_ (S3) = objet storage via web services
 * _AppSheet_ = Google's no-code mobile/web app development platform
+* _Appwrite_ = open-source BaaS, all-in-one development platform (built-in backend infrastructure & web hosting)
 * _Cloudflare_ = CDN, cloud cybersecurity, DDoS mitigation, ICANN domain registration services
 * _Couchbase_ = NoSQL Cloud Database
 * _DigitalOcean_ = cloud IaaS/PaaS platform, where _Droplet_ is a (Linux) VM
@@ -22,9 +25,10 @@
 * _Hystrix_ = Netflix's microservices defensive circuitry (_not actively maintained_)
 * _Lemon Squeezy_ = online payment, handles local taxes
 * _Linode_ = Linux machines (over SSH, $0.01/hour)
-* _Nextcloud_ = in the cloud or on-premises online collaboration platform, with an extension-based [app store](https://apps.nextcloud.com) (eg DICOM viewer)
+* _Nextcloud_ = in cloud or on-premises online collaboration platform, with an extension-based [app store](https://apps.nextcloud.com) (eg DICOM viewer)
   * _Nextcloud Hub_ = integrated on-premises (ie self-hosted) platform with four key Nextcloud products (Files/Talk/Groupware/Office, basically Drive + Zoom + Outlook + Office)
 * _openHAB_ (open Home Automation Bus) = open-source home automation software (written in Java, by Eclipse)
+* **Sevalla** = PaaS (use Fireship)
 * _Shopify_ = turnkey online stores for e-commerce entrepreneurs
 * _Slack_ = online text/mediasharing/videocalls team communication platform (à la Discord/Teams, by Salesforce)
 * _Stripe_ = online payment

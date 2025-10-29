@@ -53,3 +53,7 @@ Messages carry a timestamp, and random number to prevent replay attacks (the sam
 The Service sends the final exchange message back to the Client, with the timestamp increased by one, thus proving it can actually read the message, or something.
 
 Windows AD is based on Kerberos.
+
+## CLI
+
+* `kinit` = obtains & cache an initial ticket-granting ticket for principal

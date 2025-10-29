@@ -2,6 +2,8 @@
 
 ## Quick Tips
 
+* [Folfklore](https://www.folklore.org) = origin story of original Macintosh
+
 ## Glossary
 
 * **AirDrop** = near Apple devices remote files sharing
@@ -10,6 +12,7 @@
 * **APM** (Apple Partition Map) = older (1980) partition scheme before Apple switched to Intel, stores partition info at beginning fof disk
 * **Apple Business Manager** = company-wide management of employees Apple IDs, integrate with AD, connects with an existing MDM
 * **Apple M1** = first Apple Silicon series of ARM-based CPU & GPU SoC for desktops, notebooks & iPads
+* **Apple Pippin** = defunct open media technology platform (à la Phillips CD-i)
 * **Apple Silicon** (2020) = series of SoCs processors using ARM64 architecture, used in nearly all Apple devices
   * Apple Silicon no longer use UEFI, but an Apple custom secure boot chain built into the SoC (still referred to as ESP)
 * **Continuity** = instantly share resources across devices (eg copy-paste, mirror screen/remote control, use iPhone as webcam), synchronized through iCloud
@@ -22,6 +25,7 @@
 * **SoC** (System on a Chip) = integrated circuit combining most/all components of a computer on a single microchip
 
 * _Asahi OS_ = alternative more open Mac OS based on M1
+* _Homebrew_ = macOS (& Linux) package manager
 
 ### Stock Apps & UI
 

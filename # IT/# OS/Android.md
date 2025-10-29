@@ -7,6 +7,9 @@
 
 ## Glossary
 
+* _.aab_ (Android App Bundle) = device-agnostic package format containing compiled code & resources
+  * Used by Play Stores to eventually generate/distribute (smaller) device-specific APK files (not itself executable)
+* _.apk_ = Android app installation file as a compressed archive (its content can be un-zipped) containing compiled code, resources & manifest
 * [Activities](https://developer.android.com/guide/components/activities/intro-activities) = one app entry point, defined in _AndroidManifest.xml_
 * **Android** = open-source OS based on Linux, supported by many different manufacturer's devices
 * **Android SDK** = can be installed via Android Studio's SDK Manager (at `%USERPROFILE%\AppData\Local\Android\Sdk`)
@@ -25,15 +28,12 @@
 * **GMS** (Google Mobile Services) = Google **Proprietary** apps & APIs, not part of AOSP (eg _Google Play_, _Gmail_, _Google Maps_, …)
 * **Google Play (Store)** = app store
 * **Google Play Services** = Google background services & libraries for use by mobile apps for gaming, geofencing, SSO, maps, ads, pay, analytics
-* **Heimdall** = a cross-platform tool for interacting with Download mode on Samsung devices
 * **Image** = _.img_ file, part of the OS, to be flashed (installed) to the partition matching its name on the device
 * **IMEI** (International Mobile Equipment Identity) = uniquely identifies a hardware mobile device (actually one per fixed SIM card slot)
 * **IMSI** (International Mobile Subscriber Identity) = uniquely identifies a mobile network subscriber/SIM card (stored in SIM card itself)
-* **Odin** = utility used by Samsung to reset (or flash) their smartphones
 * **OEM** (Original Equipment Manufacturer) = a company that constructed an original component sold to end users by another company
 * **OHA** (Open Handset Alliance) = consortium (eg HTC, Sony, Dell, Motorola, Samgsung, LG) led by Google that develops Android
 * **OTA Updates** = Over-the-air updates, the upgrades to the current OS
-* **ProGuard** = open source CLI to shrink/optimize/obfuscate Java code (distributed as part of Android SDK)
 * **ROM** (aka Firmware) = basically the OS installed on the device, in its read-only memory. It is a bit ambiguous whether this refers to all images (most likely), or just the _system_ one
   * Stock ROM = orginal factory OEM ROM
   * Custom ROM = ROM not emitted by OEM. Usually contains but a subset of all images (i.e. most importantly a _system_ image), and reuse pre-existing (e.g. stock) images for non-system partitions
@@ -46,11 +46,13 @@
 * **Sideloading** = installing an image onto the phone directly from a file located on the PC
 * **Vendor image** = image containing device-specific drivers for controlling GPS, gyro, proximity & co
 
-### File Types
+### Tools
 
-* _.aab_ (Android App Bundle) = device-agnostic package format containing compiled code & resources
-  * Used by Play Stores to eventually generate/distribute (smaller) device-specific APK files (not itself executable)
-* _.apk_ = Android app installation file as a compressed archive (its content can be un-zipped) containing compiled code, resources & manifest
+* **Apktool** = assemble/disassemble/reverse engineer Android _.apk_ files
+* **Heimdall** = a cross-platform tool for interacting with Download mode on Samsung devices
+* **Odin** = utility used by Samsung to reset (or flash) their smartphones
+* **ProGuard** = open source CLI to shrink/optimize/obfuscate Java code (distributed as part of Android SDK)
+* **ScrCpy** (Screen Copy) = Android screen mirroring tool
 
 ### Versions
 

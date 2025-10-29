@@ -4,6 +4,7 @@
 
 * In multiple unit tests, instead of recreating an object and having to set all their properties, have a general centralized setup method to create a valid object (eg `ValidCustomer()`), then override specific properties we want to test as needed
   * Actually, most testing frameworks (ie xUnit) instantiate classes each time for each test, so just initialize a local variable (eg `_customer`) in constructor
+* Turn print statements used during debugging into logging statements! (source: <https://programmers.blogoverflow.com/2012/08/20-controversial-programming-opinions> #10)
 
 ## Glossary
 
@@ -46,5 +47,6 @@
 
 * _Robot framework_ = Python-written generic keyword-driven test automation framework for acceptance testing/test-driven development, using a tabular test data syntax
   * [RIDE](https://github.com/robotframework/RIDE) = Robot Framework IDE (edit _.robot_ files)
+* _SonarQube_ = open-source platform to ensure continuous code quality & security (static analysis, coverage, duplication, smells & vulnerabilities detection) on 35+ languages
 * _xUnit_ = automated testing software framework/label/architecture composed of defined components: test cases & suites (ie groups), assertions, fixtures (environment), runner to report results
   * Notably used by Microsoft (in place of their self-developed _mstest_)

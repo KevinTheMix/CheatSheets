@@ -2,6 +2,10 @@
 
 Windows inputs (keyboard & mouse) macros/scripting.
 
+## Quick Tips
+
+* [aText](https://trankynam.com/atext) = another simpler keyword substitution tool
+
 ## API
 
 * Key selector = `ScrollLock::` (no curly braces) or `^j::`

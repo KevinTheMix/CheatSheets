@@ -4,6 +4,7 @@
 
 ## Glossary
 
+* **4+1** = view model describing architecture of software-intensive systems using mutliple shareholders viewpoints
 * **Barrel Files** = a file that does nothing but re-export things from other files
   * [TkDodo - Please Stop Using Barrel Files](https://tkdodo.eu/blog/please-stop-using-barrel-files)
 * **Bottlenecks** = system part that degrades the entire system's performance when congested
@@ -46,7 +47,7 @@
   * **Functional Programming** = pure functions as 1st class without side-effects, immutability, declarative code
   * **Reactive Programming** = data streams & propagation of changes (ie when something changes, other elements depending on it get updated)
 * **Requirement** = design mandate, must be testable
-* **SDK** = set of APIs, compilers, debuggers, documentation, libraries, profilers and tools created by language developers to serve as basis for development
+* **SDK** (Software Development Kit) = set of APIs, compilers, debuggers, documentation, libraries, profilers and tools created by language developers to serve as basis for development
 * **Security** = Confidentiality + Integrity + Availability (CIA)
 * **Single Point of Failure** = system part that halts the entire system if it fails
 * [SOLID](https://en.wikipedia.org/wiki/SOLID) = SRP + OCP + LSP + ISP + DIP (most of those are trivial by today's standards & modern frameworks)

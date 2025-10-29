@@ -34,6 +34,10 @@ Java basé sur OAK et Smalltalk (et C++ interagit pour amélioration)
   * **Phantom Reference** = for already-collected objects, prevents overwriting previous memory (ie for analysing it after GC's actions)
 * **Swing** = part of JFC to create windows-based applications, built on top of AWT, providing platform-independant & lightweight components
 
+## Environment
+
+* **JBuilder** = discontinued IDE (oringinally developed by Borland)
+
 ## CLI
 
 * `javadoc` = generates HTML pages of API documentation from Java source files

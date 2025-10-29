@@ -2,6 +2,10 @@
 
 * Neveo = deliver someone one printed photo album par month
 
+## AI
+
+* [Higgsfield](https://higgsfield.ai) = AI image & video generator
+
 ## Audio
 
 * **Able Rawer** = RAW images viewer/converter
@@ -9,7 +13,6 @@
 * [BlockTheSpot](https://github.com/mrpond/BlockTheSpot) = blocks ad for Spotify on Windows (note: _not the Microsoft Store version_)
 * **CDex** = free audio CD rip/convert
 * **CopyTrans** = iTunes alternative suite
-* [Exportify](https://exportify.net) = export Spotify playlist information
 * **FastStone Image Viewer** = image viewer & editor
 * **FL Studio** (formerly **Fruity Loops**, _Image-Line_) = DAW ($189)
 * **foobar2000** = customizable audio player
@@ -22,38 +25,49 @@
   * [Music screen off stutter issue](https://github.com/jellyfin/jellyfin-android/issues/39) = use Gelli or Yatse instead of official client
   * [ConfusedPolarBear - Intro Skipper](https://github.com/ConfusedPolarBear/intro-skipper)
 * **Kodi** = FOSS multi-platform extensible home media/radio/TV library/theater
-* [NCS](https://ncs.io) (No Copyright Sounds)
 * **Otter.ai** = voice meeting notes & real-time transcription
 * **PixRecovery** = repairs corrupted image files
 * **PrtScr** = super easy screenshots
+* **RipX** = AI-powered DAW that is able to take an existing song, and rip it into its individual tracks for editing
 * **SharePod** = iPod music transfer (no installer)
 * [Songbird](https://songbird.en.softonic.com) = audio player & manager (status: _discontinued_)
 * **Sound Forge** = digital audio editing ($40)
 * [Spicetify](https://github.com/spicetify) = Spotify client customization/themeing/unbloating
-* **Voicemod** = microphone sound effects
+* [Voicemod](https://www.voicemod.net) = free real time microphone voice changer/sound effects
+* [Voicemod Tuna](https://tuna.voicemod.net) = free sound clips for Voicemod soundboard
 * **Yatse** = Kodi remote & cast
 * [youtube-dl](https://youtube-dl.org) = youtube/others audio/video download manager
 * [Youtube Downloader HD](http://www.youtubedownloaderhd.com)
 
+* [Exportify](https://exportify.net) = export Spotify playlist information
+* [NCS](https://ncs.io) (No Copyright Sounds)
+* [VGMusic](https://www.vgmusic.com) = retro games music MIDI files archive
+
 ## Image
 
+* **Amide** = medical imaging data examiner
 * **DeOlidfy** = online deep learning photo/video colourization
 * **Exiv2** = Images (Exif & co) metadata editor
 * **Flameshot** = FOSS screenshot tool
 * **GIMP** (GNU Image Manipulation Program) = FOSS raster graphics editor (image manipulation/retouching, editing, drawing)
 * **Greenshot** = FOSS screenshot, annotate & share tool (for Windows)
-* [Iconfinder](https://www.iconfinder.com) = online catalogue of graphics (icons, illustrations, 3D, stickers) by independent designers
 * **Inkscape** = FOSS vector graphics editor (for cartoons, clip art, logos, typography, flowcharting)
 * **Krita** = FOSS raster graphics editor (for digital art & 2D animation)
+* **ImageMagick** = FOSS CLI cross-platform raster image editor
+* **Paint.NET** = free (image & photo) raster graphics editor for Windows
+* **Rive** (integrated **Flare**) = design & interactively animate vector/raster graphics using state machines, online or via a Flutter-based Windows app
+
+* [EmojiDB](https://emojidb.org) = emojis & ASCII art
+* [Flaticon](https://www.flaticon.com) = vector (SVG) icons & stickers
+* [Iconfinder](https://www.iconfinder.com) = online catalogue of graphics (icons, illustrations, 3D, stickers) by independent designers
 * [Canva](https://www.canva.com) = online collaborative/multiplayer visual content design tool
 * [Figma](https://www.figma.com) = online collaborative/multiplayer interface design tool
-* **ImageMagick** = FOSS CLI cross-platform raster image editor
 * [ministprit](https://minisprit.es) = online pixel sprites designer
 * [Noun Project](https://thenounproject.com) = free icons & stock photos
-* **Paint.NET** = free (image & photo) raster graphics editor for Windows
-* [Paragraphica](https://aivalley.ai/paragraphica) = camera without a lens art project generating images via AI image generation based on contextual description
-* **Rive** (integrated **Flare**) = design & interactively animate vector/raster graphics using state machines, online or via a Flutter-based Windows app
+* [Ostagram](https://www.ostagram.me) = merge a photo with a texture
+* [Triple Monitor Wallpapers](https://imgur.com/a/triple-monitor-wallpapers-Uqgxn)
 * [Very Icon](https://www.veryicon.com) = free PNG & vector icons
+* [Wallhalla](http://wallbase.net) = free curated wallpapers
 
 ## Video
 
@@ -63,6 +77,7 @@
 * [Bodymovin](https://github.com/bodymovin/bodymovin-extension) = _Adobe After Effects_ plugin to export animations as JSON
 * **BS.Player** = media player
 * **CamStudio** = FOSS video recorder
+* **CapCut** = all-in-one AI-powered video editor & graphic design tool
 * **Da Vinci Resolve** = free(mium) color/visual effects/post-production video editor
 * **FFmpeg** = FOSS video & audio download/convert/record/stream CLI
 * **Fraps** = FPS viewer, screen recording
@@ -101,7 +116,8 @@
 
 ### Editors/IDEs
 
-* **Atom** = FOSS cross-platform text/code editor
+* **Atom** = (discontinued) FOSS cross-platform text/code editor
+* **Brackets** = open-source editor for web developers/designers/students with live previews & attributes autocompletion (superseded by **Phoenix Code**)
 * **ConTEXT** = text editor (_discontinued_)
 * **Cursor** = AI-first code editor
 * **HTLM-Kit** = trialware HTML editor
@@ -111,3 +127,7 @@
 * [Replit](https://replit.com) = online AI-assisted collaborative IDE
 * **Sublime Text** = shareware text/code editor that probably inspired VS Code
 * **Zed** = FOSS fast code editor (by the Atom team)
+
+## Productivity
+
+* **n8n** (Fireship) = FOSS workflow with an AI step (Zapier alternative)

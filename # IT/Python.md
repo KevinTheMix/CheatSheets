@@ -14,7 +14,7 @@
   * Commonly overriden (eg `__init__`), listable via `dir({class})`
 * **Flask** = light & extensible web framework (`flask`)
 * **PyPI** (Python Package Index) = official repository of Python packages (default for `pip`)
-* **Tkinter** = interface to Tcl/Tk (ie to build GUIs)
+* **Tkinter** = interface to Tcl/Tk (ie a cross-platform FOSS widget toolkit for building GUIs in many programming languages)
 * **Virtual Environment** = standalone self-contained local install including all versioned dependencies, sourced in command prompt, prevents intereference with global install
 * **Web Server Gateway Interface** (WSGI) = server-to-application calling/forwarding convention for Python applications
 
@@ -63,7 +63,7 @@
 
 * `1234` = **int**eger number
 * `12.34` = **float**ing-point number
-* `int(text)` = convert to integer
+* `int(text, {base})` = convert to integer (in optional base)
 * `float(text)` = convert to float
 * `/` = floating-point division
 * `//` = floor integer division
@@ -74,6 +74,7 @@
 
 Strings are list of (1-char long) strings.
 
+* `chr(integer)` = converts integer into corresponding ASCII character
 * `'text'` or `"text"` = **str**ing
 * `"""text{Enter}text"""` = multi-line string (outputs newlines)
 * `"text/{Enter}text"` = line continuation (does not output newlines)

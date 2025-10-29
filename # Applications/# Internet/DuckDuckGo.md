@@ -1,6 +1,9 @@
 # DuckDuckGo
 
-* Search directly via wikipedia instead of google
+## Quick Tips
+
+* Search directly via wikipedia (`!w`) instead of googling
+* [WolframAlpha](https://www.wolframalpha.com/input/?i=all%20visible%20satellites)
 
 ## Bangs
 

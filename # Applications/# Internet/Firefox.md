@@ -1,5 +1,18 @@
 # Firefox
 
+## Glossary
+
+* **Brave** = FOSS Chromium-based browser marketed as privacy-focused (built-in ad block, fingerprinting protection, Tor-powered private browsing)
+* **Firefox Beta** = to test about-to-be-released features
+* **Firefox Developer Edition** = more features for web development (JavaScript debugger, CSS Grid virtualization, shape path editor, element font information)
+* **Firefox Extended Support Release** (ESR) = for organizations who control their clients' desktops
+* **Firefox Focus** = mobile device privacy browser with automatic tracking protection
+* **Firefox Nightly** = for active users who volunteer to test & report bugs
+* **LibreWolf** = FOSS Firefox fork with an emphasis on privacy & security
+* **Opera GX** = gaming-themed-oriented alternative to Chromium-based Opera (has a mobile version)
+* **Opera Air** = mindfulness-oriented browser alternative to Opera and Opera GX (includes breathing exercises, meditation, binaural beats, neck stretches features)
+* **Vivaldi** = Norwegian freeware cross-platform Chromium-based browser with a built-in email client, calendar, translation
+
 ## Menus
 
 * Right-click > **T**ake Screenshot

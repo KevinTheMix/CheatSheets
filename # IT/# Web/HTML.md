@@ -21,6 +21,7 @@
 * Tables
   * `<table>`, `<tr>` (Table Row), `<th scope="[col(group)/row(group)]">{title}</th>` (Table Header), `<td>{cell content}</td>` (Table Data)
   * `<thead>`, `<tbody>`, `<tfoot>` (can be specified before `<tbody>` and will still be displayed at the end) = static heading/footer & only body changing for results spanning multiple pages
+* `<script type="text/javascript" src="script.js" async="true" />` = loads script asynchronously (ie non-blocking, executed once it's ready but execution order becomes non-deterministic)
 
 ## Accessibility
 

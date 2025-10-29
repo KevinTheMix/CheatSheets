@@ -5,15 +5,6 @@ Technically, any outer layer that mediates between a user and a kernel's service
 ## Quick Tips
 
 * [Carlos Fenollosa - Tips](https://cfenollosa.com/misc/tricks.txt)
-* `Escape + -.` = fetches last parameter of previous command
-* `Ctrl + Q` = unfreezes terminal frozen by accidental `Ctrl-s`
-* `Ctrl + R` = search command history
-* `Ctrl + X, Ctrl + E` = opens an (GNU nano) editor to work with long or complex command lines
-* `!!` = repeats last command (useful for quickly retrying failed command as admin eg `cat /etc/...` -> _permission denied_ -> `sudo !!`)
-  * `!!:{n}` = selects nth argument of last command
-  * `!$` = selects last argument of last command
-  * Eg `ls file1 file2 file3; cat !!:1-2` = shows all files & _cats_ only 1 and 2
-* '^' = sed-like operator to replace chars from last command (eg `ls docs; ^docs^web^` is equal to `ls web`, second argument can be empty)
 
 ## Glossary
 
@@ -51,9 +42,18 @@ Technically, any outer layer that mediates between a user and a kernel's service
 
 ## API
 
-### Keywords
+* `;` = command separator
 
-* `;` can be replaced with a newline
+### History Expansion Operators
+
+* `^` = replace chars from last command (à la `sed` eg `ls docs; ^docs^web^` is equal to `ls web`, second argument can be empty)
+* `!!` = repeats last command (useful for quickly retrying failed command as admin eg `cat /etc/...` -> _permission denied_ -> `sudo !!`)
+* `!!:{n}` = selects nth argument of last command (eg `ls file1 file2 file3; cat !!:1-2` = shows all files & _cats_ only 1 and 2)
+* `!^` = expands to first argument of last command
+* `!$` = expands to last argument of last command
+* `!*` = expands to all arguments of last command
+
+### Keywords
 
 * `[[` = (Bash extension) enhanced conditional expression (eg `if [[ $answer == 'y' ]]; then … fi`)
 * `if` & `elif` (followed with `then`, ends with `if`) = uses exit status of `[` (_0_ means success, non-zero means failure)
@@ -114,8 +114,8 @@ Technically, any outer layer that mediates between a user and a kernel's service
   * `]` = basically useless (but required) last argument to make `[` command look like a balanced expression
   * `-a`/`-o` = logical AND/OR (note: it is more legible to use `[[]]` with `&&` and `||`)
   * `<`/`<=`/`>`/`>=`/`=` (POSIX-compliant)/`==` (Bash-specific) = string comparison
-  * `-n` = check if string is non-empty (eg `[ -n "$VAR" ]` or shorthand `[ $VAR ]`)
-  * `-z` = check if string length is zero (`[ -z "${variable+x}" ]` = checks whether a variable is set)
+  * `-n` = true if string is non-empty (eg `[ -n "$VAR" ]` or shorthand `[ $VAR ]`)
+  * `-z` = true if string length is zero (portable check `[ -z "${variable+x}" ]` is true only when variable is not set)
   * `-eq` = number equality
   * `-ne` = number unequality
   * `-ge` = number greater than or equal
@@ -220,8 +220,8 @@ They all use `fork()` under the hood to spawn sub-processes.
   * `>|` & `&>|` = force-overwrite
 
 * It is important to understand that commands such as `cat` either read from a file(name) passed as argument, or from _stdin_, but **don't pass a filename via stdin**
-  * `cat <(echo file.txt)` won't work: output of subshell ( "_file.txt_") is written as-is in a temp file, and that content is passed as-is to `cat`
-  * `echo "file.txt" | cat` won't work: output of echo ("_file.txt_") is passed as-is to `cat`
+  * `cat <(echo file.txt)` won't work as expected: output of subshell ( "_file.txt_") is written as-is in a temp file, and that content is passed as-is to `cat`
+  * `echo "file.txt" | cat` won't work as expected: output of echo ("_file.txt_") is passed as-is to `cat`
   * `cat "$(echo file.txt)"` works: echo output is string interpolated, and `cat` receives a filename as argument
   * `cat` (without arguments) simply plugs _stdin_ into _stdout_, hence mirrors everything typed
 

@@ -26,7 +26,7 @@
 * **HMAC** (Hash-based Message Authentication Code) = specific type of MAC via a crypto hash function & secret crypto key
 * **Hardware Security Module** (HSM) = dedicated device/PCIe card or cloud-based service to generate/store/use cryptographic keys (eg certificate private key)
 * **JWT** (JSON Web Token) = internet standard for adding optional JSON signature/encryption to data, whose payload asserts some claims (eg "logged as admin")
-  * Tokens are signed via either a shared secret or public/private key, and designed to be compact, URL-safe, usable in a web-browser SSO context
+  * Tokens are signed via either a shared secret or public/private key, designed to be compact, URL-safe, usable in a web-browser SSO context
 * **Key Derivation** = process to generate cryptographically strong keys from one or more values (eg keys, passphrases)
 * **Key Partitioning** = dividing a single key into a set of keys (eg splitting a 256-bit key into two keys of 128 bits each)
 * **MAC** (Message Authentication Code) = short piece of information to attest a message's **authenticity & integrity** (aka checksum, hash, error detection)

@@ -79,7 +79,7 @@ See <https://en.wikipedia.org/wiki/OAuth>
   * Can be implemented in any of a handful of fashions, aka Grant Types, defined by OAuth 2.0 (see below)
   * Typically relatively short-lived (eg 1 to 10 minutes).
 * **HTTP Basic Authentication** = user login/password prompt
-* **OpenID Connect** (**OIDC**) = authentication/identity/SSO layer on top of OAuth 2.0 (uses JWT for its ID tokens)
+* **OpenID Connect** (**OIDC**) = authentication/identity layer on top of OAuth 2.0, enabling SSO (uses JWT for its ID tokens)
 * Protected Resource = an API the User has access to on its own (eg Spotify), and the Client App requests access to
 * **Refresh Token** = a long-lived token used by the CA to obtain a new Access (or Refresh) Token.
   * Provides long-lived access by removing the need for the User to authenticate again everytime the Access Token times-out (also allows long-running tasks)
@@ -88,12 +88,10 @@ See <https://en.wikipedia.org/wiki/OAuth>
   * User _should be_ informed that Refresh Tokens are requested.
   * `scope=(...) offline_access`
   * Typical policy is one-time usage for one month
-* Scope = permissions to do something within an API.
+* **Scope** = permissions to do something within an API.
   * Sent by the Client Application during the initial HTTP Authorization request to the AS.
   * Should be _scoped_ (prefixed) with the API name eg `my_api.read` to guarantee namespacing.
-* User
-  * In OAuth, this is the owner of the resource
-
+* **User** = owner of a resource
 * **Resource Server**
   * An entity that holds protected data/resources and will provide access to it to anyone showing the right token for it.
 * **Client/Consumer**
@@ -257,9 +255,5 @@ Only improvement over Credential Sharing is that username/password do not need b
   * `client_id={id}`
   * `client_secret={secret}`
   * `&username={login}&password={password}`
-
-## OpenID Connect 1.0
-
-Authentication protocol.
 
 ## EOF

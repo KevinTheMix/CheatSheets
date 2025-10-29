@@ -2,6 +2,7 @@
 
 ## Quick Tips
 
+* [Project Euler](https://projecteuler.net) = challenging math/algo problems
 * Don't recalculate x in algo while (eg `while() {array[i*x +y]}` => instead add `x` each iteration)
 * TriCount algo = divide sum of everything by # of people, each's delta = that number - paid
 * Pick Random Item = `items[Math.floor(Math.random() * items.length)]` (JavaScript)
@@ -16,12 +17,15 @@
 * [Google RGB-hidden phrase](https://www.reddit.com/r/Android/comments/2k4qjs/comment/clhypmg) = RGB is a set of three ASCII letters, normalized by subtracting min value
 * `({number} & 1) == 0/1` = check whether a number is even/odd
 * To check distances (inequality), you don't have to sqrt() the variable side each time, simply pwr(2) the constant side one time
+* Checking whether a pixel is white or a RGB color: don't check that particular color, but one of the other two (see <https://gist.github.com/kezzyhko/ea5dcfd97be881d200e694731cb0c257>)
 
 ## Glossary
 
+* **A\*** = graph traversal & pathfinding algorithm used in many fields for its efficiency
+  * See [Amit's A* Pages](https://theory.stanford.edu/~amitp/GameProgramming)
 * **Alpha-beta pruning** = search algorithm that stops evaluating a move (and its search path subtree) when it is estimated to be worse than a previously examined move
 * **Backus-Naur Form** (BNF) & **Extended BNF** = meta-syntax describing a programming language's syntax
-* **Bellman-Ford** = shortest path in a weighted graph
+* **Bellman-Ford** = shortest paths in a weighted graph
 * **Complément à 2**
   1. Use 1st bit as sign = `[-127,127]` on 8 bits, `[-32767,32767]` on 16 bits, but zero appears twice: _0000_ & _1000_
   2. Complément à 1 = invert all bits (still two zero's: 0000 & 1111)

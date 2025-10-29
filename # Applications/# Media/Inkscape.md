@@ -4,13 +4,14 @@ Inkscape is a FOSS vector graphics editor, serving as alternative to Adobe Illus
 
 ## Quick Tips
 
-* Pull left menu bar to the right to align tools icons in multiple columns
+* Pull left Toolbox menu bar to the right to enlarge it & align tools icons as multiple columns
 * Alpha & Opacity are not the same (alpha is an intrinsic part of a RGBa color whereas opacity is an additional property)
 
 ## Glossary
 
+* **Fill** = object color
 * **Path** = basic vector object
-* **Stroke** = line surrounding path, part of it (can be straight/rounded, colored, widened)
+* **Stroke** = surrounding line color, part of path (can be straight/rounded, colored, widened)
 
 ## Menus
 
@@ -23,7 +24,7 @@ Inkscape is a FOSS vector graphics editor, serving as alternative to Adobe Illus
   * `Click` = set Fill color, Shift + Click` = set Stroke color
 * **Status Bar** (bottom) = contextual information (number of selected objects, scaling factor, rotation angle)
 
-### Shortcuts
+## Shortcuts
 
 * `Ctrl + Shift + 4` = center view on page
 * `Ctrl + Shift + A` = Align & Distribute
@@ -40,6 +41,7 @@ Inkscape is a FOSS vector graphics editor, serving as alternative to Adobe Illus
 * `Ctrl + -` = Difference
 * `Ctrl + B` = toggle scrollbars
 * `Ctrl + D` = Duplicate
+* `Ctrl + G` = Group
 * `Ctrl + R` = toggle rulers
 * `Shift` = select multiple objects
 * `Shift + Alt + P` = toggle Palette
@@ -50,6 +52,9 @@ Inkscape is a FOSS vector graphics editor, serving as alternative to Adobe Illus
 * `4` = zoom on content
 * `5` = zoom on page
 * `6` = zoom on page width
+
+### Tools
+
 * `*` (Star) = draw star/polygon shapes
 * `B` (Bézier) = draw line (`Click`) or Bézier curve (`Drag`) paths (`Ctrl` for 15° steps)
 * `E` (Ellipse) = draw circle/ellipse/arc shapes (drag circle handle outside to draw a pie chart or outside to draw a straight arc)

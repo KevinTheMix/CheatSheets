@@ -4,3 +4,4 @@
 * _Godot_ = FOSS cross-platform (2D & 3D) game engine
 * _Unity_ = 2D, 3D & VR development platform (_$399_)
 * [GDevelop](https://gdevelop.io) = FOSS no-code game engine
+* [The making of PopCap's Plants vs Zombies](http://www.slideshare.net/gwertzman/the-making-of-popcaps-plants-vs-zombies)

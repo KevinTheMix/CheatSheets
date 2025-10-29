@@ -73,3 +73,5 @@ Les commandes suivantes nécessitent de pointer sur une DB :
 
 * [$eq(aggregation)](https://www.mongodb.com/docs/manual/reference/operator/aggregation/eq/#mongodb-expression-exp.-eq)
 * [$size(aggregation)](https://docs.mongodb.com/manual/reference/operator/aggregation/size/#mongodb-expression-exp.-size)
+* `$unwind`
+* MongoDB.Entities = data access library for MongoDB with an elegant api, LINQ support and built-in entity relationship management
