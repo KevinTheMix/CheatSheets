@@ -1,6 +1,6 @@
 # Media
 
-* Neveo = deliver someone one printed photo album par month
+* **Neveo** = deliver someone one printed photo album par month
 
 ## AI
 
@@ -18,7 +18,6 @@
 * **foobar2000** = customizable audio player
   * [Game Emu Player for GBS/SPC files](https://www.foobar2000.org/components/view/foo_gep)
 * **FullShot** = screenshot (SWORD, $50)
-* **Gelli** = Android Jellyfin music client
 * **GoldWave** = digital audio editing ($19)
 * **IrfanView** = image viewer & editor
 * **Jellyfin** = FOSS multi-platform home media server (with desktop, web, Android clients)
@@ -104,11 +103,12 @@
 * **Joplin** = FOSS Markdown-based cloud multimedia richtext notetaking & to-do (_Windows 10+_)
 * **KeepNote** = FOSS simple rich hierarchical notekeeping (as HTML files, 2012 old, very basic: links cannot have text, richtext superfluous)
 * [Logicly](https://logic.ly) = logic gates (AND, OR, XOR) simulator/designer
-* [MDwiki](http://dynalon.github.io/mdwiki/#!index.md) = simple HTML5/JavaScript CMS/wiki displaying static Markdown files as HTML pages (requires a webspace eg GitHub Pages, Google Drive, Dropbox, IIS)
+* [MDwiki](https://dynalon.github.io/mdwiki/#!index.md) = simple HTML5/JavaScript CMS/wiki displaying static Markdown files as HTML pages (requires a webspace eg GitHub Pages, Google Drive, Dropbox, IIS)
 * [OnlyOffice](https://www.onlyoffice.com) = free office suite
-* [Pepakura Designer](https://tamasoft.co.jp/pepakura_designer) = paper crafting (turns 3D models into 2D paper patterns)
+* [Pepakura Designer](https://tamasoft.co.jp/craft/index.html) = paper crafting (turns 3D models into 2D paper patterns)
 * **PSPad** = free code/text editor with syntax highlighting
 * **Roadkill** = open-source lightweight Wiki (.NET, jQuery, Lucene)
+* **TiddlyWiki** = cross-platform open-source personal non-linear notebook for organising/sharing information (as a single HTML file wiki)
 * [Typeform](https://www.typeform.com) = free beautiful user-friendly online forms/surveys
 * **Typora** = lightweight markdown editor (_$14.99_)
 * [Torchpad](http://torchpad.com) = online Markdown wiki (must signup)
@@ -119,7 +119,7 @@
 * **Atom** = (discontinued) FOSS cross-platform text/code editor
 * **Brackets** = open-source editor for web developers/designers/students with live previews & attributes autocompletion (superseded by **Phoenix Code**)
 * **ConTEXT** = text editor (_discontinued_)
-* **Cursor** = AI-first code editor
+* **Cursor** = AI-first code editor (for of VS Code)
 * **HTLM-Kit** = trialware HTML editor
 * **JetBrains AI** = IDEs AI assistant
 * **Nodepad2** = notepad.exe alternative
@@ -130,4 +130,5 @@
 
 ## Productivity
 
+* [Goblin Tools](https://goblin.tools) = break down todo items, formalize (make writing more professional), list maker
 * **n8n** (Fireship) = FOSS workflow with an AI step (Zapier alternative)

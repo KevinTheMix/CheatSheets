@@ -8,6 +8,7 @@
 
 * [American McGee's Alice](https://www.myabandonware.com/game/american-mcgee-s-alice-452)
   * [How to install HD version](https://steamcommunity.com/sharedfiles/filedetails/?id=645862676)
+* **Audiosurf** (2008) = ride lanes with blocks synched to music (à la Guitar Hero)
 * [Command & Conquer](https://cncnz.com/features/freeware-classic-command-conquer-games) = freeware C&C, Red Alert (several releases; some require setting up 16-bit Windows XP compatibilty)
 * [Dwarf Fortress](http://www.bay12games.com/dwarves) = ASCII roguelike
 * [Item Abuse](https://www.smwcentral.net/?p=section&a=details&id=11342) = Super Mario World Kaizo

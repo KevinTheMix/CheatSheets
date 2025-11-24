@@ -22,14 +22,12 @@
 * **IObit Uninstaller** = uninstall programs completely
 * **Malwarebytes Free** = removes malware and spyware
 * **MediCat USB** = multiboot USB (BIOS) stick for modern PC repair
-* **Microsoft Defender** = replaces Microsoft Security Essentials from Win 8
 * **Norton Insight** = whitelists files based on reputation
 * **Norton Power Eraser** = small portable executable that scans a computer system (via _Norton Insight_)
 * **Open Hardware Monitor** = temperature, fan speeds, voltage & co
 * **Predator** = USB key logging in/off (for _Windows XP_)
 * **Revo Uninstaller** = uninstall, clean files/registry, shreds
 * **Spybot Search & Destroy** = removes adwares, malwares, spyware (_$12_)
-* **Sysinternals** = various semi-official Microsoft system utilities (Process Explorer, Windows Task Manager, Autoruns, RootkitRevealer, defragmentation tools)
 * **Ultimate Boot CD** = bootable CD-ROM containing system & diagnostics tools (BIOS CMOS wipe, CPU stress testing, boot management, data/disk recovery/erasing, partitioning)
 
 ## Disk & Files

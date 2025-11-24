@@ -67,6 +67,9 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
 * **google_moblie_ads** (_@google.dev_)
 * **json_serializable** (_@google.dev_) = generate to/fromJson code based on annotated class members
 * **vector_math** (_@google.dev_) = vector math for 2D/3D apps (distance calculation, vector/matrix, collision detection)
+* Firebase = via (FlutterFire) CLI
+  * **firebase_core** (_@firebase.google.com_) = Firebase Core API connecting to multiple Firebase apps
+  * **firebase_messaging** (_@firebase.google.com_) = Firebase push notification
 
 * **dynamic_color** (_@material.io_) = Material color schemes based on platform dynamic color
 * **google_fonts** (_@material.io_) = use [Google Fonts](https://fonts.google.com) (_fontSize|Weight_, _height_)
@@ -100,6 +103,7 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
 
 ### Community
 
+* **android_intent_plus** (_@fluttercommunity.dev_) = launch arbitrary intents on Android-only platform
 * **connectivity_plus** (_@fluttercommunity.dev_) = discover network connectivity types (eg mobile, wifi, ethernet, vpn, bluetooth) for all platforms
 * **device_info_plus** (_@fluttercommunity.dev_) = device/OS-specific information; `DeviceInfoPlugin()` then `.androidInfo` or `.iosInfo` ~ built-in `Platform.isAndroid|IOS`
 * **equatable** (_@fluttercommunity.dev_) = simplifies (value) equality comparison boilerplate (just define _props_ and remove `hashCode()` & `operator==()`)
@@ -188,10 +192,13 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
 * **jaspr** (_@schultek.dev_) = web framework for building HTML/CSS websites in Dart (with both client-side & server-side rendering)
 * **location** (_@bernos.dev_) = device geographical location; `serviceEnabled()`, `requestService()`, `hasPermission`, `requestPermission()`, `getLocation()`
 * **permission_handler** (_@baseflow.com_) = cross-platform post-install granular app permission requests
+* **pixel_snap** (_@widgetbakery.dev_) = fix Windows 150% non-integral pixel scaling blur
 * **printing** (_@nfet.net_) = generate & print documents to mobile-compatible printers
 * **pub_version_plus** (_@mrgnhnt.com_) = increment fragments of a version (& build) number via single command
   * Usage = `dart run pub_version_plus:main {major|minor|patch|build} (--pre-release {beta|alpha|dev})`
   * Works well with CI/CD **when installed as a dev-dependency**
+* **pubghost** (_novadev.be_, Flutter Belgium) = CLI tool to detect ghost/orphan (_pubspec.yaml_) dependencies/classes/widgets/translation (_.arb_) files
+* **rate_my_app** (_@skyost.eu_) = kindly ask users to rate your app after some conditions are met (install time, number of launches, etc)
 * **rect_getter** (_@debuggerx.com_) = obtain a widget's rectangular coordinates
 * **rnd** (_@gskinner.com_) = makes working with random values easier (global **Random** instance + helpful extension methods)
 * **searchfield** (_@maheshjamdade.com_) = simple customizable autocomplete search widget
@@ -200,7 +207,7 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
 * **tflite_flutter** (_@tensorflow.org_) = TensorFlow Lite interpreter and perform interference, with multi-platform support (mobile & desktop)
 * **undo** (_@rodydavis.com_) = undo/redo history stack to go back/forward
 * **universal_platform** (_@gskinner.com_) = platform detection (eg _isAndroid_, _isWeb_, _isWindows_) that works for web (unlike _dart.io.Platform_ at the time)
-* **upgrader** (_@larryaassen.com_) = informs users there is a newer app store version of the app
+* **upgrader** (_@larryaassen.com_) = informs users there is a newer app store version of the app (with no configuration necessary)
 * **uuid** (_@yuli.dev_) = generate UUIDs
 * **version** (_@dart.ninja_) = parse & compare semantic versions
 * **window_size** (-) = gets/sets desktop (Linux/macOS/Windows) apps window size (also see **desktop_window** package)
@@ -231,6 +238,9 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
   * **wave_container** (-) = sine water-like wave animations
   * **wave_transition** (-) = radial layer reveal effect
   * **wave_transition_animation** (-) = radial layer reveal effect
+* Buttons
+  * **pretty_animated_buttons** (_@yl0.me_) = 12 turnkey button (border neumorphic, slide)
+  * [Top 20 CSS buttons](https://dev.to/webdeasy/top-20-css-buttons-animations-f41) = gaussian gooey buttons
 * Font & Theme
   * **flex_color_scheme** (_@rydmike.com_) = Material Design 3 seeded generated color schemes
   * **material_symbols_icons** (_@hiveright.tech_) = uses official Material Symbols Icons
@@ -311,6 +321,7 @@ Using some of these packages allows building an app without never actually using
   * **hive_flutter** (_@hivedb.dev_) = lightweight wrapper around **Isar** key-value NoSQL DB, simple for small apps, written in pure Dart
   * **hive_generator** (_@hivedb.dev_) = Hive TypeAdapters generator extension
   * **isar** (_@isar.dev_) = cross-plaform DB for flutter (replaces Hive with full Web support via IndexedDB), amazing for offline-first, sync-ready use cases
-  * **objectbox** (_@objectbox.io_) = high-performance offline-first (on-device data persistence & AI) edge vector search NoSQL DB with [Data Synchronization](https://sync.objectbox.io) (no Web)
+  * **objectbox** (_@objectbox.io_) = high-performance offline-first (on-device data persistence & AI) edge vector search NoSQL DB
+    * [ObjectBox Data Sync](https://objectbox.io/sync) = edge/offline/cloud data synchronization (no Web)
   * **sqflite** (_@tekartik.com_) = save structured data locally in SQLite DB (usual CRUD, or raw SQL). Enable foreign keys explicitely if they are needed
   * **sqflite_ffi** (_@tekartik.com_) = makes sqflite work on desktop (Linux, MacOS, Windows) for both Flutter/Dart VM

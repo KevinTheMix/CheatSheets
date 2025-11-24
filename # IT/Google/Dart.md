@@ -27,12 +27,12 @@ The same Dart code can run on multiple platforms (eg mobile/desktop via Flutter,
   * Output of CFE is Kernel blobs/files that are fed to JIT Compiler
 * **Dart Core** = core libraries (eg where **int**, **String** are _implemented_) written in native code (often in C++, or platform-specific)
 * **Dart Runtime** = optimized environment in which compiled Dart code executes (whether AOT or JIT), manages memory (GC) & concurrency (isolates), enforces (dynamic-time) typing
-  * It is part of Dart VM and automatically included in AOT-compiled self-contained executables (eg _.exe_ files) on native platforms
+  * It is either part of Dart VM (_dart.exe_) or automatically included in AOT-compiled self-contained executables (eg _myapp.exe_) on native platforms
 * **Dart SDK** = toolkit to write/compile/run Dart applications (ie Dart core/additional libraries (eg io, html), Dart VM, _dart2js_, _dart2native_, `dart compile`, _pub_, DevTools)
 * **Dart VM** = Common Front End + JIT (incremental) Compiler + Debug Service & Runtime
   * Provided by `dart run` CLI command, which launches a dedicated process (eg _dart.exe_ on Windows)
 * **Dot Shorthand** = eg `Column(crossAxisAlignment: .stretch)`
-* **Isolate** = independant unit of execution that does not share memory, making it safer for concurrency compared to thread-based models
+* **Isolate** = independant unit of execution (for CPU-intensive treatments) that does not share memory, making it safer for concurrency compared to thread-based models
   * Isolates run in parallel in separate processes (ie on separate CPUs), unaware of each other, and communicate via messages (inspired by Erlang)
 * **JIT** (Just-in-Time) = used in Debug Mode, compiles/executes code on-the-fly inside a **Dart VM** (running until program exits), enabling QoL features such as _Stateful Hot Reload/Restart_
   * Eg `dart run ({file})`
@@ -67,6 +67,7 @@ The same Dart code can run on multiple platforms (eg mobile/desktop via Flutter,
 
 ## API
 
+* `unawaited(…)` = performs fire & forget treatment
 * `a.hashCode` = pseudo-random hash code (warning: differs between program execution or even same class instances with identical values so don't use as map key or set item, unless value equality is explicitly implemented)
 * `a.runtimeType` = à la **runtime** `typeof` (types can be used as variables via **Type** class eg `Type kokoType = int`, à la reflection)
 * `print()` = built-in function to output text to console (for debugging/logging), we can pass it object instances (not just strings)

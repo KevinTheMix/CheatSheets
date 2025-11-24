@@ -15,7 +15,6 @@
 * [sandspiel](https://sandspiel.club) = different materials physics sandbox
 * [Scale of the Universe](https://scaleofuniverse.com)
 * [The Evolution of Trust](https://ncase.me/trust)
-* [The Longest Joke in the World](https://longestjokeintheworld.com) = BETTER NATE THAN LEVER (2011.11)
 * [The Official Ninja Homepage](http://www.realultimatepower.net/ninja/ninja2.htm) = flip out (2011.05)
 * [The Sect of Homokaasu](http://homokaasu.org/gasgames/game.gas)
 * [Twitch Plays Pokemon](https://sites.google.com/site/twitchplayspokemonstatus)
@@ -23,6 +22,11 @@
 * [Whitney Music Boxes](https://whitneymusicbox.org/index.php?var=v11) = polyrithm
   * [Source code](https://github.com/jbum/Whitney-Music-Box-Examples)
 * [World Trade Center Gigapan](http://wtc.gigapan.com/wtc) by Time Magazine
+
+## Read
+
+* [Five Hundred Shades of Great](http://www.fivehundredshadesofgreat.blogspot.be/2012/08/chapter-one-epic-saga-of-our-times.html) (2012.08.08)
+* [The Longest Joke in the World](https://longestjokeintheworld.com) = BETTER NATE THAN LEVER (2011.11)
 
 ## Comics
 
@@ -52,10 +56,12 @@
 
 ## Art
 
+* [ertdfgcvb](https://www.ertdfgcvb.ch) = matrix-like ASCII art
 * [Hooger Brugge](https://www.hoogerbrugge.com) = Modern Living / Neurotica series (bookmarked 2006.02)
 * [KLX](http://www.kalx.com) = weird HTML labyrinth with music (2008.01)
 * [Megan Ganz Community Coffee Table Book](http://wendago.com/2012/01/05/megans-coffee-table) (2012.04)
 * [Paragraphica](https://aivalley.ai/paragraphica) = camera without a lens art project generating images via AI image generation based on contextual description
+* [THA LTD.](https://tha.jp) (previously <http://yugop.com>) = matrix-like Japanese ASCII art & digital works
 
 ## Podcast/Radio
 

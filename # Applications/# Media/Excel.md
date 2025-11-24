@@ -2,89 +2,107 @@
 
 ## Quick Tips
 
-* [8 Excel tips](https://www.instagram.com/p/CnhQwTjonpC/)
-
-* _Data > Filter_ = Make header into sort/filter cell
-* Sequence auto-continuation
-  * Select 2 (or more) sequential cells
-  * Drag & slide the square at the bottom-right dot of the selection
-  * This will continue the current series and generate values for the sequence
-
-* Select Column/Row > Right Click > Hide/Unhide
-* Regional Settings for comma/dot separator = _File > Options > Advanced > Editing Options > (Uncheck) Use System Separater_
-* [Edit a macro](https://support.microsoft.com/en-us/office/edit-a-macro-ed9e8c3d-58fd-47a1-83eb-bdee680376bb)
-  * File extension must be `.xslm`
-* Formulas > _Show Formulas_ = toggle displaying cell formulas/values
-* Formulas > _Name Manager_ = CRUD cell names
-* Page Layout -> Page Setup -> Print Area -> _Set Print Area_
-
-* Change default format
-  * In Excel, File > Options > _When creating new workbooks_ (note: only for new wb created from within Excel itself)
+* **Change default format/template**
+  * In Excel, File > Options > _When creating new workbooks_ (note: only for new workbooks created from within Excel itself)
   * In Windows, replace **EXCEL12.XLSX** template in _C:\Program Files\Microsoft Office\root\vfs\Windows\SHELLNEW_ (make backup first)
-
-* Color rows depending on one column value (Conditional formatting)
-  * Select whole range/table
-  * _Home > Conditional Formatting > New Rule > formula_
-  * Enter formula (eg `=$C2="Value"`) & format to apply (eg font color)
-* Remove table = _Table Design > Tools (group) > Convert to Range_
-* Microsoft Word
-  * `Ctrl + Alt + {n}` = creates a header-level text
+* [Leila Gharani](https://www.youtube.com/@LeilaGharani) = Excel shortcut keys you SHOULD know! (2022.02.21, already absorbed)
+* [excelisfun](https://www.youtube.com/@excelisfun)
 
 ## Glossary
 
+* **Spill** = when some values exceed their initial cell and overflow into adjacent ones
 * **VLOOKUP** = find things in a table or a range by row
 * **XLOOKUP** = improved VLOOKUP (any direction and returns exact matches by default, making it easier and more convenient to use)
 
+## Menus
+
+* File
+  * _Options > Advanced > Editing Options > (Uncheck) Use System Separater_ = Regional Settings for comma/dot separator
+  * _Options > Customize Ribbon > Customize the Ribbon > Main Tabs_ = check Developer to add Developer tab (for Macros)
+* Home > **Conditional Formatting** > _New Rule > Use a formula (…)_  = color selected range depending on one column's cell values
+  * Enter formula (eg `=$C2="Value"`) & format to apply (eg font color)
+* Page Layout > _Page Setup > Print Area > Set Print Area_ = select exclusive cells to print
+* Formulas > _Defined Names > Name Manager_ = add/delete/edit cell names
+* Data > _Sort & Filter > Filter_ = make header into sort/filter cell
+* Developer > _Code > Macro Security > Enable all macros (not recommended, potentially dangerous code can run)_ = enable macros (ile extension must be `.xslm`)
+* `Alt` = display tab menu shortcut labels
+  * `DFS` (legacy) = clears current filter (but keeps it)
+  * `ES` (legacy, after copying from outside Excel) = Paste Special clipboard contents
+  * `ESV` (legacy, after copying some cells) = paste special as Values (alternatively `Ctrl + Alt + V + V`)
+  * `HK` =  Comma Style ie format as thousands separator (good for accounting)
+  * `HNS` = convert number to Short Date
+  * `HOI` or `OCA` (legacy) = automatically adjust columns width to contained data
+  * `MH` = toggle formulas display
+  * `WVG` = toggle gridlines
+
 ## Shortcuts
 
-* `'` = Format cell value as string
-* `$` = cell coordinate _freeze_ when copy-pasting
-  * Eg _$A1_ = Freeze a column's reference (when copy-pasting a cell horizontally)
-  * Eg _A$1_ = Freeze a row's reference (when copy-pasting a cell vertically)
-  * `F4` = cycle through column/row dollar freezing combinations in current formula
+Note: shortcuts including numbers require holding `Shift` on EU keyboard as num pad does not work (except for `+` & `-`)
 
-* `Alt + =` auto-sum adjacent cells (both horizontalliy & vertically, at the same time)
-* `Alt + H + O + I`
-* `Alt + Down` = easy fill cell using dropdown of all previous column cells values
+* Down/Up/Right/Left = `Enter`, `Shift + Enter`, `Tab`, `Shift + Tab`
+* `'` = Format cell value as string
+* `$` = coordinate _freeze_ when copy-pasting cells
+  * Eg _$A1_ = freeze a column's reference (when copy-pasting a cell horizontally)
+  * Eg _A$1_ = freeze a row's reference (when copy-pasting a cell vertically)
+  * `F4` (while in Edit mode) = cycle through column/row dollar freezing combinations in current formula
+* `F2` = switch to Edit mode (alternatively, click Formula bar)
+* `Alt + =` = auto-sum adjacent cells (both horizontally & vertically, at the same time)
+* `Alt + ;` = select only visible cells if row/columns where hidden (easy way to detect that)
+* `Alt + Down` = display dropdown showing all previous string values in same column (ie quick enum-like value selection)
+* `Alt + Enter` (in Edit mode) = add newline inside a cell
 * `Alt + F1` = generate a bar chart using the selected data
 * `Alt + F11` = Open Visual Basic editor
-* `Alt + W + V + G` = toggle gridlines
-
-* `Ctrl + '` (or `Ctrl + "`) = clone above value
-* `Ctrl + Enter` = paints active cell's content (eg formula) into selected cells (active cell must be in edit mode eg click formula bar)
-* `Ctrl + Up/Down` = go to top/bottom of current column (add `Shift` to select range)
-* `Ctrl + Left/Right` = go to start/end of current row (add `Shift` to select range)
-* `Ctrl + E` = Flash Fill (fill based on pattern eg other columns bodies based on 1st column & column header)
-* `Ctrl + F` = Search
-  * Search in _Values_ = search displayed values (otherwise hidden by underlying formulas)
-* `Ctrl + G` = Go To
-  * Go to Special allows quick selection of cells on blanks, errors, etc.
-* `Ctrl + T` = Format as Table (works with a single cell selected)
+* `Ctrl + +` or `Ctrl + -` = insert or remove a row/column (select an existing row/column beforehand to skip dialog, also insert after cut/copying to clone/move)
+* `Ctrl + '` or `Ctrl + "` or `Ctrl + D` = clone down above cell value
+* `Ctrl + ;`/`Ctrl + :` = insert current date/time
+* `Ctrl + Enter` (in Edit mode after selecting multiple cells) = paints active cell's content (ie value or formula) into other selected cells
+* `Ctrl + Left/Right/Up/Down` = go to first/last cell horizontally/vertically (add `Shift` to select range)
+* `Ctrl + &` = surround with border
+* `Ctrl + 1` = Format cells
+* `Ctrl + 9` = hide current row(s)
+* `Ctrl + 0` = hide current column(s)
+* `Ctrl + E` = Flash Fill (ie fills data down a column based on detected pattern eg adjacent column substring)
+* `Ctrl + F` = Search (search in _Values_ to search displayed values, otherwise hidden by underlying formulas)
+* `Ctrl + G` or `F5` = Go To (go to _Special…_ allows quick selection of cells on blanks, errors, etc.)
+* `Ctrl + L` or `Ctrl + T` = create table (also in Home > Format as Table, works with a single cell selected)
   * All table references (Charts, formulas, pivot) are automatically updated as the table's data is changed
-  * _Table Design_ > table theme (colours) dropdown > _Clear_ = strip table style (formatting)
-  * _Table Design_ > _Convert to Range_ = remove table
-  * (Additionally, remove: Data > _Filter_)
+  * Strip table style/formatting = _Table Design > table theme (colours) dropdown > Clear_
+  * Remove table = _Table Design > Tools (group) > Convert to Range_ (alternatively Data > _Filter_)
+* `Ctrl + N` = create new book
+* `Ctrl + R` = copy value of left cell
 * `Ctrl + V, Ctrl, V` = copy values
 * `Ctrl + Z` = cancels last auto-formatting upon pasting
-
+* `Ctrl + Alt + {n}` = creates a header-level text in Microsoft Word
+* `Ctrl + Shift + L` = toggle filter
+* `Ctrl + Shift + V` = paste without formatting (works in many other Windows applications)
+* `Ctrl + Space` = select whole column
+* `Shift + Space` = select whole row
 * `Shift + Alt + Left/Right` (or _Data > Outline > Group_) = Group/Ungroup
 * `Shift + F11` = Add new sheet
-
-### EN
-
-* `Ctrl + D(own)` = copy down topmost cell into selected cells below
-* `Ctrl + N` = go to last row
-
-### FR
-
-* `Ctrl + B(as)` = copy-paste up cell
-* `Ctrl + D` = copy-paste left cell
-* `Ctrl + N` = create new book
+* `Right-Click` (on selected Column/Row) > Hide/Unhide
+* `Drag Down` square at bottom-right dot of selection = fill handle (ie generates values continuing selected sequence/series, only in one dimension)
+* `Drag a cell corder` = move selection (or insert if also holding `Shift`)
 
 ## API (Formulas)
 
-* `INDIRECT({text})` = returns a reference (eg _C2_) given by text expression (eg `=INDIRECT("C" & ROW())`)
+* `COUNTA(range)` = counts non-empty cells
+* `COUNTIF(range, pattern)` = counts only cells satisfying pattern (with wildcards)
+* `INDIRECT(text)` = returns a reference (eg _C2_) given by text expression (eg `=INDIRECT("C" & ROW())`)
 * `ROW()` = current row
+* `SUMIF(range, criteria, [sum_range])` = adds only cells satisfying criteria (ie a string eg _">100_, with wildcards), from itself or another range
+* `SUMIFS(sum_range, criteria_range1, criteria1, [criteria_range2, criteria2])` = adds cells based on multiple criteria of other columns (eg filter by rows & columns)
+* `UNIQUE(range)` = distinct values
+* **Curly Braces** = spilled array
+  * `{a;b;c}` = will expand into a vertical array spilling down
+  * `{a,b,c}` = will expand into horizontal array spilling right
+  * Eg `=DATE(2025,{1;4;7;10})` will produce 4 quarterly cells
+* **Range**
+  * `{Cell}#` = indicates (growing) range of spilled array (eg `B2#` if _BE_ is first cell of spilled array)
+* **Square Brackets**
+  * `Table[Column]` = table column range reference (or just clicking table column header)
+  * `Table[@Column]` = table cell on same row reference (or within table itself just `[@Column]`)
+* **Wildcards** = `*` (many characters), ´?´ (one character), `??` (two characters), etc
+  * `~` = escape character for wildcards (eg `*~?*` for a literal _?_ surrounded by stuff), including itself
 
 ## Extensions
 

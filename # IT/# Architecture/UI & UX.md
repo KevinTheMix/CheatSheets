@@ -2,6 +2,7 @@
 
 ## Quick Tips
 
+* [pixselacademy: 49 UI Design Tips](https://www.linkedin.com/feed/update/urn:li:ugcPost:6954769316294635520)
 * [10 Usability Crimes You Really Shouldn't Commit](https://line25.com/articles/10-usability-crimes-you-really-shouldnt-commit)
   1. Form labels that aren't associated to form input fields
   2. A logo that doesn't link to the homepage
@@ -26,6 +27,7 @@
 * **Flat design** = minimalist design language
 * **Fluent Design System** = a design language developed by Microsoft in 2017
 * **Graphics Design** = static visual content to communicate messages
+* **Hamburger** = 3 horizontal lines icon button that usually opens a menu
 * **Hover** = change in color, shadow or animation of a button/link/icon in response to a mouseover
 * **Material Design** = design language developed by Google in 2014
 * **Motion Design** = broad discipline including motion graphics, animation, cinematography, graphic design
@@ -56,12 +58,15 @@
   * [OpenGL Book](https://openglbook.com)
 * **Shader** = program that runs on a GPU that transforms 3D data into a (three-dimensional-looking) 2D scene, part of Graphics Pipeline
   * _If a GPU is being used, shaders are involved_ (confirmed by ChatGPT, unless old GPUs or using CPU for software rendering)
-  * **Fragment/Pixel Shader** = calculates color for each pixel (kinda inefficient because threads don't share calculation but done in parallel)
+  * **Fragment/Pixel Shader** = tiny program running once per pixel to compute their color (kinda inefficient because threads don't share calculation but done in parallel+++)
   * **Vertex** = 3D rotate/stretch projections
   * **Geometry** = add details or modify geometry in real-time (eg fur/hair)
   * **Compute** = general-purpose for other non-graphical tasks (physics calculation, AI)
   * [The Book of Shaders](https://thebookofshaders.com)
   * [Shadertoy](https://www.shadertoy.com) = community shaders library (eg [Raymarched Hexagonal Truchet](https://www.shadertoy.com/view/4td3zj))
+    * [Cloud tunnel](https://www.shadertoy.com/view/XlSSzV)
+    * [Spiral](https://www.shadertoy.com/view/tslcW4)
+* **SVG** (Scalable Vector Graphics) = XML-based vector 2D graphics format with support for interactivity/animation (open standard by W3C)
 * **Vulkan** (_Khronos Group_) = low-level cross-platform API & open standard for 3D graphics & computing, addressing **OpenGL** sortcomings
 
 * Music Visualization

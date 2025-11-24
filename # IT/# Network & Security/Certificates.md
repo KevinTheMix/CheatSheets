@@ -1,6 +1,11 @@
 # Certificates
 
+Certificates are a way to tie a public key to identifying/legitimating information (ie who, what, when) wrapped together & signed by an authority (a CA).
 Certificates are often associated with **TLS** (for HTTPS) & **SAML** authentication (to represent a logged user).
+
+## Quick Tips
+
+* <https://badssl.com> = improper certificate configurations
 
 ## Glossary
 
@@ -27,7 +32,8 @@ Certificates are often associated with **TLS** (for HTTPS) & **SAML** authentica
 * **Root CA** = top-level CA in the chain of trust; renown public ones are installed by default (eg _Symantec_, _Thawte_, _Verisign_), with more that can be installed locally manually
   * Those renown authorities are assumed to have performed some authenticity/integrity checks on a website before delivering a certificate
   * Any website that requires SSL (for HTTPS) must first register to one of those public root CA and pay a subscription fee
-* **Self-Signed Certificate** = certificate that are not issued by a CA, basically managing custom certificates (chain) manually
+* **Self-Signed Certificate** = certificate that are not issued by an external public CA, yet entrusted via TOFU (eg signing an app for an app store or managing custom certificates chain manually)
+* **Trust On First Use** (TOFU) = first time a system encounters a new key/certificate (not signed by CA), it records its fingerprint to treat future exchanges as trusted (ie consistency)
 * **Trust Store** (or **Root Store** or **Certificate Store**) = local DB containing certificates of trusted root CAs are installed
 * **X.509** = standard defining the creation/format of public key certificate (also defines extensions eg _.pfx_)
 

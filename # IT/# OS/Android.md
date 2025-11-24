@@ -7,16 +7,17 @@
 
 ## Glossary
 
-* _.aab_ (Android App Bundle) = device-agnostic package format containing compiled code & resources
-  * Used by Play Stores to eventually generate/distribute (smaller) device-specific APK files (not itself executable)
-* _.apk_ = Android app installation file as a compressed archive (its content can be un-zipped) containing compiled code, resources & manifest
+* _.aab_ (Android App Bundle) = device-agnostic distribution (but not installation) package format containing compiled code & resources
+  * Used by Play Stores to eventually generate/distribute (smaller) optimized device-specific APK files (not itself executable)
+* _.apk_ (Android Package Kit) = app installation file as a compressed archive (its content can be un-zipped) containing compiled code, resources & manifest
+  * Can be ABI/CPU/device-specific (as in `flutter run --release` or when downloaded from app store) or universal (Codemagic with multiple ABIs)
 * [Activities](https://developer.android.com/guide/components/activities/intro-activities) = one app entry point, defined in _AndroidManifest.xml_
 * **Android** = open-source OS based on Linux, supported by many different manufacturer's devices
 * **Android SDK** = can be installed via Android Studio's SDK Manager (at `%USERPROFILE%\AppData\Local\Android\Sdk`)
   * [Platform Tools](https://developer.android.com/tools/releases/platform-tools) = primarily **adb** & **fastboot** exe (see section below)
 * [Android Studio](https://developer.android.com/studio) = full Android development SDK, for building apps on Android devices
   * Includes **Android SDK Platform Tools** (which are also available as standalone tools)
-* **Application Binary Interface** (ABI) = low-level interface to a specific CPU architecture
+* **ABI** (Application Binary Interface) = low-level interface to a specific CPU architecture
 * [ARM](https://www.androidcentral.com/what-arm-cpu) (Acorn RISC Machine) = English company selling low-power processor architecture used in mobiles
   * By extension, an architecture (instructions set) for low-power scalable CPUs used in mobile devices (**ARM Code** is basically a name for (mobile native) machine code)
   * Architecture/Platform = _arm_ or _arm64_ (less commonly _x86_ or _x86\_64_) - see [Open GApps](https://opengapps.org)
@@ -31,6 +32,7 @@
 * **Image** = _.img_ file, part of the OS, to be flashed (installed) to the partition matching its name on the device
 * **IMEI** (International Mobile Equipment Identity) = uniquely identifies a hardware mobile device (actually one per fixed SIM card slot)
 * **IMSI** (International Mobile Subscriber Identity) = uniquely identifies a mobile network subscriber/SIM card (stored in SIM card itself)
+* **Intent** = message object to request actions from other apps or system components (ie jumping between applications eg maps, payment, open a webpage, send an email, dial, search)
 * **OEM** (Original Equipment Manufacturer) = a company that constructed an original component sold to end users by another company
 * **OHA** (Open Handset Alliance) = consortium (eg HTC, Sony, Dell, Motorola, Samgsung, LG) led by Google that develops Android
 * **OTA Updates** = Over-the-air updates, the upgrades to the current OS

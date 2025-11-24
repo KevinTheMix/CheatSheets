@@ -1,7 +1,14 @@
-# Material Design
+# [Material Design](https://m3.material.io)
 
 ## Quick Tips
 
+* [Material Design Icons](https://fonts.google.com/icons)
+* [Material Design Icons](https://pictogrammers.com/library/mdi)
+* [Google Fonts Icons](https://fonts.google.com/icons) = find icon search engine
+* [Material Icons Guide](https://developers.google.com/fonts/docs/material_icons)
+* [Flutter Material 3 Demo](https://flutter.github.io/samples/web/material_3_demo) (_removed_)
+* [Appainter](https://appainter.dev) = play with theme settings (also see <https://rxlabz.github.io/panache/#>)
+* [Material Theme Builder](https://material-foundation.github.io/material-theme-builder) = generate dynamic color schemes (pick primary, secondary, etc)
 * [Material 3 Expressive](https://m3.material.io/blog/building-with-m3-expressive) = 2025.05 update with visual constrasts, button menus, springy animations
 
 ## Glossary

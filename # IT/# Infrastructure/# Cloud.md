@@ -25,6 +25,7 @@
 * _Hystrix_ = Netflix's microservices defensive circuitry (_not actively maintained_)
 * _Lemon Squeezy_ = online payment, handles local taxes
 * _Linode_ = Linux machines (over SSH, $0.01/hour)
+* [MacinCloud](https://www.macincloud.com) = rent a Mac in the Cloud
 * _Nextcloud_ = in cloud or on-premises online collaboration platform, with an extension-based [app store](https://apps.nextcloud.com) (eg DICOM viewer)
   * _Nextcloud Hub_ = integrated on-premises (ie self-hosted) platform with four key Nextcloud products (Files/Talk/Groupware/Office, basically Drive + Zoom + Outlook + Office)
 * _openHAB_ (open Home Automation Bus) = open-source home automation software (written in Java, by Eclipse)

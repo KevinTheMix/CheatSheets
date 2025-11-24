@@ -6,6 +6,7 @@
 
 ## Glossary
 
+* _.dmg_ (Disk Image) = disk image format used to distribute software & files, works like a mountable virtual disk (containing an _.app_ file)
 * **AirDrop** = near Apple devices remote files sharing
 * **AirPlay** = remote speakers
 * **AirTag** = GPS beacon

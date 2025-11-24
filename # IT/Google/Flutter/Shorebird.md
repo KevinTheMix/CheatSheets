@@ -2,11 +2,13 @@
 
 Created by Flutter creators (ex-Google engineers).
 Pushes small Dart VM-related patches via OTA updates.
-Cannot update native changes (such as plugins using platform channels, as well as _pubspec.yaml_).
 
 ## Quick Tips
 
+* Cannot update native changes (ie plugins using platform channels or _pubspec.yaml_)
+* Checks & downloads small delta patches while an app is running, and applies it at its next startup
 * Use [Shorebird Console](https://console.shorebird.dev) to delete a registered application (with all its builds/releases)
+* For Shorebird patches to get applied, an app instance must be a Shorebird Release build (ie installed from Codemagic and not a local VS Code install)
 
 ## Glossary
 

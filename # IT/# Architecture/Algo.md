@@ -14,7 +14,6 @@
 * [Flow Field Pathfinding for Tower Defense](https://www.redblobgames.com/pathfinding/tower-defense) = A* visualization
 * [What is the alphanumeric id in a reddit URL?](http://stackoverflow.com/questions/410485/whats-the-5-character-alphanumeric-id-in-reddit-url) = base 36 (ie lowercase alphanumeric)
 * [Visualizing algorithmes](https://bost.ocks.org/mike/algorithms)
-* [Google RGB-hidden phrase](https://www.reddit.com/r/Android/comments/2k4qjs/comment/clhypmg) = RGB is a set of three ASCII letters, normalized by subtracting min value
 * `({number} & 1) == 0/1` = check whether a number is even/odd
 * To check distances (inequality), you don't have to sqrt() the variable side each time, simply pwr(2) the constant side one time
 * Checking whether a pixel is white or a RGB color: don't check that particular color, but one of the other two (see <https://gist.github.com/kezzyhko/ea5dcfd97be881d200e694731cb0c257>)
@@ -40,6 +39,7 @@
 * **Monte Carlo Method** = empiric randomness backdoor into a problem to approximate a solution, leveraging law of large numbers stating average converges to true value
   * Eg generate random points in a (2x2) square, and check which ones fall within (1 unit-long radius) circle within it to approximate π/4
   * Related to **resampling** (also relying on random sampling to approximate) = create new sets from a fixed sample set (by cloning elements, removing them, etc)
+* **Quine** = program that takes no input and produces a copy of its own source code as only output (eg TiddlyWiki)
 * **Rope** = binary tree data structure used to store longer strings as smaller linked ones (eg used by text editors)
 * **Sort**
   * **Merge** = O(n log n)

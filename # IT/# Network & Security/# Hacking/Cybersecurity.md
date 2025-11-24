@@ -10,10 +10,13 @@
 * **AAA** (Authentication, Authorization, and Accounting) = framework to control/track access within a computer network
   * Authentication proves identity, authorization grants permissions, accounting maintains continuous & robust audit trail via logging
 * **Access Control List** (ACL) = allow/deny traffic on certain criteria (eg source/destination IP, TCP/UDP ports, ICMP), used by NAT, QoS, a router ingress/egress, or an OS filesystem per user/group access rights
+* **Bit-for-Bit** or **Byte-for-Byte** copy = clone entire content of a drive, including all empty areas possibly containing deleted information
 * **Budapest Convention** (on CyberCrime, 2001.11.23) = 1st international treaty seeking to harmonize Internet/computer crime national laws, improving investigative techniques, increasing cooperation among nations
 * **CERT** (Computer Emergency Response Team) = team responding to cybersecurity incidents (detect, analyze, coordinates response)
+* **Chip Off** = hardest/last resort data extraction technique where a device is disassembled and its (possibly still encrypted) chips read externally
 * **CSIRT** (Computer Security Incident Response Team) = similar to CERT used in organization/administration (contain & restore)
 * **Cyber Threat Intelligence** (CBI) = structured collection, analysis, and dissemination of data regarding potential/existing cyber threats
+* **Data Carving** = extracting & interpreting raw bit-level data from a device
 * **Data Loss Prevention** (DLP) = where is your data (social security, credit card, medical records)
 * Detection & Response
   * **Endpoint (Threat) Detection & Response** (E(T)DR) = continually monitors an endpoint (eg client device eg mobile phone, laptop, IoT device) to mitigate malicious cyber threats
@@ -76,6 +79,7 @@
 
 * _Autopsy_ = open-source hard drive investigation forensics platform
 * _EnCase_ (by OpenText) = suite of digital investigations products (eg analyze hard-drive & preserve evidence for court admission)
+* _FEI_ (Forensic Email Intelligence, by _Metaspike_) = commercial desktop tool to dissect raw e-mail evidence for investigations
 * _FTK Imager_ = electronic device data imaging & previewing tool, create forensic images (EO1, AFF, RAW)
 * _UFED_ (Universal Forensic Extraction Device) = mobile devices data extraction product series by Israel company _Cellebrite_
 * _Volatility_ = FOSS RAM forensic analysis tool

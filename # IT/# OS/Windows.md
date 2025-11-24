@@ -4,10 +4,10 @@
 
 ## Quick Tips
 
-* **con.txt File** = [forbidden file name](https://www.reddit.com/r/todayilearned/comments/a0zht/til_that_you_cant_create_a_file_in_windows_called/c0fcr5n)
-* **nul.txt** & **foo** = [forbidden file names](https://old.reddit.com/r/programming/comments/9bzrx/wtf_the_maximum_path_length_in_win32_is_260_chars)
-* **File Size Search** = `size: >1000MB AND < 3GB` (or `size:` and select listed proposition)
-* **Invisible/Hidden Folder** = name a folder `" "` (ie a no-Break Space, CharMap _U+00A0_, _Alt+255_ or _Alt+0160_), then change folder icon to a blank one
+* _con.txt_ file = [forbidden file name](https://www.reddit.com/r/todayilearned/comments/a0zht/til_that_you_cant_create_a_file_in_windows_called/c0fcr5n)
+* _nul.txt_ & _foo_ = [forbidden file names](https://old.reddit.com/r/programming/comments/9bzrx/wtf_the_maximum_path_length_in_win32_is_260_chars)
+* Search by file size = `size: >1000MB AND < 3GB` (or `size:` and select listed proposition)
+* Create an invisible/hidden folder = name a folder `" "` (ie a no-Break Space, CharMap _U+00A0_, _Alt+255_ or _Alt+0160_), then change folder icon to a blank one
 * View current **CD Key**
   * CMD = `wmic path softwareLicensingService get OA3xOriginalProductKey`
   * PowerShell = `(Get-WmiObject -query 'select * from SoftwareLicensingService').OA3xOriginalProductKey`
@@ -21,9 +21,16 @@
 * **Chocolatey** = machine-level CLI package manager using NuGet package infrastructure and PowerShell to download/install (2011)
 * **Encrypting File System** (EFS) = NTFS 3.0 feature providing FS-level encryption to specific files/folders (using user username/password, while OS is running, in file/folder Properties > (Attributes:) Advanced)
 * **Hyper-V** = native hypervisor for Pro & Enterprise editions
+* **Microsoft Defender** (aka **Windows Defender**) = replaces Microsoft Security Essentials from Win 8
+* **Reliability Monitor** = review computer reliability/problem history
+* **Safe Mode** (FR: Mode Sans Échec) = loads bare minimum OS to troubleshoot/remove malware
+* **Sysinternals** = various semi-official Microsoft system utilities (Process Explorer, Windows Task Manager, Autoruns, RootkitRevealer, defragmentation tools)
+  * _sdelete_ = securely delete files
 * **User Account Control** (UAC) = popup dialog when an action requires elevated privilege (user must be logged as admin or be presented with credentials, exactly à la Unix `sudo`)
+* **Windowd ADK** (Assessmant & Deployment Kit) = create your own Windows PE
 * **Windows Features** = turn Windows features on/off (Windows Media Player Legacy, MSMQ, Print to PDF, XPS, PowerShell, WSL)
 * **Windows Hello** = sign-in options (facial, fingerprint, PIN, physical security key, password, picture)
+* **Windows PE** (Pre-installation Environment) = recovery console booted from CD/DVD/USB when even Safe Mode isn't available, able to repair boot records/sectors
 * **Windows Recovery Environment** = GUI-based recovery menu loaded before OS is loaded (eg repair startup, restore system, uninstall updates, Command Prompt **warning** with full FS access)
   * Access via _Settings > System > Recovery > Advanced startup > Restart now_ (or hold `Shift` while clicking Restart)
 * **Windows Terminal** = a tabbed GUI-based terminal emulator (click the `v` to access various consoles/shells)
@@ -47,8 +54,12 @@
 
 ### Versions
 
-* **Windows 10**
-  * End of support = 10/10/2025
+* **Windows XP** end-of-support = 08/04/2014
+* **Windows Vista** end-of-support = 11/04/2017
+* **Windows 7** end-of-support = 14/01/2020
+* **Windows 8** end-of-support = 12/01/2016 (unusually quickly upgraded to Windows 8.1)
+* **Windows 8.1** end-of-support = 10/01/2023 (service pack for Windows 8)
+* **Windows 10** end-of-support = 10/10/2025
 * **Windows 11 Home** = core Windows experience, app store, gaming (S mode restricts app installation to app store)
 * **Windows 11 Pro** = Bitlocker, Domains/Group Policy management, Hyper-V, Remote Desktop host (**Pro for Workstations** for server-grade hardware support)
 * **Windows 11 Enterprise** = all Pro features plus advanced security, mangement, deployment, update controls

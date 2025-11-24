@@ -5,7 +5,7 @@
 * Search directly via wikipedia (`!w`) instead of googling
 * [WolframAlpha](https://www.wolframalpha.com/input/?i=all%20visible%20satellites)
 
-## Bangs
+## [Bangs](https://duckduckgo.com/bang)
 
 * `!` = go to first result (à la _I'm feeling lucky_)
 * `!b` = Bing

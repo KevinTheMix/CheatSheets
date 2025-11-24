@@ -1,4 +1,4 @@
-# [Firebase](https://firebase.google.com/)
+# [Firebase](https://firebase.google.com)
 
 Firebase is a development platform developed by Google for creating and scaling mobile/web applications, and built on top of Google Cloud platform.
 

@@ -23,27 +23,31 @@ Features:
 ## Quick Tips
 
 * [Medium blogs](https://blog.flutter.dev)
-* [Flutter: Cookbook](https://docs.flutter.dev/cookbook)
+* [Community](https://flutter.dev/community)
+* [Stay up to date](https://docs.flutter.dev/release)
+* [Flutter samples](https://github.com/flutter/samples)
+* [It's All Widgets!](https://itsallwidgets.com) = list of Flutter apps
+* [Performance best practices](https://docs.flutter.dev/perf/best-practices)
+* [Stack Overflow](https://stackoverflow.com/questions/tagged/flutter) = newest questions
+* [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources) = samples & cookbooks
 * [@Wm Leler](https://leler.com/wm/bio.html#flutter) = Flutter-promoting articles (eg _what's revolutionary?_, _why Dart?_ UX study with eight developers, _company pitch_)
-  * Most of the time, Flutter can do layout in a single pass (or even none, through cacheing), aka linear time, so it can even be used for scrolling & any animations
 * [Matthew Smith - Why we chose Flutter and how it's changed our company](https://medium.com/@matthew.smith_66715/why-we-chose-flutter-and-how-its-changed-our-company-for-the-better-271ddd25da60)
 * _const_ in front of constructors is very important, making rendering more efficient by skipping most of rebuild
 * It's possible to create & assign widgets to variables, then we can access their properties (eg height) down the tree, or add them conditionally in several places
 * Break down long widgets into modular widgets rather than helper methods (see Decoding Flutter video on that topic)
 * Use `compute()` (similar to Dart `Isolate.run()`) to run a given callback in background, for operations that take longer than a few milliseconds
 * `build()` should remain 'pure' ie without side-effects (see <https://stackoverflow.com/a/52249579/3559724>)
-* [Material Theme Builder](https://material-foundation.github.io/material-theme-builder) = generate dynamic color schemes (pick primary, secondary, etc)
 * Refactor small widget subtrees subject to frequent change out of large `build()` methods to leverage **more granular & efficient rebuilds**
 * Builders are methods that can map data to return widgets dynamically, also enable describing UI declaratively (as `build()` does)
 
 ## Glossary
 
 * [Architecture](https://docs.flutter.dev/resources/architectural-overview#anatomy-of-an-app)
-  * **Dart App** = user custom app written entirely in Dart language
-  * **Framework** = Flutter classes (high-level API in Dart)
-  * **Engine** = platform-agnostic low-level API in C/C++, including rendering engine (eg Skia), Dart Runtime (including Dart VM that runs user Dart & framework Flutter code), platform channels, Embedder API
-  * **Embedder** = native application hosting all Flutter content, interfaces host OS & Flutter, is app main entrypoint (as an Android Activity or iOS UIViewController), manages event loop & lifecycle
-  * **Runner** = native-level customizable code (originally generated via `flutter create`)
+  * **Runner** = platform-specific native host shell app package and its main entrypoint (eg an Android Activity/iOS UIViewController), originally generated via `flutter create`, owned/modifiable by app developer
+  * **Embedder** = platform-specific C API library used by Runner providing services for rendering surfaces/accessibility/input, event loop (eg `FlutterEngineRun()`, `FlutterEngineShutdown()`)
+  * **Engine** = platform-agnostic C/C++ Flutter core, including rendering engine (Skia/Impeller), Dart Runtime (including Dart VM that runs user Dart & framework Flutter code), platform channels, Embedder API
+  * **Framework** = platform-agnostic Dart Flutter classes (high-level API in Dart)
+  * **Dart App** = platform-agnostic Dart user custom app
   * [Inside Flutter](https://docs.flutter.dev/resources/inside-flutter) = optimized & single pass layouting, onboarding strategies
 * [BLoC](https://www.flutterclutter.dev/flutter/basics/what-is-the-bloc-pattern/2021/2084) = state management design pattern using Streams of events (in) & states (out)
 * `build(BuildContext context)` = is itself a sort of _builder_ (ie indirect callback)
@@ -312,6 +316,9 @@ Use commands with either long/short names (eg `flutter --option=value` or just `
 
 ## Extensions
 
+* **Blup** = GUI & backend visual designer
 * **Flame** (Engine) = cross-platform open-source game engine built on top of Flutter
 * **Flock** (possibly abandoned) = a community-powered fork of Flutter aspiring to deliver quicker maintenance
-* **FlutterFlow** = build widgets via a GUI, import themes from Figma
+* **FlutterFlow** = GUI visual designer, import themes from Figma
+* **Serverpod** = FOSS Dart backend for Flutter, with client-side codegen, logging, caching, ORM
+* **Very Good CLI** = CLI to generate opiniated scalable templates & use helpful commands

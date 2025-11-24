@@ -27,6 +27,7 @@
 * _Maltego_ = OSINT tool for link analysis & data visualization of relationships between people/groups/websites/domains/networks, real-time data mining, information as node-based graph to identify patterns
 * _Shodan_ = IoT search engine (servers, routers, webcams, unprotected devices)
 * [TinEye](https://www.tineye.com) = reverse image search
+* [Ultimate Flash Face](http://flashface.ctapt.de/index.php) = facial composite (FR: portrait robot)
 * _Wayback Machine_ (by _Internet Archive_) = investigate (now possibly erased) past
 * [WiGLE](https://wigle.net) = information about wireless hotspots around world
 * _Zoomeye_ = analyze devices connected to internet (dynamic maps of assets, ports & protocols)

@@ -30,6 +30,7 @@
 
 ## Posts
 
+* [3-jars easy/medium/hard TODO list system](https://old.reddit.com/r/AskReddit/comments/lm3w8z/comment/gnutdxa/?context=2)
 * [5 years in a Zen monastery](https://old.reddit.com/r/zen/comments/1jumpc/comment/cbiosfn) (@Fallopian_tuba)
 * [Autism & Asperger](https://www.reddit.com/r/AskReddit/comments/ezmtgu/comment/fgovu0w)
 * [Billiards](https://np.reddit.com/r/billiards/comments/6antdh/comment/dhgq4v0)

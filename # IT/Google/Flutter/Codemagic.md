@@ -4,20 +4,20 @@ CI/CD for Android, iOS, Flutter & React Native.
 
 ## Quick Tips
 
+* [Flutter Docs: Sign the app](https://docs.flutter.dev/deployment/android#sign-the-app), once an _upload-keystore.jks_ file is generated:
+  * Reference it from a _key.properties_ file (in _android_ folder)
+  * Modify _android/app/build.gradle.kts_ to use signing for release (ie when executing `flutter build apk --release`)
 * [Codemagic - Android Code Signing](https://docs.codemagic.io/flutter-code-signing/android-code-signing)
-  * **upload key** = to sign app before uploading to Codemagic or Google Play Store, associated with a certificate
-    * Stored within a **keystore** (that can hold multiple keys), both generated (using same password) via either:
-      * `keytool` Java command (installed with Android Studio)
-      * Android Studio > Build > _Generate Signed Bundle/APK_ dialog
-    * For Flutter, once an _upload-keystore.jks_ file is generated:
-      * Reference it from a _key.properties_ file (in _android_ folder, `/!\` both files must be excluded from git public source version control)
-      * Modify _android/app/build.gradle.kts_ to setup signing whenever building for release (ie `flutter build apk --release`)
-        * See <https://docs.flutter.dev/deployment/android#sign-the-app>
-  * Requires an **app signing key** (to let Google sign app to Users)
-    * This step is only mandatory when actually registering the app to Google Play Store
+  * In Codemagic, _upload-keystore.jks_ file gets uploaded as-is, but not _key.properties_ whose passwords are simply filled in GUI fields
+* `/!\` **both** _upload-keystore.jks_ & _key.properties_ files must be excluded from git public source version control
 
 ## Glossary
 
+* **App Signing Key** = key to let Google sign app to Users (only mandatory when actually registering the app to Google Play Store)
+* **(Java) Keystore** (JKS) = file holding multiple named key (eg _upload_) pairs (ie a private key + a public key contained within a certificate used by stores to verify legitimacy), generated via:
+  * `keytool` Java command (installed with Android Studio)
+  * Android Studio > Build > _Generate Signed Bundle/APK_ dialog
+* **Upload Key** = key to sign app before uploading to Codemagic or Google Play Store, essentially a private key associated with a public certificate (both contained in keystore file & password-protected)
 * **Workflow Editor** = GUI alternative to configuring _codemagic.yaml_
 
 ## Configuration
@@ -45,9 +45,9 @@ CI/CD for Android, iOS, Flutter & React Native.
   * `$HOME/Library/Caches/CocoaPods` = iOS/CocoaPods
 * Pre-build script = (see dedicated section below)
 * Shorebird (aka Build step)
-  * Flutter version = (choose Shorebird default or specific if more advanced)
+  * Flutter version = (choose Shorebird default or specific if more advanced, eg _3.35.3_ at the moment ie 2025.11.19)
   * Build arguments
-    * `--artifact apk` (specifies an _apk_ must be generated in addition to default _aab_)
+    * `--artifact apk` (for **Shorebird Release only**, specifies an _apk_ must be generated in addition to default _aab_)
     * `-- --obfuscate --split-debug-info=build/symbols` (mind leading `--` to separate/indicate those are `flutter build` arguments, not shorebird's) = obfuscate and produce debug symbols
 * Post-build script = (removed renaming _apk_, as that removes it from result artifacts)
 * Distribution > Android code signing = (enabled)
