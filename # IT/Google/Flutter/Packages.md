@@ -38,6 +38,7 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
 * **intl** = date formatting
 * **material**
 * **services** = platform features (clipboard, system sounds eg `SystemSound.play(SystemSoundType.click);`)
+* **time** = **DateTime** & **Duration** inline manipulation (eg `3.days.fromNow.day` for a future date in 3 days or `await 2.seconds.delay` to wait 2 seconds)
 * **widgets** = no implementations, only (re-)exports all widget-related libraries
 
 ## Plugins
@@ -45,22 +46,24 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
 ### Official
 
 * **async** (_@dart.dev_) = additions to built-in [dart:async](https://api.dart.dev/stable/3.5.0/dart-async/dart-async-library.html) (`StreamGroup.merge()`, `AsyncCache<T>()` time-based cacheing, **StreamQueue**)
-* **build_runner** (_@tools.dart.dev_) = generate files on disk using Dart code
-  * `dart run build_runner build` = generate once (`--delete-conflicting-outputs`)
-  * `dart run build_runner watch -d` = generate continusouly on files change/save
-  * `flutter pub run build_runner build --delete-conflicting-outputs`
-  * Don't include folders where generated files reside to a git repo (by mentioning them in _.gitignore_ config)
 * **collection** (_@dart.dev_) = collection utilities (eg _max_)
 * **crypto** (_@dart.dev_) = cryptographic hashing functions for Dart
-* **dds** (_@tools.dart.dev_) = spawns Dart Developer Service used to communicate with Dart VM Service instance
 * **fake_async** (_@dart.dev_) = provides a **FakeAsync** class to deterministically test code using asynchronous features (Future, Stream, Timer, microtasks)
 * **grpc** (_@dart.dev_) = Google (HTTP/2 & Protobuf) protocol for connecting microservices or mobile clients to backends
-* **html** (_@tools.dart.dev_) = HTML 5 parser
 * **http** (_@dart.dev_)
 * **intl** (_@dart.dev_) = Dates & Numbers (& Bidi) formatting methods
-* **leak_tracker** (_@tools.dart.dev_) = framework for detecting memory issues
 * **logging** (_@dart.dev_)
 * **path** (_@dart.dev_) = helper to combine/construct paths
+* [tools.dart.dev](https://pub.dev/publishers/tools.dart.dev/packages) = packages published by Dart team
+  * **build_runner** (_@tools.dart.dev_) = generate files on disk using Dart code
+    * `dart run build_runner build` = generate once (`--delete-conflicting-outputs`)
+    * `dart run build_runner watch -d` = generate continusouly on files change/save
+    * `flutter pub run build_runner build --delete-conflicting-outputs`
+    * Don't include folders where generated files reside to a git repo (by mentioning them in _.gitignore_ config)
+  * **dds** (_@tools.dart.dev_) = spawns Dart Developer Service used to communicate with Dart VM Service instance
+  * **html** (_@tools.dart.dev_) = HTML 5 parser
+  * **leak_tracker** (_@tools.dart.dev_) = framework for detecting memory issues
+  * **markdown** (_@tools.dart.dev_) = client or server Markdown to HTML parser
 
 * **built_value** (_@google.dev_) = popular value class codegen, similar to **freezed** (immutable value types, EnumClass, JSON serialization)
 * **flutter_simple_treeview** (_@google.dev_) = tree structure of widget nodes
@@ -109,6 +112,7 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
 * **equatable** (_@fluttercommunity.dev_) = simplifies (value) equality comparison boilerplate (just define _props_ and remove `hashCode()` & `operator==()`)
 * **flutter_blurhash** (_@fluttercommunity.dev_) = [BlurHash](https://blurha.sh) short string-based representation of an image to display while loading
 * **flutter_launcher_icons** (_@fluttercommunity.dev_) = CLI to generate all platforms/sizes icons from a single image asset (`flutter pub run flutter_launcher_icons:main`)
+  * See [Google Play icon design specifications](https://developer.android.com/distribute/google-play/resources/icon-design-specifications) = icon guidelines (512x512, 1024KB)
 * **font_awesome_flutter** (_@fluttercommunity.dev_) = free [Font Awesome](https://fontawesome.com/icons) Icon pack as Flutter Icons
 * **get_it** (aka **GetIt**) (_@fluttercommunity.dev_) = simple DI container/service locator via global singleton
 * **package_info_plus** (_@fluttercommunity.dev_) = meta-information about application package (name, version, build number)
@@ -164,6 +168,8 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
 #### Misc
 
 * **auto_route** (_@codeness.ly_) = navigation/routing with deep linking & code generation
+* **dart_code_metrics_presets** (_@dcm.dev_) = advanced linter for Dart/Flutter
+* **dart_frog** (_@dart-frog.dev_) = fast, minimalistic backend framework for Dart
 * **device_preview** (_@aloisdeniel.com_) = approximate how an app looks & performs on another device (select devices, orientation, language, theme, custom resolution & safe areas)
 * **dio** (_@flutter.cn_) = HTTP networking (request cancel/intercept to automatically attach JWT tokens, file up/download with progress tracking, timeout)
 * **dotted_border** (-) = easily add (rect/round/oval) dotted borders around widget

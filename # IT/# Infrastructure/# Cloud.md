@@ -1,14 +1,30 @@
 # Cloud (Backend)
 
+## Quick Tips
+
+## Glossary
+
 * **CDN** (Content Distribution Network) = cloud-backed geographically-distributed data provider (eg **CloudFlare**)
-* **SaaS** = Software as a Service aka Software on demand. Subscription-based web app
-* **IaaS** = Infrastructure as a Service, a cloud-based VM to setup & install apps on
-* **BaaS** = Backend as a Service (eg **FireBase**)
 * **No-code** = application creation via visual-based GUIs rather than programming, aimed at businesses
-* **PaaS** = Platform as a Service, a (DB/.NET/Java) platform space/repo on which to deploy such apps
 * **Serverless computing** = cloud servers that are virtualized and treated as a single pay-per-use platform instead of discrete units
+* Services
+  * **BaaS** = Backend as a Service (eg **FireBase**)
+  * **IaaS** = Infrastructure as a Service, a cloud-based VM to setup & install apps on
+  * **PaaS** = Platform as a Service, a (DB/.NET/Java) platform space/repo on which to deploy such apps
+  * **SaaS** = Software as a Service aka Software on demand. Subscription-based web app
 * **VPS** (Virtual Private Server) = VM sold as a service by Internet hosting company (simulating a dedicated physical server environment but actually shared with other users)
   * [Hostinger VPS](https://www.hostinger.com/fr/vps)
+
+### Delivery & Deployment
+
+* **Feature Flags** = individual switches that control activation of newly added functionalities so they can be turned on/off (always off first in production) until cleaned up when ready, piloted remotely (eg Firebase Remote Config)
+
+* **AppVeyor** = desktop CI/CD service used to build/test projects hosted on GitHub & co (GitLab, BitBucket)
+* **Fastlane** = open source CLI automation toolkit for mobile app tasks (screenshots, beta, app stores, code signing), part of CI/CD pipeline (acquired by Google)
+* **GitLab** = web-based DevOps for Git (wiki, issue tracking, CI)
+* **Vercel** = cloud infrastruture, build & deploy (CI/CD), generates URL on git push
+
+## Tools
 
 * _Amazon_
   * _Amazon Web Services_ (AWS) = cloud platform & API
@@ -29,12 +45,11 @@
 * _Nextcloud_ = in cloud or on-premises online collaboration platform, with an extension-based [app store](https://apps.nextcloud.com) (eg DICOM viewer)
   * _Nextcloud Hub_ = integrated on-premises (ie self-hosted) platform with four key Nextcloud products (Files/Talk/Groupware/Office, basically Drive + Zoom + Outlook + Office)
 * _openHAB_ (open Home Automation Bus) = open-source home automation software (written in Java, by Eclipse)
-* **Sevalla** = PaaS (use Fireship)
+* **Sevalla** = PaaS (use [Fireship](https://sevalla.com/fireship))
 * _Shopify_ = turnkey online stores for e-commerce entrepreneurs
 * _Slack_ = online text/mediasharing/videocalls team communication platform (à la Discord/Teams, by Salesforce)
 * _Stripe_ = online payment
 * _Supabase_ = open-source Firebase alternative (Postrgres DB, Authentication, instan APIs, Edge Functions, Realtime subscriptions, Storage, Vector embeddings)
 * _Terraform_ (_Hashicorp_) = infrastructure as code (cloud APIs as declarative configuration files)
 * _Twilio_ = CPaaS (Communications Platform as a Service), APIs for 2FA, SMS, voice, video, authentication
-* _Vercel_ = cloud infrastruture, build & deploy (CI/CD), generates URL on git push
 * _Webflow_ = SF-based no-code website development & hosting SaaS

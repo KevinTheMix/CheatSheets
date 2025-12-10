@@ -120,12 +120,14 @@
 * **Brackets** = open-source editor for web developers/designers/students with live previews & attributes autocompletion (superseded by **Phoenix Code**)
 * **ConTEXT** = text editor (_discontinued_)
 * **Cursor** = AI-first code editor (for of VS Code)
+* **Google Antigravity** = built on Windsurf's foundation
 * **HTLM-Kit** = trialware HTML editor
 * **JetBrains AI** = IDEs AI assistant
 * **Nodepad2** = notepad.exe alternative
 * **PSPPad** = freeware code/HEX editor with syntax highlighting (notepad.exe substitute)
 * [Replit](https://replit.com) = online AI-assisted collaborative IDE
 * **Sublime Text** = shareware text/code editor that probably inspired VS Code
+* **Windsurf** = AI-powered IDE (created in 2021, mostly acquired by Google)
 * **Zed** = FOSS fast code editor (by the Atom team)
 
 ## Productivity

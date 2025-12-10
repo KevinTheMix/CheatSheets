@@ -30,19 +30,23 @@ Features:
 * [Performance best practices](https://docs.flutter.dev/perf/best-practices)
 * [Stack Overflow](https://stackoverflow.com/questions/tagged/flutter) = newest questions
 * [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources) = samples & cookbooks
-* [@Wm Leler](https://leler.com/wm/bio.html#flutter) = Flutter-promoting articles (eg _what's revolutionary?_, _why Dart?_ UX study with eight developers, _company pitch_)
+* [Awesome Flutter](https://github.com/Solido/awesome-flutter) = github curated list of Flutter resources (libraries, tools, tutorials, articles)
+* [@Wm Leler](https://leler.com/wm/bio.html#flutter) = Flutter-promoting articles (eg _what's revolutionary?_, _why Dart?_ UX study with eight developers, _company pitch_, **Transform**)
 * [Matthew Smith - Why we chose Flutter and how it's changed our company](https://medium.com/@matthew.smith_66715/why-we-chose-flutter-and-how-its-changed-our-company-for-the-better-271ddd25da60)
-* _const_ in front of constructors is very important, making rendering more efficient by skipping most of rebuild
-* It's possible to create & assign widgets to variables, then we can access their properties (eg height) down the tree, or add them conditionally in several places
-* Break down long widgets into modular widgets rather than helper methods (see Decoding Flutter video on that topic)
-* Use `compute()` (similar to Dart `Isolate.run()`) to run a given callback in background, for operations that take longer than a few milliseconds
 * `build()` should remain 'pure' ie without side-effects (see <https://stackoverflow.com/a/52249579/3559724>)
-* Refactor small widget subtrees subject to frequent change out of large `build()` methods to leverage **more granular & efficient rebuilds**
+* _const_ in front of constructors is very important, making rendering more efficient by skipping most of rebuild
+* Break down long widgets into modular widgets rather than helper methods (see Decoding Flutter video on that topic)
 * Builders are methods that can map data to return widgets dynamically, also enable describing UI declaratively (as `build()` does)
+* Refactor small widget subtrees subject to frequent change out of large `build()` methods to leverage **more granular & efficient rebuilds**
+* Use `compute()` (similar to Dart `Isolate.run()`) to run a given callback in background, for operations that take longer than a few milliseconds
+* It's possible to create & assign widgets to variables, then we can access their properties (eg height) down the tree, or add them conditionally in several places
+* An app is identified by its package name, not its name (let alone capitalizing it) as that is just a label (see `application android:label` in _main\AndroidManifest.xml_)
 
 ## Glossary
 
-* [Architecture](https://docs.flutter.dev/resources/architectural-overview#anatomy-of-an-app)
+* [Flutter Architecture Samples](https://fluttersamples.com) = same Todos app using different architectural concepts/tools
+* [App Architecture](https://docs.flutter.dev/app-architecture) = repositories are single source of truth (SSOT) and don't know each other, they are n-to-n with both viewmodels (ie states) and services, use cases are optional
+* [Flutter Architecture](https://docs.flutter.dev/resources/architectural-overview#anatomy-of-an-app)
   * **Runner** = platform-specific native host shell app package and its main entrypoint (eg an Android Activity/iOS UIViewController), originally generated via `flutter create`, owned/modifiable by app developer
   * **Embedder** = platform-specific C API library used by Runner providing services for rendering surfaces/accessibility/input, event loop (eg `FlutterEngineRun()`, `FlutterEngineShutdown()`)
   * **Engine** = platform-agnostic C/C++ Flutter core, including rendering engine (Skia/Impeller), Dart Runtime (including Dart VM that runs user Dart & framework Flutter code), platform channels, Embedder API
@@ -50,7 +54,6 @@ Features:
   * **Dart App** = platform-agnostic Dart user custom app
   * [Inside Flutter](https://docs.flutter.dev/resources/inside-flutter) = optimized & single pass layouting, onboarding strategies
 * [BLoC](https://www.flutterclutter.dev/flutter/basics/what-is-the-bloc-pattern/2021/2084) = state management design pattern using Streams of events (in) & states (out)
-* `build(BuildContext context)` = is itself a sort of _builder_ (ie indirect callback)
 * [Build Modes](https://docs.flutter.dev/testing/build-modes) = Debug (development, Hot Reload), Profile (performances analysis), Release (release app)
 * **BuildContext** = context for current widget, holds a reference to its corresponding Element, handle for widget location in its tree
 * [CanvasKit](https://skia.org/docs/user/modules/canvaskit) = lightweight version of Skia compiled to WebAssembly optimized for web browser (paint to HTML canvas/SVG) via WebGL
@@ -97,13 +100,6 @@ Features:
   * Native Android apps also use Skia as part of their rendering routine, however Flutter packs its own standalone copy (in the engine layer) to remain decouple from a platform's specific version
 * **Slivers** = different parts of a scrollable area that can each react appropriately to the same scroll
 * **State** = objects associated with stateful widgets (actually linked **from** their associated Elements)
-  * _widget_ = access to its associated widget's properties (usually passed down from parent)
-  * _context_ = access to its associated widget's context (ie outside of `build()`, declare `late final` variables to use in an initializer)
-  * `build()` = called by Flutter (and never directly!), possibly very often whenever it needs to paint something (ie `setState()` called, or parent input data changes, or once during app creation)
-    * Always return a new or cached (tree of) widget(s), ie it constitutes a reactive snapshot of UI
-  * `setState()` = [takes in & executes an anonymous method, mostly contains _asserts_, then marks the Element dirty](https://iiro.dev/set-state)
-    * State (aka private variables) can be managed in any Dart class really, but `setState()` is what Flutter does need to update UI
-  * _Lifting state up_ = moving state up to first common ancestor; basic solution to fix state sharing between multiple widgets
   * State is persistent between widget tree rebuilds (eg a few parts of the screen gets updated), but not navigating to a whole different page, which replaces subtrees
 * **State Restoration** = restoring state after app was backgrounded/suspended by OS (**RestorationManager**, `with RestorationMixin` > `restoreState()`)
 * **WebGL** = JavaScript API for rendering interactive 2D/3D graphics with GPU-accelerated physics to web browsers (ie HTML canvas) without plugins
@@ -147,17 +143,24 @@ Features:
 
 ### Lifecycles
 
+* `build(BuildContext context)` = called by Flutter (never directly) from a widget's Element
+  * Always return a new or cached (tree of) widget(s), ie it constitutes a reactive snapshot of UI
+  * It can be called possibly very often, whenever it (initState, setState) or its dependencies (parent or ancestor) change, or it needs to paint something and must have no side-effects
 * App
   * **WidgetsBindingObserver** = mixin to observe various lifecycle events affecting overall app/widget tree (eg entering back/foreground, screen orientation/size, text scale factor, Android back button)
     * Set `WidgetsBinding.instance.add|removeObserver(this)` & override `didChangeAppLifecycleState(state)`
   * `WidgetsFlutterBinding.ensureInitialized()` = make sure there is an instance of **WidgetsBinding**, needed to use platform channels to call native code asynchronously (ie if _main_ is `async`)
-* Widget = `createState()` = other than that they don't have a lifecycle as they're immutable, they exist or they don't and that's the end of it
+* Widget don't have a lifecycle (other than `createState()`) as they're immutable
 * State
+  * _widget_ = access to its associated widget's properties (usually passed down from parent)
+  * _context_ = access to its associated widget's context (ie outside of `build()`, declare `late final` variables to use in an initializer)
+
   * `initState()` = one-time init
+  * `setState()` = [takes in & executes an anonymous method, mostly contains _asserts_, then marks the Element dirty](https://iiro.dev/set-state)
   * `didChangeDependencies()` = when a dependency changes (eg an **InheritedWidget** in `build()` changes), called immediately after `initState()`
-  * `didUpdateWidget()` = whenever (associated stateful) widget configuration changes (eg its input values)
-    * There's always a rebuild performed after this method
-  * `void dispose()` = widget removed from UI (always dispose controllers, focus nodes, streams, etc)
+  * `didUpdateWidget()` = whenever (associated stateful) widget configuration changes (eg its input values), there's always a rebuild performed after this method
+  * `deactivate()` = called when this object is removed from its tree
+  * `dispose()` = widget removed from UI (always dispose controllers, focus nodes, streams, etc)
   * _mounted_ (bool) = true if this state is associated with a **BuildContext** (ie after creation/construction, ie before `initState()`, and until `dispose()` gets called)
 * StatefulElement = _initial_ (created not mounted/attached), _active_ (mounted to tree), _inactive_ (temporarily removed), _defunct_ (removed permanently)
 
@@ -203,6 +206,7 @@ Use commands with either long/short names (eg `flutter --option=value` or just `
     * _html_ maps component to native HTML/CSS/JS elements (eg images as `<img>`), can handle basic CSS animations, better for SEO
   * `--build-name` & `--build-number` = override version & build numbers, respectively
   * `--dart-define={VAR}={value}` = define a local environment variable (eg `BUILD_MS=$(date +%s000)`, read via `int.fromEnvironment('{VAR}', defaultValue: {value})`)
+    * [Read This Before Using --dart-define in Your Flutter Build](https://medium.com/@ogbonnaijeoma871/d464159d96e4) = don't store sensitive information here
   * `--obfuscate --split-debug-info={symbols_directory}` = obfuscate & save symbols mapping file to directory (for later de-obfuscating eg for debugging & stack trace)
   * `--release` = build in _build/app/outputs/_
   * `--split-per-abi` = produces multiple APK, each optimized to a specific [Application Binary Interface (ABI)](../Android.md#glossary)

@@ -2,8 +2,9 @@
 
 ## Quick Tips
 
-* _Not everything is a widget_ (eg **BoxDecoration**, **ThemeData**, **TextStyle**)
 * [Material component widgets](https://docs.flutter.dev/ui/widgets/material)
+* _Not everything is a widget_ (eg **BoxDecoration**, **ThemeData**, **TextStyle**)
+* Don't forget to use **AnimatedContainer** (& **AnimatedPadding**) to animate stuff
 
 ## Misc
 
@@ -99,7 +100,7 @@ There are two built-in solutions: imperative **Navigator** (push/pop API that wo
 * **Dialog** = general-purpose Material Design dialog (_child_)
   * **AboutDialog** = boring legalese stuff (`showAboutDialog()`, `application`, `children`, `LicenseRegistry.addLicense()`)
   * **AlertDialog** = popup with a title, content and yes/no actions (_title_, _content_, _actions_, _elevation_, _backgroundColor_, _shape_, _barrierDismissible_), also **CupertinoAlertDialog**
-  * **SimpleDialog** = simplified popup with a list of clickable **SimpleDialogOption** _children_ choices (_contentPadding_)
+  * **SimpleDialog** = popup with a list of clickable **SimpleDialogOption** _children_ choices (_contentPadding_)
   * Awaitable result of `show…Dialog()` is passed via `Navigator.pop(c, result)`
     * `showAboutDialog()`
     * `show(OkCancel)AlertDialog()` = adaptive alert dialog
@@ -266,9 +267,11 @@ There are two built-in solutions: imperative **Navigator** (push/pop API that wo
 * **Scrollable** = manages scrolling in one dimension (eg **ListView**, **DraggableScrollableSheet**, **SingleChildScrollView**)
   * **CustomScrollView** = (hybrid) appbar/grid/list scrolls via _slivers_ (**SliverAppBar**, **SliverList**, **SliverGrid**, `center: key`)
     * **SliverAppBar** = scroll-reactive top menu used with parent **CustomScrollView**, with (zoom, blur) effects (_expandedHeight_, _flexibleSpace_, _floating_ to reappear on each scroll-up, _pinned_)
+    * **SliverFillRemaining** = lets single box child fill remaining space of parent
     * **SliverFixedExtentList** = SliverList with all items of same extent (ie height)
     * **SliverList** & **SliverGrid** = advanced scrolling control (_delegate_: `Sliver[Child|Builder]ListDelegate`, `.count()` & `.extent()` ctors)
     * **SliverAnimatedList|Grid** = **SliverList|Grid** that animates items when added/removed
+    * See [@emily.fortuna: Slivers, Demystified](https://medium.com/flutter/slivers-demystified-6ff68ab0296f) = scrolling collapsible list
   * **RestorableScrollController** = special type of scroll controller with embedded restoration capabilities
   * **Scrollbar** = add scrollbar to _finite_ scrollable widget (**List|Grid|CustomScrollView**) (`isAlwaysShown`, `showTrackOnHover`, **ScrollbarTheme**)
   * **ScrollController** = pilots one (or multiple) scrollable widgets programmatically
@@ -304,12 +307,13 @@ There are two built-in solutions: imperative **Navigator** (push/pop API that wo
   * Space is attributed to their inflexible (_flex:0_) children first, then distribute rest of space (ie parent constraint - inflexible children size) to **Flexible** children
   * Unbounded/unlimited constraints are given to their inflexible children to choose their own size (asking them to shrinkwrap)
   * In bounded context, they themselves take up max size in their main axis by default (ie `mainAxisSize: MainAxisSize.max`)
-  * In unbounded context, they try to fit their children (who must all be inflexible)
+  * Row within a Column takes 100% width by default (change this behavior via `mainAxisSize: MainAxisSize.min`)
   * Their cross axis must always be bounded, since they take up all space in that direction
+  * In unbounded context, they try to fit their children (who must all be inflexible)
   * See [Understanding constraints: Flex](https://docs.flutter.dev/ui/layout/constraints#flex)
 * **Flexible** = receives available space from **Flex** parent (ie Column/Row), via _fit_ (_tight_ divides equally, _loose_ depends on content size) and _flex_ factor (_1_ by default, _0_ is inflexible)
 * **FittedBox** = scales/positions child within smaller/larger parent (_fit_ = `BoxFit.{value=contain|cover|fitH/W|fill|none}`, _alignment_)
-* **FractionallySizedBox** = size by percentage (_heigh/widthFactor_), align in parent or wrap in **Flexible**; use no child for whitespacing
+* **FractionallySizedBox** = size by percentage of parent (_heigh/widthFactor_), align in parent or wrap in **Flexible**, or use no child for whitespacing
 * **IntrinsicHeight** & **IntrinsicWidth** = sizes its child to its maximum intrinsic h/w by letting it speculatively sizing to its its largest child
   * Useful for edge cases (eg when each sibling wants to align in different directions in a scrollable context), but can be expensive (worse case O(N²))
 * **LimitedBox** = give limited constraints (_maxH/W_) to child with infinite (specifically, only) parent constraints (eg **ListView**/**Column**/**Row**/**UnconstrainedBox**)
@@ -410,7 +414,7 @@ There are two built-in solutions: imperative **Navigator** (push/pop API that wo
 * **AnimatedList** = list with built-in add/remove item animation (_initialItemCount_, _itemBuilder_, trigger via **AnimatedListState** either locally or via **GlobalKey**)
 * **AnimatedSwitcher** = transition between child widgets (set new _child_ via `setState()`, set _transitionBuilder_ to **Fade/Scale/Rotation-Transition**, set _layoutBuilder_) use keys if new widget is same (runtime)Type
 * **Flow** = sizes/positions/animates children widgets according to **FlowDelegate** logic using transformation matrices
-* **Hero** = images/clips/etc morphing animation between **Navigator** routes (via common _tag_)
+* **Hero** = images/clips/etc morphing animation between **Navigator** routes (via common _tag_, see [Hero animations](https://docs.flutter.dev/ui/animations/hero-animations))
 * **HeroMode** = en/disables child **Hero** in widget subtree (_enabled_)
 * **Transform** = custom (PowerPoint-like) transitions (`rotate()`, `scale()`, `skewX()` `translate()`, or 4x4 custom matrix)
 * Tweens = (linear) interpolation be**tween**
@@ -464,7 +468,7 @@ In order to implement a custom widget, use either **AnimatedBuilder**, or extend
 * Requires a **AnimationController** (to `dispose()` within a StatefulWidget's State)
 * **Animation\<T>** = anything of type _T_ (double, Color, Size) that changes over time
 * **AnimatedBuilder** (extends **AnimatedWidget** via **ListenableBuilder**) = full-custom explicit animation (provide an inert _child_ to optimize rendering)
-* **AnimatedIcon** = controllable icon, explicit despite naming  (`icon: AnimatedIcon.play_pause, progress: _controller`)
+* **AnimatedIcon** = explicit (thus controllable despite naming) animated icon among a dozen available (eg `icon: AnimatedIcon.play_pause, progress: _controller` then `_controller.forward/reverse()`)
 * **AnimationController** (extends **Animation\<double>**) = animation pilot/player (_status_, _(reverse)Duration_, _isCompleted|Dismissed_, _value_)
   * `add(Status)Listener()`, `forward()`, `fling()`, `repeat()`, `reverse()`, `dispose()`, `animateTo(double value)` (similar to TweenAB's end), `drive(Animatable<T>)`
   * Controllers can even update widgets without plugging it into any animation, ie by adding a listener that `setState()` (although better to use existing options, see Animation Deep Dive)

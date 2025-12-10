@@ -1,6 +1,6 @@
 # Shorebird
 
-Created by Flutter creators (ex-Google engineers).
+Codepush for Fluter, created by Flutter creators (ex-Google engineers).
 Pushes small Dart VM-related patches via OTA updates.
 
 ## Quick Tips

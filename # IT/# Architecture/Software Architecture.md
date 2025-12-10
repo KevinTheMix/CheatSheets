@@ -5,6 +5,7 @@
 ## Glossary
 
 * **4+1** = view model describing architecture of software-intensive systems using mutliple shareholders viewpoints
+* **Backend For Frontend** (BFF) = dedicated backend service for each type of client interface (eg one for mobile, web, smartwatch app, etc) to combat inefficiency of one-size-fits-all
 * **Barrel Files** = a file that does nothing but re-export things from other files
   * [TkDodo - Please Stop Using Barrel Files](https://tkdodo.eu/blog/please-stop-using-barrel-files)
 * **Bottlenecks** = system part that degrades the entire system's performance when congested
@@ -31,6 +32,7 @@
   * Doesn't require consent to collect and process data required to run the site, but only for a well-defined, transparent purpose
   * A deletion request might lead to possibly only the anonymization of data, and some data **must** be kept for some time (eg financial records)
 * **Hexagonal Architecture** = Domain no longer depends on Data (as in n-layered architecture) but holds ports (ie repository interfaces) that are implemented in Data
+* **Law of Demeter** = don't access a property's sub-properties (eg `a.b.c`)
 * **Marshalling** = transforming one live object's memory representation into a format suitable for storage/transmission between different runtimes (broader than only serialization)
 * **Mixin** = in OO, a feature-able class that can be _included_ without being inherited from (eg C# `IEquatable`, Ruby include, JS extend/assign), promoting reusability & multiple inheritance
 * **Module** = une fonction ou une classe ou un fichier, selon les langages
@@ -58,7 +60,7 @@
   * **Interface Segregation Principle** = split large Interfaces into more "role-granular" ones, so subclasses don't need to implement unnecessary methods
   * **Dependency Inversion Principle** = use Interfaces between parent & child classes (the parent owns, the child inherits/implements)
     * The Interface is packaged with the parent (actually more recently, a separate _Child.Contract_ project) instead of the child, thus _inverting_ the direction of their (compile-time) relationship
-* **Law of Demeter** = don't access a property's sub-properties (eg `a.b.c`)
+* **Value Object** = immutable type that represent a concept by their value, not identity (ie equality based on all fields, not a unique ID)
 
 ### Non-Functional Properties
 
@@ -103,3 +105,35 @@
 * **Aggregate** = cluster of entities, with a root entity (aka the **Aggregate Root** (Entity))
 * **Anti-Corruption Layer** (ACL) = translates/shields internal models from inbound lingo from an external 3rd party service
 * **Bounded Context** = essentially, a strategic business-driven namespace
+
+### Clean Architecture
+
+UI → Application → Domain → Data → Infrastructure.
+
+* **Application** = orchestrates domain logic (ie use cases), depends only on domain abstractions
+  * **Application Services** = orchestrate use cases, often depending on external layers (infrastructure, UI)
+  * **Use Case** = orchestrates domain-level operations to fulfill a single user action/business rule, receive presentation-level notifier requests and hit one or more repositories
+* **Data** = repo implementation, DTOs/models, mappers, cache poligy, abstract datasource interfaces
+  * **Datasources** = useful if several repositories share the same DB/HTTP logic
+    * Datasource Layer is central entry point for data access, useful when there is both local & remote sources, or for centralizing/reusing some treatments.
+    * Handles caching (even for a single table), network logic, multi-DAOs transactions (single-DAO can be handled in DAO, even with DS present), multi-sources aggregation.
+    * For simpler CRUD-like DAOs (without caching, etc), Datasources are pretty redundant and can be merged with DAOs.
+* **Domain** = entities/enums/value objects, repository abstractions, services
+  * **Domain Services** = pure logic without external dependencies (encapsulates BL that does not belong to a single entity/value object)
+* **Infrastructure** = lowest-level to exchange with OS/drivers, 3rd-party frameworks, external systems (I/Os, datasource impl, API clients, DB adapters, K-V stores, interceptors)
+  * Instantiated once at start-up, no inbound interfaces (only concrete calls)
+  * **Containerization**
+  * **Database**
+  * **Http** = low-level HTTP client setup only (eg a dio_client.dart that adds auth/header interceptors, attaches logging, sets base URL & timeouts)
+    * You do not write endpoints or JSON mapping here (that belongs in a datasource under _data/_)
+  * **Storage** = anything touching platform file systems or secure key/value stores (eg a wrapper around SharedPreferences, flutterSecureStorage, or file picker bridges)
+    * Again: no business logic, only driver code
+
+#### Why usecases use classes (rather than functions)
+
+* Dependency injection (DI): Since it’s a class, you can inject dependencies (eg NoteRepository) via constructor.
+* Named abstraction: The use-case has a name (AddNotes) which shows up clearly in stack traces, logs, test output, etc.
+* Testability: Easy to instantiate and test in isolation: AddNotes(FakeNoteRepo()).call(...)
+* Extensibility: You can later add fields (eg injected Logger, flags, strategy objects) without changing the call site.
+* Interchangeability: You can pass it around, mock it, or swap implementations (eg for background vs. interactive) — it’s a polymorphic unit.
+* Consistency: Every use-case follows the same pattern: MyUseCase.call(...). No free-floating, inconsistently-named functions.

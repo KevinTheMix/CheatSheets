@@ -2,7 +2,14 @@
 
 ## Quick Tips
 
+* It's ok to try design ideas & redesign later (alpha spirit)
+* Choose your defaults wisely (as they are what most users will use forever)
+* Use Conventions = allow minimal input to perform an action, and default-set the rest
+* Be Optimistic = perform actions immediately and lets user undo (_better to ask for forgiveness than permission_)
+* [Trending Color palettes](https://coolors.co/palettes/trending)
+* [w3.org: Personal names around the world](https://www.w3.org/International/questions/qa-personal-names)
 * [pixselacademy: 49 UI Design Tips](https://www.linkedin.com/feed/update/urn:li:ugcPost:6954769316294635520)
+* [Jakob Nielsen: Response Times: The 3 important Limits](https://www.nngroup.com/articles/response-times-3-important-limits) (Usability) = 0.1, 1 and 10
 * [10 Usability Crimes You Really Shouldn't Commit](https://line25.com/articles/10-usability-crimes-you-really-shouldnt-commit)
   1. Form labels that aren't associated to form input fields
   2. A logo that doesn't link to the homepage
@@ -14,9 +21,6 @@
   8. Underlining stuff that isn't a link
   9. Telling people to click here
   10. Using justified text
-* [w3.org: Personal names around the world](https://www.w3.org/International/questions/qa-personal-names)
-* [Jakob Nielsen: Response Times: The 3 important Limits](https://www.nngroup.com/articles/response-times-3-important-limits) (Usability) = 0.1, 1 and 10
-* [Trending Color palettes](https://coolors.co/palettes/trending)
 
 ## Glossary
 
@@ -27,7 +31,7 @@
 * **Flat design** = minimalist design language
 * **Fluent Design System** = a design language developed by Microsoft in 2017
 * **Graphics Design** = static visual content to communicate messages
-* **Hamburger** = 3 horizontal lines icon button that usually opens a menu
+* **Hamburger** = a three horizontal lines icon button that usually opens a menu
 * **Hover** = change in color, shadow or animation of a button/link/icon in response to a mouseover
 * **Material Design** = design language developed by Google in 2014
 * **Motion Design** = broad discipline including motion graphics, animation, cinematography, graphic design

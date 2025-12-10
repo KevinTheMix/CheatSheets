@@ -24,7 +24,7 @@
   * **Validation** = ensures a system conforms to the customer's expectations (ie green light), including emergent properties (ie are we building the right product?)
   * **Verification** = checking the software conforms to specification & meets functional & non-functional requirements (ie are we building the product right?)
 
-## Types
+### Types
 
 * [Types of Software Testing](https://www.javatpoint.com/types-of-software-testing)
   * **Unit** = does a unit of code work as intended (path, **structural**, whitebox, interface consistent, coverage analysis)
@@ -45,8 +45,9 @@
 
 ## Tools
 
+* _Appium_ = open-source framework to automate testing of mobile apps (not just Flutter), to write GUI tests like a user (equires **Appium Flutter Driver** on Flutter)
 * _Robot framework_ = Python-written generic keyword-driven test automation framework for acceptance testing/test-driven development, using a tabular test data syntax
   * [RIDE](https://github.com/robotframework/RIDE) = Robot Framework IDE (edit _.robot_ files)
-* _SonarQube_ = open-source platform to ensure continuous code quality & security (static analysis, coverage, duplication, smells & vulnerabilities detection) on 35+ languages
+* _SonarQube_ (SonarSource) = open-source platform to ensure continuous code quality & security (static analysis, coverage, duplication, smells & vulnerabilities detection) on 35+ languages
 * _xUnit_ = automated testing software framework/label/architecture composed of defined components: test cases & suites (ie groups), assertions, fixtures (environment), runner to report results
   * Notably used by Microsoft (in place of their self-developed _mstest_)

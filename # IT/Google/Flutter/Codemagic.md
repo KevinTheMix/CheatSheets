@@ -4,12 +4,7 @@ CI/CD for Android, iOS, Flutter & React Native.
 
 ## Quick Tips
 
-* [Flutter Docs: Sign the app](https://docs.flutter.dev/deployment/android#sign-the-app), once an _upload-keystore.jks_ file is generated:
-  * Reference it from a _key.properties_ file (in _android_ folder)
-  * Modify _android/app/build.gradle.kts_ to use signing for release (ie when executing `flutter build apk --release`)
-* [Codemagic - Android Code Signing](https://docs.codemagic.io/flutter-code-signing/android-code-signing)
-  * In Codemagic, _upload-keystore.jks_ file gets uploaded as-is, but not _key.properties_ whose passwords are simply filled in GUI fields
-* `/!\` **both** _upload-keystore.jks_ & _key.properties_ files must be excluded from git public source version control
+* Codemagic is linked to git repo via a GitHub Webhook that is setup to call a Codemagic API, triggering calls on some event (push/PR update/**tag creation**)
 
 ## Glossary
 
@@ -21,6 +16,15 @@ CI/CD for Android, iOS, Flutter & React Native.
 * **Workflow Editor** = GUI alternative to configuring _codemagic.yaml_
 
 ## Configuration
+
+### Code Signing
+
+* `/!\` **both** _upload-keystore.jks_ & _key.properties_ files must be excluded from git public source version control
+* [Codemagic - Android Code Signing](https://docs.codemagic.io/flutter-code-signing/android-code-signing)
+  * In Codemagic, _upload-keystore.jks_ file gets uploaded as-is, but not _key.properties_ whose passwords are simply filled in GUI fields
+* [Flutter Docs: Sign the app](https://docs.flutter.dev/deployment/android#sign-the-app), once an _upload-keystore.jks_ file is generated:
+  * Reference it from a _key.properties_ file (in _android_ folder)
+  * Modify _android/app/build.gradle.kts_ to use signing for release (ie when executing `flutter build apk --release`)
 
 ### Repository settings
 

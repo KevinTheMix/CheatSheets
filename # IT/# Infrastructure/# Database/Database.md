@@ -22,6 +22,7 @@
   * See <https://martinfowler.com/bliki/EagerReadDerivation.html>
 * **Eventual Consistency** = distributed DB model to achieve high availability at the cost (and guarantee) of eventual consistency
 * [Fragmentation](https://www.mssqltips.com/sqlservertip/4331/sql-server-index-fragmentation-overview) = internal (too much free space) or external (table storage pages are out of order)
+* **Graph DB** = stores explicit connections between items (as edges), unlike a vector DB storing implicit similarity between items
 * **Index** = a lookup table applied to PK, FK and UNIQUE-constrained fields that enables dichotomical (_log(n)_) searches, as opposed to slow sequential _O(n)_ table-scanning (reads get faster, but inserts get slower)
   * Indexes should apply to shortest & stablest fields so browsing them is efficient
   * **Clustered Index** = one per table, data gets inserted in actual order of chosen column (doesn't require additional storage as the table itself _is_ the Index), Inserts are slower since new rows must be placed corectly
@@ -47,7 +48,7 @@
 * **Transaction log** = records transactions & the modifications made by each of them
 * **Two-Phase Commit Protocol** = type of atomic commitment protocol, a distributed algorithm coordinating distributed atomic transactions and whether to commit or abort them
 * **Union** = concatenates result sets from two queries with identical columns number/order and compatible data types compatible (`UNION` removes duplicates, `UNION ALL` allows duplicates)
-* **Vector DB** = nearest neighbor/similarity & semantic searches
+* **Vector DB** = nearest neighbor/similarity & semantic searches rather than exact matching (à la ElasticSearch for complex entities)
 * **Wildcards** = matches one (`_`), or several (`%`), or ranges of characters (`[a-z0-9.,;]` or opposite `[^…]`) as part of a `LIKE` clause
 * **Write-ahead Logging** = techniques for atomicity & durability (two of ACID properties), and an implementation of Event Sourcing architecture
 * **Write-ahead Log** = append-only structure for crash & transaction recovery where changes are initially written before being actually applied

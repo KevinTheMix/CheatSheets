@@ -87,4 +87,3 @@
 * [Magical Debugging](https://marketplace.visualstudio.com/items?itemName=CodeValueLtd.OzCode) (OzCode) = augmented debugging
   * [LINQ Debugging](https://blog.somewhatabstract.com/2016/06/13/i-am-an-ozcode-magician-and-i-have-a-new-linq-trick)
 * [Metalama](https://www.postsharp.net/metalama) (Postsharp) = aspects (meta attributes), real-time code verification (~architecture) & code fixes
-* [Sonarqube](https://www.sonarsource.com/products/sonarqube) (SonarSource) = code quality analyzer

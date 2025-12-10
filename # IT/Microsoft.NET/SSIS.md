@@ -11,4 +11,5 @@ Broad range of data migration tasks, and ETL tools
 ## Glossary
 
 * **ETL** (Extract, Transform, Load)
+* **SSAS** (SQL Server Analysis Services)
 * **SSIS** (SQL Server Integration Services)

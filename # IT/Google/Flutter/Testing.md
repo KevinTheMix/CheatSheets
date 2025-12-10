@@ -2,9 +2,17 @@
 
 ## Quick Tips
 
+* Use **RepaintBoundaries**
+* Immediately write tests on new functionalities
+* Debounce I/O heavy inputs (but writing to local memory is fine)
+* Run apps actually without debugging (unless deliberate) for faster development/execution cycles
+* Test app with **very small sizes**, eg a small window in split-screen mode (a **SingleChildScrollView** might be useful in that scenario)
 * [Overview](https://docs.flutter.dev/testing)
 * [Cookbook](https://docs.flutter.dev/cookbook/testing)
 * [Codelab](https://codelabs.developers.google.com/codelabs/flutter-app-testing)
+* [Error Handling](https://docs.flutter.dev/testing/errors) (`PlatformDispatcher.onError`)
+* [Flutter Spy](https://github.com/anasfik/flutter-spy) = CLI tool to disassemble/reverse engineer Flutter apps, extract data
+* [Background computation isolate](https://docs.flutter.dev/cookbook/networking/background-parsing) = use `compute()` isolate to perform heavy treatments (>16ms), returns a Future
 
 ## Glossary
 
@@ -20,12 +28,13 @@
 
 * **alchemist** (_@betterment.dev_) = provides functions, extensions, documentation to support golden tests
 * **flutter_driver** (_deprecated_) = integration testing ([use **integration_test** instead](https://docs.flutter.dev/release/breaking-changes/flutter-driver-migration))
+* **flutter_test_goldens** (_@flutterbountyhunters.com_) = 'official' golden tests toolkit
 * **flutter_test** = widget testing library built on top of **test** (adds class `testWidgets()`, a **WidgetTester** class with pump methods, finders & matchers, setup & teardown)
 * **integration_test** (_@flutter.dev_, now integrated to SDK itself) = automated testing of app UI
 * **mockito** (_@dart.dev_) = mock library for Dart inspired by Java's [mockito](https://github.com/mockito/mockito) (mocking framework for unit tests)
 * **mocktail** (_@felangel.dev_) = mock library for Dart inspired by mockito (simpler without manual mocks/code generation)
 * **riverpod_test** (_@eronsoft.com_) = tests riverpod notifiers/providers state logic (internally, not for mocking them eg in a UI widget test)
-* **test** (_@dart.dev_) = Dart standard test library (provides `group()`, `test()`, `expect()`, comparers)
+* **test** (_@dart.dev_) = Dart standard test library (provides `group()`, `test()`, `expect()`, etc comparers)
 
 ## API
 
@@ -65,9 +74,7 @@
   * Extends **flutter_test**'s `TestWidgetsFlutterBinding` with: running on real device/emulator, reporting results to Flutter tool (`flutter test`), platform channels & real async events
 * `traceAction(action)` = records actions & generates a performance timeline, requires a twin driver file to produce a timeline summary (a thousand times smaller, both generated in _build_)
 
-## [Debugging](https://docs.flutter.dev/testing/code-debugging)
-
-Run apps actually without debugging (unless intended) for faster development/execution cycles.
+## [Debug](https://docs.flutter.dev/testing/code-debugging), Optimize & Trace
 
 * [DevTools](https://docs.flutter.dev/development/tools/devtools) = debugging & performance tools
   * [Flutter Inspector](https://docs.flutter.dev/development/tools/devtools/inspector) = visualize & explore widget trees
@@ -98,6 +105,8 @@ Run apps actually without debugging (unless intended) for faster development/exe
 * **leak_tracker** package to identify memory issues in Dart & Flutter
 
 ## [Troubleshooting](https://docs.flutter.dev/testing/common-errors)
+
+* Blame **Keys** (or identity-based **equality** hashcode/operator==) when something about state feels wrong
 
 * Red text with yellow double underline = a Material Design based widget (eg **Text**, **Slider**, etc) does not have an ancestor providing default styling (eg **DefaultTextStyle**)
   * Usually, that ancestor is included in another widget (eg **Scaffold** which adds a **Material** widget that applies that styling)

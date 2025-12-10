@@ -512,9 +512,8 @@ enum Color {
 * _dart:convert_ = JSON encode/decode
 * _dart:math_ = `Random().nextInt(n)`
 * _dart:mirrors_ = reflection
-* [Packages](https://pub.dev/publishers/tools.dart.dev/packages)
-  * **Markdown**
-* [Invertase Melos](https://melos.invertase.dev) = manage projects split into mutliple packages
+* **Dart Frog** = fast, minimalistic backend framework for Dart
+* **Melos** (by Invertase) = manage projects split into mutliple packages (aka mono-repos)
 
 ## Sample Code
 

@@ -226,25 +226,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 
 ## Extensions
 
-* **AppVeyor** = desktop CI/CD service used to build/test projects hosted on GitHub & co (GitLab, BitBucket)
-* `gitk` = commit history, branches and tags GUI visualizer
-* **GitLab** = web-based DevOps for Git (wiki, issue tracking, CI)
-* [Git Credential Manager (GCM)](https://github.com/git-ecosystem/git-credential-manager) = provides 2FA capabilities to Git's simple 1FA authentication (mandatory for GitHub & co)
+* **Git Credential Manager** (GCM) = provides 2FA capabilities to Git's simple 1FA authentication (mandatory for GitHub & co)
   * Stores logins in Windows Credential Store
   * Replaces the older [Git Credential Manager for Windows](https://github.com/Microsoft/Git-Credential-Manager-for-Windows)
-
-### Github
-
-GitHub is a web platform hosting (mostly software) projects using Git.
-
-* Uploading an (existing) local repo to GitHub:
-  1. create a repo on GitHub via website or [CLI](https://cli.github.com)
-  2. add a remote using the URL provided by GitHub on creation (eg `git remote add origin "https://github.com/{user}/{repository}"`)
-  3. push local onto remote repo (eg `git push origin master`)
-* If a **README** file is present in the repo, its content gets displayed (with homonyms priority: _README.md_ > _README_ > _README.txt_)
-
-* **GitHub Codespace** = shared online IDE (eg Visual Studio Code, JetBrains, GitHub CLI)
-* **GitHub Desktop** = Git desktop GUI
-* [GitHub Pages](https://pages.github.com) = public website hosting service for GitHub repositories
-  * Set Repository name as `{username}.github.io`, as its name can be changed _once_ the website is published for the first time (_confirmed_)
-  * Configure it further (or unpublish it) via repository Settings > _Pages_
+* `gitk` = commit history, branches and tags GUI visualizer

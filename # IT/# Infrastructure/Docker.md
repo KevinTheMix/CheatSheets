@@ -46,7 +46,8 @@ Unlike a virtual machine, Docker does not virtualize hardware, but the operating
   * For reliability reasons, it's better to run different instances of the same image on different machines/VMs
   * Accepts runtime parameters when (docker) run
 * **Multi-stage Build** = used to decrease the size of the final Image (eg full SDK base image is necessary for building & publishing, but a lighter runtime base image might suffice after that => re-package published result)
-* **Orchestrator** = manages the lifecycle and locations of various Containers, with error control & restart capabilities (eg Azure Fabric Service, Docker Swarm, Kubernetes, Mesosphere
+* **Open Container Initiative** (OCI) = industry effort to standardize container format & execution
+* **Orchestrator** = manages the lifecycle and locations of various Containers, with error control & restart capabilities (eg Azure Fabric Service, Docker Swarm, Kubernetes, Mesosphere)
 * **Registry** = Docker Hub & co. Contains repositories. Companies often have a private registry to manage their own custom Images (e.g. using Azure Container Registry)
 * **Remote Storage** = external DB (SQL Server & co), Azure Cosmos DB (NoSQL), Azure SQL Database, Azure Storage
 * **Repository** = collection of related Images under common Tag
@@ -58,6 +59,9 @@ Unlike a virtual machine, Docker does not virtualize hardware, but the operating
   * Only use Volumes for logs/temp files (not Business Data), because when using an Orchestrator, the Container might move
   * For Business storage, use the traditional data repositories, regardless of using containerization (see Remote)
 * **Windows Server** = runtime with process & namespace isolation, but shared kernel with container host
+
+* _Kubernetes_ = open-source production-grade orchestrating platform for placing & executing (not necessarily Docker) containers, enabling availability/flexility/scalability
+* _minikube_ = quickly setup a local Kubernetes cluster on macOS/Linux/Windows
 
 ## API
 
