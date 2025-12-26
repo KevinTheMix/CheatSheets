@@ -287,6 +287,7 @@
   * `-i` = inode number
   * `-l` = long format (file type - file mode bits - # hard links - owner - group - size - timestamp - filename)
   * `abc*` = lists files starting with _abc_
+* `lsblk` (List Block Devices) = information about all available or specified block devices
 * `man {#} {command}` or `man {command}.{#}` = help on command (section number indicate category, not priority/popularity)
   * `1` = executable programs or shell commands (eg `crontab(1)`)
   * `2` = system calls (eg `open(2)`)

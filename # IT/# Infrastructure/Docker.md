@@ -2,7 +2,7 @@
 
 Docker is an open-source virtualization/containerization tool to package, deploy & run applications, making them easily deployable/testable.
 Docker essentially provides an isolated & portable environment as a minimal package, that is easily rebootable from scratch.
-Unlike a virtual machine, Docker does not virtualize hardware, but the operating system kernel.
+Unlike a virtual machine that virtualizes hardware (to install a real OS), Docker virtualizes OS kernels (to install real images).
 
 ## Quick Tips
 
@@ -12,7 +12,7 @@ Unlike a virtual machine, Docker does not virtualize hardware, but the operating
 ## Glossary
 
 * **Base/Parent Image** = custom or vendor-made cross-platform pre-built image containing OS & software (eg Windows Nano Server with .NET Core image)
-  * Base Images need only stored just once (not for each image referencing them)
+  * They only need to be stored once (not for each referencing image) in a local store, or in public registries (eg Docker Hub, GitHub Container Registry, AWS ECR, or a private custom server)
 * **Bind Mounts** = map to any folder in the host filesystem (access to sensitive OS folder may create security risk)
 * **Cluster** = collection of Docker hosts exposed as one. Used by orchestration for scaling
 * **Compose** = a Docker client to work with applications consisting of a set of containers
@@ -35,7 +35,7 @@ Unlike a virtual machine, Docker does not virtualize hardware, but the operating
 * **Docker Daemon/Runtime** = heart of Docker that does the heavy lifting: a service inside of which containers are built/run/disttributed
 * **Docker Desktop** = Docker for Windows/Mac, using a HyperVisor Layer with a lightweight Linux distro to run Linux-based containers (ie what most of them are)
 * **Docker Toolbox** = legacy Windows/Mac solution for older systems that do not meet the requirements (packs _Oracle VM VirtualBox_)
-* **Dockerfile** = blueprint/makefile of an Image, usually referencing a base image as first statement
+* **Dockerfile** = step-by-step recipe/blueprint of an Image, usually referencing a base image as first statement
 * **Hyper-V** = hypervisor (available on Windows 8+) that can run other OS (required to run Linux Containers)
   * Hyper-V containers don't share the host OS kernel, they each run in its own separated (optimized) VM (kernel), providing better isolation
   * Hyper-V container require an additional parameter when the Container gets run

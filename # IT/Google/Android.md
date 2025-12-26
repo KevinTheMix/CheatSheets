@@ -2,8 +2,12 @@
 
 ## Quick Tips
 
-* URLs can be configured to be opened via designated apps (instead of the browser by default)
 * [Rooting, Bootloader, Recovery](https://android.stackexchange.com/a/117593)
+* URLs can be configured to be opened via designated apps (instead of the browser by default)
+* Android guarantees forward compatibility at framework level: an app can be compiled in Android 15 (**compileSdkVersion**) and run on Android 13 (**minSdkVersion**) as long as newer APIs are guarded/unused
+  * compileSdkVersion = Android API level used to build the app (determines which framework APIs can be used in code)
+  * minSdkVersion = lowest Android version the app can run on (controls install compatibility)
+  * targetSdkVersion = behavior, security, & permissions rules
 
 ## Glossary
 
@@ -11,7 +15,7 @@
   * Used by Play Stores to eventually generate/distribute (smaller) optimized device-specific APK files (not itself executable)
 * _.apk_ (Android Package Kit) = app installation file as a compressed archive (its content can be un-zipped) containing compiled code, resources & manifest
   * Can be ABI/CPU/device-specific (as in `flutter run --release` or when downloaded from app store) or universal (Codemagic with multiple ABIs)
-* [Activities](https://developer.android.com/guide/components/activities/intro-activities) = one app entry point, defined in _AndroidManifest.xml_
+* [Activities](https://developer.android.com/guide/components/activities/intro-activities) = one app's entry point, declared/defined in _AndroidManifest.xml_
 * **Android** = open-source OS based on Linux, supported by many different manufacturer's devices
 * **Android SDK** = can be installed via Android Studio's SDK Manager (at `%USERPROFILE%\AppData\Local\Android\Sdk`)
   * [Platform Tools](https://developer.android.com/tools/releases/platform-tools) = primarily **adb** & **fastboot** exe (see section below)
@@ -32,7 +36,8 @@
 * **Image** = _.img_ file, part of the OS, to be flashed (installed) to the partition matching its name on the device
 * **IMEI** (International Mobile Equipment Identity) = uniquely identifies a hardware mobile device (actually one per fixed SIM card slot)
 * **IMSI** (International Mobile Subscriber Identity) = uniquely identifies a mobile network subscriber/SIM card (stored in SIM card itself)
-* **Intent** = message object to request actions from other apps or system components (ie jumping between applications eg maps, payment, open a webpage, send an email, dial, search)
+* **Intent** = message object for inter-components communication, a passive data structure holding abstract description of an action (ie an activity) to perform (ie start) that supports that intent's message type
+  * Actions/activities can be requested from other apps/system components (ie jumping between applications eg maps, payment, open a webpage, send an email, dial, search)
 * **OEM** (Original Equipment Manufacturer) = a company that constructed an original component sold to end users by another company
 * **OHA** (Open Handset Alliance) = consortium (eg HTC, Sony, Dell, Motorola, Samgsung, LG) led by Google that develops Android
 * **OTA Updates** = Over-the-air updates, the upgrades to the current OS

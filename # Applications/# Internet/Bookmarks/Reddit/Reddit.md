@@ -7,7 +7,7 @@
 * [Follow the arrows](https://www.reddit.com/r/AskReddit/comments/anexq)
 * [How to fuck](https://www.reddit.com/r/sex/comments/13irow)
 * [How to read](https://www.reddit.com/r/AskReddit/comments/bk0xh)
-* [Island survival](https://www.reddit.com/r/reddit.com/comments/bvo91)
+* [Desert Island survival](https://www.reddit.com/r/reddit.com/comments/bvo91)
 * [Jail advices](https://www.reddit.com/r/AskReddit/comments/bf53y)
 * [Planting 1000 seeds](https://www.reddit.com/r/seduction/comments/ufzvf) = be sociable
 * [Positive affirmations](https://www.reddit.com/r/seduction/comments/unsvz) & practical confidence map (1st post)

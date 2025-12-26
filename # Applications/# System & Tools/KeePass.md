@@ -3,15 +3,15 @@
 Open-source password manager with plugin extensibility and an active community.
 Saves its data in a .kdbx file, that can be published to the cloud, as long as its master password is strong.
 
+## Quitk Tips
+
 * [Why](https://www.youtube.com/watch?v=7U-RbOKanYs)
 * [How to Choose a (master) Password](https://www.youtube.com/watch?v=3NjQ9b3pgIg)
+* Websites (Hotmail, Google, Facebook, etc.) offer 2FA via phone, QR code, or in our case a **key**
+  * Use that key to initialize a TOTP generator for that site (it is often offered as an alternative step further more hidden than Phone & QR Code options)
+  * Also save the associated recovery codes if provided (in the same KeePass entry for the site)
 
 ## Glossary
-
-* **2FA** (2-Factor Authentication) = websites (Hotmail, Google, Facebook, etc.) offer 2FA via phone/QR code/**key**
-  * Use that key to initialize TOTP generator for that site (might be a step further hidden than Phone/QR Code)
-  * Also save the associated recovery codes if provided (in the same KeePass entry for the site)
-* **TOTP** = Timed One-Time Password
 
 ## API
 

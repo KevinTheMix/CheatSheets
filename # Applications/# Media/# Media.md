@@ -120,7 +120,7 @@
 * **Brackets** = open-source editor for web developers/designers/students with live previews & attributes autocompletion (superseded by **Phoenix Code**)
 * **ConTEXT** = text editor (_discontinued_)
 * **Cursor** = AI-first code editor (for of VS Code)
-* **Google Antigravity** = built on Windsurf's foundation
+* **Google Antigravity** = combines a editor/agent orchestration system/browser (built on Windsurf's foundation)
 * **HTLM-Kit** = trialware HTML editor
 * **JetBrains AI** = IDEs AI assistant
 * **Nodepad2** = notepad.exe alternative

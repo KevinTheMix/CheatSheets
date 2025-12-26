@@ -30,6 +30,7 @@
 * **STIB-MIVB**
 * **Stocard** = cartes de fidélité
 * **Too Good To Go**
+* [Trickle](https://www.trickle.ai) = developed by Cameron, Jarno (Flutter Belgium)
 * **Uccle**
 
 ## Tools/Tweak

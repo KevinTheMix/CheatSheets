@@ -57,6 +57,7 @@
 * [Web Developer's Toolbox](https://addons.mozilla.org/en-US/firefox/collections/4757633/webdeveloper)
 
 * 7TV = Twitch & YouTube features, emotes
+* Always Active Window (Always Visible) = prevents Facebook feed auto-refreshing (by JS spoofing visibility status)
 * BetterTTV = Twitch & YouTube features, emotes
 * Buster: Captcha Solver for Humans = auto captchas solving
 * **Cookie AutoDelete** = delete closed tabs cookies

@@ -387,7 +387,7 @@ There are two built-in solutions: imperative **Navigator** (push/pop API that wo
 * **AndroidView** & **UiKitView** = embeds Android/iOS view in widget hierarchy, allows using native controls (eg a browser control, Google Maps) but pretty performance-expensive
 * **CupertinoActionSheet** = iOS-themed actions sliding from bottom
 * **LayoutBuilder** = gives access to incoming local parent constraints size, rebuilds when they change (more granular than whole **MediaQuery**), making layout responsive
-* **MediaQuery** = retrieve info about screen _orientation_, _size_ (eg `MediaQuery.sizeOf(context)`), text scaling
+* **MediaQuery** = retrieve info about device system information: screen orientation, size, text scaling, pixel ratio, system padding, inverted/high contrast colors, status bar height
 * **MediaQueryData** = provided via `MediaQuery.of(context)`
   * _orientation_ (device), OrientationBuilder (parent widget) or LayoutBuilder (parent widget, not just its orientation)
   * _padding_ = parts of display partially obscured by system UI (typically hardware notches or system status bar)

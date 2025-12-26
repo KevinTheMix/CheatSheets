@@ -9,6 +9,7 @@
 * [Trending Color palettes](https://coolors.co/palettes/trending)
 * [w3.org: Personal names around the world](https://www.w3.org/International/questions/qa-personal-names)
 * [pixselacademy: 49 UI Design Tips](https://www.linkedin.com/feed/update/urn:li:ugcPost:6954769316294635520)
+* [Tao Dong: How I do Developer UX at Google](https://medium.com/google-design/b21646c2c4df) = through a user study of Flutter
 * [Jakob Nielsen: Response Times: The 3 important Limits](https://www.nngroup.com/articles/response-times-3-important-limits) (Usability) = 0.1, 1 and 10
 * [10 Usability Crimes You Really Shouldn't Commit](https://line25.com/articles/10-usability-crimes-you-really-shouldnt-commit)
   1. Form labels that aren't associated to form input fields
@@ -46,6 +47,11 @@
 * **Staggered animation** = a human-friendly way to introduce new UI elements on screen, one by one
 * **Typeface** (aka **font family**) = design for alphanumerics & symbols used in printing/electronic display
 * **Viewport** = a box that is bigger on the inside, ie children outside bounds can be scrolled into view
+* GUI frameworks/toolkits
+  * **Qt** = cross-language UI framework, native in C++ with bindings in Python (PyQt/PySide), JavaScript (QML), Java, C#, etc
+  * **Tk** = (kinda dated & limited) FOSS simple cross-platform lightweight GUI widget toolkit for building GUIs in many programming languages with bindings in Python (Tkinter), Perl, Ruby
+    * **Tcl** (Tool Command Language) = high-level general purpose interpreted programming language that Tk was originally designed for
+  * **wxWidgets** = FOSS cross-platform C++ GUI toolkit
 
 ### Graphics
 

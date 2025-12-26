@@ -234,9 +234,9 @@ In Dart, arrays are List objects, so most people just call them _lists_.
     * Eg `[...list, item]` = add item (without spread operator, list would become a nested list)
     * Eg `[...a, ...b]` = concatenate (note: easier to do `a+b` here)
   * `List.generate(count, (index) => … );` = uses generator function to generate _count_ items
-  * `List<T>.from(Iterable)` = constructs a T List from an Iterable, useful to cast each item, or convert another Iterable type (eg a Set) to a List
   * `[if (condition) Item(…), b, c]` = add item conditionally (note: **don't use curly braces** to delimite blocks in this syntax)
   * `[for (var i in integers) '$i']` = add items using a loop (eg turns a list of int into a list of Strings)
+  * `List<T>.from(Iterable)` = creates a new T-typed list containing all elements in an Iterable (useful to cast each item or convert a non-List Iterable to a List)
   * `List.filled(length, value/instance, {growable})` = creates a length-long list filled with the current value at each position
   * `List.unmodifiable(list)` = creates an unmodifiable list containing all elements in given list (cannot change its length or items)
     * Also see **UnmodifiableListView** (eg unmodifiable getter: `List<Note> get notes => UnmodifiableListView(_notes)`)

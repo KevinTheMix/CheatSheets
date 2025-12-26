@@ -20,7 +20,6 @@
 * **PXE** (Preboot eXecution Environment) = install an OS remotely from network
 * **Secure Boot** = UEFI process to ensure a device/PC has not been tampered with using a hash chain, requires dedicated hardware (eg motherboard UEFI firmware chip or Apple T2 security chip acting as hardware root of trust)
 * **System Call** (syscall) = how a program requests a service from OS (eg hardware HDD or camera, creating new processes, kernel services such as process scheduling)
-* **TPM** (Trusted Platform Module) = hardware chip to store cryptographic keys (notably for BitLocker & Windows Hello) outside of the OS and reduce malware by 60%
 * **Trap** = a way (imilar to interrupts) for kernel to regain control when a process performs an illegal operation (eg divide by 0) so that it can handle it (eg kill it)
 * **User Space** (or **User-land** or **User Mode**) = everything a program can touch while CPU is running in _user_ mode (ring 3 on x86 ie lower priviledges)
 * **Virtual Machine** = a software emulated computer hardware system that can be parametered, cloned (ideal to quickly deploy identical OS images since hardware is virtually identical on all machines)
@@ -60,6 +59,7 @@
   * **Address** = address of RAM or I/O devices for usage by CPU
   * **Data** = data words being read/written between CPU & RAM/devices
   * **Control** = timing & control signals (read/write, interrupts, clock, etc)
+* **TPM** (Trusted Platform Module) = hardware chip to store cryptographic keys (notably for BitLocker & Windows Hello) outside of the OS and reduce malware by 60%
 
 * _Arduino_ = single-board microcontrollers (by open-source hard/software Italian company)
 * _Raspberry Pi_ = single board computers (SBC)

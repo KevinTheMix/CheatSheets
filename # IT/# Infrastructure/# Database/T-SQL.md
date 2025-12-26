@@ -122,12 +122,3 @@ When multiplying a non integer and dividing by that same number, _decimals_ lose
   * `DAY(date)` = day as an int
   * `EOMONTH(date[, month_to_add])` = last day of the month (aka the number of days in that month)
 * `inputdate AT TIME ZONE timezone` = converts _inputdate_ to a `datetimeoffset` in that timezone (eg `'Central European Standard Time'`, based on Windows Registry)
-
-## Extensions
-
-* **ApexSQL** = SSMS plugin for deep/meta (field & tables names) search
-  * [Generate random sample data](https://www.apexsql.com/sql-tools-generate) for new tables/tests
-* **SQL Server Data Tools (SSDT)** = SQL Server for Visual Studio (SQL Diff & SSIS)
-* **Microsoft® SQL Server® Express** = free MSSQL
-  * [2019.11](https://www.microsoft.com/fr-FR/download/details.aspx?id=101064)
-  * [2022.11](https://www.microsoft.com/fr-fr/sql-server/sql-server-downloads)

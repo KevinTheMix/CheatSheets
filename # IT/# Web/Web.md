@@ -9,15 +9,16 @@
 * **ARIA** (Accessible Rich Internet Applications) = roles/attributes defining ways to make web applications more accessible
 * **GraphQL** (by _Meta_) = open-source data query/manipulation language for APIs
 * **Microfrontend** = web development pattern in which a single app may be built from disparate builds, à la microservices for client-side SPAs written in JavaScript (eg Spotify)
-* **Progressive Web Application** (PWA) = delivered via the web, for browsers or as a mobile app with near-full native capabilities (eg push notif, desktop icon, work offline, phone API access)
+* **Progressive Web Application** (PWA, not to be confounded with SPA) = delivered via the web, for browsers or as a mobile app with near-full native capabilities (eg push notif, desktop icon, work offline, phone API access)
 * **REST** (Representational state transfer) = software architectural style with the following communication constraints/properties: Client-server, Stateless, Caching, Layered
 * **REST vs SOAP**
   * REST is an architecture whilst SOAP is a protocol
   * REST uses JSON/HTML/XML whilst SOAP uses XML + envelope
   * REST uses HTTP CRUD calls whilst SOAP uses HTTP/TCP/UDP/SMTP
 * **Server-Sent Events** (SSE) = unidirectional (unlike WebSockets) server-to-client push technology (via HTTP connection, once it's initially established)
-* **Service Worker** = makes a web site/app behave like a native app, solves loss of connectivity issues, by enabling caching data locally & working offline-first (acts as a proxy for requests & responses)
+* **Service Worker** = makes a (progressive) web site/app behave like a native app, provides local caching for offline(-first) use, acts as a proxy for requests & responses, background sync, push notifications
 * **Shadow DOM** = DOM encapsulation/nesting technique, isolates (without barbaric iframes) inner DOM as a standalone component (eg CSS is contained)
+* **Single-Page Application** (SPA) = web app/site that dynamically (eg using AJAX) rewrites its current content with new data from a web server instead of loading new full pages, making websites feel like native apps
 * **Text Fragment** (`#:~:text=`) = (browser-specific) URL suffix to search & highlight a given string (if present) on web page
 * **URL Rewriting** = rewrite a URL (eg turn GET parameters into URL fragments)
 * **URL Slug** = human-readable last part of a URL address explaining its content as a non-technical ID

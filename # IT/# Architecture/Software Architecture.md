@@ -34,9 +34,11 @@
 * **Hexagonal Architecture** = Domain no longer depends on Data (as in n-layered architecture) but holds ports (ie repository interfaces) that are implemented in Data
 * **Law of Demeter** = don't access a property's sub-properties (eg `a.b.c`)
 * **Marshalling** = transforming one live object's memory representation into a format suitable for storage/transmission between different runtimes (broader than only serialization)
+* **Middleware** = interception layer in a processing pipeline that applies shared behavior around a core operation without being that operation itself (eg auth, logging, messaging, transactions)
 * **Mixin** = in OO, a feature-able class that can be _included_ without being inherited from (eg C# `IEquatable`, Ruby include, JS extend/assign), promoting reusability & multiple inheritance
 * **Module** = une fonction ou une classe ou un fichier, selon les langages
   * L'intérêt est de pouvoir décomposer une partie de traitement dans un module réutilisable ayant le moins de dépendances/liens/informtion possibles
+* **Offline First** or **Local First** = designing an app with lack of connection baked in from scratch as part of normal operation, and eventual sync to share data across devices
 * **OO** = Héritage + Polymorphisme + Encapsulation
 * **Polymorphism** = various techniques for using one symbol to represent multiple different types
   * **Ad Hoc** = functions overload

@@ -9,6 +9,7 @@
 
 * **ACID** (Atomicity, Consistency, Isolation, Durability) = DB transactions properties intended to guarantee data validity despite errors & failures
 * [Aggregate functions](https://learn.microsoft.com/en-us/sql/t-sql/functions/aggregate-functions-transact-sql) = (eg `COUNT`, `MIN`/`MAX`, `AVG`, `SUM`)
+* **BLOB** (Binary Large OBject) = data storage as unstructured objects/files (eg images, videos, executable, texts)
 * **Candidate Key** (aka Natural key, or Domain key or Business key) = a key that _could_ be used as PK instead of the PK (ie it is also unique for each rows/values in the set)
 * **Clause** = built-in functions/operators (such as `SELECT`, `WHERE`, `AND`, `OR`, `LIKE`, `TOP`)
 * **Column-Oriented** = pivot a row of data into horizontal columns (efficient homogenous column-based compression, slower writes, much faster aggregated reads for analytics)
@@ -36,7 +37,7 @@
   1. no repetitive attributes, Primary Key
   2. 1NF + non-key attributes cannot depend on part of a key
   3. 2NF + no functional dependency between non-key attributes
-* **NoSQL** (non-SQL aka non-relational) = schema-less, non tabular relations more flexible DB, via different data structure (eg key–value pair, wide column, graph, or document), making some operations faster
+* **NoSQL** (Not Only SQL or Non-relational) = schema-less, non tabular relations more flexible DB, via different data structure (eg key–value pair, wide column, graph, or document), making some operations faster
 * **ORM (Object-Relational Mapping)** = technique for converting data between a relational DB and the heap of an OO programming language
 * **Replication** = copying of data from a primary to replica DBs in order to achieve distributedness and/or reliability (either triggered in real-time, or scheduled by batch)
 * **Reporting Database** = (one or more) read-only DBs dedicated to getting queryed (ie not updated from direct user interactions) efficiently
@@ -61,6 +62,7 @@
 * [dbdiagram.io](https://dbdiagram.io) = online DB diagrams
 * **DB Browser for SQLite** = SQLite DB IDE
 * **GraphQL** = DB-agnostic data query/manipulation language for APIs, letting a client specify data to fetch (possibly from separate sources as one unified result)
+* **Gremlin** = graph DB
 * **PowerBuilder** = .NET compatible IDE (by SAP) using _DataWindow_ objects to CRUD query a DB
 * **Redis** (Remote Dictionary Server) = open source in-memory storage, used as a distributed in-memory key-value DB, cache, and message broker
 * **SQL Manager for MySQL** = MySQL DB IDE (also for PostgreSQL, Oracle, DB2)

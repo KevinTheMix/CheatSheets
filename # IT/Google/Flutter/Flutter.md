@@ -27,9 +27,11 @@ Features:
 * [Stay up to date](https://docs.flutter.dev/release)
 * [Flutter samples](https://github.com/flutter/samples)
 * [It's All Widgets!](https://itsallwidgets.com) = list of Flutter apps
-* [Performance best practices](https://docs.flutter.dev/perf/best-practices)
 * [Stack Overflow](https://stackoverflow.com/questions/tagged/flutter) = newest questions
+* [Flutter for Android developers](https://docs.flutter.dev/get-started/flutter-for/android-devs)
+* [Zharfan: Top 10 tips I learned at 2M+ users](https://medium.com/@zharfan104/ab03eda10a55) = pro-tips
 * [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources) = samples & cookbooks
+* [Reflectly: from React Native to Flutter](https://medium.com/reflectly-engineering/2e3dffced2ea) = switch from React Native to Flutter
 * [Awesome Flutter](https://github.com/Solido/awesome-flutter) = github curated list of Flutter resources (libraries, tools, tutorials, articles)
 * [@Wm Leler](https://leler.com/wm/bio.html#flutter) = Flutter-promoting articles (eg _what's revolutionary?_, _why Dart?_ UX study with eight developers, _company pitch_, **Transform**)
 * [Matthew Smith - Why we chose Flutter and how it's changed our company](https://medium.com/@matthew.smith_66715/why-we-chose-flutter-and-how-its-changed-our-company-for-the-better-271ddd25da60)

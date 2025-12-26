@@ -8,7 +8,11 @@
 
 ## Glossary
 
+* **2FA** (2-Factor Authentication) = special case of Multi-Factor Authentication
 * **AES** (Advanced Encryption Standard, aka Rijndael) = symmetric data encryption specification (via matrix transformation)
+* **Asymmetric Authentication** = only (bearer of) private key can decrypt data/sign a nonce or transaction, and only (anyone with) matching public key encrypt data/verify signature
+* **Authentication** = process of verifying/asserting of identity
+* **Authorization** = ensures only authenticated identities get access to resources for which they have been granted access
 * **Curve25519** = elliptic curve designed for use in ECDH
 * **DES** (Data Encryption Standard) = (_obsolete_) older symmetric key algorithm using a (now-considered short) 56 bits key
 * **Diffie-Hellman** shared key/secret exchange = generation & transmission of a symmetric key (eg SSL/TLS) over a **public channel** (eg mixing paints)
@@ -33,6 +37,8 @@
 * **Key Partitioning** = dividing a single key into a set of keys (eg splitting a 256-bit key into two keys of 128 bits each)
 * **MAC** (Message Authentication Code) = short piece of information to attest a message's **authenticity & integrity** (aka checksum, hash, error detection)
   * Encryption ensures confidentiality, but not that a message wasn't altered (eg blind bits flipping by an attacker with access to data)
+* **Multi-Factor Authentication** = somthing you are (fingerprint, voice, face, eye), something you know (password, PIN), something you have (card, key, phone, token), somewhere you are (GPS)
+* **Nonce** (Number used Once) = arbitrary number that can be used just once in a cryptographic communication (eg as a challenge to prove ownership of a private key)
 * **On-the-fly encryption** = method used by some disk encryption tools (eg _VeraCrypt_) where data gets automatically de/encrypted as it is loaded/saved
 * **One-Time Pad** (OTP) = encryption technique that's uncrackable (even with quantum computing), but necessitate a single-use **pre-shared** key that's longer than the message
 * **One-Time Password** (OTP) = password valid for only one login session or transaction, often integrating 2FA in the process

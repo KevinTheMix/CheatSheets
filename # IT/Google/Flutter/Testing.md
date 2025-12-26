@@ -6,9 +6,11 @@
 * Immediately write tests on new functionalities
 * Debounce I/O heavy inputs (but writing to local memory is fine)
 * Run apps actually without debugging (unless deliberate) for faster development/execution cycles
+* Split large Widgets into smaller ones in order to isolate stateless Widgets that don't need frequent rebuilding
 * Test app with **very small sizes**, eg a small window in split-screen mode (a **SingleChildScrollView** might be useful in that scenario)
 * [Overview](https://docs.flutter.dev/testing)
 * [Cookbook](https://docs.flutter.dev/cookbook/testing)
+* [Performance best practices](https://docs.flutter.dev/perf/best-practices)
 * [Codelab](https://codelabs.developers.google.com/codelabs/flutter-app-testing)
 * [Error Handling](https://docs.flutter.dev/testing/errors) (`PlatformDispatcher.onError`)
 * [Flutter Spy](https://github.com/anasfik/flutter-spy) = CLI tool to disassemble/reverse engineer Flutter apps, extract data
@@ -74,7 +76,7 @@
   * Extends **flutter_test**'s `TestWidgetsFlutterBinding` with: running on real device/emulator, reporting results to Flutter tool (`flutter test`), platform channels & real async events
 * `traceAction(action)` = records actions & generates a performance timeline, requires a twin driver file to produce a timeline summary (a thousand times smaller, both generated in _build_)
 
-## [Debug](https://docs.flutter.dev/testing/code-debugging), Optimize & Trace
+## [Debug](https://docs.flutter.dev/testing/code-debugging), Optimize/Performance & Trace
 
 * [DevTools](https://docs.flutter.dev/development/tools/devtools) = debugging & performance tools
   * [Flutter Inspector](https://docs.flutter.dev/development/tools/devtools/inspector) = visualize & explore widget trees
@@ -83,7 +85,7 @@
 * Use `toStringDeep()` = a string representation of this node and its descendants
 * Use _dart:convert_ `jsonEncode(…)` to encode & pass whole objects
 * For custom widgets, override `debugFillProperties()` to add custom information (**DiagnosticsProperty**) into Flutter widget tree inspector (especially when publishing packages)
-* Toggle Repaint Rainbow tool to identify superfluous repaints (via **DevTools** or setting _debugRepaintRainbowEnabled_ in main by importing _rendering.dart_)
+* Toggle **Repaint Rainbow** tool to identify superfluous/non-granular repaints (via **DevTools** or setting _debugRepaintRainbowEnabled_ in main by importing _rendering.dart_)
 * **DevTools**: add log to Logging view (or system console)
   * Print to _sdout_ & _stderr_ via `print(…)` or `stderr.writeln(…)` (from _dart:io_)
   * Use `debugPrint()` to wrap `print(…)` and avoid Android throttling log lines due to too high a volume

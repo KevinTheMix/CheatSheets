@@ -2,6 +2,7 @@
 
 ## Quick Tips
 
+* [Network Encyclopedia](https://networkencyclopedia.com)
 * [DNSstuff tools](https://www.dnsstuff.com/freetools)
 * [TCP & UDP Port numbers](https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers) = Well-knownn Registered, Dynamic/Private/Ephemeral
 * [Notable well-known Port numbers](https://en.wikipedia.org/wiki/Port_(computer_networking)#Common_port_numbers)
@@ -17,6 +18,7 @@
   * It is a separate subnet neither internal or public, has very limited connectivity towards internal network (through same or another firewall), and does not initiate outbound connections
   * Clients connect _directly_ (through a firewall) to its services, unlike a reverse proxy that hides all the internal servers behind it
 * **Ethernet** = family of wired technologies used in LAN (local), MAN (metropolitan) & WAN (wide)
+* **Firewall** = network security service that monitors & controls incoming/outgoing traffic
 * **FTP** (File Transfer Protocol) = can be active (client start control connection, server starts data connection) or passive (client starts both, so works better with client-side firewalls)
 * **HTTP** (HyperText Transfer Protocol)
 * **HTTP/2** = major revision of HTTP (developed by Google), derived from (obsolete) SPDY communication protocol, supported by nearly 100% of browsers
@@ -85,6 +87,8 @@
   * Server must sign that key exchange using its certificate private key (only that key is able to complete that challenge)
   * An attacker possessing only the public certificate cannot forge a signature, nor decrypt handshake messages
   * The client and server have now established a secure connection, and use exchanged key to encrypt future communication
+* **SSL Termination Proxy** = proxy server acting as intermediary point between client/server applications that terminates/establish TLS tunnels
+  * Allows using HTTPS for public-facing traffic but faster normal HTTP after first gateway for internal quicker communications
 * **TACACS** (Terminal Access Controller Access-Control System) = older (ARPANET-era) authentication framework (associated with Cisco switches/routers), modernized as TACACS+
 * **Telnet** (Telecommunication Network) = older (abandoned in favor of **SSH**) bi-directional client-server application protocol to access virtual terminals of remote system on LAN/Internet
 * **TLS** (Transport Layer Security) = cryptographic protocol to provide communications security over a network
@@ -139,6 +143,7 @@
 * **NIC** (Network Interface Card) = a device's network card (associated with a MAC)
 * **ONT** (Optical Network Terminal) = converts an ISP's fiber optics to customer's copper Ethernet devices
 * **Patch Panel** = hardware device onto which employees computers are statically connected, then individually linked to a switch over RJ45 cables
+* **Plenum** = dropped ceiling or raised floor facilitating HVAC air flow/circulation (see Messer video on Network Cables), requiring special fire-rated (ie non-toxic) cables
 * **Port Replicator** = external connectivity hub (à la single plug docking station)
 * **Power over Ethernet** (PoE) = provides electricity over an ethernet cable, useful in difficult-to-power areas
   * **Endspan** = built in Switch

@@ -13,10 +13,14 @@
 * **Dunder Method** (Double Under) or **Magic Methods** = built-in methods starting with double leading & trailing underscores
   * Commonly overriden (eg `__init__`), listable via `dir({class})`
 * **Flask** = light & extensible web framework (`flask`)
+* **Kivy** = cross-platform (one codebase for desktop & mobile, but non-native look) mobile/touch-oriented Python UI framework (uses OpenGL)
 * **PyPI** (Python Package Index) = official repository of Python packages (default for `pip`)
-* **Tkinter** = interface to Tcl/Tk (ie a cross-platform FOSS widget toolkit for building GUIs in many programming languages)
+* **PyQt** = Python bindings for Qt framework (older, widely used)
+* **PySide** = Python bindings for Qt framework (more permissive license, officially supported by Qt)
+* **Tkinter** = Python built-in GUI library and binding/wrappper around Tcl/Tk
 * **Virtual Environment** = standalone self-contained local install including all versioned dependencies, sourced in command prompt, prevents intereference with global install
 * **Web Server Gateway Interface** (WSGI) = server-to-application calling/forwarding convention for Python applications
+* **wxPython** = Python bindings for wxWidgets
 
 ## CLI
 

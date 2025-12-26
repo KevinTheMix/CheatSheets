@@ -19,3 +19,5 @@ GitHub is a web platform hosting (mostly software) projects using Git.
   * Set Repository name as `{username}.github.io`, as its name can be changed _once_ a website is published for the first time (_confirmed_)
 * **Jekyll** = plain text into static websites/blogs
 * **Webhooks** (_Settings > Webhooks_) = notify external services when certain events happen (via POST request)
+
+* [Gitingest](https://gitingest.com) = turn any Git repository into a simple long text digest of its codebase, to feed into any LLM

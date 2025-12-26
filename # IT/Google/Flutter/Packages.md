@@ -33,12 +33,16 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
 * **convert** = en/decode between different data representations (eg String to JSON `jsonDecode()`, UTF-8, Base64, HTML escape)
 * **dart:core**
 * **dart:math**
+* [dart:mirrors](https://api.dart.dev/dart-mirrors) = introspection (ie readonly reflection) & dynamic invocation, used by Dart VM, not available in Flutter framework
+  * [Rémi Rousselet: dart:mirror is disabled](https://stackoverflow.com/a/47810160/3559724)
+  * [Runtime reflection is disabled](https://docs.flutter.dev/data-and-backend/serialization/json#is-there-a-gsonjacksonmoshi-equivalent-in-flutter) because it interferes with tree shaking
+  * Use **reflectable** (unverified) plugin for code-generated limited reflection capabilities
 * **flutter_localizations** = internalization (i18n) & localization (i10n), permits parameterized & conditional output (generated via source ARB files)
 * **foundation**
 * **intl** = date formatting
 * **material**
 * **services** = platform features (clipboard, system sounds eg `SystemSound.play(SystemSoundType.click);`)
-* **time** = **DateTime** & **Duration** inline manipulation (eg `3.days.fromNow.day` for a future date in 3 days or `await 2.seconds.delay` to wait 2 seconds)
+* **dart:time** = **DateTime** & **Duration** inline manipulation (eg `3.days.fromNow.day` for a future date in 3 days or `await 2.seconds.delay` to wait 2 seconds)
 * **widgets** = no implementations, only (re-)exports all widget-related libraries
 
 ## Plugins
@@ -180,12 +184,13 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
 * **file_saver** (_@hassanansari.dev_) = cross-platform file saving
 * **fl_chart** (_@flchart.dev_) = line/bar/pie/scatter/radar charts
 * **flutter_blue** (_@pauldemarco.com_) = bluetooth LE (Low Energy)
+* **flutter_cache_manager** (_@baseflow.com_) = download & cache web files in app's cache directory (for a configurable duration)
 * **flutter_gen** (_@wasabeek.jp_) = access assets programmatically instead of path strings (inspired by [SwiftGen](https://github.com/SwiftGen/SwiftGen))
 * **flutter_keyboard_visibility** (_@jasonrai.ca_) = react to virtual keyboard visibility changes
 * **flutter_local_notifications** (_@dexterx.dev_) = display notifications on most platforms (desktop & mobile, not web)
 * **flutter_native_splash** (_jonhanson.net_) = splash screen before/while Flutter boots
 * **flutter_rating_bar** (_@sarbagyastha.com.np_) = "5-stars" (or other icons) fractional rating bar
-* **sentry** = Sentry SDK for pure Dart ([Sentry](https://sentry.io) performance monitoring & error tracking)
+* **sentry** (_@sentry.io_) = Sentry SDK for pure Dart ([Sentry](https://sentry.io) performance monitoring & error tracking)
 * **sentry_flutter** (_@sentry.io_) = Sentry SDK for Flutter
 * **flutter_slidable** (_@romainrastel.com_) ~= customizable **Dismissible** (`actionPane`, `actions: [IconSlideAction]`, `actionExtentRatio: 1/actions.length`)
 * **flutter_treeview** (_@kevinandre.com_) = customizable hierarchical tree of widgets
