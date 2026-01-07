@@ -1,181 +1,69 @@
-# [OAuth 2.0](https://app.pluralsight.com/library/courses/oauth-2-getting-started/table-of-contents)
+# OAuth
 
-OAuth (Open Authorization) is an open framework/protocol/standard for scoped (ie partial) access delegation over HTTP, using access tokens rather than passing private passwords (aka _impersonation_).
+* Past = XML + SOAP + SAML/WS-* (federation)
+* Now = JSON + HTTP APIs + OAuth & OpenID Connect
 
-Eg logging into a SaaS using a 3rd-party GitHub/Google/Facebook account (via OAuth + OpenID Connect).
+## Quick Tips
 
-## Context
-
-### History
-
-The problem of API authorization.
-Past solutions, and why they are no longer suitable for modern applications:
-
-* Credential-sharing = the user provides her login/password to an application so it can access some resource (service).
-  * Can't distinguish between user & application (**impersonation**).
-  * Can't grant granular permissions: the application can do everything the user can.
-  * Gives the application full access to user administration, enabling it to possibly change her password for malicious intents
-  * If the app gets compromised, the user's password can get lost in nature. The user has then to change her password herself (no **revocation**).
-  * If the app stores the login for user convenience, it can't just store it as a hash, since it needs to login into the resource each time the session must be reopened.
-    * Thus they have to be stored in plain-text (or encrypted but reversibly so).
-    * This also prevents using 2FA because it has to be repeatable by the app.
-  * Federation is not possible (which is login once to multiple apps/websites eg Google apps, or company systems).
-  * Prevents client-side-only SPA websites, who cannot possibly store credentials securely.
-* Cookies = Redirects user to the API where she can login, which produces a cookie that the app can then use to access the API.
-  * Better that providing login directly to the App in plain-text, and allows some granularity on the functionalities to allow.
-  * But... CSRF; not only is the App authorized, but actually the whole browser is, since cookies are shared at the browser-level.
-* API keys = store in the App a (long term) API key provided by the API.
-  * Solve nearly all the above problems
-  * But still doesn't work for applications that cannot keep a secret (client-side-only SPAs)
-  * Besides, there is no standard, so you're on your own
-
-Past = XML + SOAP + SAML/WS-* (federation)
-Now = JSON + HTTP APIs + OAuth & OpenID Connect
-
-### Misunderstandings
-
-* OAuth is an Authorization protocol, not an Authentication one.
-  * The Access Tokens do not represent the user (delegation instead of impersonation).
-  * For Authentication plus (OAuth) Authorization, use OpenID Connect.
-* The Client App must not be concerned with the content of the Access Token.
-  * The Access Token validation & understanding is the duty of only the Protected Resource (with possibly the AS).
-  * The CA should only request the Access Token and then pass it on to the PR. It should not attempt to read its content to perform any business logic of ID verification. Therefore it should not break should the Access Token's format or scheme be modified.
-* OAuth is a framework, not a standard
-  * It does not prescribe the format of the Access Token, or its validation process, so the quality of its actual implementation may vary.
-
-**OAuth** is an _Authorization_ protocol, unlike **OpenID** which is an _Authentication_ protocol.
-[Difference](https://nat.sakimura.org/2011/05/15/dummys-guide-for-the-difference-between-oauth-authentication-and-openid/).
-
-See <https://connect2id.com/learn/oauth-2>
-See <https://en.wikipedia.org/wiki/OAuth>
-
-### Versions
-
-* OAuth 1 uses request cryptographic signature.
-* OAuth 2 doesn't use signature
-  * => easier for developers.
-  * => Requires HTTPS (TLS/SSL) must be used for all exchanges so the token doesn't get compromised.
+* [OAuth 2.0 Simplified](https://www.oauth.com)
+* [OAuth 2.0](https://tools.ietf.org/html/rfc6749) = RFC
+* [Bearer Token](https://tools.ietf.org/html/rfc6750) = RFC
+* [OAuth 2.0 explained](https://connect2id.com/learn/oauth-2)
+* [Diagrams of All The OpenID Connect Flows](https://medium.com/@darutk/6968e3990660)
+* Gist of it is we don't want to provide our confidential credentials to an app (not even who user is), so it will only carry a token whose content (and format) is none of its concern
 
 ## Glossary
 
-* **Access Token** = the "valet key" that allows anyone possessing it to access the Protected Resource with the scopes.
-  * This should preferably not be exposed to the user (and her client-side browser) but kept safe in the backend server, although this is not always possible (eg client-side-only apps).
-  * CA shouldn't be concerned at all with the content of the Token, as it is intended primarily for the PR to verify the rights of the CA (specific implementation is left open by OAuth).
-  * Access Token are implementations of [Bearer Token](https://oauth.net/2/bearer-tokens/)
-* API Key = long-lived secret key provided to a Client App to use the Protected Resource
-  * CA must be able to keep a secret.
-  * Its longevity is problematic if stolen.
-* Authentication = Is someone who they claim they are? Logins & Passwords
-* Authorization = Can someone do something? Permissions & Access control
-* **Authorization Server** = handles authorization requests and is trusted by all parties involved.
+* **Access Delegation** = use access tokens instead of sharing credentials
+* **Access Token** = contains security credentials for a login session about user/group/privileges/particular application to access a some resources on a user's behalf before its expiration date
+  * It does not describe user itself, only provides limited access rights to something a user has access
+  * Analogy is a valet key, ie a key that opens some but not all parts of a car/house (like a master key would)
+  * Must be kept private in transit & storage, because it provides as much access to anyone who has it (ie another user)
+  * It should preferably not be exposed to user (& client-side browser) but kept safe in backend server, although this is not always possible (eg client-side-only apps)
+  * Access Token are implementations of [Bearer Token](https://oauth.net/2/bearer-tokens), but implementation details are not prescribed by OAuth (could be login/password or valet key)
+* **Authentication** = logins/passwords (is someone who they claim they are?)
+* **Authorization** = permissions/access control (can someone do something?)
+* **Bearer Token** = opaque string in any agreed format (eg hexadecimal or JWT) without any meaning to clients using it (client should be impervious to its particular format and not crash if changed)
+* **Grant** = method that a client application (CA) uses to obtain an access token from an authorization server (AS)
+* **HTTP Basic Authentication** = older user login/password prompt
+* **OAuth** (Open Authorization) = open standard for access delegation over HTTP (ie partial/scoped access valet key)
+  * It does not prescribe Access Token format or validation process (quality of actual implementation may vary)
+  * **OAuth 1.0** = uses request cryptographic signature
+  * **OAuth 2.0** = does not use signature (easier for developers, requires HTTPS (TLS/SSL) must be used for all exchanges so the token doesn't get compromised)
+* **OpenID** = open standard & decentralized authentication protocol (ie a referral letter)
+* **OpenID Connect** (**OIDC**) = 3rd generation of OpenID technology, an authentication (identity) layer on top of OAuth 2.0, enabling SSO (uses JWT for its ID tokens)
+* **Refresh Token** = optional longer-lived (typical policy is one-time usage for one month) token used by CA to obtain new access(/refresh) tokens after expiration without reinitiating protocol over
+  * Highly condential: if stolen, effectiveness of short-lived access strategy becomes foiled as thief gains long-term access
+  * Can only be used by Authorization Code & ROPC Grant Types, which possess a backend (also Client Credentials but doesn't need it since it can logs itself in)
+* **Scope** = permissions to do something within an API (ie what an access token is allowed to do)
+  * Sent by client application during initial HTTP Authorization request to AS
+  * Should be _scoped_ (prefixed) with API name eg `my_api.read` to guarantee namespacing
+
+### Roles
+
+* **Authorization Server** (AS) = dedicated server trusted by all parties involved, handling authorization requests, issuing access tokens to clients via serveral means (eg user Domain authentication, asking to login, etc)
+  * A **Authorization Endpoint** = webpage that CA forwards user to (with all necessary parameters) to authenticate and come back with a grant (eg authorization code)
+  * A **Device Authorization Endpoints** = for device authorization flow (device receives URL from that endpoint and starts polling, secondary device opens URL and authenticates, device gets in)
+  * A **Token Endpoint** = lets a client application contact AS directly (ie not via web browser) to swap in its authorization code for an access token
   * Must use TLS to guarantee underlying channel security
-  * Provides two separated endpoints:
-    * A **Authorization endpoint** ie a webpage that the CA forwards the User to (with all necessary parameters) to authenticate and come back with a Grant
-    * A **Token endpoint** ie an API to let the Client Application swap in the Grant for an Access Token
-* **Client App(lication)** = application used by the User that does not necessary require authentication itself but requests access to an API
-  * eg a public webpage that displays some statistics about a Spotify user account, thus requiring access to parts of that Spotify account, but without needing to login
-* **Federation** = trust relationship/architecture allowing identity sharing across domains
-* **Grant** = right of the Client App to perform some actions on the User's behalf, as a random value generated by the AS and only understood by it.
-  * Can be implemented in any of a handful of fashions, aka Grant Types, defined by OAuth 2.0 (see below)
-  * Typically relatively short-lived (eg 1 to 10 minutes).
-* **HTTP Basic Authentication** = user login/password prompt
-* **OpenID Connect** (**OIDC**) = authentication/identity layer on top of OAuth 2.0, enabling SSO (uses JWT for its ID tokens)
-* Protected Resource = an API the User has access to on its own (eg Spotify), and the Client App requests access to
-* **Refresh Token** = a long-lived token used by the CA to obtain a new Access (or Refresh) Token.
-  * Provides long-lived access by removing the need for the User to authenticate again everytime the Access Token times-out (also allows long-running tasks)
-  * Highly condential: if stolen, the effectiveness of the short-lived access strategy becomes foiled as the thief gains long-term access.
-    * Can only be used by Authorization Code & ROPC Grant Types, which possess a backend (also Client Credentials but it doesn't need it since it can logs itself in)
-  * User _should be_ informed that Refresh Tokens are requested.
-  * `scope=(...) offline_access`
-  * Typical policy is one-time usage for one month
-* **Scope** = permissions to do something within an API.
-  * Sent by the Client Application during the initial HTTP Authorization request to the AS.
-  * Should be _scoped_ (prefixed) with the API name eg `my_api.read` to guarantee namespacing.
-* **User** = owner of a resource
-* **Resource Server**
-  * An entity that holds protected data/resources and will provide access to it to anyone showing the right token for it.
-* **Client/Consumer**
-  * An app/site used by the Owner that must obtain a token in order to connect to and consume data from the Resource Server.
-* **Resource Owner**
-  * The end-user him/herself, who possesses some remote resource but must first prove himself to access it.
-* **Authorization Server**
-  * A dedicated server for issueing access tokens via serveral means (using user Domain authentication, asking to login, etc.)
-  * Grant Types = Authorization code, Implicit, Password, Client credentials, Refresh token, SAML/JWT bearers, Device code
-    * Authorization Code = Authorization-establishing code sent by the requesting app to the Provider to receive the Token. Gets revoked by the Provider as soon as it generates a Token. See <https://tools.ietf.org/html/rfc6749#section-4.1>
+* **Client (Application)** (CA) = (web/mobile/desktop) application used by end-user that needs to obtain a token to access a resource server (eg public Spotify statistics webpage)
+* **Resource Owner** = end-user who possesses some remote resource but must first prove himself to access it
+* **Resource Server** (RS) = an entity that holds protected assets/data/resources, provided in exchange of right token
 
-### Tokens
+### Grant Types
 
-* Access Token
-  * The analogy is a valet key, ie a key that opens some but not all parts of a car or house (like a master key would).
-  * Used to access some resources on an API on a user's behalf.
-  * It does not describe the user, only provides limited access rights to something a user has access.
-  * Using this mechanism, the calling application never needs to know or hold the actual user credentials.
-  * Has an expiration date.
-  * They must be kept private in transit and storage, because it provides as much access to anyone who has it (ie another user).
-  * See <https://www.oauth.com/oauth2-servers/access-tokens/>
-* [Bearer Token](https://tools.ietf.org/html/rfc6750)
-  * A Bearer Token is (an Access Token? a Refresh Token?)
-* [Refresh Token](https://tools.ietf.org/html/rfc6749#section-6)
-  * Optional long-lasting Token used to refresh an expired Access Token without having to start the protocol initiation over.
+* **Authorization Code** = most common, optimal for traditional mobile/web applications with a confidential backend, redirection-based flow to obtain both access/refresh tokens
+* **Client Credentials** = machine-to-machine (eg WS calling other WS) authentication, CA becomes resource owner and authenticates directly via ID/secret
+* **Device Authorization** = limited devices with no browser (eg IoT, Smart TV, media console, printer) authenticate via a secondary device (eg a smartphone with more up-to-date secure browser, and convenient QR/NFC/LE Bluetooth)
+* **Implicit** (deprecated) = legacy flow for browser-only (JavaScript, SPAs) applications without a backend, pass token via URL
+* **Password** = for trusted native clients where application & authorization server belong to same provider
+* **Refresh Token** = special grant to let clients refresh their access token without having to go through steps of code or password grant again
+* **Resource Owner Password Credentials** (ROPC) = direct user login/password impersonation by highly trusted CA, strongly discouraged & only used to migrate legacy applications
+* **SAML/JWT Bearers**
 
-## General Flow
+### Authorization Code
 
-Important concepts:
-
-* The Authorization Request and the Token Request are performed via two very different channels: one is performed through the user's browser and the other by the CA itself.
-* The CA does never need to know who the user is, it simply needs to be given access to the PR (OAuth is not an authentication protocol)
-* To let the user authenticate with the AS, she is driven completely away from the CA ie her browser go to an entirely different website
-
-* The client web browser needs to display something protected, asks data from the CA
-* The Client web Application ponders whether it has access to the protected resources ie a valid access token
-  * If it does, this flow is short circuited and the resource can simply be requested using that token
-  * If it does not, a game of ping-pong start between the CA & the AS to first obtain a single-use grant token, then swapped a transitory access token
-* The Client Application makes an Authorization Request to the Authorization Server
-  * This request is **not** sent directly from the CA to the AS.
-  * Instead, the (Resource Owner) User's browser is redirected to the Authorization Server's **Authorization endpoint** ie an actual webpage on a different website, fully away from the Client App.
-* The Authorization Server approves the incoming request, and challenges the User to verify their identity: this is the Authentication part
-  * Notice that the User credentials are therefore completely removed from the Client App: it is truly a redirection out of the Client App.
-  * The method used for Authentication is left open by the OAuth specification (Login/Password, Google Id, federated entreprise login).
-* Once the User is successfully authenticated, she needs to consent to the permissions requested by the Client App: access this part, edit that part, for how long.
-  * This is still fully done outside of the Client App, so no interference are possible
-* The User is redirected back to the Client Application, including an Authorization Grant in the redirection
-  * That Grant represents the given right of the Client App to perform some actions on the User's behalf
-  * There are a few possible Grant types
-  * The Grant is typically short-lived, and to be traded for an Access Token right away.
-* The Client App now armed with a Grant plus some way to identify itself as a valid client (eg client ID & secret), makes a **direct** background request to the AS.
-  * Notice this is the first time the CA communicates directly with the AS (via a background WS API request to the AS's **Token endpoint**)
-  * Notice this HTTP Post request doesn't go through the User's browser, which doesn't need to know about it.
-* If approved, the AS responds to the Client App's request with an Access Token
-  * Only the Client App that was given the Authorization Grant can swap it for a token.
-* The Client App can now use that Access Token to authorize requests to the Protected Resource
-  * This is done via the Authorization header, using a given scheme defined by the Authorization Server
-    * Using the typical Bearer scheme, anybody whoever has the Access Token can use it
-  * What is inside an Access Token, and how the Protected Resource verifies it, is left open
-    * Can be a request from the Protected Resource to the AS
-    * Or perhaps the PR has an internal mechanism to validate it and understand what permissions were delegated (allowed).
-* Finally, the Client App is allowed access
-  * That means it gets the awaited HTTP response from the PR
-
-### [Device Flow](https://oauth.net/2/device-flow)
-
-This is for IoT devices that don't have a browser embedded, such as connected appliances, consoles, etc.
-
-Since those devices typically don't have an up-to-date secured browser, nor very effective input interface, the login process is offloaded to a secundary device with an up-to-date secure browser ie a smartphone.
-
-1. A new AS endpoint is requested by the IoT device: the **Device Authorization** endpoint
-2. The AS replies with codes and a URL for the secundary device
-3. The URL can be entered in the smartphone browser. This can be made easier by displaying a QR code, or taking advantage of proximity communication tech: NFC or low-energy bluetooth
-4. Meanwhile, the device keeps polling the AS for a token until the user has logged in
-5. Finally, the device receives the token in response to one of its polling requests
-
-## Grant Types
-
-<https://medium.com/@darutk/diagrams-of-all-the-openid-connect-flows-6968e3990660>
-
-### [Authorization Code Grant Type](https://developer.okta.com/blog/2018/04/10/oauth-authorization-code-grant-type)
-
-Most common Grant Type.
-Best for applications/websites with a backend that can keep a secret ie the client secret and Access Token.
+Best for applications/websites with a backend that can keep a secret (ie the client secret and Access Token).
 
 * CA Authorization Request
   * Redirects the user's browser with the following query parameters:
@@ -204,7 +92,7 @@ Best for applications/websites with a backend that can keep a secret ie the clie
   * The SA responds with a HTTP 200 including a JSON body containing the Access Token as well as some meta-information (token type, expiry, and optionally the scope, which is also mandatory if the User didn't consent to all of the requested scopes)
   * This Token must be kept hidden from the User in the Backend, so it cannot fall into the wrong hands.
 
-### Implicit Grant Type
+### Implicit
 
 For _public clients_ that cannot store secret client credentials in a way that the User('s browser) cannot see/access ie all requests go through the User's browser.
 It was designed specifically for Javascript applications.
@@ -229,24 +117,8 @@ Instead, the Access Token is provided directly via the browser in response to th
   * Also, there's no way to verify that the Client App was the intended recipient of this Access Token (since there is no client secret), as it may have been injected.
   * Despite its flaws, this flow can be made more secure using OpenID Connect.
 
-### Client Credientials Grant Type
+### Resource Owner Password Credentials (ROPC)
 
-When there isn't a clear Resource Owner, or that the CA that has no users, the CA itself is the Resource Owner.
-This is best for Machine-to-Machine communication.
-Client Authentication is required.
-The Resource Owner is removed from the equation, as is the Authorization Endpoint.
-Uses short-lived Access tokens.
-
-* CA Token Request
-  * `grant_type=client_credentials`
-  * `client_id={id}`
-  * `client_secret={secret}`
-* PR responds with Token Response
-
-### Resource Owner Password Credentials (ROPC) Grant Type
-
-Used to migrate legacy applications and is considered deprecated.
-The CA _impersonates_ the User, and is exceedingly trusted.
 Only improvement over Credential Sharing is that username/password do not need be stored, and credentials revocation.
 **Do not use this!**
 
@@ -256,4 +128,17 @@ Only improvement over Credential Sharing is that username/password do not need b
   * `client_secret={secret}`
   * `&username={login}&password={password}`
 
-## EOF
+## Other API Authorization Methods
+
+* **Credential Sharing** = lets applications use private login/password to access some resource/API
+  * Can't distinguish between user & application (**impersonation**)
+  * Can't grant granular permissions: the application can do everything the user can (full access/administration possibly for malicious intents)
+  * No revocation if app gets compromised (user's password itself can get lost in nature and must then be changed)
+  * If app stores credentials for user convenience, they cannot be securely hashed as they must be provided in clear/plain text
+  * Prevents client-side-only SPA websites, who cannot possibly store credentials securely
+  * Federation is not possible
+* **Cookies** = lets user login to API and save login token in a cookie (better, no plain text login, allows some granularity on allowed functions)
+  * Sensitive to CSRF = whole browser becomes since cookies are shared at the browser-level
+* **API Key** = long-lived secret key provided by API to lets Client App access it(s resources), solves nearly all above problems
+  * Doesn't work for client applications that cannot keep a secret (eg client-side-only SPAs)
+  * There is no standard so you're on your own, and its longevity is problematic if stolen

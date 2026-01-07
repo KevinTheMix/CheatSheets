@@ -11,6 +11,7 @@
 * **Behavior-driven development** (BDD) = naming tests using domain language (DSL) & natural-language constructs (ie English) to describe code behavior
 * **Defect Rate/Density** = defect / KLOC (1000 lines of code)
 * **Fixture** = fixed state of a system/set of objects used as baseline for running tests in a consistent environment, data & conditions (eg DB, test files & folders with known data)
+* **Fuzzing** = automated testing techique that provides invalid/unexpected/random data as inputs to a program to identify crashes, failing code assertions, potential memory leaks
 * **Setup**/**Teardown** = work to accomplish before/after a test runs
 * **Software Inspection** = peer review/defect hunt using a well defined process
   * Advantages:
@@ -49,5 +50,3 @@
 * _Robot framework_ = Python-written generic keyword-driven test automation framework for acceptance testing/test-driven development, using a tabular test data syntax
   * [RIDE](https://github.com/robotframework/RIDE) = Robot Framework IDE (edit _.robot_ files)
 * _SonarQube_ (SonarSource) = open-source platform to ensure continuous code quality & security (static analysis, coverage, duplication, smells & vulnerabilities detection) on 35+ languages
-* _xUnit_ = automated testing software framework/label/architecture composed of defined components: test cases & suites (ie groups), assertions, fixtures (environment), runner to report results
-  * Notably used by Microsoft (in place of their self-developed _mstest_)

@@ -14,7 +14,6 @@
 ## Glossary
 
 * **Advantage Actor Critic** (A2C) = reinforcement learning algorithm used for training agents to perform tasks in environments
-* **(Artificial) neural network** (ANN or NN) = biological brain NNs inspired model
 * **Deep Learning** = ML subset based on artificial neural networks with representation learning
   * **Deep neural network** (DNN) = an artificial neural network with multiple layers between the I/O layers
 * **Feature Learning** (aka Representation Learning) = techniques for feature detection or classification of raw data
@@ -22,7 +21,8 @@
 * **GPT** (Generative Pre-trained Transformer) = deep learning generative large language model created by OpenAI that can process complex questions and even generate websites
 * [ImageNet](http://www.image-net.org) = image DB organized according to WordNet hierarchy
 * **Machine Learning** (ML) = field of study of AI studying statistical algorithms to learn from existing data then generalize to new data to complete tasks without explicit instructions
-* **Neural Network** (aka Artificial NN) = branch of ML built on biological neural organization (ie in/out with math in middle)
+* **Neural Network** (NN) or **Artificial Neural Network** (ANN) = branch of ML built on biological (brain) neural organization (ie in/out with math in middle)
+  * **Convolutional** = type of NN designed to process high-dimensional data with spatial structure (images/videos/audio/text eg for image recognition, object detection, medical imaging, computer vision)
 * **Overfitting** = when an analysis corresponds too closely to a particular set of data (ie its training data) and therefore fails to fit additional data or predict future reliably
 * **Reinforcement learning** = no data & no labels but we have ruleset (eg a game), numerical performance score as guidance (eg **Q-learning**)
   * [OpenAI - Proximal Policy Optimization](https://openai.com/blog/openai-baselines-ppo) = reinforcement learning

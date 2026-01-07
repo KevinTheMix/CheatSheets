@@ -35,12 +35,12 @@
 * _Plausible_ = Google Analytics alternative
 * **Selenium** = open-source tools & libraries for browser tasks automation (ie script/record/playback à la DOM AutoHotKey, eg for testing & debugging)
   * Uses a DSL (Selenese) to write tests for various languages (C#, Java, JS, Python)
-* _Swagger_ = framework & tools for designing/documenting/consuming RESTful web services
-  * **OpenAPI Specification** (OAS) = core of Swagger, a language-agnostic format describing APIs
-  * _Swagger Codegen_ = generates client libraries, server stubs, API documentation from an OAS
-  * _Swagger Hub_ = commercial platform with a collaborative environment for designing/documenting APIs
-  * _Swagger Editor_ = open-source editor to write OAS
-  * _Swagger UI_ = web-based UI automatically generated from a OAS, that documents an API and is able to make direct request/response to it
+* **Swagger** = framework & tools for designing/documenting/consuming RESTful web services
+  * **OpenAPI Specification** (OAS) = machine-readable IDL for describing/procuding/consuming/visualizing web services, a language-agnostic (YAML or JSON) format that describes APIs
+  * **Swagger Codegen** = generates client libraries, server stubs, API documentation from an OAS
+  * **Swagger Editor** = open-source editor to write OAS
+  * **Swagger Hub** = commercial platform with a collaborative environment for designing/documenting APIs
+  * **Swagger UI** = web-based UI automatically generated from a OAS, that documents an API and is able to make direct request/response to it
 * [web.dev](https://web.dev) = guidance by the Chrome team to build modern cross-browser web apps (eg accessibility, CSS, HTML, performance, privacy, PWA)
 * [Wix](https://www.wix.com) = build a website
 

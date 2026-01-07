@@ -14,14 +14,14 @@
   * `<para/>` or `<para>...</para>` = paragraph (with line break)
 * **IFormattable** can be inherited from to format an object value into a string representation (ie a richer `ToString()` method)
   * `public string ToString(string format, IFormatProvider provider) { if (provider == null) provider = CultureInfo.CurrentCulture; switch(format) { .. } }` with _format_ equal to eg "full" or "short", or even a pattern
-* Don't instantiate `HttpClient` multiple times; inject it from startup in classes that use it
+* Don't instantiate `HttpClient` multiple times, inject it from startup in classes that use it
 * Don't forget to apply a `ToArray()`/`ToList()` on cached variables (so they're calculated/queryed only once)
 * Naming
   * Use Singular for Enum name: `enum Color { Blue, Green, Red }` except for bit flags: `[Flags] enum Things { A = 0, B = 1, C = 2 }`
   * Append the used design-pattern name to class names where appropriate (eg `Observer`, `Factory`, etc.)
 * **MSTest**
   * Check that invalid scenarios return expected error messages = `try {…} catch { Assert.IsTrue(ex.Message == String.Format("{format}", param)) }`
-* [Explicit interface implementation hiding](https://stackoverflow.com/a/5284799)
+* [Hide members of an interface](https://stackoverflow.com/a/5284799)
 
 ## Glossary
 

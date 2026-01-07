@@ -13,10 +13,10 @@ It has very high capabilities in concurrency & multi-threading and on the other 
 ## Glossary
 
 * **BIFs** (Built-In Functions) = methods defined in the built-in _erlang:_ module
-* **EPMD** = Erlang Process Manager Daemon
+* **EPMD** (Erlang Process Manager Daemon)
 * **erlide** = Erlang IDE, as an Eclipse plugin
-* **ERTS** = Erlang Runtime System
-* **OTP** = Open Telecom Platform
+* **ERTS** (Erlang Runtime System)
+* **OTP** (Open Telecom Platform)
 * **LYME** = Erlang's LAMP framework
 
 ## Environment
@@ -332,7 +332,9 @@ Structure translated to a **tuple** at compilation.
 * Receive = `receive MessageA -> doA(); messageB -> doB() end`
   * Receive with timeout = `receive Message -> do() after {milliseconds} -> handle() end`
 
-## [Quickcheck](http://www.quviq.com/products/erlang-quickcheck/)
+## [Quickcheck](http://www.quviq.com/products/erlang-quickcheck)
+
+Fuzz tool to generate test input data.
 
 Records containing generators are themselves generators -> sample pick
 

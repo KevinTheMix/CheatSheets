@@ -149,3 +149,18 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 * **Todo Tree** = show TODO, FIXME comments as a tree view in a separate Visual Studio Code side bar menu
 * [Webview API](https://code.visualstudio.com/api/extension-guides/webview) = à la iframe for custom Visual Studio Code extension
 * [Winter is Coming](https://github.com/johnpapa/vscode-winteriscoming) = theme
+
+### Coding Assistants
+
+* **ChatGPT - Genie AI** = unofficial ChatGPT non-agentic coding assistant
+* **Claude Code for VS Code** = official Claude Code **agentic** coding assistant
+* **Codex – OpenAI’s coding agent** = official ChatGPT **agentic** coding assistent
+* **Gemini Code Assist** = official Gemini **agentic** (via _Agent Mode_) coding assistant
+* **GitHub Copilot** = official GitHub Copilot **agentic** coding assistant (via 3rd-party LLMs)
+
+## Forks
+
+* **Cursor** = AI-first code editor with paid subscription for LLMs access
+* **Google Antigravity** = combines an editor + an agent orchestration system + a Chrome-based browser (built upon Windsurf)
+  * [Learn the basic of Google Antigravity](https://www.youtube.com/watch?v=nTOVIGsqCuY)
+* **Windsurf** = (first agentic) AI-powered IDE (created in 2021, mostly acquired by Google)

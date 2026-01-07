@@ -6,9 +6,7 @@ Azure provides more than 100 services that enable you to do everything from runn
 
 * [Azure Portal](https://portal.azure.com)
 * [Azure Portal (Preview)](https://preview.portal.azure.com)
-* [Microsoft Learn](https://learn.microsoft.com/en-us/users/me) = gamified documentation by topics
-* [Microsoft Credentials](https://learn.microsoft.com/en-us/credentials)= certifications & applied skills
-  * [Azure Fundamentals](https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals) = AZ-900
+* [Microsoft Learn: Azure Fundamentals](https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals) (AZ-900)
 
 ## Glossary
 
@@ -228,3 +226,4 @@ Documents & platforms to manage legal requirements and formalize security concer
 ## TODO
 
 * Deploy a web app to Azure App Service (episode 9 @ 18:00)
+* [Create an Azure resource](https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/7-exercise-create-azure-resource)

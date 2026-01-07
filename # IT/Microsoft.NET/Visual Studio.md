@@ -75,15 +75,16 @@
 
 ## Extensions
 
-* [Configuration Transform](https://marketplace.visualstudio.com/items?itemName=GolanAvraham.ConfigurationTransform) = multiple web.config's
-* [Microsoft RDLC Report Designer](https://marketplace.visualstudio.com/items?itemName=ProBITools.MicrosoftRdlcReportDesignerforVisualStudio-18001) = à la Crystal Reports
-* [Object Exporter](https://marketplace.visualstudio.com/items?itemName=OmarElabd.ObjectExporter) = export runtime instance to static code
-* [Rename Visual Studio Window Title](https://marketplace.visualstudio.com/items?itemName=mayerwin.RenameVisualStudioWindowTitle)
-* [SQL Server Data Tools (SSDT)](https://visualstudio.microsoft.com/vs/features/ssdt) = adds tools (e.g. comparison) under _Tools_ > _SQL Server_
+* **Configuration Transform** = generates multiple _App/Web.{configuration}.config_ files per configuration (eg Debug, Release)
+* **Microsoft RDLC Report Designer** = à la Crystal Reports
+* **Object Exporter** = export runtime instance to static code
+* **Rename Visual Studio Window Title**
+* **SlowCheetah** = transforms json/XML files at build time based on configuration
+* **SQL Server Data Tools** (SSDT) = adds tools (eg comparison) under _Tools_ > _SQL Server_
 
 ### Third Party
 
-* [ReSharper](https://www.jetbrains.com/resharper) (JetBrains) = code quality analyzer, refactoring, fixes
-* [Magical Debugging](https://marketplace.visualstudio.com/items?itemName=CodeValueLtd.OzCode) (OzCode) = augmented debugging
+* **ReSharper** (JetBrains) = code quality analyzer, refactoring, fixes
+* **Magical Debugging** (OzCode) = augmented debugging
   * [LINQ Debugging](https://blog.somewhatabstract.com/2016/06/13/i-am-an-ozcode-magician-and-i-have-a-new-linq-trick)
-* [Metalama](https://www.postsharp.net/metalama) (Postsharp) = aspects (meta attributes), real-time code verification (~architecture) & code fixes
+* **Metalama** (Postsharp) = aspects (meta attributes), real-time code verification (~architecture) & code fixes

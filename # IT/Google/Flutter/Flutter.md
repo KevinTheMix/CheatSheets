@@ -43,6 +43,10 @@ Features:
 * Use `compute()` (similar to Dart `Isolate.run()`) to run a given callback in background, for operations that take longer than a few milliseconds
 * It's possible to create & assign widgets to variables, then we can access their properties (eg height) down the tree, or add them conditionally in several places
 * An app is identified by its package name, not its name (let alone capitalizing it) as that is just a label (see `application android:label` in _main\AndroidManifest.xml_)
+* Model Context Protol (MCP) servers
+  * [Dart and Flutter MCP server](https://docs.flutter.dev/ai/mcp-server)
+  * [Ander Dobo: Supercharge Your Dart & Flutter Development Experience with the Dart and Flutter MCP Server](https://blog.flutter.dev/2edcc8107b49)
+  * [How I Built a Flame Engine MCP Server to Build Flutter Games](https://dev.to/salihgueler/how-i-built-a-flame-engine-mcp-server-to-build-flutter-games-3ea2)
 
 ## Glossary
 

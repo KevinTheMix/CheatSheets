@@ -18,10 +18,10 @@
 
 * **BitLocker** = logical volume & full disk encryption (FDE) using a Volume Master Key (VMK), ie everything is encrypted including OS itself
 * **BitLocker To Go** = encrypt removable USB flash drives
-* **Chocolatey** = machine-level CLI package manager using NuGet package infrastructure and PowerShell to download/install (2011)
 * **Encrypting File System** (EFS) = NTFS 3.0 feature providing FS-level encryption to specific files/folders (using user username/password, while OS is running, in file/folder Properties > (Attributes:) Advanced)
 * **Hyper-V** = native hypervisor for Pro & Enterprise editions
 * **Microsoft Defender** (aka **Windows Defender**) = replaces Microsoft Security Essentials from Win 8
+* **MSMQ** (Microsoft Message Queuing) = native message queueing (between applications/machines) system (uses disk-backed queues for durability, mostly considered legacy)
 * **Reliability Monitor** = review computer reliability/problem history
 * **Safe Mode** (FR: Mode Sans Échec) = loads bare minimum OS to troubleshoot/remove malware
 * **Sysinternals** = various semi-official Microsoft system utilities (Process Explorer, Windows Task Manager, Autoruns, RootkitRevealer, defragmentation tools)
@@ -116,7 +116,7 @@
 * `Winkey + X` = Start Menu shortcuts
 * `Winkey + Z` = desktop Widgets
 * `Winkey + Ctrl + Left/Right` = Switch Virtual Desktop
-* `Winkey + Shift + S` = Screenshot
+* `Winkey + Shift + S` = Snipping Tool (screenshots & color picker)
 * `Multi-select Files > Rename` = group renaming
 * `Drag (file) + Ctrl/Shift/Alt` = copy/move/shortcut
 * `Drag (file) to {program}.exe` = open file with program

@@ -25,13 +25,14 @@
 * **Elliptic Curve Diffie-Hellman Ephemeral** (ECDHE) = improved Diffie-Hellman, used in TLS & SSH to derive a temporary shared session key
 * **Evaluation Assurance Level** (EAL) = methodological confidence in entire IT product/system (not only crypto)
 * **Federal Information Processing Standard** (FIPS) = security requirement for cryptographic modules (examines correct implementation of approved algorithms)
+* **Federation** = trust relationship/architecture allowing identity sharing across domains (eg several Google apps, or company systems)
 * **FIDO** (Fast IDentity Online) Alliance = open industry association developing/promoting authentication standards reducing over-reliance on passwords
 * **FIDO2** = joint effort between FIDO & W3C to create strong authentication for the web (via user-controlled authenticator eg smartphone or hardware security key)
 * **Full Disk Encryption** (FDE) = (eg BitLocker)
 * **Hash** = one-way irreversible transformation of an input into a fixed-size singular/unique output
 * **HMAC** (Hash-based Message Authentication Code) = specific type of MAC via a crypto hash function & secret crypto key
 * **Hardware Security Module** (HSM) = dedicated device/PCIe card or cloud-based service to generate/store/use cryptographic keys (eg certificate private key)
-* **JWT** (JSON Web Token) = internet standard for adding optional JSON signature/encryption to data, whose payload asserts some claims (eg "logged as admin")
+* **JWT** (JSON Web Token) = internet standard for creating optional signatures and/or encryption with JSON payload asserting some claims (eg _logged in as admin_)
   * Tokens are signed via either a shared secret or public/private key, designed to be compact, URL-safe, usable in a web-browser SSO context
 * **Key Derivation** = process to generate cryptographically strong keys from one or more values (eg keys, passphrases)
 * **Key Partitioning** = dividing a single key into a set of keys (eg splitting a 256-bit key into two keys of 128 bits each)

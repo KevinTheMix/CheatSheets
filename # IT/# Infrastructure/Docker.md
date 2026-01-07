@@ -8,6 +8,7 @@ Unlike a virtual machine that virtualizes hardware (to install a real OS), Docke
 
 * [Docker Overview](https://docs.docker.com/get-started/overview)
 * [Docker Crash Course for Absolute Beginners](https://www.youtube.com/watch?v=pg19Z8LL06w) (2023)
+* Docker caches image layers during the build process to speed up subsequent builds
 
 ## Glossary
 
@@ -18,7 +19,7 @@ Unlike a virtual machine that virtualizes hardware (to install a real OS), Docke
 * **Compose** = a Docker client to work with applications consisting of a set of containers
   * Uses a single YAML file to define & run multi-container applications (from several Images)
   * A single (`docker compose`) command creates several containers on the Docker host
-* **Container** = (running or stopped) stateless (ie volatile, though a persistent disk can be mounted ) instance of an Image
+* **Container** = (running or stopped) stateless (ie volatile, though a persistent disk can be mounted) instance of an Image
   * Containers share the kernel of the container host (which is the host machine itself if run natively) with other containers
   * Containers are configurable (via Dockerfile) & parameterized (by providing arguments to the `docker run` command) => 1 image can actually generate various containers
   * This scaling/orchestration ability from a single image makes even monolithic applications want to use Containers

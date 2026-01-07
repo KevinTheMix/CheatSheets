@@ -15,9 +15,9 @@
     * **Application** (references Domain) = BL (services) interfaces (no implementation), Commands & Queries, DTOs
     * **Presentation** (references Application layer) = GUI/WebAPI, BL (services) implementation, Startup with DI pipeline (links implementation to interfaces)
     * **Infrastructure** (references Application layer) = DL implementation (DB/EF, I/O, WS client, SMTP, etc.)
-  * **CQRS** (Command Query Responsibility Segregation) = use different models for reading & updating (unlike basic CRUD)
-    * **Query** = return a resulit but do not change state (ie free of side-effects)
-    * **Command** (aka modifiers or mutators) = change state but don't return a value
+  * **CQRS** (Command Query Responsibility Segregation) = archi pattern to use different code paths for reading & updating, and possibly even separate models/datastores (no more basic CRUD)
+    * **Query** = returns a result but do not change state (read-only, no side-effects)
+    * **Command** (aka modifiers or mutators) = request to perform an action that changes system state (writes, doesn't return a value)
       * [Commands vs Events](https://stackoverflow.com/q/4962755/3559724) = commands can be rejected, events have happened
 * **Dependency Injection** (DI) = providing dependencies at runtime using reflection, rather than passing them top-down all over the place, reduces tight coupling
 * **Domain-specific language** (DSL) = computer language (ie programming, markup, data, etc) specialized to a particular application domain (eg HTML)
@@ -34,7 +34,7 @@
 * **Hexagonal Architecture** = Domain no longer depends on Data (as in n-layered architecture) but holds ports (ie repository interfaces) that are implemented in Data
 * **Law of Demeter** = don't access a property's sub-properties (eg `a.b.c`)
 * **Marshalling** = transforming one live object's memory representation into a format suitable for storage/transmission between different runtimes (broader than only serialization)
-* **Middleware** = interception layer in a processing pipeline that applies shared behavior around a core operation without being that operation itself (eg auth, logging, messaging, transactions)
+* **Middleware** = interception layer in a processing pipeline (eg HTTP requests) that applies shared behavior around a core operation without being that operation itself (eg auth, error handling, logging, messaging, transactions)
 * **Mixin** = in OO, a feature-able class that can be _included_ without being inherited from (eg C# `IEquatable`, Ruby include, JS extend/assign), promoting reusability & multiple inheritance
 * **Module** = une fonction ou une classe ou un fichier, selon les langages
   * L'intérêt est de pouvoir décomposer une partie de traitement dans un module réutilisable ayant le moins de dépendances/liens/informtion possibles
@@ -92,7 +92,7 @@
 * [Behavioral patterns](https://en.wikipedia.org/wiki/Behavioral_pattern) = design patterns that identify common comunication patterns among objects (eg Memento, Observer)
   * **Event Aggregation** = centralizes public events (eg "user logged in") between publishers & subscribers
   * **Iterator** = well-spred nowadays (à la .Net `GetEnumerator()`)
-  * **Mediator** = centralizes/decouples communication between classes via request and (DI-discoverable generic-typed) handler classes, reducing coupling between them
+  * **Mediator** = centralizes/decouples communication between classes via request and (DI-discoverable genericly-typed) handler classes, reducing coupling between them
   * **Visitor** = one way follow the Open-Close Principle
 * **Builder** = used in .Net Core configuration
 * **Composite** = composite class implements interface and manages a collection of instances (or a factory), then dispatchs calls to one of those instances.

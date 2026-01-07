@@ -64,7 +64,7 @@
 * **GraphQL** = DB-agnostic data query/manipulation language for APIs, letting a client specify data to fetch (possibly from separate sources as one unified result)
 * **Gremlin** = graph DB
 * **PowerBuilder** = .NET compatible IDE (by SAP) using _DataWindow_ objects to CRUD query a DB
-* **Redis** (Remote Dictionary Server) = open source in-memory storage, used as a distributed in-memory key-value DB, cache, and message broker
+* **Redis** (Remote Dictionary Server) = open source in-memory storage for caching & extremely fast access to frequently used transient (short-lived) data, as a distributed key-value DB & message broker
 * **SQL Manager for MySQL** = MySQL DB IDE (also for PostgreSQL, Oracle, DB2)
 * **SQL Manager for SQL Server** = SQL Server IDE (SMSS-like)
 * **SQuirreL SQL Client** = Java-based multi-DB administration tool
