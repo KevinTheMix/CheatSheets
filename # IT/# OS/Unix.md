@@ -47,7 +47,7 @@
   * **Pseudo-Terminal** (PTY) = pair of kernel objects making (master) applications (eg `ssh`, `tmux`, a new terminal tab) believe they interact with a human (TTY) whereas it is another (slave) program
     * Slave end  (_/dev/pts/N_) = looks exactly like a real tty device but real I/O originates from another program launched by user (eg `shell`, `ssh`, `top`, `vim`)
     * Master end  (_/dev/pts/ptmx_) = owned by terminal emulator
-* **tmpfs** = RAM-based filesystem (stores files in memory, not disk)
+* **tmpfs** (Temp FS) = memory-backed RAM-based filesystem (stores files in memory, not disk)
 * **Unix** = original OS family developed by AT&T Bell Labs in 1970, with most variants being propriertary (eg Solaris)
 * **Useless Use Of Cat** (UUOC) = jargon describing piping a cat command (eg `cat file | cmd`) in place of a more efficient yet less legible shell open (`cmd < file`)
 * **Zombie Process** = completed but its entry still exists in process table (until parent uses `wait()`)
@@ -408,7 +408,7 @@
 * `traceroute` (installable) = determines route a packet takes to a destination (uses ICMP)
 * `tty` = print file name of the terminal (if any) connected to (my program's) standard input
 * `ufw` = sets firewall config (uses `iptables`)
-* `uname` = display system information (`-a` all, `-n` system (host) name, also see `neofetch` utility)
+* `uname` = display system information (`-a` all, `-n` system (host) name, `-r` distro, also see `neofetch` utility)
 * `uniq {file}` = report/omit repeated lines (`-u` only unique lines)
 * `unmount` (installable)
 * `uptime` = show session uptime

@@ -19,7 +19,8 @@
 * **BitLocker** = logical volume & full disk encryption (FDE) using a Volume Master Key (VMK), ie everything is encrypted including OS itself
 * **BitLocker To Go** = encrypt removable USB flash drives
 * **Encrypting File System** (EFS) = NTFS 3.0 feature providing FS-level encryption to specific files/folders (using user username/password, while OS is running, in file/folder Properties > (Attributes:) Advanced)
-* **Hyper-V** = native hypervisor for Pro & Enterprise editions
+* **Hyper-V** = native hypervisor for (Windows 8+, Pro & Enterprise editions), which can create VMs (eg required to run Linux Containers)
+  * Hyper-V containers don't share host OS kernel, they each run in its own separated (optimized) VM (kernel), providing better isolation
 * **Microsoft Defender** (aka **Windows Defender**) = replaces Microsoft Security Essentials from Win 8
 * **MSMQ** (Microsoft Message Queuing) = native message queueing (between applications/machines) system (uses disk-backed queues for durability, mostly considered legacy)
 * **Reliability Monitor** = review computer reliability/problem history
@@ -30,9 +31,13 @@
 * **Windowd ADK** (Assessmant & Deployment Kit) = create your own Windows PE
 * **Windows Features** = turn Windows features on/off (Windows Media Player Legacy, MSMQ, Print to PDF, XPS, PowerShell, WSL)
 * **Windows Hello** = sign-in options (facial, fingerprint, PIN, physical security key, password, picture)
+* **Windows Hypervisor Platform** = API layer that allows hypervisor-based virtualization (used eg by WSL2, Docker Desktop)
 * **Windows PE** (Pre-installation Environment) = recovery console booted from CD/DVD/USB when even Safe Mode isn't available, able to repair boot records/sectors
 * **Windows Recovery Environment** = GUI-based recovery menu loaded before OS is loaded (eg repair startup, restore system, uninstall updates, Command Prompt **warning** with full FS access)
   * Access via _Settings > System > Recovery > Advanced startup > Restart now_ (or hold `Shift` while clicking Restart)
+* **Windows Subsystem for Linux** (WSL) = component that allows use of a Linux environment from within Windows without a full VM or dual boot, requires a distribution to be downloaded & installed
+  * **WSL 1** = uses a compatibility layer to run Linux (ELF) executables via Linux system calls implemented in Windows kernel
+  * **WSL 2** = uses a real Linux kernel via a managed VM (Hyper-V)
 * **Windows Terminal** = a tabbed GUI-based terminal emulator (click the `v` to access various consoles/shells)
   * `Ctrl + Shift + F` = search in terminal content
 

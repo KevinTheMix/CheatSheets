@@ -19,7 +19,7 @@
   * **Zombie** = completed execution (via `exit` syscall) but still has entry in process table, (cannot be `kill`ed)
 * **PXE** (Preboot eXecution Environment) = install an OS remotely from network
 * **Secure Boot** = UEFI process to ensure a device/PC has not been tampered with using a hash chain, requires dedicated hardware (eg motherboard UEFI firmware chip or Apple T2 security chip acting as hardware root of trust)
-* **System Call** (syscall) = how a program requests a service from OS (eg hardware HDD or camera, creating new processes, kernel services such as process scheduling)
+* **System Call** (syscall) = how a program requests a service from OS (eg accessing hardware eg HDD or camera, creating new processes, kernel services such as process scheduling)
 * **Trap** = a way (imilar to interrupts) for kernel to regain control when a process performs an illegal operation (eg divide by 0) so that it can handle it (eg kill it)
 * **User Space** (or **User-land** or **User Mode**) = everything a program can touch while CPU is running in _user_ mode (ring 3 on x86 ie lower priviledges)
 * **Virtual Machine** = a software emulated computer hardware system that can be parametered, cloned (ideal to quickly deploy identical OS images since hardware is virtually identical on all machines)
@@ -37,7 +37,7 @@
 * **Bootloader** (Bootstrap Loader) = program located on boot sector (and often extends beyond it) that initializes system hardware, loads & transfers control to (one of possibly several installed) OS kernel
 * **Bus** = data communication system inside (eg non-directional internal CPU registers bus) or between components inside or between computers
 * **Controller** = hardware chip/component part of/piloting a device, manages communication between CPU (high-level operations issued from OS/driver) & peripheral (low-level device-specific) operations (eg timing, buffering, protocol)
-* **CPU Ring** = privilege level (eg _0_ for full hardware authority for kernel code, less for higher numbers)
+* **CPU Ring** = privilege level (eg _0_ for full hardware authority for kernel code, higher numbers have less privilege)
 * **DDR** (Double Data Rate) = transfers information twice as fast as **SDR** (on each clock cycle ups & downs)
   * Successive versions of DDR increase chips capacity and/or transfer speeds, and are not backwards compatible
 * **DIMM** (Dual In-line Memory Module) = recto/verso memory bar of memory chips

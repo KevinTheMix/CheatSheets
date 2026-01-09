@@ -2,129 +2,110 @@
 
 Docker is an open-source virtualization/containerization tool to package, deploy & run applications, making them easily deployable/testable.
 Docker essentially provides an isolated & portable environment as a minimal package, that is easily rebootable from scratch.
-Unlike a virtual machine that virtualizes hardware (to install a real OS), Docker virtualizes OS kernels (to install real images).
+Unlike a virtual machine that virtualizes hardware (to install a real guest OS), Docker virtualizes OS kernels (to install real images).
+
+Docker originated as a Linux technology, whose kernel is highly stable & backward compatible (stable syscall ABI), leading to very portable containers.
+On Windows, two types of containers are possible: Linux containers (via a Linux VM ie _WSL 2_, cross-platform portable) & Windows containers (eg _nanoserver_/_windowsservercore_, low compatibility even between Windows 10/11)
 
 ## Quick Tips
 
-* [Docker Overview](https://docs.docker.com/get-started/overview)
-* [Docker Crash Course for Absolute Beginners](https://www.youtube.com/watch?v=pg19Z8LL06w) (2023)
-* Docker caches image layers during the build process to speed up subsequent builds
+* Use `wsl --shutdown` to kill RAM-hungry _Vmmmwsl_ process
+* Docker itself downloads base images, but not all other dependencies (that is done via commands within Dockerfile eg `npm install`)
+* Containers share host kernel, so they require a compatible OS (note that [all Linux distros share same Linux kernel](https://askubuntu.com/a/172932))
+* Base images and image layers are only stored once and can get referenced many times, and also get cached during build process to speed up subsequent builds
+* [Docker Hub](https://hub.docker.com)
+* [Get started](https://docs.docker.com/get-started)
+* [TechWorld with Nana: Docker Crash Course for Absolute Beginners [NEW]](https://www.youtube.com/watch?v=pg19Z8LL06w)
 
 ## Glossary
 
-* **Base/Parent Image** = custom or vendor-made cross-platform pre-built image containing OS & software (eg Windows Nano Server with .NET Core image)
-  * They only need to be stored once (not for each referencing image) in a local store, or in public registries (eg Docker Hub, GitHub Container Registry, AWS ECR, or a private custom server)
-* **Bind Mounts** = map to any folder in the host filesystem (access to sensitive OS folder may create security risk)
-* **Cluster** = collection of Docker hosts exposed as one. Used by orchestration for scaling
-* **Compose** = a Docker client to work with applications consisting of a set of containers
-  * Uses a single YAML file to define & run multi-container applications (from several Images)
-  * A single (`docker compose`) command creates several containers on the Docker host
-* **Container** = (running or stopped) stateless (ie volatile, though a persistent disk can be mounted) instance of an Image
-  * Containers share the kernel of the container host (which is the host machine itself if run natively) with other containers
-  * Containers are configurable (via Dockerfile) & parameterized (by providing arguments to the `docker run` command) => 1 image can actually generate various containers
-  * This scaling/orchestration ability from a single image makes even monolithic applications want to use Containers
-  * A Windows container requires a Windows Server-based Docker host (_native_)
-  * A Linux container requires a Linux-based Docker host (_native or VM_)
-* **Containers vs VMs** = Containers have a smaller footprint (a few MBs, seconds to start) than actual VM images (a few GBs, minutes to start)
-  * On a VM, resources (CPU, RAM) are fixed, while with Containers they are allocated dynamically
-  * Docker reuses the kernel of its hosts, so it does not have to pack it up, let alone starting it up each time
-  * By contrast, a virtual machine (VM) runs a full-blown guest OS with virtual access to host resources through a hypervisor
-  * In general, VMs provide an environment with more resources than most applications need; on the other hand, they provide better isolation
-* **Container Base OS** = base image containing an OS (eg Windows Nano Server, Windows Server Core, Linux Alpine), or not (using `FROM scratch`, only on Linux)
-* **Container Host** = machine/VM that has the OS on which the Docker Daemon runs
-* **Docker Client** = Docker uses a client-server architecture: the client talks to the daemon (not necessarily on the same system)
-* **Docker Daemon/Runtime** = heart of Docker that does the heavy lifting: a service inside of which containers are built/run/disttributed
-* **Docker Desktop** = Docker for Windows/Mac, using a HyperVisor Layer with a lightweight Linux distro to run Linux-based containers (ie what most of them are)
-* **Docker Toolbox** = legacy Windows/Mac solution for older systems that do not meet the requirements (packs _Oracle VM VirtualBox_)
-* **Dockerfile** = step-by-step recipe/blueprint of an Image, usually referencing a base image as first statement
-* **Hyper-V** = hypervisor (available on Windows 8+) that can run other OS (required to run Linux Containers)
-  * Hyper-V containers don't share the host OS kernel, they each run in its own separated (optimized) VM (kernel), providing better isolation
-  * Hyper-V container require an additional parameter when the Container gets run
-* **Image** = cross-platform package usually constructed from another image (notably a base image), including all dependencies (ie runtime, services, DBs, libraries), ready to be deployed (build once, run anywhere)
-  * Note that dependencies can run in their own separate containers, yet interact with one another (à la microservices)
-  * Images only necessitates storage for successive granular deltas from base image
-  * Images act as a standard unit of deployment, even though they can package different codes & services and their dependencies
-  * For reliability reasons, it's better to run different instances of the same image on different machines/VMs
-  * Accepts runtime parameters when (docker) run
-* **Multi-stage Build** = used to decrease the size of the final Image (eg full SDK base image is necessary for building & publishing, but a lighter runtime base image might suffice after that => re-package published result)
+* **Base Image** = a regular image designated in `FROM` directive in Dockerfile, defining starting point of build on which additional layers are added
+  * Base images are pre-built (meaning we don't need to make them from a Dockerfile, they're tarballs, ie readymade filesystem layer archives artifacts) custom, community or vendor-made images
+  * Base images provide userspaces but not OS kernels, as that is provided by host OS (or guest kernel in case of intermediary VM)
+* **Bind Mounts** = mount host filesystem path directly into a container, managed outside Docker, implemented via host OS filesystem (access to sensitive OS folder may create security risk)
+* **Compose** = a higher-level client to run a multi-service application (consisting of a set of images ie containers eg a backend & a frontend) from a single declarative YAML file
+  * A single (`docker compose`) command creates/coordinates several containers on host
+  * Unlike Kubernetes, this is not scaling-oriented cluster-level orchestration, merely a declarative setup to run interacting services in parallel (à la Visual Studio Debug multiple projects)
+  * Images are either pre-built (and will pull missing images), or build them on the spot (ie either runs full Dockerfile, or references one of its images)
+  * Where referencing an entire Docker file (ie `build: context: . (dockerfile: Dockerfile)` with optional explicit Dockerfile name), uses its last stage as target
+* **Container** = runnable (running or stopped) stateless (ie volatile although a persistent disk can be mounted) instance of an image, isolated from one another but share host OS kernel
+  * Containers allocate resources (CPU, RAM) dynamically, take a few MBs, take seconds to start, reuse/share host kernel (which does not have to be restarted each time)
+  * VMs take GBs, minutes, fixed resources, run full-blown guest OS with resources access through a hypervisor, provide more resources than most apps need, but do provide better isolation & can runr non-compatible OSes
+* **Docker Client** = client communicating with daemon (not necessarily on same system)
+* **Docker Daemon** = heavy lifting heart of Docker, a service inside of which containers are built/run/distributed
+* **Docker Desktop** = Windows/macOS/Linux application including Docker Engine, Docker CLI, Docker Compose, a Kubernetes cluster
+* **Docker Engine** = Docker Daemon (`dockerd`) + REST API + Docker CLI client
+* **Docker Hub** = public registry/repository/marketplace of images (à la .NET nuget) where Docker will look for images by default
+* **Docker Toolbox** = legacy Windows/Mac solution for older systems that do not meet requirements (packs _Oracle VM VirtualBox_)
+* **Dockerfile** = step-by-step text recipe/blueprint/script to **build** a single final image, usually referencing a base image as its first statement
+  * **Multi-Stage Build** = a dockerfile that has multiple stages, only one of which can be chosen as final image during a build (others are discarded, no two independent images from a single build)
+    * Only stages in dependency chain of target stage are built (ie those explicitly referenced in `FROM`, or `COPY --from=` of currently built stage or its recursive ancestors)
+    * That decreases size of final image (eg defines full SDK base image for building & publishing, but a lighter runtime base image for later deployments)
+* **Image** = platform-agnostic read-only versionable taggable template used to create containers, typically including a base OS & software packaged together using a Dockerfile, can be pushed/pulled to/from a registry
+  * Images act as a standard unit of deployment and include all dependencies (runtime, services, DBs, libraries), which can also be run in their own separate containers (for an architecture à la microservices)
+  * Images are stored as layered filesystem snapshots (shareable between images) + metadata (ie environment variables, entrypoint, command, ports), and only necessitate storage for successive deltas from base image
 * **Open Container Initiative** (OCI) = industry effort to standardize container format & execution
-* **Orchestrator** = manages the lifecycle and locations of various Containers, with error control & restart capabilities (eg Azure Fabric Service, Docker Swarm, Kubernetes, Mesosphere)
-* **Registry** = Docker Hub & co. Contains repositories. Companies often have a private registry to manage their own custom Images (e.g. using Azure Container Registry)
-* **Remote Storage** = external DB (SQL Server & co), Azure Cosmos DB (NoSQL), Azure SQL Database, Azure Storage
-* **Repository** = collection of related Images under common Tag
-* **Scratch** = special minimal OS-less image acting as a blank container (mainly for Rust/Go applications which don't require an OS)
-* **Tag** = label used to identify the specific platform (OS) and version (e.g. .NET version) of an Image when several of those are available
-* **Tmpfs Mounts** (Temp FS) = virtual folder stored in the host's memory (not persisted)
-* **Volumes** = area of the host filesystem where containers can write/persist information, via mapping Container directories to the Host OS directories
-  * The Container thinks it is access the FS, but it's a mapped directory
-  * Only use Volumes for logs/temp files (not Business Data), because when using an Orchestrator, the Container might move
-  * For Business storage, use the traditional data repositories, regardless of using containerization (see Remote)
-* **Windows Server** = runtime with process & namespace isolation, but shared kernel with container host
+* **Registry** = Docker images hosted store service, can be private (on-premises or cloud eg Azure Container Registry) or public (eg **Docker Hub**)
+* **Repository** = named collection of images related to a particular application/microservice/project in order to store/manage/share them publicliy or privately
+* **Tag** = custom label used to identify specific platform (OS) and version (eg .NET version) of an image (eg when several of those are available, à la Git tags)
+  * _latest_ = special tag that is used as default when none is explicitly specified
+* **Volumes** = abstracts away filesystem paths & host details, an mapped area of host filesystem where containers can write/persist information
 
-* _Kubernetes_ = open-source production-grade orchestrating platform for placing & executing (not necessarily Docker) containers, enabling availability/flexility/scalability
-* _minikube_ = quickly setup a local Kubernetes cluster on macOS/Linux/Windows
+### (Docker Hub) Images
+
+* **alpine** = minimal Linux distribution providing a small userland (musl libc, BusyBox) for lightweight containers/services without a kernel
+* **microsoft/dotnet** = official images for .NET & ASP.NET Core (ie cross-platform, eg Windows Nano Server, includes Kestrel)
+* **microsoft/dotnet-framework** = official images for .NET Framework & Windows Communication Framework (eg Windows Server Core)
+* **microsoft/dotnet:2.2-sdk** = .NET Core image for development (>1GB), multi-architecture
+* **microsoft/dotnet:2.2-runtime** = runtime-only (~200 Mo), multi-architecture (Linux & Windows => depends on Docker host)
+* **microsoft/dotnet:2.2-aspnetcore-runtime** = runtime-only, multi-architecture for Linux & Windows
+* **microsoft/dotnet:2.2-aspnetcore-runtime-nanoserver-1803** = runtime-only, Windows Nano Server
+* **node** = node & npm commands
+* **scratch** = an explicitly empty Docker image with no userspace, used for containers that run a single statically linked binary (eg Go/Rust) and rely solely on host kernel
+* **treafik** = cloud native edge router
+* Servers
+  * **Windows Nano Server** = container-optimized minimal Windows user-mode subset for modern applications excluding legacy components (no GUI/windows, no explorer shell, etc)
+  * **Windows Server** = full Windows Server OS with complete Windows APIs, GUI, mangement tools & services, typically used for VMs or bare metal
+  * **Windows Server Core** = reduced Windows Server OS without GUI shell, with most Windows APIs & services for compatibility with traditional server workloads
 
 ## API
 
-Build an image
-
-* `docker build -t {image_name} {dockerfile_folder}`
-* `docker build -f {dockerfile_path}` = explicit path to the Dockerfile (that can be different from "Dockerfile" then)
 * `cat {dockerfile_folder} | docker build -t {image_name}`
-
-Creates a container based on the image, which can be local or remote (Docker Hub):
-
-* `docker run {image}`
-* `docker run {image} -d` = in the background (d for daemon)
-* `docker run {image} -rm` = deletes the container once the program is finished ("exited" signal received)
-* `docker run {image} -it` = standard input/output
-
-A new container is created from the image every one time the command is run.
-
+* `docker build ({options}) {dockerfile_folder}` = builds an image from Dockerfile
+  * `-f {dockerfile_name}` = explicit Dockerfile name (instead of default _Dockerfile_)
+  * `-t(ag) {image(:tag)}`
+* `docker images` = lists local images (`-a` includes intermediary images)
+* `docker info` = display setup information (where images reside, etc.)
+* `docker logs {container_id|container_name}` = view logs of a container (especially useful for backgrounded ones since they are not displayed in terminal)
+* `docker ps` = lists running containers (`-a` includes stopped containers)
+* `docker pull {image(:tag)}` = download image from registry (_latest_ tag by default), implied when running a image not present locally
+* `docker run {image(:tag)}` = creates a container based on a (local or remote eg Docker Hub) image, creating a new container from image each time
+  * `-d(etach)` = run in background
+  * `-it` = standard input/output
+  * `-p {host_port}:{container_port}` = binds host port & container port (exposes container to local network, usually same port both on host & container)
+  * `-rm` = deletes container once program is finished (exited signal received)
+  * `--name {container_name}` = provide an explicit name for container (in place of defaultly generated one)
+  * Runtime parameters can be provided, so a same image can actually generate different containers
 * `docker rm {name|id}` = inversely, the following command deletes a container
 * `docker start` = start an existing (stopped) container
-* `docker stop` = stop a running container
-* `docker ps` = lists running containers
-* `docker ps -a` = lists running and stopped containers
-* `docker images -a` = lists all images
+* `docker stop {container_id|container_name}` = stop one (or more) running container
 * `docker system prune` = deletes all resources — images, containers, volumes, and networks — that are dangling (not associated with a container)
-* `docker system prune -a` = remove any stopped containers and all unused images (not just dangling images)
-* `docker info` = display setup information (where images reside, etc.)
+  * `-a` = remove any stopped containers & all unused images (not just dangling images)
 
 ### Dockerfile
 
-Script used to build a Docker image  
-
 * `FROM {base_image}` = first statement in the Dockerfile; indicate the a base image from the repository (which is _Docker Hub_ by default)
-* `WORKDIR {path}` = set the working directory
-* `COPY {path_a} {path_b}` = Copy some files/folders
-* `SHELL cmd|powershell` = Specify which shell/cli to use when using the RUN command
-* `RUN {command}` = Adds layer to the initial parent image (i.e. installs stuff)
-* `CMD {command}` = Defines a default command when none is provided
-* `ENTRYPOINT` = Runs a container like an executable
-* `EXEC {command}` = Runs a command inside a Container
-* `EXPOSE {port}` = Expose a port to the world outside the container
-* `ENV {variable} {value}` = Define an environment variable
+* `WORKDIR {path}` = set working directory (for all following commands, à la `cd`)
+* `COPY (--from=previous_stage) {source(s)} {target}` = copy some files/folders into this stage's filesystem
+* `SHELL cmd|powershell` = specify which shell/CLI to use when using the RUN command
+* `RUN {command}` = adds layer to initial parent image (ie installs stuff eg `npm install`)
+* `CMD {command} ({parameter(s)})` = defines a default command executed when container starts (there can only be one in whole Dockerfile)
+* `ENTRYPOINT` = runs a container like an executable
+* `EXEC {command}` = runs a command inside a container
+* `EXPOSE {port}` = expose a port to the world outside the container
+* `ENV {variable} {value}` = define an environment variable
 
-## Extensions
+## Exensions
 
-* _Vagrant_ (by _Hashicorp_) = (à la Docker)
-* _Portainer_ = a web UI for Docker
-* **Docker Hub** = repository/Marketplace of (base) images (à la <https://nuget.org> for nugets)
-
-### Docker Hub Images
-
-* _microsoft/dotnet_ = .NET Core (Windows Nano Server, cross-platform, includes Kestrel) => optimized for .NET Core
-* _microsoft/dotnet-framework_ = .NET Framework (Windows Server Core, includes IIS) => optimized for .NET Framework
-
-Both exist as SDK (>1 Go even for Core), or as Runtime (~200 Mo) that can be used for multi-stage builds.
-
-Note that it is possible to run .NET Core on the Windows Server Core, for exemple.
-In that case, we need to create our own custom Image since it is an unusual (and not really optimal) configuration.
-
-We can specify the OS we want by adding its tag as a suffix to the Image in the FROM statement of the Dockerfile.
-
-* _microsoft/dotnet:2.2-sdk_ = .NET Core Image for development, Multi-architecture
-* _microsoft/dotnet:2.2-runtime_ = Runtime-only & Multi-architecture (Linux & Windows => depends on the Docker host)
-* _microsoft/dotnet:2.2-aspnetcore-runtime_ = Runtime-only, Multi-architecture for Linux & Windows
-* _microsoft/dotnet:2.2-aspnetcore-runtime-nanoserver-1803_ = Runtime-only & Windows Nano Server
+* **Portainer** = a web UI for Docker
+* **Vagrant** (by _Hashicorp_) = (à la Docker)

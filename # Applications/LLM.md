@@ -2,11 +2,13 @@
 
 ## Quick Tips
 
+* [Claude Skills](https://claude.com/skills)
 * Submit whole screenshots instead of painfully describing UI for troubleshooting
 * Include an _AGENTS.md_ file in projects to guide coding agents, provide setup commands, coding style guidelines, etc (see <https://agents.md>)
 
 ## Glossary
 
+* **Agent** = define goal, plan tasks, take actions, observe results, adjust, repeat (autonomous, access to tools, can retain state/memory, can be automated/triggered/orchestrated)
 * **Codex** = originally a simple coding-oriented ChatGPT model, now a full-blown agentic coding assistant (via CLI, local IDE extension, or [online](https://chatgpt.com/codex) linked to GitHub)
 * **Microsoft Copilot** = Windows-integrated LLM based on OpenAI GPT-4/5 developed by Microsoft AI, replacing discontinued Cortana
 

@@ -18,6 +18,7 @@ Both NPM and Webpack (written in JS) are part of Node.js ecosystem and therefore
 * **Blitz.js** = _Next.js_ fullstack toolkit
 * **Deno** = JavaScript runtime similar to _Node.js_ (by its creator), built for TypeScript natively (& WebAssembly) based on V8 engine & Rust
 * **Electron** = build cross-platform desktop apps with JavaScript/HTML/CSS
+* **Express** = fast unopinionated minimalist web framework (HTTP listen)
 * **forever** = CLI tool letting a given script run forever (restart on error)
 * [JSON Placeholder](https://jsonplaceholder.typicode.com) = free fake and reliable API for testing and prototyping
 * [JSON Server](https://github.com/typicode/json-server) = fake REST API (with zero coding, for front-end developers who need a quick back-end for prototyping & mocking)

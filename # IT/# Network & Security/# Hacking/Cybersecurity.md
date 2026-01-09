@@ -74,7 +74,7 @@
 * [AbuseIPDB](https://www.abuseipdb.com) = look up blacklisted IP addresses
 * [CVE](https://www.cve.org) (Common Vulnerabilities & Exposures) = US-based reference system/DB for publicly known vulnerabilities & exposures
 * [NVD](https://nvd.nist.gov) (National Vulnerability Database, by NIST)
-* [OWASP Top Ten](https://owasp.org/www-project-top-ten)
+* [OWASP Top Ten](https://owasp.org/Top10) = standard awareness document presenting annual top 10 most critical security risks to web applications
 * [VirusTotal](https://www.virustotal.com) = scan files using multiple antivirus engines
 
 ### Forensics

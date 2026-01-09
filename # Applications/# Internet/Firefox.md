@@ -12,6 +12,7 @@
 * **Opera GX** = gaming-themed-oriented alternative to Chromium-based Opera (has a mobile version)
 * **Opera Air** = mindfulness-oriented browser alternative to Opera and Opera GX (includes breathing exercises, meditation, binaural beats, neck stretches features)
 * **Vivaldi** = Norwegian freeware cross-platform Chromium-based browser with a built-in email client, calendar, translation
+* **Zen Browser** = (2024) FOSS Firefox fork with tab organization QoL features (workspace grouping, compact mode, glance, split view)
 
 ## Menus
 

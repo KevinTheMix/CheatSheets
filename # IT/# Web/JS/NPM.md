@@ -19,18 +19,17 @@ Not only that, Node.js also exposes various APIs and some modules that NPM may d
 
 Requires _Node.js_, preferably LTS (Long-Term Support) version (minimum 8.9+).
 
-* `npm init` = creates the _package.json_ file
-* `npm i(nstall)` = install all the dependencies found in _packages.json_ into the local _node\_modules_ folder.
-* `npm install {name}`
+* `npm init` = creates _package.json_ file
+* `npm i(nstall) ({name})` = install all dependencies found in _packages.json_ into local _node\_modules_ folder (à la `flutter pub get`)
+  * `-g @{package}`
   * Stop (then restart) any server before running this command
-* `npm install -g @{package}`
-* `npm run {command_key}` = instantiates a shell and execute the command corresponding to the (arbitrary) key/label found in the _Script_ section of the _package.json_ file
-* `npm run build` = executes the command found in _package.json_, which typically builds the app for production to the build folder
-  * E.g. the _build_ key may target `vue-cli-service build`, which in turn accomplishes the build "end-to-end", i.e. bundling (via Webpack - see <https://v3.cli.vuejs.org/guide/cli-service.html#vue-cli-service-inspect>), minifying JS, transpiling SASS & TS, etc.
+* `npm run {command_key}` = instantiates a shell and execute the command corresponding to (arbitrary) key/label found in _Script_ section of _package.json_ file
+* `npm run build` = executes command found in _package.json_, which typically builds app for production to build folder
+  * Eg _build_ key may target `vue-cli-service build`, which in turn accomplishes build "end-to-end", ie bundling (via Webpack - see <https://v3.cli.vuejs.org/guide/cli-service.html#vue-cli-service-inspect>), minifying JS, transpiling SASS & TS, etc
   * See <https://stackoverflow.com/a/48614507>
   * See <https://github.com/facebook/create-react-app#npm-run-build-or-yarn-build>
-* `npm run serve` = build & serve the app
-  * Watches the served files for changes, and update the view accordingly in real-time
+* `npm run serve` = build & serve app
+  * Watches served files for changes, and update view accordingly in real-time
   * This command is actually an alias as defined in _package.json_.
 
 ## Misc

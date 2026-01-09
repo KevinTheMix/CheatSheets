@@ -104,6 +104,8 @@ Credit: _Tech World With Milan Milanović_
 * 2021.11. **C# 10.0** = record structs, global usings
 * 2022.11. **C# 11.0** = file-scoped types, required members, auto-default structs
 
+* 202?.?? **?** = Field-backed properties
+
 ## API
 
 ### Operators

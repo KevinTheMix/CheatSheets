@@ -2,6 +2,8 @@
 
 ## Quick Tips
 
+* [Cloudflare: How are serverless computing and PaaS different?](https://www.cloudflare.com/learning/serverless/glossary/serverless-vs-paas)
+
 ## Glossary
 
 * **Availability Geography** = discrete continent-wide market, containing two or more regions
@@ -12,7 +14,6 @@
   * **Zone-Redundant** Service = replicate data/systems (eg DB) to multiple zones for redundancy
 * **Big Data** = field of technology dealing with extraction/processing/analysis of data sets too large or complex for traditional data-processing software
 * **CDN** (Content Distribution Network) = cloud-backed geographically-distributed data provider (eg **CloudFlare**)
-* **CI/CD** (Continuous Integration & Continuous Delivery) = frequent merging small changes into main branch + rapidly repeatedly release reliable software in short cycles
 * **Cloud Solution Provider** (CSP) = a provider of cloud services (eg Microsoft) to customers (ie users or organizations)
 * **Consumption-Based Model** = compute/storage/network(-weighted) granular pay-as-you-go
   * Advantages = no upfront costs, use full potential of infrastructure (no wasted resources), pay for more when needed (eg Tomorrowland), stop paying when not needed

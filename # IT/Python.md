@@ -157,16 +157,36 @@ Returned by libraries such as SQL libraries (eg `fetchone()` & `fetchall()`).
 * `__init__(self, {args})` = constructor
 * `method(self, {args})` = instance method, receiving instance as first argument (named _self_ by convention)
 
+### Built-ins
+
+* **datetime** (eg `from datetime import datetime, timedelta`)
+* **io**
+* **math**
+* **os**
+* **pickle**
+* **platform** = get OS name
+* **subprocess** = execute a shell command
+* **time**
+
 ### Libraries
 
 * **http.server** = basic HTTP server
+* **krb5** = wraps Kerberos 5 C API
+* **matplotlib** = create static, animated, interactive visualizations (`matplotlib.pyplot`)
 * **NumPy** (Numerical Python) = arrays manipulation
 * **openpyxl** = read/write Excel 2010 xlsx/xlsm/xltx/xltm files
-* **pandas** (panel data) = data manipulation & analysis, especially data structures/operations for numerical tables & time series
+* **pandas** (panel data) = open source data manipulation & analysis, especially data structures/operations for numerical tables & time series (see <https://pandas.pydata.org>)
   * `df.dropna(how='all')` = remove missing values
   * `df.iloc[start:end]` = subset splicing
   * `df.isin({collection})` = check if DataFrame has values in collection (eg `df[~df.isin([excluded_values])]`)
   * `dg.reset_index(drop=True)`
+* **plotly** = open-source interactive data visualization
 * **pyngrok** = Ngrok API
+* **seaborn** = statistical data visualization
+* **scikit-learn** = modules for machine learning & data mining (`from sklearn import preprocessing`, see <https://scikit-learn.org>)
+* **SQLAlchemy** = SQL toolkit & ORM
+* **statistics**
+* **statsmodels** = statistical computation & models (`from statsmodels.graphics.mosaicplot import mosaic`)
 * **timeit** = measure performances (eg `timeit.timeit(stmt={treatment}, number={n})`)
+* **winkerberos** = high-level interface to SSPI for Kerberos client auth
 * **xlsxwriter**

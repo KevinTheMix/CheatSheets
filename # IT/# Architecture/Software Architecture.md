@@ -5,6 +5,7 @@
 ## Glossary
 
 * **4+1** = view model describing architecture of software-intensive systems using mutliple shareholders viewpoints
+* **Application Lifecycle Management** (ALM) = end-to-end product lifecycle management (governance, development, maintenance) of computer programs (ie requirements, architecture, programming/testing, maintenance, changes, CI)
 * **Backend For Frontend** (BFF) = dedicated backend service for each type of client interface (eg one for mobile, web, smartwatch app, etc) to combat inefficiency of one-size-fits-all
 * **Barrel Files** = a file that does nothing but re-export things from other files
   * [TkDodo - Please Stop Using Barrel Files](https://tkdodo.eu/blog/please-stop-using-barrel-files)
@@ -19,14 +20,14 @@
     * **Query** = returns a result but do not change state (read-only, no side-effects)
     * **Command** (aka modifiers or mutators) = request to perform an action that changes system state (writes, doesn't return a value)
       * [Commands vs Events](https://stackoverflow.com/q/4962755/3559724) = commands can be rejected, events have happened
+* **Closure** = function (eg anonymous or lambda) + its captured context (ie values/references of inbound parameters at closure creation)
 * **Dependency Injection** (DI) = providing dependencies at runtime using reflection, rather than passing them top-down all over the place, reduces tight coupling
-* **Domain-specific language** (DSL) = computer language (ie programming, markup, data, etc) specialized to a particular application domain (eg HTML)
 * **Encapsulation** = cacher le mécanisme interne d'un objet en vue de forcer une certaine utilisation et garantir son intégrité
-* **Entreprise Service Bus** (ESB) = communication system between distributed SOA applications, a special case of client-server in which any application can behave as either
+* **Enterprise Resource Planning** (ERP) = suite of integrated applications used by an organization to collect/store/manage/interpret data from many business activities (eg accounting, sales, CRM, HR)
+* **Enterprise Service Bus** (ESB) = communication system between distributed SOA applications, a special case of client-server in which any application can behave as either
 * **Event Sourcing** = derives application state from a succession of events (ie an add-only evergrowing audit/event log) capturing sequence of changes, allowing to rebuild state or travel it back/forward
 * **Façade** = layer holding controllers
 * **Framework** = architectural style, boilerplate alleviating, toolschain complementing an existing language
-* **Function/Lexical closure** = function (eg anonymous or lambda) + its captured context (ie values/references of inbound parameters at closure creation)
 * **GDPR** (General Data Protection Regulation)
   * All people _living_ in Europe, and **all** digital marketing data (eg cookies but also dynamic IP)
   * Doesn't require consent to collect and process data required to run the site, but only for a well-defined, transparent purpose
@@ -36,8 +37,7 @@
 * **Marshalling** = transforming one live object's memory representation into a format suitable for storage/transmission between different runtimes (broader than only serialization)
 * **Middleware** = interception layer in a processing pipeline (eg HTTP requests) that applies shared behavior around a core operation without being that operation itself (eg auth, error handling, logging, messaging, transactions)
 * **Mixin** = in OO, a feature-able class that can be _included_ without being inherited from (eg C# `IEquatable`, Ruby include, JS extend/assign), promoting reusability & multiple inheritance
-* **Module** = une fonction ou une classe ou un fichier, selon les langages
-  * L'intérêt est de pouvoir décomposer une partie de traitement dans un module réutilisable ayant le moins de dépendances/liens/informtion possibles
+* **Module** = a function or class or file (depending on langages), embodying modularity/reusability through decomposing treatment parts and minimizing hard dependencies
 * **Offline First** or **Local First** = designing an app with lack of connection baked in from scratch as part of normal operation, and eventual sync to share data across devices
 * **OO** = Héritage + Polymorphisme + Encapsulation
 * **Polymorphism** = various techniques for using one symbol to represent multiple different types
@@ -62,6 +62,7 @@
   * **Interface Segregation Principle** = split large Interfaces into more "role-granular" ones, so subclasses don't need to implement unnecessary methods
   * **Dependency Inversion Principle** = use Interfaces between parent & child classes (the parent owns, the child inherits/implements)
     * The Interface is packaged with the parent (actually more recently, a separate _Child.Contract_ project) instead of the child, thus _inverting_ the direction of their (compile-time) relationship
+* **TOGAF** (The Open Group Architecture Framework) = most used framework for enterprise architecture, a high-level approach to design/plan/implement/govern an enterprise IT architecture (business, application, data, technology)
 * **Value Object** = immutable type that represent a concept by their value, not identity (ie equality based on all fields, not a unique ID)
 
 ### Non-Functional Properties
@@ -105,7 +106,7 @@
 ### DDD (Domain-Driven Design)
 
 * **Aggregate** = cluster of entities, with a root entity (aka the **Aggregate Root** (Entity))
-* **Anti-Corruption Layer** (ACL) = translates/shields internal models from inbound lingo from an external 3rd party service
+* **Anti-Corruption Layer** (ACL) = boundary to isolate/shield/translate domain model from external systems (3rd party service or other bounded contexts) so that their concepts/lingo does not leak in
 * **Bounded Context** = essentially, a strategic business-driven namespace
 
 ### Clean Architecture
@@ -133,9 +134,9 @@ UI → Application → Domain → Data → Infrastructure.
 
 #### Why usecases use classes (rather than functions)
 
-* Dependency injection (DI): Since it’s a class, you can inject dependencies (eg NoteRepository) via constructor.
-* Named abstraction: The use-case has a name (AddNotes) which shows up clearly in stack traces, logs, test output, etc.
-* Testability: Easy to instantiate and test in isolation: AddNotes(FakeNoteRepo()).call(...)
-* Extensibility: You can later add fields (eg injected Logger, flags, strategy objects) without changing the call site.
-* Interchangeability: You can pass it around, mock it, or swap implementations (eg for background vs. interactive) — it’s a polymorphic unit.
-* Consistency: Every use-case follows the same pattern: MyUseCase.call(...). No free-floating, inconsistently-named functions.
+* Dependency injection (DI) = since it’s a class, you can inject dependencies (eg NoteRepository) via constructor
+* Named abstraction = the use-case has a name (AddNotes) which shows up clearly in stack traces, logs, test output, etc
+* Testability = easy to instantiate and test in isolation: AddNotes(FakeNoteRepo()).call(...)
+* Extensibility = you can later add fields (eg injected Logger, flags, strategy objects) without changing the call site
+* Interchangeability = you can pass it around, mock it, or swap implementations (eg for background vs. interactive) — it’s a polymorphic unit
+* Consistency = every use-case follows the same pattern: MyUseCase.call(...). No free-floating, inconsistently-named functions

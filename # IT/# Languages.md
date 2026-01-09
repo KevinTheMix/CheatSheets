@@ -6,6 +6,7 @@
 
 ## Glossary
 
+* **Domain-Specific Language** (DSL) = computer language (ie programming, markup, data, etc) specialized to a particular application domain (eg HTML)
 * **Eiffel** = OO language (1985)
 * **Hack** = open-source language (by Meta in 2014) for HipHop Virtual Machine (HHVM), extending PHP (a majority of vanilla PHP scripts are valid in Hack)
 * **Lisp** (list processing) = family of old programming languages with distinctive fully parenthesized prefix notation (eg `+ a b` instead of `a + b`)

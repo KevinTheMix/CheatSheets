@@ -32,7 +32,7 @@
   * **Composite Index** = composed of multiple columns
 * **Joins** = composes columns originating from multiple tables (`INNER`, `LEFT`/`RIGHT`/`FULL OUTER`, `CROSS` aka Cartesian product)
   * Joins can be performed between tables in different DBs (but on the same server)
-* **N+1 Select Problem** = separate queries for a main entity then each of its children vs loading both collections and performing lookups there in memory (or better, a single JOIN)
+* **N+1 Select Problem** = using separate independant queries for a main entity then each of its children (solution is loading all collections & perform lookups there in memory, or better a single JOIN)
 * **Normalization** = structure relational DB data to reduce redundancy & improve integrity
   1. no repetitive attributes, Primary Key
   2. 1NF + non-key attributes cannot depend on part of a key
