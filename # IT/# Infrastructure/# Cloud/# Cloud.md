@@ -84,6 +84,7 @@
 * **Couchbase** = NoSQL Cloud Database
 * **DigitalOcean** = cloud IaaS/PaaS platform, where _Droplet_ is a (Linux) VM
 * **Firebase** = Google's mobile/web apps development cloud platform (subject to privacy controversies)
+* **Google Cloud Platform** (GCP) = suite of cloud computing services offered by Google (for computing, data storage, data analytics, machine learning)
 * **Heroku** = cloud PaaS supporting several programming languages (ie _polyglot_, eg Node.js, Ruby, Java, PHP, Python, Go, Scala, Clojure, and others eg Elixir via Buildpacks)
 * **Honeycode** = Amazon's no-code mobile/web app development platform
 * [Hostinger VPS](https://www.hostinger.com/fr/vps)

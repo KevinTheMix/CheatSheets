@@ -24,6 +24,9 @@
   * All processes can be refined by the team as necessary to suit the team/the work.
   * Any "Task" can be picked up by any one team member (+ or -).
 
+* **Jira** = collaborative agile project management & issue/bug tracking software product
+  * **JQL** (Jira Query Language) = dedicated search language to create complete queries for issue tracking, advanced filtering, reporting, helping navigate large datasets
+
 ### Daily Stand Up Meeting (DSTUM)
 
 Daily timeboxed & equally timeshared individual status update.

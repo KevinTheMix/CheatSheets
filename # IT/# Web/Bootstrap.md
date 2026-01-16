@@ -1,7 +1,7 @@
 # Bootstrap
 
 Reusable & extendable web design framework.
-Reusability is achieved by semantic class naming i.e. _why_ instead of _what_ (e.g. "warning" instead of "yellow_text"), as well as having small units of styles with a single purpose which then permits modular composition (`class="a b c"` => features from a + b + c).
+Reusability is achieved by semantic class naming ie _why_ instead of _what_ (eg "warning" instead of "yellow_text"), as well as having small units of styles with a single purpose which then permits modular composition (`class="a b c"` => features from a + b + c).
 
 Finally, Bootstrap uses conventions to specify how common elements get displayed, and predefines aritrary size ranges, dividing content into even areas.
 
@@ -9,7 +9,7 @@ Finally, Bootstrap uses conventions to specify how common elements get displayed
 
 * _./css/_ contains the core css, as well as the reactive one for multi-devices support.
 * _./img/_ must remain at the same relative location to the _./css/_ folder.
-* _./js/_ is used for images carousel, etc., and requires jQuery (it has to be included just before/above).
+* _./js/_ is used for images carousel, etc, and requires jQuery (it has to be included just before/above).
 
 ## Layout
 

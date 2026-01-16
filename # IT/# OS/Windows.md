@@ -21,6 +21,7 @@
 * **Encrypting File System** (EFS) = NTFS 3.0 feature providing FS-level encryption to specific files/folders (using user username/password, while OS is running, in file/folder Properties > (Attributes:) Advanced)
 * **Hyper-V** = native hypervisor for (Windows 8+, Pro & Enterprise editions), which can create VMs (eg required to run Linux Containers)
   * Hyper-V containers don't share host OS kernel, they each run in its own separated (optimized) VM (kernel), providing better isolation
+* **Microsoft Copilot** = Windows-integrated LLM based on OpenAI GPT-4/5 developed by Microsoft AI, replacing discontinued Cortana
 * **Microsoft Defender** (aka **Windows Defender**) = replaces Microsoft Security Essentials from Win 8
 * **MSMQ** (Microsoft Message Queuing) = native message queueing (between applications/machines) system (uses disk-backed queues for durability, mostly considered legacy)
 * **Reliability Monitor** = review computer reliability/problem history
@@ -28,7 +29,7 @@
 * **Sysinternals** = various semi-official Microsoft system utilities (Process Explorer, Windows Task Manager, Autoruns, RootkitRevealer, defragmentation tools)
   * _sdelete_ = securely delete files
 * **User Account Control** (UAC) = popup dialog when an action requires elevated privilege (user must be logged as admin or be presented with credentials, exactly à la Unix `sudo`)
-* **Windowd ADK** (Assessmant & Deployment Kit) = create your own Windows PE
+* **Windows ADK** (Assessmant & Deployment Kit) = create your own Windows PE
 * **Windows Features** = turn Windows features on/off (Windows Media Player Legacy, MSMQ, Print to PDF, XPS, PowerShell, WSL)
 * **Windows Hello** = sign-in options (facial, fingerprint, PIN, physical security key, password, picture)
 * **Windows Hypervisor Platform** = API layer that allows hypervisor-based virtualization (used eg by WSL2, Docker Desktop)

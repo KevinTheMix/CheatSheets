@@ -8,6 +8,11 @@ Can use all of JS features, but adds a layer of OO classes, static typing, casti
 * [TypeScript Variable Declaration](https://www.typescriptlang.org/docs/handbook/variable-declarations.html)
 * OO `class Child extends Parent { ... }`
 
+### CLI
+
+* `tsc`
+  * `--no-emit` = statically analyze/type-check project code
+
 ## tsconfig.json
 
 A [JSON5](https://json5.org/) configuration file the TypeScript compiler uses to determine which & where files to compile.

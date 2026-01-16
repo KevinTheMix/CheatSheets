@@ -210,7 +210,7 @@
 * `chsh` = change user login shell (only for own account, unless superuser)
 * `clear` = clear screen
 * `cmp` = compare two files byte by byte (see `diff`)
-* `cp {file} {target}` = copy (target may be a file, or directory in which case source file is added to that directory)
+* `cp {source} {target}` = copy files & directories (`-r(ecursive)` directory source, `-a(rchive)` archive mode to preserve structure & attributes)
 * `cron` = job scheduler (_minute hour day month weekday_ (as 0-6), `@reboot` once at reboot)
 * `crontab` = maintain crontab files for individual users
 * `curl` (client URL) = transfer data from/to a (mail or web) server using URLs
@@ -223,8 +223,12 @@
   * `-f {fields}` = select only these fields
 * `date` = system date
 * `dd` = carve out, convert, copy a file
+* `ddrescue {in} {out} ({logfile})` = safely copies data from a failing disk/image (_in_) to output image file (_out_) while skipping unreadable areas (_logfile_ tracks rescued/failed sectors when starting again)
+  * `-d` = use direct disk access (bypass cache)
+  * `-n` = do not retry bad sectors (fast initial pass)
+  * `-r1` = retry each failed sector once
 * `deluser` & `delgroup` = remove a user or group from system
-* `df` (disk free) = reports FS space usage (`-h` for human-readable)
+* `df` (disk free) = reports mounted filesystems & available space/usage (`-h` human-readable sizes)
 * `diff {filea} {fileb}` = content differences between two files files (`-u` for context, see `cmp`)
 * `dig {domain}` (installable) = DNS lookup (`-x {host}` reverse lookup)
 * `dir` = list directory contents (identical to `ls`)
@@ -278,7 +282,11 @@
   * `-s` aka `--symbolic` = creates a soft/symbolic link
 * `locate {file}` (installable) = find all instances of file
 * `login` = begin session on system (should be invoked via `exec login` from shell, so shell gets replaced and newly logged user does not return to caller previous shell session after exiting)
-  * `nologin` = politely refuse a login
+  * `nologin` = politely refuse a login (replacement shell for accounts that have been disabled)
+* `losetup` = attaches a disk image as a virtual block device
+  * `-f` = use the next available loop device
+  * `-P` = scan for partitions inside the image
+  * `--show` = print the assigned loop device name
 * `ls` = liste folder content
   * `/` = lists root files
   * `-a` = all (hidden, _._ & _.._)
@@ -287,7 +295,7 @@
   * `-i` = inode number
   * `-l` = long format (file type - file mode bits - # hard links - owner - group - size - timestamp - filename)
   * `abc*` = lists files starting with _abc_
-* `lsblk` (List Block Devices) = information about all available or specified block devices
+* `lsblk` (List Block Devices) = information about all available or specified block devices (and their partitions)
 * `man {#} {command}` or `man {command}.{#}` = help on command (section number indicate category, not priority/popularity)
   * `1` = executable programs or shell commands (eg `crontab(1)`)
   * `2` = system calls (eg `open(2)`)
@@ -303,7 +311,7 @@
 * `modprob` = add/remove modules from Linux Kernel
 * `more` = display stdin with (`(Page) Down`/`Space` screen, `Enter` line) paging (`q` to exit, `v` to launch Vim, reads whole file upfront, see `less`)
   * A popular usage is paging output of a previous command eg `{command} | more`
-* `mount ({path})` = manually (un)mount a storage device (eg USB or _/dev/floppy_, à la Windows `net use`)
+* `mount ({path})` = mount a storage device to directory tree (`-o ro` read-only to prevent modification, eg USB or _/dev/floppy_, à la Windows `net use`)
 * `mv {source} {target}` = rename/move
 * `nano ({file})` = small friendly editor
 * `netcat` (aka `nc`, also see `ncat` richer rewrite) = open/send/listen to TCP/UDP/sockets connections, scan ports
@@ -331,10 +339,19 @@
   * `--forest` = ASCII art process tree
 * `reboot` (with `sudo`)
 * `reset` = initialize/reset terminal state
-* `rm {file/dir}` (remove) = delete
-  * `-f` (force) = without confirmation
-  * `-r` (recursive) = delete directory & its content
+* `rm {file/dir}` (remove) = delete (`-f(orce)` without confirmation, `-r(ecursive)` directory & its content)
 * `rmdir` = remove directory
+* `rsync` = copies files reliably while tolerating read errors
+  * `-h` = human-readable sizes
+  * `-r` = recursive copy
+  * `-t` = preserve timestamps
+  * `-v` = verbose output
+  * `--ignore-errors` = continue on I/O errors
+  * `--inplace` = write directly to destination file
+  * `--no-group` = do not preserve group
+  * `--no-owner` = do not preserve ownership
+  * `--no-perms` = do not preserve permissions
+  * `--partial` = keep partially copied files
 * `scp` = OpenSSH secure file copy (`-P {port}` with uppercase P unlike `ssh -p {port}`)
 * `screen` = full-screen window manager multi-plexing physical terminal between several processes (ie interactive shells)
 * `sed` (**s**tream **ed**itor) = parse & transform text (reads pipe stream line by line, not an entire file in memory)
@@ -410,7 +427,7 @@
 * `ufw` = sets firewall config (uses `iptables`)
 * `uname` = display system information (`-a` all, `-n` system (host) name, `-r` distro, also see `neofetch` utility)
 * `uniq {file}` = report/omit repeated lines (`-u` only unique lines)
-* `unmount` (installable)
+* `umount` = unmount filesystems
 * `uptime` = show session uptime
 * `vi(m)` = Vi IMproved
 * `vimtutor` = Vim tutorial
@@ -433,6 +450,12 @@
 * `write` = sends a message to another user
 * `xxd` = hex dump (& reverse)
 * `(un)zip`
+
+#### Installable Utilities
+
+* `ntfsfix` = repairs basic NTFS filesystem inconsistencies
+* `photorec` = recovers files by scanning raw disk data without filesystem metadata
+* `testdisk` = interactively repair partition tables & filesystem metadata (contains `photorec`)
 
 #### System Calls
 

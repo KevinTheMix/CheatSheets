@@ -247,5 +247,6 @@ Use `background-color` when using `background-image`.
   * [Mixins](https://responsivedesign.is/articles/helpful-sass-mixins)
 * **SCSS**
   * Prefixing `.elem { &-sub {} }` equals `.elem {}` + `.elem-sub {}`
-* **Tailwind CSS** = FOSS CSS framework providing a list of composable utility classes (eg _flex_, _pt-4_, _text-center_ and _rotate-90_)
+* **Tailwind CSS** = FOSS CSS framework providing a list of granular single-purpose composable utility classes (eg _flex_, _pt-4_, _text-center_ and _rotate-90_)
   * **daisyUI** = **Tailwind CSS** components library (eg accordions, alerts, avatars, carousel)
+  * `@apply` = gather utility classes under one common larger rule (only use to avoid repetition, not as default use)

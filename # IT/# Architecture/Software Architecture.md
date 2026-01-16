@@ -67,6 +67,9 @@
 
 ### Non-Functional Properties
 
+* **Cohesion** = internal coherence of a unit of code (ie do one well-defined thing)
+* **Coupling** = external dependencies between modules (undesired)
+
 * **Validité** = résoud le problème qu'on voulait
 * **Robustesse** = résiste aux évènements inattendus (eg plante pas si HDD down)
 * **Extensibilité** = faculté d'adaptation à une petite modification du problème

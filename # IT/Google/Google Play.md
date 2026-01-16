@@ -1,7 +1,8 @@
-# [Google Play Console](https://play.google.com/console)
+# Google Play
 
 ## Quick Tips
 
+* [Google Play Console](https://play.google.com/console)
 * To publish via Codemagic:
   * [The very first version of the app must be added to Google Play manually](https://docs.codemagic.io/flutter-publishing/publishing-to-google-play/#setting-up-publishing-to-google-play-on-codemagic)
   * In Google Cloud, create a service account with _Service Account User_ role (which provides an email address), then create a credentials JSON key for that account (which downloads a JSON file)
@@ -13,6 +14,7 @@
 
 ## Glossary
 
+* **Google Play Billing** = service to sell digital products & contents in an Android app (mandatory for all in-app purchases)
 * [Tracks](https://support.google.com/googleplay/android-developer/answer/14151465)
   * **Internal Testing** = optional phase for dev team to quickly test Play Store features (up to 100 users), no human review necessary
     * Link is (well hidden) in _Test and publish_ > _Tests_ > _Internal tests_ > _Testers_ tab > **Copy link**
@@ -20,11 +22,3 @@
   * **Open Testing** = publish so anyone can test (à la open beta version, available when production access is obtained)
   * **Production** = publish to billions
   * An app in Internal & Closed Testing track cannot be found in Play Store and can be accessed via a Play Store dedicated link
-
-## TODO
-
-* <olivia.guell@gmail.com>
-
-* [Interne](https://play.google.com/apps/internaltest/4701580164914687737)
-* [Fermé (Android)](https://play.google.com/store/apps/details?id=be.kalex.timewalk)
-* [Fermé (Web)](https://play.google.com/apps/testing/be.kalex.timewalk)

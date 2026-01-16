@@ -116,6 +116,8 @@
 
 ### Editors/IDEs
 
+* **Language Server Protocol** (LSP) = enables extraction of language-specific synctactic/refactoring capabilities from IDE itself into a separate server, letting 3rd parties implement those services
+
 * **Atom** = (discontinued) FOSS cross-platform text/code editor
 * **Brackets** = open-source editor for web developers/designers/students with live previews & attributes autocompletion (superseded by **Phoenix Code**)
 * **ConTEXT** = text editor (_discontinued_)

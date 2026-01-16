@@ -57,8 +57,8 @@ The same Dart code can run on multiple platforms (eg mobile/desktop via Flutter,
   * `--(no-)pub` = runs or not `pub get` after project has been created (default on)
   * `--template` = _cli_, _console_ (default), _package_, _server-shelf_, _web_
 * `dart fix` = automatically applies fixes for issues such as:
-  * those revealed by the static analyzer that have an associated automated solution
-  * depreciated APIs that can be auto-migrated to their newest counterpart
+  * Those revealed by the static analyzer that have an associated automated solution
+  * Deprecated APIs that can be auto-migrated to their newest counterpart
   * `dart fix --apply` = auto-applies suggested fixes in bulk
   * `dart fix --dry-run` = preview all suggested auto-fixes
 * `dart format` = code auto-tidy

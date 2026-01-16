@@ -1,6 +1,6 @@
 # Docker
 
-Docker is an open-source virtualization/containerization tool to package, deploy & run applications, making them easily deployable/testable.
+Docker is an open-source virtualization/containerization tool (written in Go) to package, deploy & run applications, making them easily deployable/testable.
 Docker essentially provides an isolated & portable environment as a minimal package, that is easily rebootable from scratch.
 Unlike a virtual machine that virtualizes hardware (to install a real guest OS), Docker virtualizes OS kernels (to install real images).
 
@@ -15,6 +15,7 @@ On Windows, two types of containers are possible: Linux containers (via a Linux 
 * Base images and image layers are only stored once and can get referenced many times, and also get cached during build process to speed up subsequent builds
 * [Docker Hub](https://hub.docker.com)
 * [Get started](https://docs.docker.com/get-started)
+  * [What is Docker?](https://docs.docker.com/get-started/docker-overview)
 * [TechWorld with Nana: Docker Crash Course for Absolute Beginners [NEW]](https://www.youtube.com/watch?v=pg19Z8LL06w)
 
 ## Glossary
@@ -35,7 +36,7 @@ On Windows, two types of containers are possible: Linux containers (via a Linux 
 * **Docker Daemon** = heavy lifting heart of Docker, a service inside of which containers are built/run/distributed
 * **Docker Desktop** = Windows/macOS/Linux application including Docker Engine, Docker CLI, Docker Compose, a Kubernetes cluster
 * **Docker Engine** = Docker Daemon (`dockerd`) + REST API + Docker CLI client
-* **Docker Hub** = public registry/repository/marketplace of images (à la .NET nuget) where Docker will look for images by default
+* **Docker Hub** = public registry/repository/marketplace of existing images (à la .NET nuget.org) where Docker will look for images by default, and also a private repository for personal images
 * **Docker Toolbox** = legacy Windows/Mac solution for older systems that do not meet requirements (packs _Oracle VM VirtualBox_)
 * **Dockerfile** = step-by-step text recipe/blueprint/script to **build** a single final image, usually referencing a base image as its first statement
   * **Multi-Stage Build** = a dockerfile that has multiple stages, only one of which can be chosen as final image during a build (others are discarded, no two independent images from a single build)
@@ -46,7 +47,7 @@ On Windows, two types of containers are possible: Linux containers (via a Linux 
   * Images are stored as layered filesystem snapshots (shareable between images) + metadata (ie environment variables, entrypoint, command, ports), and only necessitate storage for successive deltas from base image
 * **Open Container Initiative** (OCI) = industry effort to standardize container format & execution
 * **Registry** = Docker images hosted store service, can be private (on-premises or cloud eg Azure Container Registry) or public (eg **Docker Hub**)
-* **Repository** = named collection of images related to a particular application/microservice/project in order to store/manage/share them publicliy or privately
+* **Repository** = named collection of images related to a particular application/microservice/project in order to store/manage/share them publicliy or privately (à la Git repository)
 * **Tag** = custom label used to identify specific platform (OS) and version (eg .NET version) of an image (eg when several of those are available, à la Git tags)
   * _latest_ = special tag that is used as default when none is explicitly specified
 * **Volumes** = abstracts away filesystem paths & host details, an mapped area of host filesystem where containers can write/persist information
@@ -74,16 +75,19 @@ On Windows, two types of containers are possible: Linux containers (via a Linux 
 * `docker build ({options}) {dockerfile_folder}` = builds an image from Dockerfile
   * `-f {dockerfile_name}` = explicit Dockerfile name (instead of default _Dockerfile_)
   * `-t(ag) {image(:tag)}`
+* `docker image {command}` = manage images (`build`, `history`, `import`, `inspect`, `load`, `ls`, `prune`, `pull`, `push`, `rm` remove one or more, `save`, `tag` create a tag)
 * `docker images` = lists local images (`-a` includes intermediary images)
 * `docker info` = display setup information (where images reside, etc.)
 * `docker logs {container_id|container_name}` = view logs of a container (especially useful for backgrounded ones since they are not displayed in terminal)
 * `docker ps` = lists running containers (`-a` includes stopped containers)
 * `docker pull {image(:tag)}` = download image from registry (_latest_ tag by default), implied when running a image not present locally
-* `docker run {image(:tag)}` = creates a container based on a (local or remote eg Docker Hub) image, creating a new container from image each time
+* `docker push {username}/{image}` = push to registry
+* `docker run {image(:tag)} ({command})` = creates a container based on a (local or remote eg Docker Hub) image, creating a new container from image each time
   * `-d(etach)` = run in background
-  * `-it` = standard input/output
+  * `-i` = interactive mode
   * `-p {host_port}:{container_port}` = binds host port & container port (exposes container to local network, usually same port both on host & container)
   * `-rm` = deletes container once program is finished (exited signal received)
+  * `-t` = allocate a pseudo-TTY (plugs container to current terminal)
   * `--name {container_name}` = provide an explicit name for container (in place of defaultly generated one)
   * Runtime parameters can be provided, so a same image can actually generate different containers
 * `docker rm {name|id}` = inversely, the following command deletes a container

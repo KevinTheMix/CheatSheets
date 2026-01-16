@@ -83,9 +83,10 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * **Tag** = reference to a specific commit in the history (generally for significant milestones or release; note that tags can have the same name as a branch)
   * **Lightweight Tag** = simple references to specific commits
   * **Annotated Tag** = full Git object with a name & metadata (message, creation date, tagger's info ie name/email/timestamp)
-* **Trunk-based development** = branch workflow tailored for CI/CD, advocating short-lived feature branches with few small commits, and a clean always latest _main_ (vouched for by CI pipeline)
+* **Trunk-Based Development** = branch workflow tailored for CI/CD, advocating short-lived feature branches with few small commits, and a clean always latest _main_ (vouched for by CI pipeline)
 * **Upstream** = on platforms (like GitHub or GitLab), this is the original repo from which a project was forked
-* **Work(ing) tree** (aka **Working Directory**) = a directory where the (project) files reside and where changes are made (note: may also contain untracked files)
+* **Work(ing) Tree** (aka **Working Directory**) = a directory where the (project) files reside and where changes are made (note: may also contain untracked files)
+* **Worktree** = mechanism that allows a single same repository (hence with a shared history) to be checked out as multiple parallel separate working directories at same time, each attached to possibly a different branch
 
 ## API/CLI
 
@@ -112,6 +113,11 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 
 ### Info/Logging
 
+* `git bisect` = binary search commit (ie start a session by indicating which earlier commit was bad and which one is good and bisect checks out middle commit)
+  * `start` = start
+  * `good/bad` = indicate if current commit
+  * `reset` = returns to original state
+  * `run ./script.sh` = automate by letting script determine good/bad automatically
 * `git blame`
 * `git diff (--staged)`= shows (un)staged changes in tracked files (`Page Down` to scroll down, `q` to exit)
 * `git diff {a} {b}` = shows difference between two git states (eg files, commits, local branches, local branch vs remote branch)

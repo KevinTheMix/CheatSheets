@@ -260,6 +260,8 @@ s1[s2]          # The first occurence of s2 in s1
 /pattern/.match(s)  # Returns a MatchData object
 ```
 
+* `.tr(pattern, replacement)` = string substitution (pattern is character class, à la Unix)
+
 ### Array
 
 ```Ruby
