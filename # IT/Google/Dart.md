@@ -127,6 +127,7 @@ The same Dart code can run on multiple platforms (eg mobile/desktop via Flutter,
   * `clamp(lower, upper)` = returns a num set between a range
   * `pow(base, exponent)` = exponent (requires _dart:math_ package)
   * `0.12e³` (ie `0.12 x 10³`) = scientific notation, actual _runtimeType_ depends on expression result (_int_ or _double_ whether has floating part)
+  * `.abs()` = absolute value
 * **int**
   * `i.isOdd`, `i.isEven`
   * `i.toRadixString(base)` = convert to a string in that int radix (typically a multiple of two)

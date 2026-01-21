@@ -132,6 +132,7 @@ See <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statement
 * **Handlebars.js** = string templating (à la `String.Format`) engine library
 * **HTMX** = HTML-augmenting (JavaScript) UI library (providing access to AJAX, CSS transitions, WebSockets, Server-sent events, form validation)
 * [Intence](https://github.com/asvd/intence) = scroll-aware minimap as a scrollbar replacement
+* [jq](https://jqlang.org) = lightweight command-line JSON processor
 * **JSFuck** = esoteric/educational programming style based on atomic parts of JavaScripts, uses only six different characters to write/execute code (`[]()!+`)
 * **JSX** (JavaScript XML, formally JavaScript Syntax eXtension) = syntactic sugar enabling creation of DOM trees via XML-like syntax, transpiled to nested JS functions, initially created by Facebook for React
 * **Knockout** = library for building dynamic UIs using MvvM

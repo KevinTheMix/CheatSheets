@@ -10,11 +10,14 @@
 
 ## Glossary
 
+* **Context Rot** = when answer quality decreases as context window enlarges
+* **Context Windows** = total information exchanges from start of discussion with LLM (both questions & responses), which is re-sent in full for each new request
 * **Fine-Tuning** = embeds knowledge & behavioral patterns directly into model's weights through additional training on domain-specific data, changing model persistently (expensive, less flexible)
 * **Function Calling** (aka Tool Calling) = lets OpenAI models interface with external systems & access data outside their training data, using a JSON schema to define available tools
-* **GPT** (Generative Pre-trained Transformer) = deep learning generative large language model created by OpenAI that can process complex questions and even generate websites
+* **GPT** (Generative Pre-trained Transformer) = deep learning generative large language model created by OpenAI that can process complex questions & generate text/code
 
 ### Tools
 
 * **AutoGPT** = open-source agent orchestration agent that attempts to achieve a goal specified by a user in natural language (eg ChaosGPT to destroy humanity)
 * **Perplexity** = AI-powered web search/answer angine (added as an option in Firefox search bar)
+* _Whisper Flow_ = AI-powered voice dictation

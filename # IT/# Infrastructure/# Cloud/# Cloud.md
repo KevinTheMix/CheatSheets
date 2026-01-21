@@ -31,7 +31,7 @@
   * When components are duplicated for redundancy, SLA formula becomes a logical _OR_ `100% - (unavailability S1 * unavailability S2)`
 * **Shared Responsibility Model** = splitting upkeep responsabilities between cloud provider (eg physical security, power, cooling, network connectivity) & customer (data itself & its accesses)
 * **Stock Keeping Unit** (SKU) = inventory management unique reference (eg an ID or barcode) common to identical items
-* **Lift & Shift** (aka Rehosting) = migrate an existing application & surrounding environment (storage, PS) as-is from one environment to another (eg send local VM to cloud)
+* **Lift & Shift** (aka Rehosting) = migrate an existing application & surrounding environment (storage) as-is from one environment to another (eg send local VM to cloud)
 * **VPS** (Virtual Private Server) = VM as a service (either IaaS but with fixed resources or Paas) by Internet hosting company simulating a dedicated physical server environment but actually shared with other users
 * Characteristics
   * **HA/DR** = High Availability / Disaster Recovery
@@ -72,6 +72,7 @@
   * **Elastic Compute Cloud** (EC2) = IaaS (virtual machines)
   * **Simple Storage Service** (S3) = objet storage via web services
 * Apache
+  * **Mesos** = open-source project to manage computer clusters (developed at UC Berkeley)
   * **Spark** = leading technology for big data analytics & transformation
   * **Storm** = cross-platform distributed & fault-tolerant realtime stream processing computation framework
   * **Hadoop** = collection of open-source software utilities for reliable/scalable distributed computing, a software framework for distributed storage & processing of bid data using MapReduce

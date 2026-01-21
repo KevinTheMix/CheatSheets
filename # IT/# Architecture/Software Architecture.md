@@ -6,7 +6,7 @@
 
 * **4+1** = view model describing architecture of software-intensive systems using mutliple shareholders viewpoints
 * **Application Lifecycle Management** (ALM) = end-to-end product lifecycle management (governance, development, maintenance) of computer programs (ie requirements, architecture, programming/testing, maintenance, changes, CI)
-* **Backend For Frontend** (BFF) = dedicated backend service for each type of client interface (eg one for mobile, web, smartwatch app, etc) to combat inefficiency of one-size-fits-all
+* **Backend For Frontend** (BFF) = dedicated backend service for each type of client interface (eg mobile/web/smartwatch/etc) to combat one-size-fits-all inefficiency or manage app secrets
 * **Barrel Files** = a file that does nothing but re-export things from other files
   * [TkDodo - Please Stop Using Barrel Files](https://tkdodo.eu/blog/please-stop-using-barrel-files)
 * **Bottlenecks** = system part that degrades the entire system's performance when congested
@@ -67,7 +67,7 @@
 
 ### Non-Functional Properties
 
-* **Cohesion** = internal coherence of a unit of code (ie do one well-defined thing)
+* **Cohesion** = internal coherence of a unit of code (ie do one well-defined thing with clear boundaries => no spaghetti code)
 * **Coupling** = external dependencies between modules (undesired)
 
 * **Validité** = résoud le problème qu'on voulait

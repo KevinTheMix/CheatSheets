@@ -24,6 +24,7 @@ Azure provides more than 100 services that enable you to do everything from runn
   * **Test Plans** = manual/exploratory testing
 * **Azure DevTest Labs** (PaaS) = unified service sandbox environment for developers/testers to provision/run/deallocate/delete self-managed VMs to try different configs, ruled by admin policies
 * **Azure Event Grid** = fully managed serverless publishers topics to subscribers message routing service, for event-based & near-realtime applications, able to react to Azure services events (eg a VM was created)
+* **Azure Service Fabric** = distributed systems plartform to package/deploy/manage scalable reliable microservices & containers
 * **Azure Logic App** (PaaS) = serverless enterprise integration service for orchestration of business processes & applications workflowcharts via a no-code visual GUI (à la Zapier), with I/Os connectors (eg storage, web, e-mails)
 * **Azure Notification Hub** = push notifications
 * **Azure Resource Manager** (ARM) = shared layer for all Azure UIs (portal, REST, PowerShell, CLI, SDKs eg C#) to manage resources
@@ -202,7 +203,7 @@ Azure provides more than 100 services that enable you to do everything from runn
 * **Locks** = prevent accidental deletion and/or modification by locking down resource/group/subscription-scoped configuration (à la Unix `chattr ±i`) so that even owner cannot perform certain operations, in conjunction with RBAC
   * Only Owner & User Access Administrator built-in roles can manage locks
 * **Managed Identity** = application account tied to a specific service
-* **Microsoft Entra** = family of identity & network access products, let organizations implement Zero Trust security strategy, and verify/validate/check identity & permissions
+* **Microsoft Entra** = family of identity & network access products, let organizations implement Zero Trust security strategy, and verify/validate/check identity & permissions, OAuth/OIDC
 * **Role-Based Access Control** (RBAC) = authorization system built on Azure Resource Manager, designed for fine-grained access management of resources
 * **Role** = collection of actions that assigned identities will be able to perform (ie Microsoft default or custom named permissions, eg _DB Admin_ role can create/update a DB)
 * **Role Assignment** = combination of role definition + security principal + scope

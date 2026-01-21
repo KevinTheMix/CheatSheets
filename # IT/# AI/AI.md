@@ -15,6 +15,8 @@
   * **Deep neural network** (DNN) = an artificial neural network with multiple layers between the I/O layers
 * **Feature Learning** (aka Representation Learning) = techniques for feature detection or classification of raw data
 * **Genetic Algorithm** (GA) = do the evolution baby (eg **NEAT** (_NeuroEvolution of Augmenting Topologies_))
+  * Eg [HTML5 Genetic Cars 2](https://rednuht.org/genetic_cars_2)
+  * Eg [CodinGame Pod Racing](https://files.magusgeek.com/csb/csb_en.html)
 * [ImageNet](http://www.image-net.org) = image DB organized according to WordNet hierarchy
 * **Machine Learning** (ML) = field of study of AI studying statistical algorithms to learn from existing data then generalize to new data to complete tasks without explicit instructions
 * **Neural Network** (NN) or **Artificial Neural Network** (ANN) = branch of ML built on biological (brain) neural organization (ie in/out with math in middle)
@@ -25,6 +27,7 @@
 * **Unsupervised learning** = learns from unlabeled/untagged data, through mimicry like people
 * [WordNet](https://wordnet.princeton.edu) = large English lexical DB (of nouns/verbs/adjectives/adverbs)
 
+* _Label4.ai_ = deepfake detection (audio/image/video/documents) tool by a French company
 * _DeepMind_ = British AI company acquired by Google
 * _JupyterLab_ = notebooks, code & data with a flexible interface
 * _Jupyter Notebook_ = online shared inlined analysis/reporting scripting supporting a variety of programming languages

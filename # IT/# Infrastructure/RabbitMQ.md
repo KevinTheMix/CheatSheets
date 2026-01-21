@@ -1,14 +1,13 @@
 # RabbitMQ
 
-RabbitMQ is a message broker/distribution middleware (implementing AMQP), that is used to soften ties between applications.
-It provides applications with features such as broadcasting, programmable routing and message persistence.
-It is written in Erlang as an open-source implementation of the AQMP protocol.
+RabbitMQ is a open-source message broker/distribution middleware implementing AMQP and written in Erlang.
+It soften ties between applications & provides applications with features such as broadcasting/programmable routing/message persistence.
 
 * _Programmable network_ protocol, which means message routing configuration (exchanges, queues, bindings) can be created (or _declared_) by client nodes  (publisher or consumer) themselves, not just via centralized administration
 * Besides, those declarations are _idempotent_: they can be declared multiple times without side-effects (_created once_)
-* Therefore the applications themselves can declare all the AMQP entities and routing schemes they need
-* Therefore a single entity can validly be declared multiple times at different locations (nodes), as long as the same parameters are provided in its creation
-* Beware though of configuration conflicts between different applications, e.g. declaring the same exchange/queue with different parameters
+* Therefore applications themselves can declare all AMQP entities & routing schemes they need
+* Therefore a single entity can validly be declared multiple times at different locations (nodes), as long as same parameters are provided in its creation
+* Beware though of configuration conflicts between different applications, eg declaring the same exchange/queue with different parameters
 
 ## Glossary
 
@@ -17,6 +16,7 @@ It is written in Erlang as an open-source implementation of the AQMP protocol.
   * Automatic Acknowledgement = Messages are removed from their Queue as soon as they are consumed
   * Explicit Acknowledgement = An Ack must be manually sent to the broker in order for the message to be removed from its Queue
   * Negative Acknowledgement = Allows to reject messages, and can also requeue them
+* **Advanced Message Queuing Protocol** (AMQP) = open standard application layer protocol for message-oriented middleware (message orientation, queuing, routing, reliability & security)
 * **Binding** = named link between an Exchange and a Queue
   * Its name constitutes a Routing Key, part of the routing configuration to deliver Messages to the appropriate Queues
   * A Binding is necessary for any Queue to receive any Messages, but the routing key it specifies may be disregarded by some Exchange types (i.e. fanout)
@@ -32,7 +32,7 @@ It is written in Erlang as an open-source implementation of the AQMP protocol.
       * There always exists a default, anonymous, Direct Exchange (see below)
     * _fanout_ = Broadcast a Message to all its bound queues (ignores routing keys)
     * _topic_ = Distributes a Message to all Queues whose binding pattern-matches the routing key of the Message Used for multicast.
-      * Similar to a _direct_ Exchange but with wildcards: `*` for exactly one word, `#` for 0 or more words e.g. `*.fox.#` matches _gray.fox.eating.in.the.winter_
+      * Similar to a _direct_ Exchange but with wildcards: `*` for exactly one word, `#` for 0 or more words eg `*.fox.#` matches _gray.fox.eating.in.the.winter_
       * If the binding of the Queue consists solely of `#`, it will receive all the messages transiting through the Exchange, just like a _fanout_ Exchange
       * If the binding of the Queue contains no wildcard, it will behave like a _direct_ Exchange
     * _header_ = Analyze the properties (Headers) within a message to determine its destination, ignoring its routing key

@@ -13,7 +13,7 @@
 
 * _.aab_ (Android App Bundle) = device-agnostic distribution (but not installation) package format containing compiled code & resources
   * Used by Play Stores to eventually generate/distribute (smaller) optimized device-specific APK files (not itself executable)
-* _.apk_ (Android Package Kit) = app installation file as a compressed archive (its content can be un-zipped) containing compiled code, resources & manifest
+* _.apk_ (Android Package Kit) = app installation file as a compressed ZIP archive (its content can be un-zipped) containing compiled code, resources & manifest (& signature if signed)
   * Can be ABI/CPU/device-specific (as in `flutter run --release` or when downloaded from app store) or universal (Codemagic with multiple ABIs)
 * [Activities](https://developer.android.com/guide/components/activities/intro-activities) = one app's entry point, declared/defined in _AndroidManifest.xml_
 * **Android** = open-source OS based on Linux, supported by many different manufacturer's devices
@@ -51,6 +51,8 @@
   * Ie checks the device is not rooted & bootloader is locked
   * Circumventable via microG DroidGuard Helper
 * **Sideloading** = installing an image onto the phone directly from a file located on the PC
+* **Signing** = associates a signature with _.apk_ file, which ensures app identity (requires private key), integrity (untampered), compatibility (can update same version), trust between apps from same developer (can exchange data)
+  * Also packs a self-signed certificate (ie not validation by any CA) acting as a simple keystore for associated public key, so no CA-based trust chain as we only need make sure it corresponds to original upload (TOFU)
 * **Vendor image** = image containing device-specific drivers for controlling GPS, gyro, proximity & co
 
 ### Tools

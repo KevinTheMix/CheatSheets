@@ -80,6 +80,7 @@
 * `bin(n)` = binary
 * `hex(n)` = hexadecimal
 * `oct(n)` = octal
+* `round(n, digits)`
 
 ### Strings
 
@@ -95,15 +96,17 @@ Strings are list of (1-char long) strings.
 * `str({n})` = convert to string
 * `f"{variable}"` = interpolation (using curly braces)
 * `{separator}.join({list})` = concatenate (eg `', '.join(['a', 'b', 'c'])` gives _a, b, c_)
-* `"{:10.4f}".format({n})`
+* `"{pattern}".format({n})` = format using pattern (eg _:10.4f_ for float or _:02X_ for hexadecimal)
 * `.count({needle})` = number of occurences of needles in string
 * `.isalpha()` = True if text represents text
 * `.isdigit()` = True if text represents a number
 * `.replace(from,to(,max))` = replace all (or max) occurrences of a substring wit another
-* `.split((separator))` = split (default separator are whitespaces chars)
+* `.split(({separator}))` = split (default separator is whitespace chars)
 * `.strip({characters})` = trim whitespaces (or any provided characters)
 * `.translate(translation_table)` = replace multiple characters in a string using a translation table
   * `str.maketrans({dic})` = creates a translation table from a dictionary (eg `{'o': 'O', 't': 'T'}`)
+* `.lower()`
+* `.upper()`
 
 ### Flow
 
@@ -126,6 +129,7 @@ Strings are list of (1-char long) strings.
 * `next(iterator)` = retrieve next item from iterator (eg `next(iter(dic))` first dic key)
 * `enumerate({collection})` = adds a counter to collection loop (eg `for i, name in enumerate({list})`)
 * `{needle} in {haystack}` = find in collection (works for strings, à la C# `Contains()`)
+* `print(*t)` = print space-separated items
 
 #### Lists
 

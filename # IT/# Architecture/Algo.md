@@ -37,8 +37,8 @@
   * **Damerau-Levenshtein distance** = Levenshtein distance + substitutions & transpositions (aka permutations)
 * **Memoization** = optimization technique that stores result of expensive function calls to produce same outputs for same future inputs
 * **Monte Carlo Method** = empiric randomness backdoor into a problem to approximate a solution, leveraging law of large numbers stating average converges to true value
-  * Eg generate random points in a (2x2) square, and check which ones fall within (1 unit-long radius) circle within it to approximate π/4
-  * Related to **resampling** (also relying on random sampling to approximate) = create new sets from a fixed sample set (by cloning elements, removing them, etc)
+  * Eg generate random points in a (2x2) square, and tally ones that fall within (1 unit-long radius) circle within it to approximate π/4 (circle area / square area)
+  * Related to **resampling** (also relying on random sampling to approximate) = create new sets from a fixed sample set (by cloning/removing/etc elements)
 * **Quine** = program that takes no input and produces a copy of its own source code as only output (eg TiddlyWiki)
 * **Rope** = binary tree data structure used to store longer strings as smaller linked ones (eg used by text editors)
 * **Sort**

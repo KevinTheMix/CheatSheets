@@ -57,14 +57,15 @@ Technically, any outer layer that mediates between a user and a kernel's service
 
 * `[[` = (Bash extension) enhanced conditional expression (eg `if [[ $answer == 'y' ]]; then … fi`)
 * `if` & `elif` (followed with `then`, ends with `if`) = uses exit status of `[` (_0_ means success, non-zero means failure)
-* `for`, `while`, `until`, `do`, `done` = loops
-  * `for {var} in {values}; do …; done` = for loop
+* Loops (end `do` with semi-colon if one-liner)
+  * `for {var} in {values}; do …(;) done` = for loop
     * Values eg `1 2 3 4 5` explicit, `{from..to(..step)}` range, `this is a sequence of words`, `$(cat {file})` file content
     * Eg `for f in * .[!.]* ..?*; do … done` = loop on entries in a directory, excluding current (_._) & parent (_.._)
     * `.[!.]*` = all names starting with a single dot following by a char that is not a dot (then some stuff)
     * `..?*` = all names starting with two dots and at least one character (then some stuff)
-  * `until [ {condition} ]; do … done` = runs until condition becomes true
-  * `while [ {condition} ]; do … done` = runs while condition is true
+  * `until [ {condition} ]; do …(;) done` = runs until condition becomes true (spaces in brackets are mandatory)
+  * `while [ {condition} ]; do …(;) done` = runs while condition is true (spaces in brackets are mandatory)
+    * `while :;` is equivalente to `while true;` (as `:` is a built-in command that does nothing & always return success exit status _0_)
 * `case {expression} in 1) …;; 2) …;; esac` = multi-branch conditional
 * `function` = declares a function
 * `select` = menu-based loop (Bash only)
@@ -104,6 +105,7 @@ Technically, any outer layer that mediates between a user and a kernel's service
 * `readonly` = makes variables read-only
 * `return` = return from a shell function
 * `set ({option})` = display variables & functions, or set shell option/positional parameter (ie _$1_, _$2_, _$#_, _$@_, _$*_)
+  * `-e` = exit immediately if any command returns a non-zero exit status
 * `shift ({#})` = shift positional parameters (1 by default, eg `shift 1` translates _$3/$2_ to _$2/$1_)
 * `shopt ({options})` = display all (or specified) shell options (`-s/-u` to set/unset provided shell option(s))
   * _cdspell_ = automatically fixes `cd {folder}` spelling mistakes
@@ -132,6 +134,7 @@ Technically, any outer layer that mediates between a user and a kernel's service
 
 * `var={value}` (no spaces) = defines a variable (not inherited by children unless exported via `export var(={value})` or configured in _~/.bashrc_)
 * **Parameter Expansion** = string interpolation
+  * _var_ can be a positional parameter (eg `${1:-10}` is first argument or _10_ as default value)
   * `"$var"` or `"${var}"` (but not `'$var'` single quotes, which treats it literally)
   * `${var+override}` = use override only if variable is set (can be empty/null)
   * `${var:+override}` = use override only if variable is set and not empty/null

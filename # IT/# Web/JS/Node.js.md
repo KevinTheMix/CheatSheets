@@ -23,7 +23,7 @@ Both NPM and Webpack (written in JS) are part of Node.js ecosystem and therefore
 * [JSON Placeholder](https://jsonplaceholder.typicode.com) = free fake and reliable API for testing and prototyping
 * [JSON Server](https://github.com/typicode/json-server) = fake REST API (with zero coding, for front-end developers who need a quick back-end for prototyping & mocking)
 * **NestJS** = progressive Node.js framework for building efficient, reliable, scalable server-side (backend) applications
-* **Next.js** = _React_-based open-source web development framework for server-side (universal App-to-plain-HTML on the server side instead of the client) rendering & static website generation (by _Vercel_)
+* **Next.js** (by _Vercel_) = _React_-based open-source web development framework for SSR & SSG (also has PWA plugin)
 * **Playwright** = Node.js library for headless Chromium, Firefox & WebKit automation
 * **Proton Native** = create desktop applications (ie like **Electron**) using React (Native) syntax, with Hot reload
 * **Puppeteer** = Node.js library for headless Chrome/ium automation over DevTools Protocol, providing high-level API control (eg browse, screenshot, interact, macro/automate)

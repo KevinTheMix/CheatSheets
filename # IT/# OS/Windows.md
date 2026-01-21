@@ -21,6 +21,7 @@
 * **Encrypting File System** (EFS) = NTFS 3.0 feature providing FS-level encryption to specific files/folders (using user username/password, while OS is running, in file/folder Properties > (Attributes:) Advanced)
 * **Hyper-V** = native hypervisor for (Windows 8+, Pro & Enterprise editions), which can create VMs (eg required to run Linux Containers)
   * Hyper-V containers don't share host OS kernel, they each run in its own separated (optimized) VM (kernel), providing better isolation
+* **Integrated Windows Authentication** (IWA) = authentication method that uses logged-in user's domain credentials (Kerberos/NTLM) for silent SSO into apps (eg user must not re-login into WPF app)
 * **Microsoft Copilot** = Windows-integrated LLM based on OpenAI GPT-4/5 developed by Microsoft AI, replacing discontinued Cortana
 * **Microsoft Defender** (aka **Windows Defender**) = replaces Microsoft Security Essentials from Win 8
 * **MSMQ** (Microsoft Message Queuing) = native message queueing (between applications/machines) system (uses disk-backed queues for durability, mostly considered legacy)
