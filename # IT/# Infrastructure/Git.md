@@ -29,6 +29,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * **Cache** = another term for the staging area
 * **Cherry picking** = applying specific commit(s) from one branch onto another without merging full branch history (eg to apply a _main_ fix to an older _release_ branch)
   * Basically re-applies all changes tied to referenced commit(s) as a new commit (with new hash ID) to current branch, forming a new parallel commit history
+  * Even eventual merging works, because even though same logical changes exist in both histories, end result of 3-way merge (common ancestor base + A tip + B tip) is same text so there's no conflict
 * **Cloning** = creating a local repository based on a remote repository, still associated to it (via push/pull commands)
   * **Shallow Cloning** = cloning only a limited portion of the commit history, which reduces the number of objects and improves performance
 * **Commit** = fundamental building blocks of a Git repository recording a snapshot of a project at a specific point in time (saved in local repo DB in `.git/objects/`)
@@ -45,9 +46,9 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * **Fork** = on platforms like GitHub, duplicates an existing repository/project along with its full history towards the user's own account
   * This is typically followed by a cloning (to work locally), pushing changes to (_origin_) remote, and ending with a pull request back to the original (_upstream_) repo
 * **Gitflow** = a Git branching strategy/workflow suited for projects with larger releases cycles (rather abandoned in favor of **Trunk-based development**)
-  * _main_/_master_ branch holds stable, production-ready releases
+  * _main_ aka _master_ branch holds stable, production-ready releases
   * _develop_ branches off _main_ (at very start, ie immediately after initial commmit), living a parallel life ahead of it, always busy integrating & accumulating features
-  * Feature branches branch off _develop_ and are merged back into _develop_ only, never directly to _main_ (features + _develop_ = basically Feature Branch Workflow)
+  * Feature branches branch off _develop_ and are merged back into _develop_ only, never directly to _main_ (_develop_ + features = basically Feature Branch Workflow)
   * A dedicated _release_ branch is created from _develop_ once enough features have accumulated in it, which can receive bug fixes or release-oriented changes
   * Once finalized, _release_ is merged into both _main_ (tagged) and _develop_ (to integrate latest bugfixes & releases changes), then deleted
   * _hotfix_ branches can be created off _main_ for quick production patches, they are merged into both _main_ and _develop_ (or the current _release_)
@@ -62,8 +63,8 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * **Origin** = default name (and alias for a URL) given to remote repository from which a local repo was cloned (and will eventually be pushed)
   * Multiple other remotes can be added to a same (local) repo, each with a different name (eg `upstream`, `github`, `bitbucket`)
 * **Pull Request** = on collaborative platforms (eg GitHub, Azure DevOps), a formal proposal to merge changes into a codebase
-* **Rebasing** = modifies the commit history of a branch to maintain a cleaner, more linear project history ("I want my branch to start from this commit instead")
-  * A typical use case is when working on a feature branch, switching to main, pulling latest remote changes from origin, then rebasing the feature branch from the updated main to integrate those latest changes
+* **Rebasing** = modifies commit history (ie creates new commits) of a branch to maintain a cleaner, more linear project history ("I want my branch to start from this commit instead")
+  * A typical use case is when working on a feature branch, switching to main, pulling latest remote changes from origin, then rebasing feature branch from updated main to integrate those latest changes
   * Don't rebase commits that have already been pushed to shared repo (use merging instead); rebase only local/unshared branches
 * **Repository** = a regular folder augmented into a self-contained version-controlled directory that tracks changes to (some/all of its) files over time
 * **Reference** (or just **ref(s)**) = label/pointer to specific commits (ie aliases for commit hashes), saved as files (in the `.git/refs/` directory)

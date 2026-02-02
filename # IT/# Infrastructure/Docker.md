@@ -5,12 +5,13 @@ Docker essentially provides an isolated & portable environment as a minimal pack
 Unlike a virtual machine that virtualizes hardware (to install a real guest OS), Docker virtualizes OS kernels (to install real images).
 
 Docker originated as a Linux technology, whose kernel is highly stable & backward compatible (stable syscall ABI), leading to very portable containers.
+Docker uses resource isolation features of Linux kernel such as cgroups & kernel namespaces, and a union-capable file system such as OverlayFS and others to allow independent containers to run within a single Linux instance
 macOS and Windows use a Linux VM under Docker Desktop.
 On Windows, container types are either cross-platform portable Linux (a Linux VM via _WSL 2_) or Windows(Server)-only (eg _nanoserver_/_windowsservercore_, low compatibility even between Windows 10/11)
 
 ## Quick Tips
 
-* Use `wsl --shutdown` to kill RAM-hungry _Vmmmwsl_ process
+* Use `wsl --shutdown` to kill RAM-hungry _Vmmmwsl_ process (first stop Docker Desktop in system tray)
 * Docker itself downloads base images, but not all other dependencies (that is done via commands within Dockerfile eg `npm install`)
 * Containers share host kernel, so they require a compatible OS (note that [all Linux distros share same Linux kernel](https://askubuntu.com/a/172932))
 * (Base) images layers are only stored once then referenced many times (in a read-only fashion by containers, virtualized as if they belonged to their FS), and also get cached during build process to speed up subsequent builds
@@ -24,7 +25,8 @@ On Windows, container types are either cross-platform portable Linux (a Linux VM
 * **Base Image** = a regular image designated in `FROM` directive in Dockerfile, defining starting point of build on which additional layers are added
   * Base images are pre-built (meaning we don't need to make them from a Dockerfile, they're tarballs, ie readymade filesystem layer archives artifacts) custom, community or vendor-made images
   * Base images provide userspaces but not OS kernels, as that is provided by host OS (or guest kernel in case of intermediary VM)
-* **Bind Mounts** = mount host filesystem path directly into a container, managed outside Docker, implemented via host OS filesystem (access to sensitive OS folder may create security risk)
+* **Bind Mounts** = mounts into container a specific file/directory path from host machine (useful for workflows where live code changes must be reflected in container, but create host directory structure dependency)
+* **Build Context** = folder path specified during build whose contents are accessible to Dockerfile instructions (eg `COPY`); paths in those instructions are relative to this context
 * **Compose** = a higher-level client to run a multi-service application (consisting of a set of images ie containers eg a backend & a frontend) from a single declarative YAML file
   * A single (`docker compose`) command creates/coordinates several containers on host
   * Unlike Kubernetes, this is not scaling-oriented cluster-level orchestration, merely a declarative setup to run interacting services in parallel (à la Visual Studio Debug multiple projects)
@@ -51,13 +53,16 @@ On Windows, container types are either cross-platform portable Linux (a Linux VM
   * An image is a static representation of an app or service along with its configuration & dependencies (runtime, services, DBs, libraries) and act as a standard unit of deployment
   * Images are stored as layered filesystem snapshots (shareable between images) + metadata (ie environment variables, entrypoint, command, ports), and only necessitate storage for successive deltas from base image
   * Using a graphics editor analogy, a built Docker image is truly stored as separate layers and not the resulting composite graphical image (that is only achieved when running a container)
+* **Image Layer** = read-only file system delta/diff from previous image layer that are either uncompressed (when created or manipulated during execution) or compressed (as a gzipped tag archive) when stored in a registry
+  * When a container writes a new file, it is created in its writable layer, but when modifying an existing file (from an image layer), copy-on-write is performed granularly to obtain only a copy of that file in writable layer
 * **Open Container Initiative** (OCI) = industry effort to standardize container format & execution
 * **Registry** = Docker images hosted store service, can be public (eg **Docker Hub**) or private (on-premises or cloud eg Azure Container Registry or Docker Hub as well)
 * **Repository** = named collection of images related to a particular application/microservice/project in order to store/manage/share them publicliy or privately (à la Git repository)
-* **Storage Driver** = manages images & containers storage as compressed blobs (tar archives) & unpacked directories for each layer, and metadata
+* **Storage Driver** = manages images & containers layers storage, and metadata
 * **Tag** = custom label used to identify specific platform (OS) and version (eg .NET version) of an image (eg when several of those are available, à la Git tags)
   * _latest_ = special tag that is used as default when none is explicitly specified
-* **Volumes** = a mapped area of host filesystem where containers can write/persist information, abstracts away filesystem paths & host details
+* **Volumes** = preferered mechanism for persisting data: a mapped area of host filesystem where containers can write/persist information, abstracts away filesystem paths & host details, can be shared between containers
+* **Writable Container Layer** = thin ephemeral runtime-only writable layer on top of read-only image layers (using copy-on-write when writing to existing files from image)
 
 ### (Docker Hub) Images
 
@@ -80,9 +85,10 @@ On Windows, container types are either cross-platform portable Linux (a Linux VM
 ## API
 
 * `cat {dockerfile_folder} | docker build -t {image_name}`
-* `docker build ({options}) {dockerfile_folder}` = builds an image from Dockerfile (uses specified folder as _build context_, ie will serve as relative path for paths in Dockerfile)
-  * `-f {dockerfile_name}` = explicit Dockerfile name (instead of default _Dockerfile_)
+* `docker build ({options}) {dockerfile_folder}` = builds an image from a Dockerfile where specified folder (eg `.` for current) is used as _build context_ ie will serve as relative path for instructions in Dockerfile
+  * `-f {dockerfile_name|dockerfile_path}` = explicit Dockerfile name (instead of default _Dockerfile_) or path
   * `-t(ag) {image(:tag)}`
+* `docker exec {command}` = runs command inside already running container
 * `docker image {command}` = manage images (`build`, `history`, `import`, `inspect`, `load`, `ls`, `prune`, `pull`, `push`, `rm` remove one or more, `save`, `tag` create a tag)
 * `docker images` = lists local images (`-a` includes intermediary images)
 * `docker info` = display setup information (where images reside, etc.)
@@ -108,12 +114,12 @@ On Windows, container types are either cross-platform portable Linux (a Linux VM
 
 * `FROM {base_image}` = first statement in the Dockerfile; indicate the a base image from the repository (which is _Docker Hub_ by default)
 * `WORKDIR {path}` = set working directory (for all following commands, à la `cd`)
-* `COPY (--from={stage_index|stage_name}) {source(s)} {target}` = copy some files/folders from a previous stage or a host local directory (relative to _build context_) into this stage's filesystem
+* `ADD` = COPY + can extract compressed archives (tar/gzip/etc) automatically and it can fetch files from URLs (don't use unless you need those extra features)
+* `COPY (--from={stage_index|stage_name}) {source(s)} {target}` = copy some files/folders from a previous stage or a host local directory (relative to build context) into a this new image layer's filesystem
 * `SHELL cmd|powershell` = specify which shell/CLI to use when using the RUN command
 * `RUN {command}` = adds layer to initial parent image using commands provided by base image (ie installs stuff eg `npm install`)
-* `CMD {command} ({parameter(s)})` = defines a default command executed when container starts (there can only be one in whole Dockerfile)
+* `CMD {command} ({parameter(s)})` = defines a default command executed when container starts (only last one takes effect)
 * `ENTRYPOINT` = runs a container like an executable
-* `EXEC {command}` = runs a command inside a container
 * `EXPOSE {port}` = expose a port to the world outside the container
 * `ENV {variable} {value}` = define an environment variable
 
@@ -121,3 +127,7 @@ On Windows, container types are either cross-platform portable Linux (a Linux VM
 
 * **Portainer** = a web UI for Docker
 * **Vagrant** (by _Hashicorp_) = (à la Docker)
+
+## TODO
+
+* [Build and push your first image](https://docs.docker.com/get-started/introduction/build-and-push-first-image)

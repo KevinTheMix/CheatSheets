@@ -26,10 +26,12 @@
   * **Resource** = passive read-only data source
   * **Tool** = (JSON) schema-defined function/treatment callable by LLM (eg read/write/grep/search files, DB, code/string manipulation, commands/shell script, code analysis, Git(Hub), web browser, Slack, calendars)
 * **Product Requirement Document** (PRD) = requirements document
-* **Retrieval-Augmented Generation** (RAG) = enables "dumb" retrieval/incorporation of information from external data sources as documents chunked as embeddings indexed in a vector DB
+* **Retrieval-Augmented Generation** (RAG) = enables "dumb" retrieval/incorporation of information from external data sources as documents chunked as embeddings indexed in a vector DB, then passed as context to a LLM
+  * A common example: a company might build a RAG system over their internal documentation, so employees can ask questions and get answers based on actual company policies and procedures rather than generic LLM knowledge
   * Preprocessing depends on data type (text as tokens, image as pixel tensors, audio as spectograms/waveforms) and passed forward through a pretrained neural network model
   * Comparison is then achieved via cosine similarity (most common, compares vector direction more so than size), dot product or Euclidean distance
 * [Skills](https://agentskills.io) = standard (by Anthropic) for reusable on-demand instructions/metadata/resources used automatically when deemed relevant by agent (packed as a discoverable folder/zip containing a _SKILL.md_ file)
+  * Eg Claude: _Reading the docx skill to understand best practices for creating a Word document_
 
 ## Tools
 

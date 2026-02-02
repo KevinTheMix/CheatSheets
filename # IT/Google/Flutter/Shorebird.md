@@ -5,6 +5,7 @@ Pushes small Dart VM-related patches via OTA updates.
 
 ## Quick Tips
 
+* Mostly intended to push quick emergency patches without app store latency
 * Cannot update native changes (ie plugins using platform channels or _pubspec.yaml_)
 * Checks & downloads small delta patches while an app is running, and applies it at its next startup
 * Use [Shorebird Console](https://console.shorebird.dev) to delete a registered application (with all its builds/releases)

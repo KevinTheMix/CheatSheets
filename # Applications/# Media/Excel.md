@@ -66,7 +66,7 @@ Note: shortcuts including numbers require holding `Shift` on EU keyboard as num 
 * `Ctrl + G` or `F5` = Go To (go to _Special…_ allows quick selection of cells on blanks, errors, etc.)
 * `Ctrl + L` or `Ctrl + T` = create table (also in Home > Format as Table, works with a single cell selected)
   * All table references (Charts, formulas, pivot) are automatically updated as the table's data is changed
-  * Strip table style/formatting = _Table Design > table theme (colours) dropdown > Clear_
+  * Strip table style/formatting = _Table Design > Table Styles > (dropdown) > Clear_
   * Remove table = _Table Design > Tools (group) > Convert to Range_ (alternatively Data > _Filter_)
 * `Ctrl + N` = create new book
 * `Ctrl + R` = copy value of left cell

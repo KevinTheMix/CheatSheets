@@ -12,7 +12,10 @@
 ## Glossary
 
 * **Agile** = adaptable, reactive framework promoting teamwork, aimed to combat failed waterfall projects lacking in communication, allegedly beats the alternative
+* **Back-Office** = support business infrastructure (eg accounting, IT, HR, compliance)
 * **Definition of Done** = when a US is considered complete
+* **Key Performance Indicator** (KPI) = concrete/measurable/palpable metric self-chosen by business to measure whether it's meeting its goals
+* **Front-Office** = customer-facing operations & generate revenue (eg sales, marketing, customer service/support, business development)
 * **Product Owner** = responsible for USs
 * **Scrum** = aswers the question "how do we self-organize as a _development_ team?", seems easy on the surface, actually digs deep (social/company/national culture)
 * **Scrum Master** = team helper/support (eg taskboard redactor), shield against outside forces, process > progress

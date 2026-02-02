@@ -1,12 +1,10 @@
-# AI
+# Artificial Intelligence
 
 ## Quick Tips
 
+* Machine Learning doesn't output data, but code
 * [Neural Networks: Zero to Hero](https://karpathy.ai/zero-to-hero.html) by Andrej Karpathy of OpenAI/Tesla fame
 * [Threre's An AI For That](https://theresanaiforthat.com) (TAAFT) = find & compare hundreds of AI tools by features, pricing, etc
-* [Hugging Face](https://huggingface.co) = machine learning models collaborative/sharing platform
-* [Ollama](https://ollama.com) = run llama2 (uncensored) & other models (Mistral)
-* Machine Learning doesn't output data, but code
 
 ## Glossary
 

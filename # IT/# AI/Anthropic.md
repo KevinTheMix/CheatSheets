@@ -4,7 +4,8 @@
 
 * [Claude Skills](https://claude.com/skills)
 * [Docs](https://platform.claude.com/docs/en/intro)
-* [Anthropic Academy](https://anthropic.skilljar.com)
+* [Security](https://code.claude.com/docs/en/security)
+* [Anthropic Academy](https://anthropic.skilljar.com) = courses
 * [Mastering Claude Code in 30 minutes](https://www.youtube.com/watch?v=6eBSHbLKuN0) (Boris Cherny, member of technical staff)
   * Claude Code was designed as a CLI to be future-proof & agnostic of any particular currently popular IDE solution
 * [Awesome Claude subagents](https://github.com/VoltAgent/awesome-claude-code-subagents)
@@ -30,6 +31,9 @@
 
 ## Claude CLI
 
+* `claude` = start interactive session
+  * `\theme` = select a theme
+* `claude --help` = help
 * `claude -p {prompt}`
   * `--allowedTools {tool}` = eg `Bash(git log:*)`
   * `--output-format {format}` = receives response in given format (eg `json`)

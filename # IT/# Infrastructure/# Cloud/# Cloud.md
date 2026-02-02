@@ -15,11 +15,13 @@
 * **Big Data** = field of technology dealing with extraction/processing/analysis of data sets too large or complex for traditional data-processing software
 * **CDN** (Content Distribution Network) = cloud-backed geographically-distributed data provider (eg **CloudFlare**)
 * **Cloud Solution Provider** (CSP) = a provider of cloud services (eg Microsoft) to customers (ie users or organizations)
+* **Cluster Autoscaling** = automatically increase/decrease number of servers in response to load
 * **Consumption-Based Model** = compute/storage/network(-weighted) granular pay-as-you-go
   * Advantages = no upfront costs, use full potential of infrastructure (no wasted resources), pay for more when needed (eg Tomorrowland), stop paying when not needed
 * **Data Center** = facility holding multiple servers, along with power source, cooling & rapid networking capabilities
 * **Disaster** = serious disruption of services caused by natural or human-induced causes
 * **Entreprise Resource Planning** (ERP) = software that runs a company's core internal operations in one place (eg accounting/financing, procurement, inventory/supply chain, manufacturing/operations, orders, reporting/compliance)
+* **FinOps** = combines financial management principles with cloud engineering & operations to provide organizations better understanding of their cloud spending (eg cluster autoscaling, spot pricing, cost attribution)
 * **Functions** = event-driven serverless no-code applications
 * **Massively Parallel (Processing)** = use large number of processors (or separate computers) to simultaneously perform a set of coordinated computations in parallel (eg a GPU)
 * **No-code** = application creation via visual-based GUIs rather than programming, aimed at businesses
@@ -30,6 +32,7 @@
   * **Composite SLA** = combined (ie not per-service) SLA of all components in your application (eg web server + DB), for a _AND_ formula of `availability S1 * availability S2`
   * When components are duplicated for redundancy, SLA formula becomes a logical _OR_ `100% - (unavailability S1 * unavailability S2)`
 * **Shared Responsibility Model** = splitting upkeep responsabilities between cloud provider (eg physical security, power, cooling, network connectivity) & customer (data itself & its accesses)
+* **Spot Pricing** = pay for temporary unused datacenter VMs capacity (ideal for non-critical interruptable workloads) at a significant discount, which can be taken away at any time without notice as Microsoft needs it back
 * **Stock Keeping Unit** (SKU) = inventory management unique reference (eg an ID or barcode) common to identical items
 * **Lift & Shift** (aka Rehosting) = migrate an existing application & surrounding environment (storage) as-is from one environment to another (eg send local VM to cloud)
 * **VPS** (Virtual Private Server) = VM as a service (either IaaS but with fixed resources or Paas) by Internet hosting company simulating a dedicated physical server environment but actually shared with other users

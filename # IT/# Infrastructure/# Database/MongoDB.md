@@ -1,23 +1,47 @@
 # MongoDB
 
-_NoSql_ JSON (rich-)document based DB.
-Compared to a static schema Relational DB, it is polymorphic, which means it can store instances of different shapes.
+NoSql JSON (rich-)document-based DB.
 
-Relational DB: `List<struct>` only.
-Mongo DB: `List<object>`.
+## Quick Tips
 
-A strict schema can be defined for all (which is then similar to relational), none (key-value), or only some attributes of the object in the collection.
+* Compared to a static schema Relational DB, it is polymorphic, which means it can store instances of different shapes (ie relational `List<struct>` vs Mongo `List<object>`)
 
-Example: an e-commerce website such as Amazon has products with common attributes (a name, a price, a quantity, a description) but also various **product-specific** attributes (height, color, voltage, resolution, clothing fit size, etc.).
+## Glossary
 
-There is of course some overhead associated with checking that a new object matches the required schema.
-The schema itself is a JSON schema, and defines if a field must be present, what type of values, etc.
+* **Collection** = a table
+* **Schema** = formal definition of DB structure in JSON that defines if a field must be present, what type of values, etc
+  * Can be defined strictly for all fields in the collection (which is then similar to relational), only some of them, or none (in which case it behaves as a key-value store)
+  * There is of course some overhead associated with checking that a new object matches the required schema
+  * Eg an e-commerce website (eg Amazon) has products with common attributes (name, price, quantity, description) but also various **product-specific** attributes (height, color, voltage, resolution, clothing fit size, etc)
 
-## Architecture
+## CLI
+
+All commands must be run from MongoDB install folder (eg _C:\Program Files\mongodb-2.4.6\bin_)
+
+* `mongod.exe --dbpath <Path to \DATA\ folder>` = start server handling requests (so we can query DB)
+* `mongodump --out <output_directory> [--db <db_to_backup>] [--collection <collection_to_backup>]` = backup
+* `mongorestore <input_directory>` = restore
+* Requires a running server:
+  * `show dbs` = displays server DBs list
+  * `show databases` = display all available DBs
+  * `use <db>` = select a DB
+* Require a selected DB:
+  * `show collections` = displays collections
+  * `coll = db.<collection>` = assign collection to variable
+  * `db.<collection>.find()` = returns all collection rows
+
+## TODO
+
+* [$eq(aggregation)](https://www.mongodb.com/docs/manual/reference/operator/aggregation/eq/#mongodb-expression-exp.-eq)
+* [$size(aggregation)](https://docs.mongodb.com/manual/reference/operator/aggregation/size/#mongodb-expression-exp.-size)
+* `$unwind`
+* MongoDB.Entities = data access library for MongoDB with an elegant api, LINQ support and built-in entity relationship management
+
+### Architecture
 
 Under the hood, it is implemented as a series of nested documents referencing each other (=> à la dynamically allocated heap data vs static fixed-size data).
 
-Contrarily to a relational DB, one-to-many relationships are inverted.
+Contrarily to a relational DB, one-to-many relationships are inverted (eg wheels don't point to car, a car has a wheels IDs array instead)
 E.g. it's not the wheels that possess a foreign key to the car (provided the DB is normalized), but the car has an _array_ of wheel IDs (or name, or reference, or whatever field can uniquely identify them - and is indexed).
 
 For one-to-one relationship, the parent object contains the entire child object (kinda denormalized but ok to some extent since 1-to-1!).
@@ -34,44 +58,3 @@ The steps to designing the DB are as follows:
 3. There are multiple initial solutions, some more optimized to solve the issue at hand, whereas a relational DB should have only one (3rd normalized) solution.
 4. During its lifetime, the DB design will undergo few changes, and remain easy to adapt, with no downtime (thanks to versioning).
 5. (technical & user) performances are optimized
-
-## Installation
-
-Installer le serveur MongoDB
-See <https://www.mongodb.com/download-center?jmp=nav#community>
-mongodb-win32-x86_64-2008plus-2.6.12-signed.msi
-
-## Commands
-
-Toutes les commandes doivent être évidemment démarrés du dossier où est installé MongoDB, par exemple :
-C:\Program Files\mongodb-2.4.6\bin\
-
-Avant de pouvoir query la DB, il faut lancer le serveur qui traite les requêtes :
-
-    mongod.exe --dbpath <Path to \DATA\ folder>
-
-### Backup & Restore
-
-    mongodump --out <output_directory> [--db <db_to_backup>] [--collection <collection_to_backup>]
-    mongorestore <input_directory>
-
-### Select
-
-Les commandes suivantes nécessitent qu'un serveur soit lancé :
-
-    show dbs # Retourne la liste des DBs sur le serveur
-    show databases # Retourne la liste de toutes les DBs disponibles
-    use <db> # Pointe sur une DB
-
-Les commandes suivantes nécessitent de pointer sur une DB :
-
-    show collections # Retourne les tables (aka collections dans la DB)
-    coll = db.<collection> # Assigne la table à une variable
-    db.<collection>.find() # Retourne toutes les lignes de la table
-
-## TODO
-
-* [$eq(aggregation)](https://www.mongodb.com/docs/manual/reference/operator/aggregation/eq/#mongodb-expression-exp.-eq)
-* [$size(aggregation)](https://docs.mongodb.com/manual/reference/operator/aggregation/size/#mongodb-expression-exp.-size)
-* `$unwind`
-* MongoDB.Entities = data access library for MongoDB with an elegant api, LINQ support and built-in entity relationship management

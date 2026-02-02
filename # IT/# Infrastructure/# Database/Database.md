@@ -17,7 +17,7 @@
 * **Cursor** = a type of variable that can keep browse a query result set (eg `DECLARE CURSOR {name} FOR SELECT …`)
   * Avoid cursors by thinking less in terms of loops and more in terms of sets (as SQL was intended)
 * **Data Lake** = large storage space of hybrid mess (no DB engine, just files storage)
-* **Data Warehouse** = structured queryable nearly always column-oriented DB
+* **Data Warehouse** = almost always column-oriented structured queryable DB
 * **Data Lakehouse** = consistency/structural layer on top of a Data Lake to make it queryable like a Data Warehouse
 * **Eager Read Derivation** = preparing report (DBs) on writes rather than reads (à la Facebook homepage)
   * See <https://martinfowler.com/bliki/EagerReadDerivation.html>
@@ -68,3 +68,4 @@
 * **SQL Manager for MySQL** = MySQL DB IDE (also for PostgreSQL, Oracle, DB2)
 * **SQL Manager for SQL Server** = SQL Server IDE (SMSS-like)
 * **SQuirreL SQL Client** = Java-based multi-DB administration tool
+* **Unity Catalog** = data governance layer for _Databricks_ Lakehouse

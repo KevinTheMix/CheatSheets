@@ -92,6 +92,7 @@
 * **TACACS** (Terminal Access Controller Access-Control System) = older (ARPANET-era) authentication framework (associated with Cisco switches/routers), modernized as TACACS+
 * **Telnet** (Telecommunication Network) = older (abandoned in favor of **SSH**) bi-directional client-server application protocol to access virtual terminals of remote system on LAN/Internet
 * **TLS** (Transport Layer Security) = cryptographic protocol to provide communications security over a network
+* **TLS Termination Proxy** = server acting as intermediary between client & server applications & used to terminate/establish TLS tunnels (eg secure plaintext communications over untrusted networks)
 * **TTL** (Time To Live) = mechanism using a number of (router) hops to limits lifespan/lifetime of data in a computer or network so it does not circulate indefinitely
 * **WWAN** (Wireless Wide Area Network aka Mobile Broadband) = using mobile telecom cellular network (2G, 3G, 4G, LTE, 5G) to transfer data (eg using phone or dedicated WWAN card as gateway)
 * **X.500** = series of networking standards covering electronic directory services
@@ -112,6 +113,7 @@
 * _PuTTY_ = FOSS (ssh/scp, telnet/rlogin, etc) terminal client for administration over networks, (originally) for Windows (1999)
 * _Samba_ = free re-implementation of SMB, providing file & print services for Windows clients, running on Unix-like systems (including macOS)
   * `smbclient` = ftp-like client to access SMB/CIFS resources on servers
+* **Traefik** = modern open-source reverse proxy & load balancer designed for microservices & cloud-native environments
 * _Wget_ = HTTP(S)/FTP CLI to GET files from web servers
 * _WireGuard_ = FOSS VPN communication protocol (native on Ubuntu) for creating secure point-to-point encrypted tunnels between machines (adding OS-level virtual network interface)
 * _Wireshark_ = FOSS network packets analyzer (uses WinPcap or Npcap)
@@ -223,17 +225,23 @@ Layers sometimes shortened to _Ln_ (eg _L2_ for Transport Layer 2)
 * **DHCP IP Reservation** = an IP address reserved to be always associated with a specific machine (via its MAC) as it connects
   * Not to be confused with manually assigning a static IP address on each device
 * **DNS** (Domain Name System) = phonebook of the Internet, hierarchical maps of readable URLs to IP addresses
+* **DNS Nameserver** = 24/7 running server that answers DNS queries by reading them from zone file (responds when someone's browser asks _where is that website?_)
 * **DNS over HTTPS** (DoH) = protocol for DNS resolution over HTTPS, to increase privacy/security by preventing MitM eavesdropping & manipulation of DNS dta
 * **DNS Record** = information about domains provided by authoritative DNS Servers, of different types:
   * A server's records information is viewable via Unix/Mac command `dig` or Windows `nslookup` (with option eg `-type=txt`)
   * **A**/**AAAA** = IP (respectively v4/v6) addresses to hostname translation
   * **CNAME** (Canonical Name) = maps one domain name to another (ie an alias)
   * **MX** (Mail eXchanger) = which hosts (ie servers) accept incoming e-mail for a domain (ie a routing table using a priority list to direct e-mails to one or more mail servers)
+  * **NS** (Name Server) = which DNS servers are authoritative for a particular zone (eg `example.com` -> `ns1.hostingprovider.com`)
   * **TXT** = free form text for public information (widely used for SPF, DKIM keys, verification tokens)
     * **DKIM** = specialized DNS TXT records that stores public key used in DKIM
     * **DMARC** = stores DMARC policies
     * **SPF** = TXT records including a list of IP addresses & domains authorized to send emails from a domain
-* **DNS Root Zone** = top-level DNS zone in hierarchical namespace of internet DNS
+* **DNS Registrar** = customer-facing company that registers/renews domains, submitting ownership details to registries on users behalf (eg Hostinger, OVH)
+* **DNS Registry (Operator)** = hierarchical/regional entity that holds records of (annual) domain ownership, and can indicate which registrar's nameservers are linked to a website (to lookup its DNS records & ultimately its IP)
+* **DNS Root Domain** = top-level root for all TLDs (above _.com_, _.net_, _.org_, etc)
+* **DNS Zone** = logical grouping of related domains, an administrative space which allows for more granular control of DNS components, with actual list of records configuration stored in an associated zone file
+* **DNS Zone File** = plain text file (on nameserver) containing all records (eg A, CNAME, MX) for a zone (ie a lookup table mapping names to addresses or one or more domains)
 * **FQDN** (Fully Qualified Domain Name) = exact location in DNS tree hierarchy, including top-level domain (eg _.com_) & root zone (eg _example_)
 * **Host Identifier** (or Rest Field) = host portion of an IP address following network prefix
 * **ICMP** (Internet Control Message Protocol) = network-layer (L3, so no assigned port) supporting IP suite protocol, used by users (eg `ping`, `traceroute`) or by routers to send error messages and OK/NOK statuses

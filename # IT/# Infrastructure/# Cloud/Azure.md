@@ -5,7 +5,7 @@ Azure provides more than 100 services that enable you to do everything from runn
 ## Quick Tips
 
 * [Azure Portal](https://portal.azure.com)
-* [Azure Portal (Preview)](https://preview.portal.azure.com)
+* [Azure Portal (Preview)](https://preview.portal.azure.com) = sandbox
 * [Microsoft Learn: Azure Fundamentals](https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals) (AZ-900)
 
 ## Glossary
@@ -151,7 +151,6 @@ Azure provides more than 100 services that enable you to do everything from runn
     * **Reserved Instances** = Azure Virtual Machines
     * **Reserved Capacity** = Azure Storage, SQL Database vCores, Databricks DBUs, Cosmos DB RUs
     * **Software Plans** = Red Hat, Red Hat OpenShift, SUS Linux, etc
-  * **Spot Pricing** = pay for unused datacenter VMs capacity (ideal for non-critical interruptable workloads) at a significant discount, which can be taken away at any time without notice as Microsoft needs it back
 * 7 steps to minimizing costs
   1. **Azure Pricing Calculator** = choose low-cost region with good latency, all required services, data sovereignty/compliance requirements
   2. **Hybrid Benefit** & **Azure Reservations**

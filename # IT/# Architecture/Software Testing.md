@@ -8,6 +8,7 @@
 
 ## Glossary
 
+* **Automation Testing** = higher-level tests (UI/end-to-end/integration) often written by QA engineers or dedicated automation engineers to use automate tests on an application via tools/scripts without manual human intervention
 * **Behavior-driven development** (BDD) = naming tests using domain language (DSL) & natural-language constructs (ie English) to describe code behavior
 * **Defect Rate/Density** = defect / KLOC (1000 lines of code)
 * **Fixture** = fixed state of a system/set of objects used as baseline for running tests in a consistent environment, data & conditions (eg DB, test files & folders with known data)

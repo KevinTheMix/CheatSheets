@@ -55,14 +55,15 @@
 * `implicit` = implicit casting operator (use a Type in place of another with automatic casting), implementation defines how source type is transformed into (local class) destination Type, typically by calling one of its constructor
 * `in` = readonly reference parameter entering a method
 * `interface` = interface members must be implemented `public`ly (prefer interfaces over abstract classes)
-* `internal` = accessible only within same assembly
+* `internal` = accessible only within same assembly (note: `protected internal` means class/subclasses OR same assembly)
 * `is` = check type compatibility (but not identity as in `koko.getType() == typeof(Koko)` or `typeof(Koko).IsAssignableFrom(koko.GetType())`, see <https://stackoverflow.com/a/10416231/3559724>)
 * `lock` = only lock on a private (static or not) object, and avoid locking on the current object instance (ie don't use _this_)
 * `new` = redefines a method in a child class. See <https://msdn.microsoft.com/en-us/library/ms173153.aspx>
 * `operator` = operators overload
 * `out` = reference parameter exiting a method
 * `override` = overrides a method in a child class. You cannot override non-virtual methods.
-* `private` = default access modifier. See <http://stackoverflow.com/questions/2521459/what-are-the-default-access-modifiers-in-c>
+* `private` =  only within same class/struct (default access modifier, see <http://stackoverflow.com/questions/2521459/what-are-the-default-access-modifiers-in-c>)
+* `protected` = same & derived classes
 * `readonly` = can only be initialized at declaration AND in constructors (=> at runtime)
 * `ref` = reference parameter entering & exiting a method (needs the parameter to be initialized beforehand)
   * Useful even for reference types (see <http://stackoverflow.com/questions/961717/what-is-the-use-of-ref-for-reference-type-variables-in-c>)
@@ -73,7 +74,7 @@
 * `struct` = declares a **value-type** struct (without inheritance from/to, but can implement interfaces), ie a simple (one-level) collections of related properties that are immutable once created
 * `T` = generic type parameter. Actually a **prefix** (eg `TKey`, `TValue`, `TKoko`) which is `T` (for **T**ype) by convention (but can be anything)
 * `unsafe` = required on sections that use pointers in C#. Also must set compiler to run in unsafe mode.
-* `using` = wrap objects inheriting from `IDisposable` within such a statement to ensure their proper automatic `Dispose()`-al
+* `using` = wrap objects inheriting from `IDisposable` within such a statement to ensure their proper automatic `Dispose()`-al (safely even in case of exceptions)
 * `var` = type inference => lets the compiler figure out the type (note: still **strongly typed** ie at compile-time)
   * Value cannot be null and cannot be used at class-level (class variable) or as method return type
   * Eg `var i = 5;` compiles/built into `int i = 5;` (checkable with ILSpy)
@@ -173,6 +174,7 @@ Credit: _Tech World With Milan Milanović_
 `string` aka `System.String` is a reference type, and are immutable (ie original literal in memory is never modified).
 Note that due to String Interning, multiple string variables sharing same value will point to same unique literal in memory (ie even `object.ReferenceEquals()` will return true).
 
+* `$"{koko}"` = interpolation
 * `char` = 2 bytes Unicode character
 * `CompareTo()` = returns an integer
 * `Graphics.MeasureString(String, Font)` = size of a string in pixels in a given Font
@@ -268,7 +270,7 @@ Method reference (à la function pointer but with type safety), which can be use
 
 ### Events
 
-An event is a special type of delegate that can hold references to multiple methods (event handlers) and invoke them in a multicast fashion when the event is triggered.
+An event is a special type of delegate that restrict how listeners can be added/removed (ie have `±=` but no direct assign that could wipe all listeners) and who can trigger it (only declaring class).
 (GPT:) An event itself is an abstraction built on top of delegates to provide a safer and more controlled way to handle the publishing and subscribing of events in object-oriented programming
 
 [Using events](https://learn.microsoft.com/fr-fr/dotnet/standard/events/how-to-raise-and-consume-events)

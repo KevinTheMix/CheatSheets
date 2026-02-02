@@ -10,6 +10,7 @@
 ## API
 
 * `Get-Date` = get current date & time
+* `Invoke-Expression` (aka `iex`) = runs commands/expressions on local computer
 * `Select-String -pattern {regex}` = use regular expression to search for text patterns in input strings/files (à la Unix `grep` or Windows `findstr.exe`)
   `-notMatch` = not matching pattern
 * `Start-Process {command}` = executes/opens command or file (in new window)

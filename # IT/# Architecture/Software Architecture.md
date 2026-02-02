@@ -22,6 +22,10 @@
       * [Commands vs Events](https://stackoverflow.com/q/4962755/3559724) = commands can be rejected, events have happened
 * **Closure** = function (eg anonymous or lambda) + its captured context (ie values/references of inbound parameters at closure creation)
 * **Dependency Injection** (DI) = providing dependencies at runtime using reflection, rather than passing them top-down all over the place, reduces tight coupling
+* **Progressive Delivery** = gradually release changes to a subset of users, evaluating results then expanding rollout/rolling back (ie an evolution of CD with more control & safety to release process)
+  * **Blue-Green Deployment** = all-or-nothing switch between two identical environments (ie prepare inactive one to go live then flip traffic over entirely, à la A/B test)
+  * **Canary Deployment** = roll out to a tiny percentage first to monitor for errors then gradually increase if everything goes smoothly
+  * **Regional Rollout** = deploy to one datacenter/region first, verify it's healthy then proceed to others
 * **Encapsulation** = cacher le mécanisme interne d'un objet en vue de forcer une certaine utilisation et garantir son intégrité
 * **Enterprise Resource Planning** (ERP) = suite of integrated applications used by an organization to collect/store/manage/interpret data from many business activities (eg accounting, sales, CRM, HR)
 * **Enterprise Service Bus** (ESB) = communication system between distributed SOA applications, a special case of client-server in which any application can behave as either
@@ -37,6 +41,7 @@
 * **Marshalling** = transforming one live object's memory representation into a format suitable for storage/transmission between different runtimes (broader than only serialization)
 * **Middleware** = interception layer in a processing pipeline (eg HTTP requests) that applies shared behavior around a core operation without being that operation itself (eg auth, error handling, logging, messaging, transactions)
 * **Mixin** = in OO, a feature-able class that can be _included_ without being inherited from (eg C# `IEquatable`, Ruby include, JS extend/assign), promoting reusability & multiple inheritance
+* **Model-View-Controller** (MVC) = model is business data & rules (entities, DTOs, validation logic), view (eg HTML), controllers (incoming HTTP requests) return a view
 * **Module** = a function or class or file (depending on langages), embodying modularity/reusability through decomposing treatment parts and minimizing hard dependencies
 * **Offline First** or **Local First** = designing an app with lack of connection baked in from scratch as part of normal operation, and eventual sync to share data across devices
 * **OO** = Héritage + Polymorphisme + Encapsulation
@@ -45,23 +50,19 @@
   * **Parametric** = generic functions
   * **Subtyping** = using base class in place of a variety of children (à la ESI)
 * Programming Styles
-  * **Declarative Programming** = focuses on _what_ is to be done by abstracting _how_ things must be done whenever a treatment gets executed
-    * Works by convention & pre-configuring/declaring once rather than every time an operation takes place
-    * Low-level logic is still performed imperatively under the hood
+  * **Declarative Programming** = focuses on _what_ is to be done (end goal configuration) and lets system handle _how_ things must be done (low-level logic is still performed imperatively under the hood)
   * **Functional Programming** = pure functions as 1st class without side-effects, immutability, declarative code
   * **Reactive Programming** = data streams & propagation of changes (ie when something changes, other elements depending on it get updated)
 * **Requirement** = design mandate, must be testable
 * **SDK** (Software Development Kit) = set of APIs, compilers, debuggers, documentation, libraries, profilers and tools created by language developers to serve as basis for development
 * **Security** = Confidentiality + Integrity + Availability (CIA)
 * **Single Point of Failure** = system part that halts the entire system if it fails
-* [SOLID](https://en.wikipedia.org/wiki/SOLID) = SRP + OCP + LSP + ISP + DIP (most of those are trivial by today's standards & modern frameworks)
-  * **Single-Responsibility Principle** = every class must only do one thing (_Robert C. Martin_)
-  * **Open/Closed Principle** = software entities should be open for extension, but closed for modification
-    * Use stable Interfaces (defining common behaviors) that children can extend (ie implement/inherit from) at will, not whole classes with implementation that could be modified (which could impact its children)
-  * **Liskov Substitution Principle** = class instance can be replaced by subclass instance with no side-effects (inheritance, co/contra-variance)
-  * **Interface Segregation Principle** = split large Interfaces into more "role-granular" ones, so subclasses don't need to implement unnecessary methods
-  * **Dependency Inversion Principle** = use Interfaces between parent & child classes (the parent owns, the child inherits/implements)
-    * The Interface is packaged with the parent (actually more recently, a separate _Child.Contract_ project) instead of the child, thus _inverting_ the direction of their (compile-time) relationship
+* [SOLID](https://en.wikipedia.org/wiki/SOLID) (OO design guidelines by _Robert C. Martin_) = abstractize/decouple/modularize/use granular interfaces (implicit by today's modern architectural frameworks/standards)
+  * **Single-Responsibility Principle** = a class should have only one & only one reason to change
+  * **Open/Closed Principle** (Open for extension, Closed for modification) = new behaviors can be added without modifying existing code (ie decrease coupling via IOs or SRP so entities are modular)
+  * **Liskov Substitution Principle** = class instance can be replaced by subclass instance without breaking expectations (eg `Square : Rectangle` may be troublesome for some usecases)
+  * **Interface Segregation Principle** = use smaller/more granular interfaces to avoid bloat (ie don't force implementing unnecessary methods)
+  * **Dependency Inversion Principle** = depend on **abstractions, not concretions** (à la printer that depends on its cartridge slots, not on actual cartridges), makes code testable, respects OCP
 * **TOGAF** (The Open Group Architecture Framework) = most used framework for enterprise architecture, a high-level approach to design/plan/implement/govern an enterprise IT architecture (business, application, data, technology)
 * **Value Object** = immutable type that represent a concept by their value, not identity (ie equality based on all fields, not a unique ID)
 

@@ -68,7 +68,7 @@
 
 ### Numbers
 
-* `1234` = **int**eger number
+* `1234` = **int**eger number (or `123_456_789` as underscores are ignored)
 * `12.34` = **float**ing-point number
 * `int(text, {base})` = convert to integer (in optional base)
 * `float(text)` = convert to float
@@ -121,7 +121,7 @@ Strings are list of (1-char long) strings.
 * `a <= n <= b` = chained inequalities
 * `a == b == c == d` = chained equality
 * Loops
-  * `range(start, stop, step)` = default start is 0, default step is 1
+  * `range((start), stop, (step))` = default start is 0, default step is 1
 
 ### Collections
 
@@ -140,8 +140,8 @@ There is no built-in arrays (but tools like **NumPy** exist).
 * `[a, b, c] = {list|tuple}` = multi assign (similar to tuple unpacking), assign multiple variables at once
 * `[1, 2, 3] + [4, 5]` = concatenates lists
 * `[{items}] * {n}` = clone items  (eg `['abc']*3` is `['abc', 'abc', 'abc']`)
-* `[x for x in {list} if {condition}]` = list comprehension (returns a list with items satisfying a condition)
-* `[f(one) for one in list if condition]` = remap a subset of a list (eg `digits = [int(ch) for ch in ip if ch.isdigit()]` gives list of int digits from a string IP address)
+* `[f(item) for item in {list} if condition]` = list comprehension, builds a new filtered & remapped subset list in memory (eg `digits = [int(c) for c in ip if c.isdigit()]` gives list of int digits from a string IP address)
+* `(f(item) for item in {list} if condition)` = generator expression, builds items lazily one at a time, single throwaway use, no indexing (eg no `gen[0]`)
 * `list[(start):(end):(step)]` = slices into a new sublist (_start_/_end_/_step_ all optional, default to first/last/1), safely empty if range outside bounds
   * `list[-{n}]` = nth-to-last element (eg `list[-1]` for last item)
   * `list[:-1]` = don't take last character
@@ -153,10 +153,11 @@ There is no built-in arrays (but tools like **NumPy** exist).
 * `.pop((index))` = remove & return item at index (or last if not specified)
 * `.remove(item)` = remove first matching item (by value)
 * `.sort()` = sort a list in place
-* `list(map)` = convert to list (à la `toList()`)
+* `list(col)` = convert collection (eg generator, map, set) to list (à la `toList()`)
 * `map(function, list)` = select
 * `sorted(list)` = sort a list
 * `sorted(list, key={lambda})` = sort by custom key (which can be a tuple for multi-criteria sorting, with negative values for descending order)
+* `sum(list)` = built-in sum function
 
 #### Set
 
