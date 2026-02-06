@@ -5,12 +5,16 @@
 * [Docs](https://antigravity.google/docs/home)
 * [CLI Hooks](https://geminicli.com/docs/hooks)
 * Configure Rules & Workflows via _Customizations_ menu
+* Run agents in parallel to develop non-coupled layers faster
+* Whole codebase is never sent when sending requests, but current file usually is, as well as any explicit manual mentions
+  * Upon initializing a project, an index/embedding DB is constructed to act as a map for remote LLM to
 
 ## Glossary
 
 * **Agent Manager** = bird's eye view into agents, knowledge, playground, workspaces
 * **Inbox** = track all conversations in one place (even closed chats so eg pending treatments awaiting approval can be resumed)
 * **Knowledge Item** (KI) = persistent memory system to automatically capture & organize important insights/patterns/solutions from coding sessions
+* **Mention** = refer to a file (eg `@filename` mention file as context)
 * **Playground** = independent sandbox workspace
 * **Rules** = always-on manually defined constraints (not capabilities) for agent to follow (as a Markdown file)
   * _~/.gemini/GEMINI.md_ = global rule applied across all workspaces

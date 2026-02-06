@@ -42,6 +42,7 @@
 * **Replication** = copying of data from a primary to replica DBs in order to achieve distributedness and/or reliability (either triggered in real-time, or scheduled by batch)
 * **Reporting Database** = (one or more) read-only DBs dedicated to getting queryed (ie not updated from direct user interactions) efficiently
   * See <https://martinfowler.com/bliki/ReportingDatabase.html>
+* **Saga** = pattern for managing transactions that span multiple services (ie where traditional monolithic transactions cannot be used), either through choregraphy (decentralized events) or central orchestration
 * **Schema** = namespace-like containing other DB entities, to which granular permissions can apply (eg `CREATE SCHEMA {name} AUTHORIZATION {user}`)
   * Tables created without a schema specified will get a default schema applied (_dbo_)
   * Two tables with the same name can coexist in the same DB if they have different schemas

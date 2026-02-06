@@ -10,16 +10,6 @@
 * **Barrel Files** = a file that does nothing but re-export things from other files
   * [TkDodo - Please Stop Using Barrel Files](https://tkdodo.eu/blog/please-stop-using-barrel-files)
 * **Bottlenecks** = system part that degrades the entire system's performance when congested
-* **Clean Architecture** = Onion Architecture with further separation of inner layers (+ DDD + CQRS)
-  * Layers
-    * **Domain** = entities only (POCOs, no logic, no dependencies)
-    * **Application** (references Domain) = BL (services) interfaces (no implementation), Commands & Queries, DTOs
-    * **Presentation** (references Application layer) = GUI/WebAPI, BL (services) implementation, Startup with DI pipeline (links implementation to interfaces)
-    * **Infrastructure** (references Application layer) = DL implementation (DB/EF, I/O, WS client, SMTP, etc.)
-  * **CQRS** (Command Query Responsibility Segregation) = archi pattern to use different code paths for reading & updating, and possibly even separate models/datastores (no more basic CRUD)
-    * **Query** = returns a result but do not change state (read-only, no side-effects)
-    * **Command** (aka modifiers or mutators) = request to perform an action that changes system state (writes, doesn't return a value)
-      * [Commands vs Events](https://stackoverflow.com/q/4962755/3559724) = commands can be rejected, events have happened
 * **Closure** = function (eg anonymous or lambda) + its captured context (ie values/references of inbound parameters at closure creation)
 * **Dependency Injection** (DI) = providing dependencies at runtime using reflection, rather than passing them top-down all over the place, reduces tight coupling
 * **Progressive Delivery** = gradually release changes to a subset of users, evaluating results then expanding rollout/rolling back (ie an evolution of CD with more control & safety to release process)
@@ -29,7 +19,7 @@
 * **Encapsulation** = cacher le mécanisme interne d'un objet en vue de forcer une certaine utilisation et garantir son intégrité
 * **Enterprise Resource Planning** (ERP) = suite of integrated applications used by an organization to collect/store/manage/interpret data from many business activities (eg accounting, sales, CRM, HR)
 * **Enterprise Service Bus** (ESB) = communication system between distributed SOA applications, a special case of client-server in which any application can behave as either
-* **Event Sourcing** = derives application state from a succession of events (ie an add-only evergrowing audit/event log) capturing sequence of changes, allowing to rebuild state or travel it back/forward
+* **Event Sourcing** = persistence pattern where application state is stored as a(n ever-growing append-only) sequence of replayable events (or via intermediary snapshots for performance), also to travel back/forward in state
 * **Façade** = layer holding controllers
 * **Framework** = architectural style, boilerplate alleviating, toolschain complementing an existing language
 * **GDPR** (General Data Protection Regulation)
@@ -57,14 +47,15 @@
 * **SDK** (Software Development Kit) = set of APIs, compilers, debuggers, documentation, libraries, profilers and tools created by language developers to serve as basis for development
 * **Security** = Confidentiality + Integrity + Availability (CIA)
 * **Single Point of Failure** = system part that halts the entire system if it fails
-* [SOLID](https://en.wikipedia.org/wiki/SOLID) (OO design guidelines by _Robert C. Martin_) = abstractize/decouple/modularize/use granular interfaces (implicit by today's modern architectural frameworks/standards)
+* [SOLID](https://en.wikipedia.org/wiki/SOLID) (OO design guidelines by _Robert C. Martin_) = make code flexible/maintainable/testable/understandable (implicit by today's modern architectural frameworks/standards)
   * **Single-Responsibility Principle** = a class should have only one & only one reason to change
   * **Open/Closed Principle** (Open for extension, Closed for modification) = new behaviors can be added without modifying existing code (ie decrease coupling via IOs or SRP so entities are modular)
   * **Liskov Substitution Principle** = class instance can be replaced by subclass instance without breaking expectations (eg `Square : Rectangle` may be troublesome for some usecases)
   * **Interface Segregation Principle** = use smaller/more granular interfaces to avoid bloat (ie don't force implementing unnecessary methods)
-  * **Dependency Inversion Principle** = depend on **abstractions, not concretions** (à la printer that depends on its cartridge slots, not on actual cartridges), makes code testable, respects OCP
+  * **Dependency Inversion Principle** = high-level modules should depend on low-level modules **abstractions, not concretions** (à la printer that depends on its cartridge slots, not on actual cartridges), makes code testable, respects OCP
+  * [DigitalOcean: SOLID Design Principles Explained](https://www.digitalocean.com/community/conceptual-articles/s-o-l-i-d-the-first-five-principles-of-object-oriented-design)
 * **TOGAF** (The Open Group Architecture Framework) = most used framework for enterprise architecture, a high-level approach to design/plan/implement/govern an enterprise IT architecture (business, application, data, technology)
-* **Value Object** = immutable type that represent a concept by their value, not identity (ie equality based on all fields, not a unique ID)
+* **Value Object** = immutable type that represent a concept by their value, not identity (ie equality based on all fields, not a unique ID, eg DateRange, EmailAddress)
 
 ### Non-Functional Properties
 
@@ -106,41 +97,3 @@
 * **Repository** = abstracts data access considerations (eg DB) with reusable generic CRUD (concrete implementations are abstracted in a way that BL is agnostic)
 * **Singleton** = a Single instance; hard to test
 * **Unit of Work** = keeps track of changes affecting a DB during a 'work' session, then persists that as a single transaction (or rollback everything)
-
-### DDD (Domain-Driven Design)
-
-* **Aggregate** = cluster of entities, with a root entity (aka the **Aggregate Root** (Entity))
-* **Anti-Corruption Layer** (ACL) = boundary to isolate/shield/translate domain model from external systems (3rd party service or other bounded contexts) so that their concepts/lingo does not leak in
-* **Bounded Context** = essentially, a strategic business-driven namespace
-
-### Clean Architecture
-
-UI → Application → Domain → Data → Infrastructure.
-
-* **Application** = orchestrates domain logic (ie use cases), depends only on domain abstractions
-  * **Application Services** = orchestrate use cases, often depending on external layers (infrastructure, UI)
-  * **Use Case** = orchestrates domain-level operations to fulfill a single user action/business rule, receive presentation-level notifier requests and hit one or more repositories
-* **Data** = repo implementation, DTOs/models, mappers, cache poligy, abstract datasource interfaces
-  * **Datasources** = useful if several repositories share the same DB/HTTP logic
-    * Datasource Layer is central entry point for data access, useful when there is both local & remote sources, or for centralizing/reusing some treatments.
-    * Handles caching (even for a single table), network logic, multi-DAOs transactions (single-DAO can be handled in DAO, even with DS present), multi-sources aggregation.
-    * For simpler CRUD-like DAOs (without caching, etc), Datasources are pretty redundant and can be merged with DAOs.
-* **Domain** = entities/enums/value objects, repository abstractions, services
-  * **Domain Services** = pure logic without external dependencies (encapsulates BL that does not belong to a single entity/value object)
-* **Infrastructure** = lowest-level to exchange with OS/drivers, 3rd-party frameworks, external systems (I/Os, datasource impl, API clients, DB adapters, K-V stores, interceptors)
-  * Instantiated once at start-up, no inbound interfaces (only concrete calls)
-  * **Containerization**
-  * **Database**
-  * **Http** = low-level HTTP client setup only (eg a dio_client.dart that adds auth/header interceptors, attaches logging, sets base URL & timeouts)
-    * You do not write endpoints or JSON mapping here (that belongs in a datasource under _data/_)
-  * **Storage** = anything touching platform file systems or secure key/value stores (eg a wrapper around SharedPreferences, flutterSecureStorage, or file picker bridges)
-    * Again: no business logic, only driver code
-
-#### Why usecases use classes (rather than functions)
-
-* Dependency injection (DI) = since it’s a class, you can inject dependencies (eg NoteRepository) via constructor
-* Named abstraction = the use-case has a name (AddNotes) which shows up clearly in stack traces, logs, test output, etc
-* Testability = easy to instantiate and test in isolation: AddNotes(FakeNoteRepo()).call(...)
-* Extensibility = you can later add fields (eg injected Logger, flags, strategy objects) without changing the call site
-* Interchangeability = you can pass it around, mock it, or swap implementations (eg for background vs. interactive) — it’s a polymorphic unit
-* Consistency = every use-case follows the same pattern: MyUseCase.call(...). No free-floating, inconsistently-named functions

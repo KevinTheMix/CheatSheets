@@ -39,6 +39,7 @@ It soften ties between applications & provides applications with features such a
   * **Default Exchange** = direct exchange with no name ("") pre-declared by the broker for us
     * It is special because all queues are bound to it using the queue name as binding key
     * That is what make it seem like we can send a message directly from producers to a queue using the queue's name as binding key without having defined an explicit binding
+* **Dead-Letter Exchange** (DLX) = queue where messages end up due to low-level infrastructure issues (eg message not acknowledged, message expired (TTL), queue is full due to length limit, no route exists)
 * **Message** = contains the data that is sent (as a byte array, so any text content must be encoded/decoded), **persistent messages** survive a broker restart
 * [Message Passing](https://en.wikipedia.org/wiki/Message_passing#Synchronous_versus_asynchronous_message_passing) middleware
 * **Prefetching**

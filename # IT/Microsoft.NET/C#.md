@@ -44,12 +44,12 @@
 
 ### Keywords
 
-* `abstract` = interface-like, but the class can contain methods that are implemented (non-abstract). The class must be abstract if it contains one abstract member. Abstract members must be overriden in children. See <https://msdn.microsoft.com/en-us/library/sf985hc5.aspx>, <http://stackoverflow.com/questions/747517/interfaces-vs-abstract-classes>, <http://forums.asp.net/t/1411490.aspx?Can+the+C+Abstract+Methods+have+Implementation+>
+* `abstract` = can contain (non-abstract) methods implementations, must be abstract if contains one abstract member, abstracted members must be overriden in children ([interface vs abstract](https://stackoverflow.com/q/747517/3559724))
 * `checked`/`unchecked` = method or code block to set overflow checking runtime context (default is unchecked, `checked` raise exceptions, `unchecked` wraps around)
 * `constant` = can only be initialized at declaration (=> static compile time)
 * `default`
   * Either a [default value](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/default-values) for a given type (either as an operator `default(int?)` or a literal `int? i = default`)
-  * Or a means to distinguish which one of two methods with same name to override (derived method with `where T : default` means overriding the method without `where` constraints in the base class)
+  * Or a means to distinguish which one of two methods with same name to override (derived method with `where T : default` means overriding base class method without `where` constraints out of two)
 * `dynamic` = disable compile-time type checking
   * Usually a code smell but can be used for objects with common members instead of a full-fledged polymorphic solution (for quick prototyping or handling legacy code)
 * `implicit` = implicit casting operator (use a Type in place of another with automatic casting), implementation defines how source type is transformed into (local class) destination Type, typically by calling one of its constructor
@@ -92,20 +92,22 @@
 
 Credit: _Tech World With Milan Milanović_
 
-* 2002.01. **C# 1.0** = initial version released with VS 2002
-* 2005.11. **C# 2.0** = generics, anonymous methods, nullable types
-* 2007.11. **C# 3.0** = lambda expression, extension methods, anonymous types, var
-* 2010.04. **C# 4.0** = dynamic, delegate, variance, named args
-* 2012.08. **C# 5.0** = async
-* 2015.07. **C# 6.0** = string interpolation, null condition operator
-* 2017.03. **C# 7.0** = tuples, ref locals, pattern matching
-  * **C# 7.1** to **C# 7.3** = async main, `Span<T>`
-* 2019.09. **C# 8.0** = nullable ref-types, async streams, using declarations
-* 2020.11. **C# 9.0** = init-only props, records, with-expressions
-* 2021.11. **C# 10.0** = record structs, global usings
-* 2022.11. **C# 11.0** = file-scoped types, required members, auto-default structs
-
-* 202?.?? **?** = Field-backed properties
+* 2002.01 **C# 1** = initial version released with VS 2002
+* 2005.11 **C# 2** = generics, anonymous methods, nullable types
+* 2007.11 **C# 3** = lambda expression, extension methods, anonymous types, var
+* 2010.04 **C# 4** = dynamic, delegate, variance, named args
+* 2012.08 **C# 5** = async
+* 2015.07 **C# 6** = string interpolation, null condition operator
+* 2017.03 **C# 7** = tuples, ref locals, pattern matching (**C# 7.1** to **C# 7.3** = async main, `Span<T>`)
+* 2019.09 **C# 8** = nullable ref-types, async streams, using declarations
+* 2020.11 **C# 9** = `record`s immutable reference type with value-based equality and `with` expressions for non-destructive mutation, top-level statement to skip Main method boilerplate, `init`-only setters, pattern matching
+* 2021.11 **C# 10** = global usings & file-scoped namespaces (no more wrapping entire file in `namespace` block), record structs, `const` interpolated strings
+* 2022.11 **C# 11** = raw string literals (eg `"""…"""`) for embedding JSON/XML without escapes, required members (`required` keyword), UTF-8 string literals (eg `"hello"u8`), auto-default structs (no longer must explicit all fields)
+* 2023.xx **C# 12** = primary constructors on classes/structs (not just records, eg `class Person(string name)`), collection expressions syntax (eg `[1, 2, 3]`), type aliasing (eg `using Point = (int X, int Y);`), performance gains
+* 2024.xx **C# 13** = any collection `params` modifier, a new `System.Threading.Lock` type with dedicated compiler support to replace old `lock(obj)` pattern, `\e` escape sequence, `ref struct` can implement interfaces
+* 2025.11 **C# 14** = extension members (properties/operators/static), `field` to access compiler-generated backing field in accessors (no more expliciting private fields), null-conditional assignment (eg left-side `?.`)
+  * Partial constructors/events, user-defined compound assigment operators, ref/in/out modifiers on lambda parameters without needing explicit types
+  * File-based app = can run a single _.cs_ file (via `dotnet run`) without full-fledged _.sln_ or _.csproj_ (improves C# scripting utility)
 
 ## API
 
@@ -280,7 +282,7 @@ An event is a special type of delegate that restrict how listeners can be added/
   * Eg `public event EventHandler<KokoArgs> Fired;` with `KokoArgs` a custom POCO class inheriting from `EventArgs`
 * Although non-conventional, we could even used other well-known stock delegates **Action** & **Function**
   * Eg `event Action<string> StuffBeingDoneSomething;`
-* 'On' Firing method
+* _On_ Firing method
   * `protected virtual void OnFired(KokoArgs e) { if (Fired != null) Fired(this, e); }` without thread-safety
   * `protected virtual void OnFired(KokoArgs e) { EventHandler<KokoArgs> handler = Fired; if (handler != null) handler(this, e); }` with thread-safety
     * In this case, a (reference) copy is made for thread-safety in case `Fired = null;` happens somewhere else in the code

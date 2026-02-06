@@ -119,6 +119,7 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
   * See [Google Play icon design specifications](https://developer.android.com/distribute/google-play/resources/icon-design-specifications) = icon guidelines (512x512, 1024KB)
 * **font_awesome_flutter** (_@fluttercommunity.dev_) = free [Font Awesome](https://fontawesome.com/icons) Icon pack as Flutter Icons
 * **get_it** (aka **GetIt**) (_@fluttercommunity.dev_) = simple DI container/service locator via global singleton
+  * **injectable** (_@codeness.ly_) = code generator for get_it
 * **package_info_plus** (_@fluttercommunity.dev_) = meta-information about application package (name, version, build number)
 * **rxdart** (_@fluttercommunity.dev_) = extends Dart **Streams** & **StreamControllers** with reactive programming
 * **sensors_plus** (_@fluttercommunity.dev_) = accelerometer, gyroscope, magnetometer, barometer sensors
@@ -175,7 +176,7 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
 * **dart_code_metrics_presets** (_@dcm.dev_) = advanced linter for Dart/Flutter
 * **dart_frog** (_@dart-frog.dev_) = fast, minimalistic backend framework for Dart
 * **device_preview** (_@aloisdeniel.com_) = approximate how an app looks & performs on another device (select devices, orientation, language, theme, custom resolution & safe areas)
-* **dio** (_@flutter.cn_) = HTTP networking (request cancel/intercept to automatically attach JWT tokens, file up/download with progress tracking, timeout)
+* **dio** (_@flutter.cn_) = HTTP networking (cancel request, adds auth/header interceptors to automatically attach JWT tokens & logging, file up/download with progress tracking, set timeout)
 * **dotted_border** (-) = easily add (rect/round/oval) dotted borders around widget
 * **easy_localization** (-) = easy translations for many languages, supports other file formats (JSON, CSV, Yaml, XML), plurals, genders
 * **external_path** (-) = internal/external/public storage paths (ie paths that require explicit permissions, unlike **path_provider** that handles always-accessible directories)
@@ -190,6 +191,7 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
 * **flutter_local_notifications** (_@dexterx.dev_) = display notifications on most platforms (desktop & mobile, not web)
 * **flutter_native_splash** (_jonhanson.net_) = splash screen before/while Flutter boots
 * **flutter_rating_bar** (_@sarbagyastha.com.np_) = "5-stars" (or other icons) fractional rating bar
+* **flutter_secure_storage** (_@steenbakker.dev_) = platform-specific secure storage using Keychain (iOS) and Encrypted Shared Preferences with Tink (Android)
 * **sentry** (_@sentry.io_) = Sentry SDK for pure Dart ([Sentry](https://sentry.io) performance monitoring & error tracking)
 * **sentry_flutter** (_@sentry.io_) = Sentry SDK for Flutter
 * **flutter_slidable** (_@romainrastel.com_) ~= customizable **Dismissible** (`actionPane`, `actions: [IconSlideAction]`, `actionExtentRatio: 1/actions.length`)

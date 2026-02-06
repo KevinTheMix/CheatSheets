@@ -7,8 +7,8 @@
 * [Security](https://code.claude.com/docs/en/security)
 * [Anthropic Academy](https://anthropic.skilljar.com) = courses
 * [Mastering Claude Code in 30 minutes](https://www.youtube.com/watch?v=6eBSHbLKuN0) (Boris Cherny, member of technical staff)
-  * Claude Code was designed as a CLI to be future-proof & agnostic of any particular currently popular IDE solution
 * [Awesome Claude subagents](https://github.com/VoltAgent/awesome-claude-code-subagents)
+  * Claude Code was designed as a CLI to be future-proof & agnostic of any particular currently popular IDE solution
 
 ## Glossary
 
@@ -27,7 +27,6 @@
   * **Opus** = most intelligent
   * **Sonnet** balanced
 * **Plan Mode** = review development plan before coding (instead of coding immediately)
-* **Tool Use** = Claude decides it needs to call a tool (à la ChatGPT function calling)
 
 ## Claude CLI
 

@@ -1,13 +1,19 @@
 # Entity Framework
 
+## Quick Tips
+
+* Inject DbContext it as _Scoped_ ie existing during entire single web request, or as _Pooled_ via **AddDbContextPool**
+* EF Core supports various underlying DBs (OOB or via packages, eg SQL Server/PostgreSQL (via Npgsql)/MySQL/SQLite/Cosmos DB/etc) so we can write C# DbContext/LINQ code once and use any supported DB
+
 ## Glossary
 
-* **DbContext** = acts as a Unit Of Work pattern (inject it as _Scoped_ ie existing during entire single web request, or as _Pooled_ via **AddDbContextPool**)
+* **DbContext** = main class to interact with DB in EF Core, acts as a Unit Of Work pattern, represents a session with DB (tables definition via DbSet, LINQ querying, tracking/saving changes, configuration eg connection strings)
 * **ObjectContext** = represents a connection between the CLR & the DB (for CRUD operations)
 * **DbFunctions** = CLR (DateTime/Numbers/String manipulation) methods to be executed on (`IQueryable`) `DbContext` or `ObjectContext` entities (Linq to Entities queries)
   * They are executed as **CLR code at the DB-level, not in memory**
-* **DbSet** = acts as a Repository pattern
-* `DbSet<T>` = a `DbContext` property that inherits from `IQueryable<T>`
+* **DbSet** = code-side entity, acts as a Repository pattern
+  * `DbSet<T>` = a `DbContext` property that inherits from `IQueryable<T>`
+* **Navigation Properties** = preferred way to handle tables relationship
 
 ## Database Context
 
@@ -44,3 +50,37 @@ Holds global mapping configuration.
 ## API
 
 * `DbFunctions.TruncateTime(DateTime)` = return the date part of a DateTime
+* `await dbContext.Database.MigrateAsync();` = applies pending migrations (same as running `dotnet ef database update` programmatically, ideal for container initialization)
+
+### Joins
+
+```C#
+// Preferred = navigation properties (EF handles JOINs automatically):
+public class Order
+{
+    public int Id { get; set; }
+    public int CustomerId { get; set; }
+    public Customer Customer { get; set; }  // navigation property
+    public List<OrderItem> Items { get; set; }
+}
+var orders = context.Orders
+    .Include(o => o.Customer)
+    .Include(o => o.Items)
+    .Where(o => o.Customer.Country == "USA")
+    .ToList();
+
+// More control = LINQ explicit joins (query/expression syntax):
+var result = from o in context.Orders
+             join c in context.Customers on o.CustomerId equals c.Id
+             join e in context.Employees on o.EmployeeId equals e.Id
+             where c.Country == "USA"
+             select new { o.Id, CustomerName = c.Name, EmployeeName = e.Name };
+// More control = LINQ explicit joins (method syntax):
+var result = context.Orders
+    .Join(context.Customers, o => o.CustomerId, c => c.Id, (o, c) => new { o, c })
+    .Join(context.Employees, oc => oc.o.EmployeeId, e => e.Id, (oc, e) => new { oc.o, oc.c, e })
+    .Select(x => new { x.o.Id, CustomerName = x.c.Name, EmployeeName = x.e.Name });
+
+// Very complex queries = raw SQL:
+context.Users.FromSqlRaw("SELECT * FROM Users WHERE Id IN (SELECT UserId FROM Orders GROUP BY UserId HAVING COUNT(*) > 5)").ToList();
+```

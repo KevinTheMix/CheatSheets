@@ -304,8 +304,10 @@ Layers sometimes shortened to _Ln_ (eg _L2_ for Transport Layer 2)
   * Authorized servers can be external services and don't have to be subdomains (eg authorize _Mailgun_ or _SendGrid_)
 * **TLD** (Top-Level Domain) = one of domains at highest level in hierarchical DNS (eg _com_, and TLD Root Zone _com._ where trailing dot represents DNS root)
 
-* _Mailgun_ = one of the best known ESPs, using REST/SMTP API (rather than a drag&drop GUI)
-* _SendGrid_ (by _Twilio_) = ESP
+* **Mailgun** = one of the best known ESPs, using REST/SMTP API (rather than a drag&drop GUI)
+* **Papercut-SMTP** = test e-mails on localhost without sending real e-mails
+* **SendGrid** (by _Twilio_) = ESP
+* **smtp4dev** = cross-platform fake smtp email server for development/testing
 
 ### Wi-Fi
 

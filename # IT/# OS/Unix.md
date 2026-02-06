@@ -194,8 +194,10 @@
   * `ls -l | awk 'NR>1{print $(NF-1)}'` = access fields by relative index
   * `ls -l | awk 'BEGIN{i=0}(NR>1)&&(NR<=NF){print $(i+1); i++}'` = calculated variable & index
   * `kill $(ps -aux | awk '$1="<user>"{print $2}')` = kills all processes linked to given user (ie awk can map/fetche PID per user)
-* `bash ({script})` = starts a new bash process (interactive shell, or interprets script if provided)
-  * `-c '{string}'` = runs string in new Bash subprocess (environment is isolated, positional parameters _$i_ via eg `bash -c 'echo $1' -- "hello"`)
+* `bash` = starts a new interactive bash process
+  * `-c '<string>'` = runs string in new Bash subprocess (environment is isolated, positional parameters _$i_ via eg `bash -c 'echo $1' -- "hello"`)
+  * `<script_file>` = starts a new bash subprocess to interpret provided script
+  * `<code_outputting_command> | bash` = similar to `bash <script_file>` but with actual code (no file name) being passed from command _stout_ to bash _stdin_
 * `base64` = base64 encode/decode
 * `bc` (basic calculator) = arbitrary-precision arithmetic language
 * `bzip2` = (_bz2_) file compressor (Burrows-Wheeler block sorting text compression algorithm), better than gzip
@@ -215,8 +217,11 @@
 * `crontab` = maintain crontab files for individual users
 * `curl` (client URL) = transfer data from/to a (mail or web) server using URLs
   * `-d` = data to send in a HTTP POST request
+  * `-f` = fail silently on HTTP errors
   * `-s` = silent/quiet mode (no progress/error messages)
   * `-H {header}` = header (eg `accept: application/json` or `Content-Type: application/json`)
+  * `-L` = follow redirects
+  * `-S` = show errors even in silent mode
   * `-X` = request method to use when starting the transfer
   * Eg `curl http://wttr.in/brussels?format=3` for local weather
 * `cut` = split (`-d '{delimiter}'`) & splice (`-b {byte_range}`, `-c {char_range}`, `-f {fieldid_range}`)

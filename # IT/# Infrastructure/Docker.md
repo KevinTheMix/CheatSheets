@@ -5,15 +5,16 @@ Docker essentially provides an isolated & portable environment as a minimal pack
 Unlike a virtual machine that virtualizes hardware (to install a real guest OS), Docker virtualizes OS kernels (to install real images).
 
 Docker originated as a Linux technology, whose kernel is highly stable & backward compatible (stable syscall ABI), leading to very portable containers.
-Docker uses resource isolation features of Linux kernel such as cgroups & kernel namespaces, and a union-capable file system such as OverlayFS and others to allow independent containers to run within a single Linux instance
+Docker uses resource isolation features of Linux kernel such as cgroups (ie what resources a process can use) & kernel namespaces (ie what a process can see), and a union-capable file system such as OverlayFS and others to allow independent containers to run within a single Linux instance
 macOS and Windows use a Linux VM under Docker Desktop.
-On Windows, container types are either cross-platform portable Linux (a Linux VM via _WSL 2_) or Windows(Server)-only (eg _nanoserver_/_windowsservercore_, low compatibility even between Windows 10/11)
+On Windows, container types are either cross-platform portable Linux (a Linux VM via _WSL 2_) or more niche Windows(Server)-only (eg _nanoserver_/_windowsservercore_ that have low compatibility even between Windows 10/11).
 
 ## Quick Tips
 
 * Use `wsl --shutdown` to kill RAM-hungry _Vmmmwsl_ process (first stop Docker Desktop in system tray)
 * Docker itself downloads base images, but not all other dependencies (that is done via commands within Dockerfile eg `npm install`)
 * Containers share host kernel, so they require a compatible OS (note that [all Linux distros share same Linux kernel](https://askubuntu.com/a/172932))
+* Windows containers are niche & used primarily for legacy .NET Framework apps that must run on Windows (can't be used by Mac/Linux, can't be part of same Docker compose as Linux containers)
 * (Base) images layers are only stored once then referenced many times (in a read-only fashion by containers, virtualized as if they belonged to their FS), and also get cached during build process to speed up subsequent builds
 * [Docker Hub](https://hub.docker.com)
 * [Get started](https://docs.docker.com/get-started)
@@ -27,7 +28,7 @@ On Windows, container types are either cross-platform portable Linux (a Linux VM
   * Base images provide userspaces but not OS kernels, as that is provided by host OS (or guest kernel in case of intermediary VM)
 * **Bind Mounts** = mounts into container a specific file/directory path from host machine (useful for workflows where live code changes must be reflected in container, but create host directory structure dependency)
 * **Build Context** = folder path specified during build whose contents are accessible to Dockerfile instructions (eg `COPY`); paths in those instructions are relative to this context
-* **Compose** = a higher-level client to run a multi-service application (consisting of a set of images ie containers eg a backend & a frontend) from a single declarative YAML file
+* **Compose** = a higher-level client to run a multi-service application (consisting of a set of images ie containers eg a backend & a frontend) from a single declarative YAML file (infrastructure-as-code, shareable within devteam)
   * A single (`docker compose`) command creates/coordinates several containers on host
   * Unlike Kubernetes, this is not scaling-oriented cluster-level orchestration, merely a declarative setup to run interacting services in parallel (à la Visual Studio Debug multiple projects)
   * Images are either pre-built (and will pull missing images), or build them on the spot (ie either runs full Dockerfile, or references one of its images)
@@ -41,13 +42,13 @@ On Windows, container types are either cross-platform portable Linux (a Linux VM
 * **Docker Desktop** = development tool for Windows/macOS/Linux for building/running/testing containers locally (includes Docker Engine/CLI/Compose & a Kubernetes cluster), replaces Docker Toolbox (based on Oracle VirtualBox)
 * **Docker Engine** = Docker Daemon (`dockerd`) + REST API + Docker CLI client
 * **Docker Hub** = public registry/repository/marketplace of existing images (à la .NET nuget.org) where Docker will look for images by default, also a private repository for custom images
-* **Docker Swarm** = built-in Docker orchestrator (similar to Kubernetes, not as widely used), turning multiple hosts into a single cluster
+* **Docker Swarm** = built-in Docker orchestrator (similar to Kubernetes, not as widely used), turning multiple hosts into a single cluster, has built-in secret management
 * **Docker Toolbox** = legacy Windows/Mac solution for older systems that do not meet requirements (packs _Oracle VM VirtualBox_)
 * **Docker Trusted Registry** (DTR) = official Docker registry service to be installed on-premises (for enterprises, included in Docker Datacenter product)
 * **Dockerfile** = step-by-step text recipe/blueprint/script to **build** (build time only, not used when a container is run) a single final image, usually referencing a base image as its first statement
   * **Multi-Stage Build** = a dockerfile that has multiple `FROM` statements (ie stages) that can use a different base
     * Any one stage can be built as resulting image (each build produce a single image, and only its dependency chain is built ie those explicitly referenced in `FROM` or `COPY --from=` recursively)
-    * Eg a large image containing an SDK can be used for compiling some code into resulting artifacts, which are then specifically copied to a following smaller stage with just a lighter runtime used as final image
+    * Eg a typical scenario involves using a larger SDK image for compiling some code into resulting artifacts, and copying them to a lighter runtime-only final production image
     * Eg [Multi-stage builds](https://docs.docker.com/build/building/multi-stage) = provides Go source code inline & compile it, then execute that compiled result in a _scratch_ base image
 * **Image** = platform-agnostic **read-only** versionable taggable template used to create containers, typically including a base OS & software packaged together using a Dockerfile, can be pushed/pulled to/from a registry
   * An image is a static representation of an app or service along with its configuration & dependencies (runtime, services, DBs, libraries) and act as a standard unit of deployment
@@ -78,50 +79,57 @@ On Windows, container types are either cross-platform portable Linux (a Linux VM
 * **scratch** = an explicitly empty Docker image with no userspace (no runtime/shell/libraries), used for containers that run single fully self-contained statically linked binary (eg Go/Rust) and rely solely on host kernel
 * **treafik** = cloud native edge router
 * Servers
-  * **Windows Nano Server** = container-optimized minimal Windows user-mode subset for modern applications excluding legacy components (no GUI/windows, no explorer shell, etc)
+  * **Windows Nano Server** = container-optimized minimal Windows user-mode subset for modern applications (eg uses Kestrel self-hosted web server) while excluding legacy components (no GUI/windows, no explorer shell)
   * **Windows Server** = full Windows Server OS with complete Windows APIs, GUI, mangement tools & services, typically used for VMs or bare metal
-  * **Windows Server Core** = reduced Windows Server OS without GUI shell, with most Windows APIs & services for compatibility with traditional server workloads
+  * **Windows Server Core** = reduced Windows Server OS without GUI shell, with most Windows APIs & services (eg **IIS**) for compatibility with traditional server workloads
+    * Required only to run older legacy .NET versions, Windows-specific APIs, COM interop (use Nano Server _aspnet:8.0-nanoserver-ltsc2022_ instead, or better yet .NET on Linux _aspnet:8.0_)
 
 ## API
 
-* `cat {dockerfile_folder} | docker build -t {image_name}`
-* `docker build ({options}) {dockerfile_folder}` = builds an image from a Dockerfile where specified folder (eg `.` for current) is used as _build context_ ie will serve as relative path for instructions in Dockerfile
-  * `-f {dockerfile_name|dockerfile_path}` = explicit Dockerfile name (instead of default _Dockerfile_) or path
-  * `-t(ag) {image(:tag)}`
-* `docker exec {command}` = runs command inside already running container
-* `docker image {command}` = manage images (`build`, `history`, `import`, `inspect`, `load`, `ls`, `prune`, `pull`, `push`, `rm` remove one or more, `save`, `tag` create a tag)
+* `cat <dockerfile_folder> | docker build -t <image_name>`
+* `docker build (<options>) <dockerfile_folder>` = builds an image from a Dockerfile where specified folder (eg `.` for current) is used as _build context_ ie will serve as relative path for instructions in Dockerfile
+  * `-f <dockerfile_name>dockerfile_path}` = explicit Dockerfile name (instead of default _Dockerfile_) or path
+  * `-t(ag) <image>:tag)}`
+* `docker compose`
+  * `down (-v)` = stop everything (also delete volumes ie wiping DB data for a fresh start)
+  * `up` = start multi-container environement defined in _docker-compose.yml_
+* `docker exec <command>` = runs command inside already running container
+* `docker image <command>` = manage images (`build`, `history`, `import`, `inspect`, `load`, `ls`, `prune`, `pull`, `push`, `rm` remove one or more, `save`, `tag` create a tag)
 * `docker images` = lists local images (`-a` includes intermediary images)
 * `docker info` = display setup information (where images reside, etc.)
-* `docker logs {container_id|container_name}` = view logs of a container (especially useful for backgrounded ones since they are not displayed in terminal)
+* `docker inspect <container>` = shows full configuration & state of a container (or image/network/volume/etc) in JSON format
+  * `--format {{<specific_field>}}`  
+* `docker logs <container_id|container_name>` = view logs of a container (especially useful for backgrounded ones since they are not displayed in terminal)
 * `docker ps` = lists running containers (`-a` includes stopped containers)
-* `docker pull {image(:tag)}` = download image from registry (_latest_ tag by default), implied when running a image not present locally
-* `docker push {username}/{image}` = push to registry
-* `docker run {image(:tag)} ({command})` = creates a container based on a (local or remote eg Docker Hub) image, creating a new container from image each time
+* `docker pull <image(:tag)>` = download image from registry (_latest_ tag by default), implied when running a image not present locally
+* `docker push <username>/<image>` = push to registry
+* `docker run <image(:tag)> (<command>)` = creates a container based on a (local or remote eg Docker Hub) image, creating a new container from image each time
   * `-d(etach)` = run in background
+  * `-e <ENV_VAR=value>` = define environment variables
   * `-i` = interactive mode
-  * `-p {host_port}:{container_port}` = binds host port & container port (exposes container to local network, usually same port both on host & container)
+  * `-p <host_port>:<container_port>` = binds host port & container port (exposes container to local network, usually same port both on host & container)
   * `-rm` = deletes container once program is finished (exited signal received)
   * `-t` = allocate a pseudo-TTY (plugs container to current terminal)
-  * `--name {container_name}` = provide an explicit name for container (in place of defaultly generated one)
+  * `--name <container_name>` = provide an explicit name for container (in place of defaultly generated one)
   * Runtime parameters can be provided, so a same image can actually generate different containers
-* `docker rm {name|id}` = inversely, the following command deletes a container
+* `docker rm <name|id>` = inversely, the following command deletes a container
 * `docker start` = start an existing (stopped) container
-* `docker stop {container_id|container_name}` = stop one (or more) running container
+* `docker stop <container_id|container_name>` = stop one (or more) running container
 * `docker system prune` = deletes all resources — images, containers, volumes, and networks — that are dangling (not associated with a container)
   * `-a` = remove any stopped containers & all unused images (not just dangling images)
 
 ### Dockerfile
 
-* `FROM {base_image}` = first statement in the Dockerfile; indicate the a base image from the repository (which is _Docker Hub_ by default)
-* `WORKDIR {path}` = set working directory (for all following commands, à la `cd`)
+* `FROM <base_image>` = first statement in the Dockerfile; indicate the a base image from the repository (which is _Docker Hub_ by default)
+* `WORKDIR <path>` = set working directory (for all following commands, à la `cd`)
 * `ADD` = COPY + can extract compressed archives (tar/gzip/etc) automatically and it can fetch files from URLs (don't use unless you need those extra features)
-* `COPY (--from={stage_index|stage_name}) {source(s)} {target}` = copy some files/folders from a previous stage or a host local directory (relative to build context) into a this new image layer's filesystem
+* `COPY (--from=<stage_index|stage_name>) <source(s)> <target>` = copy some files/folders from a previous stage or a host local directory (relative to build context) into a this new image layer's filesystem
 * `SHELL cmd|powershell` = specify which shell/CLI to use when using the RUN command
-* `RUN {command}` = adds layer to initial parent image using commands provided by base image (ie installs stuff eg `npm install`)
-* `CMD {command} ({parameter(s)})` = defines a default command executed when container starts (only last one takes effect)
+* `RUN <command>` = adds layer to initial parent image using commands provided by base image (ie installs stuff eg `npm install`)
+* `CMD <command> (<parameter(s)>)` = defines a default command executed when container starts (only last one takes effect)
 * `ENTRYPOINT` = runs a container like an executable
-* `EXPOSE {port}` = expose a port to the world outside the container
-* `ENV {variable} {value}` = define an environment variable
+* `EXPOSE <port>` = expose a port to the world outside the container
+* `ENV <variable> <value>` = define an environment variable
 
 ## Exensions
 

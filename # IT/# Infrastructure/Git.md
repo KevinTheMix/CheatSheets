@@ -148,9 +148,9 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * Note that it's possible to keep some files in the Git repo untracked/ignored if they're never added
 * `git add -i` = stages interactively (via CLI)
 * `git branch` = lists all branches (with current branch highlighted)
-* `git branch -m {old} {new}` = rename a branch (current branch if _old_ not provided)
-* `git branch {branch}` = creates a new branch
-* `git branch {branch} {commit}` = creates a new branch pointing to a specific commit
+  * `-m|-M ({old}) {new}` = rename a branch (current branch if _old_ not provided)
+  * `{branch}` = creates a new branch
+  * `{branch} {commit}` = creates a new branch pointing to a specific commit
 * `git checkout (HEAD)` = lists modified files
   * (ChatGPT3.5:) starting from Git version 2.23 (2019.08), the recommendation is to use `git switch` or `git restore` instead of `git checkout` for clarity and consistency
   * `git checkout .` = discards local changes in the working directory for all files (**warning**: destructive)

@@ -48,6 +48,9 @@
 ## Tools
 
 * _Appium_ = open-source framework to automate testing of mobile apps (not just Flutter), to write GUI tests like a user (equires **Appium Flutter Driver** on Flutter)
+* _Datadog_ = American company providing observability service for cloud-scale applications (servers/DBs/tools/services monitoring through a SaaS-based data analytics platform)
+* _OpenTelemetry_ (aka OTel) = vendor-neutral open standard & general purpose toolkit for collecting and exporting traces/metrics/logs from applications
 * _Robot framework_ = Python-written generic keyword-driven test automation framework for acceptance testing/test-driven development, using a tabular test data syntax
   * [RIDE](https://github.com/robotframework/RIDE) = Robot Framework IDE (edit _.robot_ files)
+* _Sentry_ = error & crash tracking tool to capture exceptions/stacktrace/context when things go wrong (_what broke & why?_)
 * _SonarQube_ (SonarSource) = open-source platform to ensure continuous code quality & security (static analysis, coverage, duplication, smells & vulnerabilities detection) on 35+ languages
