@@ -208,18 +208,18 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * `git fetch --prune` = fetches remote and remove local branches that no longer exist remotely
 * `git branch -u {remote}/{branch}` (or `--set-upstream-to {remote}/{branch}`) = links local branch to remote branch (adds (max one, previous gets replaced) _branch_ section in `.git/config`)
 * `git remote` = lists all the remote repos names associated with local repo
-* `git remote -v` = lists all remote repositories names & URLs associated with local repo
-* `git remote add {remote} {url}` = adds a remote repo to local repo (adds a _remote_ section in `.git/config`)
-* `git remote set-url {remote} {url}` = update the remote's URL (in the context of GitHub, the URL format `git@github.com:user/repo.git` is an SSH URL)
-* `git remote remove {remote}` = removes remote repo (deletes _remote_ & _branch_ sections in `.git/config` & folder from `.git/refs/remotes`, note that even `origin` can be removed)
-* `git remote prune {remote}` = removes local branches that no longer exist on the remote repo
-* `git remote show {remote}` = detailed information about remote repo
+  * `-v` = lists all remote repositories names & URLs associated with local repo
+  * `add {remote} {url}` = adds a remote repo to local repo (adds a _remote_ section in `.git/config`)
+  * `set-url {remote} {url}` = update the remote's URL (in the context of GitHub, the URL format `git@github.com:user/repo.git` is an SSH URL)
+  * `remove {remote}` = removes remote repo (deletes _remote_ & _branch_ sections in `.git/config` & folder from `.git/refs/remotes`, note that even `origin` can be removed)
+  * `prune {remote}` = removes local branches that no longer exist on the remote repo
+  * `show {remote}` = detailed information about remote repo
 * `git ls-remote {remote}` = list all remote references (including branches)
 * `git pull {remote} {branch}` = `git fetch` + `git merge`
 * `git push` = pushes changes to remote branch linked with current branch
-* `git push {remote} {branch}` = pushes changes to a remote repo branch
-* `git push {remote} {tag}` = shares local tag with remote repo (eg `git push origin v1.0.0`)
-* `git push -u {remote} {branch}` (or `--set-upstream-to`) = one-time link current local branch to a remote branch (create it if not exist), then pushes changes to it
+  * `{remote} {branch}` = pushes changes to a remote repo branch
+  * `{remote} {tag}` = shares local tag with remote repo (eg `git push origin v1.0.0`)
+  * `-u {remote} {branch}` (or `--set-upstream-to`) = one-time link current local branch to a remote branch (create it if not exist), then pushes changes to it
 
 ## Troubleshooting
 

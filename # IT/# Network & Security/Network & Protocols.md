@@ -87,12 +87,12 @@
   * Server must sign that key exchange using its certificate private key (only that key is able to complete that challenge)
   * An attacker possessing only the public certificate cannot forge a signature, nor decrypt handshake messages
   * The client and server have now established a secure connection, and use exchanged key to encrypt future communication
-* **SSL Termination Proxy** = proxy server acting as intermediary point between client/server applications that terminates/establish TLS tunnels
+* **SSL/TLS Termination Proxy** = proxy server acting as intermediary between client & server applications, that terminates/establish TLS tunnels (eg secure plaintext communications over untrusted networks)
   * Allows using HTTPS for public-facing traffic but faster normal HTTP after first gateway for internal quicker communications
+  * Also offloads CPU-intensive SSL termination to cloud-based services (eg Azure Application Gateway along with other routing duties)
 * **TACACS** (Terminal Access Controller Access-Control System) = older (ARPANET-era) authentication framework (associated with Cisco switches/routers), modernized as TACACS+
 * **Telnet** (Telecommunication Network) = older (abandoned in favor of **SSH**) bi-directional client-server application protocol to access virtual terminals of remote system on LAN/Internet
 * **TLS** (Transport Layer Security) = cryptographic protocol to provide communications security over a network
-* **TLS Termination Proxy** = server acting as intermediary between client & server applications & used to terminate/establish TLS tunnels (eg secure plaintext communications over untrusted networks)
 * **TTL** (Time To Live) = mechanism using a number of (router) hops to limits lifespan/lifetime of data in a computer or network so it does not circulate indefinitely
 * **WWAN** (Wireless Wide Area Network aka Mobile Broadband) = using mobile telecom cellular network (2G, 3G, 4G, LTE, 5G) to transfer data (eg using phone or dedicated WWAN card as gateway)
 * **X.500** = series of networking standards covering electronic directory services
@@ -225,7 +225,7 @@ Layers sometimes shortened to _Ln_ (eg _L2_ for Transport Layer 2)
 * **DHCP IP Reservation** = an IP address reserved to be always associated with a specific machine (via its MAC) as it connects
   * Not to be confused with manually assigning a static IP address on each device
 * **DNS** (Domain Name System) = phonebook of the Internet, hierarchical maps of readable URLs to IP addresses
-* **DNS Nameserver** = 24/7 running server that answers DNS queries by reading them from zone file (responds when someone's browser asks _where is that website?_)
+* **DNS Nameserver** = 24/7 running server that answers DNS queries (eg lookup its DNS records & ultimately its IP) by reading them from zone file (responds when someone's browser asks _where is that website?_)
 * **DNS over HTTPS** (DoH) = protocol for DNS resolution over HTTPS, to increase privacy/security by preventing MitM eavesdropping & manipulation of DNS dta
 * **DNS Record** = information about domains provided by authoritative DNS Servers, of different types:
   * A server's records information is viewable via Unix/Mac command `dig` or Windows `nslookup` (with option eg `-type=txt`)
@@ -238,9 +238,10 @@ Layers sometimes shortened to _Ln_ (eg _L2_ for Transport Layer 2)
     * **DMARC** = stores DMARC policies
     * **SPF** = TXT records including a list of IP addresses & domains authorized to send emails from a domain
 * **DNS Registrar** = customer-facing company that registers/renews domains, submitting ownership details to registries on users behalf (eg Hostinger, OVH)
-* **DNS Registry (Operator)** = hierarchical/regional entity that holds records of (annual) domain ownership, and can indicate which registrar's nameservers are linked to a website (to lookup its DNS records & ultimately its IP)
+* **DNS Registry (Operator)** = hierarchical/regional entity that holds records of (annual) domain ownership, and can indicate which registrar's nameservers are linked to a website (eg DNS Belgium)
 * **DNS Root Domain** = top-level root for all TLDs (above _.com_, _.net_, _.org_, etc)
 * **DNS Zone** = logical grouping of related domains, an administrative space which allows for more granular control of DNS components, with actual list of records configuration stored in an associated zone file
+  * Ownership of that domain is required, otherwise it essentially sits as unused configuration
 * **DNS Zone File** = plain text file (on nameserver) containing all records (eg A, CNAME, MX) for a zone (ie a lookup table mapping names to addresses or one or more domains)
 * **FQDN** (Fully Qualified Domain Name) = exact location in DNS tree hierarchy, including top-level domain (eg _.com_) & root zone (eg _example_)
 * **Host Identifier** (or Rest Field) = host portion of an IP address following network prefix

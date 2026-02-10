@@ -269,11 +269,13 @@ Method reference (à la function pointer but with type safety), which can be use
 * **Action** & **Function** (and more niche **Predicate**) are a set of delegates already defined by the framework for convenience (up to 16 parameters)
 * [Multicast Delegates](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/delegates/how-to-combine-delegates-multicast-delegates)
   * Multiple objects can be assigned to one delegate instance (via the `+`/`-` operators & the `Delegate.Combine()` invocation lists concatenation method)
+  * All delegate types actually inherit from _System.MulticastDelegate_ and are multicast-capable (ie `±=`)
 
 ### Events
 
 An event is a special type of delegate that restrict how listeners can be added/removed (ie have `±=` but no direct assign that could wipe all listeners) and who can trigger it (only declaring class).
-(GPT:) An event itself is an abstraction built on top of delegates to provide a safer and more controlled way to handle the publishing and subscribing of events in object-oriented programming
+An event itself is an abstraction built on top of delegates to provide a safer and more controlled way to handle the publishing and subscribing of events in object-oriented programming.
+An event is essentially syntactic sugar for a private EventHandler variable with associated public add/remove methods accessible from outside that call `Delegate.Combine()/Remove()`.
 
 [Using events](https://learn.microsoft.com/fr-fr/dotnet/standard/events/how-to-raise-and-consume-events)
 

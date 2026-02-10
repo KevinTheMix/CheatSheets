@@ -5,12 +5,16 @@ Based on an internal Google product called Borg open-sourced in 2014.
 
 ## Quick Tips
 
-* [Roadmap](https://roadmap.sh/kubernetes)
-* [Tutorials](https://kubernetes.io/docs/tutorials)
 * Can run on-premise, in public cloud or in a hybrid environment
 * Implement Progressive Delivery via tools like Argo Rollouts or Flagger that automatically roll back if error rates spike
 * Drawbacks = complexity (distributed system requires expertise to setup/operate), costs (high upfront cost, requires minimum level of resources to run & support all its features)
 * Some complexity can be offloaded to a managed Kubernetes cloud service (eg Microsoft AKS, Amazon EKS, Google GKE) to avoid handling underlying infrastructure & expertise (eg setting up control plane, scaling, maintenance)
+
+### Resources
+
+* [Roadmap](https://roadmap.sh/kubernetes)
+* [Tutorials](https://kubernetes.io/docs/tutorials) = includes a Basics in-depth interactive tutorial
+* [Kelsey Hightower: Kubernetes The Hard Way](https://github.com/kelseyhightower/kubernetes-the-hard-way)
 * [Microsoft Learn: What is Azure Kubernetes Service (AKS)?](https://learn.microsoft.com/en-us/azure/aks/what-is-aks)
 * [Microsoft Learn: Introduction to Kubernetes](https://learn.microsoft.com/en-us/training/modules/intro-to-kubernetes)
 * [Microsoft Learn: Introduction to Azure Kubernetes Service](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-kubernetes-service)
@@ -65,6 +69,7 @@ Based on an internal Google product called Borg open-sourced in 2014.
 * _containerd_ = high-level container runtime (but lower-level daemon compared to Docker) that manages container lifecycle & sits between orchestrator & low-level runtimes (eg runc)
 * _CRI-O_ = lightweight container runtime built specifically for Kubernetes implementing CRI with minimal overhead
 * _Flagger_ = Kubernetes operator for progressive delivery, working alongside standard Deployments & manages canary resources automatically
+* _kind_ (Kubernetes in Docker) = primarily designed for testing Kubernetes itself, but may be used for local development or CI
 * _Kustomize_ = similar to Helm
 * _Helm_ = package manager for Kubernetes that uses templated manifests (charts) to deploy & manage applications, helps reducing number of YAML manifest/configuration files
 * _Minikube_ = cross-platform tool for running Kubernetes locally

@@ -28,6 +28,7 @@
 
 ### Types
 
+* **(Non-)Regression Test** (NRT) = verifies changes/updates had no impact on existing functionality
 * [Types of Software Testing](https://www.javatpoint.com/types-of-software-testing)
   * **Unit** = does a unit of code work as intended (path, **structural**, whitebox, interface consistent, coverage analysis)
   * **Acceptance/Release** = does a codebase conform to its specification (blackbox, Functional, Acceptance, Validation, Requirements Testing)
@@ -50,6 +51,7 @@
 * _Appium_ = open-source framework to automate testing of mobile apps (not just Flutter), to write GUI tests like a user (equires **Appium Flutter Driver** on Flutter)
 * _Datadog_ = American company providing observability service for cloud-scale applications (servers/DBs/tools/services monitoring through a SaaS-based data analytics platform)
 * _OpenTelemetry_ (aka OTel) = vendor-neutral open standard & general purpose toolkit for collecting and exporting traces/metrics/logs from applications
+* _Prometheus_ (by SoundCloud) = open-source systems monitoring & alerting toolkit (metrics, time series, PromQL query language)
 * _Robot framework_ = Python-written generic keyword-driven test automation framework for acceptance testing/test-driven development, using a tabular test data syntax
   * [RIDE](https://github.com/robotframework/RIDE) = Robot Framework IDE (edit _.robot_ files)
 * _Sentry_ = error & crash tracking tool to capture exceptions/stacktrace/context when things go wrong (_what broke & why?_)

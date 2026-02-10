@@ -2,7 +2,6 @@
 
 ## Quick Tips
 
-* [Saga](https://microservices.io/patterns/data/saga.html) = pattern to handle operations spanning multiple microservices (one DB per service) via choregraphed events/orchestrated messages
 * [Coding Horror - A Visual Explanation of SQL Joins](https://blog.codinghorror.com/a-visual-explanation-of-sql-joins)
 
 ## Glossary
@@ -21,7 +20,7 @@
 * **Data Lakehouse** = consistency/structural layer on top of a Data Lake to make it queryable like a Data Warehouse
 * **Eager Read Derivation** = preparing report (DBs) on writes rather than reads (à la Facebook homepage)
   * See <https://martinfowler.com/bliki/EagerReadDerivation.html>
-* **Eventual Consistency** = distributed DB model to achieve high availability at the cost (and guarantee) of eventual consistency
+* **Event Sourcing** = persistence pattern where application state is stored as a(n ever-growing append-only) sequence of replayable events (or via intermediary snapshots for performance), also to travel back/forward in state
 * [Fragmentation](https://www.mssqltips.com/sqlservertip/4331/sql-server-index-fragmentation-overview) = internal (too much free space) or external (table storage pages are out of order)
 * **Graph DB** = stores explicit connections between items (as edges), unlike a vector DB storing implicit similarity between items
 * **Index** = a lookup table applied to PK, FK and UNIQUE-constrained fields that enables dichotomical (_log(n)_) searches, as opposed to slow sequential _O(n)_ table-scanning (reads get faster, but inserts get slower)
@@ -39,20 +38,21 @@
   3. 2NF + no functional dependency between non-key attributes
 * **NoSQL** (Not Only SQL or Non-relational) = schema-less, non tabular relations more flexible DB, via different data structure (eg key–value pair, wide column, graph, or document), making some operations faster
 * **ORM (Object-Relational Mapping)** = technique for converting data between a relational DB and the heap of an OO programming language
+* **Polyglot Persistence** = using various DB systems across multiple microservices (ie not a single unified eg relational DB)
 * **Replication** = copying of data from a primary to replica DBs in order to achieve distributedness and/or reliability (either triggered in real-time, or scheduled by batch)
-* **Reporting Database** = (one or more) read-only DBs dedicated to getting queryed (ie not updated from direct user interactions) efficiently
-  * See <https://martinfowler.com/bliki/ReportingDatabase.html>
-* **Saga** = pattern for managing transactions that span multiple services (ie where traditional monolithic transactions cannot be used), either through choregraphy (decentralized events) or central orchestration
+* [Reporting Database](https://martinfowler.com/bliki/ReportingDatabase.html) = (one or more) read-only DBs dedicated to getting queryed (ie not updated from direct user interactions) efficiently
 * **Schema** = namespace-like containing other DB entities, to which granular permissions can apply (eg `CREATE SCHEMA {name} AUTHORIZATION {user}`)
   * Tables created without a schema specified will get a default schema applied (_dbo_)
   * Two tables with the same name can coexist in the same DB if they have different schemas
 * **Transaction** = segment of code where lack of integrity is locally/temporarily permitted (constraints will be tested at next commit, no longer for every action), and that can be applied or cancelled (on demand/error)
-* **Transaction log** = records transactions & the modifications made by each of them
-* **Two-Phase Commit Protocol** = type of atomic commitment protocol, a distributed algorithm coordinating distributed atomic transactions and whether to commit or abort them
+* **Transaction Log** = records transactions & modifications made by each of them (in a growing series of physical files)
+* **Transaction Log Tailing** = watch for latest change in outbox (actually in transaction log by plugging into real-time replication mechanisms) and publish each of those messages/events to broker
+* **Transactional Outbox Pattern** = guarantees atomicity of both an entity update & its domain event, by updating its table and inserting a row in a dedicated outbox (consumed by another process) table as part of same transaction
+* **Two-Phase Commit** (2PC or tupac) = a distributed algorithm/protocol to coordinate distributed atomic transactions and whether to commit or abort them (one node acts as coordinators and commits if all nodes succeed)
 * **Union** = concatenates result sets from two queries with identical columns number/order and compatible data types compatible (`UNION` removes duplicates, `UNION ALL` allows duplicates)
 * **Vector DB** = nearest neighbor/similarity & semantic searches rather than exact matching (à la ElasticSearch for complex entities)
 * **Wildcards** = matches one (`_`), or several (`%`), or ranges of characters (`[a-z0-9.,;]` or opposite `[^…]`) as part of a `LIKE` clause
-* **Write-ahead Logging** = techniques for atomicity & durability (two of ACID properties), and an implementation of Event Sourcing architecture
+* **Write-ahead Logging** (WAL) = techniques for atomicity & durability (two of ACID properties), and an implementation of Event Sourcing architecture
 * **Write-ahead Log** = append-only structure for crash & transaction recovery where changes are initially written before being actually applied
 
 ## Tools

@@ -16,4 +16,6 @@ Software development approach prioritizing modeling software around core busines
 * **Aggregate** = cluster of entities (and value objects) treated as a single unit for consistency purposes, with one designated as **aggregate root** (ie entry point through which all modification happen)
 * **Anti-Corruption Layer** (ACL) = boundary to isolate/shield/translate domain model from external systems (3rd party service or other bounded contexts) so that their concepts/lingo does not leak in
 * **Bounded Context** = explicit boundaries where a particular model applies, essentially a strategic business-driven namespace
+* **Context Mapping** pattern = explicitly define/manage relationships between different bounded contexts (eg do we use another BC's lingo or shield via an ACL, do we share models?)
 * **Domain Event** = something meaningful that (already) happened in domain (enables decoupling domain actions from eventual handlers, ie event aggregation eg via PRISM or MediatR `INotification`)
+* **Ubiquitous Language** = shared common lexicon that helps communication between software developers & domain experts

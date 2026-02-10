@@ -6,6 +6,7 @@
 * Submit whole screenshots instead of painfully describing UI for troubleshooting
 * _Let ChatGPT write it_, _Shit in, shit out_, _How hard can it be?_ -- William Verhaeghe
 * [OpenAI: Proximal Policy Optimization](https://openai.com/blog/openai-baselines-ppo) = reinforcement learning
+* [Context7](https://context7.com) = MCP server that pulls up-to-date API versioned documentation & code samples (eg Flutter), adds them as manual copy-paste, prompt context, API access
 
 ## Glossary
 

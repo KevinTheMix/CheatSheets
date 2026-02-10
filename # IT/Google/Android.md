@@ -52,7 +52,8 @@
   * Circumventable via microG DroidGuard Helper
 * **Sideloading** = installing an image onto the phone directly from a file located on the PC
 * **Signing** = associates a signature with _.apk_ file, which ensures app identity (requires private key), integrity (untampered), compatibility (can update same version), trust between apps from same developer (can exchange data)
-  * Also packs a self-signed certificate (ie not validation by any CA) acting as a simple keystore for associated public key, so no CA-based trust chain as we only need make sure it corresponds to original upload (TOFU)
+  * Also packs a self-signed certificate (ie not validated by any CA) acting as a simple keystore for associated public key, so no CA-based trust chain as we only need make sure it corresponds to original upload (TOFU)
+  * In that case, that certificate & associated public key acts as that app's identity (Google keeps a copy of originally uploaded one, and compares future certificates against it)
 * **Vendor image** = image containing device-specific drivers for controlling GPS, gyro, proximity & co
 
 ### Tools

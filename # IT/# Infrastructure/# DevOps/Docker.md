@@ -26,7 +26,9 @@ On Windows, container types are either cross-platform portable Linux (a Linux VM
 * **Base Image** = a regular image designated in `FROM` directive in Dockerfile, defining starting point of build on which additional layers are added
   * Base images are pre-built (meaning we don't need to make them from a Dockerfile, they're tarballs, ie readymade filesystem layer archives artifacts) custom, community or vendor-made images
   * Base images provide userspaces but not OS kernels, as that is provided by host OS (or guest kernel in case of intermediary VM)
-* **Bind Mounts** = mounts into container a specific file/directory path from host machine (useful for workflows where live code changes must be reflected in container, but create host directory structure dependency)
+* **Bind Mounts** = mounts into container a specific file/directory path from host machine (addresses some workflows but create host directory structure dependency & security risks)
+  * Especially useful during development by pointing to source code, so that every small code change can be reflected immediately live in container (without rebuilding an image if we had used `COPY` instead)
+  * For production, we pack source code using dockerfile `COPY` instead so that image is self-contained & embeds everything it needs
 * **Build Context** = folder path specified during build whose contents are accessible to Dockerfile instructions (eg `COPY`); paths in those instructions are relative to this context
 * **Compose** = a higher-level client to run a multi-service application (consisting of a set of images ie containers eg a backend & a frontend) from a single declarative YAML file (infrastructure-as-code, shareable within devteam)
   * A single (`docker compose`) command creates/coordinates several containers on host
@@ -62,27 +64,28 @@ On Windows, container types are either cross-platform portable Linux (a Linux VM
 * **Storage Driver** = manages images & containers layers storage, and metadata
 * **Tag** = custom label used to identify specific platform (OS) and version (eg .NET version) of an image (eg when several of those are available, à la Git tags)
   * _latest_ = special tag that is used as default when none is explicitly specified
+* **Tmpfs Mounts** = in-host-memory temporary storage (never written to filesystem, meant for fast non-persistent data)
 * **Volumes** = preferered mechanism for persisting data: a mapped area of host filesystem where containers can write/persist information, abstracts away filesystem paths & host details, can be shared between containers
+* **Windows Nano Server** = container-optimized minimal Windows user-mode subset for modern applications (eg uses Kestrel self-hosted web server) while excluding legacy components (no GUI/windows, no explorer shell)
+* **Windows Server** = full Windows Server OS with complete Windows APIs, GUI, mangement tools & services, typically used for VMs or bare metal
+* **Windows Server Core** = reduced Windows Server OS without GUI shell, with most Windows APIs & services (eg **IIS**) for compatibility with traditional server workloads
+  * Required only to run older legacy .NET versions, Windows-specific APIs, COM interop (use Nano Server _aspnet:8.0-nanoserver-ltsc2022_ instead, or better yet .NET on Linux _aspnet:8.0_)
 * **Writable Container Layer** = thin ephemeral runtime-only writable layer on top of read-only image layers (using copy-on-write when writing to existing files from image)
 
 ### (Docker Hub) Images
 
 * **alpine** = minimal Linux distribution providing a small userland (musl libc, BusyBox) for lightweight containers/services without a kernel
 * **hello-world** = official minimal image for learning/installation testing purposes (at <https://hub.docker.com/_/hello-world>)
-* **microsoft/dotnet** = official images for .NET & ASP.NET Core (ie cross-platform, eg Windows Nano Server, includes Kestrel)
-* **microsoft/dotnet-framework** = official images for .NET Framework & Windows Communication Framework (eg Windows Server Core)
-* **microsoft/dotnet:2.2-sdk** = .NET Core image for development (>1GB), multi-architecture
-* **microsoft/dotnet:2.2-runtime** = runtime-only (~200 Mo), multi-architecture (Linux & Windows => depends on Docker host)
-* **microsoft/dotnet:2.2-aspnetcore-runtime** = runtime-only, multi-architecture for Linux & Windows
-* **microsoft/dotnet:2.2-aspnetcore-runtime-nanoserver-1803** = runtime-only, Windows Nano Server
+* [dotnet](https://github.com/dotnet/dotnet-docker)
+  * **microsoft/dotnet** = official images for .NET & ASP.NET Core (ie cross-platform, eg Windows Nano Server, includes Kestrel)
+  * **microsoft/dotnet-framework** = official images for .NET Framework & Windows Communication Framework (eg Windows Server Core)
+  * **microsoft/dotnet:2.2-sdk** = .NET Core image for development (>1GB), multi-architecture
+  * **microsoft/dotnet:2.2-runtime** = runtime-only (~200 Mo), multi-architecture (Linux & Windows => depends on Docker host)
+  * **microsoft/dotnet:2.2-aspnetcore-runtime** = runtime-only, multi-architecture for Linux & Windows
+  * **microsoft/dotnet:2.2-aspnetcore-runtime-nanoserver-1803** = runtime-only, Windows Nano Server
 * **node** = node & npm commands
 * **scratch** = an explicitly empty Docker image with no userspace (no runtime/shell/libraries), used for containers that run single fully self-contained statically linked binary (eg Go/Rust) and rely solely on host kernel
 * **treafik** = cloud native edge router
-* Servers
-  * **Windows Nano Server** = container-optimized minimal Windows user-mode subset for modern applications (eg uses Kestrel self-hosted web server) while excluding legacy components (no GUI/windows, no explorer shell)
-  * **Windows Server** = full Windows Server OS with complete Windows APIs, GUI, mangement tools & services, typically used for VMs or bare metal
-  * **Windows Server Core** = reduced Windows Server OS without GUI shell, with most Windows APIs & services (eg **IIS**) for compatibility with traditional server workloads
-    * Required only to run older legacy .NET versions, Windows-specific APIs, COM interop (use Nano Server _aspnet:8.0-nanoserver-ltsc2022_ instead, or better yet .NET on Linux _aspnet:8.0_)
 
 ## API
 
@@ -123,7 +126,7 @@ On Windows, container types are either cross-platform portable Linux (a Linux VM
 * `FROM <base_image>` = first statement in the Dockerfile; indicate the a base image from the repository (which is _Docker Hub_ by default)
 * `WORKDIR <path>` = set working directory (for all following commands, à la `cd`)
 * `ADD` = COPY + can extract compressed archives (tar/gzip/etc) automatically and it can fetch files from URLs (don't use unless you need those extra features)
-* `COPY (--from=<stage_index|stage_name>) <source(s)> <target>` = copy some files/folders from a previous stage or a host local directory (relative to build context) into a this new image layer's filesystem
+* `COPY (--from=<stage_index|stage_name>) <source(s)> <target>` = embeds some files/folders from a previous stage or a host local directory (relative to build context, eg source code) into a this new image layer's filesystem
 * `SHELL cmd|powershell` = specify which shell/CLI to use when using the RUN command
 * `RUN <command>` = adds layer to initial parent image using commands provided by base image (ie installs stuff eg `npm install`)
 * `CMD <command> (<parameter(s)>)` = defines a default command executed when container starts (only last one takes effect)

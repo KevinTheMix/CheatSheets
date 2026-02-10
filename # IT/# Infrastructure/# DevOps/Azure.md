@@ -13,6 +13,7 @@ Azure provides more than 100 services that enable you to do everything from runn
 * **Azure Active Directory** = provides single sign-on, multifactor authentication, conditional access
 * **Azure Advisor** = provides (admin/developer) recommendations for potential improvements on installed services (cost, performance, reliability (eg backups, redundancy), security (eg 2FA), operational excellence)
 * **Azure Analysis Services** = (à la SSAS)
+* **Azure API Management** (APIM) = API Gateway with caching/discoverability/observability/security, a management plane (for administration), and developer portal (a customizable API documentation website for consumers)
 * **Azure Arc** = manage hybrid cloud environment (whether private, public, hybrid, multi)
 * **Azure Cloud Solution Provider** = Microsoft-partner intermediary that resells MS cloud products (Microsoft 365, Azure, Dynamics) to customers at their set price then manages their relationship, billing, support
 * **Azure Data Factory** = (à la SSIS)
@@ -24,12 +25,12 @@ Azure provides more than 100 services that enable you to do everything from runn
   * **Test Plans** = manual/exploratory testing
 * **Azure DevTest Labs** (PaaS) = unified service sandbox environment for developers/testers to provision/run/deallocate/delete self-managed VMs to try different configs, ruled by admin policies
 * **Azure Event Grid** = fully managed serverless publishers topics to subscribers message routing service, for event-based & near-realtime applications, able to react to Azure services events (eg a VM was created)
-* **Azure Service Fabric** = distributed systems plartform to package/deploy/manage scalable reliable microservices & containers
 * **Azure Logic App** (PaaS) = serverless enterprise integration service for orchestration of business processes & applications workflowcharts via a no-code visual GUI (à la Zapier), with I/Os connectors (eg storage, web, e-mails)
 * **Azure Notification Hub** = push notifications
 * **Azure Resource Manager** (ARM) = shared layer for all Azure UIs (portal, REST, PowerShell, CLI, SDKs eg C#) to manage resources
 * **Azure Resource Manager Template** = declarative JSON-like script language to define resources
-* **Azure Service Bus** = entreprise message broker (à la RabbitMQ)
+* **Azure Service Bus** = entreprise message broker (à la RabbitMQ) with topics & subscriptions
+* **Azure Service Fabric** = distributed systems platform to package/deploy/manage scalable reliable microservices & containers
 * **Azure Stack Hub** = extension that provides a way to run apps in an on-premises environment and deliver Azure services in your datacenter
 * **Azure VMware Solution** = runs VMware on cloud (for when configured VMware on-premise and want to move it to cloud)
 * **Dynamics** = Microsoft's line of business applications for day-to-day operations like sales/accounting/customer support, or in short Microsoft’s suite of CRM and ERP software
