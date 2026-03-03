@@ -50,15 +50,17 @@ Features:
 
 ## Glossary
 
-* [Flutter Architecture Samples](https://fluttersamples.com) = same Todos app using different architectural concepts/tools
-* [App Architecture](https://docs.flutter.dev/app-architecture) = repositories are single source of truth (SSOT) and don't know each other, they are n-to-n with both viewmodels (ie states) and services, use cases are optional
-* [Flutter Architecture](https://docs.flutter.dev/resources/architectural-overview#anatomy-of-an-app)
-  * **Runner** = platform-specific native host shell app package and its main entrypoint (eg an Android Activity/iOS UIViewController), originally generated via `flutter create`, owned/modifiable by app developer
-  * **Embedder** = platform-specific C API library used by Runner providing services for rendering surfaces/accessibility/input, event loop (eg `FlutterEngineRun()`, `FlutterEngineShutdown()`)
-  * **Engine** = platform-agnostic C/C++ Flutter core, including rendering engine (Skia/Impeller), Dart Runtime (including Dart VM that runs user Dart & framework Flutter code), platform channels, Embedder API
-  * **Framework** = platform-agnostic Dart Flutter classes (high-level API in Dart)
-  * **Dart App** = platform-agnostic Dart user custom app
-  * [Inside Flutter](https://docs.flutter.dev/resources/inside-flutter) = optimized & single pass layouting, onboarding strategies
+* **Application Resource Bundle** (ARB) = Flutter-specific JSON file containing parameterizable/conditional localization strings, generating _.dart_ files upon building
+* Architecture
+  * [Flutter Architecture Samples](https://fluttersamples.com) = same Todos app using different architectural concepts/tools
+  * [App Architecture](https://docs.flutter.dev/app-architecture) = repositories are single source of truth (SSOT) and don't know each other, they are n-to-n with both viewmodels (ie states) and services, use cases are optional
+  * [Flutter Architecture](https://docs.flutter.dev/resources/architectural-overview#anatomy-of-an-app)
+    * **Runner** = platform-specific native host shell app package and its main entrypoint (eg an Android Activity/iOS UIViewController), originally generated via `flutter create`, owned/modifiable by app developer
+    * **Embedder** = platform-specific C API library used by Runner providing services for rendering surfaces/accessibility/input, event loop (eg `FlutterEngineRun()`, `FlutterEngineShutdown()`)
+    * **Engine** = platform-agnostic C/C++ Flutter core, including rendering engine (Skia/Impeller), Dart Runtime (including Dart VM that runs user Dart & framework Flutter code), platform channels, Embedder API
+    * **Framework** = platform-agnostic Dart Flutter classes (high-level API in Dart)
+    * **Dart App** = platform-agnostic Dart user custom app
+    * [Inside Flutter](https://docs.flutter.dev/resources/inside-flutter) = optimized & single pass layouting, onboarding strategies
 * [BLoC](https://www.flutterclutter.dev/flutter/basics/what-is-the-bloc-pattern/2021/2084) = state management design pattern using Streams of events (in) & states (out)
 * [Build Modes](https://docs.flutter.dev/testing/build-modes) = Debug (development, Hot Reload), Profile (performances analysis), Release (release app)
 * **BuildContext** = context for current widget, holds a reference to its corresponding Element, handle for widget location in its tree

@@ -215,6 +215,7 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
 * **rect_getter** (_@debuggerx.com_) = obtain a widget's rectangular coordinates
 * **rnd** (_@gskinner.com_) = makes working with random values easier (global **Random** instance + helpful extension methods)
 * **searchfield** (_@maheshjamdade.com_) = simple customizable autocomplete search widget
+* **slang** (_@tienisto.com_) = simplify L10n, breaks down large translation files into smaller ones (via namespaces), access values via nested keys (à la jQuery)
 * **sliver_tools** (_@pietervanloon.com_) = missing sliver package (related: [SliverFooter](https://stackoverflow.com/a/49621060/3559724) by Rémy Rousselet)
 * **system_tray** (-) = design a system tray menu for desktop (Linux, macOS, Windows) opening from the system tray app icon
 * **tflite_flutter** (_@tensorflow.org_) = TensorFlow Lite interpreter and perform interference, with multi-platform support (mobile & desktop)

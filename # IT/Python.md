@@ -13,7 +13,7 @@
 * **Django** = Python's full-fledged web framework
 * **Dunder Method** (Double Under) or **Magic Methods** = built-in methods starting with double leading & trailing underscores
   * Commonly overriden (eg `__init__`), listable via `dir({class})`
-* **Flask** = light & extensible web framework (`flask`)
+* **Flask** (`flask`) = lightweight "micro" web framework for small/medium application bundling only minimal essential features (routing, request handling, templating), extensible via extensions
 * **Kivy** = cross-platform (one codebase for desktop & mobile, but non-native look) mobile/touch-oriented Python UI framework (uses OpenGL)
 * **PyPI** (Python Package Index) = official repository of Python packages (default for `pip`)
 * **PyQt** = Python bindings for Qt framework (older, widely used)

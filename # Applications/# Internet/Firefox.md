@@ -43,6 +43,7 @@
 * `Ctrl + E/K` = search (bar)
 * `Ctrl + U` = Page Source
 * `Ctrl + Shift + J` = (master) Browser Console (able to log from all sources, eg a standalone popup page)
+* `Ctrl + Shift + K` = opens console and/or jumps focus to it
 * `Ctrl + Shift + M` = Responsive Design Mode
 * `Ctrl + Shift + X` = toggle left-to-right text
 * `Ctrl + (Shift +) Tab` = next/previous tab

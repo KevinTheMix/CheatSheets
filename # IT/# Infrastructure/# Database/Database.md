@@ -46,9 +46,11 @@
   * Two tables with the same name can coexist in the same DB if they have different schemas
 * **Transaction** = segment of code where lack of integrity is locally/temporarily permitted (constraints will be tested at next commit, no longer for every action), and that can be applied or cancelled (on demand/error)
 * **Transaction Log** = records transactions & modifications made by each of them (in a growing series of physical files)
-* **Transaction Log Tailing** = watch for latest change in outbox (actually in transaction log by plugging into real-time replication mechanisms) and publish each of those messages/events to broker
 * **Transactional Outbox Pattern** = guarantees atomicity of both an entity update & its domain event, by updating its table and inserting a row in a dedicated outbox (consumed by another process) table as part of same transaction
-* **Two-Phase Commit** (2PC or tupac) = a distributed algorithm/protocol to coordinate distributed atomic transactions and whether to commit or abort them (one node acts as coordinators and commits if all nodes succeed)
+  * Once outbox row was created, a consuming process can use either of those options to treat it:
+    * At-least-once + idempotence = mark row as _in progress_ with a _locked until_ date, if everything went smoothly mark status as _treated_, if not another process can treat same row once _locked until_ elapsed
+    * **Change Data Capture** (CDC) aka **Transaction Log Tailing** = watch for latest change in outbox (or in transaction log by plugging into real-time replication mechanisms) & publish each message/event to broker (eg _Debezium_)
+    * Delete row + Insert in another DB = for non-message based immediate insert into another DB treatment, if we can use a single **distributed transaction** (2PC/XA) to both delete outbox row & insert into other DB
 * **Union** = concatenates result sets from two queries with identical columns number/order and compatible data types compatible (`UNION` removes duplicates, `UNION ALL` allows duplicates)
 * **Vector DB** = nearest neighbor/similarity & semantic searches rather than exact matching (à la ElasticSearch for complex entities)
 * **Wildcards** = matches one (`_`), or several (`%`), or ranges of characters (`[a-z0-9.,;]` or opposite `[^…]`) as part of a `LIKE` clause

@@ -20,6 +20,7 @@
 * [Tasty Static](https://www.tastystatic.com) = Polygonal WipeOut-like
 * [Teeworlds](https://teeworlds.com) = Multiplayer 2D platform-shooter
 * [Warsow](https://warsow.net) = Quake III -like
+* [Wartale](https://wartale.com) = Priston Tale spin-off
 
 ### Demon's Souls
 

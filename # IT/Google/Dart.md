@@ -20,8 +20,6 @@ The same Dart code can run on multiple platforms (eg mobile/desktop via Flutter,
 * _dart:ui_ (library) = bridge between Dart bits & native bits (eg C++ or browser APIs eg Canvas, JS, DOM)
 * **AOT** (Ahead-of-Time) = used in Release Mode, Dart codebase is compiled beforehand (eg via `dart compile exe {file}`) to efficient native machine code (ie a _libapp.so_ shared object file that gets packed within an APK file for ARM/x86, or a Windows _.exe_ file), JavaScript or WebAssembly, thereby producing a native artifact that does not require Dart VM
   * Flutter Engine (in C++) itself gets compiled to native code (eg _libflutter.so_ packed in APK's _/lib/_ folder as well)
-* **APK** = an actual zip archive file containing an entire app, ie its source native code as well as assets (fonts, images, etc)
-* **ARB** (Application Resource Bundle) = file containing parameterizable/conditional localization strings, generating _.dart_ files upon building
 * **AST** (Abstract Syntax Tree) = data structure representing code flow/structure as static data (ie a tree, à la Linq expression tree)
 * **Common Front End** (CFE) = Lexer/Parser (into AST), Compiler (type inference/cheking, optimizations), Analyzer (code navigation/refactoring/linting), Analysis Server (exposes Analyzer features to client IDEs)
   * Output of CFE is Kernel blobs/files that are fed to JIT Compiler

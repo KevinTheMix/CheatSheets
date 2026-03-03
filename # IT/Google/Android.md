@@ -13,8 +13,8 @@
 
 * _.aab_ (Android App Bundle) = device-agnostic distribution (but not installation) package format containing compiled code & resources
   * Used by Play Stores to eventually generate/distribute (smaller) optimized device-specific APK files (not itself executable)
-* _.apk_ (Android Package Kit) = app installation file as a compressed ZIP archive (its content can be un-zipped) containing compiled code, resources & manifest (& signature if signed)
-  * Can be ABI/CPU/device-specific (as in `flutter run --release` or when downloaded from app store) or universal (Codemagic with multiple ABIs)
+* _.apk_ (Android Package Kit) = app installation file as a compressed actual ZIP archive (its content can be un-zipped) containing compiled code, resources (eg fonts, images) & manifest (& signature if signed)
+  * Can be ABI/CPU/device-specific (as in `flutter run --release` or when downloaded from app store) or universal (eg Codemagic with multiple ABIs)
 * [Activities](https://developer.android.com/guide/components/activities/intro-activities) = one app's entry point, declared/defined in _AndroidManifest.xml_
 * **Android** = open-source OS based on Linux, supported by many different manufacturer's devices
 * **Android SDK** = can be installed via Android Studio's SDK Manager (at `%USERPROFILE%\AppData\Local\Android\Sdk`)

@@ -6,6 +6,7 @@
 * [Docs](https://platform.claude.com/docs/en/intro)
 * [Security](https://code.claude.com/docs/en/security)
 * [Anthropic Academy](https://anthropic.skilljar.com) = courses
+* [Claude in Excel Add-in](https://marketplace.microsoft.com/en-us/product/saas/wa200009404)
 * [Mastering Claude Code in 30 minutes](https://www.youtube.com/watch?v=6eBSHbLKuN0) (Boris Cherny, member of technical staff)
 * [Awesome Claude subagents](https://github.com/VoltAgent/awesome-claude-code-subagents)
   * Claude Code was designed as a CLI to be future-proof & agnostic of any particular currently popular IDE solution

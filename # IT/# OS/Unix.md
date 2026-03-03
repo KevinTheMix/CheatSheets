@@ -65,6 +65,7 @@
 * **CentOS** = Linux distribution (_discontinued_)
 * **Gnome** = FOSS desktop environment for Linux/Unix-like OS used by many distributions
 * **Kali Linux** = Debian-based Linux distribution designed for digital forensics & pentesting
+* **Linux Mint** = Ubuntu-based community Linux distro, ease of use, OOB functionality, desktop appeal, bundled with FOSS selection
 * **Lubuntu Alternate** = even lighter Lubuntu for low-RAM PC/laptops
 * **Lubuntu Desktop** = lightweight Linux distribution based on Ubuntu
 * **MINIX 3** = FOSS Unix-like microkernel OS (for embedded systems & educative purposes)

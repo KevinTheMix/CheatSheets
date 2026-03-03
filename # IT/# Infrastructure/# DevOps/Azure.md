@@ -30,7 +30,7 @@ Azure provides more than 100 services that enable you to do everything from runn
 * **Azure Resource Manager** (ARM) = shared layer for all Azure UIs (portal, REST, PowerShell, CLI, SDKs eg C#) to manage resources
 * **Azure Resource Manager Template** = declarative JSON-like script language to define resources
 * **Azure Service Bus** = entreprise message broker (à la RabbitMQ) with topics & subscriptions
-* **Azure Service Fabric** = distributed systems platform to package/deploy/manage scalable reliable microservices & containers
+* **Azure Service Fabric** = Microsoft's container orchestrator for deploying and managing microservices across a cluster of machines, and developing/managing cloud-native applications
 * **Azure Stack Hub** = extension that provides a way to run apps in an on-premises environment and deliver Azure services in your datacenter
 * **Azure VMware Solution** = runs VMware on cloud (for when configured VMware on-premise and want to move it to cloud)
 * **Dynamics** = Microsoft's line of business applications for day-to-day operations like sales/accounting/customer support, or in short Microsoft’s suite of CRM and ERP software
@@ -59,7 +59,7 @@ Azure provides more than 100 services that enable you to do everything from runn
 ### Compute Services
 
 * **Azure App Services** (Paas) = web (GUI) application or (API) services, supports multiple programming languages & containers
-* **Azure Container Instances** (Paas) = run a (serverless because we don't need to manage underlying server) container in Azure, with medium scalability
+* **Azure Container Apps** (Paas) = run a higher-level serverless (because we don't need to manage underlying server) container in Azure, with medium scalability
 * **Azure Kubernetes Service** (AKS, Paas) = open-source container orchestration platform, highly scalable & customizable
 * **Azure Functions** (Paas or FaaS) = highly scalable serverless coding PaaS (similar to app services) with granular pricing for micro/nano-services, in popular languages/frameworks (.NET/Java/Python/PowerShell)
 * **Azure Virtual Machines** (IaaS) = custom software & requirements, specialized, high degree of control

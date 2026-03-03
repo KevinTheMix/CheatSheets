@@ -81,7 +81,8 @@
   * **Hadoop** = collection of open-source software utilities for reliable/scalable distributed computing, a software framework for distributed storage & processing of bid data using MapReduce
   * **HBase** = open-source non-relational distributed DB (modeled after Google's Bigtable)
   * **Hive** = data warehouse software project built on top of Hadoop for providing data query & analysis
-  * **Kafka** = open-source distributed event store & realtime stream-processing platform
+  * **Kafka** = open-source distributed event store & realtime stream-processing platform, ie a durable high-throughput log-based system for publishing & subscribing to streams of records
+    * It is well-suited for things like event-driven microservice communication, real-time data pipelines, log aggregation, and stream processing
 * **AppSheet** = Google's no-code mobile/web app development platform
 * **Appwrite** = open-source BaaS, all-in-one development platform (built-in backend infrastructure & web hosting)
 * **Cloudflare** = CDN, cloud cybersecurity, DDoS mitigation, ICANN domain registration services

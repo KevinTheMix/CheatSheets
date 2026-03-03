@@ -46,6 +46,8 @@
 
 * **AutoGPT** = open-source agent orchestration agent that attempts to achieve a goal specified by a user in natural language (eg ChaosGPT to destroy humanity)
 * **Amazon Q Developer** = generative AI-powered assistant
+* **Amazon Bedrock** = fully managed service from AWS to build AI-Powered applications (eg AI assistants, chatbots, content generators, etc) quickly/easily without managing servers or training AI models yourself
+* **Amazon SageMaker** = cloud-based machine learning platform to create/train/deploy ML models on cloud (eg on embedded systems, edge devices)
 * **Amp** (by _Sourcegraph_) = CLI or IDE-integrated coding agent using various models (eg Gemini 3 Pro), with a strong focus on autonomous sub-agents & multi-step task execution
 * **Codex** = originally a simple coding-oriented OpenAI LLM (that powered GitHub Copilot), now a local IDE agentic coding assistant consuming OpenAI API (also via CLI or GitHub-connected [cloud-based](https://chatgpt.com/codex))
 * [Hugging Face](https://huggingface.co) = machine learning models collaborative/sharing platform

@@ -21,7 +21,8 @@
 * **Firewall** = network security service that monitors & controls incoming/outgoing traffic
 * **FTP** (File Transfer Protocol) = can be active (client start control connection, server starts data connection) or passive (client starts both, so works better with client-side firewalls)
 * **HTTP** (HyperText Transfer Protocol)
-* **HTTP/2** = major revision of HTTP (developed by Google), derived from (obsolete) SPDY communication protocol, supported by nearly 100% of browsers
+* **HTTP/2** = major revision of HTTP (by Google) using multiplexed streams over a single TCP connection, derived from earlier experimental SPDY communication protocol (by Google), supported by nearly 100% of browsers
+* **HTTP/3** = major version that uses QUIC (a multiplexed transport protocol built on UDP introduced in 2021) instead of TCP, supported by 95% of browsers
 * **HTTPd** (HTTP daemon) = any software running as background process and playing server in a client-server model, using HTTP(S) protocol (eg Apache HTTP Server)
 * **HTTPS** (HTTP Secure) = TLS layer between HTTP & TCP, attested via a digitally signed server certificate, initiated via public crypto key handshake
 * **IDL** (Interface Description Language) = contract/model format description (à la WSDL)
@@ -126,6 +127,7 @@
 * **Concentrator** = company-wide VPN access device (or software) that encrypts/decrypts outbound/inbound data, with firewall
 * **COPE** (Corporate Owned, Personally Enabled) = mobile devices owned by company but configured as both a personal/corporate device
 * **DOCSIS** (Data Over Cable Service Interface Specification) = internet via cable television modem
+* **Edge Device** = entry point into an enterprise ot service provider core networks (eg router, switch, integrated access device, multiplexer, MAN/WAN access devices)
 * **F Connector** = associated with cable television & cable model links
 * **Firewall** = filters by either port or application, encrypt/decrypts traffic between sites
 * **Hub** (or Repeater Hub) = connects multiple Ethernet devices together acting as a single network segment, broadcasting one input of any port to all other ports (which filter incoming data as needed)
@@ -225,7 +227,7 @@ Layers sometimes shortened to _Ln_ (eg _L2_ for Transport Layer 2)
 * **DHCP IP Reservation** = an IP address reserved to be always associated with a specific machine (via its MAC) as it connects
   * Not to be confused with manually assigning a static IP address on each device
 * **DNS** (Domain Name System) = phonebook of the Internet, hierarchical maps of readable URLs to IP addresses
-* **DNS Nameserver** = 24/7 running server that answers DNS queries (eg lookup its DNS records & ultimately its IP) by reading them from zone file (responds when someone's browser asks _where is that website?_)
+* **DNS Nameserver** = any 24/7 running server in DNS hierarchy that answers DNS queries (eg lookup its DNS records & ultimately its IP) by reading them from zone file (responds when someone's browser asks _where is that website?_)
 * **DNS over HTTPS** (DoH) = protocol for DNS resolution over HTTPS, to increase privacy/security by preventing MitM eavesdropping & manipulation of DNS dta
 * **DNS Record** = information about domains provided by authoritative DNS Servers, of different types:
   * A server's records information is viewable via Unix/Mac command `dig` or Windows `nslookup` (with option eg `-type=txt`)
@@ -237,9 +239,9 @@ Layers sometimes shortened to _Ln_ (eg _L2_ for Transport Layer 2)
     * **DKIM** = specialized DNS TXT records that stores public key used in DKIM
     * **DMARC** = stores DMARC policies
     * **SPF** = TXT records including a list of IP addresses & domains authorized to send emails from a domain
-* **DNS Registrar** = customer-facing company that registers/renews domains, submitting ownership details to registries on users behalf (eg Hostinger, OVH)
+* **DNS Registrar** = administrative customer-facing intermediary company that registers/renews domains, submitting ownership details to registries on users behalf (eg Hostinger, OVH)
 * **DNS Registry (Operator)** = hierarchical/regional entity that holds records of (annual) domain ownership, and can indicate which registrar's nameservers are linked to a website (eg DNS Belgium)
-* **DNS Root Domain** = top-level root for all TLDs (above _.com_, _.net_, _.org_, etc)
+* **DNS Root Domain/Server** = top-level root for all TLDs (above _.com_, _.net_, _.org_, etc)
 * **DNS Zone** = logical grouping of related domains, an administrative space which allows for more granular control of DNS components, with actual list of records configuration stored in an associated zone file
   * Ownership of that domain is required, otherwise it essentially sits as unused configuration
 * **DNS Zone File** = plain text file (on nameserver) containing all records (eg A, CNAME, MX) for a zone (ie a lookup table mapping names to addresses or one or more domains)

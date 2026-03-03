@@ -17,6 +17,7 @@
 * `***both***` (or ```both```)
 * `~~barred~~`
 * `> quote`
+* `![Alt text](image-url "Tool tip")` = image (with optional tooltip)
 * List
   * node
   1. 1

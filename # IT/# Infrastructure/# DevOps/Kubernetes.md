@@ -5,6 +5,7 @@ Based on an internal Google product called Borg open-sourced in 2014.
 
 ## Quick Tips
 
+* Kubernetes is mature in Linux, less mature in Windows
 * Can run on-premise, in public cloud or in a hybrid environment
 * Implement Progressive Delivery via tools like Argo Rollouts or Flagger that automatically roll back if error rates spike
 * Drawbacks = complexity (distributed system requires expertise to setup/operate), costs (high upfront cost, requires minimum level of resources to run & support all its features)
@@ -17,7 +18,9 @@ Based on an internal Google product called Borg open-sourced in 2014.
 * [Kelsey Hightower: Kubernetes The Hard Way](https://github.com/kelseyhightower/kubernetes-the-hard-way)
 * [Microsoft Learn: What is Azure Kubernetes Service (AKS)?](https://learn.microsoft.com/en-us/azure/aks/what-is-aks)
 * [Microsoft Learn: Introduction to Kubernetes](https://learn.microsoft.com/en-us/training/modules/intro-to-kubernetes)
+* [Microsoft Learn: Core concepts for Azure Kubernetes Service](https://learn.microsoft.com/en-us/azure/aks/core-aks-concepts)
 * [Microsoft Learn: Introduction to Azure Kubernetes Service](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-kubernetes-service)
+* [Microsoft Learn: Quickstart: Deploy an Azure Kubernetes Service cluster using Azure portal](https://learn.microsoft.com/en-us/azure/aks/learn/quick-kubernetes-deploy-portal)
 
 ## [Glossary](https://kubernetes.io/docs/reference/glossary)
 
@@ -33,7 +36,7 @@ Based on an internal Google product called Borg open-sourced in 2014.
     * **Deployment Controller** = manages rolling update & rollback of deployments
     * **Ingress Controller** = software that reads ingress resources & implements routing (eg _Traefik_, _Nginx Ingress Controller_)
     * **Replication Controller** = ensures designed number of pod replicas are running
-* **Deployment** = API object that manages a replicated application
+* **Deployment** = API object that manages a set of (replicated) Pods to run an application workload, usually one that doesn't maintain state
 * **Dockershim** = was a translation layer built into kubelets that converted CRI calls into Docker API calls
 * **etcd** = distributed key-value store to store all cluster (persistent) state, used by API server & other control plane components to store/retrieve cluster information
 * **Horizontal Pod Autoscaling** = scale horizontally as neded by adding more nodes to a cluster

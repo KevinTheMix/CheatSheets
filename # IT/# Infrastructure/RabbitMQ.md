@@ -3,11 +3,11 @@
 RabbitMQ is a open-source message broker/distribution middleware implementing AMQP and written in Erlang.
 It soften ties between applications & provides applications with features such as broadcasting/programmable routing/message persistence.
 
-* _Programmable network_ protocol, which means message routing configuration (exchanges, queues, bindings) can be created (or _declared_) by client nodes  (publisher or consumer) themselves, not just via centralized administration
-* Besides, those declarations are _idempotent_: they can be declared multiple times without side-effects (_created once_)
+## Quick Tips
+
+* _Programmable network_ protocol, which means message routing configuration (exchanges, queues, bindings) can be created (or _declared_) by client nodes (publisher or consumer) themselves, not just via centralized administration
+* Besides, those declarations are _idempotent_: a single entity can be validly declared multiple times at different locations without side-effects (_created once_), as long as its parameters match
 * Therefore applications themselves can declare all AMQP entities & routing schemes they need
-* Therefore a single entity can validly be declared multiple times at different locations (nodes), as long as same parameters are provided in its creation
-* Beware though of configuration conflicts between different applications, eg declaring the same exchange/queue with different parameters
 
 ## Glossary
 
@@ -22,6 +22,7 @@ It soften ties between applications & provides applications with features such a
   * A Binding is necessary for any Queue to receive any Messages, but the routing key it specifies may be disregarded by some Exchange types (i.e. fanout)
   * All Queues are bound to the default Exchange, with the Queue name acting as binding name
 * **Broker** = central entity receiving & delivering messages (contains exchanges & queues)
+* **Channel** = lightweight virtual connection inside a single TCP connection (à la HTTP/2), typically used by a single thread (as they are not thread-safe)
 * **Consumer** = any application that receives and reads message from a RabbitMQ Server
 * **Exchange** = AMQP entities akin to a postal service, through which messages transit and are distributed to their destined Queues
   * If no Queue matches the routing configuration for a message, it is lost
@@ -74,6 +75,7 @@ Adding RabbitMQ server .bat administration files to Windows path via `PATH = %PA
 ## API
 
 * `IModel`= Represents an AMQP channel
+* `QueueBind(queue: _queueName, exchange: BROKER_NAME, routingKey: eventName)` = binds queue to exchange (eg for a new subscription)
 * `QueueDeclare({name}}, {…args})` = (re)declares a queue. If the queue exists, its configuration must match exactly the provided configuration
   * `durable` = whether the queue survive a server restart
   * `exclusive` = whether the queue is exclusive to this client application declaring it

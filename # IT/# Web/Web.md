@@ -11,11 +11,9 @@
   * **Cumulative Layout Shift** (CLS) = measures visual stability (how much unexpected layout shift happens while loading)
   * **First Input Delay** (FID) = measures interactivity (how quickly a page responds to first user interaction)
   * **Largest Contentful Paint** (LCP) = measures loading performance (how fast main/largest visible content element becomes visible)
-* **GraphQL** (by _Meta_) = open-source data query/manipulation language for APIs
 * **Hydration** = making a server-rendered HTML page interactive by attaching client-side JavaScript behavior to it
 * **Microfrontend** = web development pattern in which a single app may be built from disparate builds, à la microservices for client-side SPAs written in JavaScript (eg Spotify)
 * **Progressive Web Application** (PWA) = app delivered via web, for browsers or as a mobile app with near-full native capabilities thanks to service workers (eg push notif, desktop icon, work offline, phone API access)
-* **REST** (Representational State Transfer) = architecture style for networked/web applications/APIs (stateless, client-server separation, uniform URL/JSON/HTTP methods, cacheable, layered eg transparent intermediate load balancer)
 * **Server-Sent Events** (SSE) = unidirectional (unlike WebSockets) server-to-client push technology (via HTTP connection, once it's initially established)
 * **Server-Side Rendering** (SSR) = generates fully rendered HTML pages (typically from a JS backend), then hydrates any interactive content afterwards to behave like a SPA (ie fast initial load, better SEO, no subsequent loads)
 * **Service Worker** = makes a (progressive) web app behave like a native app, provides local caching for offline(-first) use, acts as a proxy for requests & responses, background sync, push notifications
@@ -23,7 +21,6 @@
 * **Single-Page Application** (SPA) = loads once as a minimal HTML shell with JS bundle, then dynamically rewrites page content using API data without ever reloading page, making websites feel like native apps (eg Gmail)
   * During initial load, user gets a minimal HTML page with an empty root div element (eg `<div id="root"></div>`), that framework (eg React) interactivity 'runtime', and all transpiled components (pure JS/CSS/static assets)
   * Note that SPAs don't require a custom backend as that app can be self-contained (eg a calculator or game), use 3rd-party APIs (eg Firebase/Supabase), or shared/general-purpose API
-* **SOAP** (Simple Object Access Protocol) = protocol using XML message format (envelope, encoding rules, call/response convention), communicates over HTTP/TCP/UDP/SMTP application layer
 * **Static Site Generation** (SSG) = static pages are pre-built ahead at build time and served as-is to user browser, then JS still loads (fast initial load, good for mostly-static content)
 * **Text Fragment** (`#:~:text=`) = (browser-specific) URL suffix to search & highlight a given string (if present) on web page
 * **URL Rewriting** = rewrite a URL (eg turn GET parameters into URL fragments)
@@ -41,12 +38,6 @@
 * _Plausible_ = Google Analytics alternative
 * **Selenium** = open-source tools & libraries for browser tasks automation (ie script/record/playback à la DOM AutoHotKey, eg for testing & debugging)
   * Uses a DSL (Selenese) to write tests for various languages (C#, Java, JS, Python)
-* **Swagger** = framework & tools for designing/documenting/consuming RESTful web services
-  * **OpenAPI Specification** (OAS) = machine-readable IDL for describing/procuding/consuming/visualizing web services, a language-agnostic (YAML or JSON) format that describes APIs
-  * **Swagger Codegen** = generates client libraries, server stubs, API documentation from an OAS
-  * **Swagger Editor** = open-source editor to write OAS
-  * **Swagger Hub** = commercial platform with a collaborative environment for designing/documenting APIs
-  * **Swagger UI** = web-based UI automatically generated from a OAS, that documents an API and is able to make direct request/response to it
 * [web.dev](https://web.dev) = guidance by the Chrome team to build modern cross-browser web apps (eg accessibility, CSS, HTML, performance, privacy, PWA)
 * [Wix](https://www.wix.com) = build a website
 

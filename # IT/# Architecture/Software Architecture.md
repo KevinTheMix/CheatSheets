@@ -43,7 +43,7 @@
 * **Single Point of Failure** = system part that halts the entire system if it fails
 * [SOLID](https://en.wikipedia.org/wiki/SOLID) (OO design guidelines by _Robert C. Martin_) = make code flexible/maintainable/testable/understandable (implicit by today's modern architectural frameworks/standards)
   * **Single-Responsibility Principle** = a class should have only one & only one reason to change
-  * **Open/Closed Principle** (Open for extension, Closed for modification) = new behaviors can be added without modifying existing code (ie decrease coupling via IOs or SRP so entities are modular)
+  * **Open/Closed Principle** (Open for extension, Closed for modification) = new behaviors can be added without modifying existing code (ie append-only)
   * **Liskov Substitution Principle** = class instance can be replaced by subclass instance without breaking expectations (eg `Square : Rectangle` may be troublesome for some usecases)
   * **Interface Segregation Principle** = use smaller/more granular interfaces to avoid bloat (ie don't force implementing unnecessary methods)
   * **Dependency Inversion Principle** = high-level modules should depend on low-level modules **abstractions, not concretions** (eg printer depends on its cartridge slots, not on actual cartridges), makes code testable/respects OCP
