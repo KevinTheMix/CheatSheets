@@ -13,7 +13,7 @@ On Windows, container types are either cross-platform portable Linux (a Linux VM
 
 * In VS 2022+, right-click on solution then _Add > Orchestrator Support…_ to add a Dockerfile & _compose.yml_ file to a project
 * Use `wsl --shutdown` to kill RAM-hungry _Vmmmwsl_ process (first stop Docker Desktop in system tray)
-* Docker itself downloads base images, but not all other indirect dependencies (that is done via commands within Dockerfile eg `npm install`)
+* Docker itself downloads base images, but not indirect dependencies (that is done via commands within Dockerfile eg `npm install`)
 * Containers share host kernel, so they require a compatible OS (note that [all Linux distros share same Linux kernel](https://askubuntu.com/a/172932))
 * Windows containers are niche & used primarily for legacy .NET Framework apps that must run on Windows (can't be used by Mac/Linux, can't be part of same Docker compose as Linux containers)
 * (Base) images layers are only stored once then referenced many times (in a read-only fashion by containers, virtualized as if they belonged to their FS), and also get cached during build process to speed up subsequent builds
@@ -37,8 +37,8 @@ On Windows, container types are either cross-platform portable Linux (a Linux VM
   * Images are either pre-built (and will pull missing images), or build them on the spot (ie either runs full Dockerfile, or references one of its images)
   * Where referencing an entire Docker file (ie `build: context: . (dockerfile: Dockerfile)` with optional explicit Dockerfile name), uses its last stage as target
   * That compose YAML file is included in solution repo, so any dev can clone it then spin `docker compose up -d` at beginning of day and have all required dependencies running while they test their local code (via `F5`)
-  * _docker-compose.yml_ should contain all base environment-agnostic configuration
-  * _docker-compose.override.yml_ (usually for development) or similar file for production/staging should contain environment-specific configuration, merged with base file content when launching `docker compose up`
+  * _docker-compose.yml_ should contain all base environment-agnostic configuration (eg which services with images & `depends_on` relationships)
+  * _docker-compose.override.yml_ (usually for development) or similar file for production/staging/testing should contain environment-specific configuration, merged with base file content when launching `docker compose up`
 * **Container** = runnable (running or stopped) stateless (ie volatile although a persistent disk can be mounted) instance of an image, isolated from one another but share host OS kernel
   * Containers are not a _copy_ of their parent image and its storage; rather they access that read-only storage where it sits in a virtualized fashion (thinking it is its own) while also having a separate writable storage area
   * Containers allocate resources (CPU, RAM) dynamically, take a few MBs, take seconds to start, reuse/share host kernel (which does not have to be restarted each time)
@@ -102,9 +102,10 @@ On Windows, container types are either cross-platform portable Linux (a Linux VM
   * `-t(ag) <image>:tag)}`
 * `docker compose`
   * `down (-v)` = stop everything (also delete volumes ie wiping DB data for a fresh start)
+  * `run (<options>) <container> (<command>)` = run a one-off command on a service container, or run single container itself (using present docker compose file configuration)
   * `up` = start multi-container environement defined in _docker-compose.yml_
   * `-d(etach)` = runs in background (until taken down manually)
-  * `-f(ile) <file>` = specify one or more compose (base or override) file explicitely (one `-f <file>` for each file, where order matters as latter ones overrides former ones)
+  * `-f(ile) <file>` = specify one or more compose (base or override) file explicitely (one `-f <file>` argument for each file, where order matters as latter ones overrides former ones)
 * `docker exec <command>` = runs command inside already running container
 * `docker image <command>` = manage images (`build`, `history`, `import`, `inspect`, `load`, `ls`, `prune`, `pull`, `push`, `rm` remove one or more, `save`, `tag` create a tag)
 * `docker images` = lists existing local images (as seen in Docker Desktop)
@@ -121,7 +122,7 @@ On Windows, container types are either cross-platform portable Linux (a Linux VM
   * `-d(etach)` = run in background
   * `-e <ENV_VAR=value>` = define environment variables
   * `-i` = interactive mode
-  * `-p <host_port>:<container_port>` = binds host port & container port (exposes container to local network, usually same port both on host & container)
+  * `-p(ublish) <host_port>:<container_port>` = binds host port & container port (exposes container to local network, usually same port both on host & container)
   * `-rm` = deletes container once program is finished (exited signal received)
   * `-t` = allocate a pseudo-TTY (plugs container to current terminal)
   * `--name <container_name>` = provide an explicit name for container in place of defaultly generated one (eg to use in `docker start/stop` commands)
@@ -140,7 +141,7 @@ On Windows, container types are either cross-platform portable Linux (a Linux VM
   * Ignores files/folders mentioned in _.dockerignore_ file
 * `ENTRYPOINT ["<command>"(, "<arg1>", "<arg2>")]` = defines command to run when container is started
 * `ENV <variable> <value>` = define an environment variable
-* `EXPOSE <port>` = opens TCP listening port to outside world
+* `EXPOSE <port>` = documents which ports this container listens to (purely informational, use `docker run -p` to actually map a port between container & host, or equivalent docker compose file's _ports_ section)
 * `FROM <base_image> (AS <multi_stage_alias>)` = first statement in the Dockerfile; indicate the a base image from the repository (which is _Docker Hub_ by default)
 * `RUN <command>` = adds layer to initial parent image using commands provided by base image (eg `npm install` or `powershell -Command Add-WindowsFeature Web-Server`)
 * `SHELL cmd|powershell` = specify which shell/CLI to use when using `RUN` command
@@ -149,24 +150,34 @@ On Windows, container types are either cross-platform portable Linux (a Linux VM
 ### Docker Compose
 
 ```yaml
-version: <version>
+version: <version> # (deprecated in newer Compose versions)
 services:
   <service>
-    image: <image>
     build:
       context: <context eg .>
       dockerfile: <path>
-    environment:
+    depends_on: # This service won't start until all its other services dependencies have been spun up
+      - <service>
+    entrypoint: ["<command>", "<args>"] # eg ["dotnet", "test", "--no-build"]
+    environment: # Environment variables (ie container-local)
       - <var>=<value>
     expose: # Publishes a port only to other containers in internal/virtual Docker network.
       - "<port>"
-    ports: # Publishes ports to (local)host to be reachable from 'outside'.
-      - "<host>:<container>"
     extra_hosts: # Adds entries to container's /etc/hosts file, letting you map hostnames to IP addresses.
       - "<hostname>:<ip>" # IP or special value _host-gateway_ resolving to host's internal IP (10.0.75.1 on older Docker version, or 172.17.0.1 on Linux (ie default bridge network gateway)).
       - "host.docker.internal:host-gateway" # Linux trick replicating Docker Desktop default behavior: maps built-in DNS name host.docker.internal (used by processes inside containers) to host machine's internal IP (ie localhost).
-    depends_on: # This service won't start until all its other services dependencies have been spun up
-      - <service>
+    image: <image>
+    ports: # Maps container to (local)host ports to be reachable from outside (ie dev/debug direct access, in production go through API Gateways eg Ocelot).
+      - "<host>:<container>"
+    volumes: # Defines volumes for persistent storage
+      - <volume>:<path> # Create a usable named volume linked to path inside container
+      - <path> # Create an anonymous volume linked to path inside container (persistent but use less predictable random hash as name, not very useful in practice)
+  volumes: # Explicitly configure (named) volume options (eg custom driver/labels)
+    <volume>:
+      driver: <driver> # Determines where/how data is stored (built-in _local_ by default, ie stores files on host machine's filesystem)
+      labels: # Key-value metadata
+        <key>: "<value>"
+  networks: # Defines arbitrary names for segmenting network
 ```
 
 * Variable placeholders can be defined with a (shell expansion fallback) value that can be overridden by environment variables or have default values defined in a gitignored _.env_ file (in folder where compose command is run):

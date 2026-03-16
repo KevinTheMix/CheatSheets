@@ -5,6 +5,7 @@
 ## Glossary
 
 * **4+1** = view model describing architecture of software-intensive systems using mutliple shareholders viewpoints
+* **Anemic Domain Model** = entities with mostly only properies (ie little to no behavior/methods)
 * **Application Lifecycle Management** (ALM) = end-to-end product lifecycle management (governance, development, maintenance) of computer programs (ie requirements, architecture, programming/testing, maintenance, changes, CI)
 * **Barrel Files** = a file that does nothing but re-export things from other files
   * [TkDodo - Please Stop Using Barrel Files](https://tkdodo.eu/blog/please-stop-using-barrel-files)
@@ -25,7 +26,7 @@
 * **Marshalling** = transforming one live object's memory representation into a format suitable for storage/transmission between different runtimes (broader than only serialization)
 * **Middleware** = interception layer in a processing pipeline (eg HTTP requests) that applies shared behavior around a core operation without being that operation itself (eg auth, error handling, logging, messaging, transactions)
 * **Mixin** = in OO, a feature-able class that can be _included_ without being inherited from (eg C# `IEquatable`, Ruby include, JS extend/assign), promoting reusability & multiple inheritance
-* **Model-View-Controller** (MVC) = model is business data & rules (entities, DTOs, validation logic), view (eg HTML), controllers (incoming HTTP requests) return a view
+* **Model-View-Controller** (MVC) = model is business data & rules (entities, DTOs, validation logic), view (eg HTML), controllers (incoming HTTP requests) return a view (ie HTML, not JSON like a simple WebAPI)
 * **Module** = a function or class or file (depending on langages), embodying modularity/reusability through decomposing treatment parts and minimizing hard dependencies
 * **Offline First** or **Local First** = designing an app with lack of connection baked in from scratch as part of normal operation, and eventual sync to share data across devices
 * **OO** = Héritage + Polymorphisme + Encapsulation
@@ -50,7 +51,7 @@
   * [DigitalOcean: SOLID Design Principles Explained](https://www.digitalocean.com/community/conceptual-articles/s-o-l-i-d-the-first-five-principles-of-object-oriented-design)
 * **Strangler (Fig)** (or Ship of Theseus) pattern = wrap old code with intent of migrating it to newer code or log its uses (ie break down a monolith into modular parts with a façade in front, eg an API gateway & microservices)
 * **TOGAF** (The Open Group Architecture Framework) = most used framework for enterprise architecture, a high-level approach to design/plan/implement/govern an enterprise IT architecture (business, application, data, technology)
-* **Value Object** = immutable type that represent a concept by their value, not identity (ie equality based on all fields, not a unique ID, eg DateRange, EmailAddress)
+* **Value Object** = immutable type that represent a concept by their value not identity, ie equality based on all fields not a unique ID (eg DateRange/EmailAddress)
 
 ### Non-Functional Properties
 

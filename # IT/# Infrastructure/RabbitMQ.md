@@ -17,34 +17,36 @@ It soften ties between applications & provides applications with features such a
   * Explicit Acknowledgement = An Ack must be manually sent to the broker in order for the message to be removed from its Queue
   * Negative Acknowledgement = Allows to reject messages, and can also requeue them
 * **Advanced Message Queuing Protocol** (AMQP) = open standard application layer protocol for message-oriented middleware (message orientation, queuing, routing, reliability & security)
-* **Binding** = named link between an Exchange and a Queue
-  * Its name constitutes a Routing Key, part of the routing configuration to deliver Messages to the appropriate Queues
-  * A Binding is necessary for any Queue to receive any Messages, but the routing key it specifies may be disregarded by some Exchange types (i.e. fanout)
-  * All Queues are bound to the default Exchange, with the Queue name acting as binding name
+* **Binding** = named link between an Exchange and a Queue (multiple queues can have same binding name)
+  * A Binding is necessary for any Queue to receive any Messages, but the routing key it specifies may be disregarded by some Exchange types (ie fanout)
+  * Its name constitutes a Routing Key, part of routing configuration to deliver Messages to appropriate Queues
+  * All Queues are bound to default Exchange, with Queue name acting as binding name
 * **Broker** = central entity receiving & delivering messages (contains exchanges & queues)
 * **Channel** = lightweight virtual connection inside a single TCP connection (à la HTTP/2), typically used by a single thread (as they are not thread-safe)
 * **Consumer** = any application that receives and reads message from a RabbitMQ Server
+* **Dead-Letter Exchange** (DLX) = RabbitMQ's entrypoint into DLQs (since everything goes through an exchange first)
+* **Dead-Letter Queue** (DLQ) = holding area for messages (instead of losing/retrying them forever) not processed successfully due to low-level infrastructure issues (eg unacknowledged, expired TTL, full queue, no route exists)
+* [Delivery Metadata](https://www.rabbitmq.com/docs/consumers#message-properties)
+  * _Redelivered_ = indicates a message was previously delivered & requeued (in which case it may be a duplicate to handle properly)
 * **Exchange** = AMQP entities akin to a postal service, through which messages transit and are distributed to their destined Queues
   * If no Queue matches the routing configuration for a message, it is lost
   * Durable Exchanges survive a broker restart
   * The routing algorithm depends on the exchange type
   * **Exchange Type**
-    * _direct_ = Distributes a Message to the Queue whose name matches the routing key of that Message, can be used for round robin task distribution between several workers (Consumers) reading the same queue
-      * There always exists a default, anonymous, Direct Exchange (see below)
-    * _fanout_ = Broadcast a Message to all its bound queues (ignores routing keys)
-    * _topic_ = Distributes a Message to all Queues whose binding pattern-matches the routing key of the Message Used for multicast.
-      * Similar to a _direct_ Exchange but with wildcards: `*` for exactly one word, `#` for 0 or more words eg `*.fox.#` matches _gray.fox.eating.in.the.winter_
-      * If the binding of the Queue consists solely of `#`, it will receive all the messages transiting through the Exchange, just like a _fanout_ Exchange
-      * If the binding of the Queue contains no wildcard, it will behave like a _direct_ Exchange
-    * _header_ = Analyze the properties (Headers) within a message to determine its destination, ignoring its routing key
-  * **Default Exchange** = direct exchange with no name ("") pre-declared by the broker for us
-    * It is special because all queues are bound to it using the queue name as binding key
+    * _direct_ = distributes a Message to any Queue whose exchange binding name exactly matches that message's routing key, there always exists a default anonymous Direct Exchange (see below)
+      * Can be used for round robin task distribution between several workers consuming same queue, each handling a share of messages (eg with three Consumers _A/B/C, A/B/C_)
+    * _fanout_ = broadcast a Message to all its bound queues (ignores routing keys)
+    * _topic_ = distributes a Message to all Queues whose binding pattern-matches routing key of Message Used for multicast
+      * Similar to a _direct_ Exchange but with wildcards: `*` for exactly one word, `#` for 0 or more words (eg `*.fox.#` matches _gray.fox.eating.in.the.winter_)
+      * If binding of Queue consists solely of `#`, it will receive all messages transiting through Exchange (à la _fanout_ Exchange)
+      * If binding of Queue contains no wildcard, it will behave like a _direct_ Exchange
+    * _header_ = analyze properties (Headers) within a message to determine its destination, ignoring its routing key
+  * **Default Exchange** = direct exchange with no name ("") pre-declared by broker for us
+    * It is special because all queues are bound to it using queue name as binding key
     * That is what make it seem like we can send a message directly from producers to a queue using the queue's name as binding key without having defined an explicit binding
-* **Dead-Letter Exchange** (DLX) = queue where messages end up due to low-level infrastructure issues (eg message not acknowledged, message expired (TTL), queue is full due to length limit, no route exists)
 * **Message** = contains the data that is sent (as a byte array, so any text content must be encoded/decoded), **persistent messages** survive a broker restart
 * [Message Passing](https://en.wikipedia.org/wiki/Message_passing#Synchronous_versus_asynchronous_message_passing) middleware
-* **Prefetching**
-  * Qos = Quality of service, used for load balancing
+* **Prefetching** = how many unacked messages a consumer can hold at once, used for load balancing
 * **Producer** = any application that creates and sends messages to a RabbitMQ Server.
 * **Queue** = entity where messages arrive according to a particular routing configuration (Exchange Type & Routing Key Bindings) and are stored, **durable queues** survive a broker restart
 * **Virtual Host** = workspace with specific entities, users, permissions, policies
@@ -74,17 +76,20 @@ Adding RabbitMQ server .bat administration files to Windows path via `PATH = %PA
 
 ## API
 
-* `IModel`= Represents an AMQP channel
-* `QueueBind(queue: _queueName, exchange: BROKER_NAME, routingKey: eventName)` = binds queue to exchange (eg for a new subscription)
-* `QueueDeclare({name}}, {…args})` = (re)declares a queue. If the queue exists, its configuration must match exactly the provided configuration
-  * `durable` = whether the queue survive a server restart
-  * `exclusive` = whether the queue is exclusive to this client application declaring it
-  * `autodelete` = whether the queue must be deleted once the client disconnects
-  * `arguments` = other arguments
-  * If the queue is declared as `exclusive` & `autodelete`, it will be destroyed when the client closes (`durable` doesn't matter then)
-* `BasicConsume()` = Register a consumer that own the callback handling message reception.
-* `BasicAck()` = Acknowledge message reception/execution, by consumer.
-* `BasicQos()` = Quality of service. Useful to prevent additional upcoming messages on a consumer that is already busy.
+* `channel` = represents an AMQP **channel** (ie _IModel_ instance)
+  * `.BasicAck(deliveryTag: <deliveryTag>, multiple: <true|false>)` = acknowledge message reception/execution, by consumer.
+  * `.BasicConsume(queue: <queue>, autoAck: <true|false>, consumer: <consumer>)` = registers a message reception callback (ie a _EventingBasicConsumer_ instance)
+  * `.BasicGet(queue: <queue>, autoAck: <true|false>)` = pulls a single message manually
+  * `.BasicPublish(exchange: <exchange>, routingKey: <key>, basicProperties: null, body: <message>)`
+  * `.BasicQos(prefetchSize: <n>, prefetchCount: <n>, global: <true|false>)` = controls prefetch (ie how many unacked messages a consumer can hold at once), useful to prevent additional messages on an already busy consumer
+  * `.ExchangeDeclare(exchange: <exchange>, type: <type>)`
+  * `.QueueBind(queue: <queue>, exchange: <exchange>, routingKey: <key>)` = binds queue to exchange (eg subscribe)
+  * `.QueueDeclare(queue: <queue>, durable: <true|false>, exclusive: <true|false>, autoDelete: <true|false>, arguments: <args>)` = (re)declares a queue (if exists, configuration must match exactly provided configuration)
+    * `durable` = queue survive a broker server restart
+    * `exclusive` = queue exclusive to this client application declaring it
+    * `autodelete` = queue deleted when last client disconnects
+    * `arguments` = other arguments (eg TTL, dead-letter exchange)
+    * If the queue is declared as `exclusive` & `autodelete`, it will be destroyed when the client closes (`durable` doesn't matter then)
 
 ## Plugins
 

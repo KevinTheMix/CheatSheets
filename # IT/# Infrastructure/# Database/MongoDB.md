@@ -39,7 +39,7 @@ All commands must be run from MongoDB install folder (eg _C:\Program Files\mongo
 
 ### Architecture
 
-Under the hood, it is implemented as a series of nested documents referencing each other (=> à la dynamically allocated heap data vs static fixed-size data).
+Under the hood, data is stored a BSON (binary JSON) and sub-documents can either be embedded (nested) within other documents, or (in another collection and) referenced by ID.
 
 Contrarily to a relational DB, one-to-many relationships are inverted (eg wheels don't point to car, a car has a wheels IDs array instead)
 E.g. it's not the wheels that possess a foreign key to the car (provided the DB is normalized), but the car has an _array_ of wheel IDs (or name, or reference, or whatever field can uniquely identify them - and is indexed).

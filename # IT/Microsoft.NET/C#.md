@@ -27,7 +27,7 @@
 
 * **Casting** = changing compile type of a variable for types with no implicit conversion (but [explicit ones](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/numeric-conversions#explicit-numeric-conversions))
 * [Boxing/Unboxing](https://stackoverflow.com/a/2111905) = converts value to/from reference type (to be avoided)
-  * Can be used to shoehorn polymorphism in antiquated structures (eg. ArrayList that requires `object`s, not `int`s)
+  * Can be used to shoehorn polymorphism in antiquated structures (eg ArrayList that requires `object`s, not `int`s)
 * [Code Contracts](https://docs.microsoft.com/en-us/dotnet/framework/debug-trace-profile/code-contracts) = pre/post-conditions & invariants (eg `Contract.Requires(`{boolean_expression}`)
 * **Expression-bodied members** = member (ie method/property) statement as a single expression (eg `member => expression;`)
 * **Finalizer** (or **Destructor**) = for cleaning unmanaged resources before a class instance gets collected by the garbage collector `~Koko() { }`
@@ -72,6 +72,7 @@
 * `static readonly` = runtime constant (Can only be set at declaration or in static constructors)
 * `string` = alias for fully qualified .NET type name `System.String`
 * `struct` = declares a **value-type** struct (without inheritance from/to, but can implement interfaces), ie a simple (one-level) collections of related properties that are immutable once created
+  * Stored on stack, except when as a subproperty of a class (which is all referenced on heap)
 * `T` = generic type parameter. Actually a **prefix** (eg `TKey`, `TValue`, `TKoko`) which is `T` (for **T**ype) by convention (but can be anything)
 * `unsafe` = required on sections that use pointers in C#. Also must set compiler to run in unsafe mode.
 * `using` = wrap objects inheriting from `IDisposable` within such a statement to ensure their proper automatic `Dispose()`-al (safely even in case of exceptions)

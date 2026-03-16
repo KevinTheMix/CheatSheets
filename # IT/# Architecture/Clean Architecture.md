@@ -4,6 +4,7 @@
 
 * [GitHub: Ardalis Clean Architecture](https://github.com/ardalis/CleanArchitecture)
 * [Steve Smith: Clean Architecture With ASP.NET Core](https://www.youtube.com/watch?v=qOwB8PxOqC0)
+* When using CQRS + DDD, Query side is free to ignore constraints, trespass DDD aggregate boundaries, and query/join any table(s) (satisfying views needs) returned as static ViewModels or even as-is (eg using Dapper) dynamic objects
 
 ## Glossary
 
@@ -15,6 +16,7 @@
   * Goal = addressing different scaling needs (eg _100:1_ ratio between reads/writes), optimizing/simplifying models, performance optimization (eg specialized DBs on read side), but overkill for simple CRUD
 * **Dependency Rule** = core principle that source code dependencies must only point inward
   * Proper pattern is letting entities accumulate events (in commands) & dispatch them on saving (DbContext override eg `SaveChangesAsync` or via MediatR), and are then handled by MediatR `INotificationHandler` notification handlers
+* **Modular Monolith** = each business domain gets its own folder or project with strict boundaries between modules that each own their own data access/API endpoint/domain logic (microservice-style separation)
 * **Single Project Clean Architecture** = enforce dependency & other architectural rules via unit tests instead of using separate projects (still gain dependency management benefits, eg _ArchUnit.Test_)
 * **Vertical Slice Architecture** (VSA) = uniproject feature folders (domain models/DbContext/exception/logging are still shared), more simplicity at cost of less (or no) compile-time dependencies guardrails (via project references)
 
@@ -42,6 +44,8 @@
   * Consistency = every use-case follows the same pattern: MyUseCase.call(...). No free-floating, inconsistently-named functions
 
 ## Snippet
+
+DDD with event sourcing:
 
 ```C#
 public abstract class Aggregate

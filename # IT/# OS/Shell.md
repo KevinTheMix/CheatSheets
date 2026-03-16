@@ -43,6 +43,7 @@ Technically, any outer layer that mediates between a user and a kernel's service
 ## API
 
 * `;` = command separator
+* `KO_KO="kontan"` = sets a shell variable (ie internal to shell process)
 
 ### History Expansion Operators
 
@@ -82,10 +83,11 @@ Technically, any outer layer that mediates between a user and a kernel's service
 * `continue` = resume next iteration of a loop
 * `declare` = declare variables (Bash-specific)
 * `echo {arg(s)}` (quotes optional, arg can have newlines) = display a line of text (`-e` enable interpretation of backslash escapes eg `\n`)
+* `env` = prints all current environment variables but not local shell ones (handy for debugging)
 * `eval` = execute string argument in current shell (as if it was typed right there)
 * `exec {command}` = replaces shell with given command (ie no forked subshell is created, eg `exec more $1`)
 * `exit` = exit shell with status code
-* `export {variable(=value)}` = set environment variable to be inherited by child processes
+* `export {variable(=value)}` = marks local shell variable to get copied into environment of any child process (ie becomes an OS-level environment variable)
 * `fg ({job_id})` = brings background job to foreground (most recently backgrounded/stopped job if no argument given)
 * `hash` = remember/display _hashed_ commands location (avoid repetitive _$PATH_ lookups as a marginal performance gain, `-r` to clear that cache)
 * `help` = help for builtin commands (bash-specific)
@@ -104,8 +106,12 @@ Technically, any outer layer that mediates between a user and a kernel's service
   * Eg `while (IFS=) read (-r) {line}; do … done < {file}` = read file line (or fields) by line (common Bash idiom)
 * `readonly` = makes variables read-only
 * `return` = return from a shell function
-* `set ({option})` = display variables & functions, or set shell option/positional parameter (ie _$1_, _$2_, _$#_, _$@_, _$*_)
-  * `-e` = exit immediately if any command returns a non-zero exit status
+* `set` = displays all (shell & environment) variables, plus all shell functions
+* `set ({option})` = controls shell options/behaviors (eg fail loudly rather than silently), or more niche replaces shell positional parameters in current script (ie _$1_, _$2_, _$#_, _$@_, _$*_)
+  * `-e` = exit immediately if any command fails (ie returns a non-zero exit status)
+  * `-o pipefail` = fail a pipeline if any command in it fails
+  * `-u` = treat unset variables as errors
+  * `-x` = print each command before executing (great for debugging)
 * `shift ({#})` = shift positional parameters (1 by default, eg `shift 1` translates _$3/$2_ to _$2/$1_)
 * `shopt ({options})` = display all (or specified) shell options (`-s/-u` to set/unset provided shell option(s))
   * _cdspell_ = automatically fixes `cd {folder}` spelling mistakes
@@ -127,7 +133,7 @@ Technically, any outer layer that mediates between a user and a kernel's service
 * `times` = displays cumulative user/system time for shell & children
 * `trap` = specify commands to run on signal/exit
 * `type {command}` = display type of a command (shell builtin/keyword, function, file, alias)
-* `unset {variable}` = deletes shell environment variable or function
+* `unset {variable}` = deletes shell/environment variable or function
 * `wait` = blocks calling shell until one or more child processes (usually background jobs) have finished
 
 ### Environment Variables

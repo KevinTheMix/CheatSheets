@@ -43,18 +43,12 @@
   * **Remote** or **Reverse** = binds remote port to local one (eg `ssh -R` starts a local SSH client and creates a TCP-listening socket on remote machine forwarding data to local machine)
   * **Dynamic** = eg SOCKS
   * **Destination NAT** or **Static NAT** = router manual rule/configuration enabling uninitiated inbound connections to a specific local device's IP & port, making it accessible from internet
-* **Protocol Buffers** (aka _Protobuf_) = FOSS Google cross-platform (efficient binary) IDL used to serialize strongly-typed/structured data
 * **Proxy (Server)** = application-layer intermediary in a client-server network, can be forward (at client, eg provide cacheing, application content/URL filtering) or reverse (at server)
 * **RADIUS** (Remote Authentication Dial-in User Service) = client-server application layer networking protocol providing centralized AAA management for users connecting/using a network service
 * **RDP** (Remote Desktop Protocol)
 * **Reverse Proxy** = accepts incoming client connections on behalf of server, hiding & representing it to outside world, for load balancing, security (eg DMZ), caching, logging, monitoring user activty
 * **Reverse SSH Tunneling** = have a (hard to reach/well-protected behind NAT/firewall) computer grant access to it from outside by initiating an outbound SSH connection & reverse port forwarding
   * Outside machine is pre-configured to accept SSH connections (via SSHD) and allow remote/reverse port forwarding to send (usually local) TCP traffic through tunnel to protected machine
-* **RPC** (Remote Procedure Call) = serialize (strongly-typed) local method call to remote handler and back
-  * **gRPC** = Google cross-platform open source bi-directional (with codegened client-server stubs) real-time RPC framework using HTTP/2 for transport & Protobuf to encode data
-  * **Interceptors** = both at client & server endpoints enable inspection & modification (à la middleware, ie logging, metrics, authentication, retries, rate limiting)
-  * Strict common IDL contract (faster than HTTP1.1+REST overhead) promotes reliability/speed at scale between internal tightly-coupled microservices, or mobile clients & backends
-  * Not ideal for loosely-coupled public/external/universal facing services (cannot use cURL, Postman, IIS), where human-friendly HTTP REST or GraphQL can still be used
 * **SFTP** = file transfer over ssh
 * **Spanning Tree Protocol** (SPT) = network protocol that builds loop-free logical topology for Ethernet networks, prevents bridge loops (resuliting in broadcast storms)
 * **SSH** (Secure Shell) = application-layer client-server crypto protocol for network services over unsecured network (first remote login, then either CLI or GUI via X11 Forwarding-compatible apps)

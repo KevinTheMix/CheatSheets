@@ -40,7 +40,7 @@
   * **Failure** = accumulation of defects leading to information loss
   * **Fault** = unintended behavior by a program, ie a usecase that wasn't forethought, potentially leading to a failure
 * Types of fakes
-  * **Dummy** = placeholder to pass as required parameter (eg null or DummyUser())
+  * **Dummy** = placeholder to pass as required parameter (eg `null` or `DummyUser()`)
   * **Fake** = working lightweight interface implementation (eg performs memory operations instead of real DB)
   * **Mock** = hi-jacks/injects a fake/test double object in place of a real dependency (eg a method), so code does not call real API/DB/service
     * [Mock out dependencies, not the actual classes under test](https://stackoverflow.com/a/2277068)
