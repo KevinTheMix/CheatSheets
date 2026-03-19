@@ -22,10 +22,12 @@ Note that [in Windows, all I/O is asynchronous; synchronous APIs are just a conv
   * The entire call stack must be marked `async`, up to an (`async void`) event handler, _main_/Domain, `Task.Run()`, a WebAPI controller
   * Never define `async void` methods, unless [subscribing to events](https://stackoverflow.com/a/38241969/3559724)
 * `await` = suspends current context & non-blockingly yields control back to caller whilst waiting for an asynchronous operation to conclude (a Task result)
-  * If the awaited task is already completed (or is _extremely fast_), the current context is not captured and the execution continues immediately/synchronously
-  * When the task completes, the captured context is restored and the remaining code is executed within that context
-  * There may be no statements left in the method, but it **still needs execution time to exit**, hence potential deadlocks if the captured context is blocking
+  * If awaited task is already completed (or is _extremely fast_), current context is not captured and execution continues immediately/synchronously
+  * When a task completes, its captured context is restored and remaining code is executed within that context
+  * There may be no statements left in its method, but it **still needs execution time to exit**, hence potential deadlocks if that captured context is blocking
   * Any code before first await is executed **synchronously** as (background) asynchrony only starts then (compiler will complain if no awaits are found, making method synchronous instead)
+  * Forgetting an `await` when calling an `async` method will start that method but jump to next statement immediately (ie fire & forget, similar to `Task.Run()` but less deliberate)
+  * Forgetting all `await`s within an `async` method will run its bodys synchronously until completion but still returns a `Task`
   * [A method with multiple await statements will pause itself and resume its caller multiple times](https://stackoverflow.com/a/18445829)
 * `lock` = renders a portion of code atomic, providing thread-safety for sets of indivisible operations in a _concurrent_ context (or usually more complex shared memory configuration)
 

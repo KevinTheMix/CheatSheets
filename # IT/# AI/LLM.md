@@ -6,7 +6,6 @@
 * Submit whole screenshots instead of painfully describing UI for troubleshooting
 * _Let ChatGPT write it_, _Shit in, shit out_, _How hard can it be?_ -- William Verhaeghe
 * [OpenAI: Proximal Policy Optimization](https://openai.com/blog/openai-baselines-ppo) = reinforcement learning
-* [Context7](https://context7.com) = MCP server that pulls up-to-date API versioned documentation & code samples (eg Flutter), adds them as manual copy-paste, prompt context, API access
 
 ## Glossary
 
@@ -50,6 +49,8 @@
 * **Amazon SageMaker** = cloud-based machine learning platform to create/train/deploy ML models on cloud (eg on embedded systems, edge devices)
 * **Amp** (by _Sourcegraph_) = CLI or IDE-integrated coding agent using various models (eg Gemini 3 Pro), with a strong focus on autonomous sub-agents & multi-step task execution
 * **Codex** = originally a simple coding-oriented OpenAI LLM (that powered GitHub Copilot), now a local IDE agentic coding assistant consuming OpenAI API (also via CLI or GitHub-connected [cloud-based](https://chatgpt.com/codex))
+* [Context7](https://context7.com) = MCP server that pulls up-to-date API versioned documentation & code samples (eg Flutter), adds them as manual copy-paste, prompt context, API access
+* [Gitingest](https://gitingest.com) = turn any Git(Hub) repository into a simple long text digest of its codebase, to feed into any LLM
 * [Hugging Face](https://huggingface.co) = machine learning models collaborative/sharing platform
 * **Kiro** = AWS's native agentic AI development environment & IDE, from prototype to production
 * **mgrep** (_Mixedbread AI_) = cloud-based semantic multilingual multimodal (ie code/images/audio/video/PDFs) pre-filter grep system packaged as a developer tool, improving requests (ie use fewer tokens, halving costs & duration)

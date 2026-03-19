@@ -41,6 +41,12 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * _.gitconfig_ (User), _C:/Program Files/Git/etc/gitconfig_ (System), _./git/config_ (Local) = configuration sections
   * _.gitattributes_ = (binary/textual) merging and [line ending](https://stackoverflow.com/a/10855862/3559724) stragtegies per file type
   * _.gitignore_ = tracking strategy per file type
+* **Deploy Keys** = a SSH key attached to a single GitHub repo that grants read/write access to that repo only, without requiring a personal user account
+  * Generate a public/private pair of SSH keys via `ssh-keygen -t ed25519 -f C:\Users\<user>\.ssh\<key_name> -C <public_key_comment>` (`mkdir .ssh` if it does not exist yet)
+  * Create/generate a _config_ file in same _.ssh_ folder that sets a host alias, references private SSH key file, and probably `Port 443` (since most companies firewall block default 22)
+  * Go to GitHub repository > _Settings > Deploy keys_, set a title like _Work computer_ and paste content of SSH public key (also check _Allow write access_)
+  * That repo must be setup using SSH (not HTTPS, check what `git remote get-url origin` displays, and run `git remote set-url origin git@<host_alias>:<user>/<repo>.git` if HTTPS)
+  * Test using `ssh -T git@<host_alias>` & `git remove -v`
 * **Feature Branch Workflow** = create local _feature_ branch from _main_, make many commits, push to remote, pull request, resolve feedback locally/together, resolve merge conflicts to _main_
 * **Fetching** = re-synching from remote repository into local repository
 * **Fork** = on platforms like GitHub, duplicates an existing repository/project along with its full history towards the user's own account

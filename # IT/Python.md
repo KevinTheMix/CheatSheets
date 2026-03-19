@@ -11,13 +11,15 @@
 ## Glossary
 
 * **Django** = Python's full-fledged web framework
-* **Dunder Method** (Double Under) or **Magic Methods** = built-in methods starting with double leading & trailing underscores
-  * Commonly overriden (eg `__init__`), listable via `dir({class})`
+* **Dunder** (Double under) = special reserved names with double leading & trailing underscores used to implement certain behaviors
+  * Commonly overriden methods (eg `__init__`, listable via `dir({class})`)
+  * Although not recommended, custom variables can also use that format (eg for metadata-type variables like `__version__`, `__project_name__`)
 * **Flask** (`flask`) = lightweight "micro" web framework for small/medium application bundling only minimal essential features (routing, request handling, templating), extensible via extensions
 * **Kivy** = cross-platform (one codebase for desktop & mobile, but non-native look) mobile/touch-oriented Python UI framework (uses OpenGL)
 * **PyPI** (Python Package Index) = official repository of Python packages (default for `pip`)
 * **PyQt** = Python bindings for Qt framework (older, widely used)
 * **PySide** = Python bindings for Qt framework (more permissive license, officially supported by Qt)
+* **setuptools** = legacy standard Python packaging library to build/package/install/distribute Python projects (uses a _setup.py_ config file to define included modules & required dependencies)
 * **Tkinter** = Python built-in GUI library and binding/wrappper around Tcl/Tk
 * **Virtual Environment** = standalone self-contained local install including all versioned dependencies, sourced in command prompt, prevents intereference with global install
 * **Web Server Gateway Interface** (WSGI) = server-to-application calling/forwarding convention for Python applications
@@ -210,23 +212,47 @@ Returned by libraries such as SQL libraries (eg `fetchone()` & `fetchall()`).
 
 ### Libraries
 
+* **attrs** = declarative type-like class/attribute definitions without boilerplate
+* **azure-storage-file** = client SDK for azure file storage
+* **bleach** = HTML sanitizer that removes unsafe tags/attributes
+* **certifi** = mozilla-maintained ca bundle for ssl verification
+* **flask** = lightweight Python web microframework
+* **flask_csv** = CSV export helper for flask routes
+* **flask-restx** = flask extension for building REST apis with swagger docs
 * **http.server** = basic HTTP server
 * **krb5** = wraps Kerberos 5 C API
 * **matplotlib** = create static, animated, interactive visualizations (`matplotlib.pyplot`)
 * **NumPy** (Numerical Python) = arrays manipulation
 * **openpyxl** = read/write Excel 2010 xlsx/xlsm/xltx/xltm files
+* **oracledb** = oracle's official Python driver
 * **pandas** (panel data) = open source data manipulation & analysis, especially data structures/operations for numerical tables & time series (see <https://pandas.pydata.org>)
   * `df.dropna(how='all')` = remove missing values
   * `df.iloc[start:end]` = subset splicing
   * `df.isin({collection})` = check if DataFrame has values in collection (eg `df[~df.isin([excluded_values])]`)
   * `dg.reset_index(drop=True)`
 * **plotly** = open-source interactive data visualization
+* **pymongo** = official MongoDB driver
 * **pyngrok** = Ngrok API
+* **pyodbc** = ODBC database connectivity driver
+* **requests** = standard HTTP client for python
+* **riskpy** = financial risk-calculation utilities
 * **seaborn** = statistical data visualization
 * **scikit-learn** = modules for machine learning & data mining (`from sklearn import preprocessing`, see <https://scikit-learn.org>)
+* **sheeze** = serialization & data-transformation toolkit
+* **singleton** = tiny helper implementing the singleton pattern
 * **SQLAlchemy** = SQL toolkit & ORM
 * **statistics**
 * **statsmodels** = statistical computation & models (`from statsmodels.graphics.mosaicplot import mosaic`)
 * **timeit** = measure performances (eg `timeit.timeit(stmt={treatment}, number={n})`)
+* **tzlocal** = detects system's local timezone reliably
 * **winkerberos** = high-level interface to SSPI for Kerberos client auth
 * **xlsxwriter**
+
+#### Testing
+
+* **freezegun** = freezes time in tests to control datetime behavior
+* **mockito** = mockito-style mocking framework for python
+* **mongomock** = in-memory mongodb mock for tests
+* **mypy** = static type checker for python
+* **pytest** = python test runner
+* **pytest-cov** = code coverage plugin for pytest

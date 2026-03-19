@@ -42,7 +42,7 @@ On Windows, container types are either cross-platform portable Linux (a Linux VM
 * **Container** = runnable (running or stopped) stateless (ie volatile although a persistent disk can be mounted) instance of an image, isolated from one another but share host OS kernel
   * Containers are not a _copy_ of their parent image and its storage; rather they access that read-only storage where it sits in a virtualized fashion (thinking it is its own) while also having a separate writable storage area
   * Containers allocate resources (CPU, RAM) dynamically, take a few MBs, take seconds to start, reuse/share host kernel (which does not have to be restarted each time)
-  * VMs take GBs, minutes, fixed resources, run full-blown guest OS with resources access through a hypervisor, provide more resources than most apps need, but do provide better isolation & can runr non-compatible OSes
+  * VMs take GBs, minutes, fixed resources, run full-blown guest OS with resources access through a hypervisor, provide more resources than most apps need, but do provide better isolation & can run non-compatible OSes
 * **Docker CE** = Community Edition (as opposed to EE)
 * **Docker Client** = client communicating with daemon (not necessarily on same system)
 * **Docker Daemon** = heavy lifting heart of Docker, a service inside of which containers are built/run/distributed

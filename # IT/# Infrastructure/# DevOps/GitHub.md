@@ -17,7 +17,12 @@ GitHub is a web platform hosting (mostly software) projects using Git.
 * **GitHub Desktop** = Git desktop GUI
 * **GitHub Pages** = public website hosting service for GitHub repositories (eg blog via **Jekyll** or [MDwiki](https://dynalon.github.io/mdwiki/#!index.md))
   * Set Repository name as `{username}.github.io`, as its name can be changed _once_ a website is published for the first time (_confirmed_)
+* **GitHub Spark** = AI-powered whole app generation & prototyping tool built into GitHub
 * **Jekyll** = plain text into static websites/blogs
 * **Webhooks** (_Settings > Webhooks_) = notify external services when certain events happen (via POST request)
 
-* [Gitingest](https://gitingest.com) = turn any Git repository into a simple long text digest of its codebase, to feed into any LLM
+### Copilot
+
+* **Chat** = IDE-integrated chat
+* **CLI** = terminal to answer questions, write/debug code, interact with GitHub.com (eg make changes & create a pull request)
+* **Spaces** = include repositories/code/pull requests/issues/free-text/images/files as additional shareable context
