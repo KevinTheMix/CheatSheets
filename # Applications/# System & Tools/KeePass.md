@@ -3,7 +3,7 @@
 Open-source password manager with plugin extensibility and an active community.
 Saves its data in a .kdbx file, that can be published to the cloud, as long as its master password is strong.
 
-## Quitk Tips
+## Quick Tips
 
 * [Why](https://www.youtube.com/watch?v=7U-RbOKanYs)
 * [How to Choose a (master) Password](https://www.youtube.com/watch?v=3NjQ9b3pgIg)
