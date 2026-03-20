@@ -26,6 +26,8 @@ Azure provides more than 100 services that enable you to do everything from runn
 * **Azure DevTest Labs** (PaaS) = unified service sandbox environment for developers/testers to provision/run/deallocate/delete self-managed VMs to try different configs, ruled by admin policies
 * **Azure Event Grid** = fully managed serverless publishers topics to subscribers message routing service, for event-based & near-realtime applications, able to react to Azure services events (eg a VM was created)
 * **Azure Logic App** (PaaS) = serverless enterprise integration service for orchestration of business processes & applications workflowcharts via a no-code visual GUI (à la Zapier), with I/Os connectors (eg storage, web, e-mails)
+* **Azure Monitor** = collect/analyze/act on telemetry data (eg performance & health) from your applications/infrastructure (also find & scale down underutilized resources)
+  * **Application Insights** = OpenTelemetry feature of Azure Monitor that offers vendor-neutral Application Performance Monitoring (APM) for live web applications
 * **Azure Notification Hub** = push notifications
 * **Azure Resource Manager** (ARM) = shared layer for all Azure UIs (portal, REST, PowerShell, CLI, SDKs eg C#) to manage resources
 * **Azure Resource Manager Template** = declarative JSON-like script language to define resources
@@ -38,7 +40,7 @@ Azure provides more than 100 services that enable you to do everything from runn
 * [Microsoft Marketplace](https://marketplace.microsoft.com) = 1st-party (Azure) & 3rd-party products/services (ie IaaS, PaaS, SaaS) shop
 * **Power BI** = Microsoft's analytics & visualization reporting (à la SSRS, part of **Microsoft Power Platform** or embedded in **Azure**)
 * **Resource** = specific deployed instance of a service, with its own configuration (as a JSON template) & lifecycle
-* **Resource Group** = logical container for resources, organized by type (all DBs together, all web servers together), by application lifecycle (one group with DB/web/VM/storage), by department, by billing or location/region
+* **Resource Group** = logical container for resources with shared policies, grouped by type (eg DBs, web servers), application lifecycle (one group with DB/web/VM/storage), department, billing, location/region
 * **Scope** = hierarchical tree organization of entities on which configurations can be broadly/granularly applied, with top-down inheritance to lover level subtrees
   * **Management Group** (root) > **Subscription** (paying) > **Resource Group** > **Resource**
 * **Service** = category/offering that defines what kind of resources you can create and their capabilities (eg a DB, VM, web server/service)
@@ -138,8 +140,6 @@ Azure provides more than 100 services that enable you to do everything from runn
 
 ### Costs
 
-* **Azure Monitor** = find & scale down underutilized resources
-* **Azure Monitor Application Insights** = OpenTelemetry feature of Azure Monitor that offers vendor-neutral Application Performance Monitoring (APM) for live web applications
 * **Azure Pricing Calculator** = estimate costs, depends on **Resource Type** (eg VM/DB/Compute), **Services** offers/channels (Enterprise, CSP), **Location** (eg specific data center operation costs), **Bandwidth** (in/out)
 * **Azure Total Cost of Ownership** (TCO) = compares costs of running workloads on-premises datacenter vs on Azure
 * **Cost Management** = centralized self-service portal for monitoring/reporting usage & billing of Azure environment (can export billing information as a .csv on Blob storage)

@@ -10,15 +10,21 @@
 
 ## Glossary
 
+* **Anaconda** = Python, Jupyter & data science packages manager
+* **Conda** = CLI tool for package & environment management on Linux/macOS/Windows
 * **Django** = Python's full-fledged web framework
 * **Dunder** (Double under) = special reserved names with double leading & trailing underscores used to implement certain behaviors
   * Commonly overriden methods (eg `__init__`, listable via `dir({class})`)
   * Although not recommended, custom variables can also use that format (eg for metadata-type variables like `__version__`, `__project_name__`)
 * **Flask** (`flask`) = lightweight "micro" web framework for small/medium application bundling only minimal essential features (routing, request handling, templating), extensible via extensions
 * **Kivy** = cross-platform (one codebase for desktop & mobile, but non-native look) mobile/touch-oriented Python UI framework (uses OpenGL)
+* **Miniconda** = free miniature version of Anaconda Distribution (includes only conda plus minimal dependencies)
+* **Poetry** = manages dependencies, virtual environments, packages (à la Docker for Python), using a single declarative _pyproject.toml_ file (replaces old _setup.py_ & _requirements.txt_)
 * **PyPI** (Python Package Index) = official repository of Python packages (default for `pip`)
 * **PyQt** = Python bindings for Qt framework (older, widely used)
 * **PySide** = Python bindings for Qt framework (more permissive license, officially supported by Qt)
+* **Python Development Master** (PDM) = similar goal as Poerty but faster/lighter/more modern, also uses _pyproject.toml_
+* **Python Enhancement Proposal** (PEP) = official design documents that define how Python works (syntax, packaging, environments, runtime, community conventions) by Python core team
 * **setuptools** = legacy standard Python packaging library to build/package/install/distribute Python projects (uses a _setup.py_ config file to define included modules & required dependencies)
 * **Tkinter** = Python built-in GUI library and binding/wrappper around Tcl/Tk
 * **Virtual Environment** = standalone self-contained local install including all versioned dependencies, sourced in command prompt, prevents intereference with global install
@@ -31,17 +37,19 @@
   * `python - <<'PY'{Enter}{code}{Enter}PY` = execute inline Python code from a Bash here-document
   * `python -c {command}` = executes inline Python code passed as a string argument to `-c`
   * `python -m {module}` = runs Python _.py_ module file as a script (eg _pip_, _venv_)
-  * Eg `python -m venv {directory}` = creates a virtual environment
+  * Eg `python -m venv {directory}` = creates a virtual environment (or `py -3.11 -m venv .venv` for a specific local Python version)
     * `source {venv}/bin/activate` (or `.\{venv}\Scripts\Activate.ps1` in PowerShell) = change prompt to virtual environment
     * `deactivate` = exit virtual environment (return to system-wide python install)
   * Eg `python -m pip install {package}`
 * **python-is-python3** = small Debian/Ubuntu system package that creates a symlink for convenience
 * **pip(3)** = Python (3) package manager (installed as part of Python environment)
-  * `pip freeze > {file}` (eg _requirements.txt_) = list every package currently importable/usable into a requirements file (one package per line)
+  * `pip freeze` = list packages name & version in a key-value format, usually followed by `> {file}` (eg _requirements.txt_)
   * `pip (un)install`
     * `--upgrade-pip` = upgrades itself
+    * `-e` = in editable mode
     * `-r {file}` = install from a requirements file
     * `"pandas[excel]"` = install current Excel-related stack from PyPI (pandas, openpyxl, xslxwriter)
+  * `pip list` = list packages name & version in tab-separated format
 * **pyinstaller** = (pre-)compile Python code (`-F` aka `--onefile` to create single file bundle exe)
   * `--icon={icon.ico}` = add custom icon to final _.exe_
   * `--noconfirm` = don't ask when overwriting _build_ & _dist_ folders
@@ -174,7 +182,7 @@ Unordered collection **unique** heterogenous elements.
 
 #### Tuple
 
-Ordered collection of immutable heterogenous data.
+Ordered immutable collection of heterogenous data.
 Immutability makes them non-growable, which makes it memory-effcient & fast.
 Can be used as a record in place of a full-blown class object.
 Returned by libraries such as SQL libraries (eg `fetchone()` & `fetchall()`).
@@ -182,13 +190,14 @@ Returned by libraries such as SQL libraries (eg `fetchone()` & `fetchall()`).
 * `(1, 'a', True)` = **tuple**
 * `1, 'a', True` = also a valid tuple (parentheses are optional)
 * `(1,)` (or just `1,`) = single element tuple (with mandatory comma)
-* `(name, age, bow) = ("Koko", 17, "bare")` = tuple unpacking, assign multiple variables at once
+* `(name, age, bow) = ("Koko", 17, "bare")` = assign multiple variables at once (**tuple unpacking**)
 * `tuple[index]` = returns item at index
 * `if i (not) in {tuple}` = checks for (not) membership
 
 ### Functions
 
-* `def koko():  {body}` = definition
+* `def koko(): <body>` = definition
+* `def koko(): return 1,2` = functions can return (a tuple of) multiple values or objects
 
 ### OOP
 
@@ -197,7 +206,7 @@ Returned by libraries such as SQL libraries (eg `fetchone()` & `fetchall()`).
 * `def koko(self, {args})` = instance method, receiving instance as first argument (named _self_ by convention)
 * `isinstance({varialble}, {class})` = check if instance is of type class (eg `isinstance(text, str)`)
 
-### Built-ins
+## Built-ins
 
 * **datetime** (eg `from datetime import datetime, timedelta`)
 * **io**
@@ -210,7 +219,7 @@ Returned by libraries such as SQL libraries (eg `fetchone()` & `fetchall()`).
 * **subprocess** = execute a shell command
 * **time**
 
-### Libraries
+## Libraries
 
 * **attrs** = declarative type-like class/attribute definitions without boilerplate
 * **azure-storage-file** = client SDK for azure file storage
@@ -248,7 +257,7 @@ Returned by libraries such as SQL libraries (eg `fetchone()` & `fetchall()`).
 * **winkerberos** = high-level interface to SSPI for Kerberos client auth
 * **xlsxwriter**
 
-#### Testing
+### Testing
 
 * **freezegun** = freezes time in tests to control datetime behavior
 * **mockito** = mockito-style mocking framework for python

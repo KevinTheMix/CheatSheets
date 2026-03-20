@@ -96,28 +96,38 @@ On Windows, container types are either cross-platform portable Linux (a Linux VM
 
 ## API
 
-* `cat <dockerfile_folder> | docker build -t <image_name>`
-* `docker build (<options>) <dockerfile_folder>` = builds an image from a Dockerfile where specified folder (eg `.` for current) is used as _build context_ (ie will serve as relative path for instructions in Dockerfile)
-  * `-f <dockerfile_name>dockerfile_path}` = explicit Dockerfile name (instead of default _Dockerfile_) or path
-  * `-t(ag) <image>:tag)}`
 * `docker compose`
   * `down (-v)` = stop everything (also delete volumes ie wiping DB data for a fresh start)
   * `run (<options>) <container> (<command>)` = run a one-off command on a service container, or run single container itself (using present docker compose file configuration)
   * `up` = start multi-container environement defined in _docker-compose.yml_
   * `-d(etach)` = runs in background (until taken down manually)
   * `-f(ile) <file>` = specify one or more compose (base or override) file explicitely (one `-f <file>` argument for each file, where order matters as latter ones overrides former ones)
-* `docker exec <command>` = runs command inside already running container
+* `docker info` = display setup information (where images reside, etc)
+* `docker logs <container_id|container_name>` = view logs of a container (especially useful for backgrounded ones since they are not displayed in terminal)
+* `docker push <username>/<image>` = push to registry
+* `docker system prune` = deletes all resources — images, containers, volumes, and networks — that are dangling (not associated with a container)
+  * `-a` = remove any stopped containers & all unused images (not just dangling images)
+
+### Images
+
+* `docker build (<options>) <dockerfile_folder>` = builds an image from a Dockerfile where specified folder (eg `.` for current) is used as _build context_ (ie will serve as relative path for instructions in Dockerfile)
+  * `-f <dockerfile_name>dockerfile_path}` = explicit Dockerfile name (instead of default _Dockerfile_) or path
+  * `-t(ag) <image>:tag)}`
 * `docker image <command>` = manage images (`build`, `history`, `import`, `inspect`, `load`, `ls`, `prune`, `pull`, `push`, `rm` remove one or more, `save`, `tag` create a tag)
 * `docker images` = lists existing local images (as seen in Docker Desktop)
   * `-a(ll)` = show all images (including intermediary images)
-* `docker info` = display setup information (where images reside, etc.)
+* `docker load` = import from a _.tar_ file
+* `docker pull <image(:tag)>` = download image from registry (_latest_ tag by default), implied when running a image not present locally
+* `docker rmi <image>` = deletes an image
+* `docker save` = export an image to a _.tar_ file
+
+### Containers
+
+* `docker exec <command>` = runs command inside already running container
 * `docker inspect <container>` = shows full configuration & state of a container (or image/network/volume/etc) in JSON format
   * `--format {{<specific_field>}}`  
-* `docker logs <container_id|container_name>` = view logs of a container (especially useful for backgrounded ones since they are not displayed in terminal)
 * `docker ps` = lists running containers (`-a` includes stopped containers)
-* `docker pull <image(:tag)>` = download image from registry (_latest_ tag by default), implied when running a image not present locally
-* `docker push <username>/<image>` = push to registry
-* `docker rm <name|id>` = inversely, the following command deletes a container
+* `docker rm <container|id>` = deletes a container
 * `docker run <image(:tag)> (<command>)` = creates a container based on a (local or remote eg Docker Hub) image, creating a new container from image each time
   * `-d(etach)` = run in background
   * `-e <ENV_VAR=value>` = define environment variables
@@ -129,8 +139,6 @@ On Windows, container types are either cross-platform portable Linux (a Linux VM
   * Runtime parameters can be provided, so a same image can actually generate different containers
 * `docker start <container_id|container_name>` = start an existing (stopped) container
 * `docker stop <container_id|container_name>` = stop one (or more) running container
-* `docker system prune` = deletes all resources — images, containers, volumes, and networks — that are dangling (not associated with a container)
-  * `-a` = remove any stopped containers & all unused images (not just dangling images)
 
 ### Dockerfile
 

@@ -24,7 +24,7 @@ Based on an internal Google product called Borg open-sourced in 2014.
 
 ## [Glossary](https://kubernetes.io/docs/reference/glossary)
 
-* **Cluster** = a set of (at least one) worker machines (ie nodes) that run containerized applications
+* **Cluster** = a set of (worker) machines (ie nodes) that run containerized applications
 * **ConfigMap** = API object to store non-confidential data in key-value pairs, consumed by pods as environment variables, CLI arguments, configuration files in a volume
 * **Container Runtime** = runs containers effectively by managing their execution & lifecycle (pulls images from registry, start/stops containers, manages their resources)
 * **Container Runtime Interface** (CRI) = main gRPC protocol for communication between kubelet & container runtime (implemented nnatively by eg containerd & CRI-O)
@@ -45,7 +45,7 @@ Based on an internal Google product called Borg open-sourced in 2014.
 * **Kubelet** = daemon running on each node that ensures containers described in PodSpecs obtained through various sources are running/healthy in a pod (communicate with control plane to receive instructions on desired pods state)
 * **Kubernetes API** = application that serves functionality through a RESTful interface & stores cluster state
 * **Namespace** = a way to divide cluster resource between teams or environments
-* **Node** = (physical or virtual) machine in cluster that has daemons/services to host pods
+* **Node** = (physical or virtual) machine/server in cluster that has daemons/services to host pods
 * **Object** = an API entity/resource representing cluster state (or "record of intent")
   * Can be created via a declarative (YAML/JSON) manifest/configuration file that control plane will work to ensure it exists or imperatively (via `kubectl` commands), or via custom controllers/Helm charts
 * **Orchestrator** = manages lifecycle & locations of various containers, with error control & restart capabilities (eg Azure Fabric Service, Docker Swarm, Kubernetes, Mesosphere)
@@ -76,6 +76,7 @@ Based on an internal Google product called Borg open-sourced in 2014.
 * _Kustomize_ = similar to Helm
 * _Helm_ = package manager for Kubernetes that uses templated manifests (charts) to deploy & manage applications, helps reducing number of YAML manifest/configuration files
 * _Minikube_ = cross-platform tool for running Kubernetes locally
+* _Rancher_ = open-source Kubernetes-as-a-service (eg to pilot AKS)
 * _Spinnaker_ = blue-green
 
 ## CLI
