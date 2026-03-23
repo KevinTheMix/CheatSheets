@@ -49,7 +49,7 @@ Based on an internal Google product called Borg open-sourced in 2014.
 * **Object** = an API entity/resource representing cluster state (or "record of intent")
   * Can be created via a declarative (YAML/JSON) manifest/configuration file that control plane will work to ensure it exists or imperatively (via `kubectl` commands), or via custom controllers/Helm charts
 * **Orchestrator** = manages lifecycle & locations of various containers, with error control & restart capabilities (eg Azure Fabric Service, Docker Swarm, Kubernetes, Mesosphere)
-* **Pod** = smallest & simplest deployable unit in a node designed as a shared execution context for a set of running containers (sharing network namespace/IP address, storage volumes, lifecycle together)
+* **Pod** = smallest & simplest deployable unit in a node, a shared (network namespace/IP address, storage volumes, lifecycle) execution context for a set of 1 upto N running containers
 * **PodSpec** = specification within a pod manifest that defines containers/volumes/runtime configuration for that pod
 * **Recreate** = another deployment strategy, which kills everything then start new pods
 * **Replica** = running copy/duplicate of a pod (set) ready to go live at any given time that ensures high availability/scalability/fault tolerance/rolling updates/efficient resources distribution across nodes

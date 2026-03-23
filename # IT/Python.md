@@ -2,7 +2,7 @@
 
 ## Quick Tips
 
-* [PyPI](https://pypi.org) = packages
+* [PyPI](https://pypi.org) (Python Package Index) = official repository of Python packages (default for `pip`)
 * There is no brackets in python, indentation matters
 * Variables can be declared in a sub-scope and be used outside (eg declared locally within `if` block & used underneath)
 * On Windows, disable default aliases/redirections to Microsoft Store to avoid interferences with local install (eg in **PowerShell** & virtual environment)
@@ -10,26 +10,103 @@
 
 ## Glossary
 
-* **Anaconda** = Python, Jupyter & data science packages manager
-* **Conda** = CLI tool for package & environment management on Linux/macOS/Windows
-* **Django** = Python's full-fledged web framework
+* _.pyi_ file = Python type stub file, provides type information to type checkers, IDEs & tools (mirrors structure of a _.py_ file, only signatures/definitions)
+* **Callable** = anything you can call with parentheses (eg `something(…)`)
+* **Decorator** = any callable that takes a function/class and returns/replaces it with another function/class (ie syntactic sugar for `f = decorator(f)`)
+  * Decorators with parameters (hence parentheses) are expressions evaluated immediately (with _None_ func parameter), yet **applied** later at same time argument-free would
 * **Dunder** (Double under) = special reserved names with double leading & trailing underscores used to implement certain behaviors
-  * Commonly overriden methods (eg `__init__`, listable via `dir({class})`)
+  * **Magic Methods** = commonly overriden methods (eg `__init__`, listable via `dir({class})`)
   * Although not recommended, custom variables can also use that format (eg for metadata-type variables like `__version__`, `__project_name__`)
-* **Flask** (`flask`) = lightweight "micro" web framework for small/medium application bundling only minimal essential features (routing, request handling, templating), extensible via extensions
-* **Kivy** = cross-platform (one codebase for desktop & mobile, but non-native look) mobile/touch-oriented Python UI framework (uses OpenGL)
-* **Miniconda** = free miniature version of Anaconda Distribution (includes only conda plus minimal dependencies)
+* **Module** = a single file of Python code
+* **Package** = a folder containing multiple modules
 * **Poetry** = manages dependencies, virtual environments, packages (à la Docker for Python), using a single declarative _pyproject.toml_ file (replaces old _setup.py_ & _requirements.txt_)
-* **PyPI** (Python Package Index) = official repository of Python packages (default for `pip`)
-* **PyQt** = Python bindings for Qt framework (older, widely used)
-* **PySide** = Python bindings for Qt framework (more permissive license, officially supported by Qt)
 * **Python Development Master** (PDM) = similar goal as Poerty but faster/lighter/more modern, also uses _pyproject.toml_
 * **Python Enhancement Proposal** (PEP) = official design documents that define how Python works (syntax, packaging, environments, runtime, community conventions) by Python core team
 * **setuptools** = legacy standard Python packaging library to build/package/install/distribute Python projects (uses a _setup.py_ config file to define included modules & required dependencies)
-* **Tkinter** = Python built-in GUI library and binding/wrappper around Tcl/Tk
 * **Virtual Environment** = standalone self-contained local install including all versioned dependencies, sourced in command prompt, prevents intereference with global install
-* **Web Server Gateway Interface** (WSGI) = server-to-application calling/forwarding convention for Python applications
+
+### Frameworks
+
+* **Anaconda** = Python, Jupyter & data science packages manager
+* **Conda** = CLI tool for package & environment management on Linux/macOS/Windows
+* **Django** = Python's full-fledged web framework
+* **Flask** (`flask`) = lightweight "micro" web framework for small/medium application bundling only minimal essential features (routing, request handling, templating), extensible via extensions
+* **Kivy** = cross-platform (one codebase for desktop & mobile, but non-native look) mobile/touch-oriented Python UI framework (uses OpenGL)
+* **Miniconda** = free miniature version of Anaconda Distribution (includes only conda plus minimal dependencies)
+* **PyQt** = Python bindings for Qt framework (older, widely used)
+* **PySide** = Python bindings for Qt framework (more permissive license, officially supported by Qt)
 * **wxPython** = Python bindings for wxWidgets
+
+### Modules
+
+#### Python Standard Library
+
+Over 200 built-in modules.
+
+* **datetime** (eg `from datetime import datetime, timedelta`)
+* **functools** = function tools
+  * partial = function that creates a new function with some of original function's arguments pre‑filled
+* **io**
+* **math**
+  * `math.comb(n,k)` = binomial coefficient
+* **re** (regular expressions)
+* **os**
+* **pickle**
+* **platform** = get OS name
+* **subprocess** = execute a shell command
+* **time**
+* **typing** = type-related annotations
+  * Dict = provide an explicit type (ie type-hint) for dictionary variables beyond built-in `dict` type (no longer relevant since Python 3.9 that lets `dict` behave like Dict)
+  * Optional = nullable type (`Optional[T]` means _T_ or _None_)
+
+#### External Packages
+
+* **attrs** = declarative type-like class/attribute definitions without boilerplate
+* **azure-storage-file** = client SDK for azure file storage
+* **bleach** = HTML sanitizer that removes unsafe tags/attributes
+* **certifi** = mozilla-maintained ca bundle for ssl verification
+* **flask** = lightweight Python web microframework
+* **flask_csv** = CSV export helper for flask routes
+* **flask-restx** = Flask extension for quickly building REST apis with minimal setup & swagger docs
+  * `reqparse` (_deprecated_) = request argument parsing & validating (considered legacy, use marshmallow + apispec or model-based validation with @api.expect() for new projects)
+* **http.server** = basic HTTP server
+* **krb5** = wraps Kerberos 5 C API
+* **matplotlib** = create static, animated, interactive visualizations (`matplotlib.pyplot`)
+* **NumPy** (Numerical Python) = arrays manipulation
+* **openpyxl** = read/write Excel 2010 xlsx/xlsm/xltx/xltm files
+* **oracledb** = oracle's official Python driver
+* **pandas** (panel data) = open source data manipulation & analysis, especially data structures/operations for numerical tables & time series (see <https://pandas.pydata.org>)
+  * `df.dropna(how='all')` = remove missing values
+  * `df.iloc[start:end]` = subset splicing
+  * `df.isin({collection})` = check if DataFrame has values in collection (eg `df[~df.isin([excluded_values])]`)
+  * `dg.reset_index(drop=True)`
+* **plotly** = open-source interactive data visualization
+* **pymongo** = official MongoDB driver
+* **pyngrok** = Ngrok API
+* **pyodbc** = ODBC database connectivity driver
+* **requests** = standard HTTP client for python
+* **riskpy** = financial utilities for risk analysts, validators, checking statistical models
+* **seaborn** = statistical data visualization
+* **scikit-learn** = modules for machine learning & data mining (`from sklearn import preprocessing`, see <https://scikit-learn.org>)
+* **singleton** = tiny helper implementing the singleton pattern
+* **SQLAlchemy** = SQL toolkit & ORM
+* **statistics**
+* **statsmodels** = statistical computation & models (`from statsmodels.graphics.mosaicplot import mosaic`)
+* **timeit** = measure performances (eg `timeit.timeit(stmt={treatment}, number={n})`)
+* **tkinter** = Python built-in GUI library and binding/wrappper around Tcl/Tk
+* **tzlocal** = detects system's local timezone reliably
+* **winkerberos** = high-level interface to SSPI for Kerberos client auth
+* **Web Server Gateway Interface** (WSGI) = server-to-application calling/forwarding convention for Python applications
+* **xlsxwriter**
+
+##### Testing
+
+* **freezegun** = freezes time in tests to control datetime behavior
+* **mockito** = mockito-style mocking framework for python
+* **mongomock** = in-memory mongodb mock for tests
+* **mypy** = static type checker for python
+* **pytest** = python test runner
+* **pytest-cov** = code coverage plugin for pytest
 
 ## CLI
 
@@ -58,6 +135,7 @@
 
 ## API
 
+* `*` & `**` = argument unpacking operators (`*` iterable, `**` mapping/dict)
 * `:=` (walrus operator) = assign & use in same expression (returns right value)
 * `""" {comment} """` = function comment (as first line following under name)
 * `\` = (multi-)line continuation
@@ -67,14 +145,13 @@
 
 * _None_ = **NoneType** (à la null)
 * `pass` = no op, ie placeholder statement for contexts where a statement is required by syntax but not implemented yet (eg in a if/else block)
-* `_field` = meant informatively that an attribute/method is intended for use inside that class only
 * `field_` = single trailing underscore avoid conflicts with reserved keyword (by convention)
-* `__field` = name mangling (ie replaced with `_classname__field`)
 * `#` = comment
 * `input(text)` = displays optional prompt text & returns user input
 * `print(arg(s))` = prints argument (concatenates them if multiple)
 * `type(value)` = returns type (eg `<class 'str'>`)
 * `eval(code)` = returns result of Python code string dynamically
+* `callable(koko)` = true/false whether argument is callable
 
 ### Numbers
 
@@ -175,11 +252,6 @@ Unordered collection **unique** heterogenous elements.
 
 * `{a, b, c}` = **set**
 
-#### Dictionary
-
-* `{a:b}` = **dict**ionary
-* `.get({key}, {default})` = retrieves value at key, or default if not found
-
 #### Tuple
 
 Ordered immutable collection of heterogenous data.
@@ -194,74 +266,31 @@ Returned by libraries such as SQL libraries (eg `fetchone()` & `fetchall()`).
 * `tuple[index]` = returns item at index
 * `if i (not) in {tuple}` = checks for (not) membership
 
+#### Dictionary
+
+* `{a:b}` = **dict**ionary
+* `dic[key]` = get value
+* `dic.get(key(, default))` = retrieves value at key (with default when not found)
+* `if "key" in dic` = check key presence
+
 ### Functions
 
-* `def koko(): <body>` = definition
+* `def koko(): …` = definition
 * `def koko(): return 1,2` = functions can return (a tuple of) multiple values or objects
+* `def koko(*args, **kwargs)` = function with argument unpacking operators (use eg `kwargs["key"]`)
 
 ### OOP
 
+* **Attributes** = instance or class fields or methods
 * `class Koko({Parent})` = class inheritance
-* `__init__(self, {args})` = constructor
+* `__init__(self, *args, **kwargs)` = constructor, within which all instance variables are declared (eg `self._koko = …`)
+  * Any variable defined outside a class constructor is a class (ie static) attribute, _inherited_ by instances, which can override in a per-instance basis
+* `_attribute` = naming convention meant to treat attribute/method as internal/non-public/for use inside that class only (not enforced whatsoever)
+* `__attribute` = name mangling (ie replaced with `_classname__field` making it less accessible from outside, closest thing to true `private` member)
 * `def koko(self, {args})` = instance method, receiving instance as first argument (named _self_ by convention)
-* `isinstance({varialble}, {class})` = check if instance is of type class (eg `isinstance(text, str)`)
-
-## Built-ins
-
-* **datetime** (eg `from datetime import datetime, timedelta`)
-* **io**
-* **math**
-  * `math.comb(n,k)` = binomial coefficient
-* **re** (regular expressions)
-* **os**
-* **pickle**
-* **platform** = get OS name
-* **subprocess** = execute a shell command
-* **time**
-
-## Libraries
-
-* **attrs** = declarative type-like class/attribute definitions without boilerplate
-* **azure-storage-file** = client SDK for azure file storage
-* **bleach** = HTML sanitizer that removes unsafe tags/attributes
-* **certifi** = mozilla-maintained ca bundle for ssl verification
-* **flask** = lightweight Python web microframework
-* **flask_csv** = CSV export helper for flask routes
-* **flask-restx** = flask extension for building REST apis with swagger docs
-* **http.server** = basic HTTP server
-* **krb5** = wraps Kerberos 5 C API
-* **matplotlib** = create static, animated, interactive visualizations (`matplotlib.pyplot`)
-* **NumPy** (Numerical Python) = arrays manipulation
-* **openpyxl** = read/write Excel 2010 xlsx/xlsm/xltx/xltm files
-* **oracledb** = oracle's official Python driver
-* **pandas** (panel data) = open source data manipulation & analysis, especially data structures/operations for numerical tables & time series (see <https://pandas.pydata.org>)
-  * `df.dropna(how='all')` = remove missing values
-  * `df.iloc[start:end]` = subset splicing
-  * `df.isin({collection})` = check if DataFrame has values in collection (eg `df[~df.isin([excluded_values])]`)
-  * `dg.reset_index(drop=True)`
-* **plotly** = open-source interactive data visualization
-* **pymongo** = official MongoDB driver
-* **pyngrok** = Ngrok API
-* **pyodbc** = ODBC database connectivity driver
-* **requests** = standard HTTP client for python
-* **riskpy** = financial risk-calculation utilities
-* **seaborn** = statistical data visualization
-* **scikit-learn** = modules for machine learning & data mining (`from sklearn import preprocessing`, see <https://scikit-learn.org>)
-* **sheeze** = serialization & data-transformation toolkit
-* **singleton** = tiny helper implementing the singleton pattern
-* **SQLAlchemy** = SQL toolkit & ORM
-* **statistics**
-* **statsmodels** = statistical computation & models (`from statsmodels.graphics.mosaicplot import mosaic`)
-* **timeit** = measure performances (eg `timeit.timeit(stmt={treatment}, number={n})`)
-* **tzlocal** = detects system's local timezone reliably
-* **winkerberos** = high-level interface to SSPI for Kerberos client auth
-* **xlsxwriter**
-
-### Testing
-
-* **freezegun** = freezes time in tests to control datetime behavior
-* **mockito** = mockito-style mocking framework for python
-* **mongomock** = in-memory mongodb mock for tests
-* **mypy** = static type checker for python
-* **pytest** = python test runner
-* **pytest-cov** = code coverage plugin for pytest
+* `isinstance({variable}, {class})` = check if instance is of type class (eg `isinstance(text, str)`)
+* **Method decorators** = special functions that wrap another function, applied vertically bottom to up
+  * `@property def koko(self) -> …` = turns method into a property
+  * `@staticmethod` = plain function placed inside class namespace, callable via either a class (`Koko.f(777)`) or an instance (`koko.f(777)`)
+  * `@classmethod` = basically a static method in other languages (receives `cls` ie class itself eg `@classmethod def koko(cls): …`)
+* `@ThreadSafeSingleton class Koko: def __init__(self): …` = class decorator to create a thread-safe (ie using a lock) single instance (ie singleton)

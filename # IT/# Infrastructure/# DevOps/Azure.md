@@ -51,7 +51,7 @@ Azure provides more than 100 services that enable you to do everything from runn
   * **General Availability** (GA) = service is official, might still get improved with new features over time
 * **Tag** = simple key-value extra metadata information applied to resource/resource group/subscription scopes (but they are not inherited by default, except via Azure Policy), that can then be used eg for filtering
   * Typically categorize by function (eg _environment=production_), policies used (eg _classification=restricted_), finance/accounting for billing a department (eg _department=finance_), collaboration (eg _spoc=koko_)
-* Interfaces
+* Interfaces = all ultimately communicate with same Azure API backend (ie **Azure Resource Manager** REST API)
   * **Azure CLI** = manage Azure through multi-platform (Python) more-Unix-like command terminal (`az login` to login, `az group list/create` to list/create resource groups, `az vm create` to create VMs)
   * **Azure Cloud Shell** = cloud-based scripting environment, ie a CLI/PowerShell to manage Azure from anywhere via scripts, based on Ubuntu container
     * Multiple client interfaces/integration = Azure Portal, [Shell Portal](https://shell.azure.com), VS Code extension, Windows Terminal, Azure Mobile App, Microsoft Docs (run code inline from documentation snippets)
