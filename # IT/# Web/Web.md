@@ -14,12 +14,15 @@
 * **Hydration** = making a server-rendered HTML page interactive by attaching client-side JavaScript behavior to it
 * **Microfrontend** = web development pattern in which a single app may be built from disparate builds, à la microservices for client-side SPAs written in JavaScript (eg Spotify)
 * **Progressive Web Application** (PWA) = app delivered via web, for browsers or as a mobile app with near-full native capabilities thanks to service workers (eg push notif, desktop icon, work offline, phone API access)
+* **REST** (Representational State Transfer) = architecture style for networked/web applications/APIs (stateless, client-server separation, uniform URL/JSON/HTTP methods, cacheable, layered eg transparent intermediate load balancer)
+  * Endpoint = action/operation on a specific resource (ie HTTP method + URL path)
+  * Resource = conceptual entity identified by a URL (eg a user, list of users, a product, a shopping cart)
 * **Server-Sent Events** (SSE) = unidirectional (unlike WebSockets) server-to-client push technology (via HTTP connection, once it's initially established)
 * **Server-Side Rendering** (SSR) = generates fully rendered HTML pages (typically from a JS backend), then hydrates any interactive content afterwards to behave like a SPA (ie fast initial load, better SEO, no subsequent loads)
 * **Service Worker** = makes a (progressive) web app behave like a native app, provides local caching for offline(-first) use, acts as a proxy for requests & responses, background sync, push notifications
 * **Shadow DOM** = DOM encapsulation/nesting technique, isolates (without barbaric iframes) inner DOM as a standalone component (eg CSS is contained)
-* **Single-Page Application** (SPA) = loads once as a minimal HTML shell with JS bundle, then dynamically rewrites page content using API data without ever reloading page, making websites feel like native apps (eg Gmail)
-  * During initial load, user gets a minimal HTML page with an empty root div element (eg `<div id="root"></div>`), that framework (eg React) interactivity 'runtime', and all transpiled components (pure JS/CSS/static assets)
+* **Single-Page Application** (SPA) = serve (once) a minimal HTML shell plus entire JS bundle then dynamically rewrite page using API JSON data without reloading page, making websites feel like native apps (eg Gmail)
+  * During initial load, user gets a minimal HTML page with an empty root div element (eg `<div id="root"></div>`), that framework (eg React) runtime, and all transpiled components (pure JS/CSS/static assets)
   * Note that SPAs don't require a custom backend as that app can be self-contained (eg a calculator or game), use 3rd-party APIs (eg Firebase/Supabase), or shared/general-purpose API
 * **Static Site Generation** (SSG) = static pages are pre-built ahead at build time and served as-is to user browser, then JS still loads (fast initial load, good for mostly-static content)
 * **Text Fragment** (`#:~:text=`) = (browser-specific) URL suffix to search & highlight a given string (if present) on web page

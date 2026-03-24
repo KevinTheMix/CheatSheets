@@ -8,11 +8,7 @@ Both NPM and Webpack (written in JS) are part of Node.js ecosystem and therefore
 
 * **Node Version Manager** = used to retrieve a specific version of Node
 
-## API
-
-* `process.env` = Environment variable (_/.env_ file contains global variables, _/.env.development_, _/.env.production_, etc.)
-
-## Frameworks
+### Frameworks
 
 * **Axios** = promise-based HTTP client, isomorphic for both client (browser) & server (Node.js)
 * **Blitz.js** = _Next.js_ fullstack toolkit
@@ -42,3 +38,12 @@ Both NPM and Webpack (written in JS) are part of Node.js ecosystem and therefore
 * **SvelteKit** = (meta)framework on top of Svelte to build robust, performant web applications (à la Next or Nuxt)
   * [Interactive tutorial](https://svelte.dev/tutorial/kit/introducing-sveltekit)
 * **Vite** = build tool & development server
+* _webpack_ = a module bundler for JavaScript applications, takes all project files (JS, CSS, images, etc), treats them as modules, builds a dependency graph, output bundlers that browsers can load efficiently
+
+## API
+
+* `process.env` = Environment variable (_/.env_ file contains global variables, _/.env.development_, _/.env.production_, etc.)
+
+## CLI
+
+* `node --version`

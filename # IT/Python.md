@@ -15,8 +15,7 @@
 * **Decorator** = any callable that takes a function/class and returns/replaces it with another function/class (ie syntactic sugar for `f = decorator(f)`)
   * Decorators with parameters (hence parentheses) are expressions evaluated immediately (with _None_ func parameter), yet **applied** later at same time argument-free would
 * **Dunder** (Double under) = special reserved names with double leading & trailing underscores used to implement certain behaviors
-  * **Magic Methods** = commonly overriden methods (eg `__init__`, listable via `dir({class})`)
-  * Although not recommended, custom variables can also use that format (eg for metadata-type variables like `__version__`, `__project_name__`)
+  * Although not recommended, custom attributes can also use that format (eg for metadata-type variables like `__version__`, `__project_name__`)
 * **Module** = a single file of Python code
 * **Package** = a folder containing multiple modules
 * **Poetry** = manages dependencies, virtual environments, packages (à la Docker for Python), using a single declarative _pyproject.toml_ file (replaces old _setup.py_ & _requirements.txt_)
@@ -47,6 +46,17 @@ Over 200 built-in modules.
 * **functools** = function tools
   * partial = function that creates a new function with some of original function's arguments pre‑filled
 * **io**
+* **logging**
+  * Logging pipeline = `logger.info("…")` creates a LogRecord (> loger-level filters eg `logger.addFilter(…)` ) > Handler(s) > Filters > Formatter
+  * filters = filters log records (ie what to log), and also modify them on-the-fly (eg add attributes)
+  * formatters = how log messages look
+    * _asctime_ = formatted timestamp (created at format time)
+    * _created_ = timestamp as a float
+    * _levelname_ = "INFO", "ERROR", etc.
+    * _message_ = the final rendered log message
+    * _msecs_ = milliseconds
+    * Others = _name_, _pathname_, _lineno_, _funcName_, etc
+  * handlers = where do logs go (eg console, splunk)
 * **math**
   * `math.comb(n,k)` = binomial coefficient
 * **re** (regular expressions)
@@ -89,7 +99,7 @@ Over 200 built-in modules.
 * **seaborn** = statistical data visualization
 * **scikit-learn** = modules for machine learning & data mining (`from sklearn import preprocessing`, see <https://scikit-learn.org>)
 * **singleton** = tiny helper implementing the singleton pattern
-* **SQLAlchemy** = SQL toolkit & ORM
+* **SQLAlchemy** = open-source SQL toolkit & ORM
 * **statistics**
 * **statsmodels** = statistical computation & models (`from statsmodels.graphics.mosaicplot import mosaic`)
 * **timeit** = measure performances (eg `timeit.timeit(stmt={treatment}, number={n})`)
@@ -151,7 +161,8 @@ Over 200 built-in modules.
 * `print(arg(s))` = prints argument (concatenates them if multiple)
 * `type(value)` = returns type (eg `<class 'str'>`)
 * `eval(code)` = returns result of Python code string dynamically
-* `callable(koko)` = true/false whether argument is callable
+* `callable(koko)` = True/False whether argument is callable
+* `version('<package>')` = returns named version for given package
 
 ### Numbers
 
@@ -202,6 +213,7 @@ Strings are list of (1-char long) strings.
   * `[123]` = True (list in a boolean context)
 * `~` = bitwise NOT operator
 * `not {condition}`
+* `if <variable>` = False if _None/False/0/""/[]/{}/set()/()/range(0)_
 * `if {condition}: … (elif {condition}: …) (else: …)` (if alone works as a single line as well)
 * `{v1} if {condition} else {v2}` = inline ternary operator
 * `match {expression}: case {value}: … case _: …` = switch-case
@@ -212,11 +224,12 @@ Strings are list of (1-char long) strings.
 
 ### Collections
 
-* `iter({collection})` = get an iterator for the dictionary
+* `iter(collection)` = get an iterator over a collection
 * `next(iterator)` = retrieve next item from iterator (eg `next(iter(dic))` first dic key)
-* `enumerate({collection})` = adds a counter to collection loop (eg `for i, name in enumerate({list})`)
-* `{needle} in {haystack}` = find in collection (works for strings, à la C# `Contains()`)
+* `enumerate(collection)` = adds a counter to collection loop (eg `for i, name in enumerate(list)`)
+* `{needle} in {haystack}` = True/False if needle is in collection (works for strings, à la C# `Contains()`)
 * `print(*t)` = print space-separated items
+* `len(collection)` = count
 
 #### Lists
 
@@ -224,8 +237,8 @@ Ordered & changeable collection of (hybrid, but should be used to handle homogen
 There is no built-in arrays (but tools like **NumPy** exist).
 
 * `[1, 'a', True]` = **list**
-* `[a, b, c] = {list|tuple}` = multi assign (similar to tuple unpacking), assign multiple variables at once
-* `[1, 2, 3] + [4, 5]` = concatenates lists
+* `[a, b, c] = <list|tuple>` = multi assign (similar to tuple unpacking), assign multiple variables at once
+* `l1 + l2` = concatenates lists (eg `[1, 2, 3] + [3, 4, 5]` gives `[1, 2, 3, 4, 5]`)
 * `[{items}] * {n}` = clone items  (eg `['abc']*3` is `['abc', 'abc', 'abc']`)
 * `[f(item) for item in {list} if condition]` = list comprehension, builds a new filtered & remapped subset list in memory (eg `digits = [int(c) for c in ip if c.isdigit()]` gives list of int digits from a string IP address)
 * `(f(item) for item in {list} if condition)` = generator expression, builds items lazily one at a time, single throwaway use, no indexing (eg no `gen[0]`)
@@ -251,6 +264,10 @@ There is no built-in arrays (but tools like **NumPy** exist).
 Unordered collection **unique** heterogenous elements.
 
 * `{a, b, c}` = **set**
+* `set(list)` = creates a set
+* `set1.intersection(set2)` = intersection
+* `set1.union(set2)` = union (combines multiple sets, discards any duplicates)
+* `set1 | set2 | set3` = chained unions with `|` operator
 
 #### Tuple
 
@@ -259,8 +276,7 @@ Immutability makes them non-growable, which makes it memory-effcient & fast.
 Can be used as a record in place of a full-blown class object.
 Returned by libraries such as SQL libraries (eg `fetchone()` & `fetchall()`).
 
-* `(1, 'a', True)` = **tuple**
-* `1, 'a', True` = also a valid tuple (parentheses are optional)
+* `(1, 'a', True)` = **tuple** (parentheses are optional eg `1, 'a', True` is also a valid tuple)
 * `(1,)` (or just `1,`) = single element tuple (with mandatory comma)
 * `(name, age, bow) = ("Koko", 17, "bare")` = assign multiple variables at once (**tuple unpacking**)
 * `tuple[index]` = returns item at index
@@ -268,9 +284,9 @@ Returned by libraries such as SQL libraries (eg `fetchone()` & `fetchall()`).
 
 #### Dictionary
 
-* `{a:b}` = **dict**ionary
+* `{key:value}` = **dict**ionary
 * `dic[key]` = get value
-* `dic.get(key(, default))` = retrieves value at key (with default when not found)
+* `dic.get(key[, default])` = retrieves value at key (with default when not found)
 * `if "key" in dic` = check key presence
 
 ### Functions
@@ -283,10 +299,14 @@ Returned by libraries such as SQL libraries (eg `fetchone()` & `fetchall()`).
 
 * **Attributes** = instance or class fields or methods
 * `class Koko({Parent})` = class inheritance
-* `__init__(self, *args, **kwargs)` = constructor, within which all instance variables are declared (eg `self._koko = …`)
-  * Any variable defined outside a class constructor is a class (ie static) attribute, _inherited_ by instances, which can override in a per-instance basis
-* `_attribute` = naming convention meant to treat attribute/method as internal/non-public/for use inside that class only (not enforced whatsoever)
-* `__attribute` = name mangling (ie replaced with `_classname__field` making it less accessible from outside, closest thing to true `private` member)
+* `_attribute` = naming convention meant to treat attribute as internal/non-public/for use inside that class only (not enforced whatsoever)
+* `__attribute` = name mangling (ie replaced with `_classname__attribute` making it less accessible from outside, closest thing to a `private` member)
+* **Magic Methods** = dunder names for commonly overriden methods (listable via `dir({class})`)
+  * `__bool__(self)` = truth value of an object (ie inherent True/False value, uses `__len__` as a fallback when not explicitly defined with _0_ meaning False)
+  * `__len__(self)` = defines behavior of built-in `len()` function for custom objects
+  * `__init__(self, *args, **kwargs)` = constructor, within which all instance variables are declared (eg `self._koko = …`)
+  * `__iter__(self)` = returns an iterator (ie an object with a `__next__(self)` method) for loops/comprehensions/etc
+    * Any variable defined outside a class constructor is a class (ie static) attribute, _inherited_ by instances, which can override in a per-instance basis
 * `def koko(self, {args})` = instance method, receiving instance as first argument (named _self_ by convention)
 * `isinstance({variable}, {class})` = check if instance is of type class (eg `isinstance(text, str)`)
 * **Method decorators** = special functions that wrap another function, applied vertically bottom to up

@@ -39,7 +39,6 @@
   * **Service** = broader term for any proxy mediating traffic between services (eg mesh/edge/sidecar proxy)
   * **Sidecar** = runs alongside a single application instance (ie same host/pod/VM) rather than as a standalone intermediary
 * **Quality of Service** (QoS) = retries & circuit breaker features
-* **REST** (Representational State Transfer) = architecture style for networked/web applications/APIs (stateless, client-server separation, uniform URL/JSON/HTTP methods, cacheable, layered eg transparent intermediate load balancer)
 * **RPC** (Remote Procedure Call) = serialize (strongly-typed) local method call to remote handler and back
   * **Interceptors** = both at client & server endpoints enable inspection & modification (à la middleware, ie logging, metrics, authentication, retries, rate limiting)
   * Strict common IDL contract (faster than HTTP1.1+REST overhead) promotes reliability/speed at scale between internal tightly-coupled microservices, or mobile clients & backends
