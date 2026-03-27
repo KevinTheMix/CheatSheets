@@ -87,11 +87,12 @@ Azure provides more than 100 services that enable you to do everything from runn
 ### Storage Services
 
 * **Azure Disk Storage** = provides persistent drive storage to VM/apps via cloud disk emulation (à la Windows _C:_), comes in different sizes, types (HDD/SSD), performance tiers (hence price)
-* Storage Account = highly durable (99.999999999%) & scalable (PB of data) group of storage services to store files, messages & semi-structured data
-  * **Azure Blob Storage** = store data as unstructured blobs (eg objects or files) grouped in containers
-  * **Azure Files** = file shares, accessible via SMB shared drive protocol (à la Windows _Map network drive…_), to extend on-premise file shares or implement lift-and-shift scenarios
-  * **Azure Queue Storage** = messaging service to process small messages asynchronously in a queue (à la RabbitMQ)
-  * **Azure Tables Storage** = semi-structured NoSQL DB for when foreign joins/keys, relationships or strict shema are not needed, for fast access
+* Azure Storage Account = highly durable (99.999999999%) & scalable (PB of data) group of storage services to store files, messages & semi-structured data
+  * **Azure Blob Storage** = unstructured data (eg images, videos, backups) grouped in containers
+  * **Azure File Storage** (AFS) = fully managed file shares (SMB shared drive protocol à la Windows _Map network drive…_, NFS), to extend on-premise file shares or implement lift-and-shift scenarios
+  * **Azure Queue Storage** = messaging service for decoupled apps (à la RabbitMQ, ie to process small messages asynchronously in a queue)
+  * **Azure Tables Storage** = semi-structured NoSQL key-value DB (for when foreign joins/keys, relationships or strict shema are not needed, for fast access)
+  * **Shared Access Signature** (SAS) = URI that grants restricted access rights to specific Azure Storage resources, without sharing storage account key (there are types: user delegation, service, account)
 * Storage Tiers
   * _Hot_ = live, frequently accessed data
   * _Cool_ = infrequently accessed data (lower availability, high durability, cheaper eg for backups)

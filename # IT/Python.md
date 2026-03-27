@@ -1,9 +1,12 @@
 # Python
 
+High-level general purpose dynamically type-checked garbage-collected programming language empasizing code readability with use of significant indentation.
+
 ## Quick Tips
 
 * [PyPI](https://pypi.org) (Python Package Index) = official repository of Python packages (default for `pip`)
 * There is no brackets in python, indentation matters
+* Same variable can be reassigned new values of different types
 * Variables can be declared in a sub-scope and be used outside (eg declared locally within `if` block & used underneath)
 * On Windows, disable default aliases/redirections to Microsoft Store to avoid interferences with local install (eg in **PowerShell** & virtual environment)
   * In _Settings > Apps > Advanced app settings > App execution aliases_ > toggle off **App Installer** (for both python.exe & python3.exe)
@@ -17,6 +20,7 @@
 * **Dunder** (Double under) = special reserved names with double leading & trailing underscores used to implement certain behaviors
   * Although not recommended, custom attributes can also use that format (eg for metadata-type variables like `__version__`, `__project_name__`)
 * **Module** = a single file of Python code
+* **Monkey Patch** = dynamic languages technique to dynamically alter runtime code (eg add a custom method to a built-in type like _str_ or modify value of _math.pi_)
 * **Package** = a folder containing multiple modules
 * **Poetry** = manages dependencies, virtual environments, packages (à la Docker for Python), using a single declarative _pyproject.toml_ file (replaces old _setup.py_ & _requirements.txt_)
 * **Python Development Master** (PDM) = similar goal as Poerty but faster/lighter/more modern, also uses _pyproject.toml_
@@ -60,6 +64,7 @@ Over 200 built-in modules.
 * **math**
   * `math.comb(n,k)` = binomial coefficient
 * **re** (regular expressions)
+  * `re.compile(<pattern>)` = compile a regular expression pattern into a regex object to perform matches on strings
 * **os**
 * **pickle**
 * **platform** = get OS name
@@ -158,7 +163,7 @@ Over 200 built-in modules.
 * `field_` = single trailing underscore avoid conflicts with reserved keyword (by convention)
 * `#` = comment
 * `input(text)` = displays optional prompt text & returns user input
-* `print(arg(s))` = prints argument (concatenates them if multiple)
+* `print(args, sep=<separator>)` = prints argument (concatenates them using separator (default is single space) if multiple)
 * `type(value)` = returns type (eg `<class 'str'>`)
 * `eval(code)` = returns result of Python code string dynamically
 * `callable(koko)` = True/False whether argument is callable
@@ -180,6 +185,10 @@ Over 200 built-in modules.
 * `oct(n)` = octal
 * `round(n, digits)`
 
+### Dates
+
+* `.strftime(<format>)` = format date as a string (eg `date.strftime("%Y%m%d")` gives _20260325_)
+
 ### Strings
 
 Strings are list of (1-char long) strings.
@@ -192,7 +201,9 @@ Strings are list of (1-char long) strings.
 * `"text" + "text"` = concatenation
 * `"text * {n}"` = multiply a string (number can be before/after)
 * `str({n})` = convert to string
-* `f"{variable}"` = interpolation (using curly braces)
+* `f"…{<expression>}…"` = interpolation (using curly braces)
+* `r"…"` or `R"…"` = raw string literal (don't treat backslashes `\` as escape characters)
+* `u"…"` = Unicode string literal
 * `{separator}.join({list})` = concatenate (eg `', '.join(['a', 'b', 'c'])` gives _a, b, c_)
 * `"{pattern}".format({n})` = format using pattern (eg _:10.4f_ for float or _:02X_ for hexadecimal)
 * `.count({needle})` = number of occurences of needles in string
@@ -224,12 +235,13 @@ Strings are list of (1-char long) strings.
 
 ### Collections
 
-* `iter(collection)` = get an iterator over a collection
-* `next(iterator)` = retrieve next item from iterator (eg `next(iter(dic))` first dic key)
-* `enumerate(collection)` = adds a counter to collection loop (eg `for i, name in enumerate(list)`)
-* `{needle} in {haystack}` = True/False if needle is in collection (works for strings, à la C# `Contains()`)
-* `print(*t)` = print space-separated items
-* `len(collection)` = count
+* `iter(col)` = get an iterator over a collection
+  * `next(iterator)` = retrieve next item from iterator (eg `next(iter(dic))` first dic key)
+* `len(col)` = count
+* `sorted(col)` = return a new list containing all items from iterable in ascending order
+* `enumerate(col)` = adds a counter to collection loop (eg `for i, name in enumerate(list)`)
+* `{needle} in {col}` = True/False if needle is in haystack (works for strings, à la C# `Contains()`)
+* `*col` = unpacks as separate arguments (eg `print(*[1, 2, 3])` becomes `print(1, 2, 3)` which prints _1, 2, 3_)
 
 #### Lists
 
@@ -288,6 +300,9 @@ Returned by libraries such as SQL libraries (eg `fetchone()` & `fetchall()`).
 * `dic[key]` = get value
 * `dic.get(key[, default])` = retrieves value at key (with default when not found)
 * `if "key" in dic` = check key presence
+* `for key in dic` = iteration over a dictionary defaults to iterating over its keys
+* `for key, value in dic.items()` = iterates over both key & value
+* `for value in dic.values()` = iterates over values
 
 ### Functions
 

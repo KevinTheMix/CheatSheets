@@ -10,6 +10,32 @@ Uses thin/minimal easily cache-able shell templates, whilst all logic belongs to
 
 ## Glossary
 
+* **Bootstrapping** = initialization process/step during which Angular loads root module & component to start an application
+  1. Load root module (usually **AppModule**, in _main.ts_)
+  2. That module specifies a root component (usually **AppComponent**) in its _bootstrap_ array
+  3. Create & render that root component inside HTML element that matches its selector (eg `<app-root>`)
+* **Component** = reusable UI element encapsulating its own HTML, CSS, and TypeScript, making it easier to manage and test individual pieces of an application
+  * Components are rendered from a root component down in a hierarchical nested fashion (à la DOM tree), each responsible for rendition of its own HTML fragment (à la WPF UserControl)
+* **Decorator** = special TypeScript feature that adds metadata on classes, properties, parameters (but not methods) needed to wire up components/services/modules/DI
+* **Directive** = class with a `@Directive()` decorator that provides functionality or adds behavior to DOM elements (they can be applied to existing elements using selectors à la CSS)
+  * Attribute = change appearance/behavior of an existing element (eg `ngClass`, `ngStyle`, custom)
+    * Eg `<element [ngClass]="{'movies': medium==='Movies', 'series': medium==='Series'}" />` (where _movies_ & _series_ are CSS classes)
+  * Component = a component is essentially a directive with a template (`@Component({…}) export class KokoComponent { … }`)
+  * Structural = add/remove/reshape DOM/layout elements (eg `*ngIf` also false when empty/null/undefined, `*ngFor` eg `*ngFor="let property of properties"`, `$ngSwitchCase`)
+    * `*ng…` = syntactic sugar for more elaborate expression with [ng…] as outer element (eg `<ng-template [ngIf]="expression"><div></div></ng-template>`)
+* **Injector Tree** = hierarchical structure that Angular uses to resolve/provide dependencies (services) at runtime
+  * Dependencies are looked up (lazyily) bottom-up (starting at component that requires it, up to root), so multiple scoped instances of same service can exist in different parts of app
+* **Module** (`NgModule`) = (no longer core) metadata container/package that groups/links related pieces of application (components/services/dependencies) together
+  * **BrowserModule** = imported in root module (**AppModule**) when building applications running in a web browser
+  * **CommonModule** = built-in Angular module (part of _@angular/common_) that includes all basic directives (eg `NgIf`, `NgForOf`) & pipes (eg `DecimalPipe`), also re-exported by BrowserModule
+* **Pipes** = feature to transform data directly in templates (à la WPF converters & formatters), returning a new value without mutating original, built-in or custom
+  * Built-ins = _currency_ (eg `currency:'EUR'`), _date_ (eg `date:'longDate`), _json_, _lower/uppercase_, _percent_, _slice_
+  * Pure pipes (default) run only when input changes (fast, recommended), while impure pipes run every change detection cycle (use sparingly)
+* **Service** = reusable singleton instance holding shared logic/data to be injected where needed (eg shared state, business logic, data/HTTP access, transversal logging/analytics/caching, à la helpers + data layer)
+* **TypeScript** (_Microsoft_) = a typed (Classes via decorators, Modules, Strong typing) superset of JavaScript that gets transpiled to JS
+
+### Ecosystem
+
 * **Angular DevTools** = Chrome/Firefox Angular applications debugging extension (eg inspect Angular Component Tree, live editing Component state, profiling, performance)
   * Router Tree = maps application's routes as Angular sees them
   * Transfer State = tab to examine SSR/state hydration behavior
@@ -22,36 +48,20 @@ Uses thin/minimal easily cache-able shell templates, whilst all logic belongs to
   * Filter = format/transform data before it appears on screen, applied to expressions or directives using `|` pipe character
   * Service = reusable singleton object (via DI) used for shared data/BL/functionality across controllers/directives/other components
 * **Augury** (_discontinued_) = Chrome/Firefox Angular applications debugging extension
-* **Bootstrapping** = initialization process/step during which Angular loads root module & component to start an application
-  1. Load root module (usually **AppModule**, in _main.ts_)
-  2. That module specifies a root component (usually **AppComponent**) in its _bootstrap_ array
-  3. Create & render that root component inside HTML element that matches its selector (eg `<app-root>`)
-* **Component** = reusable UI element encapsulating its own HTML, CSS, and TypeScript, making it easier to manage and test individual pieces of an application
-  * Components are rendered from a root component down in a hierarchical nested fashion (à la DOM tree), each responsible for rendition of its own HTML fragment (à la WPF UserControl)
-* **Decorator** = special TypeScript feature that adds metadata on classes, properties, parameters (but not methods) needed to wire up components/services/modules/DI
-* **Directive** = class with a `@Directive()` decorator that provides functionality or adds behavior to DOM elements (they can be applied to existing elements using selectors à la CSS)
-  * Attribute = change appearance/behavior of an existing element (eg `ngClass`, `ngStyle`, custom)
-    * Eg `<element [ngClass]="{'movies': medium==='Movies', 'series': medium==='Series'}" />` (where _movies_ & _series_ are CSS classes)
-  * Component = a component is essentially a directive with a template (`@Component({…}) export class KokoComponent { … }`)
-  * Structural = add/remove/reshape DOM/layout elements (eg `*ngIf` also false if empty/null/undefined, `*ngFor` eg `*ngFor="let property of properties"`, `$ngSwitchCase`)
-    * `*ng…` = syntactic sugar for more elaborate expression with [ng…] as outer element (eg `<ng-template [ngIf]="expression"><div></div></ng-template>`)
-* **Injector Tree** = hierarchical structure that Angular uses to resolve/provide dependencies (services) at runtime
-* **Module** (`NgModule`) = (no longer core) metadata container/package that groups/links related pieces of application (components/services/dependencies) together
-  * **BrowserModule** = imported in root module (**AppModule**) when building applications running in a web browser
-  * **CommonModule** = built-in Angular module (part of _@angular/common_) that includes all basic directives (eg `NgIf`, `NgForOf`) & pipes (eg `DecimalPipe`), also re-exported by BrowserModule
-* **Pipes** = feature to transform data directly in templates (à la WPF converters & formatters), returning a new value without mutating original, built-in or custom
-  * Built-ins = _currency_ (eg `currency:'EUR'`), _date_ (eg `date:'longDate`), _json_, _lower/uppercase_, _percent_, _slice_
-  * Pure pipes (default) run only when input changes (fast, recommended), while impure pipes run every change detection cycle (use sparingly)
-* **Service** = reusable singleton instance holding shared logic/data to be injected where needed (eg shared state, business logic, data/HTTP access, transversal logging/analytics/caching, à la helpers + data layer)
-* **TypeScript** (_Microsoft_) = a typed (Classes via decorators, Modules, Strong typing) superset of JavaScript that gets transpiled to JS
+* **Karma** = test running to execute unit tests written in Jasmine framework to test in real browsers
+* **Protractor** = Angular end-to-end test framework (in a real browser, simulating user interactions)
 
 ### Project Structure
 
-* _e2e_ = test project
-* _src_ = actual application code
-  * _app_ = Angular components, modules, services (real app logic)
-  * _assets_ = static files (images, fonts, JSON configs)
-  * _environnements_ = environment-specific configs (_environment.ts_ dev, _environment.prod.ts_ prod)
+* **e2e/** = test project
+* **src/** = actual application code
+  * **app/** = Angular components, modules, services (real app logic)
+    * _app-routing.module.ts_ = app routes definition
+    * _app.component.ts_ = app root component
+    * _app.module.ts_ = app root module (bootstraps **AppComponent** ie `bootstrap: [AppComponent]`)
+    * _main.ts_ = app entry point (bootstraps **AppModule**)
+  * **assets/** = static files (images, fonts, JSON configs)
+  * **environnements/** = environment-specific configs (_environment.ts_ dev, _environment.prod.ts_ prod)
   * _favicon.ico_ = browser tab icon
   * _index.html_ = single page/shell Angular bootstraps into (hosts `<app-root>`)
   * _main.ts_ = bootstraps (entrypoint into) Angular app by calling `bootstrapApplication()` or `platformBrowserDynamic()`

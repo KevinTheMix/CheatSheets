@@ -141,11 +141,6 @@ See <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statement
 * **Moment.js** = dates library
 * **Polymer** = open-source JavaScript library (by Google) for building web applications using Web Components standard model (custom elements, shadow DOM, HTML templates)
 * **Redux** = open-source state management JS library (written in TypeScript)
-* **RxJS** (_ReactiveX_) = reactive extensions, for composing asynchronous or callback-based code by using Observable sequences (RxJs is _Lodash_ for events)
-  * `debounceTime(ms)` = wait after each keystroke
-  * `distinctUntilChanged()` = ignore new term if same as previous
-  * `switchMap(…)` = switch to new search observable each time term changes (ie previous request/service call is aborted eg `switchMap((term: string) => this.heroService.searchHeroes(term))`)
-  * See [ReactiveX](https://reactivex.io) = cross-platform asynchronous programming (eg debounce) with observable streams API (for eg .NET, Java, JavaScript)
 * **Socket.IO** = bi-directional client-server communication (via WebSocket or HTTP long-polling as a fallback)
 * **Solid.js** (2018) = lightweight, highly performant, (truely surgically) reactive UI framework, transpiles to _JavaScript_, uses JSX (like React), loved by developers
 * **Kendo UI** (Telerik) = JavaScript UI library for jQuery, Angular, React & Vue

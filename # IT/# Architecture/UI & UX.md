@@ -49,6 +49,7 @@
 * **Scrim** = temporary greyed out (Material) area appearing on surface/rest of screen to make its content less prominent when a modal element is shown (eg dialog, drawer)
   * Clicking on it sometimes removes that modal element
 * **Staggered animation** = a human-friendly way to introduce new UI elements on screen, one by one
+* **Type-Ahead** = search box that gives suggestions as you type (without waiting for Enter presses)
 * **Typeface** (aka **font family**) = design for alphanumerics & symbols used in printing/electronic display
 * **Viewport** = a box that is bigger on the inside, ie children outside bounds can be scrolled into view
 * GUI frameworks/toolkits

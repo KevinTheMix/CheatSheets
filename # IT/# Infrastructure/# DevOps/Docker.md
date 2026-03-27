@@ -110,7 +110,7 @@ On Windows, container types are either cross-platform portable Linux (a Linux VM
 
 ### Images
 
-* `docker build (<options>) <dockerfile_folder>` = builds an image from a Dockerfile where specified folder (eg `.` for current) is used as _build context_ (ie will serve as relative path for instructions in Dockerfile)
+* `docker build (<options>) <dockerfile_folder>` = builds an image from a Dockerfile where specified folder (`.` for current) is used as _build context_ (ie will serve as relative path for instructions in Dockerfile)
   * `-f <dockerfile_name>dockerfile_path}` = explicit Dockerfile name (instead of default _Dockerfile_) or path
   * `-t(ag) <image>:tag)}`
 * `docker image <command>` = manage images (`build`, `history`, `import`, `inspect`, `load`, `ls`, `prune`, `pull`, `push`, `rm` remove one or more, `save`, `tag` create a tag)

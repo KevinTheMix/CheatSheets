@@ -135,6 +135,7 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 * **carbon-now-sh** = copies code snippets for public/sharing
 * **Dev Containers** = open a folder inside a Docker container
 * **Error Lens** = display errors messages inline right next to faulty statement
+* **ESLint** (_Microsoft_) = find/fix issues in JS (and TS with `@typescript-eslint` in _.eslintrc.*_) code
 * **GitLens — Git supercharged** = improve VS Code git functionalities
 * **Image preview** = shows (tiny) image preview in gutter (aka code breakpoints area)
 * [markdownlint](https://github.com/DavidAnson/vscode-markdownlint#configure)
@@ -143,6 +144,7 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 * **PowerShell**
 * **Prettify JSON** (F1 > Prettify)
 * **Quokka** = JavaScript and TypeScript playground in your editor
+* **Rainbow CSV** = highlights columns with various colors in a .csv/tsv file for more convenient visual parsing
 * **Remote Repositories** = contribute to Github repositories from within VS Code without typing git commands
 * **Remote - SSH** = open any folder on a remote machine via SSH
 * **Paste JSON as Code** = generate models based on JSON for a series of languages
