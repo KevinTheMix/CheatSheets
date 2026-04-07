@@ -19,7 +19,7 @@ It helps handling things like events, HTTP requests, timers, streams of values o
 
 ## API
 
-* _variable$_ = naming convention (not required) indicating that variable is an observable
+* _variable$_ = naming convention (not required) indicating that variable is an **Observable**
 
 ### Observable
 
@@ -39,7 +39,9 @@ It helps handling things like events, HTTP requests, timers, streams of values o
 * `distinctUntilChanged()` = ignore new term if same as previous
 * `filter()` = where condition
 * `map()` = transforms values, not observables
+* `skip(n)` = skips first n emitted values from an observable
 * `takeUntil(<observable>)` = automatically unsubscribe from an observable when another observable (eg `this.destroy$`) emits
+* `tap(fn)` = runs a side-effect without modifying stream (emitted values pass through unchanged)
 * Higher-order mapping operators (return an inner observable)
   * `concatMap()` = run inner observables one after another (queue)
   * `exhaustMap()` = ignore new values while current inner observable is running

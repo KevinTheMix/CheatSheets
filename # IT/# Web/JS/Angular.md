@@ -5,33 +5,44 @@ Uses thin/minimal easily cache-able shell templates, whilst all logic belongs to
 
 ## Quick Tips
 
+* Use `Ctrl + T` in Visual Studio Code to jump from markup (HTML) to definition (TypeScript)
 * Previously, Angular apps were client-heavy (minimal shell plus Angular runtime plus asset bundles), until SSR apps became mainstream
 * Previously, Angular apps used **webpack** as main build bundler, but introduced a new build system using **esbuild** + **Vite** (now default for new apps)
 
 ## Glossary
 
+* **Angular Material** = Google's official Angular UI components library ready-made accessible responsive components (eg buttons, dialogs, tabs, form fields) following Material Design spec
 * **Bootstrapping** = initialization process/step during which Angular loads root module & component to start an application
   1. Load root module (usually **AppModule**, in _main.ts_)
   2. That module specifies a root component (usually **AppComponent**) in its _bootstrap_ array
   3. Create & render that root component inside HTML element that matches its selector (eg `<app-root>`)
 * **Component** = reusable UI element encapsulating its own HTML, CSS, and TypeScript, making it easier to manage and test individual pieces of an application
   * Components are rendered from a root component down in a hierarchical nested fashion (à la DOM tree), each responsible for rendition of its own HTML fragment (à la WPF UserControl)
-* **Decorator** = special TypeScript feature that adds metadata on classes, properties, parameters (but not methods) needed to wire up components/services/modules/DI
-* **Directive** = class with a `@Directive()` decorator that provides functionality or adds behavior to DOM elements (they can be applied to existing elements using selectors à la CSS)
-  * Attribute = change appearance/behavior of an existing element (eg `ngClass`, `ngStyle`, custom)
+* **Decorator** = TypeScript compile-time feature/syntax that adds metadata on classes, properties, parameters (but not methods) needed to wire up components/services/modules/DI
+  * `@Component()` (inherits `@Directive`) = `@Directive` + template + styles + change detection = creates a component/directive with a view
+  * `@Directive()` = decorator defining a directive
+  * `@Input()` = marks a component property as something that a parent component can pass data into (eg via `<child [koko]="kontan">`)
+* **Directive** = Angular runtime construct that provides functionality or attaches behavior to DOM elements (can be applied to existing elements using selectors à la CSS)
+  * They can be HTML (`<elem directive>` eg `<input matInput>`) or TypeScript `@Directive`
+  * **Attribute** = change appearance/behavior of an existing element (eg `ngClass`, `ngStyle`, custom)
     * Eg `<element [ngClass]="{'movies': medium==='Movies', 'series': medium==='Series'}" />` (where _movies_ & _series_ are CSS classes)
-  * Component = a component is essentially a directive with a template (`@Component({…}) export class KokoComponent { … }`)
-  * Structural = add/remove/reshape DOM/layout elements (eg `*ngIf` also false when empty/null/undefined, `*ngFor` eg `*ngFor="let property of properties"`, `$ngSwitchCase`)
-    * `*ng…` = syntactic sugar for more elaborate expression with [ng…] as outer element (eg `<ng-template [ngIf]="expression"><div></div></ng-template>`)
+  * **Structural** = special syntax to add/remove/reshape DOM/layout elements (eg `*ngIf`/`*ngFor`/`$ngSwitchCase`)
+* **Guard** = functions/classes to control whether a user can navigate to/from a route, typically for auth, acting as checkpoint before activating/deactivating/matching routes
+  * CanActivate (class `implements CanActivate`) = decide if a route can be entered
+  * CanActivateChild = protects child routes
+  * CanDeactivate = prevent leaving a route
+  * CanMatch = decide if a route should match before activation
 * **Injector Tree** = hierarchical structure that Angular uses to resolve/provide dependencies (services) at runtime
   * Dependencies are looked up (lazyily) bottom-up (starting at component that requires it, up to root), so multiple scoped instances of same service can exist in different parts of app
 * **Module** (`NgModule`) = (no longer core) metadata container/package that groups/links related pieces of application (components/services/dependencies) together
   * **BrowserModule** = imported in root module (**AppModule**) when building applications running in a web browser
   * **CommonModule** = built-in Angular module (part of _@angular/common_) that includes all basic directives (eg `NgIf`, `NgForOf`) & pipes (eg `DecimalPipe`), also re-exported by BrowserModule
 * **Pipes** = feature to transform data directly in templates (à la WPF converters & formatters), returning a new value without mutating original, built-in or custom
-  * Built-ins = _currency_ (eg `currency:'EUR'`), _date_ (eg `date:'longDate`), _json_, _lower/uppercase_, _percent_, _slice_
+  * Built-ins = _currency_ (eg `currency:'EUR'`), _date_ (eg `date:'longDate`), _json_, _lower/uppercase_, _percent_, _slice_, _keyvalue_
   * Pure pipes (default) run only when input changes (fast, recommended), while impure pipes run every change detection cycle (use sparingly)
+* **Selector** = string that tells Angular where a directive/component should be applied in HTML (ie element `<koko>`, attribute `<div koko>`, class `<div class="koko"`, combination `button[koko]` or `[koko][kontan]`)
 * **Service** = reusable singleton instance holding shared logic/data to be injected where needed (eg shared state, business logic, data/HTTP access, transversal logging/analytics/caching, à la helpers + data layer)
+* **Template** = Angular-augmented HTML that defines a component's view (rendered in browser)
 * **TypeScript** (_Microsoft_) = a typed (Classes via decorators, Modules, Strong typing) superset of JavaScript that gets transpiled to JS
 
 ### Ecosystem
@@ -89,6 +100,8 @@ Uses thin/minimal easily cache-able shell templates, whilst all logic belongs to
 
 ## Lifecycle Hooks
 
+Let component implement interfaces (`@Component(…) class LoginDialogComponent implements OnInit, OnDestroy`) to enforce lifecycle methods definition.
+
 1. `ngOnChanges(changes)` = called whenever an @Input() value changes (runs before ngOnInit)
 2. `ngOnInit()` = component is initialized (good place to load data)
 3. `ngDoCheck()` = custom change detection hook (rarely needed; use sparingly)
@@ -104,6 +117,7 @@ Uses thin/minimal easily cache-able shell templates, whilst all logic belongs to
 * `ng g(enerate)` = scaffolds something
   * `c(omponent)` = creates a Component class, and imports & declares it in the AppModule
   * `cl(ass)` = creates a Model class
+  * `guard <name>` = generates a _guard.ts_ file (in /src/app)
   * `m(odule)` = creates a Module (`--flat` puts file in src/app instead of own folder, `--module=app` also registers module in _imports_ array of AppModule)
   * `s(ervice)` = creates a Service
 * `ng new koko-app` = scaffold a new project
@@ -119,6 +133,38 @@ Uses thin/minimal easily cache-able shell templates, whilst all logic belongs to
 * `@NgModule({declarations: [MyComponent]}) export class MyFeatureModule {}` = old component registration (components always declared inside a (single) module)
 * `bootstrapApplication(AppComponent, {providers: […]});` = modern recommended application bootstrapping (bootstrap a component directly without **AppModule** needed)
 * `@Component({standalone: true, imports: [CommonModule, ChildComponent]}) export class ParentComponent {}` = modern standalone component registration (listing its own imports)
+
+* `$event` = represents payload of any event binding (note: _$_ is a valid JS variable name character, also used for observables by convention in RxJS)
+* `{{ expression }}` = interpolation
+* `[property]="value"` = property binding
+* `(event)="handler()"` = event binding
+* `[(ngModel)]="property"` = two-way binding
+* `ng-container` = invisible wrapper (no DOM element produced)
+* `*ng…` (directives) = syntactic sugar for more elaborate expression with `[ng…]` selectors as outer element (eg `<ng-template [ngIf]="expression"><div></div></ng-template>`)
+  * `*ngIf` = false when empty/null/undefined
+  * `*ngIf="data; else loading"` = using custom _#loading_ template while there is no data
+  * `*ngIf="foo, let x"` = displays foo (if true) under name of _x_
+  * `*ngFor="let item of collection"` = duplicate element for each item in collection
+  * `$ngSwitchCase`
+* `<ng-template>` = ng-template element, does not render anything itself, holds markup to be added elsewhere (eg **ngIf** & **ngFor** as themselves, **ngTemplateOutlet** as custom)
+* `<ng-template #errorTpl let-msg="message"><p class="error">{{ msg }}</p></ng-template>`
+  * _#errorTpl_ = template reference variable
+  * _message_ = template context property, provided from outside, either fixed (eg `*ngIf`/`*ngFor`) or custom (eg `ngTemplateOutletContext`)
+  * _msg_ = template input variable
+  * Eg `<div [ngTemplateOutlet]="errorTpl" [ngTemplateOutletContext]="{ message: errorMsg }"></div>`
+
+### Angular Material
+
+* `mat-autocomplete` = list of filtered suggestions based on user input
+* `mat-checkbox` = true/false toggle
+* `mat-form-field` = wrapper adding Material styling & behavior around inptus
+  * `mat-input` = integrates with `mat-form-field` to apply styling applied to native `<input>`, `<textarea>`
+* `mat-date-picker` & `mat-datepicker-input` = date selection (supports different date adapters eg Moment, Luxon, native)
+* `mat-option` = single selectable item among multi-select components (eg `mat-select`, `mat-autocomplete`)
+* `mat-radio-button` & `mat-radio-group` = single-choice options
+* `mat-select` = dropdown for picking one/multiple values (_value_, _disabled_)
+* `mat-slide-toggle` = switch-style boolean input
+* `mat-slider` = select numeric values by sliding
 
 ### Snippets
 

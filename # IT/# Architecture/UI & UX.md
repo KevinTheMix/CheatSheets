@@ -27,11 +27,13 @@
 
 * **Adaptive** = same code handling different platforms (eg Android, iOS, Web)
 * **Breakpoint** = well-defined size at which an app layout adapts/switches (betwen destop/mobile/tablet)
+* **Combo Box** = user can select or type a custom value (à la Timewalk pick/create a tag)
 * Delays
   * **Coalescing** or **Buffering** = collect multiple events over a time window & process them  together
   * **Debounce** = wait until activity stops, then run once
   * **Throttle** = run at most once per interval, no matter how often events fire
 * **Display typeface** = for short but eye-catching/important/large elements (eg titles, headings, pull quotes) rather than extended passages of body text
+* **Dropdown** aka **Select** menu = user selects only from predefined real-only options
 * [Fitt's Law](https://en.wikipedia.org/wiki/Fitts%27s_law#Implications_for_UI_design) = place buttons at screen edges
 * **Flat design** = minimalist design language
 * **Fluent Design System** = a design language developed by Microsoft in 2017

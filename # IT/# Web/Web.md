@@ -21,7 +21,7 @@
 * **Server-Side Rendering** (SSR) = generates fully rendered HTML pages (typically from a JS backend), then hydrates any interactive content afterwards to behave like a SPA (ie fast initial load, better SEO, no subsequent loads)
 * **Service Worker** = makes a (progressive) web app behave like a native app, provides local caching for offline(-first) use, acts as a proxy for requests & responses, background sync, push notifications
 * **Shadow DOM** = DOM encapsulation/nesting technique, isolates (without barbaric iframes) inner DOM as a standalone component (eg CSS is contained)
-* **Single-Page Application** (SPA) = serve (once) a minimal HTML shell plus entire JS bundle then dynamically rewrite page using API JSON data without reloading page, making websites feel like native apps (eg Gmail)
+* **Single-Page Application** (SPA) = serve (once) a minimal HTML shell (ie a "single page") plus entire JS bundle then dynamically rewrite page using API JSON data without reloading page, making websites feel like native apps
   * During initial load, user gets a minimal HTML page with an empty root div element (eg `<div id="root"></div>`), that framework (eg React) runtime, and all transpiled components (pure JS/CSS/static assets)
   * Note that SPAs don't require a custom backend as that app can be self-contained (eg a calculator or game), use 3rd-party APIs (eg Firebase/Supabase), or shared/general-purpose API
 * **Static Site Generation** (SSG) = static pages are pre-built ahead at build time and served as-is to user browser, then JS still loads (fast initial load, good for mostly-static content)

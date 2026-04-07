@@ -8,6 +8,7 @@ NoSql JSON (rich-)document-based DB.
 
 ## Glossary
 
+* **Aggregation** = process data step-by-step (filter, transform, group, compute results)
 * **Collection** = a table
 * **Schema** = formal definition of DB structure in JSON that defines if a field must be present, what type of values, etc
   * Can be defined strictly for all fields in the collection (which is then similar to relational), only some of them, or none (in which case it behaves as a key-value store)
@@ -29,6 +30,8 @@ All commands must be run from MongoDB install folder (eg _C:\Program Files\mongo
   * `show collections` = displays collections
   * `coll = db.<collection>` = assign collection to variable
   * `db.<collection>.find()` = returns all collection rows
+
+## API
 
 ## TODO
 

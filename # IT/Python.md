@@ -4,6 +4,7 @@ High-level general purpose dynamically type-checked garbage-collected programmin
 
 ## Quick Tips
 
+* `__init__.py` = makes containing directory behave like a package (can be imported, initialized via this file), and is mandatory when using relative imports
 * [PyPI](https://pypi.org) (Python Package Index) = official repository of Python packages (default for `pip`)
 * There is no brackets in python, indentation matters
 * Same variable can be reassigned new values of different types
@@ -26,6 +27,7 @@ High-level general purpose dynamically type-checked garbage-collected programmin
 * **Python Development Master** (PDM) = similar goal as Poerty but faster/lighter/more modern, also uses _pyproject.toml_
 * **Python Enhancement Proposal** (PEP) = official design documents that define how Python works (syntax, packaging, environments, runtime, community conventions) by Python core team
 * **setuptools** = legacy standard Python packaging library to build/package/install/distribute Python projects (uses a _setup.py_ config file to define included modules & required dependencies)
+* **Type Hint** = hint (ie not enforced) to humans & tools about what type a variable/parameter should be
 * **Virtual Environment** = standalone self-contained local install including all versioned dependencies, sourced in command prompt, prevents intereference with global install
 
 ### Frameworks
@@ -42,11 +44,21 @@ High-level general purpose dynamically type-checked garbage-collected programmin
 
 ### Modules
 
+* `import <module> (as <alias>)` = import whole module (access to member is prefixed with module name eg `<module>.<symbol>`)
+* `import <module> import *` = import everything but pollutes namespace (controlled by `__all__` inside module)
+  * `__all__` = list of (symbol) names a module explicitly chooses to export when using `import *` (eg `__all__ = ["<sym1>", "<sym2>"]`)
+* `from <module> import <symbol(s)>` = import any symbol that exists at top level of a module (function, class, variable/constant, (sub)module, exception, annotation)
+* `from .<module> import <symbol(s)>` = import a symbol in current package (requires `__init__.py` file to turn parent folder as a package)
+* `from ..<module> import <symbol(s)>` = moves up one package
+* `from <package>.<submodule> import <symbol(s)>`
+
 #### Python Standard Library
 
 Over 200 built-in modules.
 
-* **datetime** (eg `from datetime import datetime, timedelta`)
+* **copy** = `copy.deepcopy(…)` (deep copy compared to shallow reference copy using regular `.copy()` on instances)
+* **dataclasses** = `@dataclass` automatically generates `__init__`, `__repr__`, `__eq__`
+* **datetime** = **date** (eg `from datetime import datetime, timedelta`)
 * **functools** = function tools
   * partial = function that creates a new function with some of original function's arguments pre‑filled
 * **io**
@@ -73,6 +85,7 @@ Over 200 built-in modules.
 * **typing** = type-related annotations
   * Dict = provide an explicit type (ie type-hint) for dictionary variables beyond built-in `dict` type (no longer relevant since Python 3.9 that lets `dict` behave like Dict)
   * Optional = nullable type (`Optional[T]` means _T_ or _None_)
+  * Union = value that can be either of two types (eg `Union[str, Path]` or `str | Path`)
 
 #### External Packages
 
@@ -87,6 +100,7 @@ Over 200 built-in modules.
 * **http.server** = basic HTTP server
 * **krb5** = wraps Kerberos 5 C API
 * **matplotlib** = create static, animated, interactive visualizations (`matplotlib.pyplot`)
+* **mypy** = static (compile-time) type checker
 * **NumPy** (Numerical Python) = arrays manipulation
 * **openpyxl** = read/write Excel 2010 xlsx/xlsm/xltx/xltm files
 * **oracledb** = oracle's official Python driver
@@ -119,7 +133,6 @@ Over 200 built-in modules.
 * **freezegun** = freezes time in tests to control datetime behavior
 * **mockito** = mockito-style mocking framework for python
 * **mongomock** = in-memory mongodb mock for tests
-* **mypy** = static type checker for python
 * **pytest** = python test runner
 * **pytest-cov** = code coverage plugin for pytest
 
@@ -233,12 +246,15 @@ Strings are list of (1-char long) strings.
 * Loops
   * `range((start), stop, (step))` = default start is 0, default step is 1
 
-### Collections
+### Collections/Iterables
 
+* `any(col)` = true if (iterable not empty and) at least one element is truthy
 * `iter(col)` = get an iterator over a collection
   * `next(iterator)` = retrieve next item from iterator (eg `next(iter(dic))` first dic key)
 * `len(col)` = count
 * `sorted(col)` = return a new list containing all items from iterable in ascending order
+  * `key=lambda item: item["<field>"` = specifies which object field to use as sorting key
+  * `reverse=True|False` = reverse sort order
 * `enumerate(col)` = adds a counter to collection loop (eg `for i, name in enumerate(list)`)
 * `{needle} in {col}` = True/False if needle is in haystack (works for strings, à la C# `Contains()`)
 * `*col` = unpacks as separate arguments (eg `print(*[1, 2, 3])` becomes `print(1, 2, 3)` which prints _1, 2, 3_)
@@ -273,13 +289,16 @@ There is no built-in arrays (but tools like **NumPy** exist).
 
 #### Set
 
-Unordered collection **unique** heterogenous elements.
+Unordered collection of **unique** heterogenous elements.
 
 * `{a, b, c}` = **set**
 * `set(list)` = creates a set
-* `set1.intersection(set2)` = intersection
-* `set1.union(set2)` = union (combines multiple sets, discards any duplicates)
+* `set1.intersection(set2)` = intersection (ie only items in both sets)
+* `set1.union(set2)` = union (ie combines multiple sets, discards any duplicates)
 * `set1 | set2 | set3` = chained unions with `|` operator
+* `set1 & set2` = intersection (equivalent to `set1.intersection(set2)`)
+* `set(list1 + list2 + list 3)` = set formed from items of all lists (with duplicates removed)
+* `frozenset(iterable)` = immutable set that cannot be modified (no add/remove/update)
 
 #### Tuple
 
@@ -297,12 +316,13 @@ Returned by libraries such as SQL libraries (eg `fetchone()` & `fetchall()`).
 #### Dictionary
 
 * `{key:value}` = **dict**ionary
-* `dic[key]` = get value
-* `dic.get(key[, default])` = retrieves value at key (with default when not found)
+* `dic[key]` = get value (_KeyError_ if key not present)
+* `dic.get(key[, default])` = retrieves value at key (_None_/_default_ if key not present)
 * `if "key" in dic` = check key presence
 * `for key in dic` = iteration over a dictionary defaults to iterating over its keys
 * `for key, value in dic.items()` = iterates over both key & value
 * `for value in dic.values()` = iterates over values
+* `dic.setdefault(<key>, <default>)` = return value at key (set it first with provided default value if not exists yet)
 
 ### Functions
 
@@ -318,9 +338,11 @@ Returned by libraries such as SQL libraries (eg `fetchone()` & `fetchall()`).
 * `__attribute` = name mangling (ie replaced with `_classname__attribute` making it less accessible from outside, closest thing to a `private` member)
 * **Magic Methods** = dunder names for commonly overriden methods (listable via `dir({class})`)
   * `__bool__(self)` = truth value of an object (ie inherent True/False value, uses `__len__` as a fallback when not explicitly defined with _0_ meaning False)
+  * `__eq__(self)` = defines how two objects are equal (by vaue)
   * `__len__(self)` = defines behavior of built-in `len()` function for custom objects
   * `__init__(self, *args, **kwargs)` = constructor, within which all instance variables are declared (eg `self._koko = …`)
   * `__iter__(self)` = returns an iterator (ie an object with a `__next__(self)` method) for loops/comprehensions/etc
+  * `__repr__(self)` = string representation, mainly for debugging
     * Any variable defined outside a class constructor is a class (ie static) attribute, _inherited_ by instances, which can override in a per-instance basis
 * `def koko(self, {args})` = instance method, receiving instance as first argument (named _self_ by convention)
 * `isinstance({variable}, {class})` = check if instance is of type class (eg `isinstance(text, str)`)

@@ -26,6 +26,11 @@
 * **Fine-Tuning** = embeds knowledge & behavioral patterns directly into model's weights through additional training on domain-specific data, changing model persistently (expensive, less flexible)
 * **Function Calling** (aka Tool Calling) = LLMs is provided a list of available external treatments (via JSON schema) with each request, and can decide to run one then receive its output
   * Eg read/write/grep/search files, DB, code/string manipulation, commands/shell script, code analysis, Git(Hub), web browser, Slack, calendars
+* **GitHub Copilot** = originated from OpenAI Codex (derived from GPT-3 but not ChatGPT) trained specifically on large amounts of source code
+  * Agent = provide goal, perform multi-step multi-file work automatically/autonomously
+  * Ask = answer questions about codebase (read only)
+  * Edit = do this localized change for me
+  * Plan = break work down into steps, provide a structured plan
 * **GPT** (Generative Pre-trained Transformer) = deep learning generative large language model created by OpenAI that can process complex questions & generate text/code
 * **Model Context Protol** (MCP) = protocol created by Anthropic to standardize exposition of specific capabilities (ie 'eyes & hands') to AI applications
   * **MCP Client** = local process that handles requests from remote LLM and queries MCP server (eg direct subprocess communication over stdio), or Anthropic's backend in the case of public remote MCP servers

@@ -6,6 +6,12 @@
 
 ## Glossary
 
+## Menus
+
+* Project > Options > _Always Select Opened File_ = scroll to & highlight currently opened file
+* Commit
+* Structure
+
 ## Keyboard Shortcuts
 
 * `F7` = step into
