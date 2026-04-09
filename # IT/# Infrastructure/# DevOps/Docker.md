@@ -2,7 +2,7 @@
 
 Docker is an open-source virtualization/containerization tool (written in Go) to package, deploy & run applications, making them easily deployable/testable.
 Docker essentially provides an isolated & portable environment as a minimal package, that is easily rebootable from scratch.
-Unlike a virtual machine that virtualizes hardware (to install a real guest OS), Docker virtualizes OS kernels (to install real images).
+Unlike a virtual machine that virtualizes hardware (to install a real guest OS), Docker virtualizes an OS (sharing host OS' kernel to provide application-level isolation).
 
 Docker originated as a Linux technology, whose kernel is highly stable & backward compatible (stable syscall ABI), leading to very portable containers.
 Docker uses resource isolation features of Linux kernel such as cgroups (ie what resources a process can use) & kernel namespaces (ie what a process can see), and a union-capable file system such as OverlayFS and others to allow independent containers to run within a single Linux instance
