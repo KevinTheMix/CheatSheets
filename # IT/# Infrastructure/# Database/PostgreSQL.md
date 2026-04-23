@@ -4,7 +4,7 @@
 
 ## Glossary
 
-* **JSONB** (Binary JSON) = binary representation of JSON data in PostgreSQL
+* **JSONB** (Binary JSON) = binary representation of JSON data in PostgreSQL, for fast querying & data manipulation
 
 * _Marten_ = .NET library for a transactional document DB & event store on PostgreSQL (ie event sourcing built on top of PostgreSQL, ie simple for developers to add to an existing PostgreSQL DB)
 

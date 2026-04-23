@@ -1,5 +1,9 @@
 # Firefox
 
+## Quick Tips
+
+* Firefox supports full application-layer SOCKS4/SOCKS5 proxy protocol
+
 ## Glossary
 
 * **Brave** = FOSS Chromium-based browser marketed as privacy-focused (built-in ad block, fingerprinting protection, Tor-powered private browsing)

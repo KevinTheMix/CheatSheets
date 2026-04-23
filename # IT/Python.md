@@ -63,7 +63,7 @@ Over 200 built-in modules.
   * partial = function that creates a new function with some of original function's arguments pre‑filled
 * **io**
 * **logging**
-  * Logging pipeline = `logger.info("…")` creates a LogRecord (> loger-level filters eg `logger.addFilter(…)` ) > Handler(s) > Filters > Formatter
+  * Logging pipeline = `logger.info("…")` creates a LogRecord (> logger-level filters eg `logger.addFilter(…)` ) > Handler(s) > Filters > Formatter
   * filters = filters log records (ie what to log), and also modify them on-the-fly (eg add attributes)
   * formatters = how log messages look
     * _asctime_ = formatted timestamp (created at format time)
@@ -98,16 +98,23 @@ Over 200 built-in modules.
 * **flask-restx** = Flask extension for quickly building REST apis with minimal setup & swagger docs
   * `reqparse` (_deprecated_) = request argument parsing & validating (considered legacy, use marshmallow + apispec or model-based validation with @api.expect() for new projects)
 * **http.server** = basic HTTP server
+* **jinja2** = template engine library used to generate text (HTML, config files, YAML, etc) dynamically using variables, logic & templates
 * **krb5** = wraps Kerberos 5 C API
 * **matplotlib** = create static, animated, interactive visualizations (`matplotlib.pyplot`)
 * **mypy** = static (compile-time) type checker
 * **NumPy** (Numerical Python) = arrays manipulation
+  * `array.astype(<type>)` = cast each value in an array to another type (à la map)
 * **openpyxl** = read/write Excel 2010 xlsx/xlsm/xltx/xltm files
 * **oracledb** = oracle's official Python driver
 * **pandas** (panel data) = open source data manipulation & analysis, especially data structures/operations for numerical tables & time series (see <https://pandas.pydata.org>)
+  * **DataFrame** = 2D table, of which each column is a Series
+  * **Series** = 1D labeled array (à la enhanced list with indexes & data types), supporting vectorized operations
   * `df.dropna(how='all')` = remove missing values
   * `df.iloc[start:end]` = subset splicing
-  * `df.isin({collection})` = check if DataFrame has values in collection (eg `df[~df.isin([excluded_values])]`)
+  * `df.isin(collection)` = check if DataFrame has values in collection (eg `df[~df.isin([excluded_values])]`)
+  * `df[column] <condition>` = creates a boolean Series (row mask) that can be applied a dataframe (eg `df[mask]`) to obtain a subset of its rows
+  * `df.loc[mask]` = filters rows (same as `df[mask]`)
+  * `df.loc[mask, column]` = filters rows & selects columns (returns a column if single column provided, or a DataFrame if column is a list)
   * `dg.reset_index(drop=True)`
 * **plotly** = open-source interactive data visualization
 * **pymongo** = official MongoDB driver
@@ -236,6 +243,7 @@ Strings are list of (1-char long) strings.
   * `[]` = False (list in a boolean context)
   * `[123]` = True (list in a boolean context)
 * `~` = bitwise NOT operator
+* `is` = compares identity (not equality)
 * `not {condition}`
 * `if <variable>` = False if _None/False/0/""/[]/{}/set()/()/range(0)_
 * `if {condition}: … (elif {condition}: …) (else: …)` (if alone works as a single line as well)
@@ -268,11 +276,12 @@ There is no built-in arrays (but tools like **NumPy** exist).
 * `[a, b, c] = <list|tuple>` = multi assign (similar to tuple unpacking), assign multiple variables at once
 * `l1 + l2` = concatenates lists (eg `[1, 2, 3] + [3, 4, 5]` gives `[1, 2, 3, 4, 5]`)
 * `[{items}] * {n}` = clone items  (eg `['abc']*3` is `['abc', 'abc', 'abc']`)
-* `[f(item) for item in {list} if condition]` = list comprehension, builds a new filtered & remapped subset list in memory (eg `digits = [int(c) for c in ip if c.isdigit()]` gives list of int digits from a string IP address)
-* `(f(item) for item in {list} if condition)` = generator expression, builds items lazily one at a time, single throwaway use, no indexing (eg no `gen[0]`)
+* `[f(item) for item in <list> if condition]` = list comprehension, builds a new filtered & remapped subset list in memory (eg `digits = [int(c) for c in ip if c.isdigit()]` gives list of int digits from a string IP address)
+* `(f(item) for item in <list> if condition)` = generator expression, builds items lazily one at a time, single throwaway use, no indexing (eg no `gen[0]`)
 * `list[(start):(end):(step)]` = slices into a new sublist (_start_/_end_/_step_ all optional, default to first/last/1), safely empty if range outside bounds
-  * `list[-{n}]` = nth-to-last element (eg `list[-1]` for last item)
-  * `list[:-1]` = don't take last character
+  * `list[-n]` = nth-to-last element (eg `list[-1]` for last item)
+  * `list[-n:]` = take last n characters
+  * `list[:-n]` = don't take last n characters
   * `list[::-1]` = inverts list
 * `.append(item)` = add item at the end
 * `.clear()` = delete all items
@@ -284,13 +293,14 @@ There is no built-in arrays (but tools like **NumPy** exist).
 * `list(col)` = convert collection (eg generator, map, set) to list (à la `toList()`)
 * `map(function, list)` = select
 * `sorted(list)` = sort a list
-* `sorted(list, key={lambda})` = sort by custom key (which can be a tuple for multi-criteria sorting, with negative values for descending order)
+* `sorted(list, key=<lambda>)` = sort by custom key (which can be a tuple for multi-criteria sorting, with negative values for descending order)
 * `sum(list)` = built-in sum function
 
 #### Set
 
 Unordered collection of **unique** heterogenous elements.
 
+* `set()` = empty set
 * `{a, b, c}` = **set**
 * `set(list)` = creates a set
 * `set1.intersection(set2)` = intersection (ie only items in both sets)
@@ -311,18 +321,21 @@ Returned by libraries such as SQL libraries (eg `fetchone()` & `fetchall()`).
 * `(1,)` (or just `1,`) = single element tuple (with mandatory comma)
 * `(name, age, bow) = ("Koko", 17, "bare")` = assign multiple variables at once (**tuple unpacking**)
 * `tuple[index]` = returns item at index
-* `if i (not) in {tuple}` = checks for (not) membership
+* `if i (not) in {…}` = checks for (not) membership
 
 #### Dictionary
 
+* `{}` = empty dictionary (not a set)
 * `{key:value}` = **dict**ionary
+* `dict(k1=v1, k2=v2, …)`
 * `dic[key]` = get value (_KeyError_ if key not present)
-* `dic.get(key[, default])` = retrieves value at key (_None_/_default_ if key not present)
 * `if "key" in dic` = check key presence
 * `for key in dic` = iteration over a dictionary defaults to iterating over its keys
 * `for key, value in dic.items()` = iterates over both key & value
 * `for value in dic.values()` = iterates over values
-* `dic.setdefault(<key>, <default>)` = return value at key (set it first with provided default value if not exists yet)
+* `dic.get(key[, default])` = retrieves value at key (_None_/_default_ if key not present)
+* `dic.setdefault(key, default)` = return value at key (set it first with provided default value if not exists yet)
+* `dic.update({key: value})` = creates/updates value for key
 
 ### Functions
 

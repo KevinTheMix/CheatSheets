@@ -102,12 +102,12 @@ when CPU control can be yielded while a low-level time-consuming operation is be
 
 * `task.Wait()` = blocking call making the completion of a task _synchronous_ (and returns its result), throws **AggregateException**
 * `task.Result` = blocking call only if the task is not already completed, otherwise return immediately without blocking
-* `task.ConfigureAwait(continueOnCapturedContext: true|false)` = controls the context in which the continuation/resuming of a task is executed
-  * `task.ConfigureAwait(false)` is often used in UI applications to avoid deadlocks, letting the framework know it is safe to execute the continuation on any available thread from the pool rather than the original context (hence _not capturing_ the UI context)
-  * Configuring this in the callee does not affect the caller (the two methods' contexts are independant)
+* `task.ConfigureAwait(continueOnCapturedContext: true|false)` = controls context in which continuation/resuming of a task is executed
+  * `task.ConfigureAwait(false)` = often used in UI applications to avoid deadlocks, letting framework know it is safe to execute continuation on any available thread from pool rather than original context (hence _not capturing_ UI context)
+  * Configuring this in callee does not affect caller (those two methods' contexts are independant)
   * It can also be useful when gradually converting an application from synchronous to asynchronous
-  * It won't actually be called if the task completes too quickly
-  * Don't use it if the remaining code needs the UI thread e.g. to update some control value
+  * It won't actually be called if task completes too quickly
+  * Don't use it if remaining code needs UI thread eg to update some control value
 
 ### Parallel
 

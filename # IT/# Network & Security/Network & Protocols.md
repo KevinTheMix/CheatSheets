@@ -124,7 +124,7 @@
 * **Edge Device** = entry point into an enterprise ot service provider core networks (eg router, switch, integrated access device, multiplexer, MAN/WAN access devices)
 * **F Connector** = associated with cable television & cable model links
 * **Firewall** = filters by either port or application, encrypt/decrypts traffic between sites
-* **Hub** (or Repeater Hub) = connects multiple Ethernet devices together acting as a single network segment, broadcasting one input of any port to all other ports (which filter incoming data as needed)
+* **Hub** (or Repeater Hub) = (_obsolete_) L1 device that broadcasts/repeats unfiltered bits from one port to all other ports (ie all connected Ethernet devices) that can then filter incoming data as needed
 * **IEEE 802** = family of standards for LAN (local), PAN (personal) & MAN (metropolitan)
   * **IEEE 802.03** = Ethernet
   * **IEEE 802.11** = WLAN (Wi-Fi)

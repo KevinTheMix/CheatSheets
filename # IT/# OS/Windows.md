@@ -24,6 +24,7 @@
 * **Integrated Windows Authentication** (IWA) = authentication method that uses logged-in user's domain credentials (Kerberos/NTLM) for silent SSO into apps (eg user must not re-login into WPF app)
 * **Microsoft Copilot** = Windows-integrated LLM based on OpenAI GPT-4/5 developed by Microsoft AI, replacing discontinued Cortana
 * **Microsoft Defender** (aka **Windows Defender**) = replaces Microsoft Security Essentials from Win 8
+* **Microsoft PowerToys** = free open-source utilities to help power users & developers (advanced paste, always on top, keep awake, color picker, file locksmith)
 * **MSMQ** (Microsoft Message Queuing) = native message queueing (between applications/machines) system (uses disk-backed queues for durability, mostly considered legacy)
 * **Reliability Monitor** = review computer reliability/problem history
 * **Safe Mode** (FR: Mode Sans Échec) = loads bare minimum OS to troubleshoot/remove malware

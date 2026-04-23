@@ -10,6 +10,7 @@ Most of the WPF API is contained in _PresentationFramework.dll_ which contains t
 ## Quick Tips
 
 * For real-time debugging, use Live Visual Tree & Live Property Explorer
+* Set `d:DataContext="{d: DesignInstance Type=viewModel:<view_model>}"` to gain design(er)-time benefits (reliable binding resolution, IntelliSence for `{Binding …}`, sample data previews) ignored at runtime
 * [Never put BL in ViewModel](https://stackoverflow.com/q/16338536/3559724)
 * [VM can call BL, BL notifies via Event aggregator](https://www.codeproject.com/Questions/1233249/Mvvm-model-to-viewmodel-comminication) (promotes loose coupling)
 
@@ -46,7 +47,7 @@ Most of the WPF API is contained in _PresentationFramework.dll_ which contains t
   * Third, use it by referencing it (as `StaticResource`, not just a string) in a binding via that key (eg `{Binding Path=…, Converter={StaticResource KokoConverter}}`)
   * [Built-in IValueConverters](https://stackoverflow.com/a/505809/3559724)
   * [List of default converters](https://stackoverflow.com/a/12977516/3559724)
-  * **Type Converters** are converters used to (case insensitively!) parse a string into a value of the type corresponding to the assigned (dependency) property
+  * **Type Converters** are converters used to (case insensitively!) parse a string into a value of type corresponding to assigned (dependency) property
     * Eg programmatically `b.Background = (Brush)System.ComponentModel.TypeDescriptor.GetConverter(typeof(Brush)).ConvertFromInvariantString("White");` (credit: _WPF 4 Unleashed_)
 * **DataContext** = an object containing the properties bound to a control (and all its child elements - or they can use their own Data Context)
   * Can be bound directly from the XAML if there's a public constructor (eg `<UserControl.DataContext><local:KokoViewModel /></UserControl.DataContext>`, see <https://stackoverflow.com/a/2637830>)
@@ -130,6 +131,7 @@ Most of the WPF API is contained in _PresentationFramework.dll_ which contains t
     * Use `AccessText` property if the content is more complex
   * TextBox = single or multi-line (`.AcceptsReturn`, `.TextWrapping`) input text field (`&#x0a;` character in Text property for newline), with spellchecking functionalities
 * PasswordBox (`.PasswordChar`, `.MaxLength`)
+* **ScrollViewer** = scrollable area for (single child) content (usually a StackPanel) that exceeds visible UI space (à la Flutter **SingleChildScrollView**)
 * ToolTip = (see [ToolTipService](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.tooltipservice) properties)
 
 ### Collections

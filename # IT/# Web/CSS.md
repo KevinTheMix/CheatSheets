@@ -63,10 +63,11 @@ document.getElementById(id).style.display = 'block'
 
 ### Units
 
-* `p` = fixed (default = 16)
-* `pt` = fixed (default = 12)
-* `%` = relative % of container
-* `em` = like `%` (difference is Text-Size on IE)
+* `px` = CSS pixel, fixed (browser default usually 16)
+* `pt` = points, physical unit (1/72 inch), avoid for screens (mainly for print styles)
+* `%` = relative to parent's font size
+* `em` = relative to parent's font size (when used on _font-size_ property), or to element's own font size (when used on other properties eg padding/margin/etc)
+* `rem` = relative to root (html) font-size
 
 ### Color
 

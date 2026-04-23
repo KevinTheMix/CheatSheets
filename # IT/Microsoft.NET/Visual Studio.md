@@ -27,7 +27,8 @@
 
 * `Right-Click > Generate Method` = create method call before definition
 * Edit
-  * `Alt + Up/Down` = Move line around
+  * `Alt + Up/Down` = move line up/down
+  * `Alt + Shift + Up/Down` = start multiline selection
   * `Alt + Shift + Click` = Multiline editing
   * `Alt + Shift + F10` = Adds using reference
   * `Ctrl + H` = Replace
@@ -36,11 +37,11 @@
     * Right-click on `if` > Quick Actions and Refactorings… > _Convert to conditional expression_
     * Right-click on `if` > Quick Actions and Refactorings… > _Add braces_
   * `Ctrl + (Shift +) U` = Lower(Upper)case
-  * `Ctrl + K + D` = Tidy
-  * `Ctrl + R + G` = Tidy usings
-  * `Ctrl + K + S` = Surround With
-  * `Ctrl + K + C/U` = Comment/Uncomment
-  * `Ctrl + Shift + V` = Clipboard history
+  * `Ctrl + E + D` = tidy (formerly `Ctrl + K + D`)
+  * `Ctrl + K + S` = surround With (#if, #region,checked, class, do, else, enum, for, foreach, forr, if, interface, lock, namespace, struct, try, tryf, unchecked, unsafe, using, while)
+  * `Ctrl + K + C/U` = comment/uncomment
+  * `Ctrl + R + G` = tidy usings
+  * `Ctrl + Shift + V` = clipboard history
 * Search & Navigation
   * `(Shift +) F8` = previous/next error (in Error List or Output window)
   * `F12` = Go To Definition

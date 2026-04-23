@@ -10,6 +10,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 ## Quick Tips
 
 * Always commit after tidy, before refactoring
+* Do not rebase commits other people may already be using
 * Commit messages should complete the sentence: "_if applied, this commit will …_"
 * A local repo (for personal projects) provides version control by itself without the need of any associated remote repos
 * Use trailing (_dangling_) commas whenever possible at end of source code lines in order to reduce the number of lines marked as modified
@@ -25,6 +26,8 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * It's true that a branch can be made to point to an earlier commit (via `reset`), but that just means that the earlier commit becomes the latest one for that branch
   * Creating a branch equates creating a new pointer to the current commit (multiple branches can point to the same commit, notably in the case of a branch creation)
   * **Tip of a branch** = the specific (latest) commit that the branch points to
+  * **Remote-Tracking Branch** = local readonly/immutable copy of remote branches (eg _origin/…_), ie last known state of remote (updated via `git fetch`/`git pull`)
+    * Reside as refs in _refs/remotes/origin/*_, where they can technically be modified (don't do that)
   * See [Branchig & Merging](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging)
 * **Cache** = another term for the staging area
 * **Cherry picking** = applying specific commit(s) from one branch onto another without merging full branch history (eg to apply a _main_ fix to an older _release_ branch)
@@ -62,10 +65,11 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * **Fast-Forward Merge** = avoids creating a merge commit (eg whenrebasing, or when feature branch is ahead from current branch: current is an ancestor of feature), this is the default
 * **Origin** = default name (and alias for a URL) given to remote repository from which a local repo was cloned (and will eventually be pushed)
   * Multiple other remotes can be added to a same (local) repo, each with a different name (eg `upstream`, `github`, `bitbucket`)
-* **Pull Request** = on collaborative platforms (eg GitHub, Azure DevOps), a formal proposal to merge changes into a codebase
-* **Rebasing** = modifies commit history (ie creates new commits) of a branch to maintain a cleaner, more linear project history ("I want my branch to start from this commit instead")
-  * A typical use case is when working on a feature branch, switching to main, pulling latest remote changes from origin, then rebasing feature branch from updated main to integrate those latest changes
-  * Don't rebase commits that have already been pushed to shared repo (use merging instead); rebase only local/unshared branches
+* **Pull Request** (GitHub/GitLab) = formal proposal to merge changes into a codebase between same or different (ie forked) repositories
+* **Rebasing** = modify commit history (ie create new commits) of a branch to maintain a cleaner, more linear project history ("I want my branch to start from this commit instead")
+  * Typical use case = _main_ branch has kept evolving and we want to integrate those latest changes into a _feature_ branch that was spawned from it
+  * Rebasing basically replays commits of current branch (ie incoming changes) onto rebased branch (ie current changes eg _main/develop_), one by one
+  * Current Change are what's already in branch that's rebased onto (HEAD), incoming changes belong to commit being replayed by rebase
 * **Repository** = a regular folder augmented into a self-contained version-controlled directory that tracks changes to (some/all of its) files over time
 * **Reference** (or just **ref(s)**) = label/pointer to specific commits (ie aliases for commit hashes), saved as files (in the `.git/refs/` directory)
   * Branches (`refs/heads/{branch}`), Tags (`refs/tags/{tag}`), remote branches (`refs/remotes/{remote}`), even _HEAD_ are all (types of) references
@@ -85,7 +89,8 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * **Lightweight Tag** = simple references to specific commits
   * **Annotated Tag** = full Git object with a name & metadata (message, creation date, tagger's info ie name/email/timestamp)
 * **Trunk-Based Development** = branch workflow tailored for CI/CD, advocating short-lived feature branches with few small commits, and a clean always latest _main_ (vouched for by CI pipeline)
-* **Upstream** = on platforms (like GitHub or GitLab), this is the original repo from which a project was forked
+* **Upstream** (GitHub/GitLab) = original repo from which a project was forked
+* **Upstream Branch** = remote/origin branch that a local branch is currently tracking (ie for push/pull)
 * **Work(ing) Tree** (aka **Working Directory**) = a directory where the (project) files reside and where changes are made (note: may also contain untracked files)
 * **Worktree** = mechanism that allows a single same repository (hence with a shared history) to be checked out as multiple parallel separate working directories at same time, each attached to possibly a different branch
 
@@ -148,7 +153,9 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * Note that it's possible to keep some files in the Git repo untracked/ignored if they're never added
 * `git add -i` = stages interactively (via CLI)
 * `git branch` = lists all branches (with current branch highlighted)
+  * `-d <branch>` = delete a local branch
   * `-m|-M ({old}) {new}` = rename a branch (current branch if _old_ not provided)
+  * `-vv` = shows all local branches with extra infos
   * `{branch}` = creates a new branch
   * `{branch} {commit}` = creates a new branch pointing to a specific commit
 * `git checkout (HEAD)` = lists modified files
@@ -185,9 +192,13 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * `git rm {file} --cached` = un-tracks a file during next commit
 * `git rm {directory} --r` = deletes a a directory during next commit
 * `git show {object}` = display information about a commit, tag, blob (file), tree (directory)
-* `git stash (save "{message})` = shelves current work (except untracked files, unless specifying `--include-untracked` or `-u` for short)
-  * `git stash pop` = pops latest stash (removes it from stash list)
-  * `git stash appli` = applies latest stash (keeps it from stash list)
+* `git stash` = push/pop changes
+  * `push` = shelves/sets aside current dirty changes (except untracked files) & checkouts current branch back to last commit (clean working tree)
+    * `-m` (`--message`) = includes a message
+    * `-u` (`--include-untracked`) = include (new) untracked files
+  * `apply` = applies latest stash (keeps it from stash list)
+  * `list` = lists all stashes
+  * `pop` = pops latest stash (removes it from stash list)
 * `git switch -` (with hyphen === `@{-1}`) = switch to previous branch (more precisely the previous location in _HEAD_ reflog, non-destructive)
 * `git switch --detach` = detaches HEAD from the current branch (the content of the _HEAD_ file changes from a symbolic branch ref to a commit hash)
 * `git switch {branch}` = switches to branch (by moving HEAD to (latest commit of) that branch), or does nothing if already on that branch
@@ -205,7 +216,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * `git fetch` = fetches zero or one remote (the only one, or the one named _origin_, otherwise none)
 * `git fetch {remote}` = fetches remote (saved in the `.git/refs/remotes` folder, necessary after removing/re-adding a remote)
 * `git fetch --all` = fetches changes from all (configured) remote repositories, but does not merge/update local branches
-* `git fetch --prune` = fetches remote and remove local branches that no longer exist remotely
+* `git fetch --prune` = fetches remote branches & removes their local copy that no longer exist remotely (local branches remain)
 * `git branch -u {remote}/{branch}` (or `--set-upstream-to {remote}/{branch}`) = links local branch to remote branch (adds (max one, previous gets replaced) _branch_ section in `.git/config`)
 * `git remote` = lists all the remote repos names associated with local repo
   * `-v` = lists all remote repositories names & URLs associated with local repo

@@ -10,6 +10,8 @@ NoSql JSON (rich-)document-based DB.
 
 * **Aggregation** = process data step-by-step (filter, transform, group, compute results)
 * **Collection** = a table
+* **MongoDB Compass** = GUI to explore, run queries & aggregations
+  * Tip: top-right menu on a document > Copy to clipboard
 * **Schema** = formal definition of DB structure in JSON that defines if a field must be present, what type of values, etc
   * Can be defined strictly for all fields in the collection (which is then similar to relational), only some of them, or none (in which case it behaves as a key-value store)
   * There is of course some overhead associated with checking that a new object matches the required schema
@@ -33,11 +35,12 @@ All commands must be run from MongoDB install folder (eg _C:\Program Files\mongo
 
 ## API
 
+* `$unwind` = aggregation stage that turns an array into multiple documents
+
 ## TODO
 
 * [$eq(aggregation)](https://www.mongodb.com/docs/manual/reference/operator/aggregation/eq/#mongodb-expression-exp.-eq)
 * [$size(aggregation)](https://docs.mongodb.com/manual/reference/operator/aggregation/size/#mongodb-expression-exp.-size)
-* `$unwind`
 * MongoDB.Entities = data access library for MongoDB with an elegant api, LINQ support and built-in entity relationship management
 
 ### Architecture

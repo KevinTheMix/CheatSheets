@@ -9,6 +9,7 @@
 
 ## Glossary
 
+* Create a _.vscode/launch.json_ file eg to automatically spawn a browser when running a web app
 * **Emmet** (formerly **Zen Coding**) = (built-in) advanced snippet generator for HTML, CSS, etc (cycle-browse through markup elements)
 
 ## Preferences
@@ -107,9 +108,10 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 * `Ctrl + Shift + V` = preview Markdown
 * `Ctrl + Shift + ù` = new Terminal
 * `Ctrl + Shift + P` or `F1` or _View > Command Palette_ = Command Palette
-  * `create new term`
   * `Format Document`
+  * `Developer: Reload Window` = refresh UI (eg when git panel gets stale)
   * `View: Toggle Minimap`
+  * `Terminal: Create New Terminal`
 * `Ctrl + Shift + Space` = preview method full definition
 * `Ctrl + Space` = auto-complete suggestions
 * `View > Show Minimap` or _Command Palette_ > `View: Toggle Minimap` = Toggle Minimap
