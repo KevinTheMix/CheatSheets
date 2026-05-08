@@ -23,6 +23,8 @@
 
 ## API
 
+* `??=` = nullish coalescing assignment operator (assigns a value only if variable is _null_ or _undefined_)
+* `||=` = logical OR assignment operator (assigns a value if it is falsy, eg `a ||= b` equates to `if(!a) a=b;`)
 * `undefined` = a variable exists but currently has no value (eg declared but not assigned, or assigned _undefined_ literal)
 * `typeof(variable)` = (name of) type of variable
 * `{}` = [Destructuring Objects](https://wesbos.com/destructuring-objects) = decomposes an object's properties in the order they were defined (eg `{ first, second } = koko;`, where _koko_ could have more properties eg `third`)
@@ -45,7 +47,7 @@
 
 ### Conditions & Flow
 
-* `==` = loose equality, usually avoid (eg `1 == "1"`, `false == 0`, `null == undefined`)
+* `==` = loose equality, usually avoid (eg `1 == "1"`, `false == 0`, `null == undefined`) except for special intentional check of both null OR undefined (eg `x == null` equates `x === null || x === undefined`)
 * `===` = strict equality
 * `if(condition) statement;`
 * `try {block} catch(error) {error_treatment}`

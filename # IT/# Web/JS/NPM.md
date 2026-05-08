@@ -1,19 +1,17 @@
 # [NPM](https://www.npmjs.com)
 
-Package manager for JavaScript (shipped with Node).
-
-    The main goal (...) is automated dependency and package management. This means that you can specify all of your project's dependencies inside your package.json file, then any time you (or anyone else) needs to get started with your project they can just run npm install and immediately have all of the dependencies installed. On top of this, it is also possible to specify what versions your project depends upon to prevent updates from breaking your project.
-
-Source: <https://stackoverflow.com/a/31930422>
-
-Downloads & installs all packages dependencies and also exposes commands to initiate building the current project.
-Both package dependencies & building/running/testing commands shorthands are specified in the _package.json_ file.
+Package manager in JavaScript for JavaScript (shipped with Node.js), using a _package.json_ file to define package dependencies & (build/run/test) command aliases.
+Ease download & install of all packages dependencies & exposes commands to initiate building the current project.
 
 ## Quick Tips
 
-* NPM is written entirely in JS, so it requires [a platform to run on i.e. Node.js](https://github.com/npm/npm/issues/12230#issuecomment-206332690), although [the downloaded packages can be used elsewhere outside Node.js](https://www.reddit.com/r/javascript/comments/98ceyi/using_npm_without_nodejs/e4evyay).
-  * Besides Node.js also exposes various APIs & some modules that NPM may depend on (such as [filesystem API](https://stackoverflow.com/a/40087116)).
-[What are NPM, Yarn, Babel, and Webpack; and how to properly use them?](https://medium.com/front-end-weekly/what-are-npm-yarn-babel-and-webpack-and-how-to-properly-use-them-d835a758f987)
+* [What are NPM, Yarn, Babel, and Webpack; and how to properly use them?](https://medium.com/front-end-weekly/what-are-npm-yarn-babel-and-webpack-and-how-to-properly-use-them-d835a758f987)
+
+## Glossary
+
+* Semantic Version = **major.minor.patch**
+  * `~` = specified version or latest patch (eg `~1.0.1` is `1.0.1` up to `1.0.9`)
+  * `^`= specified version or latest minor or patch (eg `~1.0.1` is `1.0.1` up to `1.9.9`)
 
 ## CLI
 
