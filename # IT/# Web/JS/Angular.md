@@ -6,6 +6,7 @@ Uses thin/minimal easily cache-able shell templates, whilst all logic belongs to
 ## Quick Tips
 
 * Use `Ctrl + T` in Visual Studio Code to jump from markup (HTML) to definition (TypeScript)
+* Angular apps don't require a backend: all code is downloaded into client browser upfront (from any static content server)
 * Previously, Angular apps were client-heavy (minimal shell plus Angular runtime plus asset bundles), until SSR apps became mainstream
 * Previously, Angular apps used **webpack** as main build bundler, but introduced a new build system using **esbuild** + **Vite** (now default for new apps)
 
