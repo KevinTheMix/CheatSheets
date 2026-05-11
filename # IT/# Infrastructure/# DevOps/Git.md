@@ -152,9 +152,11 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * `git add` = stages one (`git add {file}`, _case sensitive_), several (`git add {*pattern*}`), or all (`git add .`) to be included in the next commit
   * Note that it's possible to keep some files in the Git repo untracked/ignored if they're never added
 * `git add -i` = stages interactively (via CLI)
-* `git branch` = lists all branches (with current branch highlighted)
+* `git branch` = lists local branches (with current branch highlighted)
+  * `-a(ll)` = lists both local & remote-tracking branches
   * `-d <branch>` = delete a local branch
   * `-m|-M ({old}) {new}` = rename a branch (current branch if _old_ not provided)
+  * `-r(remote)` = lists remote-tracking branches (ie local read-only pointers/references to state of branches on a remote, eg _origin/main_)
   * `-vv` = shows all local branches with extra infos
   * `{branch}` = creates a new branch
   * `{branch} {commit}` = creates a new branch pointing to a specific commit
@@ -213,7 +215,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 ### Remote
 
 * `git clone {url}` = creates a local copy of remote repo (with _origin_ default name remote) including all branches & commits, and adds an (_upstream_) remote if _origin_ is a forked repo (keeping track of the original)
-* `git fetch` = fetches zero or one remote (the only one, or the one named _origin_, otherwise none)
+* `git fetch` = downloads new objects & updates remote‑tracking branches from a remote, without touching working tree or local branches (no files change)
 * `git fetch {remote}` = fetches remote (saved in the `.git/refs/remotes` folder, necessary after removing/re-adding a remote)
 * `git fetch --all` = fetches changes from all (configured) remote repositories, but does not merge/update local branches
 * `git fetch --prune` = fetches remote branches & removes their local copy that no longer exist remotely (local branches remain)

@@ -23,7 +23,7 @@ High-level general purpose dynamically type-checked garbage-collected programmin
 * **Module** = a single file of Python code
 * **Monkey Patch** = dynamic languages technique to dynamically alter runtime code (eg add a custom method to a built-in type like _str_ or modify value of _math.pi_)
 * **Package** = a folder containing multiple modules
-* **Poetry** = manages dependencies, virtual environments, packages (à la Docker for Python), using a single declarative _pyproject.toml_ file (replaces old _setup.py_ & _requirements.txt_)
+* **Poetry** = manages dependencies, virtual environments, packages, using a single declarative _pyproject.toml_ file (replaces old _setup.py_ & _requirements.txt_)
 * **Python Development Master** (PDM) = similar goal as Poerty but faster/lighter/more modern, also uses _pyproject.toml_
 * **Python Enhancement Proposal** (PEP) = official design documents that define how Python works (syntax, packaging, environments, runtime, community conventions) by Python core team
 * **setuptools** = legacy standard Python packaging library to build/package/install/distribute Python projects (uses a _setup.py_ config file to define included modules & required dependencies)
@@ -334,6 +334,7 @@ Returned by libraries such as SQL libraries (eg `fetchone()` & `fetchall()`).
 * `for key, value in dic.items()` = iterates over both key & value
 * `for value in dic.values()` = iterates over values
 * `dic.get(key[, default])` = retrieves value at key (_None_/_default_ if key not present)
+* `dic[key].pop(key)` = replace key (`pop()` removes key first, raises an error if not found)
 * `dic.setdefault(key, default)` = return value at key (set it first with provided default value if not exists yet)
 * `dic.update({key: value})` = creates/updates value for key
 
@@ -345,6 +346,8 @@ Returned by libraries such as SQL libraries (eg `fetchone()` & `fetchall()`).
 
 ### OOP
 
+* **Class**
+  * `class Koko: kokos: List['Koko']` = string-based forward reference (ie use single quotes to define a nested instance of same class, alternatively use `from __future__ import annotations` in modern Python)
 * **Attributes** = instance or class fields or methods
 * `class Koko({Parent})` = class inheritance
 * `_attribute` = naming convention meant to treat attribute as internal/non-public/for use inside that class only (not enforced whatsoever)

@@ -96,6 +96,8 @@ On Windows, container types are either cross-platform portable Linux (a Linux VM
 
 ## API
 
+### CLI
+
 * `docker compose`
   * `down (-v)` = stop everything (also delete volumes ie wiping DB data for a fresh start)
   * `run (<options>) <container> (<command>)` = run a one-off command on a service container, or run single container itself (using present docker compose file configuration)
@@ -108,7 +110,7 @@ On Windows, container types are either cross-platform portable Linux (a Linux VM
 * `docker system prune` = deletes all resources — images, containers, volumes, and networks — that are dangling (not associated with a container)
   * `-a` = remove any stopped containers & all unused images (not just dangling images)
 
-### Images
+#### Images
 
 * `docker build (<options>) <dockerfile_folder>` = builds an image from a Dockerfile where specified folder (`.` for current) is used as _build context_ (ie will serve as relative path for instructions in Dockerfile)
   * `-f <dockerfile_name>dockerfile_path}` = explicit Dockerfile name (instead of default _Dockerfile_) or path
@@ -121,24 +123,28 @@ On Windows, container types are either cross-platform portable Linux (a Linux VM
 * `docker rmi <image>` = deletes an image
 * `docker save` = export an image to a _.tar_ file
 
-### Containers
+#### Containers
+
+Existing containers can be specified by either id or name.
 
 * `docker exec <command>` = runs command inside already running container
 * `docker inspect <container>` = shows full configuration & state of a container (or image/network/volume/etc) in JSON format
   * `--format {{<specific_field>}}`  
 * `docker ps` = lists running containers (`-a` includes stopped containers)
-* `docker rm <container|id>` = deletes a container
+* `docker rm <container>` = deletes a container
 * `docker run <image(:tag)> (<command>)` = creates a container based on a (local or remote eg Docker Hub) image, creating a new container from image each time
-  * `-d(etach)` = run in background
+  * `-d(etach)` = run in background (not in CLI, so no direct interaction with container)
   * `-e <ENV_VAR=value>` = define environment variables
   * `-i` = interactive mode
   * `-p(ublish) <host_port>:<container_port>` = binds host port & container port (exposes container to local network, usually same port both on host & container)
   * `-rm` = deletes container once program is finished (exited signal received)
   * `-t` = allocate a pseudo-TTY (plugs container to current terminal)
-  * `--name <container_name>` = provide an explicit name for container in place of defaultly generated one (eg to use in `docker start/stop` commands)
+  * `-v <local>:<remote>:ro` = maps a local path (eg holding a web page) to a required location in image (eg an Nginx folder), with `ro` is read-only mode
+  * `--name <container name>` = provide an explicit name for container in place of defaultly generated one (eg to use in `docker start/stop` commands)
   * Runtime parameters can be provided, so a same image can actually generate different containers
-* `docker start <container_id|container_name>` = start an existing (stopped) container
-* `docker stop <container_id|container_name>` = stop one (or more) running container
+* `docker start <container>` = start an existing (stopped) container (`-attach` to connect to container output to see results)
+* `docker stop <container>` = stop one (or more) running container(s)
+* `docker top <container>` = shows running processes inside a container
 
 ### Dockerfile
 

@@ -10,14 +10,15 @@ It helps handling things like events, HTTP requests, timers, streams of values o
 
 ## Glossary
 
+* **BehaviorSubject** = state rather than just events: requires an initial value, always holds latest value, new subscribers immediately receive current value (eg auth user, settings, selected item, feature flags)
 * **Emitting** (an event) = when an observable emits a value
 * **Observable** = a thing that can produce **values over time** (ie an observable stream you can subscribe to that emits value whenever)
-  * Inner = observable getting piped (haem)
-  * Outer = observable returned by lambda inside map
-  * Cold = no activity until you subscribe, each subscription creates its own execution, subscribing starts it
+  * Inner = emits results, created for each value emitted by outer Observable
+  * Outer = emits values/triggers & getting piped (haem)
+  * Cold = no activity until you subscribe, each subscription creates its own execution, subscribing starts it (eg a regular Promise 'call')
   * Hot = produces values independently of subscriptions, exists before you subscribe, subscribing does not start it (eg a Subject)
 * **Observer** = built-in shape with three optional callbacks (next, error, complete)
-* **Subject** (extends both _Observable_ & _Observer_) = observable that you can also feed using Observer methods
+* **Subject** (extends both _Observable_ & _Observer_) = observable that you can also feed using Observer methods (no initial/current value, subscribers only receive future emissions, acts like an event bus)
 
 ## API
 
@@ -42,7 +43,7 @@ It helps handling things like events, HTTP requests, timers, streams of values o
 * `debounceTime(<ms>)` = emit only after silence of X ms
 * `distinctUntilChanged()` = ignore new term if same as previous
 * `filter()` = where condition
-* `map()` = transforms values, not observables
+* `map()` = transforms each emitted value synchronously, output stays same Observable, does not handle inner Observables
 * `pairwise()` = emits previous & current values together as a tuple, nothing is emitted until two values exist (eg for tracking scroll direction, value deltas, state transitions)
 * `skip(n)` = skips first n emitted values from an observable
 * `takeUntil(<observable>)` = automatically unsubscribe from an observable when another observable (eg `this.destroy$`) emits (usually in `ngOnDestroy()`)
@@ -51,4 +52,4 @@ It helps handling things like events, HTTP requests, timers, streams of values o
   * `concatMap()` = run inner observables one after another (queue)
   * `exhaustMap()` = ignore new values while current inner observable is running
   * `mergeMap()` = run all inner observables at same time
-  * `switchMap(…)` = cancels previous inner subscriptions when new value arrives, emits value only from most recent/latest inner observable
+  * `switchMap(…)` = cancels previous inner Observable when new value arrives, emits value only from most recent/latest inner observable
