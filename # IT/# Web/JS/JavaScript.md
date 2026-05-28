@@ -14,6 +14,7 @@
 * **EventSource** JavaScript API = server-sent event (eg for social media status updates, news feeds, sending data to client IndexDB or web storage)
 * **Hoisting** = when JS moves a variable declaration (but not its value) to top of its scope before execution
 * **IIFE** (Immediately invoked function expression) = useful for context-scoping, and can have a return value
+* **Prototype** = a regular object that plays the role of serving of blueprint for building other objects
 * **Spread Syntax** (`...`) = destructure array items/object properties into distinct variables
   * Can be used for shallow-cloning (eg `{…a}={…b}`), recombining objects into more/fewer (eg `const koko = {…a,…b }`), pushing/(un)shifting/splicing arrays (eg `a = […a, '1', '2', '3' ]`)
   * [Spread operator](https://www.geeksforgeeks.org/javascript-spread-operator)
@@ -31,9 +32,13 @@
 * `f(...parameters)` = [Rest parameter](https://www.geeksforgeeks.org/javascript-rest-operator), turns a list of (indefinite number of) function parameters into a single array
   * Then `const [first, second] = parameters` using [Destructuring](https://www.samanthaming.com/tidbits/20-destructuring-function-arguments)
 * Object (note: in JS/JSON, objects are maps/dictionaries)
+  * `Object.create(proto)` = create a new object using a specific prototype (or even null in which case it has no prototype)
   * `Object.entries(o)` = properties names & values of an object
+  * `Object.hasOwn(obj, 'a')` = check whether an object **directly** owns a property (rather than inheriting it from its prototype) (modern & preferred compared to `obj.hasOwnProperty()`)
   * `Object.keys(o)` = properties keys/names of an object
+  * `Object.prototype` = root prototype of (almost) all objects (provides methods like `toString`, `toLocaleString`, `hasOwnProperty`, `valueOf`, `isPrototypeOf`, `propertyIsEnumerable`)
   * `Object.values(o)` = properties values of an object
+  * `obj.hasOwnProperty(prop)` = legacy alternative to `Object.hasOwn()`
 * Variable declaration
   * `const` = block-scoped, cannot be reassigned, must be initialized (for objects/arrays, reference is const but content can change)
   * `let` (_default, modern, recommended_) = block-scoped, can be reassigned, not hoisted
@@ -78,6 +83,7 @@
 * `.filter(callback)` = returns shallow copy of array portion satisfying predicate (à la where)
 * `.find(callback)` = returns first element satisfying predicate
 * `.findIndex(callback)` = returns index of first element satisfying predicate
+* `.includes(item)` = checks whether an item is present
 * `.map(item => item * 1.1)` = select
 * `.push(items)` = adds item(s) to end of array & returns new length
 * `.reduce((accu, next) => acc + cur)` = aggregate/accumulate

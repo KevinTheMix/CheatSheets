@@ -12,35 +12,43 @@ NoSql JSON (rich-)document-based DB.
 * **Collection** = a table
 * **MongoDB Compass** = GUI to explore, run queries & aggregations
   * Tip: top-right menu on a document > Copy to clipboard
+* **Replica Set** = group of MongoDB servers that maintain the same data set and automatically handle failover by electing a new primary if the current one goes down
 * **Schema** = formal definition of DB structure in JSON that defines if a field must be present, what type of values, etc
   * Can be defined strictly for all fields in the collection (which is then similar to relational), only some of them, or none (in which case it behaves as a key-value store)
   * There is of course some overhead associated with checking that a new object matches the required schema
   * Eg an e-commerce website (eg Amazon) has products with common attributes (name, price, quantity, description) but also various **product-specific** attributes (height, color, voltage, resolution, clothing fit size, etc)
 
-## CLI
+## CLI (MongoDB Shell)
 
-All commands must be run from MongoDB install folder (eg _C:\Program Files\mongodb-2.4.6\bin_)
+All commands must be run from MongoDB install folder (eg _C:\Program Files\mongodb-2.4.6\bin_).
+Some command require a running server, or a selected DB.
 
 * `mongod.exe --dbpath <Path to \DATA\ folder>` = start server handling requests (so we can query DB)
 * `mongodump --out <output_directory> [--db <db_to_backup>] [--collection <collection_to_backup>]` = backup
 * `mongorestore <input_directory>` = restore
-* Requires a running server:
-  * `show dbs` = displays server DBs list
-  * `show databases` = display all available DBs
-  * `use <db>` = select a DB
-* Require a selected DB:
-  * `show collections` = displays collections
-  * `coll = db.<collection>` = assign collection to variable
-  * `db.<collection>.find()` = returns all collection rows
+* `coll = db.<collection>` = assign collection to variable
+* `show collections` = displays collections (after selecting a DB)
+* `show dbs` = displays server DBs list
+* `show databases` = display all available DBs
+* `use <db>` = select a DB
 
 ## API
 
-* `$unwind` = aggregation stage that turns an array into multiple documents
+* `collection.createIndex()` = creates index (also creates collection if it does not exist)
+* `collection.find(<filter>, <projection>)` = retrieves collection rows
+* `collection.insertOne()` = inserts a single document into a collection (also creates collection if it does not exist)
+
+### Operators
+
+* `$eq` = equality check (ie as a query operator eg `{ field: { $eq: 5 } }` or an expression operator inside stages like $project, $group, $addFields eg `{ $eq: ["$a", "$b"] }`)
+* `$size` = array length condition (ie as a query operator eg `{ field: { $size: 3 } }`)
+* (Aggregation) Stage Operators = used inside aggregation framework (ie `collection.aggregate([…])`)
+  * `$group` = (eg `{ $group: {...} }`)
+  * `$match` = (eg `{ $match: {...} }`)
+  * `$unwind` = takes an array field ans splits it into multiple documents (eg `{ $unwind: "$items" }`)
 
 ## TODO
 
-* [$eq(aggregation)](https://www.mongodb.com/docs/manual/reference/operator/aggregation/eq/#mongodb-expression-exp.-eq)
-* [$size(aggregation)](https://docs.mongodb.com/manual/reference/operator/aggregation/size/#mongodb-expression-exp.-size)
 * MongoDB.Entities = data access library for MongoDB with an elegant api, LINQ support and built-in entity relationship management
 
 ### Architecture

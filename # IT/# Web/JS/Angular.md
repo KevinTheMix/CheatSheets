@@ -59,8 +59,9 @@ Uses thin/minimal easily cache-able shell templates, whilst all logic belongs to
   * Filter = format/transform data before it appears on screen, applied to expressions or directives using `|` pipe character
   * Service = reusable singleton object (via DI) used for shared data/BL/functionality across controllers/directives/other components
 * **Augury** (_discontinued_) = Chrome/Firefox Angular applications debugging extension
-* **Karma** = test running to execute unit tests written in Jasmine framework to test in real browsers
-* **Protractor** = Angular end-to-end test framework (in a real browser, simulating user interactions)
+* **Jasmine** = BDD test framework & syntax (eg `describe()`, `it()`, `expect()`) for JS
+* **Karma** = test runner developed by Angular team to execute unit tests written in Jasmine or other frameworks in real browsers (launches browsers, watches files & reruns on changes, shows results in console or browser)
+* **Protractor** (_deprecated_, replaced with **Cyrpress** or **Playwright**) = end-to-end testing framework designed for Angular (originally AngularJS) apps, simulates real user interactions in a browser to test entire flow
 
 ### Project Structure
 
@@ -72,14 +73,14 @@ Uses thin/minimal easily cache-able shell templates, whilst all logic belongs to
     * _app.module.ts_ = app root module (bootstraps **AppComponent** ie `bootstrap: [AppComponent]`)
     * _main.ts_ = app entry point (bootstraps **AppModule**)
   * **assets/** = static files (images, fonts, JSON configs)
-  * **environnements/** = environment-specific configs (_environment.ts_ dev, _environment.prod.ts_ prod)
+  * **environnements/** = environment-specific configs (_environment.ts_ dev, _environment.prod.ts_ prod, contains `production: true/false` flag)
   * _favicon.ico_ = browser tab icon
   * _index.html_ = single page/shell Angular bootstraps into (hosts `<app-root>`)
   * _main.ts_ = bootstraps (entrypoint into) Angular app by calling `bootstrapApplication()` or `platformBrowserDynamic()`
   * _manifest.webmanifest_ = PWA metadata (icons, name, theme colors)
   * _polyfills.ts_ = browser compability shims (rarely touched now)
-  * _styles.(s)css_ = global styles shared project-wide
-  * _theme.scss_ = custom design system/styles (project-specific)
+  * _styles.(s)css_ = standard global styles for whole app
+  * _theme.scss_ = not standard but very common/convention-based stylesheet file for organizing theming (especially with Angular Material, eg colors/typography/variables)
   * _test.ts_ = entry point for running unit tests (Jasmine/Karma setup)
 * _.browserslistrc_ = defines browser support targets for builds (affects JS polyfills & CSS)
 * _.editor.config_ = editor formatting conventions (indent size, charset)
@@ -87,10 +88,12 @@ Uses thin/minimal easily cache-able shell templates, whilst all logic belongs to
 * _.node-version_ = pinned Node.js version (for tools like **nvm** or **nodenv**)
 * _.prettierignore_ & _.prettierrc.json_ = Prettier formatting config
 * _angular.json_ = central Angular build configuration (app entry points, build options, file replacements, assets/styles/scripts, test configurations)
-* _ngsw-config.json_ = service worker settings for PWA functionality (caching rules)
+* _ngsw-config.json_ = Angular Service Worker configuration file, containing settings to turn an app into a PWA (with offline support & caching)
+  * _installMode_ & _updateMode_ = prefetch (cache everything during app install) or lazy (cache only when first requested)
+  * _strategy_ = _freshness_ (prefer network, fallback to cache) or _performance_ (prefer cache first)
 * _azure-pipelines.yml_ = Azure DevOps pipeline config for builds/tests/deployments
 * _karma.conf.js_ = test runner config (if project still uses Karma)
-* _package.json_ = define dependencies, Node scripts, tool configs
+* _package.json_ = define app name & version, Node scripts, dependencies (& dev dependencies), tool configs
 * _package-lock.json_ = exact dependency tree for reproducible installs
 * _tsconfig.json_ = base TypeScript config
 * _tsconfig.base.json_ = inherited by other TS configs

@@ -18,7 +18,8 @@
   * Proper pattern is letting entities accumulate events (in commands) & dispatch them on saving (DbContext override eg `SaveChangesAsync` or via MediatR), and are then handled by MediatR `INotificationHandler` notification handlers
 * **Modular Monolith** = each business domain gets its own folder or project with strict boundaries between modules that each own their own data access/API endpoint/domain logic (microservice-style separation)
 * **Single Project Clean Architecture** = enforce dependency & other architectural rules via unit tests instead of using separate projects (still gain dependency management benefits, eg _ArchUnit.Test_)
-* **Vertical Slice Architecture** (VSA) = uniproject feature folders (domain models/DbContext/exception/logging are still shared), more simplicity at cost of less (or no) compile-time dependencies guardrails (via project references)
+* **Vertical Slice Architecture** (VSA) = structure an application so that each feature/slice includes everything it needs across all layers (UI, BL, data access), as opposed to separating by technical layers (at cost of less/no compile-time project references dependencies guardrails)
+  * Can be single project (simpler solution structure & navigation, fast, recommended starting point for CQRS/MediatR) or multi-projects (large teams, microservices, reusable infrastructure components)
 
 ### Layers
 

@@ -2,57 +2,13 @@
 
 ## Quick Tips
 
-* Code comparison updates in real-time
-* Breadcrumb path fragments are browsable seamlessly between containing file system & document inner sections
-* [Fireship: 25 VS Code Productivity Tips](https://www.youtube.com/watch?v=ifTF3ags0XI)
 * [Visual Studio Code (online)](https://vscode.dev)
+* [Fireship: 25 VS Code Productivity Tips](https://www.youtube.com/watch?v=ifTF3ags0XI)
+* Breadcrumb path fragments are browsable seamlessly between containing file system & document inner sections
 
 ## Glossary
 
-* Create a _.vscode/launch.json_ file eg to automatically spawn a browser when running a web app
 * **Emmet** (formerly **Zen Coding**) = (built-in) advanced snippet generator for HTML, CSS, etc (cycle-browse through markup elements)
-
-## Preferences
-
-Via _File > Preferences_.
-
-* **Keyboard Shortcuts** (`Ctrl + K, Ctrl + S`)
-  * **Transform to Uppercase/Lowercase** = [set lower/uppercase keys](https://stackoverflow.com/a/41688564/3559724)
-* **Settings** (`Ctrl + ,`)
-  * **Text Editor**
-    * **Insert Spaces** = insert spaces on `Tab` (see [indentation settings](https://stackoverflow.com/a/29972553))
-    * **Bracket Pairs** = set parentheses matching coloured line guides (formerly an extension, now built-in)
-    * **Sticky Scroll: Enabled** = keep current scope (eg class, namespace) breadcrumb at top
-  * **Security**
-    * **Allowed UNC Hosts** = add _wsl.localhost_ (allows opening WSL Ubuntu files from Windows)
-  * **Workbench**
-    * **List: Open Mode** = display file by single/double clicking Explorer files
-    * **Editor: Enable Preview** = tab preview in italics
-
-### Setting Files
-
-* [Scopes](https://developer.hyvor.com/vscode-editing-settings-json)
-* By user (Global)
-  * %APPDATA%\Code\User\settings.json
-* By workspace
-* By folder
-* [Setting by Filetype](https://code.visualstudio.com/docs/getstarted/settings#_language-specific-editor-settings)
-* `"[plaintext]": { "editor.insertSpaces": false }`   # Note that .txt files are referenced as "plaintext" filetype.
-
-#### Flutter Settings
-
-Adapted from @Flutter Mapp 35 Flutter Tips video.
-
-```json
-{
-    // Collapses configuration files under pubspec.yaml.
-    "explorer.fileNesting.enabled": true,
-    "explorer.fileNesting.expand": false,
-    "explorer.fileNesting.patterns": { "pubspec.yaml": ".flutter-plugins, .flutter-plugins-dependencies, .gitignore, .packages, .metadata, pubspec.lock, analysis_options.yaml, todoapp.iml" },
-    // Automatically format code on save (eg adds missing 'const').
-    "[dart]": { "editor.codeActionsOnSave": { "source.fixAll": "explicit" }, }
-}
-```
 
 ## Commands
 
@@ -61,9 +17,33 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 ### Menus & Mouse
 
 * _File > Auto Save_ = Autosave
-* _Right-click folder > Open in Terminal_ = Open folder in terminal
-* _Drag & Drop Tab_ = Move opened file view
-* `Drag & Drop middle button` = multi-line text block selection
+* _File > Preferences_
+  * _Keyboard Shortcuts_ (`Ctrl + K, Ctrl + S`)
+    * _Transform to Uppercase/Lowercase_ = [set lower/uppercase keys](https://stackoverflow.com/a/41688564/3559724)
+  * _Settings_ (`Ctrl + ,`)
+    * _Text Editor_
+      * _Insert Spaces_ = insert spaces on `Tab` (see [indentation settings](https://stackoverflow.com/a/29972553))
+      * _Bracket Pairs_ = set parentheses matching coloured line guides (formerly an extension, now built-in)
+      * _Sticky Scroll: Enabled_ = keep current scope (eg class, namespace) breadcrumb at top
+    * _Security_
+      * _Allowed UNC Hosts_ = add _wsl.localhost_ (allows opening WSL Ubuntu files from Windows)
+    * _Workbench_
+      * _List: Open Mode_ = display file by single/double clicking Explorer files
+      * _Editor: Enable Preview_ = tab preview in italics
+
+#### Settings Files
+
+* _%APPDATA%\Code\User\settings.json_ = user/global-level/scoped settings
+* _.vscode_ = workspace-level/scoped settings
+  * _launch.json_ = automatically spawn a browser when running a web app
+  * _settings.json_ = workspace-scoped settings
+* [Setting by Filetype](https://code.visualstudio.com/docs/getstarted/settings#_language-specific-editor-settings)
+  * Eg `"[plaintext]": { "editor.insertSpaces": false }` = _.txt_ files are referenced as _plaintext_ filetype
+* File nesting = collapses files under a parent file:
+  * `"explorer.fileNesting.enabled": true,`
+  * `"explorer.fileNesting.expand": false,`
+  * `"explorer.fileNesting.patterns": { "pubspec.yaml": ".flutter-plugins, .flutter-plugins-dependencies, .gitignore, .packages, .metadata, pubspec.lock, analysis_options.yaml, todoapp.iml" },`
+  * `"[dart]": { "editor.codeActionsOnSave": { "source.fixAll": "explicit" }, }  // Automatically format code on save (eg adds missing 'const')`
 
 ### [Keyboards shortcuts](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf)
 
@@ -119,8 +99,15 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 
 #### Terminal
 
-* `Ctrl + Left/Right` = works!
+* `Esc` = clears currently typed command
+* `Ctrl + Left/Right` = jump to previous/next word
 * `clear` = à la clscr
+
+### Mouse
+
+* `Right-click Explorer folder` > _Open in Integrated Terminal_ = open terminal at given folder path
+* `Drag & Drop File or Tab` > `Shift` = paste source (relative) file path
+* `Drag & Drop middle button` = multi-line text block selection
 
 ## Snippets
 

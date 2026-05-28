@@ -32,6 +32,7 @@
 * **Dijkstra's algorithm** = find shortest path between nodes in a weighted graph
 * **Huffman Coding** = frequency-table-based lossless compression algorithm
 * **Loop invariant** = a property of a loop true before & after each iteration (eg an overall expression that stays true even though its constituting variables get updated)
+* **Least Recently Used** (LRU) Cache = removes least recently recently used entry from catch to make space for new data
 * String distances = for spelling correction, DNA ACGT proteins similarity
   * **Levenshtein distance** = string metric measuring difference between two sequences, ie minimum number of single-character edits (insertions, deletions or substitutions)
   * **Damerau-Levenshtein distance** = Levenshtein distance + substitutions & transpositions (aka permutations)

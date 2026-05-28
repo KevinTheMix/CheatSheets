@@ -43,6 +43,7 @@ It helps handling things like events, HTTP requests, timers, streams of values o
 * `debounceTime(<ms>)` = emit only after silence of X ms
 * `distinctUntilChanged()` = ignore new term if same as previous
 * `filter()` = where condition
+* `finalize()` = runs cleanup/side-effect logic once when an observable terminates (regardless of how it terminates _even after a switchMap()_, à la `finally` block in a try-catch)
 * `map()` = transforms each emitted value synchronously, output stays same Observable, does not handle inner Observables
 * `pairwise()` = emits previous & current values together as a tuple, nothing is emitted until two values exist (eg for tracking scroll direction, value deltas, state transitions)
 * `skip(n)` = skips first n emitted values from an observable

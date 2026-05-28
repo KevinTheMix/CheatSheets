@@ -41,7 +41,7 @@
 * _Plausible_ = Google Analytics alternative
 * **Selenium** = open-source tools & libraries for browser tasks automation (ie script/record/playback à la DOM AutoHotKey, eg for testing & debugging)
   * Uses a DSL (Selenese) to write tests for various languages (C#, Java, JS, Python)
-* [web.dev](https://web.dev) = guidance by the Chrome team to build modern cross-browser web apps (eg accessibility, CSS, HTML, performance, privacy, PWA)
+* [web.dev](https://web.dev) = guidance by Chrome team to build modern cross-browser web apps (eg accessibility, CSS, HTML, performance, privacy, PWA)
 * [Wix](https://www.wix.com) = build a website
 
 ### PWA

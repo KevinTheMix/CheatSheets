@@ -14,6 +14,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * Commit messages should complete the sentence: "_if applied, this commit will …_"
 * A local repo (for personal projects) provides version control by itself without the need of any associated remote repos
 * Use trailing (_dangling_) commas whenever possible at end of source code lines in order to reduce the number of lines marked as modified
+* [Conventional Commits](https://www.conventionalcommits.org) = specification for writing standardized commit messagese that help creating a clear & organized commit history
 * [A Hacker's Guide to Git](https://wildlyinaccurate.com/a-hackers-guide-to-git)
 * [Practical Git](https://practicalgit.com) (eg "Recover a deleted local branch")
 * [Scott Chacon - Git Tips and Tricks](https://blog.gitbutler.com/git-tips-and-tricks) = also a FOSDEM 2024 talk (by GitHub cofounder)
@@ -26,7 +27,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * It's true that a branch can be made to point to an earlier commit (via `reset`), but that just means that the earlier commit becomes the latest one for that branch
   * Creating a branch equates creating a new pointer to the current commit (multiple branches can point to the same commit, notably in the case of a branch creation)
   * **Tip of a branch** = the specific (latest) commit that the branch points to
-  * **Remote-Tracking Branch** = local readonly/immutable copy of remote branches (eg _origin/…_), ie last known state of remote (updated via `git fetch`/`git pull`)
+  * **Remote-Tracking Branch** = local reference (not a real branch you can work on) to state of remote branch, ie readonly/immutable copy of last known state of remote branches (updated via `git fetch`/`git pull`)
     * Reside as refs in _refs/remotes/origin/*_, where they can technically be modified (don't do that)
   * See [Branchig & Merging](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging)
 * **Cache** = another term for the staging area
@@ -85,7 +86,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * [Staging (area)](https://githowto.com/staging_and_committing) (aka **Index** or **Cache**) = logical space/list of files registered for next commit
   * Modified files are not automatically all registered; they have to be deliberately _staged_ (thus enabling granular control over committed files)
 * **Stashing** = temporarily saving changes that are not ready to be committed (eg work-in-progress) on the side to be resumed later (eg after some work on other branches)
-* **Tag** = reference to a specific commit in the history (generally for significant milestones or release; note that tags can have the same name as a branch)
+* **Tag** = fixed/stable pointer to a specific commit in history (generally for a significant milestone/release; note that tags can have the same name as a branch)
   * **Lightweight Tag** = simple references to specific commits
   * **Annotated Tag** = full Git object with a name & metadata (message, creation date, tagger's info ie name/email/timestamp)
 * **Trunk-Based Development** = branch workflow tailored for CI/CD, advocating short-lived feature branches with few small commits, and a clean always latest _main_ (vouched for by CI pipeline)
@@ -194,31 +195,34 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * `git rm {file} --cached` = un-tracks a file during next commit
 * `git rm {directory} --r` = deletes a a directory during next commit
 * `git show {object}` = display information about a commit, tag, blob (file), tree (directory)
-* `git stash` = push/pop changes
+* `git stash` = shorthand for `git stash push`
+  * `apply` = applies latest stash (without removing it from stash list)
+  * `clear` = removes all stash entries
+  * `drop` = removes a single stash entry
+  * `list` = lists all stashes
+  * `pop` = applies latest stash (removes it from stash list)
   * `push` = shelves/sets aside current dirty changes (except untracked files) & checkouts current branch back to last commit (clean working tree)
     * `-m` (`--message`) = includes a message
     * `-u` (`--include-untracked`) = include (new) untracked files
-  * `apply` = applies latest stash (keeps it from stash list)
-  * `list` = lists all stashes
-  * `pop` = pops latest stash (removes it from stash list)
-* `git switch -` (with hyphen === `@{-1}`) = switch to previous branch (more precisely the previous location in _HEAD_ reflog, non-destructive)
-* `git switch --detach` = detaches HEAD from the current branch (the content of the _HEAD_ file changes from a symbolic branch ref to a commit hash)
-* `git switch {branch}` = switches to branch (by moving HEAD to (latest commit of) that branch), or does nothing if already on that branch
+* `git switch` = switch to (or create) a specific branch or commit
+  * `{branch}` = switches to branch (by moving HEAD to (latest commit of) that branch), or does nothing if already on that branch
+  * `-` (with hyphen === `@{-1}`) = switch to previous branch (more precisely the previous location in _HEAD_ reflog, non-destructive)
+  * `-c <branch>` = create branch from current branch
+  * `-c <branch> <from>` = create branch from given branch or commit
+  * `--detach` = detaches HEAD from current branch (content of _HEAD_ file changes from a symbolic branch ref to a commit hash)
 * `git tag` (same with `-l(ist)`) = lists all tags (repo-wide, no matter where you currently are)
-  * `git tag {name}` = creates a tag (to current commit, ie HEAD)
-  * `git tag -a {name} -m {message}` = creates an annotated tag
-  * `git tag -n` = lists tags with messages
-  * `git tag {tag}` = creates a new lightweight tag at the latest commit (eg a version/release name `git tag v1.0.0`) with an optional message (`-m {message}`)
-  * `git tag {tag} -a -m "{message}` = creates an annotated tag with a (required) message
-  * `git tag {tag} -d` = deletes tag
+  * `<tag>` = creates a **lightweight** tag (ie a version/release name eg `git tag v1.0.0`) at latest commit (ie pointer to current commit/HEAD) without extra metadata (eg message, author, date)
+  * `-a <tag> -m "<message>"` = creates an **annotated** tag (stored as full Git object) with a (required) message, etc
+  * `-d <tag>` = deletes tag
+  * `-n` = lists tags with their messages (for lightweight tags, shows commit message instead)
 
 ### Remote
 
 * `git clone {url}` = creates a local copy of remote repo (with _origin_ default name remote) including all branches & commits, and adds an (_upstream_) remote if _origin_ is a forked repo (keeping track of the original)
 * `git fetch` = downloads new objects & updates remote‑tracking branches from a remote, without touching working tree or local branches (no files change)
-* `git fetch {remote}` = fetches remote (saved in the `.git/refs/remotes` folder, necessary after removing/re-adding a remote)
-* `git fetch --all` = fetches changes from all (configured) remote repositories, but does not merge/update local branches
-* `git fetch --prune` = fetches remote branches & removes their local copy that no longer exist remotely (local branches remain)
+  * `{remote}` = fetches remote (saved in the `.git/refs/remotes` folder, necessary after removing/re-adding a remote)
+  * `--all` = fetches changes from all (configured) remote repositories, but does not merge/update local branches
+  * `--prune` = fetches remote branches & removes their local copy that no longer exist remotely (local branches remain)
 * `git branch -u {remote}/{branch}` (or `--set-upstream-to {remote}/{branch}`) = links local branch to remote branch (adds (max one, previous gets replaced) _branch_ section in `.git/config`)
 * `git remote` = lists all the remote repos names associated with local repo
   * `-v` = lists all remote repositories names & URLs associated with local repo
@@ -233,6 +237,8 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * `{remote} {branch}` = pushes changes to a remote repo branch
   * `{remote} {tag}` = shares local tag with remote repo (eg `git push origin v1.0.0`)
   * `-u {remote} {branch}` (or `--set-upstream-to`) = one-time link current local branch to a remote branch (create it if not exist), then pushes changes to it
+  * `--force` = overwrite/push whatever is there
+  * `--force-with-lease` = overwrite only if nothing changed since I last checked (ie nobody else pushed commits that I could inadvertendly erase)
 
 ## Troubleshooting
 
