@@ -26,7 +26,7 @@
 * **Marshalling** = transforming one live object's memory representation into a format suitable for storage/transmission between different runtimes (broader than only serialization)
 * **Middleware** = interception layer in a processing pipeline (eg HTTP requests) that applies shared behavior around a core operation without being that operation itself (eg auth, error handling, logging, messaging, transactions)
 * **Mixin** = in OO, a feature-able class that can be _included_ without being inherited from (eg C# `IEquatable`, Ruby include, JS extend/assign), promoting reusability & multiple inheritance
-* **Model-View-Controller** (MVC) = model is business data & rules (entities, DTOs, validation logic), view (eg HTML), controllers (incoming HTTP requests) return a view (ie HTML, not JSON like a simple WebAPI)
+* **Model-View-Controller** (MVC) = model is business data & rules (domain entities, DTOs, validation logic), view (eg HTML), controllers (incoming HTTP requests) return a view (ie HTML, not JSON like a simple WebAPI)
 * **Module** = a function or class or file (depending on langages), embodying modularity/reusability through decomposing treatment parts and minimizing hard dependencies
 * **Offline First** or **Local First** = designing an app with lack of connection baked in from scratch as part of normal operation, and eventual sync to share data across devices
 * **OO** = Héritage + Polymorphisme + Encapsulation

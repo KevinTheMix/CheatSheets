@@ -250,7 +250,6 @@ Use commands with either long/short names (eg `flutter --option=value` or just `
   * `get` = explicitely pulls packages into the project & generates _pubspec.lock_ (implied with `flutter run`)
     * `flutter packages get` = [alias for the above](https://stackoverflow.com/a/61038022/3559724)
   * `outdated` = display current/upgradable/latest versions for each dependency
-  * `run {executable} {options}` = runs a Dart script (with a `main()`) or a package that provides CLI (eg **build_runner**, **flutter_launcher_icons**, **native_splash_screen**)
   * `upgrade` (+ `--major-versions` to force absolute latest)
 * `flutter run` = run app (on currently attached device)
   * `r` = Hot reload, `R` = Hot restart (resets state), `h` = List commands, `d` = Detach (terminates run but app lives on), `c` = clrscr, `q` = Quit
