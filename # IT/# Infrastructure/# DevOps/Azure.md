@@ -27,7 +27,8 @@ Azure provides more than 100 services that enable you to do everything from runn
 * **Azure Event Grid** = fully managed serverless publishers topics to subscribers message routing service, for event-based & near-realtime applications, able to react to Azure services events (eg a VM was created)
 * **Azure Logic App** (PaaS) = serverless enterprise integration service for orchestration of business processes & applications workflowcharts via a no-code visual GUI (à la Zapier), with I/Os connectors (eg storage, web, e-mails)
 * **Azure Monitor** = collect/analyze/act on telemetry data (eg performance & health) from your applications/infrastructure (also find & scale down underutilized resources)
-  * **Application Insights** = OpenTelemetry feature of Azure Monitor that offers vendor-neutral Application Performance Monitoring (APM) for live web applications
+  * **Application Insights** = observability/OTel feature of Azure Monitor that offers vendor-neutral Application Performance Monitoring (APM) for live web applications (à la Sentry)
+  * **Kusto (Query Language)** (KQL) = query language used to explore Application Insigthts data (à la read-only SQL, optimized for logs/time-series/diagnostics)
 * **Azure Notification Hub** = push notifications
 * **Azure Resource Manager** (ARM) = shared layer for all Azure UIs (portal, REST, PowerShell, CLI, SDKs eg C#) to manage resources
 * **Azure Resource Manager Template** = declarative JSON-like script language to define resources

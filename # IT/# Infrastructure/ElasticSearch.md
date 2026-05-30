@@ -17,14 +17,12 @@ Completion suggester
 Percolation = filtre les requêtes matchant un document (=> notification nouveau document match...)
 Profile API (ms)
 
-## Elastic Stack
+## Glossary
 
-Formerly _ELK stack_
-Suite of applications for searching, logging and visualizing data.
-
-* ElasticSearch
-* Logstash
-* Kibana = Elastic Stack
+* **Beats** = lightweight data shippers
+* **Elastic Stack** (formerly **ELK** for Elasticsearch/Logstash/Kibana) = suite of applications for searching, logging & visualizing data (ELK + Beats)
+* **Logstash** = data collection and log-parsing engine
+* **Kibana** = source-available data analytics/visualisation dashboard (lets users create bar/line/and scatter charts/pie charts/maps) against data stored in an Elasticsearch cluster
 
 ## API
 

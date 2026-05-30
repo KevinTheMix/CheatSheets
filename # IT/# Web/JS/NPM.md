@@ -9,6 +9,8 @@ Ease download & install of all packages dependencies & exposes commands to initi
 
 ## Glossary
 
+* _.npmrc_ = npm configuration file, defines registry location (public or company-private), authentication (gitignored secret token or env var), install behavior, proxy/network settings
+  * Can be defined at multiple levels (projet, user, global)
 * Semantic Version = **major.minor.patch**
   * `~` = specified version or latest patch (eg `~1.0.1` is `1.0.1` up to `1.0.9`)
   * `^`= specified version or latest minor or patch (eg `~1.0.1` is `1.0.1` up to `1.9.9`)

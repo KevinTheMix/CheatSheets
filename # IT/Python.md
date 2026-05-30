@@ -40,6 +40,7 @@ High-level general purpose dynamically type-checked garbage-collected programmin
 * **Miniconda** = free miniature version of Anaconda Distribution (includes only conda plus minimal dependencies)
 * **PyQt** = Python bindings for Qt framework (older, widely used)
 * **PySide** = Python bindings for Qt framework (more permissive license, officially supported by Qt)
+* **uWSGI** = fast application server implementing WSGI standard, sitting between a web server (eg Nginx) & an application (most commonly Python web apps such as Django/Flask)
 * **wxPython** = Python bindings for wxWidgets
 
 ### Modules
@@ -73,6 +74,7 @@ Over 200 built-in modules.
     * _msecs_ = milliseconds
     * Others = _name_, _pathname_, _lineno_, _funcName_, etc
   * handlers = where do logs go (eg console, splunk)
+  * loggers = named loggers (ie defined in client apps as `logging.getLogger(f"kokoLogger")`)
 * **math**
   * `math.comb(n,k)` = binomial coefficient
 * **re** (regular expressions)
@@ -95,7 +97,7 @@ Over 200 built-in modules.
 * **certifi** = mozilla-maintained ca bundle for ssl verification
 * **flask** = lightweight Python web microframework
 * **flask_csv** = CSV export helper for flask routes
-* **flask-restx** = Flask extension for quickly building REST apis with minimal setup & swagger docs
+* **flask-restx** = Flask extension for quickly building REST apis in a structured self-documenting way with minimal setup & automatically generated swagger docs
   * `reqparse` (_deprecated_) = request argument parsing & validating (considered legacy, use marshmallow + apispec or model-based validation with @api.expect() for new projects)
 * **http.server** = basic HTTP server
 * **jinja2** = template engine library used to generate text (HTML, config files, YAML, etc) dynamically using variables, logic & templates
@@ -330,13 +332,14 @@ Returned by libraries such as SQL libraries (eg `fetchone()` & `fetchall()`).
 * `dict(k1=v1, k2=v2, …)`
 * `dic[key]` = get value (_KeyError_ if key not present)
 * `if "key" in dic` = check key presence
-* `for key in dic` = iteration over a dictionary defaults to iterating over its keys
-* `for key, value in dic.items()` = iterates over both key & value
-* `for value in dic.values()` = iterates over values
 * `dic.get(key[, default])` = retrieves value at key (_None_/_default_ if key not present)
 * `dic[key].pop(key)` = replace key (`pop()` removes key first, raises an error if not found)
 * `dic.setdefault(key, default)` = return value at key (set it first with provided default value if not exists yet)
 * `dic.update({key: value})` = creates/updates value for key
+* Iterations
+  * `dic.items()` = list of key-value pair as tuples (eg `for key, value in dic.items()`)
+  * `dic.values()` = list of values (eg `for value in dic.values()`)
+  * `for key in dic` = iteration over a dictionary (defaults to iterating over its keys)
 
 ### Functions
 

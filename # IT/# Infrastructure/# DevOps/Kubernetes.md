@@ -74,7 +74,7 @@ Based on an internal Google product called Borg open-sourced in 2014.
 * _Flagger_ = Kubernetes operator for progressive delivery, working alongside standard Deployments & manages canary resources automatically
 * _kind_ (Kubernetes in Docker) = primarily designed for testing Kubernetes itself, but may be used for local development or CI
 * _Kustomize_ = similar to Helm
-* _Helm_ = package manager for Kubernetes that uses templated manifests (charts) to deploy & manage applications, helps reducing number of YAML manifest/configuration files
+* _Helm_ = package manager for Kubernetes that uses parameterized templated manifests (charts) to deploy & manage applications, helps reducing number of YAML manifest/configuration files
 * _Minikube_ = cross-platform tool for running Kubernetes locally
 * _Rancher_ = open-source Kubernetes-as-a-service (eg to pilot AKS)
 * _Spinnaker_ = blue-green
@@ -86,6 +86,6 @@ Based on an internal Google product called Borg open-sourced in 2014.
 * `kubectl drain {node}` = evicts (ie rescheduled to other nodes if there are replicas) all pods from it so node can be taken offline for maintenance/upgrade/decommissioning/OS update
 * `kubectl rollout undo {}` = roll  back a previous rollout
 
-## TODO
+### Helm
 
-* [AKS](https://preview.portal.azure.com)
+* `help upgrade` = update an existing release with new changes from a chart

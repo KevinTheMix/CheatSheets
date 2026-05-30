@@ -5,7 +5,9 @@ Can use all of JS features, and adds a layer of OO classes, static typing, casti
 
 ## Quick Tips
 
-[Understanding TypeScript compilation & tsconfig.json](https://medium.com/jspoint/4cb15f7244bc)
+* [Understanding TypeScript compilation & tsconfig.json](https://medium.com/jspoint/4cb15f7244bc)
+* Enable project-wide error (all files) in VS Code (`"typescript.tsserver.experimental.enableProjectDiagnostics": true`)
+  * In Settings, JS/TS > Tsserver > _Experimental: Enable Project Diagnostics_
 
 ## Glossary
 
@@ -16,7 +18,7 @@ Can use all of JS features, and adds a layer of OO classes, static typing, casti
 
 ## Environment
 
-* _.d.ts_ = declaration file, containing type information only (à la C++ _.h_ header file)
+* _.d.ts_ = declaration file, containing type information only and no executable code (à la C++ _.h_ header file)
 * _tsconfig.json_ = a [JSON5](https://json5.org) configuration file used by TypeScript compiler to determine which/where files to compile
   * **files** = manual list of exact files to include (no globs)
   * **include**/**exclude** = set of glob patterns (ie pattern matching format using wildcards) telling which files to consider/ignore
@@ -36,3 +38,4 @@ Can use all of JS features, and adds a layer of OO classes, static typing, casti
 
 * [TypeScript Variable Declaration](https://www.typescriptlang.org/docs/handbook/variable-declarations.html)
 * OO `class Child extends Parent { ... }`
+* `never` = represents a type that never returns (function that never returns, an infinite loop, an exhaustive type check)

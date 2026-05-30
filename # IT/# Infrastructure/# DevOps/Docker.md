@@ -154,7 +154,7 @@ Existing containers can be specified by either id or name.
 * `COPY (--from=<stage_index|stage_name>) <source(s)> <target>` = embeds some files/folders from a previous stage or a host local directory (relative to build context, eg source code) into a this new image layer's filesystem
   * Ignores files/folders mentioned in _.dockerignore_ file
 * `ENTRYPOINT ["<command>"(, "<arg1>", "<arg2>")]` = defines command to run when container is started
-* `ENV <variable> <value>` = define an environment variable
+* `ENV <variable> <value>` = define an environment variable (note: for stable across all configurations/defaults, eg **not** env-specific secrets, can be overriden by K8s later)
 * `EXPOSE <port>` = documents which ports this container listens to (purely informational, use `docker run -p` to actually map a port between container & host, or equivalent docker compose file's _ports_ section)
 * `FROM <base_image> (AS <multi_stage_alias>)` = first statement in the Dockerfile; indicate the a base image from the repository (which is _Docker Hub_ by default)
 * `RUN <command>` = adds layer to initial parent image using commands provided by base image (eg `npm install` or `powershell -Command Add-WindowsFeature Web-Server`)
