@@ -112,7 +112,7 @@
 * [Typeform](https://www.typeform.com) = free beautiful user-friendly online forms/surveys
 * **Typora** = lightweight markdown editor (_$14.99_)
 * [Torchpad](http://torchpad.com) = online Markdown wiki (must signup)
-* [Wide text generator](https://fsymbols.com/generators/wide) = vaporwaverize
+* [Wide text generator](https://fsymbols.com/generators/wide) = simpsonwave/vaporwaverize
 
 ### Editors/IDEs
 

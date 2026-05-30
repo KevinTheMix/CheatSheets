@@ -93,6 +93,7 @@
 * **X.500** = series of networking standards covering electronic directory services
 
 * _Apache HTTP Server_
+* _Charles Web Debugging Proxy_ = cross platform HTTP debugging proxy server application (written in Java), to view HTTP(S)/TCP traffic from/to local computer
 * _cURL_ = CLI for data transfer (FTP, HTTP, Email & co)
 * _Cyberduck_ = (S)FTP, WebDAV (aka HTTP) & cloud storage (S3, Azure) client
 * _FileZilla Portable_ = no-install FTP

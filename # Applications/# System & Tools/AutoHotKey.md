@@ -4,6 +4,7 @@ Windows inputs (keyboard & mouse) macros/scripting.
 
 ## Quick Tips
 
+* [Hotkeys](https://www.autohotkey.com/docs/v1/Hotkeys.htm)
 * [aText](https://trankynam.com/atext) = another simpler keyword substitution tool
 * [UIA-v2](https://github.com/Descolada/UIA-v2) = UIAutomation library for AHK v2 (based on thqby's UIA library) for complex windows & browsers (via UIA_Browser.ahk) automation schemes
 

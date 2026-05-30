@@ -10,8 +10,8 @@
 ## Glossary
 
 * Modes
-  * **Normal** or **Command** = move around & edit (starting mode)
-  * **Execution** or **Command-line** = run commands & range editing
+  * **Normal** (aka **Command**) = move around & edit (starting mode)
+  * **Execution** (aka **Command-line**) = run commands & range editing
   * **Insert** = basic text typing
   * **Replace** = overwrites existing characters as you type
   * **Select** = selected text is replaced as you type
@@ -20,15 +20,15 @@
 
 ## Commands
 
-* `{Escape}` = switch to **Normal** mode
+* `<Escape>` = switch to **Normal** mode
 * `:` = switch to **Execution** mode
 * `gh`/`gH` = select next char/whole line & switch to **Select** mode (use arrows to expand selection)
 * `v` = switch to **Visual** mode
 * `q:` or `q/` or `q?`  = command-line window
 * Counts (multipliers)
-  * `{n}{motion}` = repeats motion _n_ times (can be used in place a single motion)
+  * `{n}{motion}` = repeats motion _n_ times (can be used in place of a single motion)
   * `{n}{cmd}` = plays command _n_ times
-  * `{n}{a/A/i/I/o/O}{text}{escape}` = insert/append n times _text_ at cursor
+  * `{n}[aAiIoO]{text}<Escape>` = insert/append n times _text_ at cursor
 
 ### Motions
 

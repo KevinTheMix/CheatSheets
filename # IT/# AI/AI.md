@@ -20,6 +20,7 @@
 * **Neural Network** (NN) or **Artificial Neural Network** (ANN) = branch of ML built on biological (brain) neural organization (ie in/out with math in middle)
   * **Convolutional** = type of NN designed to process high-dimensional data with spatial structure (images/videos/audio/text eg for image recognition, object detection, medical imaging, computer vision)
 * **Overfitting** = when an analysis corresponds too closely to a particular set of data (ie its training data) and therefore fails to fit additional data or predict future reliably
+* **Q-Learning** = reinforcement learning algorithm that trains an agent to assign values to possible actions based on its current state (without requiring an environment model)
 * **Reinforcement learning** = no data & no labels but we have ruleset (eg a game), numerical performance score as guidance (eg **Q-learning**)
 * **Supervised learning** = we have both in (ie data) & out (ie labels), eg classification (colors), object detection (person, sensor), segmentation (face)
 * **Unsupervised learning** = learns from unlabeled/untagged data, through mimicry like people
