@@ -197,6 +197,7 @@
   * `kill $(ps -aux | awk '$1="<user>"{print $2}')` = kills all processes linked to given user (ie awk can map/fetche PID per user)
 * `bash` = starts a new interactive bash process
   * `-c '<string>'` = runs string in new Bash subprocess (environment is isolated, positional parameters _$i_ via eg `bash -c 'echo $1' -- "hello"`)
+  * `--login` = starts a login shell
   * `<script_file>` = starts a new bash subprocess to interpret provided script
   * `<code_outputting_command> | bash` = similar to `bash <script_file>` but with actual code (no file name) being passed from command _stout_ to bash _stdin_
 * `base64` = base64 encode/decode

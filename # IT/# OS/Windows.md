@@ -24,6 +24,7 @@
 * **Integrated Windows Authentication** (IWA) = authentication method that uses logged-in user's domain credentials (Kerberos/NTLM) for silent SSO into apps (eg user must not re-login into WPF app)
 * **Microsoft Copilot** = Windows-integrated LLM based on OpenAI GPT-4/5 developed by Microsoft AI, replacing discontinued Cortana
 * **Microsoft Defender** (aka **Windows Defender**) = replaces Microsoft Security Essentials from Win 8
+* **Microsoft Graph** = central REST API gateway (ie <https:///graph.microsoft.com>) into Microsoft 365 & related Microsoft cloud services (eg Outlook, Excel, Teams, SharePoint, OneDrive, OneNote, Entra ID, Intune, To Do)
 * **Microsoft PowerToys** = free open-source official utilities to help power users & developers (advanced paste, always on top, keep awake, color picker, file locksmith)
 * **MSMQ** (Microsoft Message Queuing) = native message queueing (between applications/machines) system (uses disk-backed queues for durability, mostly considered legacy)
 * **Reliability Monitor** = review computer reliability/problem history
@@ -239,6 +240,7 @@ Commands are fully case-insensitive.
 * `set {VAR}` = assignment
 * `setlocal`
 * `sfc (/scannow)` (System File Checker aka **Resource Checker**) = scan integrity of all protected system files & replace incorrect with correct Microsoft versions
+* `start` = launch a new process (à la Unix `bash`)
 * `time`
 * `type {file(s)}` = display contents of text (or not) file(s)
 * `where {command(s)}` = display command paths (searching via wildcarded patterns)

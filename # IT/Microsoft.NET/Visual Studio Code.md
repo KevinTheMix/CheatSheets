@@ -38,12 +38,12 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
   * _launch.json_ = automatically spawn a browser when running a web app
   * _settings.json_ = workspace-scoped settings
 * [Setting by Filetype](https://code.visualstudio.com/docs/getstarted/settings#_language-specific-editor-settings)
+  * Eg `"[dart]": { "editor.codeActionsOnSave": { "source.fixAll": "explicit" }, }`= automatically format code on save (eg adds missing `const`)
   * Eg `"[plaintext]": { "editor.insertSpaces": false }` = _.txt_ files are referenced as _plaintext_ filetype
-* File nesting = collapses files under a parent file:
-  * `"explorer.fileNesting.enabled": true,`
-  * `"explorer.fileNesting.expand": false,`
-  * `"explorer.fileNesting.patterns": { "pubspec.yaml": ".flutter-plugins, .flutter-plugins-dependencies, .gitignore, .packages, .metadata, pubspec.lock, analysis_options.yaml, todoapp.iml" },`
-  * `"[dart]": { "editor.codeActionsOnSave": { "source.fixAll": "explicit" }, }  // Automatically format code on save (eg adds missing 'const')`
+* `"explorer.fileNesting.enabled": true` = enables file nesting (collapses files under a parent file)
+* `"explorer.fileNesting.expand": false` = controls whether nested files are expanded/collapsed by default under their parent file
+* `"explorer.fileNesting.patterns": { "parent.file": ".child.a, .child.b, .child.c" },`
+* `"workbench.tree.indent": 8` = set horizontal indent of Explorer (and other trees)
 
 ### [Keyboards shortcuts](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf)
 

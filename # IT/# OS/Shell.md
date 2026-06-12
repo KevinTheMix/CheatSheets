@@ -22,9 +22,10 @@ Technically, any outer layer that mediates between a user and a kernel's service
 * **Here Document** = file or input stream literal
 * **Here String** = one-line heredoc
 * **Interactive Shell** = connected to a TTY, not started with `-c {command}`, nor a script shebang
-* **Login Shell** = started when first logged in (eg console, `ssh`, `tty`), starting with a `-` (eg `-bash`), reads/sets global config (_etc/profile_, **$PATH**)
+* **Login Shell** = Bash session (with a leading `-` eg `-bash`) that starts as if a user has just logged in to initialize full user environment (eg console, `ssh`, `tty`)
+  * Reads specific startup files (_/etc/profile_, _~/.bash\_login/profile_, _~/.profile_) to set environment variables (eg _PATH_), shell configuration, user-specific setup
 * **Non-Interactive Shell** = started via `cron`, `systemd`, `-c`, a script
-* **Non-Login Shell** = started after already logged in (eg `bash`, or opened as a terminal window in desktop GUI environment eg _Gnome_)
+* **Non-Login Shell** = started after user already logged in (eg via `bash` command to spawn child, or via a terminal window in desktop environment eg _Gnome_), reads _~/.bashrc_
 * **REPL** (Read-Eval-Print Loop) = interactive programming environment taking single inputs, executes them & returns result to user (eg CLI shells)
 * **Sourcing** = load a file's content/execute script into current shell session (vs in a subshell as a new process, ie all changes present in file affect current shell)
 * **Standard Shell** = CLI interpreter conforming to widely accepted specification (typically POSIX shell standard)

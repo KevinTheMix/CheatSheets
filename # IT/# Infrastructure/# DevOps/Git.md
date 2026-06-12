@@ -44,7 +44,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * **Configuration files**
   * _.gitconfig_ (User), _C:/Program Files/Git/etc/gitconfig_ (System), _./git/config_ (Local) = configuration sections
   * _.gitattributes_ = (binary/textual) merging and [line ending](https://stackoverflow.com/a/10855862/3559724) stragtegies per file type
-  * _.gitignore_ = tracking strategy per file type
+  * _.gitignore_ = glob-style top-to-bottom file tracking (eg _file_, _dir/_, _dir/file_, _dir/dir/_, _/absolute/_, `*` any char except `/`, `?` single char, `**` any dir depth, `!` include excluded, `[abc]` class)
 * **Feature Branch Workflow** = create local _feature_ branch from _main_, make many commits, push to remote, pull request, resolve feedback locally/together, resolve merge conflicts to _main_
 * **Fetching** = re-synching from remote repository into local repository
 * **Fork** = on platforms like GitHub, duplicates an existing repository/project along with its full history towards the user's own account
@@ -94,6 +94,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * **Upstream Branch** = remote/origin branch that a local branch is currently tracking (ie for push/pull)
 * **Work(ing) Tree** (aka **Working Directory**) = a directory where the (project) files reside and where changes are made (note: may also contain untracked files)
 * **Worktree** = mechanism that allows a single same repository (hence with a shared history) to be checked out as multiple parallel separate working directories at same time, each attached to possibly a different branch
+  * This allows eg working on different branches in parallel, avoiding constant git checkout switching, keep isolated changes per branch
 
 ## API/CLI
 
@@ -179,14 +180,14 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * `git merge --ff`
 * `git merge --(no-)squash {feature_branch}` = brings the change from feature branch into current branch's working tree, without committing (no merge commit gets created)
 * `git reset` = unstages all files (removes them from staging area thereby excluding them the next commit)
-* `git reset {file}` = unstages one or several files (opposite of `add`)
-* `git reset ({commit}) --soft` = uncommits (changes are left staged)
-* `git reset ({commit}) --mixed` = uncommits & unstages changes (left in the working tree)
-* `git reset ({commit}) --hard` = uncommits & unstages & delete changes (**warning**: destructive)
-* `git reset --soft HEAD~1` = cancels the last commit (`HEAD~1` means commit one step before aka parent commit)
-* `git reset --hard HEAD` = reverts all uncommitted changes
-* `git reset --hard HEAD@{1}` = reverts repo to state before most recent changes (eg by a commit/branch switch/reset)
-* `git reset --hard origin/{main}` = resets local repo (eg _main_) to origin's version (fetch it beforehand to get latest version)
+  * `{file}` = unstages one or several files (opposite of `add`)
+  * `({commit}) --soft` = uncommits (changes are left staged)
+  * `({commit}) --mixed` = uncommits & unstages changes (left in the working tree)
+  * `({commit}) --hard` = uncommits & unstages & delete changes (**warning**: destructive)
+  * `--soft HEAD~1` = cancels the last commit (`HEAD~1` means commit one step before aka parent commit)
+  * `--hard HEAD` = reverts all uncommitted changes
+  * `--hard HEAD@{1}` = reverts repo to state before most recent changes (eg by a commit/branch switch/reset)
+  * `--hard origin/{main}` = resets local repo (eg _main_) to origin's version (fetch it beforehand to get latest version)
 * `git restore {file}` = restores a staged file (or directory) to its last staged state, or an unstaged one to its HEAD state (**warning**: destructive)
 * `git restore {file} --staged` = unstages file (similar to `git reset {file}`)
 * `git revert HEAD` = cancels very last commit (only if there are no unstaged changes)
@@ -215,6 +216,8 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * `-a <tag> -m "<message>"` = creates an **annotated** tag (stored as full Git object) with a (required) message, etc
   * `-d <tag>` = deletes tag
   * `-n` = lists tags with their messages (for lightweight tags, shows commit message instead)
+  * `git push <remote> --tags` = push all local tags to remote
+  * `git push <remote> <tag>` = push a specific local tags to remote (eg `git push origin v1.0.0`)
 
 ### Remote
 
@@ -224,9 +227,10 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * `--all` = fetches changes from all (configured) remote repositories, but does not merge/update local branches
   * `--prune` = fetches remote branches & removes their local copy that no longer exist remotely (local branches remain)
 * `git branch -u {remote}/{branch}` (or `--set-upstream-to {remote}/{branch}`) = links local branch to remote branch (adds (max one, previous gets replaced) _branch_ section in `.git/config`)
-* `git remote` = lists all the remote repos names associated with local repo
+* `git remote` = lists all remote repos names associated with local repo
   * `-v` = lists all remote repositories names & URLs associated with local repo
   * `add {remote} {url}` = adds a remote repo to local repo (adds a _remote_ section in `.git/config`)
+  * `get-url <remote>` = see remote (eg _origin_) URL
   * `set-url {remote} {url}` = update the remote's URL (in the context of GitHub, the URL format `git@github.com:user/repo.git` is an SSH URL)
   * `remove {remote}` = removes remote repo (deletes _remote_ & _branch_ sections in `.git/config` & folder from `.git/refs/remotes`, note that even `origin` can be removed)
   * `prune {remote}` = removes local branches that no longer exist on the remote repo
@@ -234,11 +238,10 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * `git ls-remote {remote}` = list all remote references (including branches)
 * `git pull {remote} {branch}` = `git fetch` + `git merge`
 * `git push` = pushes changes to remote branch linked with current branch
-  * `{remote} {branch}` = pushes changes to a remote repo branch
-  * `{remote} {tag}` = shares local tag with remote repo (eg `git push origin v1.0.0`)
-  * `-u {remote} {branch}` (or `--set-upstream-to`) = one-time link current local branch to a remote branch (create it if not exist), then pushes changes to it
+  * `<remote> <branch>` = pushes changes to a remote repo branch
+  * `-u <remote> <branch>` (or `--set-upstream-to`) = one-time link current local branch to a remote branch (create it if not exist), then pushes changes to it
   * `--force` = overwrite/push whatever is there
-  * `--force-with-lease` = overwrite only if nothing changed since I last checked (ie nobody else pushed commits that I could inadvertendly erase)
+  * `--force-with-lease` = overwrite only if nothing changed since I last checked (ie nobody else pushed commits that I could inadvertendly erase, ie safety lock)
 
 ## Troubleshooting
 

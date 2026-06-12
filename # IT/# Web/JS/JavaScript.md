@@ -162,6 +162,7 @@ See <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statement
 * **Knockout** = library for building dynamic UIs using MvvM
 * **Lightbox** = image viewer with frame resizing & fade transition
 * **Lodash** = extension toolkit (eg LINQ-style collection manipulation methods, deep cloning, debouncing, etc.)
+* [Mermaid](https://mermaid.js.org) = open-source library for text-based diagrams (often used with Markdown eg on GitHub)
 * **Moment.js** = dates library
 * **Polymer** = open-source JavaScript library (by Google) for building web applications using Web Components standard model (custom elements, shadow DOM, HTML templates)
 * **Redux** = open-source state management JS library (written in TypeScript)

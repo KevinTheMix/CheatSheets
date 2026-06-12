@@ -4,6 +4,7 @@ High-level general purpose dynamically type-checked garbage-collected programmin
 
 ## Quick Tips
 
+* `py -0p` = lists local Python installs
 * `__init__.py` = makes containing directory behave like a package (can be imported, initialized via this file), and is mandatory when using relative imports
 * [PyPI](https://pypi.org) (Python Package Index) = official repository of Python packages (default for `pip`)
 * There is no brackets in python, indentation matters
@@ -15,6 +16,8 @@ High-level general purpose dynamically type-checked garbage-collected programmin
 ## Glossary
 
 * _.pyi_ file = Python type stub file, provides type information to type checkers, IDEs & tools (mirrors structure of a _.py_ file, only signatures/definitions)
+* _.whl_ file (aka wheel file) = Python official built-package format (à la .NET .nupkg) eg used by `pip`
+* **Astral Python** = Python builds distributed and managed by Astral (the creators of uv), allowing on-demand, user-space Python installations independent of system Python
 * **Callable** = anything you can call with parentheses (eg `something(…)`)
 * **Decorator** = any callable that takes a function/class and returns/replaces it with another function/class (ie syntactic sugar for `f = decorator(f)`)
   * Decorators with parameters (hence parentheses) are expressions evaluated immediately (with _None_ func parameter), yet **applied** later at same time argument-free would
@@ -28,6 +31,10 @@ High-level general purpose dynamically type-checked garbage-collected programmin
 * **Python Enhancement Proposal** (PEP) = official design documents that define how Python works (syntax, packaging, environments, runtime, community conventions) by Python core team
 * **setuptools** = legacy standard Python packaging library to build/package/install/distribute Python projects (uses a _setup.py_ config file to define included modules & required dependencies)
 * **Type Hint** = hint (ie not enforced) to humans & tools about what type a variable/parameter should be
+* **uv** = fast all-in-one Python tool that installs Python versions, manages virtual environments, handles packages without requiring system-wide installs
+  * `uv python install 3.9` = install a specific Python version
+  * `uv venv --python 3.9 .venv` = creates a venv using a specific (installed) Python version
+  * `uv pip install --upgrade pip` = install stuff
 * **Virtual Environment** = standalone self-contained local install including all versioned dependencies, sourced in command prompt, prevents intereference with global install
 
 ### Frameworks
@@ -148,13 +155,13 @@ Over 200 built-in modules.
 ## CLI
 
 * **python**
-  * `python - <<'PY'{Enter}{code}{Enter}PY` = execute inline Python code from a Bash here-document
-  * `python -c {command}` = executes inline Python code passed as a string argument to `-c`
-  * `python -m {module}` = runs Python _.py_ module file as a script (eg _pip_, _venv_)
-  * Eg `python -m venv {directory}` = creates a virtual environment (or `py -3.11 -m venv .venv` for a specific local Python version)
-    * `source {venv}/bin/activate` (or `.\{venv}\Scripts\Activate.ps1` in PowerShell) = change prompt to virtual environment
-    * `deactivate` = exit virtual environment (return to system-wide python install)
-  * Eg `python -m pip install {package}`
+  * `python - <<'PY'{Enter}<code>{Enter}PY` = execute inline Python code from a Bash here-document
+  * `python -c <command>` = executes inline Python code passed as a string argument to `-c`
+  * `python -m <module>` = runs Python _.py_ module file as a script (eg _pip_, _venv_)
+    * `python -m pip install {package}`
+    * `python -m venv <directory>` = creates a virtual environment (eg `python -m venv .venv` or `py -3.11 -m venv .venv` for a specific local Python version)
+      * Activate = `source {venv}/bin/activate` (Bash), `.venv\Scripts\activate.bat` (Windows CMD), `.\{venv}\Scripts\Activate.ps1` (PowerShell)
+      * Deactivate = `deactivate` (exit virtual environment & return to system-wide python install)
 * **python-is-python3** = small Debian/Ubuntu system package that creates a symlink for convenience
 * **pip(3)** = Python (3) package manager (installed as part of Python environment)
   * `pip freeze` = list packages name & version in a key-value format, usually followed by `> {file}` (eg _requirements.txt_)
@@ -181,14 +188,15 @@ Over 200 built-in modules.
   * `__name__` = name of current module, varies depending on whether executed directly (ie `__main__`) or imported
 
 * _None_ = **NoneType** (à la null)
-* `pass` = no op, ie placeholder statement for contexts where a statement is required by syntax but not implemented yet (eg in a if/else block)
-* `field_` = single trailing underscore avoid conflicts with reserved keyword (by convention)
 * `#` = comment
+* `del <ref>` = removes object binding (ready to be garbage collected), where ref can be a variable, a list item or slice, a dic key, an object attribute
+* `field_` = single trailing underscore avoid conflicts with reserved keyword (by convention)
 * `input(text)` = displays optional prompt text & returns user input
+* `callable(koko)` = True/False whether argument is callable
+* `eval(code)` = returns result of Python code string dynamically
+* `pass` = no op, ie placeholder statement for contexts where a statement is required by syntax but not implemented yet (eg in a if/else block)
 * `print(args, sep=<separator>)` = prints argument (concatenates them using separator (default is single space) if multiple)
 * `type(value)` = returns type (eg `<class 'str'>`)
-* `eval(code)` = returns result of Python code string dynamically
-* `callable(koko)` = True/False whether argument is callable
 * `version('<package>')` = returns named version for given package
 
 ### Numbers
@@ -215,13 +223,14 @@ Over 200 built-in modules.
 
 Strings are list of (1-char long) strings.
 
-* `chr(integer)` = converts integer into corresponding ASCII character
-* `ord(char)` = returns a single char Unicode index
 * `'text'` or `"text"` = **str**ing
 * `"""text{Enter}text"""` = multi-line string (outputs newlines)
 * `"text/{Enter}text"` = line continuation (does not output newlines)
-* `"text" + "text"` = concatenation
+* `"text" + "text"` = concatenation (note: **Python cannot concatenate str + int**, used explicit `str(i)` or format `f"{i}"`)
 * `"text * {n}"` = multiply a string (number can be before/after)
+
+* `chr(integer)` = converts integer into corresponding ASCII character
+* `ord(char)` = returns a single char Unicode index
 * `str({n})` = convert to string
 * `f"…{<expression>}…"` = interpolation (using curly braces)
 * `r"…"` or `R"…"` = raw string literal (don't treat backslashes `\` as escape characters)
@@ -231,12 +240,12 @@ Strings are list of (1-char long) strings.
 * `.count({needle})` = number of occurences of needles in string
 * `.isalpha()` = True if text represents text
 * `.isdigit()` = True if text represents a number
+* `.lower()`
 * `.replace(from,to(,max))` = replace all (or max) occurrences of a substring wit another
 * `.split(({separator}))` = split (default separator is whitespace chars)
 * `.strip({characters})` = trim whitespaces (or any provided characters)
 * `.translate(translation_table)` = replace multiple characters in a string using a translation table
   * `str.maketrans({dic})` = creates a translation table from a dictionary (eg `{'o': 'O', 't': 'T'}`)
-* `.lower()`
 * `.upper()`
 
 ### Flow
@@ -268,6 +277,9 @@ Strings are list of (1-char long) strings.
 * `enumerate(col)` = adds a counter to collection loop (eg `for i, name in enumerate(list)`)
 * `{needle} in {col}` = True/False if needle is in haystack (works for strings, à la C# `Contains()`)
 * `*col` = unpacks as separate arguments (eg `print(*[1, 2, 3])` becomes `print(1, 2, 3)` which prints _1, 2, 3_)
+* `zip(l1,l2)` = returns a collection of tuples of items from each collection (limited by shortest collection)
+  * Eg `l1 = [1, 2, 3]; l2 = ['a', 'b']; zip(l1,l2)` => _[(1, 'a'), (2, 'b')]_
+  * Can be used to browse two collections in a single loop (instead of nested loops, eg `for i,j in zip(l1,l2)`)
 
 #### Lists
 
@@ -287,9 +299,9 @@ There is no built-in arrays (but tools like **NumPy** exist).
   * `list[::-1]` = inverts list
 * `.append(item)` = add item at the end
 * `.clear()` = delete all items
-* `.extend(list)` = add list to this list (in place, returns None)
+* `.extend(list)` = append a list to this list (in place, returns _None_)
 * `.insert(index, item)` = insert item at index (can be negative, where _-1_ actually means second-to-last)
-* `.pop((index))` = remove & return item at index (or last if not specified)
+* `.pop(index)` = remove & return item at index (or last if not specified)
 * `.remove(item)` = remove first matching item (by value)
 * `.sort()` = sort a list in place
 * `list(col)` = convert collection (eg generator, map, set) to list (à la `toList()`)
@@ -333,7 +345,8 @@ Returned by libraries such as SQL libraries (eg `fetchone()` & `fetchall()`).
 * `dic[key]` = get value (_KeyError_ if key not present)
 * `if "key" in dic` = check key presence
 * `dic.get(key[, default])` = retrieves value at key (_None_/_default_ if key not present)
-* `dic[key].pop(key)` = replace key (`pop()` removes key first, raises an error if not found)
+* `dic.pop(key[, default])` = removes value from dictionary & returns it
+  * `dic[key] = dic.pop(key)` = replace key (`pop()` removes key first, raises an error if not found)
 * `dic.setdefault(key, default)` = return value at key (set it first with provided default value if not exists yet)
 * `dic.update({key: value})` = creates/updates value for key
 * Iterations

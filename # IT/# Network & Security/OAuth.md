@@ -38,6 +38,7 @@ It does not prescribe Access Token format or validation process (quality of actu
 * **HTTP Basic Authentication** = older user login/password prompt
 * **JWT** (JSON Web Token) = internet standard for creating optional signatures and/or encryption with JSON payload asserting some claims (eg _logged in as admin_)
   * Tokens are signed via either a shared secret or public/private key, designed to be compact, URL-safe, usable in a web-browser SSO context
+  * They are divided into three dot-delimited parts (ie `header.payload.signature` where signature is computed from `base64url(header) + "." + base64url(payload)` with a secret or private key)
 * **Microsoft Authentication Library** (MSAL) = enables applications to authenticate users & acquire OAuth/OIDC tokens from Microsoft Entra ID
 * **OpenID** = open standard & decentralized authentication protocol (ie a referral letter)
 * **OpenID Connect** (**OIDC**) = 3rd generation of OpenID technology, an authentication (identity) layer on top of OAuth 2.0, enabling SSO

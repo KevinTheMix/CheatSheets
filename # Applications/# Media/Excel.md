@@ -8,10 +8,15 @@
 * [excelisfun](https://www.youtube.com/@excelisfun)
 * [Find external links](https://www.ablebits.com/office-addins-blog/find-break-external-links-excel)
 * [Leila Gharani](https://www.youtube.com/@LeilaGharani) = Excel shortcut keys you SHOULD know! (2022.02.21, already absorbed)
+* Run `excel /x` to open a new isolated Excel instance/process
 
 ## Glossary
 
+* _#N/A_ (Not Available) = means a value cannot be found (common in lookup formulas eg VLOOKUP/XLOOKUP/MATCH)
+* _#VALUE!_ = wrong type of data in formula (ie incompatible data types eg text instead of expected number)
+* **Array** = block of values (ie cells group like a range or in-memory structure in VBA/Interop) handled as a single unit
 * **Spill** = when some values exceed their initial cell and overflow into adjacent ones
+* **Single-Threaded Apartment** (STA) = thread used by UI (coming from COM threading) on which all interactions must execute
 * **VLOOKUP** = find things in a table or a range by row
 * **XLOOKUP** = improved VLOOKUP (any direction and returns exact matches by default, making it easier and more convenient to use)
 
@@ -65,17 +70,20 @@ Note: shortcuts including numbers require holding `Shift` on EU keyboard as num 
   * Eg _A$1_ = freeze a row's reference (when copy-pasting a cell vertically)
   * `F4` (while in Edit mode) = cycle through column/row dollar freezing combinations in current formula
 * `F2` = switch to Edit mode (alternatively, click Formula bar)
+* `F9` = recalculates entire workbook
 * `Alt + =` = auto-sum adjacent cells (both horizontally & vertically, at the same time)
 * `Alt + ;` = select only visible cells if row/columns where hidden (easy way to detect that)
 * `Alt + Down` = display dropdown showing all previous string values in same column (ie quick enum-like value selection)
 * `Alt + Enter` (in Edit mode) = add newline inside a cell
 * `Alt + F1` = generate a bar chart using the selected data
-* `Alt + F11` = Open Visual Basic editor
+* `Alt + F8` = Macro menu: _Run_, _Step into_, _Edit_, _Create_, _Delete_, _Options…_
+* `Alt + F11` = open Microsoft Visual Basic for Applications (VBA) IDE
 * `Ctrl + +` or `Ctrl + -` = insert or remove a row/column (select an existing row/column beforehand to skip dialog, also insert after cut/copying to clone/move)
 * `Ctrl + '` or `Ctrl + "` or `Ctrl + D` = clone down above cell value
 * `Ctrl + ;`/`Ctrl + :` = insert current date/time
 * `Ctrl + Enter` (in Edit mode after selecting multiple cells) = paints active cell's content (ie value or formula) into other selected cells
 * `Ctrl + Left/Right/Up/Down` = go to first/last cell horizontally/vertically (add `Shift` to select range)
+* `Ctrl + Page Up/Down` = go to previous/next sheet
 * `Ctrl + &` = surround with border
 * `Ctrl + 1` = Format cells
 * `Ctrl + 9` = hide current row(s)
@@ -97,7 +105,8 @@ Note: shortcuts including numbers require holding `Shift` on EU keyboard as num 
 * `Ctrl + Space` = select whole column
 * `Shift + Space` = select whole row
 * `Shift + Alt + Left/Right` (or _Data > Outline > Group_) = Group/Ungroup
-* `Shift + F11` = Add new sheet
+* `Shift + F9` = recalculates active sheet
+* `Shift + F11` = insert new sheet
 * `Right-Click` (on selected Column/Row) > Hide/Unhide
 * `Drag Down` square at bottom-right dot of selection = fill handle (ie generates values continuing selected sequence/series, only in one dimension)
 * `Drag a cell corder` = move selection (or insert if also holding `Shift`)
