@@ -85,12 +85,15 @@ Can be used in Normal mode to jump at a position, or as an argument in a command
 * `{text}{Tab}` = autocomplete (cycle through shortlist if several, works for commands & files)
 * `:!{cmd}` = hides Vim & runs (shell) command in shell (see `:r` below to insert its content)
 * `:e {file}` = replace currently edited file (see `:r` below to insert its content)
-* `:n` = go to next file (in a multi-files editing session, ie via `vim {file1} {file2}`)
-* `:q` = quit current window (eg Help page), or Vim itself
+* `:n` = go to next file in a multi-files editing session (ie started via `vim {file1} {file2}`)
+* `:n!` = go to next file without saving current file
+* `:q` = exit current window (eg Help page), or Vim session
+* `:q!` = exits entire Vim session immediately, skips current & all remaining files without saving
 * `:w {file}` = save/write buffer (to file)
-* `:wq` = save & quit
-* `:x` = save & quit
-* `:[qwx]!` = force-quit immediately without saving & skipping other files to edit
+* `:wq` = save & exit (always writes file, thereby updating its last modification timestamp)
+* `:wq` = save & exit (always writes file, even if read-only if has OS permission)
+* `:x` = save & exit (only writes file if it has been modified)
+* `:x!` = save & exit (only if file has been modified but force writes if file is read-only)
 * `:help ({subject})` or `F1` = help (eg `c_CTRL-D`, `insert-index`, full `user-manual`)
 * `:shell` = start an embedded shell (default one from _.passwd_ or overriden via set option _shell=/bin/bash_)
 * `:terminal` = built-in terminal emulator
