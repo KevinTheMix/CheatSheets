@@ -9,14 +9,17 @@
 * [Find external links](https://www.ablebits.com/office-addins-blog/find-break-external-links-excel)
 * [Leila Gharani](https://www.youtube.com/@LeilaGharani) = Excel shortcut keys you SHOULD know! (2022.02.21, already absorbed)
 * Run `excel /x` to open a new isolated Excel instance/process
+* VBA to refresh just a range (not whole sheet): `ThisWorkbook.Sheets("KokoSheet").Range("A1:B2").Calculate`
 
 ## Glossary
 
 * _#N/A_ (Not Available) = means a value cannot be found (common in lookup formulas eg VLOOKUP/XLOOKUP/MATCH)
 * _#VALUE!_ = wrong type of data in formula (ie incompatible data types eg text instead of expected number)
 * **Array** = block of values (ie cells group like a range or in-memory structure in VBA/Interop) handled as a single unit
+* **Macro** = perform action or automate tasks, can be run manually, from a button
 * **Spill** = when some values exceed their initial cell and overflow into adjacent ones
 * **Single-Threaded Apartment** (STA) = thread used by UI (coming from COM threading) on which all interactions must execute
+* **User-Defined Function** (UDF) = custom formula/function typically written in VBA (or C# via Excel-DNA) complementing built-in ones (eg SUM, VLOOKUP/XLOOKUP)
 * **VLOOKUP** = find things in a table or a range by row
 * **XLOOKUP** = improved VLOOKUP (any direction and returns exact matches by default, making it easier and more convenient to use)
 

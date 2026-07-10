@@ -7,12 +7,13 @@
 * _con.txt_ file = [forbidden file name](https://www.reddit.com/r/todayilearned/comments/a0zht/til_that_you_cant_create_a_file_in_windows_called/c0fcr5n)
 * _nul.txt_ & _foo_ = [forbidden file names](https://old.reddit.com/r/programming/comments/9bzrx/wtf_the_maximum_path_length_in_win32_is_260_chars)
 * Search by file size = `size: >1000MB AND < 3GB` (or `size:` and select listed proposition)
-* Create an invisible/hidden folder = name a folder `" "` (ie a no-Break Space, CharMap _U+00A0_, _Alt+255_ or _Alt+0160_), then change folder icon to a blank one
 * View current **CD Key**
   * CMD = `wmic path softwareLicensingService get OA3xOriginalProductKey`
   * PowerShell = `(Get-WmiObject -query 'select * from SoftwareLicensingService').OA3xOriginalProductKey`
   * Registry = `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform` > _BackupProductKeyDefault_
 * [How to turn a PC into a Wi-fi hotspot](http://www.reddit.com/r/YouShouldKnow/comments/2bqfvi/ysk_how_to_turn_your_pc_into_a_wifi_hotspot)
+* Create an invisible/hidden folder = name a folder `" "` (ie a no-Break Space, CharMap _U+00A0_, _Alt+255_ or _Alt+0160_), then change folder icon to a blank one
+* `Shift + Right-Click` = old context menu (alternatively, run `reg add HKCU\Software\Classes\CLSID{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32 /ve /d "" /f` as admin)
 
 ## Glossary
 
@@ -200,6 +201,8 @@ Commands are fully case-insensitive.
   * `/f` = scan & fixes errors (requires volume not in use, or run at next start)
   * `/r` = locate bad sectors, one by one (much longer, implies `/f`)
 * `cls` = clear screen
+* `cmdkey` = creates/displays/deletes stored user names & passwords
+  * `/list` = lists available credentials
 * `copy {file(s)} {destination}` = copy one or more files (destination can be a file or volume)
   * `/b {image} + {hidden} {destination}` = hide file in an image file (destination image must be same extension/type as input)
   * `/v` = verifies files are written correctly (ie files diff source vs destination)

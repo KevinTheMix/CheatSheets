@@ -21,8 +21,10 @@ High-level general purpose dynamically type-checked garbage-collected programmin
 * **Callable** = anything you can call with parentheses (eg `something(…)`)
 * **Decorator** = any callable that takes a function/class and returns/replaces it with another function/class (ie syntactic sugar for `f = decorator(f)`)
   * Decorators with parameters (hence parentheses) are expressions evaluated immediately (with _None_ func parameter), yet **applied** later at same time argument-free would
+* **Duck Typing** = structural (as opposed to nominative) inheritance/polymorphism for dynamic/runtime languages (à la C# `dynamic`)
 * **Dunder** (Double under) = special reserved names with double leading & trailing underscores used to implement certain behaviors
   * Although not recommended, custom attributes can also use that format (eg for metadata-type variables like `__version__`, `__project_name__`)
+* **Metaclass** = a class that defines how classes themselves are created & behave (ie a class of a class)
 * **Module** = a single file of Python code
 * **Monkey Patch** = dynamic languages technique to dynamically alter runtime code (eg add a custom method to a built-in type like _str_ or modify value of _math.pi_)
 * **Package** = a folder containing multiple modules
@@ -41,11 +43,20 @@ High-level general purpose dynamically type-checked garbage-collected programmin
 
 * **Anaconda** = Python, Jupyter & data science packages manager
 * **Conda** = CLI tool for package & environment management on Linux/macOS/Windows
+  * `conda create --name <env> python=<version> (<modules>)` = create a new environment using specific Python version (e.g. _3.11_) with optional list of modules to install during creation
+  * `conda env create -f <file.yml>` = create from an _environment.yml_ file (`--prune` to update)
+  * `conda activate <env>` = activate environment
+  * `conda env list` = lists environments
+  * `conda env remove --name <env>`
 * **Django** = Python's full-fledged web framework
 * **Flask** (`flask`) = lightweight "micro" web framework for small/medium application bundling only minimal essential features (routing, request handling, templating), extensible via extensions
 * **Kivy** = cross-platform (one codebase for desktop & mobile, but non-native look) mobile/touch-oriented Python UI framework (uses OpenGL)
+* **mamba** = drop-in replacement for conda that's much faster at resolving dependencies & creating environments
 * **Miniconda** = free miniature version of Anaconda Distribution (includes only conda plus minimal dependencies)
+* **mypy** = static (compile-time) type checker by the Python typing community
 * **PyQt** = Python bindings for Qt framework (older, widely used)
+* **pyright** = static (compile-time) type checker by Microsoft (faster than mypy, better integrated with IDEs)
+* **pylance** = Microsoft's Python langauge support extension for Visual Studio Code (autocomplete, type checking, error detection, code navigation, auto-imports, parameter hints)
 * **PySide** = Python bindings for Qt framework (more permissive license, officially supported by Qt)
 * **uWSGI** = fast application server implementing WSGI standard, sitting between a web server (eg Nginx) & an application (most commonly Python web apps such as Django/Flask)
 * **wxPython** = Python bindings for wxWidgets
@@ -64,14 +75,17 @@ High-level general purpose dynamically type-checked garbage-collected programmin
 
 Over 200 built-in modules.
 
+* **abc** (Abstract Base Classes) = `@abstractmethod`
 * **copy** = `copy.deepcopy(…)` (deep copy compared to shallow reference copy using regular `.copy()` on instances)
-* **dataclasses** = `@dataclass` automatically generates `__init__`, `__repr__`, `__eq__`
+* **dataclasses** = `@dataclass` decorator that auto-generates constructor (`__init__`), equality (`__eq__`), repr (`__repr__` à la C# `ToString()`)
 * **datetime** = **date** (eg `from datetime import datetime, timedelta`)
+  * `datetime.datetime.strptime(date_str, format)` = string parse time (à la C# `DateTime.Parse(dateText)`)
 * **functools** = function tools
   * partial = function that creates a new function with some of original function's arguments pre‑filled
 * **io**
 * **logging**
   * Logging pipeline = `logger.info("…")` creates a LogRecord (> logger-level filters eg `logger.addFilter(…)` ) > Handler(s) > Filters > Formatter
+    * `logger.exception(…)` only works when passing an actual exception as argument
   * filters = filters log records (ie what to log), and also modify them on-the-fly (eg add attributes)
   * formatters = how log messages look
     * _asctime_ = formatted timestamp (created at format time)
@@ -92,13 +106,15 @@ Over 200 built-in modules.
 * **subprocess** = execute a shell command
 * **time**
 * **typing** = type-related annotations
-  * Dict = provide an explicit type (ie type-hint) for dictionary variables beyond built-in `dict` type (no longer relevant since Python 3.9 that lets `dict` behave like Dict)
-  * Optional = nullable type (`Optional[T]` means _T_ or _None_)
-  * Union = value that can be either of two types (eg `Union[str, Path]` or `str | Path`)
+  * **Dict** = provide an explicit type (ie type-hint) for dictionary variables beyond built-in `dict` type (no longer relevant since Python 3.9 that lets `dict` behave like Dict)
+  * **Optional** = nullable type (`Optional[T]` means _T_ or _None_)
+  * **Protocol** = defines class as `Protocol` for static linting/type checking (no change to usual Python runtime behavior), acting as an interface (eg for mypy/pyright)
+  * **Union** = value that can be either of two types (eg `Union[str, Path]` or `str | Path`)
 
 #### External Packages
 
 * **attrs** = declarative type-like class/attribute definitions without boilerplate
+* **awswrangler** = simplify working with AWS data services (S3, Athena, DynamoDB, OpenSearch, Redshift, etc) using Pandas DataFrames (now officially called AWS SDK for pandas)
 * **azure-storage-file** = client SDK for azure file storage
 * **bleach** = HTML sanitizer that removes unsafe tags/attributes
 * **certifi** = mozilla-maintained ca bundle for ssl verification
@@ -110,25 +126,29 @@ Over 200 built-in modules.
 * **jinja2** = template engine library used to generate text (HTML, config files, YAML, etc) dynamically using variables, logic & templates
 * **krb5** = wraps Kerberos 5 C API
 * **matplotlib** = create static, animated, interactive visualizations (`matplotlib.pyplot`)
-* **mypy** = static (compile-time) type checker
 * **NumPy** (Numerical Python) = arrays manipulation
-  * `array.astype(<type>)` = cast each value in an array to another type (à la map)
+  * `numpy.ndarray.astype(<type>)` = cast each value in an array to another type (à la map)
+  * `numpy.arange(start, end, step)` = return an array of evenly spaced values from start to (non-included) end
+  * `numpy.clip(array, min, max)` = clip values in an array (à la Dart `clamp(min, max)`)
 * **openpyxl** = read/write Excel 2010 xlsx/xlsm/xltx/xltm files
 * **oracledb** = oracle's official Python driver
 * **pandas** (panel data) = open source data manipulation & analysis, especially data structures/operations for numerical tables & time series (see <https://pandas.pydata.org>)
   * **DataFrame** = 2D table, of which each column is a Series
   * **Series** = 1D labeled array (à la enhanced list with indexes & data types), supporting vectorized operations
   * `df.dropna(how='all')` = remove missing values
+  * `df.head(<n>)` = returns top n rows of a dataframe (5 by default)
   * `df.iloc[start:end]` = subset splicing
   * `df.isin(collection)` = check if DataFrame has values in collection (eg `df[~df.isin([excluded_values])]`)
   * `df[column] <condition>` = creates a boolean Series (row mask) that can be applied a dataframe (eg `df[mask]`) to obtain a subset of its rows
   * `df.loc[mask]` = filters rows (same as `df[mask]`)
   * `df.loc[mask, column]` = filters rows & selects columns (returns a column if single column provided, or a DataFrame if column is a list)
-  * `dg.reset_index(drop=True)`
+  * `df.reset_index(drop=True)`
+  * `df.to_<format>` = export dataframe to given format (eg csv, excel, feather, html, json, parquet (columnar storage file format), etc)
 * **plotly** = open-source interactive data visualization
 * **pymongo** = official MongoDB driver
 * **pyngrok** = Ngrok API
 * **pyodbc** = ODBC database connectivity driver
+* **pyplot** = graphs
 * **requests** = standard HTTP client for python
 * **riskpy** = financial utilities for risk analysts, validators, checking statistical models
 * **seaborn** = statistical data visualization
@@ -137,8 +157,10 @@ Over 200 built-in modules.
 * **SQLAlchemy** = open-source SQL toolkit & ORM
 * **statistics**
 * **statsmodels** = statistical computation & models (`from statsmodels.graphics.mosaicplot import mosaic`)
+* **tenacity** = retry
 * **timeit** = measure performances (eg `timeit.timeit(stmt={treatment}, number={n})`)
 * **tkinter** = Python built-in GUI library and binding/wrappper around Tcl/Tk
+* **tqdm** = show a progress bar for loops & long-running operations (ie displays eg _60%||||||_ in console)
 * **tzlocal** = detects system's local timezone reliably
 * **winkerberos** = high-level interface to SSPI for Kerberos client auth
 * **Web Server Gateway Interface** (WSGI) = server-to-application calling/forwarding convention for Python applications
@@ -293,9 +315,11 @@ There is no built-in arrays (but tools like **NumPy** exist).
 * `[f(item) for item in <list> if condition]` = list comprehension, builds a new filtered & remapped subset list in memory (eg `digits = [int(c) for c in ip if c.isdigit()]` gives list of int digits from a string IP address)
 * `(f(item) for item in <list> if condition)` = generator expression, builds items lazily one at a time, single throwaway use, no indexing (eg no `gen[0]`)
 * `list[(start):(end):(step)]` = slices into a new sublist (_start_/_end_/_step_ all optional, default to first/last/1), safely empty if range outside bounds
-  * `list[-n]` = nth-to-last element (eg `list[-1]` for last item)
-  * `list[-n:]` = take last n characters
-  * `list[:-n]` = don't take last n characters
+  * `list[-n]` = nth-to-last item (eg `list[-1]` for last item)
+  * `list[n:]` = items from index n (n to length)
+  * `list[-n:]` = last n items (length-n to length)
+  * `list[:n]` = first n items (0 to n)
+  * `list[:-n]` = items until index length-n (0 to length-n)
   * `list[::-1]` = inverts list
 * `.append(item)` = add item at the end
 * `.clear()` = delete all items
@@ -333,9 +357,10 @@ Returned by libraries such as SQL libraries (eg `fetchone()` & `fetchall()`).
 
 * `(1, 'a', True)` = **tuple** (parentheses are optional eg `1, 'a', True` is also a valid tuple)
 * `(1,)` (or just `1,`) = single element tuple (with mandatory comma)
+* `*tuple` = unpacking operator (eg `print(*(1,2,3))` outputs _1,2,3_)
 * `(name, age, bow) = ("Koko", 17, "bare")` = assign multiple variables at once (**tuple unpacking**)
 * `tuple[index]` = returns item at index
-* `if i (not) in {…}` = checks for (not) membership
+* `if i (not) in tuple` = checks for (not) membership
 
 #### Dictionary
 
@@ -380,6 +405,8 @@ Returned by libraries such as SQL libraries (eg `fetchone()` & `fetchall()`).
 * `isinstance({variable}, {class})` = check if instance is of type class (eg `isinstance(text, str)`)
 * **Method decorators** = special functions that wrap another function, applied vertically bottom to up
   * `@property def koko(self) -> …` = turns method into a property
+  * `@abstractmethod` = a method that must be implemented by subclasses (à la C# abstract methods, used to defined interfaces)
+    * To make class itself abstract, make class itself inherit from ABC (eg `class Animal(ABC)`)
   * `@staticmethod` = plain function placed inside class namespace, callable via either a class (`Koko.f(777)`) or an instance (`koko.f(777)`)
   * `@classmethod` = basically a static method in other languages (receives `cls` ie class itself eg `@classmethod def koko(cls): …`)
 * `@ThreadSafeSingleton class Koko: def __init__(self): …` = class decorator to create a thread-safe (ie using a lock) single instance (ie singleton)

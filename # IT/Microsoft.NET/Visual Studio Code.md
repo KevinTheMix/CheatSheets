@@ -50,6 +50,7 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 * `Alt + {n}` = go to Tab {n}
 * `Alt + Left/Right` = go back/forward
 * `Alt + Click` or `Alt + Double-Click` or `Alt + Drag` = add cursors at clicked/selected locations
+* `Alt + Page Up/Down` = scroll up/down to previous/next screen (without moving cursor)
 * `Alt + Shift + F` = format/tidy (eg HTML)
 * `Alt + Shift + Left/Right` = shrink/expand selection
 * `Alt + Shift + Up/Down` = copy line up/down
@@ -80,6 +81,7 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 * `Ctrl + T` = search global symbols (eg classes, properties, methods, and also Markdown headers), works with camelCase initials search
 * `Ctrl + Alt + Left/Right` = send tab to other view
 * `Ctrl + Alt + Up/Down` = start multi-select
+* `Ctrl + Page Up/Down` = go to previous/next tab
 * `Ctrl + Shift + .` = local blocks
 * `Ctrl + Shift + Enter` = Insert line above
 * `Ctrl + Shift + F` = Search

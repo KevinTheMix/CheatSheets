@@ -6,6 +6,7 @@ Windows inputs (keyboard & mouse) macros/scripting.
 
 * [Hotkeys](https://www.autohotkey.com/docs/v1/Hotkeys.htm)
 * [aText](https://trankynam.com/atext) = another simpler keyword substitution tool
+* [Pulover's Macro Creator](https://www.macrocreator.com) = free automation tool, script generator, macro recorder based on AHK
 * [UIA-v2](https://github.com/Descolada/UIA-v2) = UIAutomation library for AHK v2 (based on thqby's UIA library) for complex windows & browsers (via UIA_Browser.ahk) automation schemes
 * Use context-sensitive hotkeys with `#HotIf` (AHK v2) or `#IfWinActive` (AHK v1) directives to activate scripts only while a certain app is running
   * That can be achieved by exe name, window title, window class, process ID (use AHK's built-in Spy tool to find exe or class of any window)

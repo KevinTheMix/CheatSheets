@@ -36,6 +36,7 @@
   2. 1NF + non-key attributes cannot depend on part of a key
   3. 2NF + no functional dependency between non-key attributes
 * **NoSQL** (Not Only SQL or Non-relational) = schema-less, non tabular relations more flexible DB, via different data structure (eg key–value pair, wide column, graph, or document), making some operations faster
+* **ODBC** (Open Database Connectivity) = standard API that lets an application talk to many different DB technologies through a common interface
 * **ORM (Object-Relational Mapping)** = technique for converting data between a relational DB and objects of an OO programming language
 * **Polyglot Persistence** = using various DB systems across multiple microservices (ie not a single unified eg relational DB)
 * **Replication** = copying of data from a primary to replica DBs in order to achieve distributedness and/or reliability (either triggered in real-time, or scheduled by batch)

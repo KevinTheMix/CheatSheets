@@ -16,6 +16,7 @@
 * **Progressive Web Application** (PWA) = app delivered via web, for browsers or as a mobile app with near-full native capabilities thanks to service workers (eg push notif, desktop icon, work offline, phone API access)
 * **REST** (Representational State Transfer) = architecture style for networked/web applications/APIs (stateless, client-server separation, uniform URL/JSON/HTTP methods, cacheable, layered eg transparent intermediate load balancer)
   * Endpoint = action/operation on a specific resource (ie HTTP method + URL path)
+  * Method = create (POST), read (GET), update (PATCH/PUT for partial/full), delete (DELETE)
   * Resource = conceptual entity identified by a URL (eg a user, list of users, a product, a shopping cart)
 * **Server-Sent Events** (SSE) = unidirectional (unlike WebSockets) server-to-client push technology (via HTTP connection, once it's initially established)
 * **Server-Side Rendering** (SSR) = generates fully rendered HTML pages (typically from a JS backend), then hydrates any interactive content afterwards to behave like a SPA (ie fast initial load, better SEO, no subsequent loads)

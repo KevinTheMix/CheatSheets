@@ -25,6 +25,7 @@ GitHub is a web platform hosting (mostly software) projects using Git.
   * Set Repository name as `{username}.github.io`, as its name can be changed _once_ a website is published for the first time (_confirmed_)
 * **GitHub Spark** = AI-powered whole app generation & prototyping tool built into GitHub
 * **Jekyll** = plain text into static websites/blogs
+* **Rulesets** = configure global rights to create/merge/delete certain branches
 * **Webhooks** (_Settings > Webhooks_) = notify external services when certain events happen (via POST request)
 
 ### Copilot

@@ -7,4 +7,4 @@
 
 ## Glossary
 
-* **Kelly Criterion** = betting formula for maximuzing long-term expected value in gambling or investing
+* **Kelly Criterion** = betting formula for maximizing long-term expected value in gambling/investing

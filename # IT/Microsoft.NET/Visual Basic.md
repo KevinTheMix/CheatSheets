@@ -11,6 +11,8 @@
 * `Not` = invert condition (eg ´If Not koko Is Nothing Then´, note how Not is before variable, and not _Nothing_)
 * `Set` = mandatory in order to assign an **object** reference to a variable (eg Ranges, Workbooks, Worksheets, and custom classes)
 * `With (…) End With` = shorthand to execute multiple statements (using its methods/properties) on a single object (eg `With koko .Method … .Property … End With`)
+* **Function** = performs an action & returns a value
+* **Sub** = performs an action & does not return a value
 
 ## VBA
 

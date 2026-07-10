@@ -96,9 +96,20 @@
   * `const myArray = ['a', 'b', 'c', 'd', condition ? 'e' : null].filter(Boolean);`
   * `const myArray = ['a', 'b', 'c', 'd']; condition && myArray.push('e');` (append only)
 
+#### Map
+
+Stores key-value pairs, keeps insertion order.
+
+* `reportByPortfolioMap: Map<string, Report> = new Map();`
+* `.delete(key)` = deletes a value
+* `.get(key)` = gets a value
+* `.has(key)` = checks a key is present
+* `.set(key, value)` = adds/updates a Map entry
+
 ### OO
 
 * [Get](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get) = getter method
+* `delete object.property` = removes a property from an object (different from setting it to _null/undefined_ after which property still exists)
 
 ### Events
 

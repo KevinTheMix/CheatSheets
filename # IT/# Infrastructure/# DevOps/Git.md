@@ -56,7 +56,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * A dedicated _release_ branch is created from _develop_ once enough features have accumulated in it, which can receive bug fixes or release-oriented changes
   * Once finalized, _release_ is merged into both _main_ (tagged) and _develop_ (to integrate latest bugfixes & releases changes), then deleted
   * _hotfix_ branches can be created off _main_ for quick production patches, they are merged into both _main_ and _develop_ (or the current _release_)
-* **HEAD** = a special reference (stored in the `.git/HEAD` file) to either a branch (via a symbolic reference eg `ref: refs/heads/main`) or specific commit (then said to be in a **detached HEAD** state)
+* **HEAD** = a special reference (stored in the `.git/HEAD` file) to either a branch (via a symbolic reference eg `ref: refs/heads/main`, hence its last commit) or directly a specific commit (then said to be in a **detached HEAD** state)
   * **Detached HEAD** is useful to make experimental changes and create easily discardable **detached/orphaned commits** (ie that don't belong to any branch)
 * **Hooks** = set of dedicated files (in _.git/hooks/_) that can be edited to perform some scripted treatments at some specific lifecycle events (eg _pre-commit_, _pre-push_, _pre-rebase_)
 * **Index** = another term for the staging area
@@ -90,6 +90,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * **Lightweight Tag** = simple references to specific commits
   * **Annotated Tag** = full Git object with a name & metadata (message, creation date, tagger's info ie name/email/timestamp)
 * **Trunk-Based Development** = branch workflow tailored for CI/CD, advocating short-lived feature branches with few small commits, and a clean always latest _main_ (vouched for by CI pipeline)
+  * Features get merged into main if they pass automated (build, unit tests, lint/static checks, component/API tests) & manual (code review) validation
 * **Upstream** (GitHub/GitLab) = original repo from which a project was forked
 * **Upstream Branch** = remote/origin branch that a local branch is currently tracking (ie for push/pull)
 * **Work(ing) Tree** (aka **Working Directory**) = a directory where the (project) files reside and where changes are made (note: may also contain untracked files)
@@ -154,44 +155,50 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * `git add` = stages one (`git add {file}`, _case sensitive_), several (`git add {*pattern*}`), or all (`git add .`) to be included in the next commit
   * Note that it's possible to keep some files in the Git repo untracked/ignored if they're never added
 * `git add -i` = stages interactively (via CLI)
+* `git amend` = add modifications to latest commit (rename, add files)
 * `git branch` = lists local branches (with current branch highlighted)
   * `-a(ll)` = lists both local & remote-tracking branches
   * `-d <branch>` = delete a local branch
   * `-m|-M ({old}) {new}` = rename a branch (current branch if _old_ not provided)
   * `-r(remote)` = lists remote-tracking branches (ie local read-only pointers/references to state of branches on a remote, eg _origin/main_)
+  * `-u {remote}/{branch}` (or `--set-upstream-to {remote}/{branch}`) = links local branch to remote branch (adds (max one, previous gets replaced) _branch_ section in `.git/config`)
   * `-vv` = shows all local branches with extra infos
   * `{branch}` = creates a new branch
   * `{branch} {commit}` = creates a new branch pointing to a specific commit
-* `git checkout (HEAD)` = lists modified files
-  * (ChatGPT3.5:) starting from Git version 2.23 (2019.08), the recommendation is to use `git switch` or `git restore` instead of `git checkout` for clarity and consistency
-  * `git checkout .` = discards local changes in the working directory for all files (**warning**: destructive)
-  * `git checkout -` == `git switch -`
-  * `git checkout {file}` == `git restore {file}`
-  * `git checkout {branch}` == `git switch {branch}`
-  * `git checkout {commit}` = checks out specified commit (detaches _HEAD_, not on a branch anymore), works only if there are no unstaged changes or the commit is the last one
-  * `git checkout -b {branch}` = creates a branch and checks it out
+* `git checkout` (or `git checkout HEAD`) = lists modified files
+  * (ChatGPT3.5:) starting from Git version 2.23 (2019.08), recommendation is to use `git switch` or `git restore` instead of `git checkout` for clarity and consistency
+  * `.` = replaces files in current directory with HEAD versions, discarding uncommitted changes in tracked files (**warning**: destructive)
+  * `-` == `git checkout @{-1}` == `git switch -` = switches back to last previous branch/commit
+  * `{file}` == `git restore {file}`
+  * `{branch}` == `git switch {branch}`
+  * `{commit}` = checks out specified commit (detaches _HEAD_, not on a branch anymore), works only if there are no unstaged changes or the commit is the last one
+  * `-b {branch}` = creates a branch and checks it out
 * `git clean -fdx` = deletes all gitignored/untracked files (add `-n` option to preview but not do) (**warning**: destructive)
 * `git commit` = when a message is not provided, the default text editor is launched and its result fed as message
   * `git commit -m "{message}"`
   * `git commit -a` = stages all (already/previously) tracked files then commit ine one go
-  * `git commit --amend` = reopens & saves last commit to add files or change commit message, or both (note: rewrites history so only do it locally)
+  * `git commit --amend` = modify latest commit for quick corrections (eg add files and/or change message), technically by replacing old commit with a new one (hence rewriting local history)
 * `git merge {branch}` = merges changes from given into current branch, creating a (merge) commit
-* `git merge --abort/--continue` = abort/continues the latest merge operation paused due to conflicts
-* `git merge --ff`
-* `git merge --(no-)squash {feature_branch}` = brings the change from feature branch into current branch's working tree, without committing (no merge commit gets created)
-* `git reset` = unstages all files (removes them from staging area thereby excluding them the next commit)
+* `git merge`
+  * `--abort/--continue` = cancels/resumes latest merge operation paused due to conflicts
+  * `--ff`
+  * `--(no-)squash {feature_branch}` = brings the change from feature branch into current branch's working tree, without committing (no merge commit gets created)
+* `git rebase` = reapplies a branch's commit on top of another base commit to create a cleaner linear commit history
+  * `-i` = edit, reorder, squash, split, or remove commits interactively while replaying them onto a new base (eg `git rebase -i HEAD~2`), rewriting commit history before sharing it
+* `git reset` = moves current branch's HEAD to a specific commit, optionally modyifying staging area & working directory to match it
   * `{file}` = unstages one or several files (opposite of `add`)
   * `({commit}) --soft` = uncommits (changes are left staged)
   * `({commit}) --mixed` = uncommits & unstages changes (left in the working tree)
   * `({commit}) --hard` = uncommits & unstages & delete changes (**warning**: destructive)
-  * `--soft HEAD~1` = cancels the last commit (`HEAD~1` means commit one step before aka parent commit)
+  * `--soft HEAD~1` = cancels last commit (`HEAD~1` means commit one step before aka parent commit)
   * `--hard HEAD` = reverts all uncommitted changes
   * `--hard HEAD@{1}` = reverts repo to state before most recent changes (eg by a commit/branch switch/reset)
   * `--hard origin/{main}` = resets local repo (eg _main_) to origin's version (fetch it beforehand to get latest version)
 * `git restore {file}` = restores a staged file (or directory) to its last staged state, or an unstaged one to its HEAD state (**warning**: destructive)
 * `git restore {file} --staged` = unstages file (similar to `git reset {file}`)
-* `git revert HEAD` = cancels very last commit (only if there are no unstaged changes)
-* `git revert {commit}` = cancels specific commit (only if there are no unstaged changes)
+* `git revert` = cancels a commit by creating a new one to remove changes
+  * `HEAD` = cancels latest commit (only if there are no unstaged changes)
+  * `<commit>` = cancels any specific (not necessarily latest) commit (only if there are no unstaged changes)
 * `git rm {file}` = deletes a (tracked) file (both from Git & physically on disk) during next commit
 * `git rm {file} --cached` = un-tracks a file during next commit
 * `git rm {directory} --r` = deletes a a directory during next commit
@@ -222,11 +229,10 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 ### Remote
 
 * `git clone {url}` = creates a local copy of remote repo (with _origin_ default name remote) including all branches & commits, and adds an (_upstream_) remote if _origin_ is a forked repo (keeping track of the original)
-* `git fetch` = downloads new objects & updates remote‑tracking branches from a remote, without touching working tree or local branches (no files change)
-  * `{remote}` = fetches remote (saved in the `.git/refs/remotes` folder, necessary after removing/re-adding a remote)
+* `git fetch` = downloads new objects/refs & updates remote‑tracking branches from a remote, without touching working tree or local branches (no files change)
+  * `<remote>` = fetches remote (saved in the `.git/refs/remotes` folder, necessary after removing/re-adding a remote)
   * `--all` = fetches changes from all (configured) remote repositories, but does not merge/update local branches
   * `--prune` = fetches remote branches & removes their local copy that no longer exist remotely (local branches remain)
-* `git branch -u {remote}/{branch}` (or `--set-upstream-to {remote}/{branch}`) = links local branch to remote branch (adds (max one, previous gets replaced) _branch_ section in `.git/config`)
 * `git remote` = lists all remote repos names associated with local repo
   * `-v` = lists all remote repositories names & URLs associated with local repo
   * `add {remote} {url}` = adds a remote repo to local repo (adds a _remote_ section in `.git/config`)
