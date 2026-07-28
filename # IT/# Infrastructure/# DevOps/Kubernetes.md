@@ -36,11 +36,13 @@ Based on an internal Google product called Borg open-sourced in 2014.
     * **Deployment Controller** = manages rolling update & rollback of deployments
     * **Ingress Controller** = software that reads ingress resources & implements routing (eg _Traefik_, _Nginx Ingress Controller_)
     * **Replication Controller** = ensures designed number of pod replicas are running
+* **CronJob** = a built-in K8s workload resource that creates/starts jobs on a repeated schedule
 * **Deployment** = API object that manages a set of (replicated) Pods to run an application workload, usually one that doesn't maintain state
 * **Dockershim** = was a translation layer built into kubelets that converted CRI calls into Docker API calls
 * **etcd** = distributed key-value store to store all cluster (persistent) state, used by API server & other control plane components to store/retrieve cluster information
 * **Horizontal Pod Autoscaling** = scale horizontally as neded by adding more nodes to a cluster
-* **Ingress** = Kubernetes API object for routing external HTTP(S) traffic to services (with load balancing & TLS termination)
+* **Ingress** = API object/resource acting like a reverse proxy/router deciding where (ie which service) to send inbound external HTTP requests based on rules traffic (host or path-based routing, TLS/SSL termination, à la YARP)
+* **Kube** = informal shorthand for a cluster, a component or Kubernetes itself
 * **kube-proxy** = network proxy that runs on each worker node to route traffic to correct pods, and provides load-balancing to make sure traffic is evenly distributed across pods
 * **Kubelet** = daemon running on each node that ensures containers described in PodSpecs obtained through various sources are running/healthy in a pod (communicate with control plane to receive instructions on desired pods state)
 * **Kubernetes API** = application that serves functionality through a RESTful interface & stores cluster state
@@ -74,7 +76,8 @@ Based on an internal Google product called Borg open-sourced in 2014.
 * _Flagger_ = Kubernetes operator for progressive delivery, working alongside standard Deployments & manages canary resources automatically
 * _kind_ (Kubernetes in Docker) = primarily designed for testing Kubernetes itself, but may be used for local development or CI
 * _Kustomize_ = similar to Helm
-* _Helm_ = package manager for Kubernetes that uses parameterized templated manifests (charts) to deploy & manage applications, helps reducing number of YAML manifest/configuration files
+* _Helm_ = package manager & template engine, using parameterized Go templates (charts) associated with values to render K8s YAML manifests (helping reduce their numbers)
+  * Chart = whole package (ie a dirctory) bundling everything needed to deploy an application on K8s (templates, default values, metadata, dependencies)
 * _Minikube_ = cross-platform tool for running Kubernetes locally
 * _Rancher_ = open-source Kubernetes-as-a-service (eg to pilot AKS)
 * _Spinnaker_ = blue-green

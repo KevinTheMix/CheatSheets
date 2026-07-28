@@ -5,6 +5,7 @@ Uses thin/minimal easily cache-able shell templates, whilst all logic belongs to
 
 ## Quick Tips
 
+* Check Angular version via `@angular/core` in _packages.json_
 * Use `Ctrl + T` in Visual Studio Code to jump from markup (HTML) to definition (TypeScript)
 * Angular apps don't require a backend: all code is downloaded into client browser upfront (from any static content server)
 * Previously, Angular apps were client-heavy (minimal shell plus Angular runtime plus asset bundles), until SSR apps became mainstream
@@ -12,6 +13,7 @@ Uses thin/minimal easily cache-able shell templates, whilst all logic belongs to
 
 ## Glossary
 
+* **Angular CDK** (Component Dev Kit) = library of tools & primitives for building UI components (eg overlays, drag & drop, accessibility, utilities, virtual scrolling, etc), on which Angular Material is built
 * **Angular Material** = Google's official Angular UI components library ready-made accessible responsive components (eg buttons, dialogs, tabs, form fields) following Material Design spec
 * **Bootstrapping** = initialization process/step during which Angular loads root module & component to start an application
   1. Load root module (usually **AppModule**, in _main.ts_)

@@ -26,8 +26,10 @@ Microsoft's and Sybase's proprietary extension to SQL.
   2. Set eg `SELECT @Output = column FROM TABLE {…}` or `SET @Output = value`
   3. Call eg `EXEC Schema.SP @Output = value OUTPUT`
 * [Partitions](https://www.sqlshack.com/sql-partition-by-clause-overview) = subgrouping with row ranking/numbering (`RANK|ROW_NUMBER() OVER (PARTITION BY …)`), sorting & min/max/average/sum aggregation capabilities
+  * `OVER` = clause that defines window of rows for calculation
+  * Window Function = perform calculations across a set of rows related to current row (eg `AVG()`, `DENSE_RANK()`, `FIRST_VALUE()`, `LAG()`, `LAST_VALUE()`, `LEAD()`, `RANK()`, `ROW_NUMBER()`, `SUM()`)
   * Use to detect duplicates: partition on some possibly duplicate field(s) ordering on others (eg a timestamp), then delete rows with number higher than one (ie keeping only first created)
-  * Eg `SELECT ROW_NUMBER() OVER (PARTITION BY HServerId, Date ORDER BY CreatedOn DESC) AS Row, Id, HServerId, Date, CreatedOn FROM app.HAvailability` (within a CTE or [nested FROM](https://stackoverflow.com/a/3491378))
+    * Eg `SELECT ROW_NUMBER() OVER (PARTITION BY HServerId, Date ORDER BY CreatedOn DESC) AS Row, Id, HServerId, Date, CreatedOn FROM app.HAvailability` (within a CTE or [nested FROM](https://stackoverflow.com/a/3491378))
   * [Alternative homogeneity detection](https://stackoverflow.com/questions/39922045) (eg `HAVING COUNT(DISTINCT column) <> 1` for all, or `HAVING COUNT(CASE WHEN column = 'value' THEN 1 END) = COUNT(*)` for a given _value_)
 * **SQL** (Structured Query Language)
 * **SQL Server Management Objects** (**SMO**) = manage SQL Server programmatically (ie from an appication)

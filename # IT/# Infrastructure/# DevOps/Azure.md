@@ -93,7 +93,7 @@ Azure provides more than 100 services that enable you to do everything from runn
   * **Azure File Storage** (AFS) = fully managed file shares (SMB shared drive protocol à la Windows _Map network drive…_, NFS), to extend on-premise file shares or implement lift-and-shift scenarios
   * **Azure Queue Storage** = messaging service for decoupled apps (à la RabbitMQ, ie to process small messages asynchronously in a queue)
   * **Azure Tables Storage** = semi-structured NoSQL key-value DB (for when foreign joins/keys, relationships or strict shema are not needed, for fast access)
-  * **Shared Access Signature** (SAS) = URI that grants restricted access rights to specific Azure Storage resources, without sharing storage account key (there are types: user delegation, service, account)
+  * **Shared Access Signature** (SAS) = secure time-limited token granting delegated access to Azure Storage resources without exposing account keys (appended to storage URL as query parameters)
 * Storage Tiers
   * _Hot_ = live, frequently accessed data
   * _Cool_ = infrequently accessed data (lower availability, high durability, cheaper eg for backups)

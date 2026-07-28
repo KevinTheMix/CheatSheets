@@ -219,7 +219,7 @@ Commands are fully case-insensitive.
   * `select partition {#}`
   * `select volume {#|letter}`
   * `delete partition override` (**Warning: Danger**)
-* `echo koko`
+* `echo koko` or `echo %<VAR>%` = outputs a value or variable
 * `for %i in ({pattern}) do {statement}` (pattern can be files/strings of fixed words eg `(Debug Release)` or matching expression eg `(*.json)`)
 * `format {volume}` (_as admin_) = format volume (`/FS:{filesystem}` uses given filesystem ie FAT, FAT32, exFAT, NTFS, UDF, ReFS)
 * `goto {label}` goes to `:{label}`
@@ -240,8 +240,11 @@ Commands are fully case-insensitive.
 * `powercfg` = power system settings (eg `/A` lists available sleep states)
 * `rd` or `rmdir` = remove directory
 * `robocopy {source} {destination} (/MIR)` (**Robust File Copy for Windows**, included with Windows 10/11) = copy with many more options (eg retries, `MIR` copies complete directory tree)
-* `set {VAR}` = assignment
-* `setlocal`
+* `set` = list environment variables
+  * `set <VAR>=<value>` = assign environment variable (local to current session)
+  * `set <VAR>=` = unassign variable
+  * `setlocal` & `endlocal` = declares a scope in a script for defining environment variables undone at scope (or script) end
+  * `setx <VAR> "<value>"` = sets variable permanently in user's environment (outlives current command prompt session, `/M` to make it system-wide with admin rights)
 * `sfc (/scannow)` (System File Checker aka **Resource Checker**) = scan integrity of all protected system files & replace incorrect with correct Microsoft versions
 * `start` = launch a new process (à la Unix `bash`)
 * `time`

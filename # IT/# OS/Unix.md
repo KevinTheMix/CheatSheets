@@ -388,7 +388,9 @@
   * Everything is encrypted and sent to server, command results are sent back to local shell's _stdout_/_stderr_ via ssh tunnel (so shell can handle potential `> {file}` over that output)
   * Note that there is no option to pass a password immediately; that is to avoid it being visible in plaintext (via prompt history, or running process original arguments eg: `ps -eo args`)
 * `ssh-keygen` = generates a pair of keys (in _~/.ssh_)
+  * `-C <comment>`
   * `-b` = number of bits
+  * `-f <filename>` = output filename for the key pair
   * `-t [dsa | ecdsa | ecdsa-sk | ed25519 | ed25519-sk | rsa]` = key type
 * `sshd` = OpenSSH daemon (ie a SSH server)
 * `stat {file}` = file/file system status (inode number, permissions, owner, group, timestamps, etc)

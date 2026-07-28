@@ -31,6 +31,7 @@ On Windows, container types are either cross-platform portable Linux (a Linux VM
   * Especially useful during development by pointing to source code, so that every small code change can be reflected immediately live in container (without rebuilding an image if we had used `COPY` instead)
   * For production, we pack source code using dockerfile `COPY` instead so that image is self-contained & embeds everything it needs
 * **Build Context** = folder path specified during build whose contents are accessible to Dockerfile instructions (eg `COPY`); paths in those instructions are relative to this context
+* **BuildKit** = modern engine/backend used by Docker itself for building container images, using a fundamentally different architecture compared to earlier engines
 * **Compose** = a higher-level client to run a multi-service application (consisting of a set of images ie containers eg backend + frontend) from a single declarative YAML file (ie infrastructure-as-code, shareable within devteam)
   * A single `docker compose` command is equivalent to running a bunch of `docker run` command to spawn several coordinated containers on host
   * Unlike Kubernetes, this is not scaling-oriented cluster-level orchestration, merely a declarative setup to run interacting services in parallel (à la Visual Studio Debug multiple projects)
@@ -78,6 +79,10 @@ On Windows, container types are either cross-platform portable Linux (a Linux VM
 * **Windows Server Core** = reduced Windows Server OS without GUI shell, with most Windows APIs & services (eg **IIS**) for compatibility with traditional server workloads
   * Required only to run older legacy .NET versions, Windows-specific APIs, COM interop (use Nano Server _aspnet:8.0-nanoserver-ltsc2022_ instead, or better yet .NET on Linux _aspnet:8.0_)
 * **Writable Container Layer** = thin ephemeral runtime-only writable layer on top of read-only image layers (using copy-on-write when writing to existing files from image)
+
+* _Cloud Native Computing Foundation_ (CNCF) = organization that hosts/governs many major cloud-native open-source projects (containerd, Envoy, Harbor, Helm, Kubernetes, Prometheus)
+* _containerd_ = container runtime component donated by Docker to CNCF, that manages containers lifecycle on a machine (pulls images, stores locally, manage execution)
+* _Harbor_ (VMware) = open-source private Docker image registry (instead of Docker Hub), with RBAC, vulnerability scanning, replication, LDAP/AD, through a Web UI
 
 ### (Docker Hub) Images
 

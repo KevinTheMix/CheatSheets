@@ -11,3 +11,4 @@
 ## API
 
 * `CREATE DOMAIN` = creating a subtype based on an existing type (adding constraints to it, à la C# inherited class ([CREATE DOMAIN vs CREATE TYPE](https://stackoverflow.com/a/53142713)))
+* `SELECT DISTINCT ON(<colA>) colA, colB, FROM <table> ORDER BY colA, colB` = group by colA and keep only first/top row of each group returned (à la CTE + partition in T-SQL)

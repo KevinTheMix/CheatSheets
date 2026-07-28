@@ -13,6 +13,13 @@ Saves its data in a .kdbx file, that can be published to the cloud, as long as i
 
 ## Glossary
 
+* **KeePass 1.x** = C++ basis, stores DB in KDB database format (_.kdb_ extension)
+* **KeePass 2.x** = C# basis, stores DB in KDBX database format (_.kdbx_ extension), includes extra features (Windows user account, remote/shared DB editing, many plugins)
+* **Keepass2Android** = Android
+* **KeePassDX** = FOSS KeePass fork designed for Android, writen in Kotlin/Java/C
+* **KeePassX** = FOSS cross-platform (runs natively on Linux/macOS/Windows) KeePass clone written in C++/Qt libraries, no longer developed (since 2021)
+* **KeePassXC** = FOSS KeePassX fork, actively maintained
+
 ## API
 
 * File > _Database Settings…_ > Security > _Iterations_ = 10000077 (depends on the DB file itself)

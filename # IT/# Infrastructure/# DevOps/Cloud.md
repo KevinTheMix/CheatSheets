@@ -51,7 +51,7 @@
   * **Hybrid** = both
   * **Multi** = multiple public
 * Service Types
-  * **Bare-Metal Server** (or Physical Server) = a non-VM non-shared machine
+  * **Bare Metal** (or Physical) Server = a non-VM non-shared machine (maximum performance, predictable latency, more expensive, less flexible for rapid scaling, more management)
   * **BaaS** (Backend as a Service) = (eg **FireBase**)
   * **DBaaS** = DB PaaS
   * **FaaS** (Function as a Service) = individual stateless functions that are executed on demand (eg triggered in response to HTTP request, message/event, storage event, scheduled-based), without managing servers

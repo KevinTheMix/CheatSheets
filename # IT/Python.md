@@ -5,6 +5,7 @@ High-level general purpose dynamically type-checked garbage-collected programmin
 ## Quick Tips
 
 * `py -0p` = lists local Python installs
+* Module & function names within them can possibly conflict if import statements don't address that situation (ie `from module.function import function` instead of just `from module import function`)
 * `__init__.py` = makes containing directory behave like a package (can be imported, initialized via this file), and is mandatory when using relative imports
 * [PyPI](https://pypi.org) (Python Package Index) = official repository of Python packages (default for `pip`)
 * There is no brackets in python, indentation matters
@@ -25,9 +26,9 @@ High-level general purpose dynamically type-checked garbage-collected programmin
 * **Dunder** (Double under) = special reserved names with double leading & trailing underscores used to implement certain behaviors
   * Although not recommended, custom attributes can also use that format (eg for metadata-type variables like `__version__`, `__project_name__`)
 * **Metaclass** = a class that defines how classes themselves are created & behave (ie a class of a class)
-* **Module** = a single file of Python code
+* **Module** = a single Python file (_.py_) containing code
 * **Monkey Patch** = dynamic languages technique to dynamically alter runtime code (eg add a custom method to a built-in type like _str_ or modify value of _math.pi_)
-* **Package** = a folder containing multiple modules
+* **Package** = a folder containing one or more modules (and possibly sub-packages)
 * **Poetry** = manages dependencies, virtual environments, packages, using a single declarative _pyproject.toml_ file (replaces old _setup.py_ & _requirements.txt_)
 * **Python Development Master** (PDM) = similar goal as Poerty but faster/lighter/more modern, also uses _pyproject.toml_
 * **Python Enhancement Proposal** (PEP) = official design documents that define how Python works (syntax, packaging, environments, runtime, community conventions) by Python core team
@@ -37,7 +38,10 @@ High-level general purpose dynamically type-checked garbage-collected programmin
   * `uv python install 3.9` = install a specific Python version
   * `uv venv --python 3.9 .venv` = creates a venv using a specific (installed) Python version
   * `uv pip install --upgrade pip` = install stuff
+* **uWSGI** = fast application server that implements WSGI & can run web applications (eg Django/Flask) & serve them via a web server (eg Nginx, or itself as it includes a web server/router/balancer)
+  * **uwsgi** (lowercase) = protocol used by uWSGI server, or CLI to interact with it & run apps
 * **Virtual Environment** = standalone self-contained local install including all versioned dependencies, sourced in command prompt, prevents intereference with global install
+* **Web Server Gateway Interface** (WSGI) = Python standard (PEP 3333) defining communication between a web server (eg uWSGI, Apache mod_wsgi) & a Python web application (eg Flask, Django)
 
 ### Frameworks
 
@@ -56,10 +60,8 @@ High-level general purpose dynamically type-checked garbage-collected programmin
 * **mypy** = static (compile-time) type checker by the Python typing community
 * **PyQt** = Python bindings for Qt framework (older, widely used)
 * **pyright** = static (compile-time) type checker by Microsoft (faster than mypy, better integrated with IDEs)
-* **pylance** = Microsoft's Python langauge support extension for Visual Studio Code (autocomplete, type checking, error detection, code navigation, auto-imports, parameter hints)
+* **pylance** = Microsoft's Python language support extension for Visual Studio Code (autocomplete, type checking, error detection, code navigation, auto-imports, parameter hints)
 * **PySide** = Python bindings for Qt framework (more permissive license, officially supported by Qt)
-* **uWSGI** = fast application server implementing WSGI standard, sitting between a web server (eg Nginx) & an application (most commonly Python web apps such as Django/Flask)
-* **wxPython** = Python bindings for wxWidgets
 
 ### Modules
 
@@ -71,9 +73,9 @@ High-level general purpose dynamically type-checked garbage-collected programmin
 * `from ..<module> import <symbol(s)>` = moves up one package
 * `from <package>.<submodule> import <symbol(s)>`
 
-#### Python Standard Library
+#### [Python Standard Library](https://docs.python.org/3/library/index.html)
 
-Over 200 built-in modules.
+Collection of modules & packages builded with Python (ie no need to install).
 
 * **abc** (Abstract Base Classes) = `@abstractmethod`
 * **copy** = `copy.deepcopy(…)` (deep copy compared to shallow reference copy using regular `.copy()` on instances)
@@ -118,7 +120,9 @@ Over 200 built-in modules.
 * **azure-storage-file** = client SDK for azure file storage
 * **bleach** = HTML sanitizer that removes unsafe tags/attributes
 * **certifi** = mozilla-maintained ca bundle for ssl verification
+* **decorator** = (not to be confused with the Python construct using `@` itself) = helps write decorators while preserving function signatures & introspection informatoin
 * **flask** = lightweight Python web microframework
+* **flask-cors**
 * **flask_csv** = CSV export helper for flask routes
 * **flask-restx** = Flask extension for quickly building REST apis in a structured self-documenting way with minimal setup & automatically generated swagger docs
   * `reqparse` (_deprecated_) = request argument parsing & validating (considered legacy, use marshmallow + apispec or model-based validation with @api.expect() for new projects)
@@ -145,10 +149,13 @@ Over 200 built-in modules.
   * `df.reset_index(drop=True)`
   * `df.to_<format>` = export dataframe to given format (eg csv, excel, feather, html, json, parquet (columnar storage file format), etc)
 * **plotly** = open-source interactive data visualization
+* **pyjwt** = JSON Web Token (RFC 7519) implementation
 * **pymongo** = official MongoDB driver
 * **pyngrok** = Ngrok API
 * **pyodbc** = ODBC database connectivity driver
 * **pyplot** = graphs
+* **python-jose** = JOSE (JavaScript Object Signing & Encryption) implementation (ie encrypt/sign content using variety of algorithms)
+* **pyyaml** = YAML parser & emitter
 * **requests** = standard HTTP client for python
 * **riskpy** = financial utilities for risk analysts, validators, checking statistical models
 * **seaborn** = statistical data visualization
@@ -160,10 +167,12 @@ Over 200 built-in modules.
 * **tenacity** = retry
 * **timeit** = measure performances (eg `timeit.timeit(stmt={treatment}, number={n})`)
 * **tkinter** = Python built-in GUI library and binding/wrappper around Tcl/Tk
-* **tqdm** = show a progress bar for loops & long-running operations (ie displays eg _60%||||||_ in console)
+  * **StringVar** = special variable class wrapping a string value to be linked to one/more widgets, participating in event system (notifying value change to connected widgets)
+* **tqdm** (from Arabic taqaddum for progress) = show a progress bar for loops & long-running operations (ie displays eg _60%||||||_ in console)
 * **tzlocal** = detects system's local timezone reliably
+* **werkzeug** = utilities for building WSGI applications (request parsing, response objects, URL routing, development server, debugger)
 * **winkerberos** = high-level interface to SSPI for Kerberos client auth
-* **Web Server Gateway Interface** (WSGI) = server-to-application calling/forwarding convention for Python applications
+* **wx(Python)** = open-source GUI toolkit for desktop applications (windows, buttons, menus, dialogs, etc), Python wrapper around C++ wxWidgets library
 * **xlsxwriter**
 
 ##### Testing
@@ -205,9 +214,10 @@ Over 200 built-in modules.
 * `:=` (walrus operator) = assign & use in same expression (returns right value)
 * `""" {comment} """` = function comment (as first line following under name)
 * `\` = (multi-)line continuation
-* Built-in variables
+* Built-in attributes
   * `__file__` = current script file
-  * `__name__` = name of current module, varies depending on whether executed directly (ie `__main__`) or imported
+  * `__name__` = name of current module (different depending on whether executed directly (ie `__main__`) or imported) or method (via `function.__name__`)
+  * `__qualname__` = qualified name (ie _class.method_)
 
 * _None_ = **NoneType** (à la null)
 * `#` = comment
@@ -253,7 +263,8 @@ Strings are list of (1-char long) strings.
 
 * `chr(integer)` = converts integer into corresponding ASCII character
 * `ord(char)` = returns a single char Unicode index
-* `str({n})` = convert to string
+* `repr({n})` = developer/debug representation of an object, aiming to be unambiguous/recreatable (also applicable via `f"{s}!r"`)
+* `str({n})` = human-friendly representation of an object (à la C# `ToString()`)
 * `f"…{<expression>}…"` = interpolation (using curly braces)
 * `r"…"` or `R"…"` = raw string literal (don't treat backslashes `\` as escape characters)
 * `u"…"` = Unicode string literal
@@ -341,11 +352,12 @@ Unordered collection of **unique** heterogenous elements.
 * `set()` = empty set
 * `{a, b, c}` = **set**
 * `set(list)` = creates a set
-* `set1.intersection(set2)` = intersection (ie only items in both sets)
-* `set1.union(set2)` = union (ie combines multiple sets, discards any duplicates)
-* `set1 | set2 | set3` = chained unions with `|` operator
-* `set1 & set2` = intersection (equivalent to `set1.intersection(set2)`)
-* `set(list1 + list2 + list 3)` = set formed from items of all lists (with duplicates removed)
+* Operators (left-associative chainable eg `{…} | {…} | {…}`)
+  * `{…} | {…}` = union (equivalent to `{…}.union({…})`), no duplicates
+  * `{…} & {…}` = intersection (equivalent to `{…}.intersection({…})`)
+  * `{…} - {…}` = difference (equivalent to `{…}.difference({…})`)
+  * `{…} ^ {…}` = symmetric difference (aka XOR)
+* `set(list1 + list2 + list3)` = set formed from items of all lists (with duplicates removed)
 * `frozenset(iterable)` = immutable set that cannot be modified (no add/remove/update)
 
 #### Tuple
@@ -385,14 +397,22 @@ Returned by libraries such as SQL libraries (eg `fetchone()` & `fetchall()`).
 * `def koko(): return 1,2` = functions can return (a tuple of) multiple values or objects
 * `def koko(*args, **kwargs)` = function with argument unpacking operators (use eg `kwargs["key"]`)
 
+### Files
+
+* `open(<path>, "<mode>")` = open a file for reading (`r`), (over)writing (`w`), appending (`a`), writing if not exist (`x`), read & write (`w+`), binary (`b`)
+
 ### OOP
 
 * **Class**
   * `class Koko: kokos: List['Koko']` = string-based forward reference (ie use single quotes to define a nested instance of same class, alternatively use `from __future__ import annotations` in modern Python)
-* **Attributes** = instance or class fields or methods
-* `class Koko({Parent})` = class inheritance
-* `_attribute` = naming convention meant to treat attribute as internal/non-public/for use inside that class only (not enforced whatsoever)
-* `__attribute` = name mangling (ie replaced with `_classname__attribute` making it less accessible from outside, closest thing to a `private` member)
+  * `class Koko({Parent})` = class inheritance
+* **Attributes** & **Properties** = instance or class fields or methods
+  * `class Koko: class_variable = …` = class variable (à la C# `static`)
+  * `class Koko: class_variable = …; def __init__(self): self.instance_variable = …` = instance variable (defined on _self_)
+  * `class Koko: @property def name(self): return self._koko` = getter
+  * `class Koko: @name.setter def name(self, value): self._koko = value` = attaches a setter method to a previously defined property (using `@property`)
+  * `_attribute` = naming convention meant to treat attribute as internal/non-public/for use inside that class only (not enforced whatsoever)
+  * `__attribute` = name mangling (ie replaced with `_classname__attribute` making it less accessible from outside, closest thing to a `private` member)
 * **Magic Methods** = dunder names for commonly overriden methods (listable via `dir({class})`)
   * `__bool__(self)` = truth value of an object (ie inherent True/False value, uses `__len__` as a fallback when not explicitly defined with _0_ meaning False)
   * `__eq__(self)` = defines how two objects are equal (by vaue)
