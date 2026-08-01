@@ -13,12 +13,13 @@ GitHub is a web platform hosting (mostly software) projects using Git.
 ## Glossary
 
 * **Deploy Keys** = a SSH key attached to a single GitHub repo that grants read/write access to that repo only, without requiring a personal user account (mostly intended for CI/CD, servers, bots)
+  * _~/.ssh/config_ = file that tells SSH which private key to use for which host/alias
   * Generate a public/private pair of SSH keys in a _.ssh_ folder via `ssh-keygen -t ed25519 -f ~\.ssh\<key_name> -C <public_key_comment>` (`mkdir .ssh` if it does not exist yet)
   * Create/generate (ask AI) a _config_ file in same _.ssh_ folder that sets a host alias, references private SSH key file, and probably `Port 443` (since most companies firewall block default 22)
   * Go to GitHub repo (use private browsing if necessary) > _Settings > Deploy keys_, set a title (eg _Work computer_), paste content of SSH public key (also check _Allow write access_)
-  * That repo must be locally configured to use SSH, not HTTPS (check what `git remote get-url origin` displays, run `git remote set-url origin git@<host_alias>:<user>/<repo>.git` if HTTPS)
+  * If the repo is public and already cloned, it must be locally configured to use SSH, not HTTPS (check what `git remote get-url origin` displays, run `git remote set-url origin git@<host_alias>:<user>/<repo>.git` if HTTPS)
+  * If the repo is private, it must now be cloned, using `git clone git@<host>:<user>/<repo>.git` where _host_ is the Host title field defined in the config file
   * Test using `ssh -T git@<host_alias>` & `git remote -v`
-  * _~/.ssh/config_ = file that tells SSH which private key to use for which host/alias
 * **GitHub Actions** = CI/CD workflow to produce releases (artifacts), works by adding a _.github\workflows\{workflow}.yml_ file to repo
 * **GitHub Codespace** = shared online IDE (eg Visual Studio Code, JetBrains, GitHub CLI)
 * **GitHub Desktop** = Git desktop GUI

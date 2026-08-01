@@ -72,6 +72,7 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 * `Ctrl + K, Z` = zen Mode
 * `Ctrl + L` = select current paragraph & move next
 * `Ctrl + M` = toggle _Tab Moves Focus_
+* `Ctrl + O` = Open File
 * `Ctrl + P` = search files by name
   * Type `:` to go to line in current file
   * Type `>` to access Command Palette from here
@@ -87,7 +88,7 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 * `Ctrl + Shift + F` = Search
 * `Ctrl + Shift + L` = multi-select all identical selections
 * `Ctrl + Shift + T` = tasklist
-* `Ctrl + Shift + V` = preview Markdown
+* `Ctrl + Shift + V` = toggle Markdown preview
 * `Ctrl + Shift + ù` = new Terminal
 * `Ctrl + Shift + P` or `F1` or _View > Command Palette_ = Command Palette
   * `Format Document`

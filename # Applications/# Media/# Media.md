@@ -91,6 +91,7 @@
 
 ## Office/Text
 
+* [Calibre](https://calibre-ebook.com) = FOSS cross-platform eBook/Kindle management application that helps organize/read/convert/edit/transfer eBooks between devices
 * **CherryTree** = FOSS hierachical nodes rich notekeeping (as single/many SQLite/XML fileds), exportable as PDF
 * **Clipboard AI** (_UiPath_) = AI-powered clipboard (copy-paste) automation/assistant between screens/windows with ORC capabilities
   * [Kevin Stratvert - Copy-Paste](https://www.youtube.com/watch?v=UIrUbYdNucg)

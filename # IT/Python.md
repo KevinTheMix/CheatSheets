@@ -18,6 +18,7 @@ High-level general purpose dynamically type-checked garbage-collected programmin
 
 * _.pyi_ file = Python type stub file, provides type information to type checkers, IDEs & tools (mirrors structure of a _.py_ file, only signatures/definitions)
 * _.whl_ file (aka wheel file) = Python official built-package format (à la .NET .nupkg) eg used by `pip`
+* **Asynchronous Server Gateway Interface** (ASGI) = standard defining how a Python web application communicates with a web server (WSGI successor/replacement, backward-compatible)
 * **Astral Python** = Python builds distributed and managed by Astral (the creators of uv), allowing on-demand, user-space Python installations independent of system Python
 * **Callable** = anything you can call with parentheses (eg `something(…)`)
 * **Decorator** = any callable that takes a function/class and returns/replaces it with another function/class (ie syntactic sugar for `f = decorator(f)`)
@@ -53,6 +54,7 @@ High-level general purpose dynamically type-checked garbage-collected programmin
   * `conda env list` = lists environments
   * `conda env remove --name <env>`
 * **Django** = Python's full-fledged web framework
+* **FastAPI** = modern web framework for building APIs quickly with minimal code (built on top of Starlette web framework & Pydantic data validation)
 * **Flask** (`flask`) = lightweight "micro" web framework for small/medium application bundling only minimal essential features (routing, request handling, templating), extensible via extensions
 * **Kivy** = cross-platform (one codebase for desktop & mobile, but non-native look) mobile/touch-oriented Python UI framework (uses OpenGL)
 * **mamba** = drop-in replacement for conda that's much faster at resolving dependencies & creating environments
@@ -103,6 +105,7 @@ Collection of modules & packages builded with Python (ie no need to install).
 * **re** (regular expressions)
   * `re.compile(<pattern>)` = compile a regular expression pattern into a regex object to perform matches on strings
 * **os**
+* **pathlib** = includes **Path** class (provides useful traversal properties &overrides division operator for path concatenation eg `Path(__file__).parent / "# IO" / "powerbridgeinput.json`)
 * **pickle**
 * **platform** = get OS name
 * **subprocess** = execute a shell command
@@ -134,6 +137,7 @@ Collection of modules & packages builded with Python (ie no need to install).
   * `numpy.ndarray.astype(<type>)` = cast each value in an array to another type (à la map)
   * `numpy.arange(start, end, step)` = return an array of evenly spaced values from start to (non-included) end
   * `numpy.clip(array, min, max)` = clip values in an array (à la Dart `clamp(min, max)`)
+  * `@` = matrix mulitply
 * **openpyxl** = read/write Excel 2010 xlsx/xlsm/xltx/xltm files
 * **oracledb** = oracle's official Python driver
 * **pandas** (panel data) = open source data manipulation & analysis, especially data structures/operations for numerical tables & time series (see <https://pandas.pydata.org>)
@@ -149,6 +153,7 @@ Collection of modules & packages builded with Python (ie no need to install).
   * `df.reset_index(drop=True)`
   * `df.to_<format>` = export dataframe to given format (eg csv, excel, feather, html, json, parquet (columnar storage file format), etc)
 * **plotly** = open-source interactive data visualization
+* **pydantic** = data validation, parsing & setting management using Python type hints, heavily used with FastAPI for validating requests/response data
 * **pyjwt** = JSON Web Token (RFC 7519) implementation
 * **pymongo** = official MongoDB driver
 * **pyngrok** = Ngrok API
@@ -161,7 +166,7 @@ Collection of modules & packages builded with Python (ie no need to install).
 * **seaborn** = statistical data visualization
 * **scikit-learn** = modules for machine learning & data mining (`from sklearn import preprocessing`, see <https://scikit-learn.org>)
 * **singleton** = tiny helper implementing the singleton pattern
-* **SQLAlchemy** = open-source SQL toolkit & ORM
+* **SQLAlchemy** = open-source SQL expression language to build queries using Python objects instead of raw SQL & ORM to map classes to DB tables (à la Entity Framework)
 * **statistics**
 * **statsmodels** = statistical computation & models (`from statsmodels.graphics.mosaicplot import mosaic`)
 * **tenacity** = retry
@@ -215,9 +220,11 @@ Collection of modules & packages builded with Python (ie no need to install).
 * `""" {comment} """` = function comment (as first line following under name)
 * `\` = (multi-)line continuation
 * Built-in attributes
-  * `__file__` = current script file
+  * `__file__` = path to current script file
   * `__name__` = name of current module (different depending on whether executed directly (ie `__main__`) or imported) or method (via `function.__name__`)
   * `__qualname__` = qualified name (ie _class.method_)
+* Operators override = use dunder methods (eg `__add__`, `__sub__`, `__mul__`, `__truediv__`, `__floordiv__`, `__mod__`, `__pow__`, `__matmul__`)
+  * Eg `def __truediv__(self, other)` = override `/` (division) operator
 
 * _None_ = **NoneType** (à la null)
 * `#` = comment

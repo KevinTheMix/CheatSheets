@@ -101,6 +101,7 @@
 * _LeechFTP_ = multi-threaded FTP client
 * _lighttpd_ (light + HTTPd ie a server daemon) = open-source web server optimized for speed-critical environments
 * _MiFi_ = (multiple) brands of wireless routers (ie 3/4/5G dedicated devices acting as mobile Wi-Fi hotspots)
+* _Multi-Remote Next Generation_ (**mRemoteNG** aka mR) = FOSS tabbed remote connections/VMs manager for Windows (managing RDP/SSH/VNC/etc, forked from old mRemote project)
 * _Nginx_ = FOSS web server that can be also used as a reverse proxy, load balancer (used for this by large fraction of web servers), mail proxy & HTTP cache
 * _Ngrok_ = reverse proxy tunnel to expose a local server to the public internet (bypassing need for configuring firewall/NAT/port forwarding rules), ideal for testing webhooks
 * _OpenSSH_ = cross-platform (BSD licence) suite of SSH-based secure channel utilities (eg **sshd** a SSH server daemon) over an unsecured network in a client-server architecture
@@ -160,6 +161,8 @@
 * **UPnP** (Universal Plug and Play) = set of zero-configuration protocols built into SOHO devices to discover network peers & self-configure automatically or via a software application (to be disabled for entreprise security)
 * **VLAN** (Virtual Local Area Network) = a logical network configured at one (or more) Switch's level (eg splitting interfaces/ports available on a Switch into two separate seggregated networks)
 * **VPN** (Virtual Private Network) = network layer encrypted data traversing a public network (through a VPN server ie a Concentrator), optionally with firewall/NAT
+
+* _Citrix_ = lets employees (often traders) access company systems remotely by connecting to a virtual desktop (ie streams remote work environment to client device, à la Elia)
 
 ### OSI Model
 

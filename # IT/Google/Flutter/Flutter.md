@@ -262,6 +262,7 @@ Use commands with either long/short names (eg `flutter --option=value` or just `
   * `--release` = compile to release mode (removes all debugging directives eg asserts)
   * `--v(erbose)`
   * [Fix "Parameter format not correct"](https://stackoverflow.com/a/69519005/3559724)
+  * [Fix "Nuget.exe not found, trying to download or use cached version"](https://stackoverflow.com/questions/71734042#comment135183930_75696306) (close **all** VS Code instances after installing or copying _nuget.exe_)
 * `flutter upgrade` = install latest Flutter version
   * [Upgrade and clean cache](https://stackoverflow.com/a/64515721/3559724)
 

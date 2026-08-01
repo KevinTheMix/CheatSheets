@@ -13,8 +13,8 @@ Uses thin/minimal easily cache-able shell templates, whilst all logic belongs to
 
 ## Glossary
 
-* **Angular CDK** (Component Dev Kit) = library of tools & primitives for building UI components (eg overlays, drag & drop, accessibility, utilities, virtual scrolling, etc), on which Angular Material is built
-* **Angular Material** = Google's official Angular UI components library ready-made accessible responsive components (eg buttons, dialogs, tabs, form fields) following Material Design spec
+* **Angular CDK** (Component Dev Kit) = set of low-level utilities provided by Angular to build UI components (eg overlays, drag & drop, accessibility, utilities, virtual scrolling, etc) without pre-built styled components
+* **Angular Material** = UI components library of ready-made accessible responsive components (eg buttons, dialogs, tabs, form fields) following Material Design & built using CDK
 * **Bootstrapping** = initialization process/step during which Angular loads root module & component to start an application
   1. Load root module (usually **AppModule**, in _main.ts_)
   2. That module specifies a root component (usually **AppComponent**) in its _bootstrap_ array
@@ -37,7 +37,7 @@ Uses thin/minimal easily cache-able shell templates, whilst all logic belongs to
   * CanMatch = decide if a route should match before activation
 * **Injector Tree** = hierarchical structure that Angular uses to resolve/provide dependencies (services) at runtime
   * Dependencies are looked up (lazyily) bottom-up (starting at component that requires it, up to root), so multiple scoped instances of same service can exist in different parts of app
-* **Module** (`NgModule`) = (no longer core) metadata container/package that groups/links related pieces of application (components/services/dependencies) together
+* **Module** = class grouping related functionality (ie components/directives/pipes/services) together (_deprecated_ since Angular 14+, standalone component are recommended)
   * **BrowserModule** = imported in root module (**AppModule**) when building applications running in a web browser
   * **CommonModule** = built-in Angular module (part of _@angular/common_) that includes all basic directives (eg `NgIf`, `NgForOf`) & pipes (eg `DecimalPipe`), also re-exported by BrowserModule
 * **Pipes** = feature to transform data directly in templates (à la WPF converters & formatters), returning a new value without mutating original, built-in or custom
@@ -98,10 +98,10 @@ Uses thin/minimal easily cache-able shell templates, whilst all logic belongs to
 * _karma.conf.js_ = test runner config (if project still uses Karma)
 * _package.json_ = define app name & version, Node scripts, dependencies (& dev dependencies), tool configs
 * _package-lock.json_ = exact dependency tree for reproducible installs
-* _tsconfig.json_ = base TypeScript config
-* _tsconfig.base.json_ = inherited by other TS configs
-* _tsconfig.app.json_ = TS settings applied to app source code
-* _tsconfig.spec.json_ = TS settings for test files
+* _tsconfig.json_ = TypeScript default configuration file, automatically looked for by compiler
+* _tsconfig.base.json_ = Angular CLI shared configuration for entire workspace (other files extend this one)
+* _tsconfig.app.json_ = Angular CLI application build/serve configuration
+* _tsconfig.spec.json_ = Angular CLI unit test configuration
 * _tslint.json_ (_deprecated_) = legacy linter config (moved to ESLint)
 
 ## Lifecycle Hooks
@@ -135,7 +135,7 @@ Let component implement interfaces (`@Component(…) class LoginDialogComponent 
 * `import { … } from '@namespace/package';` = import by scoped packages
 * `import { … } from 'path';` = import by path (file extension not necessary)
 * `export class TargetClass` = makes a class available to be imported in other files/modules
-* `@NgModule({declarations: [AppComponent], imports: [BrowserModule], bootstrap: [AppComponent]}) export class AppModule {}` = old (pre-v14) application bootstrapping
+* `@NgModule({declarations: [AppComponent], imports: [BrowserModule], bootstrap: [AppComponent]}) export class AppModule {}` = old (pre-14) application bootstrapping
 * `@NgModule({declarations: [MyComponent]}) export class MyFeatureModule {}` = old component registration (components always declared inside a (single) module)
 * `bootstrapApplication(AppComponent, {providers: […]});` = modern recommended application bootstrapping (bootstrap a component directly without **AppModule** needed)
 * `@Component({standalone: true, imports: [CommonModule, ChildComponent]}) export class ParentComponent {}` = modern standalone component registration (listing its own imports)
@@ -174,15 +174,15 @@ Let component implement interfaces (`@Component(…) class LoginDialogComponent 
 
 ### Snippets
 
-#### Old App Bootstrapping
+#### Old App Bootstrapping (< Angular 14)
 
 ```js
 import { NgModule } from '@angular/core';
 @NgModule({                       // Module Metadata Properties
-    declarations: [AppComponent], // Declares available (local) modules
-    imports: [BrowserModule],     // Imports other modules needed (here BrowserModule contains directives, pipes, etc for working with DOM, and is automatically included in modern Angular bootstrap)
-    providers: [],                // DI-provided service declaration (lazy-loaded ie instanciated now if they don't exist yet)
-    bootstrap: [AppComponent]     // Sets application entry point component
+    declarations: [AppComponent], // Classes that belong to this module (components, directives, pipes)
+    imports: [BrowserModule],     // Other modules exporting needed functionalities (eg BrowserModule contains directives/pipes/etc for working with DOM, and is automatically included in modern Angular bootstrap)
+    providers: [],                // Services made available through Angular's dependency injection system (lazy-loaded when something first injects them, eg a page/route using it is entered)
+    bootstrap: [AppComponent]     // Root component Angular creates when application starts (entry point component)
 })
 export class AppModule {}         // Entry point for whole application (named AppModule by convention)
 ```

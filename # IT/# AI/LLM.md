@@ -34,7 +34,7 @@
 * **GPT** (Generative Pre-trained Transformer) = deep learning generative large language model created by OpenAI that can process complex questions & generate text/code
 * **Model Context Protol** (MCP) = protocol created by Anthropic to standardize exposition of specific capabilities (ie 'eyes & hands') to AI applications
   * **MCP Client** = local process that handles requests from remote LLM and queries MCP server (eg direct subprocess communication over stdio), or Anthropic's backend in the case of public remote MCP servers
-  * **MCP Server** = local API that exposes a list of (listable) functionalities to access/read some data or perform a treatment
+  * **MCP Server** = standardized interface that exposes data (resources), actions (tools), prompts/templates so AI agents can interact with systems in a consistent way
   * **Prompt** = pre-built instruction template telling model to work with specific tools/resources
   * **Resource** = passive read-only client data source
   * **Tool** = (JSON) schema-defined function/treatment callable by LLM (e)

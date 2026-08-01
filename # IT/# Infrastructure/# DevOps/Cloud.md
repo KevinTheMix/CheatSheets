@@ -72,17 +72,24 @@
 
 * Amazon
   * **Amazon Web Services** (AWS) = cloud platform & API
+  * **AWS Athena** (AaaS, Analytics as a Service) = serverless interactive (data lake) analytics/query service (ie for ad-hoc analysis, not long-running batch jobs)
   * **Elastic Compute Cloud** (EC2) = IaaS (virtual machines)
   * **Simple Storage Service** (S3) = objet storage via web services
 * Apache
-  * **Mesos** = open-source project to manage computer clusters (developed at UC Berkeley)
-  * **Spark** = leading technology for big data analytics & transformation
-  * **Storm** = cross-platform distributed & fault-tolerant realtime stream processing computation framework
-  * **Hadoop** = collection of open-source software utilities for reliable/scalable distributed computing, a software framework for distributed storage & processing of bid data using MapReduce
+  * **ActiveMQ** = open source message broker written in Java
+  * **Hadoop** = open source scalable fault-tolerant framework for storing/processing very large datasets across clusters of computers
+    * Hadoop Distributed File System (HDFS) = distributed storage for large files
+    * Hadoop Common = shared libraries & utilities used other Hadoop modules
+    * MapReduce = processes large datasets in parallel across multiple nodes
+    * Yet Another Resource Negotiator (YARN) = manages cluster resources & job scheduling
   * **HBase** = open-source non-relational distributed DB (modeled after Google's Bigtable)
   * **Hive** = data warehouse software project built on top of Hadoop for providing data query & analysis
   * **Kafka** = open-source distributed event store & realtime stream-processing platform, ie a durable high-throughput log-based system for publishing & subscribing to streams of records
     * It is well-suited for things like event-driven microservice communication, real-time data pipelines, log aggregation, and stream processing
+  * **Mesos** = open-source project to manage computer clusters (developed at UC Berkeley)
+  * **Spark** = leading technology for big data analytics & transformation
+  * **Storm** = cross-platform distributed & fault-tolerant realtime stream processing computation framework
+  * **Zookeeper** = open-source server with highly reliable distributed coordination (eg distributed lock)
 * **AppSheet** = Google's no-code mobile/web app development platform
 * **Appwrite** = open-source BaaS, all-in-one development platform (built-in backend infrastructure & web hosting)
 * **Cloudflare** = CDN, cloud cybersecurity, DDoS mitigation, ICANN domain registration services
@@ -105,6 +112,6 @@
 * **Slack** = online text/mediasharing/videocalls team communication platform (à la Discord/Teams, by Salesforce)
 * **Stripe** = online payment
 * **Supabase** = open-source Firebase alternative (Postrgres DB, Authentication, instan APIs, Edge Functions, Realtime subscriptions, Storage, Vector embeddings)
-* **Terraform** (_Hashicorp_) = infrastructure as code (cloud APIs as declarative configuration files)
+* **Terraform** (_Hashicorp_) = infrastructure/cloud APIs as code (ie declarative configuration files)
 * **Twilio** = CPaaS (Communications Platform as a Service), APIs for 2FA, SMS, voice, video, authentication
 * **Webflow** = SF-based no-code website development & hosting SaaS

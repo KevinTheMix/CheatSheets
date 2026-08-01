@@ -69,18 +69,19 @@ Based on an internal Google product called Borg open-sourced in 2014.
 * **Service Mesh** = infrastructure layer that handls service-to-service communication and provides features like traffic management, observability, mutual TLS (eg Istio, Linkerd)
 * **Volume** = directory containing data, accessible to containers in a pod to access/share data via filesystem
 
-* _ArgoCD_ = blue-green
-* _Argo Rollouts_ = Kubernetes controller that provides advanced progressive deployment strategies (canary, blue-green), replacing standard Deployment resource with custom Rollout resource
-* _containerd_ = high-level container runtime (but lower-level daemon compared to Docker) that manages container lifecycle & sits between orchestrator & low-level runtimes (eg runc)
-* _CRI-O_ = lightweight container runtime built specifically for Kubernetes implementing CRI with minimal overhead
-* _Flagger_ = Kubernetes operator for progressive delivery, working alongside standard Deployments & manages canary resources automatically
-* _kind_ (Kubernetes in Docker) = primarily designed for testing Kubernetes itself, but may be used for local development or CI
-* _Kustomize_ = similar to Helm
-* _Helm_ = package manager & template engine, using parameterized Go templates (charts) associated with values to render K8s YAML manifests (helping reduce their numbers)
-  * Chart = whole package (ie a dirctory) bundling everything needed to deploy an application on K8s (templates, default values, metadata, dependencies)
-* _Minikube_ = cross-platform tool for running Kubernetes locally
-* _Rancher_ = open-source Kubernetes-as-a-service (eg to pilot AKS)
-* _Spinnaker_ = blue-green
+* **Azure Kubernetes Service** (AKS) = Microsoft's managed Kubernetes service
+* **ArgoCD** = blue-green
+* **Argo Rollouts** = Kubernetes controller that provides advanced progressive deployment strategies (canary, blue-green), replacing standard Deployment resource with custom Rollout resource
+* **containerd** = high-level container runtime (but lower-level daemon compared to Docker) that manages container lifecycle & sits between orchestrator & low-level runtimes (eg runc)
+* **CRI-O** = lightweight container runtime built specifically for Kubernetes implementing CRI with minimal overhead
+* **Flagger** = Kubernetes operator for progressive delivery, working alongside standard Deployments & manages canary resources automatically
+* **kind** (Kubernetes in Docker) = primarily designed for testing Kubernetes itself, but may be used for local development or CI
+* **Kustomize** = similar to Helm
+* **Helm** = package manager & template engine, using parameterized Go templates (charts) associated with values to render K8s YAML manifests (helping reduce their numbers)
+  * Package = charts themselves, ie whole packages/directories bundling everything needed to deploy an application on K8s (templates, default values, metadata, dependencies)
+* **Minikube** = cross-platform tool for running Kubernetes locally
+* **Rancher** = open-source Kubernetes-as-a-service (eg to pilot AKS) management platform/GUI/API (on-prem, edge or cloud), with cluster lifecycle management, RBAC (role-based access control) & authentication, centralized upgrades
+* **Spinnaker** = blue-green
 
 ## CLI
 

@@ -6,7 +6,9 @@ Both NPM and Webpack (written in JS) are part of Node.js ecosystem and therefore
 
 ## Glossary
 
+* **Fast Node Manager** ([fnm](https://github.com/Schniz/fnm)) = Node.js version manager, built in Rust (via a _.node\_version_ file)
 * **Node Version Manager** = used to retrieve a specific version of Node
+* **Node Version Switcher** ([nvs](https://github.com/jasongin/nvs)) = cross-platform tool for switching between versions and forks of Node.js
 
 ### Frameworks
 
