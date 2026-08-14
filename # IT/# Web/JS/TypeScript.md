@@ -14,6 +14,9 @@ Can use all of JS features, and adds a layer of OO classes, static typing, casti
 * **Abstract Syntax Tree** (AST) = tree‑shaped data structure that represents code after parsing but before type‑checking or emitting JS
 * **Emitting** = producing JS during/after compilation
 * **Intersection Type** = value being both A and B (eg `any & Date` or `type AB = {a:'koko'} & {b:123}`)
+* **Parameter Property** = turns a constructor parameter into a class field (eg `constructor(public koko: <type>)`)
+  * `public` keyword is what enables this (`private` & without access modifier parameters only exist within constructor body)
+  * Equivalent to declaring a variable outside above of constructor & assigning it constructor local variable (eg `this.koko = koko;` automatically)
 * **Union Type** = value being either A or B (eg `type hybridType = string | number` or reassigning a variable `let x; x = 1; x = 'koko';` now both string & number)
 
 ## Environment
@@ -37,5 +40,8 @@ Can use all of JS features, and adds a layer of OO classes, static typing, casti
 ## API
 
 * [TypeScript Variable Declaration](https://www.typescriptlang.org/docs/handbook/variable-declarations.html)
-* OO `class Child extends Parent { ... }`
 * `never` = represents a type that never returns (function that never returns, an infinite loop, an exhaustive type check)
+
+### OO
+
+* `class Child extends Parent { ... }`

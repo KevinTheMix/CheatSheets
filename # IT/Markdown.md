@@ -12,6 +12,7 @@
 
 ## API
 
+* `>` = blockquote (borrowed from email quoting conventions)
 * `*italic*` (or `_italic`)
 * `**bold**` (or `__italic__`)
 * `***both***` (or ```both```)

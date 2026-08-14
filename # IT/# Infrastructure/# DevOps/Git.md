@@ -122,14 +122,20 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 
 ### Info/Logging
 
-* `git bisect` = binary search commit (ie start a session by indicating which earlier commit was bad and which one is good and bisect checks out middle commit)
-  * `start` = start
-  * `good/bad` = indicate if current commit
-  * `reset` = returns to original state
-  * `run ./script.sh` = automate by letting script determine good/bad automatically
-* `git blame`
-* `git diff (--staged)`= shows (un)staged changes in tracked files (`Page Down` to scroll down, `q` to exit)
-* `git diff {a} {b}` = shows difference between two git states (eg files, commits, local branches, local branch vs remote branch)
+* `git bisect` = uses binary search through commit history to identify the commit that introduced a bug or regression (ie checks out each commit & lets user evaluate)
+  * `start` = start bisect session
+  * `good/bad` = indicate if current commit was good or is now bad
+  * `reset` = ends bisect session & returns repository to original commit/branch before it started
+  * `run <./script.sh>` = automate bisect by running a script able to determine good/bad (using its exit code: _0_ good|_1+_ bad|_125_ skip)
+  * `skip` = marks current commit as untestable & continue bisect search
+* `git blame` = displays one file with additional information per line (author, commit, last modification date, line number)
+* `git diff` = shows differences between versions of files (`Page Up/Down` to scroll, `q` to exit)
+  * _no argument_ = working directory vs staged files
+  * `--staged` = staged changes vs to be committed
+  * `--stat` = summary of changes instead of full line-by-line diff
+  * `<file>` = changes in a specific file
+  * `--no-index <f1> <f2>` = changes between two arbitrary files
+  * `<a> <b>` = changes between two git states (ie files/commits/branches, eg `git diff HEAD~1 HEAD`)
 * `git log {branch}` = lists commits history (parental ancestry) for that branch (_HEAD_ by default, if a tag has same name use full branch namespace eg `refs/heads/{branch}`)
 * `git log {tag}` = lists commits history for that tag (if tag has same name as a branch, Git complains and displays tag commits history)
 * `git log` = lists commits history in anti-chronological order (ie last first)
@@ -155,16 +161,17 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * `git add` = stages one (`git add {file}`, _case sensitive_), several (`git add {*pattern*}`), or all (`git add .`) to be included in the next commit
   * Note that it's possible to keep some files in the Git repo untracked/ignored if they're never added
 * `git add -i` = stages interactively (via CLI)
-* `git amend` = add modifications to latest commit (rename, add files)
 * `git branch` = lists local branches (with current branch highlighted)
   * `-a(ll)` = lists both local & remote-tracking branches
-  * `-d <branch>` = delete a local branch
+  * `-c <branch>` = copies existing branch to new branch name (does not check it out, to create & switch use `git switch -c <branch>` or older `git checkout -b <branch>`)
+  * `-d <branch>` = delete a local branch (safe delete ie blocksgit if branch contains commits that haven't been merged)
+  * `-D <branch>` = delete a local branch (force delete)
   * `-m|-M ({old}) {new}` = rename a branch (current branch if _old_ not provided)
   * `-r(remote)` = lists remote-tracking branches (ie local read-only pointers/references to state of branches on a remote, eg _origin/main_)
   * `-u {remote}/{branch}` (or `--set-upstream-to {remote}/{branch}`) = links local branch to remote branch (adds (max one, previous gets replaced) _branch_ section in `.git/config`)
   * `-vv` = shows all local branches with extra infos
-  * `{branch}` = creates a new branch
-  * `{branch} {commit}` = creates a new branch pointing to a specific commit
+  * `<branch>` = creates a new branch
+  * `<branch> <commit>` = creates a new branch pointing to a specific commit
 * `git checkout` (or `git checkout HEAD`) = lists modified files
   * (ChatGPT3.5:) starting from Git version 2.23 (2019.08), recommendation is to use `git switch` or `git restore` instead of `git checkout` for clarity and consistency
   * `.` = replaces files in current directory with HEAD versions, discarding uncommitted changes in tracked files (**warning**: destructive)
@@ -177,7 +184,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * `git commit` = when a message is not provided, the default text editor is launched and its result fed as message
   * `git commit -m "{message}"`
   * `git commit -a` = stages all (already/previously) tracked files then commit ine one go
-  * `git commit --amend` = modify latest commit for quick corrections (eg add files and/or change message), technically by replacing old commit with a new one (hence rewriting local history)
+  * `git commit --amend` = modify latest commit for quick corrections (add files, change message), technically by replacing old commit with a new one (hence rewriting local history)
 * `git merge {branch}` = merges changes from given into current branch, creating a (merge) commit
 * `git merge`
   * `--abort/--continue` = cancels/resumes latest merge operation paused due to conflicts
@@ -206,7 +213,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * `git stash` = shorthand for `git stash push`
   * `apply` = applies latest stash (without removing it from stash list)
   * `clear` = removes all stash entries
-  * `drop` = removes a single stash entry
+  * `drop` = removes a single stash entry (last by default)
   * `list` = lists all stashes
   * `pop` = applies latest stash (removes it from stash list)
   * `push` = shelves/sets aside current dirty changes (except untracked files) & checkouts current branch back to last commit (clean working tree)

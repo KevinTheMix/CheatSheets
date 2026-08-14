@@ -248,7 +248,7 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
   * **motion** (_@cendre.me_) = gyroscope-based "wobbling" effect
   * **particle_field** (_@gskinner.com_) = high performance custom particle effects
   * **particles_flutter** (-) = interactive particles animation
-  * **shimmer** (_@hunghd.dev_) = pulsating UI loading effect
+  * **shimmer** (_@hunghd.dev_) = skeleton loader effect
   * **wave_container** (-) = sine water-like wave animations
   * **wave_transition** (-) = radial layer reveal effect
   * **wave_transition_animation** (-) = radial layer reveal effect

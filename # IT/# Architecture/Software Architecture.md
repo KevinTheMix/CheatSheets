@@ -92,6 +92,6 @@
 * **Decorator** = add a behavior, at runtime without modifying the existing by accumulating subclasses taking previous instance as ctor parameter, separation of concerns
 * **Façade** = provides a simplified unified interface to a complex subsystem of software classes/libraries/APIs, a single front-facing entry point into an encapsulated set of individual modules
 * **Inversion of control** (IoC) = custom code receives control of flow (or its dependencies in case of **DI**) from a generic framework (eg via providing callbacks) that handles boilerplate treatment (eg GUI)
-* **Repository** = abstracts data access considerations (eg DB) with reusable generic CRUD (concrete implementations are abstracted in a way that BL is agnostic)
+* **Repository** = abstracts data access/persistence concerns behind reusable interfaces (often a generic CRUD plus entity-specific ones), making business layer agnostic of underlying storage implementation
 * **Singleton** = a Single instance; hard to test
-* **Unit of Work** = keeps track of changes affecting a DB during a 'work' session, then persists that as a single transaction (or rollback everything)
+* **Unit of Work** = accumulates/tracks ordered changes affecting a DB during a _work_ session, persist/rollback them as a single logical/business atomic operation/transaction (ie repo layer level transactionability)

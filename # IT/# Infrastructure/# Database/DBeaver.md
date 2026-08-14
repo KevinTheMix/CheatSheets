@@ -14,3 +14,4 @@
 * `Ctrl + Enter` = execute SQL query
 * `Ctrl + Alt + Up/Down` = clone current line up/down
 * `Ctrl + Page Up/Down` = navigate to previous/next tab
+* `Ctrl + Shift + Up/Down` = moves current line up/down

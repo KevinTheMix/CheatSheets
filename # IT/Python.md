@@ -18,14 +18,17 @@ High-level general purpose dynamically type-checked garbage-collected programmin
 
 * _.pyi_ file = Python type stub file, provides type information to type checkers, IDEs & tools (mirrors structure of a _.py_ file, only signatures/definitions)
 * _.whl_ file (aka wheel file) = Python official built-package format (à la .NET .nupkg) eg used by `pip`
+* **ABC** = an abstract class
 * **Asynchronous Server Gateway Interface** (ASGI) = standard defining how a Python web application communicates with a web server (WSGI successor/replacement, backward-compatible)
 * **Astral Python** = Python builds distributed and managed by Astral (the creators of uv), allowing on-demand, user-space Python installations independent of system Python
 * **Callable** = anything you can call with parentheses (eg `something(…)`)
+* **CPython** = reference & most widely used implementation of Python (written in C)
 * **Decorator** = any callable that takes a function/class and returns/replaces it with another function/class (ie syntactic sugar for `f = decorator(f)`)
   * Decorators with parameters (hence parentheses) are expressions evaluated immediately (with _None_ func parameter), yet **applied** later at same time argument-free would
-* **Duck Typing** = structural (as opposed to nominative) inheritance/polymorphism for dynamic/runtime languages (à la C# `dynamic`)
+* **Duck Typing** = runtime structural typing/polymorphism, where an object is accepted based on the methods/attributes it provides rather than on explicit inheritance or interface implementation (aka nominal typing)
 * **Dunder** (Double under) = special reserved names with double leading & trailing underscores used to implement certain behaviors
   * Although not recommended, custom attributes can also use that format (eg for metadata-type variables like `__version__`, `__project_name__`)
+* **Global Interpreter Lock** (GIL) = mutex in CPython that allows only one thread to execute Python bytecode at a time, simplifying memory management but limiting true CPU-bound parallelism in multithreaded programs
 * **Metaclass** = a class that defines how classes themselves are created & behave (ie a class of a class)
 * **Module** = a single Python file (_.py_) containing code
 * **Monkey Patch** = dynamic languages technique to dynamically alter runtime code (eg add a custom method to a built-in type like _str_ or modify value of _math.pi_)
@@ -80,6 +83,9 @@ High-level general purpose dynamically type-checked garbage-collected programmin
 Collection of modules & packages builded with Python (ie no need to install).
 
 * **abc** (Abstract Base Classes) = `@abstractmethod`
+* **concurrent.futures** = run work asynchronously using a high-level interface using two executor types, both returning **Future** objects representing eventual result
+  * **ThreadPoolExecutor** = runs callables in a pool of worker threads (good for I/O-bound work)
+  * **ProcessPoolExecutor** = runs callable in separate processes (good for CPU-bound work)
 * **copy** = `copy.deepcopy(…)` (deep copy compared to shallow reference copy using regular `.copy()` on instances)
 * **dataclasses** = `@dataclass` decorator that auto-generates constructor (`__init__`), equality (`__eq__`), repr (`__repr__` à la C# `ToString()`)
 * **datetime** = **date** (eg `from datetime import datetime, timedelta`)
@@ -110,6 +116,7 @@ Collection of modules & packages builded with Python (ie no need to install).
 * **platform** = get OS name
 * **subprocess** = execute a shell command
 * **time**
+  * `time.monotonic()` = monotonic clock (always moves forward, not affected by system clock changes, arbitrary starting point), use for stopwatching
 * **typing** = type-related annotations
   * **Dict** = provide an explicit type (ie type-hint) for dictionary variables beyond built-in `dict` type (no longer relevant since Python 3.9 that lets `dict` behave like Dict)
   * **Optional** = nullable type (`Optional[T]` means _T_ or _None_)
@@ -118,6 +125,7 @@ Collection of modules & packages builded with Python (ie no need to install).
 
 #### External Packages
 
+* **Alembic** = DB migration tool for SQLAlchemy, helps manage/version changes to DB schema over time, upgrade/downgrade schemas across environments (primarily DDL operations ie create/drop columns/constraints/indexes/tables)
 * **attrs** = declarative type-like class/attribute definitions without boilerplate
 * **awswrangler** = simplify working with AWS data services (S3, Athena, DynamoDB, OpenSearch, Redshift, etc) using Pandas DataFrames (now officially called AWS SDK for pandas)
 * **azure-storage-file** = client SDK for azure file storage
@@ -142,23 +150,35 @@ Collection of modules & packages builded with Python (ie no need to install).
 * **oracledb** = oracle's official Python driver
 * **pandas** (panel data) = open source data manipulation & analysis, especially data structures/operations for numerical tables & time series (see <https://pandas.pydata.org>)
   * **DataFrame** = 2D table, of which each column is a Series
+  * **dtype** (data type) = a column type in a dataframe (eg _string, int64, float64, bool_)
+    * Log column names & types = `for col, dtype in df_merged.dtypes.items(): print(f"{col}: {dtype}")`
+  * **Index**
+    * `df.set_index('<column>', inplace=<True|False>)` = takes existing column & makes it DataFrame's index
+    * `df.index.tz_convert(…)` = convert a **DatetimeIndex**'s timezone
+    * `df.index.normalize()` = sets a **DatetimeIndex** time to midnight
   * **Series** = 1D labeled array (à la enhanced list with indexes & data types), supporting vectorized operations
   * `df.dropna(how='all')` = remove missing values
+  * `df.ffill()` = forward fills missing values with previous last filled value found (without interpolation eg _10 NaN NaN 20 Nan_ -> _10 10 10 20 20_)
+  * `df.fillna(<val>, inplace=<True|False>)` = replaces all missing values (NaN, None, etc) in a dataframe regardless of dtype with a value, modifying it in place or not
   * `df.head(<n>)` = returns top n rows of a dataframe (5 by default)
   * `df.iloc[start:end]` = subset splicing
   * `df.isin(collection)` = check if DataFrame has values in collection (eg `df[~df.isin([excluded_values])]`)
-  * `df[column] <condition>` = creates a boolean Series (row mask) that can be applied a dataframe (eg `df[mask]`) to obtain a subset of its rows
+  * `df[column].<condition>()` = returns a boolean Series (row mask) that can be used to filter rows from a DataFrame (eg `df[mask]`) to obtain a subset of its rows
+    * `df[column].isna()`
+    * `df[column].notna()`
   * `df.loc[mask]` = filters rows (same as `df[mask]`)
   * `df.loc[mask, column]` = filters rows & selects columns (returns a column if single column provided, or a DataFrame if column is a list)
   * `df.reset_index(drop=True)`
   * `df.to_<format>` = export dataframe to given format (eg csv, excel, feather, html, json, parquet (columnar storage file format), etc)
 * **plotly** = open-source interactive data visualization
+* **psycopg** = PostgreSQL adapter for Python
 * **pydantic** = data validation, parsing & setting management using Python type hints, heavily used with FastAPI for validating requests/response data
 * **pyjwt** = JSON Web Token (RFC 7519) implementation
 * **pymongo** = official MongoDB driver
 * **pyngrok** = Ngrok API
 * **pyodbc** = ODBC database connectivity driver
 * **pyplot** = graphs
+* **python-dotenv** = loads environment variables from a .env file
 * **python-jose** = JOSE (JavaScript Object Signing & Encryption) implementation (ie encrypt/sign content using variety of algorithms)
 * **pyyaml** = YAML parser & emitter
 * **requests** = standard HTTP client for python
@@ -191,7 +211,7 @@ Collection of modules & packages builded with Python (ie no need to install).
 ## CLI
 
 * **python**
-  * `python - <<'PY'{Enter}<code>{Enter}PY` = execute inline Python code from a Bash here-document
+  * `python - <<'PY'<newline><code><newline>PY` = execute inline Python code from a Bash here-document
   * `python -c <command>` = executes inline Python code passed as a string argument to `-c`
   * `python -m <module>` = runs Python _.py_ module file as a script (eg _pip_, _venv_)
     * `python -m pip install {package}`
@@ -220,6 +240,7 @@ Collection of modules & packages builded with Python (ie no need to install).
 * `""" {comment} """` = function comment (as first line following under name)
 * `\` = (multi-)line continuation
 * Built-in attributes
+  * `__code__` = references a function's code object which contains compiled bytecode & metadata used by Python interpreter
   * `__file__` = path to current script file
   * `__name__` = name of current module (different depending on whether executed directly (ie `__main__`) or imported) or method (via `function.__name__`)
   * `__qualname__` = qualified name (ie _class.method_)
@@ -227,12 +248,15 @@ Collection of modules & packages builded with Python (ie no need to install).
   * Eg `def __truediv__(self, other)` = override `/` (division) operator
 
 * _None_ = **NoneType** (à la null)
+* _NaN_ = not a number (ie missing/null value),
+* _NaT_ = not a time (datetime equivalent of _NaN_ for numeric or _None_ for generic objects) primarily in pandas
 * `#` = comment
 * `del <ref>` = removes object binding (ready to be garbage collected), where ref can be a variable, a list item or slice, a dic key, an object attribute
 * `field_` = single trailing underscore avoid conflicts with reserved keyword (by convention)
 * `input(text)` = displays optional prompt text & returns user input
 * `callable(koko)` = True/False whether argument is callable
 * `eval(code)` = returns result of Python code string dynamically
+* `globals()` = a dictionary containing current global namespace (ie variables value by name eg `print(globals()['koko'])  # kontan`)
 * `pass` = no op, ie placeholder statement for contexts where a statement is required by syntax but not implemented yet (eg in a if/else block)
 * `print(args, sep=<separator>)` = prints argument (concatenates them using separator (default is single space) if multiple)
 * `type(value)` = returns type (eg `<class 'str'>`)
@@ -263,8 +287,8 @@ Collection of modules & packages builded with Python (ie no need to install).
 Strings are list of (1-char long) strings.
 
 * `'text'` or `"text"` = **str**ing
-* `"""text{Enter}text"""` = multi-line string (outputs newlines)
-* `"text/{Enter}text"` = line continuation (does not output newlines)
+* `"""a<newline>b"""` = multi-line string (outputs newlines)
+* `"a/<newline>b"` = line continuation (`\` suppresses newline, so a `a \<newline>b` becomes `a b`)
 * `"text" + "text"` = concatenation (note: **Python cannot concatenate str + int**, used explicit `str(i)` or format `f"{i}"`)
 * `"text * {n}"` = multiply a string (number can be before/after)
 
@@ -305,6 +329,13 @@ Strings are list of (1-char long) strings.
 * Loops
   * `range((start), stop, (step))` = default start is 0, default step is 1
 
+### Enums
+
+* `from enum import Enum, StrEnum, unique`
+* `class Koko(Enum): A=1 B=2 C=3`
+* `class Koko(StrEnum): A="a" B="b" C="c"`
+* `@unique` =  decorator that forces values to be different (or causes a _ValueError_)
+
 ### Collections/Iterables
 
 * `any(col)` = true if (iterable not empty and) at least one element is truthy
@@ -329,7 +360,7 @@ There is no built-in arrays (but tools like **NumPy** exist).
 * `[1, 'a', True]` = **list**
 * `[a, b, c] = <list|tuple>` = multi assign (similar to tuple unpacking), assign multiple variables at once
 * `l1 + l2` = concatenates lists (eg `[1, 2, 3] + [3, 4, 5]` gives `[1, 2, 3, 4, 5]`)
-* `[{items}] * {n}` = clone items  (eg `['abc']*3` is `['abc', 'abc', 'abc']`)
+* `[{items}] * {n}` = clone items  (eg `['ko']*3` is `['ko', 'ko', 'ko']`)
 * `[f(item) for item in <list> if condition]` = list comprehension, builds a new filtered & remapped subset list in memory (eg `digits = [int(c) for c in ip if c.isdigit()]` gives list of int digits from a string IP address)
 * `(f(item) for item in <list> if condition)` = generator expression, builds items lazily one at a time, single throwaway use, no indexing (eg no `gen[0]`)
 * `list[(start):(end):(step)]` = slices into a new sublist (_start_/_end_/_step_ all optional, default to first/last/1), safely empty if range outside bounds
@@ -346,7 +377,7 @@ There is no built-in arrays (but tools like **NumPy** exist).
 * `.pop(index)` = remove & return item at index (or last if not specified)
 * `.remove(item)` = remove first matching item (by value)
 * `.sort()` = sort a list in place
-* `list(col)` = convert collection (eg generator, map, set) to list (à la `toList()`)
+* `list(col)` = convert collection (eg generator, map, set) to list (à la C# `ToList()`)
 * `map(function, list)` = select
 * `sorted(list)` = sort a list
 * `sorted(list, key=<lambda>)` = sort by custom key (which can be a tuple for multi-criteria sorting, with negative values for descending order)
@@ -415,7 +446,7 @@ Returned by libraries such as SQL libraries (eg `fetchone()` & `fetchall()`).
   * `class Koko({Parent})` = class inheritance
 * **Attributes** & **Properties** = instance or class fields or methods
   * `class Koko: class_variable = …` = class variable (à la C# `static`)
-  * `class Koko: class_variable = …; def __init__(self): self.instance_variable = …` = instance variable (defined on _self_)
+  * `class Koko: class_variable = …; def __init__(self): self.instance_variable = …` = instance variable (defined on _self_ in constructor)
   * `class Koko: @property def name(self): return self._koko` = getter
   * `class Koko: @name.setter def name(self, value): self._koko = value` = attaches a setter method to a previously defined property (using `@property`)
   * `_attribute` = naming convention meant to treat attribute as internal/non-public/for use inside that class only (not enforced whatsoever)
@@ -423,17 +454,18 @@ Returned by libraries such as SQL libraries (eg `fetchone()` & `fetchall()`).
 * **Magic Methods** = dunder names for commonly overriden methods (listable via `dir({class})`)
   * `__bool__(self)` = truth value of an object (ie inherent True/False value, uses `__len__` as a fallback when not explicitly defined with _0_ meaning False)
   * `__eq__(self)` = defines how two objects are equal (by vaue)
-  * `__len__(self)` = defines behavior of built-in `len()` function for custom objects
   * `__init__(self, *args, **kwargs)` = constructor, within which all instance variables are declared (eg `self._koko = …`)
   * `__iter__(self)` = returns an iterator (ie an object with a `__next__(self)` method) for loops/comprehensions/etc
+  * `__len__(self)` = defines behavior of built-in `len()` function for custom objects
   * `__repr__(self)` = string representation, mainly for debugging
+  * `__str__(self)` = string representation, when calling `str(instance)`
     * Any variable defined outside a class constructor is a class (ie static) attribute, _inherited_ by instances, which can override in a per-instance basis
 * `def koko(self, {args})` = instance method, receiving instance as first argument (named _self_ by convention)
 * `isinstance({variable}, {class})` = check if instance is of type class (eg `isinstance(text, str)`)
 * **Method decorators** = special functions that wrap another function, applied vertically bottom to up
   * `@property def koko(self) -> …` = turns method into a property
   * `@abstractmethod` = a method that must be implemented by subclasses (à la C# abstract methods, used to defined interfaces)
-    * To make class itself abstract, make class itself inherit from ABC (eg `class Animal(ABC)`)
+    * To make class itself abstract, make class itself inherit from _ABC_ (eg `class Animal(ABC)`)
   * `@staticmethod` = plain function placed inside class namespace, callable via either a class (`Koko.f(777)`) or an instance (`koko.f(777)`)
   * `@classmethod` = basically a static method in other languages (receives `cls` ie class itself eg `@classmethod def koko(cls): …`)
 * `@ThreadSafeSingleton class Koko: def __init__(self): …` = class decorator to create a thread-safe (ie using a lock) single instance (ie singleton)

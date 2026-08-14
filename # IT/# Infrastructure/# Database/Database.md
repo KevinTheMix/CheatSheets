@@ -2,6 +2,7 @@
 
 ## Quick Tips
 
+* Avoid cursors by thinking less in terms of loops and more in terms of sets (as SQL was intended)
 * [Coding Horror - A Visual Explanation of SQL Joins](https://blog.codinghorror.com/a-visual-explanation-of-sql-joins)
 
 ## Glossary
@@ -13,8 +14,8 @@
 * **Clause** = built-in functions/operators (such as `SELECT`, `WHERE`, `AND`, `OR`, `LIKE`, `TOP`)
 * **Column-Oriented** = pivot a row of data into horizontal columns (efficient homogenous column-based compression, slower writes, much faster aggregated reads for analytics)
 * **CTE** (Common Table Expression) = intermediary virtual tables whose data are piped/reusable to the following DML statement/CTE, also enables recursion
-* **Cursor** = a type of variable that can keep browse a query result set (eg `DECLARE CURSOR {name} FOR SELECT …`)
-  * Avoid cursors by thinking less in terms of loops and more in terms of sets (as SQL was intended)
+* **Cursor** = pointer/handle on a database connection used to execute SQL statements and, for statements that return rows, to step through the result set one row (or batch) at a time
+  * Can be client-side (ie via API/libraries eg psycopg PostgreSQL adapter for Python) or server-side (eg `DECLARE CURSOR {name} FOR SELECT …`)
 * **Data Lake** = large storage space of hybrid mess (no DB engine, just files storage)
 * **Data Warehouse** = almost always column-oriented structured queryable DB
 * **Data Lakehouse** = consistency/structural layer on top of a Data Lake to make it queryable like a Data Warehouse

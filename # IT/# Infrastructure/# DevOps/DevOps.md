@@ -18,3 +18,4 @@
 * **Prometheus** (by SoundCloud) = open-source systems monitoring & alerting toolkit (metrics, time series, PromQL query language)
 * **Sentry** = error & crash tracking tool to capture exceptions/stacktrace/context when things go wrong (_what broke & why?_)
 * **Splunk** = SIEM (security information & event management), SOAR (security orchestration, automation, response), observability solutions
+  * Uses **Search Processing Language** (SPL), consisting of a search part (finding events) & a pipeline part (transforming/analyzing results)

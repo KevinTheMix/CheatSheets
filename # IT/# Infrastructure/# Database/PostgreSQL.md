@@ -5,7 +5,8 @@
 ## Glossary
 
 * **JSONB** (Binary JSON) = binary representation of JSON data in PostgreSQL, for fast querying & data manipulation
-
+* **Multi-Version Concurrency Control** (MVCC) = mechanism that allows concurrent reads & writes by keeping multiple versions of rows instead of locking them
+* **VACUUM** = maintenance process that cleans up obsolete row versions created by MVCC & makes their space reusable
 * _Marten_ = .NET library for a transactional document DB & event store on PostgreSQL (ie event sourcing built on top of PostgreSQL, ie simple for developers to add to an existing PostgreSQL DB)
 
 ## API

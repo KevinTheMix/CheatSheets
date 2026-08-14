@@ -253,12 +253,12 @@ Use commands with either long/short names (eg `flutter --option=value` or just `
   * `upgrade` (+ `--major-versions` to force absolute latest)
 * `flutter run` = run app (on currently attached device)
   * `r` = Hot reload, `R` = Hot restart (resets state), `h` = List commands, `d` = Detach (terminates run but app lives on), `c` = clrscr, `q` = Quit
-  * `-d(evice-id) {device}` = run to chosen device
-    * `chrome`
+  * `-d(evice-id) <device>` = run to chosen device (eg `chrome`, `windows`)
     * `web-server` ([works in any browser](https://stackoverflow.com/a/71518488))
     * `web-server --web-renderer [html|canvaskit]` = same as build
   * `--no-enable-impeller` = force use old Skia rendering engine
-  * `--profile` (then `P`) = displays profiling performance metrics overlay (on physical devices, not emulators)
+  * `--profile` = runs app in profile mode, which is intended for performance analysis/testing on a device before deployment (no assertions, limited debugger, near release performance)
+    * Then type `P` in Terminal = displays profiling performance metrics overlay (on physical devices, not emulators)
   * `--release` = compile to release mode (removes all debugging directives eg asserts)
   * `--v(erbose)`
   * [Fix "Parameter format not correct"](https://stackoverflow.com/a/69519005/3559724)

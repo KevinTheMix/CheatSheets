@@ -250,6 +250,7 @@ In Dart, arrays are List objects, so most people just call them _lists_.
   * `removeWhere(condition)` = remove by condition
   * _reversed_ = `Iterable<E>` basically the reverse of _iterator_
     * can be used to reverse Strings in a single statement ie `s.split('').reversed.join()` (or `s.characters.reversed.join()` with _characters/characters.dart_ package added)
+  * `sort()` = uses stable insertion sort below 32 elements, and unstable dual-pivot quicksort above that threshold
   * `sublist(start, end)` = à la String `substring()`
   * Cannot add/remove from constant list (eg `const list = []`), or constant literal rvalue (eg `var list = const []`, in that case however `list` can be reassigned since it's not `const` - unless it is `final` too)
     * Safest options = `final list = const []` or `const list = []` that both fixate both left/right terms (_tested & confirmed_)

@@ -5,6 +5,7 @@
 * [Definitive Guide to Confidence](https://www.reddit.com/r/seduction/comments/s9m4b)
 * [Dirty Talk 101](https://www.reddit.com/r/sex/comments/d4tz6)
 * [Follow the arrows](https://www.reddit.com/r/AskReddit/comments/anexq)
+* [Hobbies around 40](https://old.reddit.com/r/Millennials/comments/1vlkcwl)
 * [How to fuck](https://www.reddit.com/r/sex/comments/13irow)
 * [How to read](https://www.reddit.com/r/AskReddit/comments/bk0xh)
 * [Desert Island survival](https://www.reddit.com/r/reddit.com/comments/bvo91)
@@ -35,6 +36,7 @@
 * [Autism & Asperger](https://www.reddit.com/r/AskReddit/comments/ezmtgu/comment/fgovu0w)
 * [Better to cry for two months](https://old.reddit.com/r/AskWomenOver30/comments/129ojh4/comment/jeq74l9) = than the rest of your life
 * [Billiards](https://np.reddit.com/r/billiards/comments/6antdh/comment/dhgq4v0)
+* [Brave (browser) sucks](https://old.reddit.com/r/explainitpeter/comments/1vfmyaf/comment/p1s2nds)
 * [Cache Everything](https://www.reddit.com/r/IAmA/comments/ev2zb/comment/c1b8i0b/?context=3)
 * [Can’t make my wife orgasm](https://www.reddit.com/r/sex/comments/1aszd0q/comment/kqtpcsm) (2024.02.17, r/Thrown4a_fruitloop) = focus on waves of pleasure, not orgasming
 * [Change your life today](https://www.reddit.com/r/AskReddit/comments/al1li/comment/c0i54zx)

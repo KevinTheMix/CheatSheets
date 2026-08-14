@@ -281,6 +281,7 @@ Layers sometimes shortened to _Ln_ (eg _L2_ for Transport Layer 2)
   2. Internet = L3
   3. Transport = L4
   4. Application = L5 + L6 + L7
+* **TLD** (Top-Level Domain) = one of domains at highest level in hierarchical DNS (eg _com_, and TLD Root Zone _com._ where trailing dot represents DNS root)
 * **VLSM** (Variable-Length Subnet Mask(ing)) = designing internal networks with variable-size subnets using CIDR rules (dichotomically dividing allocating largest networks first)
 
 ### E-mail
@@ -303,7 +304,6 @@ Layers sometimes shortened to _Ln_ (eg _L2_ for Transport Layer 2)
 * **SMTP** (Simple Mail Transfer Protocol) = Internet standard communication protocol for electronic mail transmission used by servers and MTAs
 * **SPF** (Sender Policy Framework) = protocol to let e-mail sending domains publish a record list of authorized source address to send and avoid getting flagged as spam by receivers
   * Authorized servers can be external services and don't have to be subdomains (eg authorize _Mailgun_ or _SendGrid_)
-* **TLD** (Top-Level Domain) = one of domains at highest level in hierarchical DNS (eg _com_, and TLD Root Zone _com._ where trailing dot represents DNS root)
 
 * **Mailgun** = one of the best known ESPs, using REST/SMTP API (rather than a drag&drop GUI)
 * **Papercut-SMTP** = test e-mails on localhost without sending real e-mails
