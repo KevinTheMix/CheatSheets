@@ -54,6 +54,7 @@
 * [How to sell on eBay](https://www.reddit.com/r/IAmA/comments/c54u6/comment/c0q6ayd)
 * [Judging people](https://www.reddit.com/r/AskReddit/comments/cn23di/comment/ew6gnie/?context=2) = (actively) pick out 3 things you appreciate about people, makes you judge yourself less as well
 * [Keep your promise](https://www.reddit.com/r/AskReddit/comments/dv0prc/comment/f7aafe8/?context=1)
+* [Kid made a hole in the wall](https://www.reddit.com/r/AskReddit/comments/ai25i/c0ho7tq) = my father [and I] drove to the store in complete silence
 * [Make every day best](https://www.reddit.com/r/watchthingsfly/comments/evu9bb/comment/fg1m66a/?context=8)
 * [Marlon Brando & Hitchcock](https://undelete.pullpush.io/r/movies/comments/8lbd7d/comment/dzemk0s/?context=2)
 * [Marriage Tips](https://np.reddit.com/r/AskMen/comments/39r73v/old_men_of_reddit_what_was_the_key_to_your_successful_marriage/cs60z33)

@@ -24,7 +24,7 @@
 * **Circuit Breaker** pattern = closed/open/half-open states to protect & help failing services recover (prevents cascading failures, informs failure status to user quickly without timeout, reduces load on a struggling dependency)
 * **Domain Event** = emit events when entities get created/updated (eg for CQRS or choregraphy-based sagas), which can get consumed by other services
 * **Event-Driven Communication** = 1 to zero/many eventually consistent publish/subscribe mechanism where each service publishes an event whenever it updates its data, to which other service can subscribe (promotes OCP in sender)
-* **Exponential Backoff** = retry hitting a failed service strategy where delays are increased each time (potentially with a max & also some randomness to avoid thunder eg `delay = min(base * 2^attempt + random_jitter, max_delay)`)
+* **Exponential Backoff** = strategy to retry a failed service where delays are increased each time (eg with a max & also some randomness to avoid thundering herd eg `delay = min(base * 2^attempt + random_jitter, max_delay)`)
 * **Gateway Aggregation** pattern = combines multiple individual requests into a single request, so client does not have to make multiple calls to different backend systems to perform an operation
 * **Gateway Offloading** pattern = offloads cross-cuttong concerns/shared/specialized service functionality from parts of an application to a gateway proxy (eg authentication, protocol translation, SSL termination, throttling)
 * **GraphQL** (by _Meta_) = open-source data query/manipulation language for APIs
@@ -49,6 +49,7 @@
   * **Service Mesh Gateway** = standalone proxy sitting at mesh's edge not tied to any one particular service (ie not sidecar)
 * **Service Registry** pattern = highly available clusterized (eg built-in in AKS) up-to-date DB that maps service names to computer network locations
 * **SOAP** (Simple Object Access Protocol) = protocol using XML message format (envelope, encoding rules, call/response convention), communicates over HTTP/TCP/UDP/SMTP application layer
+* **Thundering Herd Problem** = a problem arising in in exponential backoff if all clients use same deterministic strategy (eg retry at 1s then 2s then 4s, etc), as they all hit it again at same time (solved by introducing jitter)
 * **Two-Phase Commit** (2PC or tupac) = a distributed algorithm/protocol to coordinate distributed atomic transactions and whether to commit or abort them (one node acts as coordinators and commits if all nodes succeed)
   * Introduces coupling/resources locking/lack of scalability/availability issues as it requires cooperation/synchronization between nodes, which makes it not ideal for a distributed microservices architecture
   * Instead, microservices rather use eventual consistency, saga pattern (local transactions with compensating rollbacks), event sourcing (propagates changes asynchronously), idempotent operations (allows safe retries)
@@ -90,7 +91,7 @@
   * Aggregation (HTTP response data aggregation) = BFF pattern to combine multiple normal routes & map their responses into a single object, consolidating otherwise multiple client requests into a single request/response
   * ReRoute = routing of one request to another (downstream is internal microservices side, upstream is client apps facing side)
 * **OpenTelemetry** = packages for specific instrumentation & exporters (ASP.NET Core, automatic HTTP request tracing, SQL DB calls, send data somewhere)
-* **Polly** = handles transient faults & improves app resilience via configurable strategies (retry, circuit breaker, hedging, timeout, rate limiter, fallback) to handle failures/slowdowns in a fluent & thread-safe way
+* **Polly** = handles transient faults & improves app resilience via configurable strategies (retry/backoff, circuit breaker, hedging, timeout, rate limiter, fallback) to handle failures/slowdowns in a fluent & thread-safe way
 * **Swashbuckle** = generates OpenAPI specification from controllers & models at runtime (now shifted towards built-in _Microsoft.AspNetCore.OpenApi_ package)
   * Also packs an embedded version of swagger-ui that is served up
 * **YARP** (Yet Another Reverse Proxy) = reverse proxying & load balancing, routes requests based on paths/headers/custom logic

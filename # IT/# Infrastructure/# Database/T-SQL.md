@@ -4,17 +4,15 @@ Microsoft's and Sybase's proprietary extension to SQL.
 
 ## Quick Tips
 
-* Add a `RETURN -- Safety first` first statement to scripts in progress to guard against unintended executions
-* [Always use a transaction](https://x.com/SkaveRat/status/1455525986850721800) while testing queries (check everything went smoothly then commit)
-* [Column Description](https://stackoverflow.com/a/9018619) = comment on a column
 * `ORDER BY i` = ordering by ith column
-* `ORDER BY NEWID()` = (incombination with `TOP 1`) obtain a random row
+* `ORDER BY NEWID()` = (in combination with `TOP 1`) obtain a random row
+* Add a `RETURN -- Safety first` first statement to scripts in progress to guard against unintended executions
+* [Column Description](https://stackoverflow.com/a/9018619) = comment on a column
+* [Always use a transaction](https://x.com/SkaveRat/status/1455525986850721800) while testing queries (check everything went smoothly then commit)
+* [Error handing](https://www.sqlshack.com/how-to-implement-error-handling-in-sql-server)
 
 ## Glossary
 
-* [Error handing](https://www.sqlshack.com/how-to-implement-error-handling-in-sql-server)
-* [Spatial Types](https://learn.microsoft.com/en-us/sql/t-sql/spatial-geometry/spatial-types-geometry-transact-sql) = _geometry_ type for space boundaries checking (& drawing)
-  * Eg `select Id, geometry::STGeomFromText(Geometry, 4283) from pw.Request`
 * [Graph tables](https://learn.microsoft.com/en-us/sql/t-sql/statements/create-table-sql-graph) = create (graph) `NODE` or `EDGE` tables (requires SQL Server 2017+)
   * [Graph search](https://learn.microsoft.com/en-us/sql/t-sql/queries/match-sql-graph) = match search along edges & nodes tables
 * **ID** (Identity)
@@ -31,7 +29,8 @@ Microsoft's and Sybase's proprietary extension to SQL.
   * Use to detect duplicates: partition on some possibly duplicate field(s) ordering on others (eg a timestamp), then delete rows with number higher than one (ie keeping only first created)
     * Eg `SELECT ROW_NUMBER() OVER (PARTITION BY HServerId, Date ORDER BY CreatedOn DESC) AS Row, Id, HServerId, Date, CreatedOn FROM app.HAvailability` (within a CTE or [nested FROM](https://stackoverflow.com/a/3491378))
   * [Alternative homogeneity detection](https://stackoverflow.com/questions/39922045) (eg `HAVING COUNT(DISTINCT column) <> 1` for all, or `HAVING COUNT(CASE WHEN column = 'value' THEN 1 END) = COUNT(*)` for a given _value_)
-* **SQL** (Structured Query Language)
+* [Spatial Types](https://learn.microsoft.com/en-us/sql/t-sql/spatial-geometry/spatial-types-geometry-transact-sql) = _geometry_ type for space boundaries checking (& drawing)
+  * Eg `select Id, geometry::STGeomFromText(Geometry, 4283) from pw.Request`
 * **SQL Server Management Objects** (**SMO**) = manage SQL Server programmatically (ie from an appication)
 * [Temporary tables](https://www.red-gate.com/simple-talk/sql/t-sql-programming/temporary-tables-in-sql-server)
   * **Table variable** = variable of type `TABLE` (eg `DECLARE @table TABLE ({inline_columns_definition})`, [local and automatically dropped](https://stackoverflow.com/a/5653535))
@@ -54,8 +53,9 @@ Microsoft's and Sybase's proprietary extension to SQL.
   * **FROM A,B,…** (multiple tables) = another way to join (eg `SELECT A.*, B.* FROM A,B WHERE A.Id = B.Id`)
   * **FROM SELECT** = nested from, can be used to precompute an expression to use in both the SELECT & GROUP BY clauses (eg `SELECT {new} FROM (SELECT {…} AS {new} FROM {A}) AS {N} GROUP BY {new}`)
     * See [Derived Table](https://logicalread.com/when-to-apply-sql-server-derived-tables-mc03)
+  * Old-style join syntax = `SELECT A.*, B.* FROM A,B WHERE A.Id = B.Id`
 * **DML** (Data Manipulation Language) = CRUD data (`INSERT`, `UPDATE`, `DELETE`)
-  * `INSERT` = create (eg multiple rows in one query `INSERT INTO Koko (col1, col2) VALUES (a1, a1, …),(b3, b2, …)` or from multiple selects `INSERT C ({all_columns}) SELECT A.*, B.* FROM A,B WHERE A.Id = B.Id`)
+  * `INSERT` = create (eg multiple rows in one query `INSERT INTO Koko (col1, col2) VALUES (a1, a1, …),(b3, b2, …)` or from selects `INSERT C ({all_columns}) SELECT A.*, B.* FROM A INNER JOIN B ON A.Id = B.Id`)
   * `UPDATE` can contain a `JOIN`, but [only one table can be modified at once](https://stackoverflow.com/a/36153756)
   * `DELETE` similarly cannot do multiple table at once (but we can [DELETE from multiple tables](https://stackoverflow.com/a/809892) using a table variable where successive deleted indices get saved, and commit at the end)
 * **DCL** (Data Control Language) = managing permissions (granularly eg read not write (_readonly_), write not read (_mailbox_), `GRANT`, `REVOKE`, `WITH GRANT OPTION` = propagate granting permission)
@@ -73,6 +73,7 @@ Microsoft's and Sybase's proprietary extension to SQL.
 * `CASE WHEN .. THEN .. ELSE .. END` = ternary operator
 * `NOT` = inverts a condition (eg `SELECT * FROM Customers WHERE NOT Country='Germany'`)
 * `CAST(number AS type)`
+* `COALESCE(a, b[, c, ...])` = returns first non-NULL value in list of expressions
 * `CONVERT(type, value)` (eg `CONVERT(DATETIME2(0), '2020-03-29 02:00:01.0000000 +01:00')`)
 
 ### Stored Procedures (built-in)

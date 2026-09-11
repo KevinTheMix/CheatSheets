@@ -13,7 +13,7 @@
 * **Candidate Key** (aka Natural key, or Domain key or Business key) = a key that _could_ be used as PK instead of the PK (ie it is also unique for each rows/values in the set)
 * **Clause** = built-in functions/operators (such as `SELECT`, `WHERE`, `AND`, `OR`, `LIKE`, `TOP`)
 * **Column-Oriented** = pivot a row of data into horizontal columns (efficient homogenous column-based compression, slower writes, much faster aggregated reads for analytics)
-* **CTE** (Common Table Expression) = intermediary virtual tables whose data are piped/reusable to the following DML statement/CTE, also enables recursion
+* **Common Table Expression** (CTE) = intermediary/temporary named result set with `WITH` that can be referenced within a single following DML/DQL statement to improve readability & structure, also enabling recursion
 * **Cursor** = pointer/handle on a database connection used to execute SQL statements and, for statements that return rows, to step through the result set one row (or batch) at a time
   * Can be client-side (ie via API/libraries eg psycopg PostgreSQL adapter for Python) or server-side (eg `DECLARE CURSOR {name} FOR SELECT …`)
 * **Data Lake** = large storage space of hybrid mess (no DB engine, just files storage)
@@ -45,6 +45,7 @@
 * **Schema** = namespace-like containing other DB entities, to which granular permissions can apply (eg `CREATE SCHEMA {name} AUTHORIZATION {user}`)
   * Tables created without a schema specified will get a default schema applied (_dbo_)
   * Two tables with the same name can coexist in the same DB if they have different schemas
+* **SQL** (Structured Query Language)
 * **Transaction** = segment of code where lack of integrity is locally/temporarily permitted (constraints will be tested at next commit, no longer for every action), and that can be applied or cancelled (on demand/error)
 * **Transaction Log** = records transactions & modifications made by each of them (in a growing series of physical files)
 * **Union** = concatenates result sets from two queries with identical columns number/order and compatible data types compatible (`UNION` removes duplicates, `UNION ALL` allows duplicates)

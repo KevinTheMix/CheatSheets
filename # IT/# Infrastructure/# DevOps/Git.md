@@ -31,9 +31,9 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
     * Reside as refs in _refs/remotes/origin/*_, where they can technically be modified (don't do that)
   * See [Branchig & Merging](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging)
 * **Cache** = another term for the staging area
-* **Cherry picking** = applying specific commit(s) from one branch onto another without merging full branch history (eg to apply a _main_ fix to an older _release_ branch)
-  * Basically re-applies all changes tied to referenced commit(s) as a new commit (with new hash ID) to current branch, forming a new parallel commit history
-  * Even eventual merging works, because even though same logical changes exist in both histories, end result of 3-way merge (common ancestor base + A tip + B tip) is same text so there's no conflict
+* **Cherry picking** = applying specific commit(s) from one branch onto another without merging full branch history (eg applying a _main_ fix to an older _release_ branch)
+  * Re-applies changes introduced by referenced commit(s) **as a commit(s)** (with new hash IDs) to current branch, creating a parallel commit history
+  * Future merges usually work because changes are already present, but conflicts remain possible since Git treats original and cherry-picked commits as different commits
 * **Cloning** = creating a local repository based on a remote repository, still associated to it (via push/pull commands)
   * **Shallow Cloning** = cloning only a limited portion of the commit history, which reduces the number of objects and improves performance
 * **Commit** = fundamental building blocks of a Git repository recording a snapshot of a project at a specific point in time (saved in local repo DB in `.git/objects/`)
@@ -68,9 +68,10 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * Multiple other remotes can be added to a same (local) repo, each with a different name (eg `upstream`, `github`, `bitbucket`)
 * **Pull Request** (GitHub/GitLab) = formal proposal to merge changes into a codebase between same or different (ie forked) repositories
 * **Rebasing** = modify commit history (ie create new commits) of a branch to maintain a cleaner, more linear project history ("I want my branch to start from this commit instead")
-  * Typical use case = _main_ branch has kept evolving and we want to integrate those latest changes into a _feature_ branch that was spawned from it
+  * Typical use case = _main_ branch has kept evolving and we want to integrate those latest changes into a _feature_ branch that was spawned from it (ie "rebasing a feature branch onto main")
   * Rebasing basically replays commits of current branch (ie incoming changes) onto rebased branch (ie current changes eg _main/develop_), one by one
   * Current Change are what's already in branch that's rebased onto (HEAD), incoming changes belong to commit being replayed by rebase
+  * **Don't alter a commit message in case of conflict** (ie don't mention conflict/rebase), resulting history should describe actual changes, not mechanics used to integrate them
 * **Repository** = a regular folder augmented into a self-contained version-controlled directory that tracks changes to (some/all of its) files over time
 * **Reference** (or just **ref(s)**) = label/pointer to specific commits (ie aliases for commit hashes), saved as files (in the `.git/refs/` directory)
   * Branches (`refs/heads/{branch}`), Tags (`refs/tags/{tag}`), remote branches (`refs/remotes/{remote}`), even _HEAD_ are all (types of) references
@@ -136,16 +137,16 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * `<file>` = changes in a specific file
   * `--no-index <f1> <f2>` = changes between two arbitrary files
   * `<a> <b>` = changes between two git states (ie files/commits/branches, eg `git diff HEAD~1 HEAD`)
-* `git log {branch}` = lists commits history (parental ancestry) for that branch (_HEAD_ by default, if a tag has same name use full branch namespace eg `refs/heads/{branch}`)
-* `git log {tag}` = lists commits history for that tag (if tag has same name as a branch, Git complains and displays tag commits history)
 * `git log` = lists commits history in anti-chronological order (ie last first)
+  * `<branch>` = lists commits history (parental ancestry) for that branch (_HEAD_ by default, if a tag has same name use full branch namespace eg `refs/heads/{branch}`)
+  * `<tag>` = lists commits history for that tag (if tag has same name as a branch, Git complains and displays tag commits history)
   * `--all` = includes all commits (not just the ancestors of currently checked-out)
   * `--author="{name}"`
   * `--date={format}` = formats all dates (eg `short`, `iso`, `local`, `relative` eg "2 hours ago")
   * `--decorate` = show branch & tag names
   * `--graph` = draws Ascii tree of commits
   * `--max-count=10` = limits output
-  * `--online` = compact one-line-per-commit format
+  * `--oneline` = compact one-line-per-commit format (eg `git log --oneline master..develop` shows simple commits diff between two branches)
   * `--pretty={format}` = where built-in _format_ is `oneline`, `short`, `medium` (default), `full`, `fuller` by increasing length, or `reference`, etc.
   * `--pretty=format:\"{custom}\"` = custom format (eg `%ad` author date, `%an` author, `%cd` date, `%d` references if any, `%h` hash, `%s` comment, `%n` newline)
   * `--since="5 minutes ago"` = after
@@ -182,9 +183,11 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * `-b {branch}` = creates a branch and checks it out
 * `git clean -fdx` = deletes all gitignored/untracked files (add `-n` option to preview but not do) (**warning**: destructive)
 * `git commit` = when a message is not provided, the default text editor is launched and its result fed as message
-  * `git commit -m "{message}"`
-  * `git commit -a` = stages all (already/previously) tracked files then commit ine one go
-  * `git commit --amend` = modify latest commit for quick corrections (add files, change message), technically by replacing old commit with a new one (hence rewriting local history)
+  * `-m "{message}"`
+  * `-a` = stages all (already/previously) tracked files then commit ine one go
+  * `--amend` = modify latest/most recent commit for quick corrections (add files, change message), technically by replacing old commit with a new one (hence rewriting local history)
+    * `--no-edit` = reuse its existing message (without it, Git will typically open an editor to change the message before saving amended commit)
+    * Run `git push --force-with-lease` after amending if commit was already pushed (since a new commit with a new hash wwas created, which cannot simply be appended as a descendant of last commit then fast-forwarded to)
 * `git merge {branch}` = merges changes from given into current branch, creating a (merge) commit
 * `git merge`
   * `--abort/--continue` = cancels/resumes latest merge operation paused due to conflicts
@@ -210,13 +213,14 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * `git rm {file} --cached` = un-tracks a file during next commit
 * `git rm {directory} --r` = deletes a a directory during next commit
 * `git show {object}` = display information about a commit, tag, blob (file), tree (directory)
-* `git stash` = shorthand for `git stash push`
+* `git stash` = shorthand for `git stash push` (see below)
   * `apply` = applies latest stash (without removing it from stash list)
   * `clear` = removes all stash entries
   * `drop` = removes a single stash entry (last by default)
   * `list` = lists all stashes
   * `pop` = applies latest stash (removes it from stash list)
   * `push` = shelves/sets aside current dirty changes (except untracked files) & checkouts current branch back to last commit (clean working tree)
+    * `-a` = include ignored files
     * `-m` (`--message`) = includes a message
     * `-u` (`--include-untracked`) = include (new) untracked files
 * `git switch` = switch to (or create) a specific branch or commit
@@ -252,7 +256,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * `git pull {remote} {branch}` = `git fetch` + `git merge`
 * `git push` = pushes changes to remote branch linked with current branch
   * `<remote> <branch>` = pushes changes to a remote repo branch
-  * `-u <remote> <branch>` (or `--set-upstream-to`) = one-time link current local branch to a remote branch (create it if not exist), then pushes changes to it
+  * `[-u | --set-upstream-to] <remote> <branch>` (eg `origin kokobranch`) = one-time link current local branch to a remote branch (create it if not exist), then pushes changes to it
   * `--force` = overwrite/push whatever is there
   * `--force-with-lease` = overwrite only if nothing changed since I last checked (ie nobody else pushed commits that I could inadvertendly erase, ie safety lock)
 

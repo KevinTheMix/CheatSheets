@@ -22,6 +22,7 @@
   * Doesn't require consent to collect and process data required to run the site, but only for a well-defined, transparent purpose
   * A deletion request might lead to possibly only the anonymization of data, and some data **must** be kept for some time (eg financial records)
 * **Hexagonal Architecture** = Domain no longer depends on Data (as in n-layered architecture) but holds ports (ie repository interfaces) that are implemented in Data
+* **Immutability** = property of an object whose state cannot be changed after creation, requiring any modification to produce a new object instead
 * **Law of Demeter** = don't access a property's sub-properties (eg `a.b.c`)
 * **Marshalling** = transforming one live object's memory representation into a format suitable for storage/transmission between different runtimes (broader than only serialization)
 * **Middleware** = interception layer in a processing pipeline (eg HTTP requests) that applies shared behavior around a core operation without being that operation itself (eg auth, error handling, logging, messaging, transactions)
