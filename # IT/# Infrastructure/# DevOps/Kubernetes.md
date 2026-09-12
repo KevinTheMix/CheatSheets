@@ -88,7 +88,9 @@ Based on an internal Google product called Borg open-sourced in 2014.
 * **Kubectl** = CLI for communicating with a cluster's control plane using Kubernetes API
 
 * `kubectl drain {node}` = evicts (ie rescheduled to other nodes if there are replicas) all pods from it so node can be taken offline for maintenance/upgrade/decommissioning/OS update
-* `kubectl rollout undo {}` = roll  back a previous rollout
+* `kubectl apply -f configmap.yaml` = deploy a configuration to a cluster so it matches its description
+* `kubectl rollout restart deployment <app>` = restart all pods belonging to a Deployment called _app_
+* `kubectl rollout undo {}` = roll back a previous rollout
 
 ### Helm
 

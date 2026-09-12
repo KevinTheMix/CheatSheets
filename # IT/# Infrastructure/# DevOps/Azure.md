@@ -29,6 +29,7 @@ Azure provides more than 100 services that enable you to do everything from runn
 * **Azure Monitor** = collect/analyze/act on telemetry data (eg performance & health) from your applications/infrastructure (also find & scale down underutilized resources)
   * **Application Insights** = observability/OTel feature that offers vendor-neutral Application Performance Monitoring (APM) for live web applications (à la Elasticsearch Kibana, Sentry)
   * **Kusto (Query Language)** (KQL) = query language used to explore Application Insigthts data (à la read-only SQL, optimized for logs/time-series/diagnostics)
+    * Eg all exceptions/traces per app = `union exceptions, traces | summarize count() by cloud_RoleName, tostring(customDimensions["deployment.environment"]) | order by count_ desc`
 * **Azure Notification Hub** = push notifications
 * **Azure Resource Manager** (ARM) = shared layer for all Azure UIs (portal, REST, PowerShell, CLI, SDKs eg C#) to manage resources
 * **Azure Resource Manager Template** = declarative JSON-like script language to define resources

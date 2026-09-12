@@ -5,6 +5,7 @@
 * [Visual Studio Code (online)](https://vscode.dev)
 * [Fireship: 25 VS Code Productivity Tips](https://www.youtube.com/watch?v=ifTF3ags0XI)
 * Breadcrumb path fragments are browsable seamlessly between containing file system & document inner sections
+* Use replace (with regex enabled) instead of multi-selection (soft-limited at 10.000 cursors) in large text files (eg `datetime.datetime\((.*?)\)` -> `"datetime.datetime($1)"`)
 
 ## Glossary
 

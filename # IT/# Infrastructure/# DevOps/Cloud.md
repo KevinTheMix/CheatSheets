@@ -92,7 +92,7 @@
   * **Zookeeper** = open-source server with highly reliable distributed coordination (eg distributed lock)
 * **AppSheet** = Google's no-code mobile/web app development platform
 * **Appwrite** = open-source BaaS, all-in-one development platform (built-in backend infrastructure & web hosting)
-* **Cloudflare** = CDN, cloud cybersecurity, DDoS mitigation, ICANN domain registration services
+* **Cloudflare** = CDN (global content caching), cloud cybersecurity, DNS provider, DDoS mitigation, ICANN domain registration services, reverse proxy
 * **Couchbase** = NoSQL Cloud Database
 * **DigitalOcean** = cloud IaaS/PaaS platform, where _Droplet_ is a (Linux) VM
 * **Firebase** = Google's mobile/web apps development cloud platform (subject to privacy controversies)

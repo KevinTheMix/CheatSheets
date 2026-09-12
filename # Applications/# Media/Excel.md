@@ -2,64 +2,68 @@
 
 ## Quick Tips
 
+* Run `excel /x` to open a new isolated Excel instance/process
+* VBA to refresh just a range (not whole sheet): `ThisWorkbook.Sheets("KokoSheet").Range("A1:B2").Calculate`
 * **Change default format/template**
   * In Excel, File > Options > _When creating new workbooks_ (note: only for new workbooks created from within Excel itself)
   * In Windows, replace **EXCEL12.XLSX** template in _C:\Program Files\Microsoft Office\root\vfs\Windows\SHELLNEW_ (make backup first)
 * [excelisfun](https://www.youtube.com/@excelisfun)
 * [Find external links](https://www.ablebits.com/office-addins-blog/find-break-external-links-excel)
 * [Leila Gharani](https://www.youtube.com/@LeilaGharani) = Excel shortcut keys you SHOULD know! (2022.02.21, already absorbed)
-* Run `excel /x` to open a new isolated Excel instance/process
-* VBA to refresh just a range (not whole sheet): `ThisWorkbook.Sheets("KokoSheet").Range("A1:B2").Calculate`
 
 ## Glossary
 
 * _#N/A_ (Not Available) = means a value cannot be found (common in lookup formulas eg VLOOKUP/XLOOKUP/MATCH)
 * _#VALUE!_ = wrong type of data in formula (ie incompatible data types eg text instead of expected number)
+* _.xll_ = Excel Add-in implemented as a compiled Windows library (à la DLL) that extends Excel with custom functions/commands/integrations
 * **Array** = block of values (ie cells group like a range or in-memory structure in VBA/Interop) handled as a single unit
+* **Excel-DNA** = .NET framework to generate XLL files (alternatively: Microsoft's Excel SDK in C/C++, PyXLL a Python Excel add-in itself)
 * **Macro** = perform action or automate tasks, can be run manually, from a button
+* **Running Object Table** (ROT) = system-wide COM registry where running COM servers (like a live _Excel.exe_) can publish themselves so clients can attach to an already running instance instead of a fresh one
 * **Spill** = when some values exceed their initial cell and overflow into adjacent ones
 * **Single-Threaded Apartment** (STA) = thread used by UI (coming from COM threading) on which all interactions must execute
 * **User-Defined Function** (UDF) = custom formula/function typically written in VBA (or C# via Excel-DNA) complementing built-in ones (eg SUM, VLOOKUP/XLOOKUP)
 * **VLOOKUP** = find things in a table or a range by row
 * **XLOOKUP** = improved VLOOKUP (any direction and returns exact matches by default, making it easier and more convenient to use)
 
-## Menus
+## (Alt) Menus
 
-* Home
-  * Styles > **Conditional Formatting** > _New Rule > Use a formula (…)_  = color selected range depending on one column's cell values
-    * Enter formula (eg `=$C2="Value"`) & format to apply (eg font color)
-
-* `Alt` = display tab menu shortcut labels
-  * `A` = **Data**
-  * `D` = **Legacy**
-  * `E` = **Legacy**
-  * `F` = **File**
-    * `FT` = **Options**
-      * _Advanced > Editing Options_ > untick 'Use system separators' to fix regional settings for Decimal/Thousands separators
-      * _Customize Ribbon > Customize the Ribbon_ > tick 'Developer' checkbox in right Main Tabs list to add Developer tab (for Macros)
-  * `H` = **Home**
-    * `HL` = (Styles >) **Conditional Formatting**
-    * `HN` = (Number >) **Number Format**
-    * `HO` = (Cells >) **Format**
-  * `L` = **Developer** (after activating it in Options menu)
-  * `M` = **Formulas**
-  * `P` = **Page Layout**
-  * `W` = **View**
-  * `AT` = _Filter_ (turn header into sort/filter cell)
+* `A` = **Data**
+* `AT` = _Filter_ (turn header into sort/filter cell)
+* `D` = **Legacy**
   * `DFS` = _Clear Filter_ (clears current selection for all filters)
-  * `HK` = _Comma Style_ (format as thousands separator, ideal for accounting large numbers)
+* `E` = **Legacy**
   * `ES` = _Paste Special_ (after copying some cells, or from outside Excel, same as `Ctrl + Alt + V`)
-  * `HLN` = _New Rule…_ (create formatting rule)
-  * `HNS` = _Short Date_ (convert number to Short Date)
-  * `HOA` = _AutoFit Row Height_
-  * `HOH` = _Row Height…_
-  * `HOI` = _AutoFit Column Width_ (automatically adjust columns width to contained data, same as legacy `OCA`)
-  * `HOR` = _Rename Sheet_
-  * `HOW` = _Column Width…_
+* `F` = **File**
+  * `FT` = **Options**
+    * _Advanced > Editing Options_ > untick 'Use system separators' to fix regional settings for Decimal/Thousands separators
+    * _Customize Ribbon > Customize the Ribbon_ > tick 'Developer' checkbox in right Main Tabs list to add Developer tab (for Macros)
+* `H` = **Home**
+  * `HE` = (Editing >) _Clear_
+    * `HEA` = _Clear All_
+    * `HEF` = _Clear Formats_
+  * `HK` = _Comma Style_ (format as thousands separator, ideal for accounting large numbers)
+  * `HL` = (Styles >) **Conditional Formatting**
+    * `HLN` = _New Rule…_ (> _Use a formula (…)_ to color selected range depending on one column's cells value eg `=$C2="Value"`)
+    * `HLR` = _Manage Rules…_
+  * `HN` = (Number >) **Number Format**
+    * `HNS` = _Short Date_ (convert number to Short Date)
+  * `HO` = (Cells >) **Format**
+    * `HOA` = _AutoFit Row Height_
+    * `HOH` = _Row Height…_
+    * `HOI` = _AutoFit Column Width_ (automatically adjust columns width to contained data, same as legacy `OCA`)
+    * `HOR` = _Rename Sheet_
+    * `HOW` = _Column Width…_
+* `L` = **Developer** (after activating it in Options menu)
   * `LAS` = _Macro Security_ (enable/disable macros, file extension must be `.xslm`)
+* `M` = **Formulas**
   * `MH` = _Show Formulas_ (toggle formulas display)
   * `MN` = _Name Manager_ (add/delete/edit cell names)
-  * `PRS`= _Set Print Area_ (select cells to print exclusively, `PRC` to clear)
+  * `MMD` = _Define Name_
+* `P` = **Page Layout**
+  * `PRS` = _Set Print Area_ (select cells to print exclusively, `PRC` to clear)
+  * `PRC` = _Clear Print Area_
+* `W` = **View**
   * `WVG` = _Gridlines_ (toggle gridlines)
 
 ## Shortcuts
@@ -73,7 +77,9 @@ Note: shortcuts including numbers require holding `Shift` on EU keyboard as num 
   * Eg _A$1_ = freeze a row's reference (when copy-pasting a cell vertically)
   * `F4` (while in Edit mode) = cycle through column/row dollar freezing combinations in current formula
 * `F2` = switch to Edit mode (alternatively, click Formula bar)
+* `F5` = Go To (see `Ctrl + G`)
 * `F9` = recalculates entire workbook
+* `Alt` = display ribbon menu shortcut labels
 * `Alt + =` = auto-sum adjacent cells (both horizontally & vertically, at the same time)
 * `Alt + ;` = select only visible cells if row/columns where hidden (easy way to detect that)
 * `Alt + Down` = display dropdown showing all previous string values in same column (ie quick enum-like value selection)
@@ -93,7 +99,7 @@ Note: shortcuts including numbers require holding `Shift` on EU keyboard as num 
 * `Ctrl + 0` = hide current column(s)
 * `Ctrl + E` = Flash Fill (ie fills data down a column based on detected pattern eg adjacent column substring)
 * `Ctrl + F` = Search (search in _Values_ to search displayed values, otherwise hidden by underlying formulas)
-* `Ctrl + G` or `F5` = _Go To…_ (select a cell or a range, _Go To Special…_ allows quick selection of cells on blanks/formulas errors/etc)
+* `Ctrl + G` = Go To (cell or range), _Special…_ allows quick selection of cells by blanks/formulas errors/etc
 * `Ctrl + L` or `Ctrl + T` = create table (also in Home > Format as Table, works with a single cell selected)
   * All table references (Charts, formulas, pivot) are automatically updated as the table's data is changed
   * Strip table style/formatting = _Table Design > Table Styles > (dropdown) > Clear_

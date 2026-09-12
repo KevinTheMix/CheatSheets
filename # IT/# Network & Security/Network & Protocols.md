@@ -21,6 +21,34 @@
 * **Firewall** = network security service that monitors & controls incoming/outgoing traffic
 * **FTP** (File Transfer Protocol) = can be active (client start control connection, server starts data connection) or passive (client starts both, so works better with client-side firewalls)
 * **HTTP** (HyperText Transfer Protocol)
+  * **2xx Success**
+    * _200 OK_ = request succeeded
+    * _201 Created_ = resource successfully created (POST)
+    * _202 Accepted_ = request accepted for asynchronous processing
+    * _204 No Content_ = success but no response body
+  * **3xx Redirection**
+    * _301 Move Permanently_ = permanent redirect
+    * _302 Found_ = temporary redirect
+    * _304 Not Modified_ = browser can use cached version
+  * **4xx Client Errors**
+    * _400 Bad Request_ = invalid request format/data
+    * _401 Unauthorized_ = authentication missing or invalid
+    * _402 Payment Required_ = you must pay before accessing this resource (originally reserved for digital payment systems, rarely used in practice)
+    * _403 Forbidden_ = authenticated but not allowed (eg wrong auth token scope)
+    * _404 Not Found_ = resource doesn't exist
+    * _405 Method Not Allowed_ = endpoint exists but HTTP method isn't supported
+    * _409 Conflict_ = business/data conflict (eg duplicate resource)
+    * _410 Gone_ = resource permanently removed
+    * _415 Unsupported Media Type_ = wrong Content-Type
+    * _422 Unprocessable Entity_ = validation failed
+    * _429 Too Many Requests_ = rate limit exceeded
+  * **5xx Server Errors**
+    * _500 Internal Server Error_ = generic server-side failure
+    * _501 Not Implemented_ = server doesn't support functionality
+    * _502 Bad Gateway_ = upstream service returned an invalid response
+    * _503 Service Unavailable_ = service temporarily unavailable
+    * _504 Gateway Timeout_ = upstream service didn't respond in time
+    * _522 Connection Timed Out_ = client browser successfully connected to Cloudflare but origin server didn't respond in time
 * **HTTP/2** = major revision of HTTP (by Google) using multiplexed streams over a single TCP connection, derived from earlier experimental SPDY communication protocol (by Google), supported by nearly 100% of browsers
 * **HTTP/3** = major version that uses QUIC (a multiplexed transport protocol built on UDP introduced in 2021) instead of TCP, supported by 95% of browsers
 * **HTTPd** (HTTP daemon) = any software running as background process and playing server in a client-server model, using HTTP(S) protocol (eg Apache HTTP Server)

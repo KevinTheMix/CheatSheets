@@ -11,14 +11,15 @@
 
 * **Bracket notation** = accessing an object's property/method via a string expression (eg `object[expression]`) rather than a dot notation (eg `object.property`)
 * [Computed Property Names](https://tylermcginnis.com/computed-property-names) = use expression result (string) as property name (eg `['koko']='kontan';` creates the object `{ koko: 'kontan' }`)
+* **Destructuring** = unpack an array or object into distinct variables (in original order, eg `[first, second] = array` or `{ first, second } = obj`, ignoring leftovers eg `[first] = array`)
 * **EventSource** JavaScript API = server-sent event (eg for social media status updates, news feeds, sending data to client IndexDB or web storage)
 * **Hoisting** = when JS moves a variable declaration (but not its value) to top of its scope before execution
 * **IIFE** (Immediately invoked function expression) = useful for context-scoping, and can have a return value
 * **Prototype** = a regular object that plays the role of serving of blueprint for building other objects
-* **Spread Syntax** (`...`) = destructure array items/object properties into distinct variables
-  * Can be used for shallow-cloning (eg `{…a}={…b}`), recombining objects into more/fewer (eg `const koko = {…a,…b }`), pushing/(un)shifting/splicing arrays (eg `a = […a, '1', '2', '3' ]`)
-  * [Spread operator](https://www.geeksforgeeks.org/javascript-spread-operator)
-  * [Destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
+* **Rest** (Parameter, left-hand side) = collects multiple values into one (smaller or equal) array/object (eg `[first, ...rest] = array` or `f(...args)`)
+* **Spread** (Operator/Syntax, right-hand side) = expands an iterable into individual values (eg `[...array, 4, 5, 6]`)
+  * Shallow Copying = creates a copy of root-level an array or object (eg `copy = [...array]` or `copy = {...obj}`)
+  * Eg `const koko = {...a, ...b}` = combining multiple objects enumerable properties (latest overriden property wins eg in this case _b_'s)
 * **Strict Mode** = safer JS mode (via `"use strict";`) that prevents bad/sloppy code (eg implicit global variables, throws errors instead of failing silently)
 * **XMLHttpRequest** = interact with servers, without reloading the full page (used extensively by **AJAX**)
 
@@ -28,9 +29,6 @@
 * `||=` = logical OR assignment operator (assigns a value if it is falsy, eg `a ||= b` equates to `if(!a) a=b;`)
 * `undefined` = a variable exists but currently has no value (eg declared but not assigned, or assigned _undefined_ literal)
 * `typeof(variable)` = (name of) type of variable
-* `{}` = [Destructuring Objects](https://wesbos.com/destructuring-objects) = decomposes an object's properties in the order they were defined (eg `{ first, second } = koko;`, where _koko_ could have more properties eg `third`)
-* `f(...parameters)` = [Rest parameter](https://www.geeksforgeeks.org/javascript-rest-operator), turns a list of (indefinite number of) function parameters into a single array
-  * Then `const [first, second] = parameters` using [Destructuring](https://www.samanthaming.com/tidbits/20-destructuring-function-arguments)
 * Object (note: in JS/JSON, objects are maps/dictionaries)
   * `Object.create(proto)` = create a new object using a specific prototype (or even null in which case it has no prototype)
   * `Object.entries(o)` = properties names & values of an object
@@ -49,6 +47,7 @@
 
 * `Number(rgb).toString(16)` = display as Hexadecimal using [Number.prototype.toString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toString)
 * `**` = power
+* `+<expression>` = converts any compatible expression to number (_NaN_ if not possible)
 
 ### Conditions & Flow
 
@@ -80,6 +79,9 @@
 
 * [Array is an abstraction](https://stackoverflow.com/a/43857048/3559724) with actual implementation (and resizing/hole-filling) up to particular engine
 * `[item]` = turns an item into an array
+* `[first, second] = array` = array destructuring (assigned array may have more items, which are ignored)
+* `[first, second, ...rest] = array` = array destructuring with spread (remaining items are assigned to rest array)
+* `array = [...array, x, y, z ]` = appending/splicing using spread
 * `.filter(callback)` = returns shallow copy of array portion satisfying predicate (à la where)
 * `.find(callback)` = returns first element satisfying predicate
 * `.findIndex(callback)` = returns index of first element satisfying predicate
@@ -88,7 +90,8 @@
 * `.push(items)` = adds item(s) to end of array & returns new length
 * `.reduce((accu, next) => acc + cur)` = aggregate/accumulate
 * `.shift()` = pops first element of an array & returns it
-* `.slice(start, end)` = returns new array with values from _start_ to _end_
+* `.slice([start], [end])` = returns new array with values from _start_ (default 0, can be negative to start backwards from end) to _end_ (default array/string length)
+  * Can be used without arguments to realize an array shallow copy
 * `.splice(start, [deleteCount, items])` = add/remove/replace item(s) & returns removed items
 * `.unshift(items)` = adds item(s) to beginning of array & returns new length
 * [Conditionally add items](https://codeburst.io/3-ways-to-initialize-an-array-with-conditional-elements-in-javascript-c95397615a7e)

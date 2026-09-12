@@ -32,6 +32,11 @@ On Windows, container types are either cross-platform portable Linux (a Linux VM
   * For production, we pack source code using dockerfile `COPY` instead so that image is self-contained & embeds everything it needs
 * **Build Context** = folder path specified during build whose contents are accessible to Dockerfile instructions (eg `COPY`); paths in those instructions are relative to this context
 * **BuildKit** = modern engine/backend used by Docker itself for building container images, using a fundamentally different architecture compared to earlier engines
+  * `buildctl <command>` = BuildKit CLI
+    * `build` = build an image
+    * `debug` = debug tools
+    * `du` = cache disk usage
+    * `prune` = cache clean
 * **Compose** = a higher-level client to run a multi-service application (consisting of a set of images ie containers eg backend + frontend) from a single declarative YAML file (ie infrastructure-as-code, shareable within devteam)
   * A single `docker compose` command is equivalent to running a bunch of `docker run` command to spawn several coordinated containers on host
   * Unlike Kubernetes, this is not scaling-oriented cluster-level orchestration, merely a declarative setup to run interacting services in parallel (à la Visual Studio Debug multiple projects)

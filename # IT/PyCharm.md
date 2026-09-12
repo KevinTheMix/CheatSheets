@@ -2,9 +2,7 @@
 
 ## Quick Tips
 
-* Default font size JetBrains Mono (size 13)
 * Click on method writer's name (right from number of usages) to show last editor for each line (à la Git blame)
-* Use Visual Studio Code KB shortcuts = _File > Settings > Get more keymaps in Settings | Plugins > VSCode keymap > Install_, then select it in dropdown
 
 ## Glossary
 
@@ -12,14 +10,19 @@
 
 ## Menus
 
-### Top-Left Navigation Bar
+### (File >) Settings
 
-* Project > (vertical …) > _Always Select Opened File_ = scroll to & highlight currently opened file
-* Structure
-* Commit
-* more tool windows = Bookmarks, Find, Coverage, GitHub Copilot Multiple Code Suggestions, Hierarchy, Learn, Run
+* **Editor** > Font > Consolas 14 (default is JetBrains Mono 13)
+* **Plugins** > 'VSCode keymap' > _Install_, then select it in dropdown = use Visual Studio Code KB shortcuts
+* **Build, Execution, Deployment** > Debugger > uncheck _Focus application on breakpoint_ to prevent window from stealing focus while typing elsewhere
 
-### Bottom-Left Navigation Bar
+### Left Navigation Bar
+
+* **Project** > (vertical …) > Behavior > _Always Select Opened File_ = scroll to & highlight currently opened file
+* **Commit**
+* **Pull Requests**
+* **Structure** = (nested) map of current file's entities (classes, variables & methods)
+* **More tool windows** = Bookmarks, Find, Coverage, Endpoints, GitHub Copilot Multiple Code Suggestions, Hierarchy, Learn, Python Process Output, Run, TODO
 
 ## Keyboard Shortcuts
 
