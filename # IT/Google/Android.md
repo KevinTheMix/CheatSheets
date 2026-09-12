@@ -17,7 +17,9 @@
   * Can be ABI/CPU/device-specific (as in `flutter run --release` or when downloaded from app store) or universal (eg Codemagic with multiple ABIs)
 * [Activities](https://developer.android.com/guide/components/activities/intro-activities) = one app's entry point, declared/defined in _AndroidManifest.xml_
 * **Android** = open-source OS based on Linux, supported by many different manufacturer's devices
-* **Android SDK** = can be installed via Android Studio's SDK Manager (at `%USERPROFILE%\AppData\Local\Android\Sdk`)
+* **Android NDK** (Native Development Kit) = toolset to implement parts of an app target device native code/language using C/C++
+* **Android SDK** (Software Development Kit) = toolset to develop Android apps as Java bytecode abstractions
+  * Can be installed via Android Studio's SDK Manager (at `%USERPROFILE%\AppData\Local\Android\Sdk`)
   * [Platform Tools](https://developer.android.com/tools/releases/platform-tools) = primarily **adb** & **fastboot** exe (see section below)
 * [Android Studio](https://developer.android.com/studio) = full Android development SDK, for building apps on Android devices
   * Includes **Android SDK Platform Tools** (which are also available as standalone tools)

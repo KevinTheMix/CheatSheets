@@ -7,7 +7,10 @@
 * Download full Youtube Channel (adapted & corrected from <https://rgetter.com/2021/12/21/back-up-a-youtube-channel-with-jdownloader2>)
   * Go to Youtube Channel > **Videos**
   * Scroll to bottom (using script: `var scroll = setInterval(function(){ window.scrollBy(0, 1000)}, 1000);` and afterwards `window.clearInterval(scroll);`)
-  * Paste `console.clear(); urls = $$('a'); urls.forEach(function(v,i,a){if (v.id=="video-title-link"){console.log('\t'+v.title+'\t'+v.href+'\t')}});` (lists all videos title & URLs)
+  * Shorts = `console.clear(); $$('a.shortsLockupViewModelHostEndpoint').forEach(function(v) { if (v.title) console.log('\t' + v.title + '\t' + v.href + '\t'); });`
+  * Videos = `console.clear(); urls = $$('a'); urls.forEach(function(v,i,a){if (v.id=="video-title-link"){console.log('\t'+v.title+'\t'+v.href+'\t')}});` (old, no longer works in 2026.07)
+  * Videos = `console.clear(); $$('a.ytLockupMetadataViewModelTitle').forEach(v => console.log('\t' + v.textContent.trim() + '\t' + v.href + '\t'));` (with a specific possibly unstable class name)
+  * Videos = `console.clear(); $$('h3 a[href^="/watch?v="]').forEach(v => console.log('\t' + v.textContent.trim() + '\t' + v.href + '\t'));` (more flexible)
   * Right-Click the console output and select _Copy all Messages_
   * Paste the text into Excel
   * Copy only the list of URLs and paste it into JDownloader
