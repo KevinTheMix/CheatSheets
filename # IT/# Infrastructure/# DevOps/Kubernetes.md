@@ -28,16 +28,19 @@ Based on an internal Google product called Borg open-sourced in 2014.
 * **ConfigMap** = API object to store non-confidential data in key-value pairs, consumed by pods as environment variables, CLI arguments, configuration files in a volume
 * **Container Runtime** = runs containers effectively by managing their execution & lifecycle (pulls images from registry, start/stops containers, manages their resources)
 * **Container Runtime Interface** (CRI) = main gRPC protocol for communication between kubelet & container runtime (implemented nnatively by eg containerd & CRI-O)
+* **Container Storage Interface** (CSI) = standard API letting external storage systems (eg cloud provider disks, NFS) expose volumes to Kubernetes as drivers, without needing their code baked into K8s core
 * **Control Plane** = central control system for nodes in a cluster, which creates/manages pods
   * **API Server** = primary interface between control plane & rest of cluster, and allows clients (admin UI & CLI) to interact with control plane & submit requests to manage cluster
     * **API Resource** = anything that can be created/managed through API server, as a resource type with its own schema
-    * **Core API Resource** = resources that are natively built into Kubernetes itself & understood by every cluster out of the box (as opposed to Custom Resource Definitions (CRD) which extend API with new resource types)
+    * **API Group** = namespacing mechanism grouping related API Resources/versions (eg `apps/v1`, `batch/v1`, `networking.k8s.io/v1`), letting each evolve independently
+      * **Core (Legacy) API Group** = the group with no name, served at `/api/v1` instead of `/apis/{group}/{version}` (eg Pod, Service, ConfigMap, Secret, Namespace, Node, PersistentVolume, PersistentVolumeClaim)
+    * **Built-in Resource** = resource type shipped natively with Kubernetes & understood by every cluster out of the box, whether in the core group or a named one (eg Deployment, Job, Ingress are built-in but not in the core group) — as opposed to Custom Resource Definitions (CRD) which extend the API with new resource types
   * **Controller Manager** = runs controllers managing cluster state
     * **Deployment Controller** = manages rolling update & rollback of deployments
     * **Ingress Controller** = software that reads ingress resources & implements routing (eg _Traefik_, _Nginx Ingress Controller_)
     * **Replication Controller** = ensures designed number of pod replicas are running
 * **CronJob** = a built-in K8s workload resource that creates/starts jobs on a repeated schedule
-* **Deployment** = API object that manages a set of (replicated) Pods to run an application workload, usually one that doesn't maintain state
+* **Deployment** = API object that manages a set of (replicated) Pods to run an application workload, usually one that doesn't maintain state (can be configured programmatically via Helm charts)
 * **Dockershim** = was a translation layer built into kubelets that converted CRI calls into Docker API calls
 * **etcd** = distributed key-value store to store all cluster (persistent) state, used by API server & other control plane components to store/retrieve cluster information
 * **Horizontal Pod Autoscaling** = scale horizontally as neded by adding more nodes to a cluster
@@ -51,6 +54,8 @@ Based on an internal Google product called Borg open-sourced in 2014.
 * **Object** = an API entity/resource representing cluster state (or "record of intent")
   * Can be created via a declarative (YAML/JSON) manifest/configuration file that control plane will work to ensure it exists or imperatively (via `kubectl` commands), or via custom controllers/Helm charts
 * **Orchestrator** = manages lifecycle & locations of various containers, with error control & restart capabilities (eg Azure Fabric Service, Docker Swarm, Kubernetes, Mesosphere)
+* **PersistentVolume** (PV) = core API resource representing an actual piece of storage in the cluster (eg a cloud disk, NFS share), provisioned either statically by an admin or dynamically via a StorageClass, with a lifecycle independent of any pod
+* **PersistentVolumeClaim** (PVC) = core API resource that is a user's request for storage (size, access mode, optional StorageClass), which gets bound 1:1 to a matching PV and is mounted into a pod like a Volume
 * **Pod** = smallest & simplest deployable unit in a node, a shared (network namespace/IP address, storage volumes, lifecycle) execution context for a set of 1 upto N running containers
 * **PodSpec** = specification within a pod manifest that defines containers/volumes/runtime configuration for that pod
 * **Recreate** = another deployment strategy, which kills everything then start new pods
@@ -60,6 +65,7 @@ Based on an internal Google product called Borg open-sourced in 2014.
 * **Scheduler** = schedules/makes decision about placing pods onto worker nodes in cluster according to available resources (eg current load)
 * **Scheduling** = assigning a pod to a specific node in cluster
 * **Secret** = stores sensitive information (eg passwords, OAuth tokens, SSH keys) in etcd (**unencrypted**) by default
+  * **secretKeyRef** = field (under `env[].valueFrom` or `envFrom[].secretRef` in a PodSpec) that injects a single key from a Secret as a container's environment variable, instead of hardcoding the value in the manifest
 * **Self-Healing** = auto-renew dead nodes
 * **Service** = stable network endpoint (IP address & DNS name, with load balancing) for reaching (a logical set of) pods even as underlying pods are created/destroyed/rescheduled
   * **ClusterIP** = (default) exposeos service on internal IP within cluster (only reachable from inside cluster)
@@ -92,6 +98,10 @@ Based on an internal Google product called Borg open-sourced in 2014.
 * `kubectl rollout restart deployment <app>` = restart all pods belonging to a Deployment called _app_
 * `kubectl rollout undo {}` = roll back a previous rollout
 
-### Helm
+### Helm CLI
 
 * `help upgrade` = update an existing release with new changes from a chart
+* `--debug` = enable verbose output (eg shows rendered manifests) for troubleshooting
+* `--force-replace` = replace existing deployment configuration (eg manually added environment variables) without warning/error
+* `--rollback-on-failure` = automatically roll back to previous release if upgrade fails
+* `--set env=dev` = override a chart value from CLI (here sets `env` to `dev`) instead of editing `values.yaml`

@@ -3,8 +3,9 @@
 ## Quick Tips
 
 * Unblock/jailbreak right-click = `document.oncontextmenu = true`
-* Use `| 0` on a (non-negative) floating point value to convert it to a 32-bit signed integer, effectively math flooring it quickly
 * [JavaScript Garden](https://shamansir.github.io/JavaScript-Garden) = documentation about JS quirks
+* Re-add scrollbars to a page = `document.body.style.overflow = 'auto'; document.documentElement.style.overflow = 'auto';`
+* Use `| 0` on a (non-negative) floating point value to convert it to a 32-bit signed integer, effectively math flooring it quickly
 * HTML elements with IDs are automatically made available as global variables (eg `<div id="menu">…</div>` can be manipulated in JS via `menu` variable)
 
 ## Glossary

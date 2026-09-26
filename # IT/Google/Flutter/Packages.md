@@ -221,12 +221,11 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
 * **tflite_flutter** (_@tensorflow.org_) = TensorFlow Lite interpreter and perform interference, with multi-platform support (mobile & desktop)
 * **undo** (_@rodydavis.com_) = undo/redo history stack to go back/forward
 * **universal_platform** (_@gskinner.com_) = platform detection (eg _isAndroid_, _isWeb_, _isWindows_) that works for web (unlike _dart.io.Platform_ at the time)
-* **upgrader** (_@larryaassen.com_) = informs users there is a newer app store version of the app (with no configuration necessary)
 * **uuid** (_@yuli.dev_) = generate UUIDs
 * **version** (_@dart.ninja_) = parse & compare semantic versions
 * **window_size** (-) = gets/sets desktop (Linux/macOS/Windows) apps window size (also see **desktop_window** package)
 
-* Animateed Containers
+* Animated Containers
   * **drag_and_drop_lists** (-) = drag & drop items between multiple lists
   * **reorderables** (-) = drag & drop lists, rows/columns, wraps
 * Animation & Clip
@@ -299,6 +298,9 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
   * **ftoast** (-) = toast pop-up messages (ie center screen notifications)
   * **gap** (-) = adds space inside **Flex** widgets (ie **Column**/**Row** or scroll lists, see **MaxGap** & **SliverGap**)
   * **panara_dialogs** (_@panarastudios.in_) = info/confirmation/warning/error modal dialogs
+* Upgrade/Update
+  * **in_app_update** (_@jonasbark.de_) = enables In App Updates on Android via official Android APIs (check/download/suggest/force users to update an app)
+  * **upgrader** (_@larryaassen.com_) = informs users there is a newer app store version of the app (with no configuration necessary)
 
 #### Codegen, DI, [State Management](https://docs.flutter.dev/data-and-backend/state-mgmt/options)
 

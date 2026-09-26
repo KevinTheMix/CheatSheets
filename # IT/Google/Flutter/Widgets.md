@@ -56,7 +56,7 @@
 
 * Listenable = Observer pattern
   * **Listenable** (abstract) = object that maintains a list of listeners (`addListener()`, `removeListener()`)
-    * **ValueListenable<T>** (abstract, extends **Listenable**) = interface for subclasses of **Listenable** that expose a (current/single) _value_
+    * **ValueListenable\<T>** (abstract, extends **Listenable**) = interface for subclasses of **Listenable** that expose a (current/single) _value_
     * **Animation\<T>** (abstract, extends **Listenable**, implements **ValueListenable\<T>**) = value with status & direction
     * **ChangeNotifier** (mixin, implements **Listenable**) = listenable with `notifyListeners()`
     * **ValueNotifier\<T>** (extends **ChangeNotifier**, implements **ValueListenable\<T>**) = a **ChangeNotifier** that holds a single (mutable) value triggering notifiations
@@ -127,7 +127,7 @@ There are two built-in solutions: imperative **Navigator** (push/pop API that wo
 * **NavigatorState** as in `GlobalKey<NavigatorState>`
 * **PageRouteBuilder** = creates route & page (with _pageBuilder_) with transition effect (via _transitionsBuilder_)
 * **Page\<T>** = describes configuration of a Route
-* **Route<T>** = abstraction for an entry managed by a Navigator, ie an abstract interface between navigator & routes that get pushed/popped off
+* **Route\<T>** = abstraction for an entry managed by a Navigator, ie an abstract interface between navigator & routes that get pushed/popped off
 * **Router\<T>** = dispatcher for opening/closing pages, parses route information into data & converts data into Pages passed to Navigator
 
 ## Display, Images, Painting
@@ -282,7 +282,7 @@ There are two built-in solutions: imperative **Navigator** (push/pop API that wo
 * Tabs
   * **DefaultTabController** = simple tabs ancestor widget when a full-fledged manual **TabController** isn't explicitly defined
   * **TabBar** = Material Design primary tab bar
-  * **TabBarView** = page view displaying currently selected tab's child/widget
+  * **TabBarView** = page view displaying currently selected tab's child/widget (built on top of **PageView**, good for fixed/horizontal/dots-indicated pages)
   * **TabController** = controller class to manually select or react to tab changes
 
 ### Boxes/Wrappers

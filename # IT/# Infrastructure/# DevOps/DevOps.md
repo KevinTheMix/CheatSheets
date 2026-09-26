@@ -11,9 +11,12 @@
   * **Canary Deployment** = roll out to a tiny percentage first to monitor for errors then gradually increase if everything goes smoothly
   * **Regional Rollout** = deploy to one datacenter/region first, verify it's healthy then proceed to others
 
+### Tools
+
 * **Artifactory** (_JFrog_) = repository manager to store/manage/version/distribute software artifacts (ie software binaries/packages eg .NET nugets, Docker images, npm packages, Python packages, Helm charts, etc)
 * **Datadog** = American company providing observability service for cloud-scale applications (servers/DBs/tools/services monitoring through a SaaS-based data analytics platform)
 * **Grafana** (not to be confused with Elastic Kibana) = open-source analytics/visualization web app to display metrics, logs & traces
+* **Jenkins** = open-source automation server that enables CI/CD by automating software building/testing/deployment (à la Azure Devops Pipelines/Release features)
 * **OpenTelemetry** (aka OTel) = vendor-neutral open standard & general purpose toolkit for collecting and exporting traces/metrics/logs from applications
 * **Prometheus** (by SoundCloud) = open-source systems monitoring & alerting toolkit (metrics, time series, PromQL query language)
 * **Sentry** = error & crash tracking tool to capture exceptions/stacktrace/context when things go wrong (_what broke & why?_)

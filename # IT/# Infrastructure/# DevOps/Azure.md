@@ -38,6 +38,12 @@ Azure provides more than 100 services that enable you to do everything from runn
 * **Azure Stack Hub** = extension that provides a way to run apps in an on-premises environment and deliver Azure services in your datacenter
 * **Azure VMware Solution** = runs VMware on cloud (for when configured VMware on-premise and want to move it to cloud)
 * **Dynamics** = Microsoft's line of business applications for day-to-day operations like sales/accounting/customer support, or in short Microsoft’s suite of CRM and ERP software
+* **Geography** = market area containing one or more regions (ie whole continent eg Europe, US, Asia Pacific, etc)
+  * **Availability Zone** (AZ) = physically separate datacenter locations within a region (with independent cooling/networking/power)
+    * Improves high availability but does not protect against complete regional outage (use multi-region strategy as well)
+    * Multi-zone = deploying a workload across multiple AZs within the same region
+  * **Datacenter** = lowest-level geographical area
+  * **Region** = geographic area containing one or more datacenters (eg West/North Europe, France Central, Belgium Central, UK South, etc), helping manage data residency, latency, compliance, DRP
 * **Microsoft Foundry** (formerly Azure AI Studio) = unified AI development platform for building popular LLM-powered applications & agents tailored to specific business needs at enterprise scale
 * [Microsoft Marketplace](https://marketplace.microsoft.com) = 1st-party (Azure) & 3rd-party products/services (ie IaaS, PaaS, SaaS) shop
 * **Power BI** = Microsoft's analytics & visualization reporting (à la SSRS, part of **Microsoft Power Platform** or embedded in **Azure**)

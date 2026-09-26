@@ -11,13 +11,16 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 
 * Always commit after tidy, before refactoring
 * Do not rebase commits other people may already be using
-* Commit messages should complete the sentence: "_if applied, this commit will …_"
+* Prefer `git mv` for renaming files in CLI (note that modern IDEs are capable of tracking plain renaming)
 * A local repo (for personal projects) provides version control by itself without the need of any associated remote repos
 * Use trailing (_dangling_) commas whenever possible at end of source code lines in order to reduce the number of lines marked as modified
+* Commit messages should complete the sentence: "_if applied, this commit will …_", start with a capitalized present tense verb, and end without period
 * [Conventional Commits](https://www.conventionalcommits.org) = specification for writing standardized commit messagese that help creating a clear & organized commit history
 * [A Hacker's Guide to Git](https://wildlyinaccurate.com/a-hackers-guide-to-git)
 * [Practical Git](https://practicalgit.com) (eg "Recover a deleted local branch")
 * [Scott Chacon - Git Tips and Tricks](https://blog.gitbutler.com/git-tips-and-tricks) = also a FOSDEM 2024 talk (by GitHub cofounder)
+* Troubleshooting
+  * Rebase stuck on "must edit all merge conflicts" despite `git status` saying resolved? → `git diff --stat` mid-rebase before `--continue`; any output = unstaged edit, fix with `git add -A`
 
 ## Glossary
 
@@ -74,10 +77,10 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * **Don't alter a commit message in case of conflict** (ie don't mention conflict/rebase), resulting history should describe actual changes, not mechanics used to integrate them
 * **Repository** = a regular folder augmented into a self-contained version-controlled directory that tracks changes to (some/all of its) files over time
 * **Reference** (or just **ref(s)**) = label/pointer to specific commits (ie aliases for commit hashes), saved as files (in the `.git/refs/` directory)
-  * Branches (`refs/heads/{branch}`), Tags (`refs/tags/{tag}`), remote branches (`refs/remotes/{remote}`), even _HEAD_ are all (types of) references
+  * Branches (`refs/heads/<branch>`), Tags (`refs/tags/<tag>`), remote branches (`refs/remotes/<remote>`), even _HEAD_ are all (types of) references
 * **Reflog** (**reference log**) = history of all reference modifications (à la VG _saved states_), stored as one file per reference (in `.git/logs/`)
   * It is a safety net to recover lost commits/changes, at least for a little time until garbage collection permanently clears them
-  * Reflog entries (aka lines) use the following format: `{after} {before} {author name & email} {timestamp with zone} {action}: {comment}`
+  * Reflog entries (aka lines) use the following format: `<after> <before> <author name & email> <timestamp with zone> <action>: <comment>`
   * The reflog is forward-only (it's a growing list/log, not a stack), but its entries may be pruned over time due to retention policies
 * **Refspec** (**reference specification**) = mapping between local & remote references (eg for `fetch` & `push`, saved in that remote's section in `.git/config` in the `+<source>:<destination>` format)
 * **Remote (repository)** = a (nonmandatory) repo hosted on a separate/centralized/shared server, required for some commands (cloning, fetching, pull, pushing)
@@ -102,17 +105,18 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 
 * `--` = see <https://stackoverflow.com/a/22750480/3559724>
 * [Practical Git - Cheat Sheet](https://practicalgit.com/cheat-sheet)
-* `git {command} --help` = opens local HTML manual page (or `man git-{command}` on Unix)
-* `{commit}~n` = nth commit before a given commit (on Unix use `^` instead of `~`, no _n_ equates _n=1_)
-* `{reflog}@{n}` = the (zero-based) nth before latest reflog entry for a given branch (eg `master@{1}` or `HEAD@{-1}` or `@{1}` just for special default _HEAD_)
+* `git <command> --help` = opens local HTML manual page (or `man git-<command>` on Unix)
+* `<commit>~(n=1)` = nth ancestor following only first parent links
+* `<commit>^(n=1)` = nth parent of a commit, mainly relevant for merge commits
+* `<reflog>@<n>` = the (zero-based) nth before latest reflog entry for a given branch (eg `master@{1}` or `HEAD@{-1}` or `@{1}` just for special default _HEAD_)
 * On Windows, use double quotes (`"`) instead of single quotes (`'`), especially relevant when Git suggest a command fix (containing single quotes)
 
 ### Configuration
 
-* `git config --{scope}` = where _scope_ is `--system` (Global), `--global` (User), `--local` or _nothing_ (Local)
-* `git config --{scope} --edit` = open target config file in default editor (itself defined at User scope under _core.editor_ parameter)
-* `git config --{scope} --l(ist)` = list the aggregated config parameters at a given scope
-* `git config --{scope} {section}.{parameter} {value}` = directly set given parameter
+* `git config --<scope>` = where _scope_ is `--system` (Global), `--global` (User), `--local` or _nothing_ (Local)
+* `git config --<scope> --edit` = open target config file in default editor (itself defined at User scope under _core.editor_ parameter)
+* `git config --<scope> --l(ist)` = list the aggregated config parameters at a given scope
+* `git config --<scope> <section>.<parameter> <value>` = directly set given parameter
   * Eg `git config --system credential.helper = manager(-core)` = remove this line to [avoid opening Credential Manager](https://stackoverflow.com/a/37185202/3559724)
   * Eg `git config --global core.askpass =` (as-is) = disables the OpenSSH credentials popup
   * Eg `git config --global core.safecrlf warn` = makes files with mixed Linux/Windows line endings non-blocking
@@ -138,38 +142,42 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * `--no-index <f1> <f2>` = changes between two arbitrary files
   * `<a> <b>` = changes between two git states (ie files/commits/branches, eg `git diff HEAD~1 HEAD`)
 * `git log` = lists commits history in anti-chronological order (ie last first)
-  * `<branch>` = lists commits history (parental ancestry) for that branch (_HEAD_ by default, if a tag has same name use full branch namespace eg `refs/heads/{branch}`)
+  * `<branch>` = lists commits history (parental ancestry) for that branch (_HEAD_ by default, if a tag has same name use full branch namespace eg `refs/heads/<branch>`)
   * `<tag>` = lists commits history for that tag (if tag has same name as a branch, Git complains and displays tag commits history)
   * `--all` = includes all commits (not just the ancestors of currently checked-out)
-  * `--author="{name}"`
-  * `--date={format}` = formats all dates (eg `short`, `iso`, `local`, `relative` eg "2 hours ago")
+  * `--author="<name>"`
+  * `--date=<format>` = formats all dates (eg `short`, `iso`, `local`, `relative` eg "2 hours ago")
   * `--decorate` = show branch & tag names
   * `--graph` = draws Ascii tree of commits
   * `--max-count=10` = limits output
   * `--oneline` = compact one-line-per-commit format (eg `git log --oneline master..develop` shows simple commits diff between two branches)
-  * `--pretty={format}` = where built-in _format_ is `oneline`, `short`, `medium` (default), `full`, `fuller` by increasing length, or `reference`, etc.
-  * `--pretty=format:\"{custom}\"` = custom format (eg `%ad` author date, `%an` author, `%cd` date, `%d` references if any, `%h` hash, `%s` comment, `%n` newline)
+  * `--pretty=<format>` = where built-in _format_ is `oneline`, `short`, `medium` (default), `full`, `fuller` by increasing length, or `reference`, etc.
+  * `--pretty=format:\"<custom>\"` = custom format (eg `%ad` author date, `%an` author, `%cd` date, `%d` references if any, `%h` hash, `%s` comment, `%n` newline)
   * `--since="5 minutes ago"` = after
   * `--until="5 minutes ago"` = before
   * Eg `git log --oneline --graph --all --decorate`
-* `git reflog (show) {reference}` = display reflog of a reference (eg `git reflog HEAD`)
-* `git rev-list {commit(s)} (--count)` = commit information (& count) in reverse chronological order
+* `git reflog (show) <reference>` = display reflog of a reference (eg `git reflog HEAD`)
+* `git rev-list <commit(s)> (--count)` = commit information (& count) in reverse chronological order
 * `git status` = information about the working tree state (staged changes, unstaged changes, untracked files)
 
 ## Local
 
 * `git init` = sets up the current directory as a Git repository (`--bare` without WD, usually to setup a repo only updated via `push`)
-* `git add` = stages one (`git add {file}`, _case sensitive_), several (`git add {*pattern*}`), or all (`git add .`) to be included in the next commit
+* `git add` = stages files to be included in the next commit
+  * `<directory/>` = stages files in a directory
+  * `<file>( <file2> <file3>)` = stages one or more specific files (including  _case sensitive_ and/or glob wildcarded paths)
+  * `.` = stages all changes (ie new/untracked + modified + deleted files) from current (sub)directory downward
+  * `-A` = stages all changes (ie new/untracked + modified + deleted files) in working tree (ie at root reposotiry level)
+  * `-i` = stages interactively (via CLI)
   * Note that it's possible to keep some files in the Git repo untracked/ignored if they're never added
-* `git add -i` = stages interactively (via CLI)
 * `git branch` = lists local branches (with current branch highlighted)
   * `-a(ll)` = lists both local & remote-tracking branches
   * `-c <branch>` = copies existing branch to new branch name (does not check it out, to create & switch use `git switch -c <branch>` or older `git checkout -b <branch>`)
   * `-d <branch>` = delete a local branch (safe delete ie blocksgit if branch contains commits that haven't been merged)
   * `-D <branch>` = delete a local branch (force delete)
-  * `-m|-M ({old}) {new}` = rename a branch (current branch if _old_ not provided)
+  * `-m|-M (<old>) <new>` = rename a branch (current branch if _old_ not provided)
   * `-r(remote)` = lists remote-tracking branches (ie local read-only pointers/references to state of branches on a remote, eg _origin/main_)
-  * `-u {remote}/{branch}` (or `--set-upstream-to {remote}/{branch}`) = links local branch to remote branch (adds (max one, previous gets replaced) _branch_ section in `.git/config`)
+  * `-u <remote>/<branch>` (or `--set-upstream-to <remote>/<branch>`) = links local branch to remote branch (adds (max one, previous gets replaced) _branch_ section in `.git/config`)
   * `-vv` = shows all local branches with extra infos
   * `<branch>` = creates a new branch
   * `<branch> <commit>` = creates a new branch pointing to a specific commit
@@ -177,42 +185,46 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * (ChatGPT3.5:) starting from Git version 2.23 (2019.08), recommendation is to use `git switch` or `git restore` instead of `git checkout` for clarity and consistency
   * `.` = replaces files in current directory with HEAD versions, discarding uncommitted changes in tracked files (**warning**: destructive)
   * `-` == `git checkout @{-1}` == `git switch -` = switches back to last previous branch/commit
-  * `{file}` == `git restore {file}`
-  * `{branch}` == `git switch {branch}`
-  * `{commit}` = checks out specified commit (detaches _HEAD_, not on a branch anymore), works only if there are no unstaged changes or the commit is the last one
-  * `-b {branch}` = creates a branch and checks it out
+  * `<file>` == `git restore <file>`
+  * `<branch>` == `git switch <branch>`
+  * `<commit>` = checks out specified commit (detaches _HEAD_, not on a branch anymore), works only if there are no unstaged changes or the commit is the last one
+  * `-b <branch>` = creates a branch and checks it out
+* `git cherry pick <commit_hash>` = replays changes introduced by specified commit onto current branch (as a new commit with a new hash)
 * `git clean -fdx` = deletes all gitignored/untracked files (add `-n` option to preview but not do) (**warning**: destructive)
 * `git commit` = when a message is not provided, the default text editor is launched and its result fed as message
-  * `-m "{message}"`
+  * `-m "<message>"`
   * `-a` = stages all (already/previously) tracked files then commit ine one go
-  * `--amend` = modify latest/most recent commit for quick corrections (add files, change message), technically by replacing old commit with a new one (hence rewriting local history)
-    * `--no-edit` = reuse its existing message (without it, Git will typically open an editor to change the message before saving amended commit)
+  * `--amend` = modify latest/most recent commit for quick corrections (add files, change message), actually replacing old commit with a new hash (rewrites local history)
+    * `-m <message>` = message only
+    * `--no-edit` = add files without modifying existing message (without it, Git will typically open an editor to change the message before saving amended commit)
     * Run `git push --force-with-lease` after amending if commit was already pushed (since a new commit with a new hash wwas created, which cannot simply be appended as a descendant of last commit then fast-forwarded to)
-* `git merge {branch}` = merges changes from given into current branch, creating a (merge) commit
+* `git merge <branch>` = merges changes from given into current branch, creating a (merge) commit
 * `git merge`
   * `--abort/--continue` = cancels/resumes latest merge operation paused due to conflicts
   * `--ff`
-  * `--(no-)squash {feature_branch}` = brings the change from feature branch into current branch's working tree, without committing (no merge commit gets created)
+  * `--(no-)squash <feature_branch>` = brings the change from feature branch into current branch's working tree, without committing (no merge commit gets created)
+* `git mv <old> <new>` = renames/moves a tracked file (or directory) and stages change (equivalent to `mv` + `git add <old> <new>`)
+  * Preferred over OS-level rename/move + separate `add`/`rm`, since better detects rename (preserving `git log`/`git blame` history) when operation is recorded as a single staged change
 * `git rebase` = reapplies a branch's commit on top of another base commit to create a cleaner linear commit history
   * `-i` = edit, reorder, squash, split, or remove commits interactively while replaying them onto a new base (eg `git rebase -i HEAD~2`), rewriting commit history before sharing it
 * `git reset` = moves current branch's HEAD to a specific commit, optionally modyifying staging area & working directory to match it
-  * `{file}` = unstages one or several files (opposite of `add`)
-  * `({commit}) --soft` = uncommits (changes are left staged)
-  * `({commit}) --mixed` = uncommits & unstages changes (left in the working tree)
-  * `({commit}) --hard` = uncommits & unstages & delete changes (**warning**: destructive)
+  * `<file>` = unstages one or several files (opposite of `add`)
+  * `(<commit>) --soft` = uncommits (changes are left staged)
+  * `(<commit>) --mixed` = uncommits & unstages changes (left in the working tree)
+  * `(<commit>) --hard` = uncommits & unstages & delete changes (**warning**: destructive)
   * `--soft HEAD~1` = cancels last commit (`HEAD~1` means commit one step before aka parent commit)
   * `--hard HEAD` = reverts all uncommitted changes
   * `--hard HEAD@{1}` = reverts repo to state before most recent changes (eg by a commit/branch switch/reset)
-  * `--hard origin/{main}` = resets local repo (eg _main_) to origin's version (fetch it beforehand to get latest version)
-* `git restore {file}` = restores a staged file (or directory) to its last staged state, or an unstaged one to its HEAD state (**warning**: destructive)
-* `git restore {file} --staged` = unstages file (similar to `git reset {file}`)
+  * `--hard origin/<main>` = resets local repo (eg _main_) to origin's version (fetch it beforehand to get latest version)
+* `git restore <file>` = restores a staged file (or directory) to its last staged state, or an unstaged one to its HEAD state (**warning**: destructive)
+* `git restore <file> --staged` = unstages file (similar to `git reset <file>`)
 * `git revert` = cancels a commit by creating a new one to remove changes
   * `HEAD` = cancels latest commit (only if there are no unstaged changes)
   * `<commit>` = cancels any specific (not necessarily latest) commit (only if there are no unstaged changes)
-* `git rm {file}` = deletes a (tracked) file (both from Git & physically on disk) during next commit
-* `git rm {file} --cached` = un-tracks a file during next commit
-* `git rm {directory} --r` = deletes a a directory during next commit
-* `git show {object}` = display information about a commit, tag, blob (file), tree (directory)
+* `git rm <file>` = deletes a (tracked) file (both from Git & physically on disk) during next commit
+* `git rm <file> --cached` = un-tracks a file during next commit
+* `git rm <directory> --r` = deletes a a directory during next commit
+* `git show <object>` = display information about a commit, tag, blob (file), tree (directory)
 * `git stash` = shorthand for `git stash push` (see below)
   * `apply` = applies latest stash (without removing it from stash list)
   * `clear` = removes all stash entries
@@ -224,7 +236,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
     * `-m` (`--message`) = includes a message
     * `-u` (`--include-untracked`) = include (new) untracked files
 * `git switch` = switch to (or create) a specific branch or commit
-  * `{branch}` = switches to branch (by moving HEAD to (latest commit of) that branch), or does nothing if already on that branch
+  * `<branch>` = switches to branch (by moving HEAD to (latest commit of) that branch), or does nothing if already on that branch
   * `-` (with hyphen === `@{-1}`) = switch to previous branch (more precisely the previous location in _HEAD_ reflog, non-destructive)
   * `-c <branch>` = create branch from current branch
   * `-c <branch> <from>` = create branch from given branch or commit
@@ -239,21 +251,21 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 
 ### Remote
 
-* `git clone {url}` = creates a local copy of remote repo (with _origin_ default name remote) including all branches & commits, and adds an (_upstream_) remote if _origin_ is a forked repo (keeping track of the original)
+* `git clone <url>` = creates a local copy of remote repo (with _origin_ default name remote) including all branches & commits, and adds an (_upstream_) remote if _origin_ is a forked repo (keeping track of the original)
 * `git fetch` = downloads new objects/refs & updates remote‑tracking branches from a remote, without touching working tree or local branches (no files change)
   * `<remote>` = fetches remote (saved in the `.git/refs/remotes` folder, necessary after removing/re-adding a remote)
   * `--all` = fetches changes from all (configured) remote repositories, but does not merge/update local branches
   * `--prune` = fetches remote branches & removes their local copy that no longer exist remotely (local branches remain)
 * `git remote` = lists all remote repos names associated with local repo
   * `-v` = lists all remote repositories names & URLs associated with local repo
-  * `add {remote} {url}` = adds a remote repo to local repo (adds a _remote_ section in `.git/config`)
+  * `add <remote> <url>` = adds a remote repo to local repo (adds a _remote_ section in `.git/config`)
   * `get-url <remote>` = see remote (eg _origin_) URL
-  * `set-url {remote} {url}` = update the remote's URL (in the context of GitHub, the URL format `git@github.com:user/repo.git` is an SSH URL)
-  * `remove {remote}` = removes remote repo (deletes _remote_ & _branch_ sections in `.git/config` & folder from `.git/refs/remotes`, note that even `origin` can be removed)
-  * `prune {remote}` = removes local branches that no longer exist on the remote repo
-  * `show {remote}` = detailed information about remote repo
-* `git ls-remote {remote}` = list all remote references (including branches)
-* `git pull {remote} {branch}` = `git fetch` + `git merge`
+  * `set-url <remote> <url>` = update the remote's URL (in the context of GitHub, the URL format `git@github.com:user/repo.git` is an SSH URL)
+  * `remove <remote>` = removes remote repo (deletes _remote_ & _branch_ sections in `.git/config` & folder from `.git/refs/remotes`, note that even `origin` can be removed)
+  * `prune <remote>` = removes local branches that no longer exist on the remote repo
+  * `show <remote>` = detailed information about remote repo
+* `git ls-remote <remote>` = list all remote references (including branches)
+* `git pull <remote> <branch>` = `git fetch` + `git merge`
 * `git push` = pushes changes to remote branch linked with current branch
   * `<remote> <branch>` = pushes changes to a remote repo branch
   * `[-u | --set-upstream-to] <remote> <branch>` (eg `origin kokobranch`) = one-time link current local branch to a remote branch (create it if not exist), then pushes changes to it

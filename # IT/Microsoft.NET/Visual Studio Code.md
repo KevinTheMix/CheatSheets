@@ -93,7 +93,7 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 * `Ctrl + Shift + ù` = new Terminal
 * `Ctrl + Shift + P` or `F1` or _View > Command Palette_ = Command Palette
   * `Format Document`
-  * `Developer: Reload Window` = refresh UI (eg when git panel gets stale)
+  * `Developer: Reload Window` = refresh UI (for when displayed information gets stale)
   * `View: Toggle Minimap`
   * `Terminal: Create New Terminal`
 * `Ctrl + Shift + Space` = preview method full definition
@@ -149,7 +149,7 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 
 * **ChatGPT - Genie AI** = unofficial ChatGPT non-agentic coding assistant
 * **Claude Code for VS Code** = official Claude Code **agentic** coding assistant
-* **Codex – OpenAI’s coding agent** = official ChatGPT **agentic** coding assistent
+* **Codex – OpenAI’s coding agent** = official ChatGPT **agentic** coding assistant
 * **Gemini Code Assist** = official Gemini **agentic** (via _Agent Mode_) coding assistant
 * **GitHub Copilot** = official GitHub Copilot **agentic** coding assistant (via 3rd-party LLMs)
 
