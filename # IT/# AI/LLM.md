@@ -55,6 +55,7 @@
 * **Amp** (by _Sourcegraph_) = CLI or IDE-integrated coding agent using various models (eg Gemini 3 Pro), with a strong focus on autonomous sub-agents & multi-step task execution
 * **Codex** = originally a simple coding-oriented OpenAI LLM (that powered GitHub Copilot), now a local IDE agentic coding assistant consuming OpenAI API (also via CLI or GitHub-connected [cloud-based](https://chatgpt.com/codex))
 * [Context7](https://context7.com) = MCP server that pulls up-to-date API versioned documentation & code samples (eg Flutter), adds them as manual copy-paste, prompt context, API access
+* [FastMCP](https://gofastmcp.com) = standard framework for building MCP servers/clients/interactive applications
 * [Gitingest](https://gitingest.com) = turn any Git(Hub) repository into a simple long text digest of its codebase, to feed into any LLM
 * [Hugging Face](https://huggingface.co) = machine learning models collaborative/sharing platform
 * **Kiro** = AWS's native agentic AI development environment & IDE, from prototype to production

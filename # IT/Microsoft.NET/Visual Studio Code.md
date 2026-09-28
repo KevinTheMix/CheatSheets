@@ -147,6 +147,7 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 
 ### Coding Assistants
 
+* **Awesome Coding Assistants** (_Engie's Jerome Lacube_) = inspired by Awesome Copilot
 * **ChatGPT - Genie AI** = unofficial ChatGPT non-agentic coding assistant
 * **Claude Code for VS Code** = official Claude Code **agentic** coding assistant
 * **Codex – OpenAI’s coding agent** = official ChatGPT **agentic** coding assistant

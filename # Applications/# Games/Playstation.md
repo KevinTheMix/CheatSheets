@@ -18,6 +18,10 @@
 * [Final Fantasy World](http://web.archive.org/web/20160411060844/http://www.ffworld.com)
 * [Shiro](http://anshiro.free.fr)
 
+### God of War
+
+* [Guide to "Give me God of War" hardest difficulty](https://www.reddit.com/r/GodofWar/comments/8fyb7b/tips_for_new_players_and_people_attempting_gmgow/)
+
 ### Ghost Recon
 
 * [Bolivia, Ghost Recon: Wildlands Map](https://guides4gamers.com/ghost-recon-wildlands/map/bolivia)

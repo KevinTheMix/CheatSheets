@@ -70,11 +70,11 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * **Origin** = default name (and alias for a URL) given to remote repository from which a local repo was cloned (and will eventually be pushed)
   * Multiple other remotes can be added to a same (local) repo, each with a different name (eg `upstream`, `github`, `bitbucket`)
 * **Pull Request** (GitHub/GitLab) = formal proposal to merge changes into a codebase between same or different (ie forked) repositories
-* **Rebasing** = modify commit history (ie create new commits) of a branch to maintain a cleaner, more linear project history ("I want my branch to start from this commit instead")
-  * Typical use case = _main_ branch has kept evolving and we want to integrate those latest changes into a _feature_ branch that was spawned from it (ie "rebasing a feature branch onto main")
-  * Rebasing basically replays commits of current branch (ie incoming changes) onto rebased branch (ie current changes eg _main/develop_), one by one
-  * Current Change are what's already in branch that's rebased onto (HEAD), incoming changes belong to commit being replayed by rebase
-  * **Don't alter a commit message in case of conflict** (ie don't mention conflict/rebase), resulting history should describe actual changes, not mechanics used to integrate them
+* **Rebasing** = replay a branch's commits one by one (ie create new commits) onto a base branch for a more linear history
+  * Typical use case = integrate latest _main/develop_ changes into a _feature_ branch spawned from it (ie "rebasing a feature branch onto main")
+  * Internally a series of cherry-picks onto that base, with _HEAD_ temporarily pointing to it as each commit is applied
+  * Current = base branch (HEAD), Incoming = commit being replayed; `ours`/`theirs` flips vs `merge` (`ours`=base branch, `theirs`=own commit being replayed)
+  * **Don't alter a commit message in case of conflict** (ie don't mention conflict/rebase): history should describe actual changes, not the mechanics used to integrate them
 * **Repository** = a regular folder augmented into a self-contained version-controlled directory that tracks changes to (some/all of its) files over time
 * **Reference** (or just **ref(s)**) = label/pointer to specific commits (ie aliases for commit hashes), saved as files (in the `.git/refs/` directory)
   * Branches (`refs/heads/<branch>`), Tags (`refs/tags/<tag>`), remote branches (`refs/remotes/<remote>`), even _HEAD_ are all (types of) references
