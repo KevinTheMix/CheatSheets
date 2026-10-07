@@ -169,6 +169,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * `.` = stages all changes (ie new/untracked + modified + deleted files) from current (sub)directory downward
   * `-A` = stages all changes (ie new/untracked + modified + deleted files) in working tree (ie at root reposotiry level)
   * `-i` = stages interactively (via CLI)
+  * `-p(atch) <file>` = stages interactively by hunks (ie chunks of changes), prompting to accept (`y`), skip (`n`), split (`s`) or edit (`e`) each one, enabling partial staging of a file
   * Note that it's possible to keep some files in the Git repo untracked/ignored if they're never added
 * `git branch` = lists local branches (with current branch highlighted)
   * `-a(ll)` = lists both local & remote-tracking branches
@@ -268,7 +269,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * `git pull <remote> <branch>` = `git fetch` + `git merge`
 * `git push` = pushes changes to remote branch linked with current branch
   * `<remote> <branch>` = pushes changes to a remote repo branch
-  * `[-u | --set-upstream-to] <remote> <branch>` (eg `origin kokobranch`) = one-time link current local branch to a remote branch (create it if not exist), then pushes changes to it
+  * `[-u | --set-upstream] <remote> <branch>` (eg `origin kokobranch`) = one-time link current local branch to a remote branch (create it if not exist), then pushes changes to it
   * `--force` = overwrite/push whatever is there
   * `--force-with-lease` = overwrite only if nothing changed since I last checked (ie nobody else pushed commits that I could inadvertendly erase, ie safety lock)
 

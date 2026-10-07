@@ -2,6 +2,7 @@
 
 ## Quick Tips
 
+* Download a YouTube ad = right-click > copy debug info > _addocid_
 * Update frequently to fix download issues
 * [Subreddit](https://www.reddit.com/r/youtubedl)
 * [Set up cookies login](https://www.reddit.com/r/youtubedl/wiki/cookies)

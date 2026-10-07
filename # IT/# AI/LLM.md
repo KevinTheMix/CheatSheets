@@ -2,21 +2,20 @@
 
 ## Quick Tips
 
+* Don't create skills yourself
 * Provide concrete examples rather than abstract principles (show, don't tell)
 * Submit whole screenshots instead of painfully describing UI for troubleshooting
 * _Let ChatGPT write it_, _Shit in, shit out_, _How hard can it be?_ -- William Verhaeghe
 * [OpenAI: Proximal Policy Optimization](https://openai.com/blog/openai-baselines-ppo) = reinforcement learning
+* Product-specific notes: [Claude](Claude.md), [GitHub Copilot](GitHub%20Copilot.md)
 
 ## Glossary
 
-* **Agent** = can refer to two different things:
-  * an LLM-powered system able to elaborate multi-step plans to reach a goal (plan tasks, take actions, observe results, adjust, repeat) autonomously, with access to tools, memory retention
-  * just the local orchestration process (ie a MCP client) that handles bi-directional communication with (remote) LLM & execute tools locally (ie MCP server & local embedding DB) as needed
-  * Hybrid AI coding agents like Claude Code or Cursor combine both parts to form an "agentic system"
+* **Agent** = LLM-powered system that pursues a goal through a loop of planning, tool use, observation and adjustment, often with access to memory
 * [AGENTS.md](https://agents.md) = file included in (any folder of) a project to guide coding agents, provide setup commands, coding style guidelines, etc
   * They're sent along with request as needed (root one is sent with each request, nested one when specific folder has to be inspected)
   * Eg Tech Stack, Architecture Overview, Development Commands, Project Structure, Coding Standards, Git Workflow Rules (eg don't push to main), Testing Standards, Project Rules
-* **AI Coding Agent** = Claude Code, GitHub Copilot, or IDEs like Cursor & Google Antigravity
+* **AI Coding Agent** = agentic development tool such as Claude Code, GitHub Copilot, Cursor or Google Antigravity
 * **Context Rot** = when answer quality decreases as context window enlarges
 * **Context Window** = total information exchanges from start of discussion with LLM, which is re-sent in full for each new request (gets compacted when reaching limit)
   * **System Prompt** = general behavior guidelines/instructions, tool definitions (eg bash, web_search, etc), available skills
@@ -24,20 +23,15 @@
   * **Attachments** = any attached files/images
 * **Embeddings** (or **Vectors**) = multi-dimensional numerical representations of text/images/data (notably created by neural networks during learning) to compare/search them semantically
 * **Fine-Tuning** = embeds knowledge & behavioral patterns directly into model's weights through additional training on domain-specific data, changing model persistently (expensive, less flexible)
-* **Function Calling** (aka Tool Calling) = LLMs is provided a list of available external treatments (via JSON schema) with each request, and can decide to run one then receive its output
+* **Frontmatter** = optional metadata block at the beginning of a Markdown file, commonly written as YAML between `---` delimiters; not part of standard Markdown
+* **Function Calling** (aka Tool Calling) = an LLM is given a list of available external operations (often via JSON schema), and can request one then receive its output
   * Eg read/write/grep/search files, DB, code/string manipulation, commands/shell script, code analysis, Git(Hub), web browser, Slack, calendars
-* **GitHub Copilot** = originated from OpenAI Codex (derived from GPT-3 but not ChatGPT) trained specifically on large amounts of source code
-  * Agent = provide goal, perform multi-step multi-file work automatically/autonomously
-  * Ask = answer questions about codebase (read only)
-  * Edit = do this localized change for me
-  * Plan = break work down into steps, provide a structured plan
 * **GPT** (Generative Pre-trained Transformer) = deep learning generative large language model created by OpenAI that can process complex questions & generate text/code
-* **Model Context Protol** (MCP) = protocol created by Anthropic to standardize exposition of specific capabilities (ie 'eyes & hands') to AI applications
-  * **MCP Client** = local process that handles requests from remote LLM and queries MCP server (eg direct subprocess communication over stdio), or Anthropic's backend in the case of public remote MCP servers
-  * **MCP Server** = standardized interface that exposes data (resources), actions (tools), prompts/templates so AI agents can interact with systems in a consistent way
-  * **Prompt** = pre-built instruction template telling model to work with specific tools/resources
-  * **Resource** = passive read-only client data source
-  * **Tool** = (JSON) schema-defined function/treatment callable by LLM (e)
+* **Harness** = software layer that runs an agent session: it prepares context, coordinates the model/tool loop and approvals, and maintains session state
+* **Hook** = command executed at a configured point in an agent lifecycle (eg before/after a tool call)
+* **Model Context Protocol** (MCP, originally created by Anthropic) = client-server protocol standardizing how AI applications connect to external capabilities
+  * An MCP server can expose tools (actions), resources (read-only contextual data), and prompts (reusable instruction templates)
+  * Self-describing (no skill needed): server sends tool names/descriptions/input schemas & optional usage instructions on connection, which the client injects into the model's context
 * **Product Requirement Document** (PRD) = requirements document
 * **Retrieval-Augmented Generation** (RAG) = enables "dumb" retrieval/incorporation of information from external data sources as documents chunked as embeddings indexed in a vector DB, then passed as context to a LLM
   * A common example: a company might build a RAG system over their internal documentation, so employees can ask questions and get answers based on actual company policies and procedures rather than generic LLM knowledge
@@ -45,6 +39,8 @@
   * Comparison is then achieved via cosine similarity (most common, compares vector direction more so than size), dot product or Euclidean distance
 * [Skills](https://agentskills.io) = standard (by Anthropic) for reusable on-demand instructions/metadata/resources used automatically when deemed relevant by agent (packed as a discoverable folder/zip containing a _SKILL.md_ file)
   * Eg Claude: _Reading the docx skill to understand best practices for creating a Word document_
+* **Tool** = built-in/MCP/IDE extension-provided discrete granular capabilities (eg browse web)
+* **Zero/One/Few-shot Learning** = providing zero, one or a few examples in the model context before asking it to perform a task
 
 ### Tools
 

@@ -41,6 +41,7 @@
     * _410 Gone_ = resource permanently removed
     * _415 Unsupported Media Type_ = wrong Content-Type
     * _422 Unprocessable Entity_ = validation failed
+    * _423 Locked_ = (WebDAV) resource is locked (eg file opened for editing by someone else, or a stale lock left by your own previous/crashed session until it times out)
     * _429 Too Many Requests_ = rate limit exceeded
   * **5xx Server Errors**
     * _500 Internal Server Error_ = generic server-side failure

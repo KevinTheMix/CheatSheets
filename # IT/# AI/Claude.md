@@ -1,4 +1,4 @@
-# Anthropic
+# Claude
 
 ## Quick Tips
 
@@ -19,16 +19,13 @@
 * **Claude Code** = coding CLI for agentic workflows
 * **Claude.ai** = web-based chat (à la ChatGPT, also exists as desktop app with access to MCP servers, Chrome extension, Excel plugin)
 * **Cowork** = (Claude Desktop) personal assistant for filesystem tasks or web-based tasks via Chrome Claude extension
-* **Hook** = add lifecycle pre/post operations (ie commands) during Claude execution & use of tools (eg detect use of read/grep tool on a sensitive file so write to stderr to prevent it)
-* **Messages API** = main HTTP API for interacting with Claude programmatically
-* **MCP Connector** = connection of remote Claude to a MCP server
+* **Hook** = Claude lifecycle command (eg block reading a sensitive file by writing to stderr before a read/grep tool call)
+* **MCP Connector** = connection from Claude to an MCP server
   * Locally = via a Claude Desktop extension (as MCP client), better for data privacy as you control what is effectively sent to Claude
-  * Remotely = via a HTTP publicly reachable MCP server (referenced in Messages API) that Claude backend (ie acting as MCP client) calls directly
-* Models
-  * **Haiku** = fastest
-  * **Opus** = most intelligent
-  * **Sonnet** balanced
+  * Remotely = via a publicly reachable HTTP MCP server referenced in the Messages API, which the Claude backend calls directly
+* **Messages API** = main HTTP API for interacting with Claude programmatically
 * **Plan Mode** = review development plan before coding (instead of coding immediately)
+* **Skill** = Claude's implementation of the Agent Skills standard, discovered from folders containing _SKILL.md_
 
 ## Claude CLI
 
@@ -44,7 +41,7 @@
 * `/compact` = discard existing context window and replace it with a shorter summary (to avoid context rot)
 * `/init` = analyzes project (architecture) & adds a _CLAUDE.md_ file
 * `#` = create a memory
-* `!` = enter bash mode (addd command to context sent with next request)
+* `!` = enter bash mode (add command to context sent with next request)
 * `@` = add a file/folder to context
 * `Esc` = cancel current action (stops immediately)
 * `Esc, Esc` = rewind/jump back in history (`--continue` or `--resume` to resume)

@@ -25,6 +25,7 @@ High-level general purpose dynamically type-checked garbage-collected programmin
 * **Astral Python** = Python builds distributed and managed by Astral (the creators of uv), allowing on-demand, user-space Python installations independent of system Python
 * **Callable** = anything you can call with parentheses (eg `something(…)`)
 * **CPython** = reference & most widely used implementation of Python (written in C, other implementations use different languages: Jython (Java), IronPython (C#), PyPy)
+* **Cython** = optimizing static compiler & superset of Python that translates (optionally C-type-annotated) Python code into C/C++ extension modules (_.pyd_/_.so_), for near-C speed in CPU-bound code & easy wrapping of C libraries (not to be confused with CPython, the interpreter)
 * **Decorator** = any callable that takes a function/class and returns/replaces it with another function/class (ie syntactic sugar for `f = decorator(f)`)
   * Decorators with parameters (hence parentheses) are expressions evaluated immediately (with _None_ func parameter), yet **applied** later at same time argument-free would
 * **Duck Typing** = runtime structural typing/polymorphism, where an object is accepted based on the methods/attributes it provides rather than on explicit inheritance or interface implementation (ie nominal typing, its opposite)
@@ -153,6 +154,7 @@ Collection of modules & packages bundled with Python (ie no need to install).
 * **flask-restx** = Flask extension for quickly building REST apis in a structured self-documenting way with minimal setup & automatically generated swagger docs
   * `reqparse` (_deprecated_) = request argument parsing & validating (considered legacy, use marshmallow + apispec or model-based validation with @api.expect() for new projects)
 * **http.server** = basic HTTP server
+* **httpx** = modern HTTP client with sync & async APIs, HTTP/2 support (`requests`-like interface)
 * **jinja2** = template engine library used to generate text (HTML, config files, YAML, etc) dynamically using variables, logic & templates
 * **krb5** = wraps Kerberos 5 C API
 * **matplotlib** = create static, animated, interactive visualizations (`matplotlib.pyplot`)

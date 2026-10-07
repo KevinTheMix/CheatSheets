@@ -96,10 +96,10 @@
 * `Winkey + Left/Right/Up` = move Window around desktop
 * `Winkey + Shift + Left/Right` = send Window to other screen
 * `Winkey + Space` = peek at desktop (make all winkey transparent)
-* `Winkey + {n}` = open docked application
-* `Winkey + Ctrl + {n}` = hides all instances of docked application
-* `Winkey + Shift + {n}` = open docked application in new Window
-* `Winkey + Ctrl + Shift + {n}` = opens docked application as admin in new window
+* `Winkey + <#>` = open docked application
+* `Winkey + Ctrl + <#>` = hides all instances of docked application
+* `Winkey + Shift + <#>` = open docked application in new Window
+* `Winkey + Ctrl + Shift + <#>` = opens docked application as admin in new window
 * `Winkey + (Shift +) Tab` = window switching & virtual desktops
 * `Winkey + Pause/Break` = System Properties
 * `Winkey + Space` = Change language (à la `Alt + Shift`)
@@ -129,7 +129,7 @@
 * `Winkey + Shift + S` = Snipping Tool (screenshots & color picker)
 * `Multi-select Files > Rename` = group renaming
 * `Drag (file) + Ctrl/Shift/Alt` = copy/move/shortcut
-* `Drag (file) to {program}.exe` = open file with program
+* `Drag (file) to <program>.exe` = open file with program
 * `Drag (file) to (opened/pinned) program in Windows Bar` = pin the file to that program's Windows bar tab's (right-click) context menu
 * `Drag (file) to command prompt` = pastes file path
 
@@ -196,41 +196,41 @@ Commands are fully case-insensitive.
 * `@` = suppresses command echoing (_obsolete_, eg in old scripts, `@echo off` was used to prevent displaying _echo off_ once before command effect applies)
 * `echo [on|off]` = turns prompt on/off
 * `cd` or `chdir` = change directory (`\` for root folders, hit tab to cycle)
-* `certutil -hashfile {file} [MD5|SHA256]` = generates checksum for given file using provided algorithm
-* `chkdsk ({volume})` (_as admin_) = check (current if none specified) disk
+* `certutil -hashfile <file> [MD5|SHA256]` = generates checksum for given file using provided algorithm
+* `chkdsk (<volume>)` (_as admin_) = check (current if none specified) disk
   * `/f` = scan & fixes errors (requires volume not in use, or run at next start)
   * `/r` = locate bad sectors, one by one (much longer, implies `/f`)
 * `cls` = clear screen
 * `cmdkey` = creates/displays/deletes stored user names & passwords
   * `/list` = lists available credentials
-* `copy {file(s)} {destination}` = copy one or more files (destination can be a file or volume)
-  * `/b {image} + {hidden} {destination}` = hide file in an image file (destination image must be same extension/type as input)
+* `copy <file(s)> <destination>` = copy one or more files (destination can be a file or volume)
+  * `/b <image> + <hidden> <destination>` = hide file in an image file (destination image must be same extension/type as input)
   * `/v` = verifies files are written correctly (ie files diff source vs destination)
   * `/y` = suppresses overwrite existing file warning (ideal for non-interactive scripts)
 * `date`
-* `defrag {volume}` = degragmenter
-* `del {file(s)}` = delete one or more files
+* `defrag <volume>` = degragmenter
+* `del <file(s)>` = delete one or more files
 * `dir` = lists files (`/B` show only names)
 * `diskpart` (**Microsoft DiskPart**, _as admin_) = disk/partition/volume management CLI utility (`help` to list available commands)
   * `list disk` = displays (physical) disks (with size)
   * `list partition` = displays partitions on selected disk
   * `list volume` = displays volumes (with letter, label, FS, size)
-  * `select disk {#}` = shift focus on an object
-  * `select partition {#}`
-  * `select volume {#|letter}`
+  * `select disk <#>` = shift focus on an object
+  * `select partition <#>`
+  * `select volume <#|letter>`
   * `delete partition override` (**Warning: Danger**)
 * `echo koko` or `echo %<VAR>%` = outputs a value or variable
-* `for %i in ({pattern}) do {statement}` (pattern can be files/strings of fixed words eg `(Debug Release)` or matching expression eg `(*.json)`)
-* `format {volume}` (_as admin_) = format volume (`/FS:{filesystem}` uses given filesystem ie FAT, FAT32, exFAT, NTFS, UDF, ReFS)
-* `goto {label}` goes to `:{label}`
+* `for %i in (<pattern>) do <statement>` (pattern can be files/strings of fixed words eg `(Debug Release)` or matching expression eg `(*.json)`)
+* `format <volume>` (_as admin_) = format volume (`/FS:<filesystem>` uses given filesystem ie FAT, FAT32, exFAT, NTFS, UDF, ReFS)
+* `goto <label>` goes to `:<label>`
 * `gpresult` = displays AD policies information for a target user & computer
   * `/r` = shows Resultant Set of Policy aka RSoP summary
-* `gpupdate /target:{computer|user} (/force)` = update multiple Group Policy settings (synchronizes latest group-wide changes)
-* `help ({command})` = list available commands or display help on given command (similar to `/?`)
+* `gpupdate /target:<computer|user> (/force)` = update multiple Group Policy settings (synchronizes latest group-wide changes)
+* `help (<command>)` = list available commands or display help on given command (similar to `/?`)
 * `hostname` = displays current device name (can be changed in System Settings)
-* `if {condition} {statement}` (condition can be eg `exist {path}`)
+* `if <condition> <statement>` (condition can be eg `exist <path>`)
 * `md` or `mkdir` = make directory
-* `mklink {source} "{target path}"` = creates a symbolic link
+* `mklink <source> "<target path>"` = creates a symbolic link
   * `/D` = directory
   * `/J` = directory junction (ie a symbolic link for directories)
   * `/H` = hard link (not symbolic)
@@ -239,7 +239,7 @@ Commands are fully case-insensitive.
 * `pause`
 * `powercfg` = power system settings (eg `/A` lists available sleep states)
 * `rd` or `rmdir` = remove directory
-* `robocopy {source} {destination} (/MIR)` (**Robust File Copy for Windows**, included with Windows 10/11) = copy with many more options (eg retries, `MIR` copies complete directory tree)
+* `robocopy <source> <destination> (/MIR)` (**Robust File Copy for Windows**, included with Windows 10/11) = copy with many more options (eg retries, `MIR` copies complete directory tree)
 * `set` = list environment variables
   * `set <VAR>=<value>` = assign environment variable (local to current session)
   * `set <VAR>=` = unassign variable
@@ -248,36 +248,36 @@ Commands are fully case-insensitive.
 * `sfc (/scannow)` (System File Checker aka **Resource Checker**) = scan integrity of all protected system files & replace incorrect with correct Microsoft versions
 * `start` = launch a new process (à la Unix `bash`)
 * `time`
-* `type {file(s)}` = display contents of text (or not) file(s)
-* `where {command(s)}` = display command paths (searching via wildcarded patterns)
+* `type <file(s)>` = display contents of text (or not) file(s)
+* `where <command(s)>` = display command paths (searching via wildcarded patterns)
 * `whoami` = displays user name (in NTLM format eg _domain\username_), group, SID, privileges (`/all`)
 * `winget` (**Windows Package Manager**) = FOSS package manager CLI for Windows 10+ to install applications (2020)
 * `wsl` (Windows Subsystem for Linux) = run a GNU/Linux environment in Windows 10+ (without VM/dualboot)
   * `--install` = initialize (run as admin)
-  * `--install (-)-d(istribution) {distro}` = install given distribution
-  * `--unregister {distro}` = irreversibly deletes distro & its filesystem (also via Windows Settings > Installed Apps > Uninstall)
+  * `--install (-)-d(istribution) <distro>` = install given distribution
+  * `--unregister <distro>` = irreversibly deletes distro & its filesystem (also via Windows Settings > Installed Apps > Uninstall)
 
 ### Network
 
 * `ipconfig` = display IP configuration (IP address, default gateway, subnet mask)
   * `/all` = show full detailed configuration information
   * `/flushdns` = purges DNS Resolver cache
-  * `/release(6) ({connection})` = release IPv4(/6) addresses for matching (with `*` wildcard) or all adapters
-  * `/renew(6) {adapter}` = renew IPv4(/6) addresses for matching (with `*` wildcard) or all adapters
+  * `/release(6) (<connection>)` = release IPv4(/6) addresses for matching (with `*` wildcard) or all adapters
+  * `/renew(6) <adapter>` = renew IPv4(/6) addresses for matching (with `*` wildcard) or all adapters
 * `net` = Windows network commands
-  * `send {message}` = send messages (via NetBIOS) to other users/computers (until Windows XP)
+  * `send <message>` = send messages (via NetBIOS) to other users/computers (until Windows XP)
   * `stop spooler` = stops printer jobs queue (then `cd \windows\system32\spool\printers`, then  `del *.*`, then `net start spooler`, then go to Printers window & hit `F5` to refresh)
-  * `use {new_volume} \\{share}` = maps/mounts a network share to a drive letter (ie set shared network folder as local volume, à la Unix `mount`)
-  * `user ({user}) (* /domain)` = view user account information & reset passwords
-  * `view \\{server}` or `view /workgroup:{workgroup}` = view network resources
+  * `use <new_volume> \\<share>` = maps/mounts a network share to a drive letter (ie set shared network folder as local volume, à la Unix `mount`)
+  * `user (<user>) (* /domain)` = view user account information & reset passwords
+  * `view \\<server>` or `view /workgroup:<workgroup>` = view network resources
 * `netsh` (Network Shell) = CLI to reset config, change IP address, or edit wireless settings (eg SSID)
   * `winsock reset` = reset TCP/IP stack to default known-good parameters to resolve issues
-  * Certificate Registration = `netsh http {option}`
+  * Certificate Registration = `netsh http <option>`
     * `show urlacl`
     * `show sslcert`
     * `add urlacl url=https://+:8081/ user=Everyone` (or `"Tout le monde"` with spaces)
-    * `add urlacl url=https://+:8081/ user={domain}\{user}`
-    * `add sslcert ipport=0.0.0.0:8081 certhash={hash} appid={GUID} certstorename=MY`
+    * `add urlacl url=https://+:8081/ user=<domain>\<user>`
+    * `add sslcert ipport=0.0.0.0:8081 certhash=<hash> appid=<GUID> certstorename=MY`
     * `delete urlacl url=https://+:8081/`
     * `delete sslcert ipport=0.0.0.0:8081`
 * `netstat` (Network Statistics) = display active connections
@@ -286,7 +286,7 @@ Commands are fully case-insensitive.
   * `-n` = does not DNS-resolve foreign addresses & port numbers (ie display in numerical form)
 * `nslookup` = name server lookup from DNS servers (CName, IP addresses, cache timers)
 * `pathping` = runs traceroute to establish a map, then runs ping at each hop (25s per hop) to measure round-trip time & packet loss
-* `ping {host}` = ping host to determine round-trip time (uses ICMP, `-t` indefinitely)
+* `ping <host>` = ping host to determine round-trip time (uses ICMP, `-t` indefinitely)
 * `tracert` = determines route a packet takes to a destination (uses ICMP)
-  * `-h {#}` = specifies TTL (ie number of hops/routers)
+  * `-h <#>` = specifies TTL (ie number of hops/routers)
   * For each hop/router, (by default) three round-trip measurements are sent (_*_ is a lost packet, as some routers don't reply to ICMP requests - but it still goes through them)

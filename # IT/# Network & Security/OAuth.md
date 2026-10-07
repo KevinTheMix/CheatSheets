@@ -69,7 +69,7 @@ It does not prescribe Access Token format or validation process (quality of actu
 * **Authorization Code** = most common, optimal for traditional mobile/web applications with a confidential backend, redirection-based flow to obtain both access/refresh tokens (in exchange of auth code)
   * An authorization code is a one-time code that is useless on its own (requires client secret to be traded), bound to a specific client, redeemable only once, very short-lived (typically seconds)
   * Browser returns from AS with its own backend address as return URL containing an auth code in GET parameter (browser does not make eg a separate XHR request, just serves to forward code on its way back)
-* **Authorization Code + PKCE** = most common/recommended default flow nowadays, mandatory for public clients (replaces deprecated Implicit flow)
+* **Authorization Code + PKCE** = most common/recommended default flow nowadays (replacing deprecated Implicit flow), mandatory for public clients that can't keep a secret (eg scripts on a user's machine)
   * **Proof Key for Code Exchange** (PKCE) = extension to specifically prevent authorization code interception, by generating a code verifier/challenge pair used in exchanges with AS proving it originated token requests
 * **Client Credentials** = for non-user (ie no GUI/browser, eg daemon/service) workflows machine-to-machine (eg WS calling other WS) authentication, CA becomes resource owner, authenticates directly via ID/secret
 * **Device Authorization** = limited devices with no browser (eg IoT, Smart TV, media console, printer) authenticate via a secondary device (eg a smartphone with more up-to-date secure browser, and convenient QR/NFC/LE Bluetooth)

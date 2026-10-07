@@ -33,7 +33,7 @@ Based on an internal Google product called Borg open-sourced in 2014.
   * **API Server** = primary interface between control plane & rest of cluster, and allows clients (admin UI & CLI) to interact with control plane & submit requests to manage cluster
     * **API Resource** = anything that can be created/managed through API server, as a resource type with its own schema
     * **API Group** = namespacing mechanism grouping related API Resources/versions (eg `apps/v1`, `batch/v1`, `networking.k8s.io/v1`), letting each evolve independently
-      * **Core (Legacy) API Group** = the group with no name, served at `/api/v1` instead of `/apis/{group}/{version}` (eg Pod, Service, ConfigMap, Secret, Namespace, Node, PersistentVolume, PersistentVolumeClaim)
+      * **Core (Legacy) API Group** = the group with no name, served at `/api/v1` instead of `/apis/<group>/<version>` (eg Pod, Service, ConfigMap, Secret, Namespace, Node, PersistentVolume, PersistentVolumeClaim)
     * **Built-in Resource** = resource type shipped natively with Kubernetes & understood by every cluster out of the box, whether in the core group or a named one (eg Deployment, Job, Ingress are built-in but not in the core group) — as opposed to Custom Resource Definitions (CRD) which extend the API with new resource types
   * **Controller Manager** = runs controllers managing cluster state
     * **Deployment Controller** = manages rolling update & rollback of deployments
@@ -71,7 +71,7 @@ Based on an internal Google product called Borg open-sourced in 2014.
   * **ClusterIP** = (default) exposeos service on internal IP within cluster (only reachable from inside cluster)
   * **ExternalName** = maps service to DNS name rather than a selector (acting as a CNAME record)
   * **LoadBalancer** = provisions an external load balancer (in cloud environments) that routes traffic to service
-  * **NodePort** = exposes service on each node's IP at a static port (accessible from outside cluster via `{NodeIP}:{NodePort}`)
+  * **NodePort** = exposes service on each node's IP at a static port (accessible from outside cluster via `<NodeIP>:<NodePort>`)
 * **Service Mesh** = infrastructure layer that handls service-to-service communication and provides features like traffic management, observability, mutual TLS (eg Istio, Linkerd)
 * **Volume** = directory containing data, accessible to containers in a pod to access/share data via filesystem
 
@@ -83,25 +83,34 @@ Based on an internal Google product called Borg open-sourced in 2014.
 * **Flagger** = Kubernetes operator for progressive delivery, working alongside standard Deployments & manages canary resources automatically
 * **kind** (Kubernetes in Docker) = primarily designed for testing Kubernetes itself, but may be used for local development or CI
 * **Kustomize** = similar to Helm
-* **Helm** = package manager & template engine, using parameterized Go templates (charts) associated with values to render K8s YAML manifests (helping reduce their numbers)
-  * Package = charts themselves, ie whole packages/directories bundling everything needed to deploy an application on K8s (templates, default values, metadata, dependencies)
+* **Helm** = package manager & template engine for K8s (see [Helm](Helm.md))
 * **Minikube** = cross-platform tool for running Kubernetes locally
 * **Rancher** = open-source Kubernetes-as-a-service (eg to pilot AKS) management platform/GUI/API (on-prem, edge or cloud), with cluster lifecycle management, RBAC (role-based access control) & authentication, centralized upgrades
 * **Spinnaker** = blue-green
 
 ## CLI
 
-* **Kubectl** = CLI for communicating with a cluster's control plane using Kubernetes API
-
-* `kubectl drain {node}` = evicts (ie rescheduled to other nodes if there are replicas) all pods from it so node can be taken offline for maintenance/upgrade/decommissioning/OS update
-* `kubectl apply -f configmap.yaml` = deploy a configuration to a cluster so it matches its description
-* `kubectl rollout restart deployment <app>` = restart all pods belonging to a Deployment called _app_
-* `kubectl rollout undo {}` = roll back a previous rollout
-
-### Helm CLI
-
-* `help upgrade` = update an existing release with new changes from a chart
-* `--debug` = enable verbose output (eg shows rendered manifests) for troubleshooting
-* `--force-replace` = replace existing deployment configuration (eg manually added environment variables) without warning/error
-* `--rollback-on-failure` = automatically roll back to previous release if upgrade fails
-* `--set env=dev` = override a chart value from CLI (here sets `env` to `dev`) instead of editing `values.yaml`
+* `kubectl` = CLI for communicating with a cluster's control plane using Kubernetes API
+  * `apply -f configmap.yaml` = deploy a configuration to a cluster so it matches its description
+  * `describe` = show detailed state of a resource, including its recent events
+    * `pod <pod>` = describe a pod (eg status, restarts, probes, events)
+      * `-n <namespace>` = namespace of the pod
+    * `node <node>` = describe a node (eg capacity, allocated resources, conditions, pods running on it)
+  * `drain <node>` = evicts (ie rescheduled to other nodes if there are replicas) all pods from it so node can be taken offline for maintenance/upgrade/decommissioning/OS update
+  * `get` = list resources
+    * `pods` = list pods
+      * `-A` = all namespaces
+      * `-n <namespace>` = restrict to a given namespace
+      * `-o wide` = add extra columns (eg pod IP, node it runs on)
+      * `--field-selector spec.nodeName=<node>` = keep only pods running on a given node
+    * `events` = list events
+      * `-n <namespace>` = restrict to a given namespace
+      * `--sort-by=.lastTimestamp` = order chronologically (most recent last), useful to troubleshoot scheduling/startup failures
+  * `logs <pod>` = print a pod's container logs
+    * `-n <namespace>` = namespace of the pod
+    * `--previous` = logs of the previous (eg crashed) container instance
+    * `| Select-String <text>` = filter log lines containing text (PowerShell)
+  * `rollout restart deployment <app>` = restart all pods belonging to a Deployment called _app_
+  * `rollout undo deployment <app>` = roll back a previous rollout
+  * `top pod` = show pods CPU/memory usage (requires Metrics Server)
+    * `-n <namespace>` = restrict to a given namespace

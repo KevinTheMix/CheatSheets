@@ -192,7 +192,7 @@ Azure provides more than 100 services that enable you to do everything from runn
   3. Ready = **Azure Setup Guide**, **Azure Landing Zone**, **Extend Landing Zone**
   4. Adopt = **Migrate** (first migration, migration scenarios, best practices, process improvements), **Innovation** (business value consensus strategy, innovation guide tools, best practices, process improvements)
   5. Govern = define governance solutions (business needs, agility, control risks), manage cloud environments (stability & costs)
-  6. Secure = protect workload against evolving cyber threats/vulnerabilities (implement zero-trust security controls, deploy continuous threat monitoring)
+  6. Secure = protect workload against evolving cyber threats/vulnerabilities (implement zero trust security controls, deploy continuous threat monitoring)
   7. Manage = operational excellence & continuous optimization (optimization, high availability SLA, continous improvement through automation/monitoring/DevOps best practices)
 
 ### Identity, Authentication & Authorization

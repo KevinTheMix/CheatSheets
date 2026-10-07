@@ -29,7 +29,7 @@ Uses thin/minimal easily cache-able shell templates, whilst all logic belongs to
   * They can be HTML (`<elem directive>` eg `<input matInput>`) or TypeScript `@Directive`
   * **Attribute** = change appearance/behavior of an existing element (eg `ngClass`, `ngStyle`, custom)
     * Eg `<element [ngClass]="{'movies': medium==='Movies', 'series': medium==='Series'}" />` (where _movies_ & _series_ are CSS classes)
-  * **Structural** = special syntax to add/remove/reshape DOM/layout elements (eg `*ngIf`/`*ngFor`/`$ngSwitchCase`)
+  * **Structural** = special syntax to add/remove/reshape DOM/layout elements (eg `*ngIf`/`*ngFor`/`*ngSwitchCase`/`*matTreeNodeDef`)
 * **Guard** = functions/classes to control whether a user can navigate to/from a route, typically for auth, acting as checkpoint before activating/deactivating/matching routes
   * CanActivate (class `implements CanActivate`) = decide if a route can be entered
   * CanActivateChild = protects child routes

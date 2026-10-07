@@ -7,6 +7,7 @@
 ## Glossary
 
 * **Qodana** = static code analysis tool, integrating into CI/CD pipelines (eg GitHub Actions, Azure DevOps, GitLab, Jenkins) for code QA, security, maintainance (à la SonarQube)
+* **Source Root** (mark a directory as) = tells IDE that modules in that directory are part of project's import path, adds that directory to PYTHONPATH (when running/debugging), resolves imports relative to that root
 
 ## Menus
 

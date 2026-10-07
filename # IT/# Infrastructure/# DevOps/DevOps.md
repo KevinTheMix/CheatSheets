@@ -1,5 +1,14 @@
 # DevOps
 
+## Quick Tips
+
+* Where to store configuration?
+  * **Secrets vault** (eg Azure Key Vault, AWS Secrets Manager, HashiCorp Vault) = credentials/keys/certs with access control, rotation & audit, fetched at runtime (ideally via managed identity, so no bootstrap secret)
+  * **Environment variables** (eg `.env` locally, K8s Secrets/ConfigMaps, CI/CD variables) = per-deployment values injected by the platform (12-Factor), flat key/values only, beware leaks via logs/crash dumps (K8s Secrets are only base64-encoded)
+  * **Config files** (per-environment eg `appsettings.Production.json`, `config/prod.yaml`) = non-secret structured/hierarchized settings (eg defaults eg logging level, retries/timeouts), versioned & reviewed alongside code
+  * **Centralized config service** (eg Azure App Configuration, AWS Parameter Store, Consul, Spring Cloud Config) = scalar & more complex structurs, shared across services, changeable at runtime without redeploy (eg feature flags)
+  * Usually layered with increasing precedence: default files < env-specific files < env vars < CLI args, secrets only referenced from the vault
+
 ## Glossary
 
 * **Artifact** = versioned immutable file(s) produced/consumed by a CI/CD pipeline step, stored to be reused/audited (eg _.apk/exe/jar_, checksums, Docker images, test reports)
@@ -21,4 +30,5 @@
 * **Prometheus** (by SoundCloud) = open-source systems monitoring & alerting toolkit (metrics, time series, PromQL query language)
 * **Sentry** = error & crash tracking tool to capture exceptions/stacktrace/context when things go wrong (_what broke & why?_)
 * **Splunk** = SIEM (security information & event management), SOAR (security orchestration, automation, response), observability solutions
+  * Splunk HEC (HTTP Event Collector) token = (sensitive) authentication secret that authorizes a client to send data/events into a Splunk instance via HEC API
   * Uses **Search Processing Language** (SPL), consisting of a search part (finding events) & a pipeline part (transforming/analyzing results)
