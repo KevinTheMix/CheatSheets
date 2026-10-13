@@ -52,7 +52,7 @@
 * **Greenshot** = FOSS screenshot, annotate & share tool (for Windows)
 * **Inkscape** = FOSS vector graphics editor (for cartoons, clip art, logos, typography, flowcharting)
 * **Krita** = FOSS raster graphics editor (for digital art & 2D animation)
-* **ImageMagick** = FOSS CLI cross-platform raster image editor
+* **ImageMagick** = FOSS cross-platform software suite & CLI for convert/create/display/edit/modify-ing raster images
 * **Paint.NET** = free (image & photo) raster graphics editor for Windows
 * **Rive** (integrated **Flare**) = design & interactively animate vector/raster graphics using state machines, online or via a Flutter-based Windows app
 
