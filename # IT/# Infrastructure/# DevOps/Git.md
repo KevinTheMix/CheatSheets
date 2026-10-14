@@ -63,10 +63,10 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * **Detached HEAD** is useful to make experimental changes and create easily discardable **detached/orphaned commits** (ie that don't belong to any branch)
 * **Hooks** = set of dedicated files (in _.git/hooks/_) that can be edited to perform some scripted treatments at some specific lifecycle events (eg _pre-commit_, _pre-push_, _pre-rebase_)
 * **Index** = another term for the staging area
-* **Merging** = combines changes from a given branch (usually a feature branch) into the current branch (usually the main/master branch)
-  * If there are any conflicts, the operation is put on hold until the user has manually resolved all of them
-  * This creates a **Merge Commit** with joined development histories, ie a commit with two parents (the previous commit on current & latest commit on imported branch)
-  * **Fast-Forward Merge** = avoids creating a merge commit (eg whenrebasing, or when feature branch is ahead from current branch: current is an ancestor of feature), this is the default
+* **Merge** = combines changes from a given branch into current branch (usually main/master branch), with any conflicts pausing operation until user has manually resolved all of them
+  * **Merge Commit** = a commit with two parents and joined development histories (the previous commit on current & latest commit on imported branch)
+  * **Fast-Forward** (default when possible) = moves current branch pointer up to tip, without a merge commit (only possible if current is an non-divergent ancestor, eg after a rebase)
+  * **Squash** = condenses all of a branch's changes into one new regular commit (no merge commit, individual commits not carried over), for a linear & compact history
 * **Origin** = default name (and alias for a URL) given to remote repository from which a local repo was cloned (and will eventually be pushed)
   * Multiple other remotes can be added to a same (local) repo, each with a different name (eg `upstream`, `github`, `bitbucket`)
 * **Pull Request** (GitHub/GitLab) = formal proposal to merge changes into a codebase between same or different (ie forked) repositories
@@ -194,16 +194,17 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * `git clean -fdx` = deletes all gitignored/untracked files (add `-n` option to preview but not do) (**warning**: destructive)
 * `git commit` = when a message is not provided, the default text editor is launched and its result fed as message
   * `-m "<message>"`
-  * `-a` = stages all (already/previously) tracked files then commit ine one go
+  * `-a` = stages all (already/previously) tracked files then commit in one go
   * `--amend` = modify latest/most recent commit for quick corrections (add files, change message), actually replacing old commit with a new hash (rewrites local history)
     * `-m <message>` = message only
-    * `--no-edit` = add files without modifying existing message (without it, Git will typically open an editor to change the message before saving amended commit)
+    * `--no-edit` = add currently staged files (ie `git add <files>`) to previous commit without modifying existing message (prevents a text editor operning)
     * Run `git push --force-with-lease` after amending if commit was already pushed (since a new commit with a new hash wwas created, which cannot simply be appended as a descendant of last commit then fast-forwarded to)
-* `git merge <branch>` = merges changes from given into current branch, creating a (merge) commit
-* `git merge`
+* `git merge <branch>` = merges changes from given branch into current branch, creating a (merge) commit
   * `--abort/--continue` = cancels/resumes latest merge operation paused due to conflicts
-  * `--ff`
-  * `--(no-)squash <feature_branch>` = brings the change from feature branch into current branch's working tree, without committing (no merge commit gets created)
+  * `--ff` (default) = fast-forwards when possible (if current is an ancestor of the branch), otherwise creates a merge commit
+  * `--ff-only` = fast-forwards when possible, otherwise aborts without merging (guarantees no merge commit)
+  * `--no-squash` (default) = regular merge that commits the result, keeping the branch's commits in history (only useful to override `--squash`)
+  * `--squash` = applies branch's combined changes (not its commits) to working tree & index without committing (then commit manually; branch not recorded as merged)
 * `git mv <old> <new>` = renames/moves a tracked file (or directory) and stages change (equivalent to `mv` + `git add <old> <new>`)
   * Preferred over OS-level rename/move + separate `add`/`rm`, since better detects rename (preserving `git log`/`git blame` history) when operation is recorded as a single staged change
 * `git rebase` = reapplies a branch's commit on top of another base commit to create a cleaner linear commit history

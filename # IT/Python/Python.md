@@ -233,6 +233,9 @@ Collection of modules & packages bundled with Python (ie no need to install).
   * `python -m <module>` = runs a module/package as a script using Python's import system
     * Eg `python -m (package.)script` = finds a local module script using Python's normal import mechanism (no _.py_ extension, with parent package if nested), then execute it as `__main__`
     * Eg `python -m pip install {package}`
+    * Eg `python -m build` = builds a source distribution (_.tar.gz_) & a wheel (_.whl_) of current project into _dist/_, using build backend declared in _pyproject.toml_ (requires `pip install build`)
+      * `--sdist` / `--wheel` = build only one of both
+      * `--outdir <dir>` = output directory (instead of _dist/_)
     * Eg `python -m venv <directory>` = creates a virtual environment (eg `python -m venv .venv` or `py -3.11 -m venv .venv` for a specific local Python version)
       * Activate = `source {venv}/bin/activate` (Bash), `.venv\Scripts\activate.bat` (Windows CMD), `.\{venv}\Scripts\Activate.ps1` (PowerShell)
       * Deactivate = `deactivate` (exit virtual environment & return to system-wide python install)

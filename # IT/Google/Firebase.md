@@ -1,11 +1,10 @@
 # [Firebase](https://firebase.google.com)
 
-Firebase is Google's mobile/web apps development cloud platform (subject to privacy controversies)
-Firebase is a development platform developed by Google for creating and scaling mobile/web applications, and built on top of Google Cloud Platform.
+Google's BaaS cloud platform for building & scaling mobile/web apps, built on top of Google Cloud Platform (subject to privacy controversies).
 
-It is essentially a BaaS cloud platform offering an array of features for Data storing, Authentication, Messaging, Analytics, A/B testing, and with a rich ecosystem of additional extensions for payments, translating, emails, ElasticSearch/TypeSense, etc.
+Offers data storage, authentication, messaging, analytics, A/B testing & a rich ecosystem of extensions (payments, translation, emails, ElasticSearch/TypeSense, etc).
 
-It is also very cheap for starting applications until they grow an active userbase, and its SDK is well-documented.
+Very cheap for starting apps until they grow an active userbase, with a well-documented SDK.
 
 ## Quick Tips
 

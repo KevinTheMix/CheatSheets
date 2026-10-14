@@ -10,6 +10,7 @@ Pushes small Dart VM-related patches via OTA updates.
 * Checks & downloads small delta patches while an app is running, and applies it at its next startup
 * Use [Shorebird Console](https://console.shorebird.dev) to delete a registered application (with all its builds/releases)
 * For Shorebird patches to get applied, an app instance must be a Shorebird Release build (ie installed from Codemagic and not a local VS Code install)
+* Patches are applied at runtime from app storage, so Android signing keys (upload/app signing) are unaffected & Play App Signing is not required
 
 ## Glossary
 

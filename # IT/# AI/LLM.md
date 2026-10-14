@@ -5,7 +5,7 @@
 * Don't create skills yourself
 * Provide concrete examples rather than abstract principles (show, don't tell)
 * Submit whole screenshots instead of painfully describing UI for troubleshooting
-* _Let ChatGPT write it_, _Shit in, shit out_, _How hard can it be?_ -- William Verhaeghe
+* *Let ChatGPT write it*, *Shit in, shit out*, *How hard can it be?* -- William Verhaeghe
 * [OpenAI: Proximal Policy Optimization](https://openai.com/blog/openai-baselines-ppo) = reinforcement learning
 * Product-specific notes: [Claude](Claude.md), [GitHub Copilot](GitHub%20Copilot.md)
 
@@ -32,13 +32,14 @@
 * **Model Context Protocol** (MCP, originally created by Anthropic) = client-server protocol standardizing how AI applications connect to external capabilities
   * An MCP server can expose tools (actions), resources (read-only contextual data), and prompts (reusable instruction templates)
   * Self-describing (no skill needed): server sends tool names/descriptions/input schemas & optional usage instructions on connection, which the client injects into the model's context
+  * Their client configuration is stored in stored in JSON files (*%USERPROFILE%\.copilot\mcp-config.json* for VS Code, *%APPDATA%\Local\github-copilot\intellij\mcp.json* for PyCharm)
 * **Product Requirement Document** (PRD) = requirements document
 * **Retrieval-Augmented Generation** (RAG) = enables "dumb" retrieval/incorporation of information from external data sources as documents chunked as embeddings indexed in a vector DB, then passed as context to a LLM
   * A common example: a company might build a RAG system over their internal documentation, so employees can ask questions and get answers based on actual company policies and procedures rather than generic LLM knowledge
   * Preprocessing depends on data type (text as tokens, image as pixel tensors, audio as spectograms/waveforms) and passed forward through a pretrained neural network model
   * Comparison is then achieved via cosine similarity (most common, compares vector direction more so than size), dot product or Euclidean distance
-* [Skills](https://agentskills.io) = standard (by Anthropic) for reusable on-demand instructions/metadata/resources used automatically when deemed relevant by agent (packed as a discoverable folder/zip containing a _SKILL.md_ file)
-  * Eg Claude: _Reading the docx skill to understand best practices for creating a Word document_
+* [Skills](https://agentskills.io) = standard (by Anthropic) for reusable on-demand instructions/metadata/resources used automatically when deemed relevant by agent (packed as a discoverable folder/zip containing a *SKILL.md* file)
+  * Eg Claude: *Reading the docx skill to understand best practices for creating a Word document*
 * **Tool** = built-in/MCP/IDE extension-provided discrete granular capabilities (eg browse web)
 * **Zero/One/Few-shot Learning** = providing zero, one or a few examples in the model context before asking it to perform a task
 
@@ -48,27 +49,27 @@
 * **Amazon Q Developer** = generative AI-powered assistant
 * **Amazon Bedrock** = fully managed service from AWS to build AI-Powered applications (eg AI assistants, chatbots, content generators, etc) quickly/easily without managing servers or training AI models yourself
 * **Amazon SageMaker** = cloud-based machine learning platform to create/train/deploy ML models on cloud (eg on embedded systems, edge devices)
-* **Amp** (by _Sourcegraph_) = CLI or IDE-integrated coding agent using various models (eg Gemini 3 Pro), with a strong focus on autonomous sub-agents & multi-step task execution
+* **Amp** (by *Sourcegraph*) = CLI or IDE-integrated coding agent using various models (eg Gemini 3 Pro), with a strong focus on autonomous sub-agents & multi-step task execution
 * **Codex** = originally a simple coding-oriented OpenAI LLM (that powered GitHub Copilot), now a local IDE agentic coding assistant consuming OpenAI API (also via CLI or GitHub-connected [cloud-based](https://chatgpt.com/codex))
 * [Context7](https://context7.com) = MCP server that pulls up-to-date API versioned documentation & code samples (eg Flutter), adds them as manual copy-paste, prompt context, API access
 * [FastMCP](https://gofastmcp.com) = standard framework for building MCP servers/clients/interactive applications
 * [Gitingest](https://gitingest.com) = turn any Git(Hub) repository into a simple long text digest of its codebase, to feed into any LLM
 * [Hugging Face](https://huggingface.co) = machine learning models collaborative/sharing platform
 * **Kiro** = AWS's native agentic AI development environment & IDE, from prototype to production
-* **mgrep** (_Mixedbread AI_) = cloud-based semantic multilingual multimodal (ie code/images/audio/video/PDFs) pre-filter grep system packaged as a developer tool, improving requests (ie use fewer tokens, halving costs & duration)
+* **mgrep** (*Mixedbread AI*) = cloud-based semantic multilingual multimodal (ie code/images/audio/video/PDFs) pre-filter grep system packaged as a developer tool, improving requests (ie use fewer tokens, halving costs & duration)
   * Watches local codebase for changes and send an index to their remote cloud service stored into a Mixedbread Store (vector DB in cloud)
   * [Me And Claude Are in Love With MGREP for 250% Better Results](https://medium.com/coding-nexus/6357351eaac0)
 * [Ollama](https://ollama.com) = run llama2 (uncensored) & other models (Mistral)
 * **OpenCode** = FOSS agent that provides planning capabilities, tools, UI, context, and ability to use any LLM (via API Key), originally designed for terminals
 * **Perplexity** = AI-powered web search/answer angine (added as an option in Firefox search bar)
-* _Playwright MCP_ = MCP server providing automated web designing capabilities (eg open a browser, click buttons, fix CSS visually) via any MCP client
+* *Playwright MCP* = MCP server providing automated web designing capabilities (eg open a browser, click buttons, fix CSS visually) via any MCP client
 * [PrivateGPT](https://github.com/imartinez/privateGPT) = interact with your documents using the power of GPT, 100% privately
   * [Installing PrivateGPT on WSL with GPU support](https://medium.com/@docteur_rs/installing-privategpt-on-wsl-with-gpu-support-5798d763aa31) (@Emilien Lancelot)
 * [Ralph](https://www.youtube.com/watch?v=RpvQH0r0ecM) = Amp & Claude Opus 4.5 based AI agent loop running Amp & pushing to git repeatedly until all PRD items are complete
   * Each iteration is a fresh instance with clean context & memory, but context/memory can be preserved between successive loops via:
-    * _git history_ = previous commits
-    * _AGENTS.md_ = long-term memory
-    * _prd.json_ = initial requirements broken down as stories (completed stories are marked as _passed_)
-    * _progress.txt_ = short-term memory, append-only (ie forward log) of what was done/changed/learned (gotchas, useful context)
+    * *git history* = previous commits
+    * *AGENTS.md* = long-term memory
+    * *prd.json* = initial requirements broken down as stories (completed stories are marked as *passed*)
+    * *progress.txt* = short-term memory, append-only (ie forward log) of what was done/changed/learned (gotchas, useful context)
   * [PRD Generator](https://github.com/snarktank/ralph/blob/main/skills/prd/SKILL.md) Skill
-* _Whisper Flow_ = AI-powered voice dictation
+* *Whisper Flow* = AI-powered voice dictation

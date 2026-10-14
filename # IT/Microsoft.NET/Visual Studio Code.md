@@ -88,6 +88,7 @@ See <https://code.visualstudio.com/docs/getstarted/keybindings>
 * `Ctrl + Alt` (hold) = toggle inlay hints (eg inferred types), requires `"editor.inlayHints.enabled": "offUnlessPressed"` (or `"onUnlessPressed"`) and language support
   * Hints may also need to be enabled per language/extension (eg Python's Pylance has `python.analysis.inlayHints.*`, all off by default)
 * `Ctrl + Alt + B` = Hide Secondary Side Bar
+* `Ctrl + Alt + I` = Open Chat
 * `Ctrl + Alt + Left/Right` = send tab to other view
 * `Ctrl + Alt + Up/Down` = start multi-select
 * `Ctrl + Page Up/Down` = go to previous/next tab
