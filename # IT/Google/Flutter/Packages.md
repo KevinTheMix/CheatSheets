@@ -192,8 +192,6 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
 * **flutter_native_splash** (_jonhanson.net_) = splash screen before/while Flutter boots
 * **flutter_rating_bar** (_@sarbagyastha.com.np_) = "5-stars" (or other icons) fractional rating bar
 * **flutter_secure_storage** (_@steenbakker.dev_) = platform-specific secure storage using Keychain (iOS) and Encrypted Shared Preferences with Tink (Android)
-* **sentry** (_@sentry.io_) = Sentry SDK for pure Dart ([Sentry](https://sentry.io) performance monitoring & error tracking)
-* **sentry_flutter** (_@sentry.io_) = Sentry SDK for Flutter
 * **flutter_slidable** (_@romainrastel.com_) ~= customizable **Dismissible** (`actionPane`, `actions: [IconSlideAction]`, `actionExtentRatio: 1/actions.length`)
 * **flutter_treeview** (_@kevinandre.com_) = customizable hierarchical tree of widgets
 * **focusable_control_builder** = reacts to all sorts of inputs (focus, tab key, mouse events, keyboard shortcut)
@@ -204,6 +202,7 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
 * **intl_utils** (_@localizely.com_) = binding between your translations from .arb files and Flutter app
 * **jaspr** (_@schultek.dev_) = web framework for building HTML/CSS websites in Dart (with both client-side & server-side rendering)
 * **location** (_@bernos.dev_) = device geographical location; `serviceEnabled()`, `requestService()`, `hasPermission`, `requestPermission()`, `getLocation()`
+* **mqtt_client** (_@darticulate.com_) = server & browser based on MQTT client for Dart (IoT publish/subscribe messaging protocol, use for project Clock)
 * **permission_handler** (_@baseflow.com_) = cross-platform post-install granular app permission requests
 * **pixel_snap** (_@widgetbakery.dev_) = fix Windows 150% non-integral pixel scaling blur
 * **printing** (_@nfet.net_) = generate & print documents to mobile-compatible printers
@@ -215,6 +214,8 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
 * **rect_getter** (_@debuggerx.com_) = obtain a widget's rectangular coordinates
 * **rnd** (_@gskinner.com_) = makes working with random values easier (global **Random** instance + helpful extension methods)
 * **searchfield** (_@maheshjamdade.com_) = simple customizable autocomplete search widget
+* **sentry** (_@sentry.io_) = Sentry SDK for pure Dart ([Sentry](https://sentry.io) performance monitoring & error tracking)
+* **sentry_flutter** (_@sentry.io_) = Sentry SDK for Flutter
 * **slang** (_@tienisto.com_) = simplify L10n, breaks down large translation files into smaller ones (via namespaces), access values via nested keys (à la jQuery)
 * **sliver_tools** (_@pietervanloon.com_) = missing sliver package (related: [SliverFooter](https://stackoverflow.com/a/49621060/3559724) by Rémy Rousselet)
 * **system_tray** (-) = design a system tray menu for desktop (Linux, macOS, Windows) opening from the system tray app icon

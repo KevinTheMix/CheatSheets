@@ -254,6 +254,7 @@ Collection of modules & packages bundled with Python (ie no need to install).
       * Deactivate = `deactivate` (exit virtual environment & return to system-wide python install)
 * **pyinstaller** = (pre-)compile Python code (`-F` aka `--onefile` to create single file bundle exe)
   * `--icon={icon.ico}` = add custom icon to final *.exe*
+  * `--name <name>` = output executable name
   * `--noconfirm` = don't ask when overwriting *build* & *dist* folders
   * `--noconsole` (alias `--windowed`) = no console window appears (for GUI apps)
   * `--onefile` = bundle everything into a single *.exe*
