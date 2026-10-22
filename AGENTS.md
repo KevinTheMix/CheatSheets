@@ -15,7 +15,7 @@
 * Content is mostly bullet lists using `*`, nested with 2-space indentation
 * Format: `* **Element** (acronym) = definition`
   * Element in bold, acronym in parentheses right after it, then ` = `
-  * File names in italics (eg `*_helpers.tpl*`), UI items/product examples in italics (eg `_Traefik_`)
+  * File names and UI items/product examples in italics (eg `*_helpers.tpl*` or `*Traefik*`, but old runs of italics using underscores may exist eg `_old_`; not to be emulated)
   * CLI commands/options in backticks, with options nested under their command (eg `--debug` under `helm upgrade`)
   * Command placeholders use chevrons (eg `kubectl logs <pod>`), even if the file already uses curly braces elsewhere
 * Glossary entries sorted alphabetically (third-party tools may form a separate trailing block)

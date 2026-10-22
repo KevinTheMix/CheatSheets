@@ -158,12 +158,18 @@ Existing containers can be specified by either id or name.
 
 ### Dockerfile
 
+* **Exec form** (preferred) = JSON array syntax (eg `["python", "-m", "app"]`), runs the executable directly (no shell), so signals (eg SIGTERM) reach the process & no shell expansion (eg `$VAR`)
+* **Shell form** = plain command syntax (eg `python -m app`), runs via `sh -c` (`cmd /S /C` on Windows), so shell features work but signals don't reach the process
+
 * `ADD` = COPY + can extract compressed archives (tar/gzip/etc) automatically and it can fetch files from URLs (don't use unless you need those extra features)
 * `ARG <variable>` = introduces a runtime variable for build (eg `docker build --build-var koko=…` that can then eg be used with standard shell parameter expansion fallback `COPY ${koko:-obj/Docker/publish} .`)
-* `CMD <command> (<parameter(s)>)` = defines a default command executed when container starts (only last one takes effect)
+* `CMD ["<command>"(, "<arg1>", "<arg2>")]` = defines default command/arguments executed when container starts (only last one takes effect), replaced entirely by `docker run <image> <command>` args
+  * With `ENTRYPOINT`, it only provides its default arguments (eg `ENTRYPOINT ["ping"]` + `CMD ["localhost"]` runs `ping localhost`, `docker run <image> example.com` runs `ping example.com`)
+  * Without `ENTRYPOINT`, it's the entire (default) command (eg `CMD ["python", "-m", "asset_repr.sheeze_scheduler"]`)
 * `COPY (--from=<stage_index|stage_name>) <source(s)> <target>` = embeds some files/folders from a previous stage or a host local directory (relative to build context, eg source code) into a this new image layer's filesystem
   * Ignores files/folders mentioned in _.dockerignore_ file
-* `ENTRYPOINT ["<command>"(, "<arg1>", "<arg2>")]` = defines command to run when container is started
+* `ENTRYPOINT ["<command>"(, "<arg1>", "<arg2>")]` = defines fixed executable always run when container is started
+  * `docker run <image> <args>` appends args to it (replaced only with `docker run --entrypoint`), unlike `CMD`
 * `ENV <variable> <value>` = define an environment variable (note: for stable across all configurations/defaults, eg **not** env-specific secrets, can be overriden by K8s later)
 * `EXPOSE <port>` = documents which ports this container listens to (purely informational, use `docker run -p` to actually map a port between container & host, or equivalent docker compose file's _ports_ section)
 * `FROM <base_image> (AS <multi_stage_alias>)` = first statement in the Dockerfile; indicate the a base image from the repository (which is _Docker Hub_ by default)

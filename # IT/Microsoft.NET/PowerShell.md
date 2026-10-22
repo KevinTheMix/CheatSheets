@@ -25,3 +25,4 @@
 ## Snippets
 
 * `ping.exe -t localhost | Foreach{"{0} - {1}" -f (Get-Date),$_} | Select-String -pattern "time(<1ms|=[1-3]ms)" -notMatch` = long-running higher-latencies ping with timestamp
+* `[Environment]::SetEnvironmentVariable("<env_var>", <value>, "<scope>")` = set or remove (with `$null`) an environment variable from given scope (ie `User`, or `Machine` with admin required)

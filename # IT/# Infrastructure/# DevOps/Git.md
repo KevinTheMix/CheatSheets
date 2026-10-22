@@ -13,8 +13,8 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * Do not rebase commits other people may already be using
 * Prefer `git mv` for renaming files in CLI (note that modern IDEs are capable of tracking plain renaming)
 * A local repo (for personal projects) provides version control by itself without the need of any associated remote repos
-* Use trailing (_dangling_) commas whenever possible at end of source code lines in order to reduce the number of lines marked as modified
-* Commit messages should complete the sentence: "_if applied, this commit will …_", start with a capitalized present tense verb, and end without period
+* Use trailing (*dangling*) commas whenever possible at end of source code lines in order to reduce the number of lines marked as modified
+* Commit messages should complete the sentence: "*if applied, this commit will …*", start with a capitalized present tense verb, and end without period
 * [Conventional Commits](https://www.conventionalcommits.org) = specification for writing standardized commit messagese that help creating a clear & organized commit history
 * [A Hacker's Guide to Git](https://wildlyinaccurate.com/a-hackers-guide-to-git)
 * [Practical Git](https://practicalgit.com) (eg "Recover a deleted local branch")
@@ -24,17 +24,17 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 
 ## Glossary
 
-* [Alias](https://githowto.com/aliases) = single term shorthand for a longer command (defined in any config file under the _alias_ section)
-* **Branch** = a reference pointing to the _latest commit in that branch_
-  * A branch is _not_ a chain of commits; even though commits can be said to be _on_ a branch, branches play no role in a commits (self-sufficient) chain/history
+* [Alias](https://githowto.com/aliases) = single term shorthand for a longer command (defined in any config file under the *alias* section)
+* **Branch** = a reference pointing to the *latest commit in that branch*
+  * A branch is *not* a chain of commits; even though commits can be said to be *on* a branch, branches play no role in a commits (self-sufficient) chain/history
   * It's true that a branch can be made to point to an earlier commit (via `reset`), but that just means that the earlier commit becomes the latest one for that branch
   * Creating a branch equates creating a new pointer to the current commit (multiple branches can point to the same commit, notably in the case of a branch creation)
   * **Tip of a branch** = the specific (latest) commit that the branch points to
   * **Remote-Tracking Branch** = local reference (not a real branch you can work on) to state of remote branch, ie readonly/immutable copy of last known state of remote branches (updated via `git fetch`/`git pull`)
-    * Reside as refs in _refs/remotes/origin/*_, where they can technically be modified (don't do that)
+    * Reside as refs in *refs/remotes/origin/**, where they can technically be modified (don't do that)
   * See [Branchig & Merging](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging)
 * **Cache** = another term for the staging area
-* **Cherry picking** = applying specific commit(s) from one branch onto another without merging full branch history (eg applying a _main_ fix to an older _release_ branch)
+* **Cherry picking** = applying specific commit(s) from one branch onto another without merging full branch history (eg applying a *main* fix to an older *release* branch)
   * Re-applies changes introduced by referenced commit(s) **as a commit(s)** (with new hash IDs) to current branch, creating a parallel commit history
   * Future merges usually work because changes are already present, but conflicts remain possible since Git treats original and cherry-picked commits as different commits
 * **Cloning** = creating a local repository based on a remote repository, still associated to it (via push/pull commands)
@@ -43,25 +43,25 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * **Commit hash** = human-friendly identity/name of a commit (short version usually first 7 characters of the longer 40 characters version)
   * Each commit holds a reference to its parent commit (or multiple parents in the case of a merge commit), forming a chain that constitutes the history of the project
   * Commits no longer referenced anywhere (eg after a hard reset) are eventually garbage collected, even if they are still cited in the reflog
-  * In CLI, commits can always be specified by hash or their various references (eg _HEAD_, a branch, a tag, a reflog entry)
+  * In CLI, commits can always be specified by hash or their various references (eg *HEAD*, a branch, a tag, a reflog entry)
 * **Configuration files**
-  * _.gitconfig_ (User), _C:/Program Files/Git/etc/gitconfig_ (System), _./git/config_ (Local) = configuration sections
-  * _.gitattributes_ = (binary/textual) merging and [line ending](https://stackoverflow.com/a/10855862/3559724) stragtegies per file type
-  * _.gitignore_ = glob-style top-to-bottom file tracking (eg _file_, _dir/_, _dir/file_, _dir/dir/_, _/absolute/_, `*` any char except `/`, `?` single char, `**` any dir depth, `!` include excluded, `[abc]` class)
-* **Feature Branch Workflow** = create local _feature_ branch from _main_, make many commits, push to remote, pull request, resolve feedback locally/together, resolve merge conflicts to _main_
+  * *.gitconfig* (User), *C:/Program Files/Git/etc/gitconfig* (System), *./git/config* (Local) = configuration sections
+  * *.gitattributes* = (binary/textual) merging and [line ending](https://stackoverflow.com/a/10855862/3559724) stragtegies per file type
+  * *.gitignore* = glob-style top-to-bottom file tracking (eg *file*, *dir/*, *dir/file*, *dir/dir/*, */absolute/*, `*` any char except `/`, `?` single char, `**` any dir depth, `!` include excluded, `[abc]` class)
+* **Feature Branch Workflow** = create local *feature* branch from *main*, make many commits, push to remote, pull request, resolve feedback locally/together, resolve merge conflicts to *main*
 * **Fetching** = re-synching from remote repository into local repository
 * **Fork** = on platforms like GitHub, duplicates an existing repository/project along with its full history towards the user's own account
-  * This is typically followed by a cloning (to work locally), pushing changes to (_origin_) remote, and ending with a pull request back to the original (_upstream_) repo
+  * This is typically followed by a cloning (to work locally), pushing changes to (*origin*) remote, and ending with a pull request back to the original (*upstream*) repo
 * **Gitflow** = a Git branching strategy/workflow suited for projects with larger releases cycles (rather abandoned in favor of **Trunk-based development**)
-  * _main_ aka _master_ branch holds stable, production-ready releases
-  * _develop_ branches off _main_ (at very start, ie immediately after initial commmit), living a parallel life ahead of it, always busy integrating & accumulating features
-  * Feature branches branch off _develop_ and are merged back into _develop_ only, never directly to _main_ (_develop_ + features = basically Feature Branch Workflow)
-  * A dedicated _release_ branch is created from _develop_ once enough features have accumulated in it, which can receive bug fixes or release-oriented changes
-  * Once finalized, _release_ is merged into both _main_ (tagged) and _develop_ (to integrate latest bugfixes & releases changes), then deleted
-  * _hotfix_ branches can be created off _main_ for quick production patches, they are merged into both _main_ and _develop_ (or the current _release_)
+  * *main* aka *master* branch holds stable, production-ready releases
+  * *develop* branches off *main* (at very start, ie immediately after initial commmit), living a parallel life ahead of it, always busy integrating & accumulating features
+  * Feature branches branch off *develop* and are merged back into *develop* only, never directly to *main* (*develop* + features = basically Feature Branch Workflow)
+  * A dedicated *release* branch is created from *develop* once enough features have accumulated in it, which can receive bug fixes or release-oriented changes
+  * Once finalized, *release* is merged into both *main* (tagged) and *develop* (to integrate latest bugfixes & releases changes), then deleted
+  * *hotfix* branches can be created off *main* for quick production patches, they are merged into both *main* and *develop* (or the current *release*)
 * **HEAD** = a special reference (stored in the `.git/HEAD` file) to either a branch (via a symbolic reference eg `ref: refs/heads/main`, hence its last commit) or directly a specific commit (then said to be in a **detached HEAD** state)
   * **Detached HEAD** is useful to make experimental changes and create easily discardable **detached/orphaned commits** (ie that don't belong to any branch)
-* **Hooks** = set of dedicated files (in _.git/hooks/_) that can be edited to perform some scripted treatments at some specific lifecycle events (eg _pre-commit_, _pre-push_, _pre-rebase_)
+* **Hooks** = set of dedicated files (in *.git/hooks/*) that can be edited to perform some scripted treatments at some specific lifecycle events (eg *pre-commit*, *pre-push*, *pre-rebase*)
 * **Index** = another term for the staging area
 * **Merge** = combines changes from a given branch into current branch (usually main/master branch), with any conflicts pausing operation until user has manually resolved all of them
   * **Merge Commit** = a commit with two parents and joined development histories (the previous commit on current & latest commit on imported branch)
@@ -71,35 +71,38 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * Multiple other remotes can be added to a same (local) repo, each with a different name (eg `upstream`, `github`, `bitbucket`)
 * **Pull Request** (GitHub/GitLab) = formal proposal to merge changes into a codebase between same or different (ie forked) repositories
 * **Rebasing** = replay a branch's commits one by one (ie create new commits) onto a base branch for a more linear history
-  * Typical use case = integrate latest _main/develop_ changes into a _feature_ branch spawned from it (ie "rebasing a feature branch onto main")
-  * Internally a series of cherry-picks onto that base, with _HEAD_ temporarily pointing to it as each commit is applied
+  * Typical use case = integrate latest *main/develop* changes into a *feature* branch spawned from it (ie "rebasing a feature branch onto main")
+  * Internally a series of cherry-picks onto that base, with *HEAD* temporarily pointing to it as each commit is applied
   * Current = base branch (HEAD), Incoming = commit being replayed; `ours`/`theirs` flips vs `merge` (`ours`=base branch, `theirs`=own commit being replayed)
   * **Don't alter a commit message in case of conflict** (ie don't mention conflict/rebase): history should describe actual changes, not the mechanics used to integrate them
 * **Repository** = a regular folder augmented into a self-contained version-controlled directory that tracks changes to (some/all of its) files over time
 * **Reference** (or just **ref(s)**) = label/pointer to specific commits (ie aliases for commit hashes), saved as files (in the `.git/refs/` directory)
-  * Branches (`refs/heads/<branch>`), Tags (`refs/tags/<tag>`), remote branches (`refs/remotes/<remote>`), even _HEAD_ are all (types of) references
-* **Reflog** (**reference log**) = history of all reference modifications (à la VG _saved states_), stored as one file per reference (in `.git/logs/`)
+  * Branches (`refs/heads/<branch>`), Tags (`refs/tags/<tag>`), remote branches (`refs/remotes/<remote>`), even *HEAD* are all (types of) references
+* **Reflog** (**reference log**) = history of all reference modifications (à la VG *saved states*), stored as one file per reference (in `.git/logs/`)
   * It is a safety net to recover lost commits/changes, at least for a little time until garbage collection permanently clears them
   * Reflog entries (aka lines) use the following format: `<after> <before> <author name & email> <timestamp with zone> <action>: <comment>`
   * The reflog is forward-only (it's a growing list/log, not a stack), but its entries may be pruned over time due to retention policies
 * **Refspec** (**reference specification**) = mapping between local & remote references (eg for `fetch` & `push`, saved in that remote's section in `.git/config` in the `+<source>:<destination>` format)
 * **Remote (repository)** = a (nonmandatory) repo hosted on a separate/centralized/shared server, required for some commands (cloning, fetching, pull, pushing)
   * It is essentially an alias for an URL, and is required to push changes from a local repo (also requires linking local to remote branches, see `git push -u …`)
-* [Resetting](https://stackoverflow.com/a/50022436/3559724) = unstaging (_soft_) and uncommitting (_mixed_) and removing changes (_hard_)
-* **Scope** = one of three levels where configuration parameters can be defined (System in _Program Files_, User in _~_, Local in  _._)
+* [Resetting](https://stackoverflow.com/a/50022436/3559724) = unstaging (*soft*) and uncommitting (*mixed*) and removing changes (*hard*)
+* **Scope** = one of three levels where configuration parameters can be defined (System in *Program Files*, User in *~*, Local in  *.*)
 * [Staging (area)](https://githowto.com/staging_and_committing) (aka **Index** or **Cache**) = logical space/list of files registered for next commit
-  * Modified files are not automatically all registered; they have to be deliberately _staged_ (thus enabling granular control over committed files)
+  * Modified files are not automatically all registered; they have to be deliberately *staged* (thus enabling granular control over committed files)
 * **Stashing** = temporarily saving changes that are not ready to be committed (eg work-in-progress) on the side to be resumed later (eg after some work on other branches)
 * **Tag** = fixed/stable pointer to a specific commit in history (generally for a significant milestone/release; note that tags can have the same name as a branch)
   * **Lightweight Tag** = simple references to specific commits
   * **Annotated Tag** = full Git object with a name & metadata (message, creation date, tagger's info ie name/email/timestamp)
-* **Trunk-Based Development** = branch workflow tailored for CI/CD, advocating short-lived feature branches with few small commits, and a clean always latest _main_ (vouched for by CI pipeline)
+* **Trunk-Based Development** = branch workflow tailored for CI/CD, advocating short-lived feature branches with few small commits, and a clean always latest *main* (vouched for by CI pipeline)
   * Features get merged into main if they pass automated (build, unit tests, lint/static checks, component/API tests) & manual (code review) validation
 * **Upstream** (GitHub/GitLab) = original repo from which a project was forked
 * **Upstream Branch** = remote/origin branch that a local branch is currently tracking (ie for push/pull)
-* **Work(ing) Tree** (aka **Working Directory**) = a directory where the (project) files reside and where changes are made (note: may also contain untracked files)
-* **Worktree** = mechanism that allows a single same repository (hence with a shared history) to be checked out as multiple parallel separate working directories at same time, each attached to possibly a different branch
-  * This allows eg working on different branches in parallel, avoiding constant git checkout switching, keep isolated changes per branch
+* **Working Tree** = directory holding the checked-out project files, where changes are made (note: may also contain untracked files)
+  * `--work-tree`/`GIT_WORK_TREE` = option/env var spelling
+* **Worktree** = working tree + its own per-worktree metadata (eg index, `HEAD`), attached to a repository whose objects & refs are shared
+  * The original one is the *main worktree*; extra *linked worktrees* are managed via `git worktree add/list/remove`
+  * Allows working on several branches in parallel without `git checkout` switching, with isolated changes per branch
+  * A branch can only be checked out in one worktree at a time
 
 ## API/CLI
 
@@ -108,13 +111,13 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * `git <command> --help` = opens local HTML manual page (or `man git-<command>` on Unix)
 * `<commit>~(n=1)` = nth ancestor following only first parent links
 * `<commit>^(n=1)` = nth parent of a commit, mainly relevant for merge commits
-* `<reflog>@<n>` = the (zero-based) nth before latest reflog entry for a given branch (eg `master@{1}` or `HEAD@{-1}` or `@{1}` just for special default _HEAD_)
+* `<reflog>@<n>` = the (zero-based) nth before latest reflog entry for a given branch (eg `master@{1}` or `HEAD@{-1}` or `@{1}` just for special default *HEAD*)
 * On Windows, use double quotes (`"`) instead of single quotes (`'`), especially relevant when Git suggest a command fix (containing single quotes)
 
 ### Configuration
 
-* `git config --<scope>` = where _scope_ is `--system` (Global), `--global` (User), `--local` or _nothing_ (Local)
-* `git config --<scope> --edit` = open target config file in default editor (itself defined at User scope under _core.editor_ parameter)
+* `git config --<scope>` = where *scope* is `--system` (Global), `--global` (User), `--local` or *nothing* (Local)
+* `git config --<scope> --edit` = open target config file in default editor (itself defined at User scope under *core.editor* parameter)
 * `git config --<scope> --l(ist)` = list the aggregated config parameters at a given scope
 * `git config --<scope> <section>.<parameter> <value>` = directly set given parameter
   * Eg `git config --system credential.helper = manager(-core)` = remove this line to [avoid opening Credential Manager](https://stackoverflow.com/a/37185202/3559724)
@@ -131,18 +134,18 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * `start` = start bisect session
   * `good/bad` = indicate if current commit was good or is now bad
   * `reset` = ends bisect session & returns repository to original commit/branch before it started
-  * `run <./script.sh>` = automate bisect by running a script able to determine good/bad (using its exit code: _0_ good|_1+_ bad|_125_ skip)
+  * `run <./script.sh>` = automate bisect by running a script able to determine good/bad (using its exit code: *0* good|*1+* bad|*125* skip)
   * `skip` = marks current commit as untestable & continue bisect search
 * `git blame` = displays one file with additional information per line (author, commit, last modification date, line number)
 * `git diff` = shows differences between versions of files (`Page Up/Down` to scroll, `q` to exit)
-  * _no argument_ = working directory vs staged files
+  * *no argument* = working directory vs staged files
   * `--staged` = staged changes vs to be committed
   * `--stat` = summary of changes instead of full line-by-line diff
   * `<file>` = changes in a specific file
   * `--no-index <f1> <f2>` = changes between two arbitrary files
   * `<a> <b>` = changes between two git states (ie files/commits/branches, eg `git diff HEAD~1 HEAD`)
 * `git log` = lists commits history in anti-chronological order (ie last first)
-  * `<branch>` = lists commits history (parental ancestry) for that branch (_HEAD_ by default, if a tag has same name use full branch namespace eg `refs/heads/<branch>`)
+  * `<branch>` = lists commits history (parental ancestry) for that branch (*HEAD* by default, if a tag has same name use full branch namespace eg `refs/heads/<branch>`)
   * `<tag>` = lists commits history for that tag (if tag has same name as a branch, Git complains and displays tag commits history)
   * `--all` = includes all commits (not just the ancestors of currently checked-out)
   * `--author="<name>"`
@@ -151,7 +154,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * `--graph` = draws Ascii tree of commits
   * `--max-count=10` = limits output
   * `--oneline` = compact one-line-per-commit format (eg `git log --oneline master..develop` shows simple commits diff between two branches)
-  * `--pretty=<format>` = where built-in _format_ is `oneline`, `short`, `medium` (default), `full`, `fuller` by increasing length, or `reference`, etc.
+  * `--pretty=<format>` = where built-in *format* is `oneline`, `short`, `medium` (default), `full`, `fuller` by increasing length, or `reference`, etc.
   * `--pretty=format:\"<custom>\"` = custom format (eg `%ad` author date, `%an` author, `%cd` date, `%d` references if any, `%h` hash, `%s` comment, `%n` newline)
   * `--since="5 minutes ago"` = after
   * `--until="5 minutes ago"` = before
@@ -165,7 +168,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * `git init` = sets up the current directory as a Git repository (`--bare` without WD, usually to setup a repo only updated via `push`)
 * `git add` = stages files to be included in the next commit
   * `<directory/>` = stages files in a directory
-  * `<file>( <file2> <file3>)` = stages one or more specific files (including  _case sensitive_ and/or glob wildcarded paths)
+  * `<file>( <file2> <file3>)` = stages one or more specific files (including  *case sensitive* and/or glob wildcarded paths)
   * `.` = stages all changes (ie new/untracked + modified + deleted files) from current (sub)directory downward
   * `-A` = stages all changes (ie new/untracked + modified + deleted files) in working tree (ie at root reposotiry level)
   * `-i` = stages interactively (via CLI)
@@ -176,9 +179,9 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * `-c <branch>` = copies existing branch to new branch name (does not check it out, to create & switch use `git switch -c <branch>` or older `git checkout -b <branch>`)
   * `-d <branch>` = delete a local branch (safe delete ie blocksgit if branch contains commits that haven't been merged)
   * `-D <branch>` = delete a local branch (force delete)
-  * `-m|-M (<old>) <new>` = rename a branch (current branch if _old_ not provided)
-  * `-r(remote)` = lists remote-tracking branches (ie local read-only pointers/references to state of branches on a remote, eg _origin/main_)
-  * `-u <remote>/<branch>` (or `--set-upstream-to <remote>/<branch>`) = links local branch to remote branch (adds (max one, previous gets replaced) _branch_ section in `.git/config`)
+  * `-m|-M (<old>) <new>` = rename a branch (current branch if *old* not provided)
+  * `-r(remote)` = lists remote-tracking branches (ie local read-only pointers/references to state of branches on a remote, eg *origin/main*)
+  * `-u <remote>/<branch>` (or `--set-upstream-to <remote>/<branch>`) = links local branch to remote branch (adds (max one, previous gets replaced) *branch* section in `.git/config`)
   * `-vv` = shows all local branches with extra infos
   * `<branch>` = creates a new branch
   * `<branch> <commit>` = creates a new branch pointing to a specific commit
@@ -188,7 +191,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * `-` == `git checkout @{-1}` == `git switch -` = switches back to last previous branch/commit
   * `<file>` == `git restore <file>`
   * `<branch>` == `git switch <branch>`
-  * `<commit>` = checks out specified commit (detaches _HEAD_, not on a branch anymore), works only if there are no unstaged changes or the commit is the last one
+  * `<commit>` = checks out specified commit (detaches *HEAD*, not on a branch anymore), works only if there are no unstaged changes or the commit is the last one
   * `-b <branch>` = creates a branch and checks it out
 * `git cherry pick <commit_hash>` = replays changes introduced by specified commit onto current branch (as a new commit with a new hash)
 * `git clean -fdx` = deletes all gitignored/untracked files (add `-n` option to preview but not do) (**warning**: destructive)
@@ -217,7 +220,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * `--soft HEAD~1` = cancels last commit (`HEAD~1` means commit one step before aka parent commit)
   * `--hard HEAD` = reverts all uncommitted changes
   * `--hard HEAD@{1}` = reverts repo to state before most recent changes (eg by a commit/branch switch/reset)
-  * `--hard origin/<main>` = resets local repo (eg _main_) to origin's version (fetch it beforehand to get latest version)
+  * `--hard origin/<main>` = resets local repo (eg *main*) to origin's version (fetch it beforehand to get latest version)
 * `git restore <file>` = restores a staged file (or directory) to its last staged state, or an unstaged one to its HEAD state (**warning**: destructive)
 * `git restore <file> --staged` = unstages file (similar to `git reset <file>`)
 * `git revert` = cancels a commit by creating a new one to remove changes
@@ -239,10 +242,10 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
     * `-u` (`--include-untracked`) = include (new) untracked files
 * `git switch` = switch to (or create) a specific branch or commit
   * `<branch>` = switches to branch (by moving HEAD to (latest commit of) that branch), or does nothing if already on that branch
-  * `-` (with hyphen === `@{-1}`) = switch to previous branch (more precisely the previous location in _HEAD_ reflog, non-destructive)
+  * `-` (with hyphen === `@{-1}`) = switch to previous branch (more precisely the previous location in *HEAD* reflog, non-destructive)
   * `-c <branch>` = create branch from current branch
   * `-c <branch> <from>` = create branch from given branch or commit
-  * `--detach` = detaches HEAD from current branch (content of _HEAD_ file changes from a symbolic branch ref to a commit hash)
+  * `--detach` = detaches HEAD from current branch (content of *HEAD* file changes from a symbolic branch ref to a commit hash)
 * `git tag` (same with `-l(ist)`) = lists all tags (repo-wide, no matter where you currently are)
   * `<tag>` = creates a **lightweight** tag (ie a version/release name eg `git tag v1.0.0`) at latest commit (ie pointer to current commit/HEAD) without extra metadata (eg message, author, date)
   * `-a <tag> -m "<message>"` = creates an **annotated** tag (stored as full Git object) with a (required) message, etc
@@ -253,17 +256,17 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 
 ### Remote
 
-* `git clone <url>` = creates a local copy of remote repo (with _origin_ default name remote) including all branches & commits, and adds an (_upstream_) remote if _origin_ is a forked repo (keeping track of the original)
+* `git clone <url>` = creates a local copy of remote repo (with *origin* default name remote) including all branches & commits, and adds an (*upstream*) remote if *origin* is a forked repo (keeping track of the original)
 * `git fetch` = downloads new objects/refs & updates remote‑tracking branches from a remote, without touching working tree or local branches (no files change)
   * `<remote>` = fetches remote (saved in the `.git/refs/remotes` folder, necessary after removing/re-adding a remote)
   * `--all` = fetches changes from all (configured) remote repositories, but does not merge/update local branches
   * `--prune` = fetches remote branches & removes their local copy that no longer exist remotely (local branches remain)
 * `git remote` = lists all remote repos names associated with local repo
   * `-v` = lists all remote repositories names & URLs associated with local repo
-  * `add <remote> <url>` = adds a remote repo to local repo (adds a _remote_ section in `.git/config`)
-  * `get-url <remote>` = see remote (eg _origin_) URL
+  * `add <remote> <url>` = adds a remote repo to local repo (adds a *remote* section in `.git/config`)
+  * `get-url <remote>` = see remote (eg *origin*) URL
   * `set-url <remote> <url>` = update the remote's URL (in the context of GitHub, the URL format `git@github.com:user/repo.git` is an SSH URL)
-  * `remove <remote>` = removes remote repo (deletes _remote_ & _branch_ sections in `.git/config` & folder from `.git/refs/remotes`, note that even `origin` can be removed)
+  * `remove <remote>` = removes remote repo (deletes *remote* & *branch* sections in `.git/config` & folder from `.git/refs/remotes`, note that even `origin` can be removed)
   * `prune <remote>` = removes local branches that no longer exist on the remote repo
   * `show <remote>` = detailed information about remote repo
 * `git ls-remote <remote>` = list all remote references (including branches)
@@ -276,12 +279,12 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 
 ## Troubleshooting
 
-* Authentication error: _could not create ssl/tls secure channel_
+* Authentication error: *could not create ssl/tls secure channel*
   * [Proven solution](https://support.captureone.com/hc/en-us/articles/360014239757) = fix by enabling TLS 1.2 (disabled by default on Windows 7)
     * Go to `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols`
-    * Right-click on **Protocols** folder, `New > Key`, and rename the freshly created folder to _TLS 1.2_
-    * Create a new **Key** under that folder, name that subfolder _Client_
-    * Create a new **DWORD (32-bit) Value** under that subfolder, set its **Name** to _DisabledByDefault_ (**Data** must be 0)
+    * Right-click on **Protocols** folder, `New > Key`, and rename the freshly created folder to *TLS 1.2*
+    * Create a new **Key** under that folder, name that subfolder *Client*
+    * Create a new **DWORD (32-bit) Value** under that subfolder, set its **Name** to *DisabledByDefault* (**Data** must be 0)
     * (Optional:) restart computer if necessary
 
 ## Extensions

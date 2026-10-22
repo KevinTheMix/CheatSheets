@@ -28,6 +28,7 @@ GitHub's AI development platform and agent runtimes, connecting IDE/CLI experien
 * **Instruction** = Copilot _.md_ file applied globally, by file pattern, by task relevance or when attached manually (eg _.github/copilot-instructions.md_ or _*.instructions.md_)
 * **Plugin** = installable Copilot bundle of customizations such as skills, agents, hooks and MCP integrations
 * **Prompt file** = reusable Copilot _.prompt.md_ prompt invoked manually; supported by the Local harness (deprecated in favor of skills for Agent Host sessions)
+* **Sandboxing** = security mechanism that limits what an AI agent can access or modify on your machine while it runs commands
 * **Skill** = Copilot's implementation of the Agent Skills standard; a folder containing _SKILL.md_ and optional files/templates
   * Invoke explicitly with `/<skill-name>`, or let the agent load it automatically when its description matches the task
   * `disable-model-invocation: <true|false>` = determines whether an agent can initiate a skill, on only user (via a slash command)
@@ -72,9 +73,11 @@ GitHub's AI development platform and agent runtimes, connecting IDE/CLI experien
 
 ## Copilot CLI
 
-* `copilot --yolo` = enable all Copilot permissions; OS permissions, policies, explicit deny rules and sandboxing can still restrict it
+* `copilot --yolo` = start a Copilot CLI session with all permissions pre-approved (OS permissions, policies, explicit deny rules and sandboxing can still restrict it)
+
 * `/fleet` = enable parallel sub-agents
 * `/remote <on|off>` = access sessions remotely (eg from phone)
+* `/sandbox (policy)`
 
 ## Customization Prompts
 

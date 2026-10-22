@@ -8,6 +8,7 @@ GitHub is a web platform hosting (mostly software) projects using Git.
   1. create a repo on GitHub via website or [CLI](https://cli.github.com)
   2. add a remote using the URL provided by GitHub on creation (eg `git remote add origin "https://github.com/{user}/{repository}"`)
   3. push local onto remote repo (eg `git push origin master`)
+* Set repo/global e-mail to [GitHub e-mail](https://github.com/settings/emails) (or use anonymous one if enabled)
 * If a **README** file is present in the repo, its content gets displayed (with homonyms priority: *README.md* > *README* > *README.txt*)
 
 ## Glossary

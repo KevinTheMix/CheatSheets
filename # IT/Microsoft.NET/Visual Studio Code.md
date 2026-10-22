@@ -9,6 +9,7 @@
 
 ## Glossary
 
+* **Agent Host Protocol** (AHP) = A standard protocol for client ↔ detached agent-host communication, making agent sessions persistent and independent of a particular IDE window
 * **Emmet** (formerly **Zen Coding**) = (built-in) advanced snippet generator for HTML, CSS, etc (cycle-browse through markup elements)
 
 ## Commands

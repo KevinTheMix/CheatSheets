@@ -27,7 +27,7 @@
 * **Function Calling** (aka Tool Calling) = an LLM is given a list of available external operations (often via JSON schema), and can request one then receive its output
   * Eg read/write/grep/search files, DB, code/string manipulation, commands/shell script, code analysis, Git(Hub), web browser, Slack, calendars
 * **GPT** (Generative Pre-trained Transformer) = deep learning generative large language model created by OpenAI that can process complex questions & generate text/code
-* **Harness** = software layer that runs an agent session: it prepares context, coordinates the model/tool loop and approvals, and maintains session state
+* **Harness** = software layer that runs an agent session: it prepares context, coordinates model/tool loop and approvals, and maintains session state
 * **Hook** = command executed at a configured point in an agent lifecycle (eg before/after a tool call)
 * **Model Context Protocol** (MCP, originally created by Anthropic) = client-server protocol standardizing how AI applications connect to external capabilities
   * An MCP server can expose tools (actions), resources (read-only contextual data), and prompts (reusable instruction templates)
@@ -51,7 +51,7 @@
 * **Amazon SageMaker** = cloud-based machine learning platform to create/train/deploy ML models on cloud (eg on embedded systems, edge devices)
 * **Amp** (by *Sourcegraph*) = CLI or IDE-integrated coding agent using various models (eg Gemini 3 Pro), with a strong focus on autonomous sub-agents & multi-step task execution
 * **Codex** = originally a simple coding-oriented OpenAI LLM (that powered GitHub Copilot), now a local IDE agentic coding assistant consuming OpenAI API (also via CLI or GitHub-connected [cloud-based](https://chatgpt.com/codex))
-* [Context7](https://context7.com) = MCP server that pulls up-to-date API versioned documentation & code samples (eg Flutter), adds them as manual copy-paste, prompt context, API access
+* [Context7](https://context7.com/dashboard) = MCP server that pulls up-to-date API versioned documentation & code samples (eg Flutter), prompt context, API access (free API key provides monthly requests allowance)
 * [FastMCP](https://gofastmcp.com) = standard framework for building MCP servers/clients/interactive applications
 * [Gitingest](https://gitingest.com) = turn any Git(Hub) repository into a simple long text digest of its codebase, to feed into any LLM
 * [Hugging Face](https://huggingface.co) = machine learning models collaborative/sharing platform
