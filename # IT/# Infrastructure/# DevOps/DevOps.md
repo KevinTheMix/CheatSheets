@@ -1,5 +1,8 @@
 # DevOps
 
+CI/CD is a major practice commonly used within DevOps (one important set of DevOps practices).
+DevOps is a broader engineering approach covering collaboration between development & operations (culture + practices + tooling).
+
 ## Quick Tips
 
 * Where to store configuration?

@@ -4,11 +4,11 @@ GitHub's AI development platform and agent runtimes, connecting IDE/CLI experien
 
 ## Quick Tips
 
-* Use _Generate Commit Message_ in VS Code
+* Use *Generate Commit Message* in VS Code
 * Context/customizations are normally scoped to the current folder/workspace (discovery can be enabled for monorepos)
 * **Try asking agents to work as experts** (which they are), as that apparently activates deep neurons and surfaces their expertise
 * GPT is supposedly better for functional specs, Claude for architecture/technical specs (but model strengths and availability evolve)
-* Workspace customizations are commonly stored under _.github/_ and committed for the team; personal Agent Host customizations use harness-specific folders such as _~/.copilot/_, while Local prompts/instructions can live in the VS Code profile
+* Workspace customizations are commonly stored under *.github/* and committed for the team; personal Agent Host customizations use harness-specific folders such as *~/.copilot/*, while Local prompts/instructions can live in the VS Code profile
 * [Awesome Copilot](https://github.com/github/awesome-copilot) = community-driven collection of agents, instructions and skills
 
 ## Glossary
@@ -17,26 +17,23 @@ GitHub's AI development platform and agent runtimes, connecting IDE/CLI experien
   * Local, remote (SSH/Tunnel/WSL) or Dev Container; talks to clients via the open Agent Host Protocol (AHP)
   * `code agent host` = start a standalone host
 * **Agent Mode**
-  * _Agent_ = default agent
-  * _Ask_ = no access to certain tools (eg agent, edit)
-  * _Plan_
-* **Custom agent** = reusable Copilot role/persona (eg _architect/product owner_) combining instructions, tools, sub-agent access and optionally a model, usually stored as an _.agent.md_ file
+  * *Agent* = default agent
+  * *Ask* = no access to certain tools (eg agent, edit)
+  * *Plan*
+* **Custom agent** = reusable Copilot role/persona (eg *architect/product owner*) combining instructions, tools, sub-agent access and optionally a model, usually stored as an *.agent.md* file
   * Optional YAML frontmatter can configure name, description, agents (which subagents may be spawned), **tools** (omitted => all default tools), **model** and harness-specific options such as reasoning effort
   * A parent agent can delegate to sub-agents; communication between related agents depends on the harness, available tools and configuration
   * A subagent inherits the parent's agent/model/tools unless you point it at a custom agent
 * **Hook** = Copilot lifecycle command configured to run before/after events such as a tool call
-* **Instruction** = Copilot _.md_ file applied globally, by file pattern, by task relevance or when attached manually (eg _.github/copilot-instructions.md_ or _*.instructions.md_)
+* **Instruction** = Copilot *.md* file applied globally, by file pattern, by task relevance or when attached manually (eg *.github/copilot-instructions.md* or **.instructions.md*)
 * **Plugin** = installable Copilot bundle of customizations such as skills, agents, hooks and MCP integrations
-* **Prompt file** = reusable Copilot _.prompt.md_ prompt invoked manually; supported by the Local harness (deprecated in favor of skills for Agent Host sessions)
+* **Prompt file** = reusable Copilot *.prompt.md* prompt invoked manually; supported by the Local harness (deprecated in favor of skills for Agent Host sessions)
 * **Sandboxing** = security mechanism that limits what an AI agent can access or modify on your machine while it runs commands
-* **Skill** = Copilot's implementation of the Agent Skills standard; a folder containing _SKILL.md_ and optional files/templates
-  * Invoke explicitly with `/<skill-name>`, or let the agent load it automatically when its description matches the task
-  * `disable-model-invocation: <true|false>` = determines whether an agent can initiate a skill, on only user (via a slash command)
 * **Slash command** = Copilot command entered with `/`; it may invoke a built-in action, prompt or skill (eg `/create-agent` and `/yolo` are commands, not skills)
 * [Tool](https://code.visualstudio.com/docs/agents/reference/tools-reference) = toggable agent capability, of 3 types:
-  * _Built-in_ = provided by VS Code/Copilot (eg access devtools, browse web, `edit` files/folders, execute code, manage todo, read, search, `agent` toolset to delegate tasks to subagents)
-  * _MCP_ = provided by a Model Context Protocol server (eg Pylance MCP Server, GitHub, Playwright, databases, external APIs)
-  * _Extension_ = contributed by a VS Code extension (eg Container Tools, Python)
+  * *Built-in* = provided by VS Code/Copilot (eg access devtools, browse web, `edit` files/folders, execute code, manage todo, read, search, `agent` toolset to delegate tasks to subagents)
+  * *MCP* = provided by a Model Context Protocol server (eg Pylance MCP Server, GitHub, Playwright, databases, external APIs)
+  * *Extension* = contributed by a VS Code extension (eg Container Tools, Python)
 
 ## Visual Studio Code
 
@@ -54,21 +51,21 @@ GitHub's AI development platform and agent runtimes, connecting IDE/CLI experien
 * `Ctrl + ;` = **Set Agent** to select mode (Agent/Ask/Plan)
 * `Ctrl + I` = **Dictate** to speech-to-text
 * `Ctrl + N` = New Chat
-* `Ctrl + Alt + ;` = **Models** (use _Auto_ to get a 10% discount)
+* `Ctrl + Alt + ;` = **Models** (use *Auto* to get a 10% discount)
 * `Ctrl + Shift + Enter` = **Send to New Chat**
 * **Configure Model** = configure effort (Balance/Efficiency/Intelligence)
 * **Configure Tools…** = enable/disable tools (built-in, MCP, extension) grouped by source; applies globally to all chat sessions using the default agent
   * Custom agents and skills can further restrict their own tools
 * **Set Session Target** or **Delegate Session** = choose which agent harness runs the session and where its tools operate
-  * _Local_ = runs in the VS Code extension host, on the current workspace; needed for VS Code built-in/extension tools or a model configured in VS Code
-  * _Copilot_ = runs in the Agent Host (local machine, remote host, or Dev Container); default for general coding tasks, background sessions, Copilot-specific capabilities
-  * _Claude_ = runs Anthropic's Claude Code harness, for Claude-specific capabilities, slash commands & permission modes; execution location depends on the selected host/environment
-  * _Codex_ = runs OpenAI's Codex harness, for Codex-specific capabilities; execution location depends on the selected host/environment
-  * _Cloud_ = delegates to a provider's remote infrastructure against a GitHub repo, returning a Pull Request; for well-scoped independent tasks
+  * *Local* = runs in the VS Code extension host, on the current workspace; needed for VS Code built-in/extension tools or a model configured in VS Code
+  * *Copilot* = runs in the Agent Host (local machine, remote host, or Dev Container); default for general coding tasks, background sessions, Copilot-specific capabilities
+  * *Claude* = runs Anthropic's Claude Code harness, for Claude-specific capabilities, slash commands & permission modes; execution location depends on the selected host/environment
+  * *Codex* = runs OpenAI's Codex harness, for Codex-specific capabilities; execution location depends on the selected host/environment
+  * *Cloud* = delegates to a provider's remote infrastructure against a GitHub repo, returning a Pull Request; for well-scoped independent tasks
 * **Set Permissions**
-  * _Default_ = ask
-  * _Allow All_ = auto-approve all tool calls and retry on errors
-  * _Autopilot_ (Preview) = auto-approve all tool calls and continue until task is done
+  * *Default* = ask
+  * *Allow All* = auto-approve all tool calls and retry on errors
+  * *Autopilot* (Preview) = auto-approve all tool calls and continue until task is done
 * **Session Info** (credit cost), **Context Window** (% before compaction), **System** (instructions/tools), **User Context** (messages/files/tools), **Compact Conversation**
 
 ## Copilot CLI
@@ -76,13 +73,14 @@ GitHub's AI development platform and agent runtimes, connecting IDE/CLI experien
 * `copilot --yolo` = start a Copilot CLI session with all permissions pre-approved (OS permissions, policies, explicit deny rules and sandboxing can still restrict it)
 
 * `/fleet` = enable parallel sub-agents
+* `/init` = explore a repository then initialize/customize its AI capabilities (eg create/update an *AGENTS.md* file)
 * `/remote <on|off>` = access sessions remotely (eg from phone)
 * `/sandbox (policy)`
 
 ## Customization Prompts
 
 * Generate multiple sub-agents for architecture, development, functional (product owner), an orchestrator (via prompts or `/create-agent` command in Local agent session)
-* Generate project-wide instructions in _.github/copilot-instructions.md_ and other relevant documentation files (personal always-on Copilot instructions use _~/.copilot/copilot-instructions.md_):
+* Generate project-wide instructions in *.github/copilot-instructions.md* and other relevant documentation files (personal always-on Copilot instructions use *~/.copilot/copilot-instructions.md*):
 
     Help me setup the global copilot instruction file for my project
     My documentation will be located in a dedicated folder

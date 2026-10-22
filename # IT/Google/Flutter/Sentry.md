@@ -85,5 +85,5 @@ Sentry configuration sections can coexist in multiple locations (properties chos
 ## Community
 
 * [Infinite recursion in SentrySqfliteDatabaseFactory](https://github.com/issues/created?issue=getsentry%7Csentry-dart%7C3229) (**Fixed** by _buenaflor_)
-  * (obsolete: <Alert>You may need to specify `databaseFactory = SentrySqfliteDatabaseFactory(databaseFactory: databaseFactory);` instead to work around a known recursion bug (version 9.6.0) causing a stack overflow.</Alert>)
+  * (obsolete: You may need to specify `databaseFactory = SentrySqfliteDatabaseFactory(databaseFactory: databaseFactory);` instead to work around a known recursion bug (version 9.6.0) causing a stack overflow.)
 * [Clarifying how to get to transactions page](https://github.com/getsentry/sentry-docs/pull/14802)

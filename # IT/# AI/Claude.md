@@ -25,7 +25,6 @@
   * Remotely = via a publicly reachable HTTP MCP server referenced in the Messages API, which the Claude backend calls directly
 * **Messages API** = main HTTP API for interacting with Claude programmatically
 * **Plan Mode** = review development plan before coding (instead of coding immediately)
-* **Skill** = Claude's implementation of the Agent Skills standard, discovered from folders containing _SKILL.md_
 
 ## Claude CLI
 

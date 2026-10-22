@@ -119,6 +119,7 @@ Note: shortcuts including numbers require holding `Shift` on EU keyboard as num 
 * `Right-Click` (on selected Column/Row) > Hide/Unhide
 * `Drag Down` square at bottom-right dot of selection = fill handle (ie generates values continuing selected sequence/series, only in one dimension)
 * `Drag a cell corder` = move selection (or insert if also holding `Shift`)
+* `Scroll Lock` = switches to arrow keys scrolling screen (instead of moving between cells)
 
 ## API (Formulas)
 

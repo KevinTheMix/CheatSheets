@@ -5,32 +5,27 @@ CI/CD for Android, iOS, Flutter & React Native.
 ## Quick Tips
 
 * Codemagic is linked to git repo via a GitHub Webhook that is setup to call a Codemagic API, triggering calls on desired event (push/PR update/**tag creation**)
-
-### Code Signing
-
-* [Flutter Docs: Sign the app](https://docs.flutter.dev/deployment/android#sign-the-app), once an *upload-keystore.jks* file is generated:
-  * Keystore generation (via `keytool` / Android Studio dialog, see [Android Studio](<../Android Studio.md>))
-  * Reference it from a *key.properties* file (in *android* folder)
-  * Modify *android/app/build.gradle.kts* to use signing for release (ie when executing `flutter build apk --release`)
-  * `/!\` **both** *upload-keystore.jks* & *key.properties* files must be excluded from git public source version control
-* [Codemagic - Android Code Signing](https://docs.codemagic.io/flutter-code-signing/android-code-signing)
-  * In Codemagic, *upload-keystore.jks* file gets uploaded as-is, but not *key.properties* whose passwords are simply filled in GUI fields
-  * In [GitHub Settings > Actions > Repository secrets](https://github.com/<user>/<repository>/settings/secrets/actions), keystore file appears as base-64 encoded (write-only secret) text
-
-### [Google Play publishing with Flutter workflow editor](https://docs.codemagic.io/flutter-publishing/publishing-to-google-play)
-
-* In Google Cloud, create a service account with *Service Account User* role (which provides an email address), then create a credentials JSON key for that server account (which downloads a JSON file)
-* In Google Cloud, in *API and Services* > *Library*, type **Google Play Android Developer API** and enable it
-* In Google Play Console, in *Users and Permissions*, invite that Google Cloud email address as user on given app, and give it all 3 *Versions* rights for an app (ie *update/deploy/manage tests*)
-* In Codemagic, in Distribution section, drop the Google Cloud service account credentials JSON file
-* [The very first version of the app must be added to Google Play manually](https://docs.codemagic.io/flutter-publishing/publishing-to-google-play/#setting-up-publishing-to-google-play-on-codemagic)
+* [Google Play publishing with Flutter workflow editor](https://docs.codemagic.io/flutter-publishing/publishing-to-google-play)
+  * In Google Cloud, create a service account with *Service Account User* role (which provides an email address), then create a credentials JSON key for that server account (which downloads a JSON file)
+  * In Google Cloud, in *API and Services* > *Library*, type **Google Play Android Developer API** and enable it
+  * In Google Play Console, in *Users and Permissions*, invite that Google Cloud email address as user on given app, and give it all 3 *Versions* rights for an app (ie *update/deploy/manage tests*)
+  * In Codemagic, in Distribution section, drop that Google Cloud service account credentials JSON file
+  * [The very first version of the app must be added to Google Play manually](https://docs.codemagic.io/flutter-publishing/publishing-to-google-play/#setting-up-publishing-to-google-play-on-codemagic)
 
 ## Glossary
 
 * **App Signing Key** & **Upload Key** = see [Google Play](<../Google Play.md>)
 * **Workflow Editor** = GUI alternative to configuring *codemagic.yaml*
 
-## GUI Workflow Editor
+## Menus
+
+* Settings > *Code signing identities* = where you setup [Android Code Signing](https://docs.codemagic.io/flutter-code-signing/android-code-signing)
+  * Local app signing setup (keystore, *key.properties*, *build.gradle.kts*): see [Flutter](Flutter.md#android-code-signing)
+  * *upload-keystore.jks* file gets uploaded as-is, but not *key.properties*: its values are simply filled in GUI fields, and Codemagic regenerates the file at build time (so it must not be committed)
+  * *build.gradle.kts* must use the variable names from Flutter's signing docs, as Codemagic relies on them (with `codemagic.yaml`, it exposes `CM_KEYSTORE_PATH`/`CM_KEYSTORE_PASSWORD`/`CM_KEY_ALIAS`/`CM_KEY_PASSWORD` env vars instead)
+  * Note that in *GitHub Settings > Actions > Repository secrets*, a  keystore file appears as base-64 encoded (write-only secret) text
+
+### GUI Workflow Editor
 
 * Set a [Github Webhook](https://github.com/<user>/<repository>/settings/hooks) pointing to Codemagic endpoint URL (in *Webhooks* tab)
 * Build for platforms = *Android*
@@ -58,7 +53,7 @@ CI/CD for Android, iOS, Flutter & React Native.
   * Note that that lets Codemagic generate its own *upload-keystore.jks* (in android/app/) & *key.properties* files using those settings
 * Notifications > Email = (enabled)
 
-### Pre-build script
+#### Pre-build script
 
 Generate freezed/riverpod files (with caching):
 

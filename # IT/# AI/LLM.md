@@ -8,6 +8,8 @@
 * *Let ChatGPT write it*, *Shit in, shit out*, *How hard can it be?* -- William Verhaeghe
 * [OpenAI: Proximal Policy Optimization](https://openai.com/blog/openai-baselines-ppo) = reinforcement learning
 * Product-specific notes: [Claude](Claude.md), [GitHub Copilot](GitHub%20Copilot.md)
+* Architecture: IDE extension <-> harness (MCP host, with one MCP client per MCP server) <-> LLM
+  * LLM only requests tool calls via (structured JSON) text, the harness executes them (built-in tools or MCP)
 
 ## Glossary
 
@@ -27,19 +29,27 @@
 * **Function Calling** (aka Tool Calling) = an LLM is given a list of available external operations (often via JSON schema), and can request one then receive its output
   * Eg read/write/grep/search files, DB, code/string manipulation, commands/shell script, code analysis, Git(Hub), web browser, Slack, calendars
 * **GPT** (Generative Pre-trained Transformer) = deep learning generative large language model created by OpenAI that can process complex questions & generate text/code
-* **Harness** = software layer that runs an agent session: it prepares context, coordinates model/tool loop and approvals, and maintains session state
+* **Harness** = software layer that runs an agent session & communicates with an LLM (usually via an HTTP API carrying structured JSON): builds context, executes tool calls & loops until done, handles approvals & session state
 * **Hook** = command executed at a configured point in an agent lifecycle (eg before/after a tool call)
 * **Model Context Protocol** (MCP, originally created by Anthropic) = client-server protocol standardizing how AI applications connect to external capabilities
-  * An MCP server can expose tools (actions), resources (read-only contextual data), and prompts (reusable instruction templates)
-  * Self-describing (no skill needed): server sends tool names/descriptions/input schemas & optional usage instructions on connection, which the client injects into the model's context
-  * Their client configuration is stored in stored in JSON files (*%USERPROFILE%\.copilot\mcp-config.json* for VS Code, *%APPDATA%\Local\github-copilot\intellij\mcp.json* for PyCharm)
+  * **MCP Client** = component inside the host holding a 1:1 connection to one server (JSON-RPC over stdio/HTTP): lists its capabilities (`tools/list`) & forwards the model's tool calls (`tools/call`)
+    * Client configuration is stored in JSON files (*%USERPROFILE%\.copilot\mcp-config.json* for VS Code, *%APPDATA%\Local\github-copilot\intellij\mcp.json* for PyCharm)
+  * **MCP Host** = AI application (here the harness, or the IDE app wrapping it) that embeds MCP clients, runs the model loop & decides which tools to expose/approve
+  * **MCP Server** = separate process (local) or remote service exposing tools (actions), resources (read-only contextual data) & prompts (reusable instruction templates)
+    * Server self-describes (no skill needed), it sends tool names/descriptions/input schemas & optional usage instructions on connection, injected by host into model's context
 * **Product Requirement Document** (PRD) = requirements document
 * **Retrieval-Augmented Generation** (RAG) = enables "dumb" retrieval/incorporation of information from external data sources as documents chunked as embeddings indexed in a vector DB, then passed as context to a LLM
   * A common example: a company might build a RAG system over their internal documentation, so employees can ask questions and get answers based on actual company policies and procedures rather than generic LLM knowledge
   * Preprocessing depends on data type (text as tokens, image as pixel tensors, audio as spectograms/waveforms) and passed forward through a pretrained neural network model
   * Comparison is then achieved via cosine similarity (most common, compares vector direction more so than size), dot product or Euclidean distance
-* [Skills](https://agentskills.io) = standard (by Anthropic) for reusable on-demand instructions/metadata/resources used automatically when deemed relevant by agent (packed as a discoverable folder/zip containing a *SKILL.md* file)
+* **Skill** = reusable on-demand instructions/resources, packaged as a discoverable folder/zip containing a *SKILL.md* & optional files/templates
+  * Invoke explicitly with `/<skill-name>`, or let the agent load it automatically when its description matches the task
+  * Standard frontmatter = `name` (must match folder name) & `description` (both required), `license`, `compatibility`, `metadata`, `allowed-tools` (experimental)
+  * Client-specific frontmatter (eg Claude Code, VS Code Copilot; not in the standard)
+    * `argument-hint` = hint shown in the chat input
+    * `disable-model-invocation: <true|false>` = if `true`, only the user can invoke the skill (via slash command)
   * Eg Claude: *Reading the docx skill to understand best practices for creating a Word document*
+  * See [Agent Skills](https://agentskills.io) open standard, by Anthropic
 * **Tool** = built-in/MCP/IDE extension-provided discrete granular capabilities (eg browse web)
 * **Zero/One/Few-shot Learning** = providing zero, one or a few examples in the model context before asking it to perform a task
 
