@@ -4,6 +4,10 @@ Cross-platform (Windows, Linux, Unix, macOS, etc) open-source JavaScript runtime
 
 Both NPM and Webpack (written in JS) are part of Node.js ecosystem and therefore rely on it to execute.
 
+## Quick Tips
+
+* See [npm & npx](./NPM.md)
+
 ## Glossary
 
 * **Fast Node Manager** ([fnm](https://github.com/Schniz/fnm)) = Node.js version manager, built in Rust (via a _.node\_version_ file)

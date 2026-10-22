@@ -247,6 +247,7 @@ Collection of modules & packages bundled with Python (ie no need to install).
   * `pip list` = list packages name & version in tab-separated format
 * **pyinstaller** = (pre-)compile Python code (`-F` aka `--onefile` to create single file bundle exe)
   * `--icon={icon.ico}` = add custom icon to final _.exe_
+  * `--name <name>` = output executable name
   * `--noconfirm` = don't ask when overwriting _build_ & _dist_ folders
   * `--noconsole` (alias `--windowed`) = no console window appears (for GUI apps)
   * `--onefile` = bundle everything into a single _.exe_

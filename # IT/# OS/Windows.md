@@ -17,6 +17,8 @@
 
 ## Glossary
 
+* _.bat_ = old legacy DOS/Win9x-era script (for compatibility)
+* _.cmd_ = newer Windows NT-specific style script for modern Windows command (ie _cmd.exe_) processor
 * **BitLocker** = logical volume & full disk encryption (FDE) using a Volume Master Key (VMK), ie everything is encrypted including OS itself
 * **BitLocker To Go** = encrypt removable USB flash drives
 * **Encrypting File System** (EFS) = NTFS 3.0 feature providing FS-level encryption to specific files/folders (using user username/password, while OS is running, in file/folder Properties > (Attributes:) Advanced)

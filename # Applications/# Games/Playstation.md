@@ -39,6 +39,15 @@ When approaching enemy bases in "Ghost Recon" as a team of four beginner players
 
 Remember, practice makes perfect. Don't be discouraged if you fail a few times, keep trying and learning from your mistakes.
 
+### Ratchet & Clank Future: Tools of Destruction
+
+* Problem: Known install bug in Ratchet & Clank: Tools of Destruction (2007). The game’s own free-space calculation breaks at certain values and wrongly shows “419 MB required / insufficient space.” Solution: Add or remove ~500 MB on the PS3 hard drive (e.g. copy a video file), then relaunch the game.
+  * Why the game handles its own installation, and why the fault lies with Insomniac’s code
+    * On the PS3, there was no mandatory, system-wide install process, unlike on the PS4 and PS5. Games ran straight from the Blu-ray disc. Because the drive was slow (roughly 9 MB/s), many studios chose to copy part of their data to the hard drive to speed up loading. That copy was optional and entirely up to each developer: some games installed nothing, others several gigabytes. The game’s own code handled it, which meant checking free space, copying the files and drawing the progress screen in the game’s own style. The PS3 operating system only supplied the storage; it did not manage the process.
+    * That is why the error screen was the clue. It had the game’s own look (background, fonts) rather than the grey system dialog of the XMB menu. That meant the check was done by Insomniac’s code, not by the console. The console itself reported your 376 GB of free space correctly, and the game misread that number. This also explains why Quest for Booty, built by the same studio a year later with corrected code, installed without trouble on the same console, and why no other PS3 game was affected by this particular bug.
+  * One caveat: Insomniac never published the technical details, so the exact mechanism (such as integer overflow) is my reconstruction. What is confirmed by the studio and by user reports is that certain free-space values triggered the error, and that adding or removing about 500 MB always fixed it.
+* Déguisement seret = `> > < v ^ ^ X`
+
 ### Sekiro
 
 * Sekiro sound cues (via _Late To The Party_ comment on Youtube)

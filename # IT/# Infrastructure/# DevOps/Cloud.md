@@ -35,7 +35,7 @@
 * **Spot Pricing** = pay for temporary unused datacenter VMs capacity (ideal for non-critical interruptable workloads) at a significant discount, which can be taken away at any time without notice as Microsoft needs it back
 * **Stock Keeping Unit** (SKU) = inventory management unique reference (eg ID, barcode) common to identical items, or a dedicated license for a given software product (billed independently)
 * **Lift & Shift** (aka Rehosting) = migrate an existing application & surrounding environment (storage) as-is from one environment to another (eg send local VM to cloud)
-* **VPS** (Virtual Private Server) = VM as a service (either IaaS but with fixed resources or Paas) by Internet hosting company simulating a dedicated physical server environment but actually shared with other users
+* **Virtual Private Server** (VPS) = VM as a service (either IaaS but with fixed resources or Paas) by Internet hosting company simulating a dedicated physical server environment but actually shared with other users
 * Characteristics
   * **HA/DR** = High Availability / Disaster Recovery
   * **Agility** = time to accessing extra resources

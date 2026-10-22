@@ -9,6 +9,7 @@ FFmpeg is a FOSS set of libraries for manipulating video, audio files/streams.
   * Edit media URLs in audio/video playlists to include host root (eg `https://…`) and GET parameters (eg `?Signature=…`), which can be found in the playlists request)
   * Feed the local master playlist to ffmpeg: `ffmpeg -allowed_extensions ALL -protocol_whitelist 'crypto,file,http,https,tls,tcp,ts' -i master.m3u8 -c copy out.ts`
 * `ffmpeg -i input.mp4 -vn -acodec copy output.m4a` = extract audio from video
+* CPU CRF 20 is identical in size to GPU CRF 23. Same size, better quality
 
 ## Glossary
 

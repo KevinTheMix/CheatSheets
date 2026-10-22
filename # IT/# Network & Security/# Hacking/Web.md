@@ -3,7 +3,7 @@
 ## Quick Tips
 
 * [Index of all web client & server security topics](https://portswigger.net/web-security/all-topics)
-* Where to look = source code (form input/hidden fields, directories & indexes), URL (parameters), cookie (-stored strings), _robots.txt_, _.htaccess_ & _.htpasswd_
+* Where to look = source code (form input/hidden fields, directories & indexes), URL (parameters), cookie (-stored strings), *robots.txt*, *.htaccess* & *.htpasswd*
 * Access paywalled research papers = install a useragent switcher extension and set it to Googlebot (they let SEs read their content)
   * <https://www.reddit.com/r/reddit.com/comments/6o84t/who_else_is_sick_of_sites_hosting_research_papers/c04f3xz>
 
@@ -17,19 +17,20 @@
   * **Local File Inclusion** (LFI) = only local files are allowed, could still be used by files whose content can be maniplated by attacker (eg access logs)
   * **Remote File Inclusion** (RFI) = any external file/page can be included (eg `index.php?page={page}`, google them via `inurl:"index.php?page="`)
 * **XSS** (Cross-Site Scripting) = abuses a legit page's lack of input (URL, form field) sanitization to insert a malicious (JS) script, accounts for 84% of all security vulnerabilities
-  * **Persistent** = the script is saved and served back to the victim when she browses a page displaying unsanitized content (eg _MMQ_)
+  * **Persistent** = the script is saved and served back to the victim when she browses a page displaying unsanitized content (eg *MMQ*)
   * **Non-Persistent** or **Reflected/ive** = coerces a victim into browsing a volatile crafted/forged (GET/POST) URL holding payload as parameter which get displayed on a page without sanitization
-    * Eg a (lousy) search engine results page: _You searched: `javascript:alert('oh no');`_
+    * Eg a (lousy) search engine results page: *You searched: `javascript:alert('oh no');`*
 
 ## Tools
 
-* _BeEF_ (The Browser EXploitation Framework) = pentesting tool focusing on web browser
-* _Burp Suite Scanner_ (by _PortSwigger_) = web app vulnerability testing/scanning graphical tool, server-side vulnerabilities, Interactive Application Security Testing (IAST), web proxy, web app crawler
-* _CeWL_ (Custom Word List generator) = crawls & extracts a website's keywords, to feed as contextal passwords fragments into a cracker
+* *BeEF* (The Browser Exploitation Framework) = open source web browser pentesting tool
+* *Burp Suite Scanner* (by *PortSwigger*) = web app vulnerability testing/scanning graphical tool, server-side vulnerabilities, Interactive Application Security Testing (IAST), web proxy, web app crawler
+* *CeWL* (Custom Word List generator) = crawls & extracts a website's keywords, to feed as contextal passwords fragments into a cracker
 * `dirb` (directory buster) = scans all (potentially nonreferenced) files/pages on a website via a dictionary/wordlist
-* _gobuster_ = scans all (potentially nonreferenced) files/pages on a website via a wordlist
-* _IronWASP_ = open-source web app vulnerability testing/scanning, reports, extensible
-* _OWASP Zap_ = web app security testing, AJAX Spidering, Fuzzing, REST APIs testing, active/passive scan, Filters, Anti-CSRF tokens, WebSocket testing, HTTP sessions, Spider
+* `gobuster` = scans all (potentially nonreferenced) files/pages on a website via a wordlist
+* *HTTrack* = FOSS web crawler & offline browser (via CLI or GUI ie *Web|WinHTTrack*), that can download websites to a local computer (à la CandiULB Archiver), respecting robots exclusion protocol (unless disabled)
+* *IronWASP* = open-source web app vulnerability testing/scanning, reports, extensible
+* *OWASP Zap* = web app security testing, AJAX Spidering, Fuzzing, REST APIs testing, active/passive scan, Filters, Anti-CSRF tokens, WebSocket testing, HTTP sessions, Spider
 
 ## Payloads
 
