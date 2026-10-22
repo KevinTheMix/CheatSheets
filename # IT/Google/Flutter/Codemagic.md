@@ -4,42 +4,38 @@ CI/CD for Android, iOS, Flutter & React Native.
 
 ## Quick Tips
 
-* Codemagic is linked to git repo via a GitHub Webhook that is setup to call a Codemagic API, triggering calls on some event (push/PR update/**tag creation**)
-
-## Glossary
-
-* **App Signing Key** = key to let Google sign app to Users (only mandatory when actually registering the app to Google Play Store)
-* **(Java) Keystore** (JKS) = file holding multiple named key (eg _upload_) pairs (ie a private key + a public key contained within a certificate used by stores to verify legitimacy), generated via:
-  * `keytool` Java command (installed with Android Studio)
-  * Android Studio > Build > _Generate Signed Bundle/APK_ dialog
-* **Upload Key** = key to sign app before uploading to Codemagic or Google Play Store, essentially a private key associated with a public certificate (both contained in keystore file & password-protected)
-* **Workflow Editor** = GUI alternative to configuring _codemagic.yaml_
-
-## Configuration
+* Codemagic is linked to git repo via a GitHub Webhook that is setup to call a Codemagic API, triggering calls on desired event (push/PR update/**tag creation**)
 
 ### Code Signing
 
-* `/!\` **both** _upload-keystore.jks_ & _key.properties_ files must be excluded from git public source version control
+* [Flutter Docs: Sign the app](https://docs.flutter.dev/deployment/android#sign-the-app), once an *upload-keystore.jks* file is generated:
+  * Keystore generation (via `keytool` / Android Studio dialog, see [Android Studio](<../Android Studio.md>))
+  * Reference it from a *key.properties* file (in *android* folder)
+  * Modify *android/app/build.gradle.kts* to use signing for release (ie when executing `flutter build apk --release`)
+  * `/!\` **both** *upload-keystore.jks* & *key.properties* files must be excluded from git public source version control
 * [Codemagic - Android Code Signing](https://docs.codemagic.io/flutter-code-signing/android-code-signing)
-  * In Codemagic, _upload-keystore.jks_ file gets uploaded as-is, but not _key.properties_ whose passwords are simply filled in GUI fields
-* [Flutter Docs: Sign the app](https://docs.flutter.dev/deployment/android#sign-the-app), once an _upload-keystore.jks_ file is generated:
-  * Reference it from a _key.properties_ file (in _android_ folder)
-  * Modify _android/app/build.gradle.kts_ to use signing for release (ie when executing `flutter build apk --release`)
+  * In Codemagic, *upload-keystore.jks* file gets uploaded as-is, but not *key.properties* whose passwords are simply filled in GUI fields
+  * In [GitHub Settings > Actions > Repository secrets](https://github.com/<user>/<repository>/settings/secrets/actions), keystore file appears as base-64 encoded (write-only secret) text
 
-### Repository settings
+### [Google Play publishing with Flutter workflow editor](https://docs.codemagic.io/flutter-publishing/publishing-to-google-play)
 
-* Application name = _Timewalk_
-* Repository URL = <https://github.com/KevinTheMix/timewalk>
+* In Google Cloud, create a service account with *Service Account User* role (which provides an email address), then create a credentials JSON key for that server account (which downloads a JSON file)
+* In Google Cloud, in *API and Services* > *Library*, type **Google Play Android Developer API** and enable it
+* In Google Play Console, in *Users and Permissions*, invite that Google Cloud email address as user on given app, and give it all 3 *Versions* rights for an app (ie *update/deploy/manage tests*)
+* In Codemagic, in Distribution section, drop the Google Cloud service account credentials JSON file
+* [The very first version of the app must be added to Google Play manually](https://docs.codemagic.io/flutter-publishing/publishing-to-google-play/#setting-up-publishing-to-google-play-on-codemagic)
 
-### Webhooks
+## Glossary
 
-* Set a [Github Webhook](https://github.com/KevinTheMix/timewalk/settings/hooks) with API URL provided by Codemagic in _Webhooks_ tab
+* **App Signing Key** & **Upload Key** = see [Google Play](<../Google Play.md>)
+* **Workflow Editor** = GUI alternative to configuring *codemagic.yaml*
 
-### Workflow Editor
+## GUI Workflow Editor
 
-* Build for platforms = _Android_
-* Publish updates to user devices using Shorebird = _Disabled/Release/Patch_
-* Build triggers = _Trigger on tag creation_ (same as GitHub)
+* Set a [Github Webhook](https://github.com/<user>/<repository>/settings/hooks) pointing to Codemagic endpoint URL (in *Webhooks* tab)
+* Build for platforms = *Android*
+* Publish updates to user devices using Shorebird = *Disabled/Release/Patch*
+* Build triggers = *Trigger on tag creation* (same as GitHub)
 * Environment variables
   * `CM_CLONE_UNSHALLOW: true` = provides git commit history (for Sentry commit association to work, because in shallow mode there are no provided commits)
   * (`CM_CLONE_DEPTH: 100` = alternatively, specify an arbitrary git history depth)
@@ -49,20 +45,20 @@ CI/CD for Android, iOS, Flutter & React Native.
   * `$HOME/Library/Caches/CocoaPods` = iOS/CocoaPods
 * Pre-build script = (see dedicated section below)
 * Shorebird (aka Build step)
-  * Flutter version = (choose Shorebird default or specific if more advanced, eg _3.35.3_ at the moment ie 2025.11.19)
+  * Flutter version = (choose Shorebird default or specific if more advanced, eg *3.35.3* at the moment ie 2025.11.19)
   * Build arguments
-    * `--artifact apk` (for **Shorebird Release only**, specifies an _apk_ must be generated in addition to default _aab_)
+    * `--artifact apk` (for **Shorebird Release only**, specifies an *apk* must be generated in addition to default *aab*)
     * `-- --obfuscate --split-debug-info=build/symbols` (mind leading `--` to separate/indicate those are `flutter build` arguments, not shorebird's) = obfuscate and produce debug symbols
-* Post-build script = (removed renaming _apk_, as that removes it from result artifacts)
+* Post-build script = (removed renaming *apk*, as that removes it from result artifacts)
 * Distribution > Android code signing = (enabled)
-  * Keystore = _upload-keystore.jks_
+  * Keystore = *upload-keystore.jks*
   * Keystore password = (set)
-  * Key alias = _upload_
+  * Key alias = *upload*
   * Key password = (set)
-  * Note that that lets Codemagic generate its own _upload-keystore.jks_ (in android/app/) & _key.properties_ files using those settings
+  * Note that that lets Codemagic generate its own *upload-keystore.jks* (in android/app/) & *key.properties* files using those settings
 * Notifications > Email = (enabled)
 
-#### Pre-build script
+### Pre-build script
 
 Generate freezed/riverpod files (with caching):
 

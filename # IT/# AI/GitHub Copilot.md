@@ -13,6 +13,9 @@ GitHub's AI development platform and agent runtimes, connecting IDE/CLI experien
 
 ## Glossary
 
+* **Agent Host** (AH) = process owning agent sessions & running harnesses (Copilot, Claude, Codex), independently of clients (VS Code, JetBrains plugin)
+  * Local, remote (SSH/Tunnel/WSL) or Dev Container; talks to clients via the open Agent Host Protocol (AHP)
+  * `code agent host` = start a standalone host
 * **Agent Mode**
   * _Agent_ = default agent
   * _Ask_ = no access to certain tools (eg agent, edit)
@@ -27,6 +30,7 @@ GitHub's AI development platform and agent runtimes, connecting IDE/CLI experien
 * **Prompt file** = reusable Copilot _.prompt.md_ prompt invoked manually; supported by the Local harness (deprecated in favor of skills for Agent Host sessions)
 * **Skill** = Copilot's implementation of the Agent Skills standard; a folder containing _SKILL.md_ and optional files/templates
   * Invoke explicitly with `/<skill-name>`, or let the agent load it automatically when its description matches the task
+  * `disable-model-invocation: <true|false>` = determines whether an agent can initiate a skill, on only user (via a slash command)
 * **Slash command** = Copilot command entered with `/`; it may invoke a built-in action, prompt or skill (eg `/create-agent` and `/yolo` are commands, not skills)
 * [Tool](https://code.visualstudio.com/docs/agents/reference/tools-reference) = toggable agent capability, of 3 types:
   * _Built-in_ = provided by VS Code/Copilot (eg access devtools, browse web, `edit` files/folders, execute code, manage todo, read, search, `agent` toolset to delegate tasks to subagents)

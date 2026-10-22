@@ -96,7 +96,7 @@ Uses thin/minimal easily cache-able shell templates, whilst all logic belongs to
   * _strategy_ = _freshness_ (prefer network, fallback to cache) or _performance_ (prefer cache first)
 * _azure-pipelines.yml_ = Azure DevOps pipeline config for builds/tests/deployments
 * _karma.conf.js_ = test runner config (if project still uses Karma)
-* _package.json_ = define app name & version, Node scripts, dependencies (& dev dependencies), tool configs
+* _package.json_ = define app name & version, npm scripts (command aliases run via `npm run <alias>`, eg `ng build/serve`), (dev) dependencies, tool configs
 * _package-lock.json_ = exact dependency tree for reproducible installs
 * _tsconfig.json_ = TypeScript default configuration file, automatically looked for by compiler
 * _tsconfig.base.json_ = Angular CLI shared configuration for entire workspace (other files extend this one)
@@ -128,7 +128,8 @@ Let component implement interfaces (`@Component(…) class LoginDialogComponent 
   * `s(ervice)` = creates a Service
 * `ng new koko-app` = scaffold a new project
 * `ng serve` = hosts a project (at <http://localhost:4200>)
-  * `-(-)o(pen)` = hosts a project at <http://localhost:4200> & opens a browser
+  * `-c <config>` = serves using a named build configuration from _angular.json_ (eg `-c production`)
+  * `-o (--open)` = hosts a project at <http://localhost:4200> & opens a browser
 
 ## API
 

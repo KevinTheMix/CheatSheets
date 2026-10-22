@@ -41,10 +41,10 @@
   * Model picker & reasoning effort level (quality vs speed vs cost)
   * `/cost` skill = displays number of credits used for a task
 * [Microsoft Copilot Studio](https://copilotstudio.microsoft.com) = low-code studio to build/manage agents & workflows (actions, connectors), for makers, developers & IT pros
-  * **Harness** = engine running an agent/workflow, impacting reasoning & billing
-    * _GitHub Copilot harness_ = reasoning-heavy multi-step work
-    * _Standard harness_ = rule-based agents with designed topics
-    * _Copilot chat harness_ = extends Copilot Chat with organization knowledge
+  * **Harness** = Copilot Studio engine running an agent/workflow, chosen per agent & impacting reasoning & billing
+    * _Copilot chat_ = extends Copilot Chat with organization knowledge
+    * _GitHub Copilot_ = reasoning-heavy multi-step work
+    * _Standard_ = rule-based agents with designed topics
 * **Pay-As-You-Go** (PAYG) = usage-based billing through an Azure subscription instead of a full license (eg Copilot Chat agents using work data, SharePoint agents, Copilot Studio)
   * Admins define billing policies (users + Azure subscription + budget) connected to a Copilot service
 * [Power Platform](https://powerplatform.microsoft.com) = Microsoft low-code suite (Power Apps, Power Automate, Power BI, Power Pages, Copilot Studio)

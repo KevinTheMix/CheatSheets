@@ -109,7 +109,7 @@
 * `Winkey + ;` = emojis & more
 * `Winkey + A` = quick settings (Wi-Fi, Flight mode, Night light, Mobile hotspot, Accessibility, Volume, Project)
 * `Winkey + B` = focus on system tray
-* `Winkey + C` = Copilot
+* `Winkey + C` = Copilot (substitute for physical Copilot key)
 * `Winkey + D` = show Desktop
 * `Winkey + G` = Game capturing
 * `Winkey + H` = Microsoft Speech Services (voice typing)
@@ -148,6 +148,7 @@
 ## Run (Win +R or Start Menu)
 
 * `Ctrl + Shift + Enter` = Run as administrator
+* _%APPDATA%_ = `C:\Users\<user>\AppData\Roaming\`
 * _%userprofile%_ or simply `.` = user folder
 * _%windir%_ = Windows folder
 
