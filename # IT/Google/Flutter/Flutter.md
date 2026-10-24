@@ -54,6 +54,8 @@ Features:
 * Reference it from a *key.properties* file (in *android* folder)
 * Modify *android/app/build.gradle.kts* to use signing for release (ie when executing `flutter build apk --release`)
 * `/!\` **both** *upload-keystore.jks* & *key.properties* files must be excluded from git public source version control
+* The upload key is atually also used to sign locally built `--release` artifacts (so they can't update a Play-installed app, different signature)
+* Debug builds are signed too, since Android refuses to install an unsigned APK (use an auto-generated debug keystore *~/.android/debug.keystore* if left default, but configurable in *build.gradle.kts*)
 
 ## Glossary
 
@@ -156,29 +158,6 @@ Features:
 * **Rendering** = layout + paint + composition
 * [Shrink-wrap](https://flutteragency.com/what-does-the-shrink-wrap-property-does) = force a widget to pre-calculate its total size ~ its items
 
-### Lifecycles
-
-* `build(BuildContext context)` = called by Flutter (never directly) from a widget's Element
-  * Always return a new or cached (tree of) widget(s), ie it constitutes a reactive snapshot of UI
-  * It can be called possibly very often, whenever it (initState, setState) or its dependencies (parent or ancestor) change, or it needs to paint something and must have no side-effects
-* App
-  * **WidgetsBindingObserver** = mixin to observe various lifecycle events affecting overall app/widget tree (eg entering back/foreground, screen orientation/size, text scale factor, Android back button)
-    * Set `WidgetsBinding.instance.add|removeObserver(this)` & override `didChangeAppLifecycleState(state)`
-  * `WidgetsFlutterBinding.ensureInitialized()` = make sure there is an instance of **WidgetsBinding**, needed to use platform channels to call native code asynchronously (ie if *main* is `async`)
-* Widget don't have a lifecycle (other than `createState()`) as they're immutable
-* State
-  * *widget* = access to its associated widget's properties (usually passed down from parent)
-  * *context* = access to its associated widget's context (ie outside of `build()`, declare `late final` variables to use in an initializer)
-
-  * `initState()` = one-time init
-  * `setState()` = [takes in & executes an anonymous method, mostly contains *asserts*, then marks the Element dirty](https://iiro.dev/set-state)
-  * `didChangeDependencies()` = when a dependency changes (eg an **InheritedWidget** in `build()` changes), called immediately after `initState()`
-  * `didUpdateWidget()` = whenever (associated stateful) widget configuration changes (eg its input values), there's always a rebuild performed after this method
-  * `deactivate()` = called when this object is removed from its tree
-  * `dispose()` = widget removed from UI (always dispose controllers, focus nodes, streams, etc)
-  * *mounted* (bool) = true if this state is associated with a **BuildContext** (ie after creation/construction, ie before `initState()`, and until `dispose()` gets called)
-* StatefulElement = *initial* (created not mounted/attached), *active* (mounted to tree), *inactive* (temporarily removed), *defunct* (removed permanently)
-
 ## Environment
 
 * Flutter Material framework constants are defined in *%USER_APPDATA%/Local/flutter/packages/flutter/lib/src/material/constants.dart*
@@ -206,86 +185,23 @@ Features:
   * Might require closing/restarting the app, closing/reopening/reattaching (while the app is running) the browser tab
 * Some apps may require enabling symbolic links (launch Windows Developer Mode via Win + R > `start ms-settings:developers`)
 
-### [CLI](https://docs.flutter.dev/reference/flutter-cli)
-
-Use commands with either long/short names (eg `flutter --option=value` or just `flutter -o value`).
-
-* `flutter --version`
-* `flutter analyze` = inspect code and display all infos/warnings/errors
-* `flutter build {platform}` = build towards platform (ie *appbundle/apk/ios/web/windows*)
-  * `appbundle` = builds an [Android App Bundle (AAB)](../Android.md#glossary)
-  * `web` = [Build for web deployment](https://docs.flutter.dev/deployment/web)
-    * `--base-href {path}` = [HTML \<base> href](https://www.w3schools.com/Tags/att_base_href.asp)
-    * `--web-renderer {canvaskit|html|skwasm}` = specify renderer (ie *CanvasKit*, *HTML* & *WebAssembly*)
-    * *canvaskit* & *skwasm* both draw to a single HTML `<canva>`, can handle complex visual games/presentations
-    * *html* maps component to native HTML/CSS/JS elements (eg images as `<img>`), can handle basic CSS animations, better for SEO
-  * `--build-name` & `--build-number` = override version & build numbers, respectively
-  * `--dart-define={VAR}={value}` = define a local environment variable (eg `BUILD_MS=$(date +%s000)`, read via `int.fromEnvironment('{VAR}', defaultValue: {value})`)
-    * [Read This Before Using --dart-define in Your Flutter Build](https://medium.com/@ogbonnaijeoma871/d464159d96e4) = don't store sensitive information here
-  * `--obfuscate --split-debug-info={symbols_directory}` = obfuscate & save symbols mapping file to directory (for later de-obfuscating eg for debugging & stack trace)
-  * `--release` = build in *build/app/outputs/*
-  * `--split-per-abi` = produces multiple APK, each optimized to a specific [Application Binary Interface (ABI)](../Android.md#glossary)
-  * `--verbose`
-* `flutter channel [stable|beta|main]` = by inverse order of finalization (*stable* = production release, *beta* = latest finalized/tested release, *main* = ongoing dev)
-* `flutter clean` = clear build & packages cache (very useful before archiving/zipping an app source code)
-* `flutter config`
-  * `--list` = displays all current settings values
-* `flutter create .` = bootstraps a new project, or regenerate all missing platform-specific directories (ie *android*, *ios*, *linux*, *web*)
-  * Adding web support to existing app (see <https://docs.flutter.dev/get-started/web#add-web-support-to-an-existing-app>)
-* `flutter create kokoapp`
-  * `bug` = for bug report submissions
-  * `--empty` = generates a (barebone minimal) empty app (without comments)
-  * `--org "com.koko"` = organization in reverse domain name notation (used as namespace when developing/publishing plugin packages)
-  * `--platforms android,ios,linux,web,windows` = target platforms
-  * `--sample=widgets.SingleChildScrollView.1 mysample` = create new app from existing sample code
-  * `--template` = specify project type
-    * `skeleton` (*deprecated*) = generate a List View / Detail View app that follows community best practices (incompatible with `-e`)
-    * `package {name}` = package
-    * `plugin(_ffi) {name}` = package plugin
-* `flutter devices` = list all connected devices
-* `flutter doctor -v(erbose)` (Tip: use PowerShell to get Unicode support)
-* `flutter doctor --android-licenses`
-* `flutter format {filename}` = Format document
-* `flutter install` = install app to attached device
-* `flutter logs` = display console logs from target device
-* `flutter pub` = manages the *pubspec.yaml* file, which contains assets & dependencies, downloaded from <pub.dev>
-  * `add {package}` = downloads & add package to *pubspec.yaml*
-  * `add dev:{package}` = add package under *dev_dependencies* section
-  * `cache list` = lists cache locations (warning: large string)
-  * `cache repair`
-    * eg [Install intl](https://stackoverflow.com/a/51706630/3559724)
-  * `get` = explicitely pulls packages into the project & generates *pubspec.lock* (implied with `flutter run`)
-    * `flutter packages get` = [alias for the above](https://stackoverflow.com/a/61038022/3559724)
-  * `outdated` = display current/upgradable/latest versions for each dependency
-  * `upgrade` (+ `--major-versions` to force absolute latest)
-* `flutter run` = run app (on currently attached device)
-  * `r` = Hot reload, `R` = Hot restart (resets state), `h` = List commands, `d` = Detach (terminates run but app lives on), `c` = clrscr, `q` = Quit
-  * `-d(evice-id) <device>` = run to chosen device (eg `chrome`, `windows`)
-    * `web-server` ([works in any browser](https://stackoverflow.com/a/71518488))
-    * `web-server --web-renderer [html|canvaskit]` = same as build
-  * `--no-enable-impeller` = force use old Skia rendering engine
-  * `--profile` = runs app in profile mode, which is intended for performance analysis/testing on a device before deployment (no assertions, limited debugger, near release performance)
-    * Then type `P` in Terminal = displays profiling performance metrics overlay (on physical devices, not emulators)
-  * `--release` = compile to release mode (removes all debugging directives eg asserts)
-  * `--v(erbose)`
-  * [Fix "Parameter format not correct"](https://stackoverflow.com/a/69519005/3559724)
-  * [Fix "Nuget.exe not found, trying to download or use cached version"](https://stackoverflow.com/questions/71734042#comment135183930_75696306) (close **all** VS Code instances after installing or copying *nuget.exe*)
-* `flutter upgrade` = install latest Flutter version
-  * [Upgrade and clean cache](https://stackoverflow.com/a/64515721/3559724)
-
 ### Folder Structure
 
-* *.idea/* = Android Studio (built on JetBrains' IntelliJ **IDEA**) configuration
-* *.vscode/* = Visual Studio configuration (zoom level, etc)
-* *android/* = complete (passive) Android project used by Flutter (we don't need to change it)
-  * *app/src/debug/AndroidManifest.xml* = (eg set internet access via `<uses-permission android:name="android.permission.INTERNET"/>`)
-* *build/* = compile output generated by Flutter SDK
-* *ios/* = same as Android
-* *lib* = source files (everything is a library in Dart)
-  * *lib/main.dart*'s `main()` = entry point of a Flutter app (by convention)
-* *test/* = automated tests, using either (or both) of these packages:
-  * **test** (Dart SDK, Dart team) = pure-Dart logic, unit tests for logic, models, usecases, repositories (eg `dart test` or `flutter test`)
-  * **flutter\_test** (Flutter SDK) = Widget tests (UI, rendering, gestures, layout), Notifier tests (eg `flutter test` only)
+* **.idea/** = Android Studio (built on JetBrains' IntelliJ **IDEA**) configuration
+* **.vscode/** = Visual Studio configuration (zoom level, etc)
+* **android/** = complete (passive) Android project used by Flutter (we don't need to change it)
+  * **app/**
+    * **src/debug/** > *AndroidManifest.xml* = (eg set internet access via `<uses-permission android:name="android.permission.INTERNET"/>`)
+    * *build.gradle.kts* = holds signing config (references *key.properties* file par debug/release environment)
+  * *gradle\wrapper\gradle-wrapper.properties* = contains Gradle version (in *distributionUrl*)
+  * *settings.gradle.kts* = contains [AGP](<../Android Gradle Plugin.md###Versions>) version (in *com.android.application*)
+* **build/** = compile output generated by Flutter SDK
+* **ios/** = same as Android
+* **lib/** = source files (everything is a library in Dart)
+  * *main.dart*'s `main()` = entry point of a Flutter app (by convention)
+* **test/** = automated tests, using either (or both) of these packages:
+  * *test* (Dart SDK, Dart team) = pure-Dart logic, unit tests for logic, models, usecases, repositories (eg `dart test` or `flutter test`)
+  * *flutter_test* (Flutter SDK) = Widget tests (UI, rendering, gestures, layout), Notifier tests (eg `flutter test` only)
 * *.gitignore* = Git
 * *.metadata* (managed by Flutter SDK) = version ID
 * *{project_name}.iml* (managed by Flutter SDK) = project dependencies
@@ -334,6 +250,99 @@ Use commands with either long/short names (eg `flutter --option=value` or just `
 * `stle` = Statless Widget
 * `stfu` = Stateful widget
 * Don't forget you can auto-complete via camelCase initials (eg `sichsc + Tab` => **SingleChildScrollView**)
+
+## API
+
+### [CLI](https://docs.flutter.dev/reference/flutter-cli)
+
+Use commands with either long/short names (eg `flutter --option=value` or just `flutter -o value`).
+
+* `flutter --version`
+* `flutter analyze` = inspect code and display all infos/warnings/errors
+* `flutter build <appbundle|apk|ios|web|windows>` = build towards platform
+  * `appbundle` = builds an [Android App Bundle (AAB)](../Android.md#glossary)
+  * `web` = [Build for web deployment](https://docs.flutter.dev/deployment/web)
+    * `--base-href <path>` = [HTML \<base> href](https://www.w3schools.com/Tags/att_base_href.asp)
+    * `--web-renderer <canvaskit|html|skwasm>` = specify renderer (ie *CanvasKit*, *HTML* & *WebAssembly*)
+    * *canvaskit* & *skwasm* both draw to a single HTML `<canva>`, can handle complex visual games/presentations
+    * *html* maps component to native HTML/CSS/JS elements (eg images as `<img>`), can handle basic CSS animations, better for SEO
+  * `--build-name=<x.y.z>` & `--build-number=<n>` = override build version (name) & build number, respectively
+  * `--dart-define=<VAR>=<value>` = define a local environment variable (eg `BUILD_MS=$(date +%s000)`, read via `int.fromEnvironment('<VAR>', defaultValue: <value>)`)
+    * [Read This Before Using --dart-define in Your Flutter Build](https://medium.com/@ogbonnaijeoma871/d464159d96e4) = don't store sensitive information here
+  * `--no-shrink` = disable R8 (Android) to check whether release-only crashes come from it (else add keep rules, see [Android Gradle Plugin](<../Android Gradle Plugin.md>))
+  * `--obfuscate --split-debug-info=<symbols_directory>` = obfuscate & save symbols mapping file to directory (for later de-obfuscating eg for debugging & stack trace)
+  * `--release` = build in *build/app/outputs/*
+  * `--split-per-abi` = produces multiple APK, each optimized to a specific [Application Binary Interface (ABI)](../Android.md#glossary)
+  * `--verbose`
+* `flutter channel [stable|beta|main]` = by inverse order of finalization (*stable* = production release, *beta* = latest finalized/tested release, *main* = ongoing dev)
+* `flutter clean` = clear build & packages cache (very useful before archiving/zipping an app source code)
+* `flutter config`
+  * `--list` = displays all current settings values
+* `flutter create .` = bootstraps a new project, or regenerate all missing platform-specific directories (ie *android*, *ios*, *linux*, *web*)
+  * Adding web support to existing app (see <https://docs.flutter.dev/get-started/web#add-web-support-to-an-existing-app>)
+* `flutter create kokoapp`
+  * `bug` = for bug report submissions
+  * `--empty` = generates a (barebone minimal) empty app (without comments)
+  * `--org "com.koko"` = organization in reverse domain name notation (used as namespace when developing/publishing plugin packages)
+  * `--platforms android,ios,linux,web,windows` = target platforms
+  * `--sample=widgets.SingleChildScrollView.1 mysample` = create new app from existing sample code
+  * `--template` = specify project type
+    * `skeleton` (*deprecated*) = generate a List View / Detail View app that follows community best practices (incompatible with `-e`)
+    * `package <name>` = package
+    * `plugin(_ffi) <name>` = package plugin
+* `flutter devices` = list all connected devices
+* `flutter doctor -v(erbose)` (Tip: use PowerShell to get Unicode support)
+* `flutter doctor --android-licenses`
+* `flutter format <filename>` = Format document
+* `flutter install` = install app to attached device
+* `flutter logs` = display console logs from target device
+* `flutter pub` = manages the *pubspec.yaml* file, which contains assets & dependencies, downloaded from <pub.dev>
+  * `add <package>` = downloads & add package to *pubspec.yaml*
+  * `add dev:<package>` = add package under *dev_dependencies* section
+  * `cache list` = lists cache locations (warning: large string)
+  * `cache repair`
+    * eg [Install intl](https://stackoverflow.com/a/51706630/3559724)
+  * `get` = explicitely pulls packages into the project & generates *pubspec.lock* (implied with `flutter run`)
+    * `flutter packages get` = [alias for the above](https://stackoverflow.com/a/61038022/3559724)
+  * `outdated` = display current/upgradable/latest versions for each dependency
+  * `upgrade` (+ `--major-versions` to force absolute latest)
+* `flutter run` = run app (on currently attached device)
+  * `r` = Hot reload, `R` = Hot restart (resets state), `h` = List commands, `d` = Detach (terminates run but app lives on), `c` = clrscr, `q` = Quit
+  * `-d(evice-id) <device>` = run to chosen device (eg `chrome`, `windows`)
+    * `web-server` ([works in any browser](https://stackoverflow.com/a/71518488))
+    * `web-server --web-renderer [html|canvaskit]` = same as build
+  * `--no-enable-impeller` = force use old Skia rendering engine
+  * `--profile` = runs app in profile mode, which is intended for performance analysis/testing on a device before deployment (no assertions, limited debugger, near release performance)
+    * Then type `P` in Terminal = displays profiling performance metrics overlay (on physical devices, not emulators)
+  * `--release` = compile to release mode (removes all debugging directives eg asserts)
+  * `--v(erbose)`
+  * [Fix "Parameter format not correct"](https://stackoverflow.com/a/69519005/3559724)
+  * [Fix "Nuget.exe not found, trying to download or use cached version"](https://stackoverflow.com/questions/71734042#comment135183930_75696306) (close **all** VS Code instances after installing or copying *nuget.exe*)
+* `flutter upgrade` = install latest Flutter version
+  * [Upgrade and clean cache](https://stackoverflow.com/a/64515721/3559724)
+
+### Lifecycles
+
+* `build(BuildContext context)` = called by Flutter (never directly) from a widget's Element
+  * Always return a new or cached (tree of) widget(s), ie it constitutes a reactive snapshot of UI
+  * It can be called possibly very often, whenever it (initState, setState) or its dependencies (parent or ancestor) change, or it needs to paint something and must have no side-effects
+* App
+  * **WidgetsBindingObserver** = mixin to observe various lifecycle events affecting overall app/widget tree (eg entering back/foreground, screen orientation/size, text scale factor, Android back button)
+    * Set `WidgetsBinding.instance.add|removeObserver(this)` & override `didChangeAppLifecycleState(state)`
+  * `WidgetsFlutterBinding.ensureInitialized()` = make sure there is an instance of **WidgetsBinding**, needed to use platform channels to call native code asynchronously (ie if *main* is `async`)
+* Widget don't have a lifecycle (other than `createState()`) as they're immutable
+* State
+  * *widget* = access to its associated widget's properties (usually passed down from parent)
+  * *context* = access to its associated widget's context (ie outside of `build()`, declare `late final` variables to use in an initializer)
+
+  * `initState()` = one-time init
+  * `setState()` = [takes in & executes an anonymous method, mostly contains *asserts*, then marks the Element dirty](https://iiro.dev/set-state)
+  * `didChangeDependencies()` = when a dependency changes (eg an **InheritedWidget** in `build()` changes), called immediately after `initState()`
+  * `didUpdateWidget()` = whenever (associated stateful) widget configuration changes (eg its input values), there's always a rebuild performed after this method
+  * `deactivate()` = called when this object is removed from its tree
+  * `dispose()` = widget removed from UI (always dispose controllers, focus nodes, streams, etc)
+  * *mounted* (bool) = true if this state is associated with a **BuildContext** (ie after creation/construction, ie before `initState()`, and until `dispose()` gets called)
+* StatefulElement = *initial* (created not mounted/attached), *active* (mounted to tree), *inactive* (temporarily removed), *defunct* (removed permanently)
 
 ## Extensions
 

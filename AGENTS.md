@@ -18,8 +18,12 @@
   * File names and UI items/product examples in italics (eg `*_helpers.tpl*` or `*Traefik*`, but old runs of italics using underscores may exist eg `_old_`; not to be emulated)
   * CLI commands/options in backticks, with options nested under their command (eg `--debug` under `helm upgrade`)
   * Command placeholders use chevrons (eg `kubectl logs <pod>`), even if the file already uses curly braces elsewhere
-* Glossary entries sorted alphabetically (third-party tools may form a separate trailing block)
+* Keep alphabetical order when possible
+  * Glossary entries (third-party tools may form a separate trailing block)
+  * CLI/API commands & their nested options (eg `-Force` before `-Recurse`)
 * Terse style: no trailing periods, `&` instead of "and", `eg`/`ie` without dots, `/` for alternatives (eg "create/manage")
+* Avoid article "the" whenever possible, even if not strictly grammatical: drop it, or replace with "a"/"that" (eg "trust OS store" / "use a PEM file")
+* Keep one-liner bullets ideally ≤ 180 chars; move extra detail into nested sub-bullets
 
 ## Markdown
 

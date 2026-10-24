@@ -29,7 +29,7 @@
 * **Function Calling** (aka Tool Calling) = an LLM is given a list of available external operations (often via JSON schema), and can request one then receive its output
   * Eg read/write/grep/search files, DB, code/string manipulation, commands/shell script, code analysis, Git(Hub), web browser, Slack, calendars
 * **GPT** (Generative Pre-trained Transformer) = deep learning generative large language model created by OpenAI that can process complex questions & generate text/code
-* **Harness** = software layer that runs an agent session & communicates with an LLM (usually via an HTTP API carrying structured JSON): builds context, executes tool calls & loops until done, handles approvals & session state
+* **Harness** = software layer that runs an agent session & communicates with an LLM (usually via an HTTP API carrying structured JSON): builds context, aggregate availables tools (built-in & MCP), executes tool calls & loops until done, handles approvals & session state
 * **Hook** = command executed at a configured point in an agent lifecycle (eg before/after a tool call)
 * **Model Context Protocol** (MCP, originally created by Anthropic) = client-server protocol standardizing how AI applications connect to external capabilities
   * **MCP Client** = component inside the host holding a 1:1 connection to one server (JSON-RPC over stdio/HTTP): lists its capabilities (`tools/list`) & forwards the model's tool calls (`tools/call`)

@@ -23,6 +23,7 @@
   * [Platform Tools](https://developer.android.com/tools/releases/platform-tools) = primarily **adb** & **fastboot** exe (see section below)
 * [Android Studio](https://developer.android.com/studio) = full Android development SDK, for building apps on Android devices
   * Includes **Android SDK Platform Tools** (which are also available as standalone tools)
+* **AGP** (Android Gradle Plugin) = Gradle plugin building apps into *.apk*/*.aab*, see [Android Gradle Plugin](<Android Gradle Plugin.md>)
 * **ABI** (Application Binary Interface) = low-level interface to a specific CPU architecture
 * [ARM](https://www.androidcentral.com/what-arm-cpu) (Acorn RISC Machine) = English company selling low-power processor architecture used in mobiles
   * By extension, an architecture (instructions set) for low-power scalable CPUs used in mobile devices (**ARM Code** is basically a name for (mobile native) machine code)
@@ -63,34 +64,36 @@
 * **Apktool** = assemble/disassemble/reverse engineer Android *.apk* files
 * **Heimdall** = a cross-platform tool for interacting with Download mode on Samsung devices
 * **Odin** = utility used by Samsung to reset (or flash) their smartphones
-* **ProGuard** = open source CLI to shrink/optimize/obfuscate Java code (distributed as part of Android SDK)
 * **ScrCpy** (Screen Copy) = Android screen mirroring tool
+
+## Environment
 
 ### Versions
 
-| Name        | Major | V  | Year |
-| ----        | ----- | -- | ---- |
-| Gingerbread | 2.3   | 7  | 2010 |
-| Honeycomb   | 3.2   | 8  | 2011 |
-| ICS         | 4     | 9  | 2011 |
-| Jelly Bean  | 4.1   | 10 | 2012 |
-| Jelly Bean  | 4.2   | 10 | 2012 |
-| Jelly Bean  | 4.3   | 10 | 2013 |
-| Jelly Bean  | 4.3.1 | 10 | 2013 |
-| KitKat      | 4.4   | 11 | 2013 |
-| Lollipop    | 5     | 12 | 2014 |
-| Marshmallow | 6     | 13 | 2015 |
-| Nougat      | 7     | 14 | 2016 |
-| Oreo        | 8     | 15 | 2017 |
-| Pie         | 9     | 16 | 2018 |
-| Q           | 10    | 17 | 2019 |
-| Android 11  | 11    | 18 | 2020 |
-| Android 12  | 12    | 19 | 2021 |
-| Android 12L | 12.1  | 19 | 2022 |
-| Android 13  | 13    | 20 | 2022 |
-| Android 14  | 14    | 21 | 2023 |
-| Android 15  | 15    | 22 | 2024 |
-| Android 16  | 16    | 23 | 2025 |
+| Year | #  | Name        | Major | API |
+| ---- | -- | ----        | ----- | --- |
+| 2010 | 7  | Gingerbread | 2.3   | 9   |
+| 2011 | 8  | Honeycomb   | 3.2   | 13  |
+| 2011 | 9  | ICS         | 4     | 14  |
+| 2012 | 10 | Jelly Bean  | 4.1   | 16  |
+| 2012 | 10 | Jelly Bean  | 4.2   | 17  |
+| 2013 | 10 | Jelly Bean  | 4.3   | 18  |
+| 2013 | 10 | Jelly Bean  | 4.3.1 | 18  |
+| 2013 | 11 | KitKat      | 4.4   | 19  |
+| 2014 | 12 | Lollipop    | 5     | 21  |
+| 2015 | 13 | Marshmallow | 6     | 23  |
+| 2016 | 14 | Nougat      | 7     | 24  |
+| 2017 | 15 | Oreo        | 8     | 26  |
+| 2018 | 16 | Pie         | 9     | 28  |
+| 2019 | 17 | Q           | 10    | 29  |
+| 2020 | 18 | Android 11  | 11    | 30  |
+| 2021 | 19 | Android 12  | 12    | 31  |
+| 2022 | 19 | Android 12L | 12.1  | 32  |
+| 2022 | 20 | Android 13  | 13    | 33  |
+| 2023 | 21 | Android 14  | 14    | 34  |
+| 2024 | 22 | Android 15  | 15    | 35  |
+| 2025 | 23 | Android 16  | 16    | 36  |
+| 2026 | 24 | Android 17  | 17    | 37  |
 
 ### [Partitions](https://source.android.com/devices/bootloader/partitions)
 
@@ -120,7 +123,7 @@ This *.zip* package must first be opened (e.g. in the *platform-tools* folder) t
 
 Note that custom ROMs only include the system image.
 
-## [Android SDK Platform Tools](https://developer.android.com/studio/releases/platform-tools) (contains ADB, fastboot, systrace)
+### [Android SDK Platform Tools](https://developer.android.com/studio/releases/platform-tools) (contains ADB, fastboot, systrace)
 
 * In device manager, phones appear with different names depending on device power & (USB debugging session) autorization status
   * Powered-on & authorized phone appears as *Galaxy Nexus*

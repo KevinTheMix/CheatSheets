@@ -10,11 +10,17 @@ Suite of cloud computing services offered by Google (for computing, data storage
 ## Glossary
 
 * **Cloud Hub** = unified, application-centric view of the resources, health, costs, deployments & support cases across projects
+* **Cloud Run** = serverless platform running a container image, with auto-scaling (down to zero), HTTPS & pay-per-use; simplest way to run containers
+* **Compute Engine** (GCE) = virtual machines (IaaS), with OS, CPU/RAM & patching managed by you
+* **Google Kubernetes Engine** (GKE) = managed Kubernetes; Google runs control plane (& optionally nodes with *Autopilot* mode)
 * **IAM** (Identity & Access Management) = controls who (principal) can do what (role) on which resource; policies set at org/folder/project/resource level, inherited downwards
 * **Project** = base container for all resources (VMs, buckets, databases, APIs…), with its own ID, billing account, IAM policies & enabled APIs
 * **Service Account** = non-human identity for an app/VM/workload to call Google Cloud APIs, with permissions via IAM roles; prefer attached identity over JSON keys (security risk)
   * Required to publish an Android app on Google Play from CI/CD (eg *Codemagic*, *Fastlane*) as the *Google Play Developer API* only accepts authenticated identities
   * A CI/CD pipeline can't log in interactively (2FA) with a personal Google account, so it authenticates with the service account's JSON key instead
+    * JSON key = bearer secret without 2FA: whoever holds it *is* the service, so a leak is a full compromise
+    * Safer alternatives = *Workload Identity Federation* (OIDC, short-lived token from CI, no stored secret), attached service account (*GCE*/*GKE*/*Cloud Run*) or impersonation
+    * If a key is unavoidable = least-privilege role, dedicated account per workload, store in CI secret store/secret manager, rotate regularly
   * It acts as a dedicated robot user, with least-privilege rights granted in *Google Play Console* (eg *Releases* permissions) & easy to revoke without affecting real users
   * Setup: enable *Google Play Android Developer API* in a project, create service account & JSON key, then invite its email in *Play Console* > *Users & permissions*
 

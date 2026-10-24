@@ -4,6 +4,8 @@ CI/CD for Android, iOS, Flutter & React Native.
 
 ## Quick Tips
 
+* [Free tier](https://codemagic.io/pricing) (personal plan) = 500 free build minutes/month on *macOS M2* machines (refilled monthly), 1 parallel build, 120 min max per build, 30 days build history/artifact storage, 3GB cache per build
+  * Beyond 500 minutes, standard rates apply (eg *M2* $0.095/min, *Linux X2*/*Windows* $0.045/min)
 * Codemagic is linked to git repo via a GitHub Webhook that is setup to call a Codemagic API, triggering calls on desired event (push/PR update/**tag creation**)
 * [Google Play publishing with Flutter workflow editor](https://docs.codemagic.io/flutter-publishing/publishing-to-google-play)
   * In Google Cloud, create a service account with *Service Account User* role (which provides an email address), then create a credentials JSON key for that server account (which downloads a JSON file)

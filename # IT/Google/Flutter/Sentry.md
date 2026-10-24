@@ -14,7 +14,6 @@
 * **In-App** = application code vs **Not In-App** = framework, SDK, system libraries
 * **PII** (Personaly Identifiable Information) = request headers and IP for users (see <https://docs.sentry.io/platforms/dart/data-management/data-collected>)
 * **Proguard** = open-source Android shrink/minify/optimize/obfuscate CLI
-* **R8** = Android app optimizer/compiler (shrink/minify, remove unused code & resources, rewrite optimized code) Java tool
 * **Sentry CLI** = administrative tool (eg to upload symbols/sources/maps or delete projects)
 * **Source Context** = sources uploaded to display inline context (surrounding code snippets) in stack traces (by setting  **upload_sources** to true)
   * Uploading sources _after_ errors were already sent to Sentry (without sources) retroactively add sources to those exceptions

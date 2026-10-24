@@ -10,7 +10,7 @@ Java basé sur OAK et Smalltalk (et C++ interagit pour amélioration)
 * ~~surcharge des opérateurs~~ primitifs (sauf + pour concaténation des strings)
 * ~~Templates~~
 * C++ : composants graphique gérés par l'IDE
-* Java est beaucoup plus orienté objet, tout est objet, tout est une classe, même _main_, qui est une méthode (statique car on instancie pas le programme)
+* Java est beaucoup plus orienté objet, tout est objet, tout est une classe, même *main*, qui est une méthode (statique car on instancie pas le programme)
 * Garbage Collector => on ne doit pas effacer nous-même la mémoire allouée dynamiquement
 * No default parameter => use **method overload**
 * Héritage : toujours `public`
@@ -23,7 +23,7 @@ Java basé sur OAK et Smalltalk (et C++ interagit pour amélioration)
 ## Glossary
 
 * **JVM** (Java Virtual Machine) = machine-specific install, runs portable bytecode
-* _.class_ file = portable, compiled IL bytecode
+* *.class* file = portable, compiled IL bytecode
 * **AWT** (Abstract Window Toolkit) = API to develop platform-dependent (calling the native platform/OS to create GUI components) GUI/windows-based applications
 * **JFC** (Java Foundation Classes)
 * **Garbage Collection** = reaps orphan objects (ie without references left) in heap, non-deterministic (so not ideal for real-time applications) but can be tuned via CLI or using dedicated reference types (see below)
@@ -56,16 +56,17 @@ Java basé sur OAK et Smalltalk (et C++ interagit pour amélioration)
 ## Libraries
 
 * [AndroMDA](http://andromda.sourceforge.net/andromda-documentation/getting-started-java) = generates code components from UML models
-* [Ant](https://ant.apache.org) (_Apache_) = Java build tool
+* [Ant](https://ant.apache.org) (*Apache*) = Java build tool
 * codecoverage
 * [EMMA](http://emma.sourceforge.net) = Java code coverage tool ([Open Source Code Coverage Tools](https://java-source.net/open-source/code-coverage))
 * [FindBugs](http://findbugs.sourceforge.net) = free Java code static analysis tool
-* [Gradle](https://gradle.org) = multi-language (C++, Java, JavaScript) build tool
+* [Gradle](https://gradle.org) (2007) = JVM build tool (Java, Kotlin, Groovy, Scala), successor to Ant/Maven with incremental builds & dependency management, scripted in Groovy/Kotlin (*build.gradle*/*build.gradle.kts*)
+  * Also builds C/C++/Swift & is Android's official build system (via [Android Gradle Plugin](<Google/Android Gradle Plugin.md>))
 * [HTML Parser list](https://java-source.net/open-source/html-parsers)
   * [HTML Parser](http://htmlparser.sourceforge.net) = HTML parsing
   * [NekoHTML](http://nekohtml.sourceforge.net) = parse/fix HTML documents via XML interfaces
 * JUnit = unit testing in Java
-* [Maven](https://maven.apache.org/what-is-maven.html) (_Apache_) = build, management & automation tool for java projects
+* [Maven](https://maven.apache.org/what-is-maven.html) (*Apache*) = build, management & automation tool for java projects
 * [Moconti](http://hick.org/~raffi/moconti.html) = light-weight application server to create web sites using **Sleep** (see below)
 * [MySQL Connector/J](https://www.w3resource.com/mysql/mysql-java-connection.php) = MySQL AB's JDBC Type 4 driver for MySQL
 * [Pooka](https://suberic.net/pooka) = e-mail client written in Java

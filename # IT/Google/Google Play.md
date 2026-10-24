@@ -20,25 +20,41 @@ Google's Android app store.
 * [Tracks](https://support.google.com/googleplay/android-developer/answer/14151465)
   * **Internal Testing** = optional phase for dev team to quickly test Play Store features (up to 100 users), no human review necessary
     * Link is (well hidden) in *Test and publish* > *Tests* > *Internal tests* > *Testers* tab > **Copy link**
-  * **Closed Testing** = share with wide group of at least 12 external friends & family users (**mandatory step to publish to production**)
+  * **Closed Testing** = share with wide group of external friends & family users
+    * Multiple parallel closed testing tracks can be created (eg *Alpha* default closed track)
   * **Open Testing** = publish so anyone can test (à la open beta version, available when production access is obtained)
   * **Production** = publish to billions
+    * Requires 12+ testers opted in Closed Testing continuously for 14 days (only for personal accounts created after 2023.11.13, older & organization accounts are exempt)
   * An app in Internal & Closed Testing track cannot be found in Play Store and can be accessed via a Play Store dedicated link
-* **Upload Key** = key used to sign bundle before uploading to Google Play, only proving uploader identity (Google replaces its signature with the App Signing Key's)
+* **Upload Key** = key used to sign app bundle (ie AAB/APK, not the source code) before uploading to Google Play
+  * Proves app comes from you when uploading (an AAB manually from local computer or via CI/CD platform) to Google Play, which then re-signs it with its own Play App Signing key
   * Essentially a private key associated with a public certificate (both contained in a keystore file & password-protected, see [Android Studio](<Android Studio.md>))
   * Resettable via Play support if lost
 
-## Menus
+## Console Menus
 
-* *Accueil* > *Applications épinglées* > *Voir l'application*
-  * *Tableau de bord* = voir les étapes restantes requises pour procéder aux différents canaux de test et à la publication
-  * *Vue d'ensemble de la publication* = vérifier & envoyer des modifications effectuées pour validation
-  * *Tester et publier*
-    * *Versions et bundles les plus récents* = packages dispos et deployés dans les différents canaux de test
-    * *Production* = Tableau de bord des releases, Versions, Pays/Régions
-    * *Tests* = configurer les différents canaux de test
-      * *Tests ouverts* = Versions, Pays/Régions (peut être synchronisés aka copiés des paramètres Pays/Régions de Production), **Testeurs**
-      * *Tests fermés* > Gérer le canal = Versions, Pays/Régions, **Testeurs**
-      * *Tests internes* = Versions, **Testeurs**
-* *Users and permissions* = accounts that can access that developer account, invite new users, manage their rights
-* [Validation des développeurs Android](https://developer.android.com/developer-verification/guides) (requis àpd 30/09/2026) = validation des entités réelles (individus ou organisations)
+* *Accueil* = see all apps
+* *Gérer le compte*
+  * *Détails du compte*
+  * *Utilisateurs et autorisations* = accounts that can access that developer account, invite new users, manage their rights
+  * *Journal d'activité* = activity log/history
+  * *Groupes de testeurs* = manage testers e-mails lists
+  * [Validation des développeurs Android](https://developer.android.com/developer-verification/guides) (mandatory since 30/09/2026) = real entities (ie people/organisations) validation
+* `<My app>` = switch app
+* *Tableau de bord* = checklists of remaining required steps for each test & publishing tracks
+* *Statistiques*
+* *Vue d'ensemble de la publication* = verify & send configuration modifications for review
+* *Protégé avec Play* > *Protection Play Store* > *Gérer la signature d'application Play* = manage/reset import (aka upload) and signing key, download certificates, copy hashes
+* *Tester et publier*
+  * *Versions et bundles les plus récents* = latest app deployed versions (per track) & available bundles/packages
+  * *Production* = releases dashboard, versions, countries/regions
+  * *Tests* = note that countries/regions of **Closed/Open** tracks can be synchronized with **Production** parameters
+    * *Tests ouverts* = versions, countries/regions, testers
+    * *Tests fermés* > *Gérer le canal* = versions, countries/regions, testers
+    * *Tests internes* = versions & testers
+  * *Préinscription*
+  * *Intégrité des applis* = moved to *Protégé avec Play*
+  * *Paramètres avancés*
+* *Surveiller et améliorer*
+* *Accroître le nombre d'utilisateurs*
+* *Monétiser avec Play*

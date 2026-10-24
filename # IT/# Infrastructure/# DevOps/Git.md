@@ -193,7 +193,11 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * `<branch>` == `git switch <branch>`
   * `<commit>` = checks out specified commit (detaches *HEAD*, not on a branch anymore), works only if there are no unstaged changes or the commit is the last one
   * `-b <branch>` = creates a branch and checks it out
-* `git cherry pick <commit_hash>` = replays changes introduced by specified commit onto current branch (as a new commit with a new hash)
+* `git cherry-pick <commit>` = replays changes introduced by specified commit onto current branch (as a new commit with a new hash)
+  * `<commit>` = commit from any branch (even not merged) as long as it exists in local repo (`git fetch` first for remote ones); long or short hash (≥ 4 chars, ie unambiguous, 7 is usual) or any ref (eg `<branch>~2`)
+  * `<commit1>..<commit2>` = range (excludes `<commit1>`)
+  * `-x` = appends origin hash to the commit message
+  * `--continue`/`--abort` = after/instead of resolving conflicts
 * `git clean -fdx` = deletes all gitignored/untracked files (add `-n` option to preview but not do) (**warning**: destructive)
 * `git commit` = when a message is not provided, the default text editor is launched and its result fed as message
   * `-m "<message>"`
@@ -244,7 +248,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * `<branch>` = switches to branch (by moving HEAD to (latest commit of) that branch), or does nothing if already on that branch
   * `-` (with hyphen === `@{-1}`) = switch to previous branch (more precisely the previous location in *HEAD* reflog, non-destructive)
   * `-c <branch>` = create branch from current branch
-  * `-c <branch> <from>` = create branch from given branch or commit
+  * `-c <branch> <from>` = create branch from given branch, tag or commit (any start-point, eg `git switch -c hotfix v1.0.0`)
   * `--detach` = detaches HEAD from current branch (content of *HEAD* file changes from a symbolic branch ref to a commit hash)
 * `git tag` (same with `-l(ist)`) = lists all tags (repo-wide, no matter where you currently are)
   * `<tag>` = creates a **lightweight** tag (ie a version/release name eg `git tag v1.0.0`) at latest commit (ie pointer to current commit/HEAD) without extra metadata (eg message, author, date)

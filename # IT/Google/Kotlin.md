@@ -7,7 +7,6 @@ Compiles to JVM, or JavaScript for IOS support.
 ## Glossary
 
 * [Activity](https://developer.android.com/reference/kotlin/android/app/Activity)
-* **Gradle** = build automation tool supporting Java, Kotlin, C/C++ & JavaScript
 
 ## API
 
