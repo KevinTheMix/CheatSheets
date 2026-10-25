@@ -27,8 +27,10 @@ Very cheap for starting apps until they grow an active userbase, with a well-doc
 * **Firebase Cloud Messaging** = push messages to apps
 * **firebase-tools** = FOSS CLI tools to test, manage, and deploy Firebase projects
 * _firestore.rules_ = file that configures DB access authorization, using Common Expression Language
+* **Firebase Remote Config** = key/value parameters (of any type, broader than just boolean feature flags) fetched by apps at runtime to change behavior/appearance without publishing an update
+  * Supports conditions (eg platform, version, user segment, % rollout) & A/B tests
 * **Realtime Database** = historical all-JSON DB
-* (DB) **Stream** = subscription to real-time changes
+* **Stream** = DB subscription to real-time changes
 
 ## Environment
 

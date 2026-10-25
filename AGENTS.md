@@ -24,6 +24,12 @@
 * Terse style: no trailing periods, `&` instead of "and", `eg`/`ie` without dots, `/` for alternatives (eg "create/manage")
 * Avoid article "the" whenever possible, even if not strictly grammatical: drop it, or replace with "a"/"that" (eg "trust OS store" / "use a PEM file")
 * Keep one-liner bullets ideally ≤ 180 chars; move extra detail into nested sub-bullets
+* Sheets are for quick scanning, not deep dives: favor terseness, drop anything a header/parent entry already says
+* Verified info only: check claims against official docs (or tool `--help`) & drop/flag anything unverified (eg no "untested" remarks)
+* One definition per concept, in the sheet where it belongs; link from other sheets only when it's a useful shortcut, preferably to a specific section (eg `[Link](<File.md#header>)`) rather than a whole file (cross-links pad text, Ctrl+F is enough most of the time)
+* Files get their own italic entries (`* *<file>* = …`) listed before alphabetical bold entries, stating **mandatory**/**optional** & which tool produces/consumes them
+* Separate commands/options get separate entries (eg `--obfuscate` vs `--split-debug-info`), never combined
+* Use official spelling/casing of names (eg *ProGuard*); after removing/renaming a section, fix links pointing to it
 
 ## Markdown
 

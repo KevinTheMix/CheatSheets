@@ -3,7 +3,7 @@
 ## Quick Tips
 
 * `(?<![\w\\])_(?!\s)([^_\r\n]*?\S)(?<!\\)_(?![\w])` = find Markdown underscores italics (then replace with asterisks by `*$1*`)
-  * Leaves expressions containing underscores alone (eg `path_to` is correctly ignored, but `_path\_to_` as well and must be fixed manually so look for `\_` afterwards)
+  * Search (without regex) for `\_` afterwards to detect expressions not replaced (eg `_path\_to_`)
   * Underscores within code blocks are also replaced, which may not be desirable
 
 ## Glossary

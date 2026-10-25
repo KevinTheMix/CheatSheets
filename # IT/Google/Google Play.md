@@ -29,9 +29,12 @@ Google's Android app store.
 * **Upload Key** = key used to sign app bundle (ie AAB/APK, not the source code) before uploading to Google Play
   * Proves app comes from you when uploading (an AAB manually from local computer or via CI/CD platform) to Google Play, which then re-signs it with its own Play App Signing key
   * Essentially a private key associated with a public certificate (both contained in a keystore file & password-protected, see [Android Studio](<Android Studio.md>))
+  * Per-app registration, but it can be shared across apps
   * Resettable via Play support if lost
 
-## Console Menus
+## Environment
+
+### GUI Menus
 
 * *Accueil* = see all apps
 * *Gérer le compte*

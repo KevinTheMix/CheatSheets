@@ -4,28 +4,68 @@ CI/CD for Android, iOS, Flutter & React Native.
 
 ## Quick Tips
 
+* Environment variables (eg `CM_CLONE_UNSHALLOW`) can be defined either:
+  * In *codemagic.yaml* (`environment.vars`) as plain-text
+  * In Codemagic GUI (*Application* > *Environment variables* tab, appropriate for secrets-only)
+    * Variables defined here are only injected if their group is listed in `environment.groups` (unlike [Workflow Editor](#gui-workflow-editor), which applies them automatically)
 * [Free tier](https://codemagic.io/pricing) (personal plan) = 500 free build minutes/month on *macOS M2* machines (refilled monthly), 1 parallel build, 120 min max per build, 30 days build history/artifact storage, 3GB cache per build
   * Beyond 500 minutes, standard rates apply (eg *M2* $0.095/min, *Linux X2*/*Windows* $0.045/min)
-* Codemagic is linked to git repo via a GitHub Webhook that is setup to call a Codemagic API, triggering calls on desired event (push/PR update/**tag creation**)
-* [Google Play publishing with Flutter workflow editor](https://docs.codemagic.io/flutter-publishing/publishing-to-google-play)
-  * In Google Cloud, create a service account with *Service Account User* role (which provides an email address), then create a credentials JSON key for that server account (which downloads a JSON file)
-  * In Google Cloud, in *API and Services* > *Library*, type **Google Play Android Developer API** and enable it
-  * In Google Play Console, in *Users and Permissions*, invite that Google Cloud email address as user on given app, and give it all 3 *Versions* rights for an app (ie *update/deploy/manage tests*)
-  * In Codemagic, in Distribution section, drop that Google Cloud service account credentials JSON file
-  * [The very first version of the app must be added to Google Play manually](https://docs.codemagic.io/flutter-publishing/publishing-to-google-play/#setting-up-publishing-to-google-play-on-codemagic)
+
+### [Publishing to Google Play](https://docs.codemagic.io/flutter-publishing/publishing-to-google-play)
+
+* In Google Cloud, create a service account with *Service Account User* role (which provides an email address), then create a credentials JSON key for that server account (which downloads a JSON file)
+* In Google Cloud, in *API and Services* > *Library*, type **Google Play Android Developer API** and enable it
+* In Google Play Console, in *Users and Permissions*, invite that Google Cloud email address as user on given app, and give it all 3 *Versions* rights for an app (ie *update/deploy/manage tests*)
+* In Codemagic, in Distribution section, drop that Google Cloud service account credentials JSON file
+* [The very first version of the app must be added to Google Play manually](https://docs.codemagic.io/flutter-publishing/publishing-to-google-play/#setting-up-publishing-to-google-play-on-codemagic)
 
 ## Glossary
 
 * **App Signing Key** & **Upload Key** = see [Google Play](<../Google Play.md>)
 * **Workflow Editor** = GUI alternative to configuring *codemagic.yaml*
 
-## Menus
+## Environment
 
-* Settings > *Code signing identities* = where you setup [Android Code Signing](https://docs.codemagic.io/flutter-code-signing/android-code-signing)
-  * Local app signing setup (keystore, *key.properties*, *build.gradle.kts*): see [Flutter](Flutter.md#android-code-signing)
-  * *upload-keystore.jks* file gets uploaded as-is, but not *key.properties*: its values are simply filled in GUI fields, and Codemagic regenerates the file at build time (so it must not be committed)
-  * *build.gradle.kts* must use the variable names from Flutter's signing docs, as Codemagic relies on them (with `codemagic.yaml`, it exposes `CM_KEYSTORE_PATH`/`CM_KEYSTORE_PASSWORD`/`CM_KEY_ALIAS`/`CM_KEY_PASSWORD` env vars instead)
-  * Note that in *GitHub Settings > Actions > Repository secrets*, a  keystore file appears as base-64 encoded (write-only secret) text
+### codemagic.yaml
+
+* Placed at repo root; defines one or more workflows (each = independent build config)
+* Top-level keys
+  * `definitions` (optional) = reusable YAML anchors (eg shared scripts/env)
+  * `workflows` = map of workflow ids
+* Workflow keys (under `workflows.<id>`)
+  * `artifacts` = glob patterns of files to keep (eg `build/**/outputs/**/*.aab`)
+  * `cache` = `cache_paths` list
+  * `environment` = build setup
+    * `android_signing` = keystore reference(s) from *Code signing identities* (exposes `CM_KEYSTORE_*` & `CM_KEY_*` env vars)
+    * `flutter`/`xcode`/`java` = tool versions (eg `stable`)
+    * `groups` = references UI-defined variable groups (secrets go there, marked *Secure*)
+    * `vars` = plain-text environmment variables, stored in repo
+  * `instance_type` = build machine (eg `mac_mini_m2`, `linux_x2`)
+  * `max_build_duration` = minutes before build is killed
+  * `name` = display name
+  * `publishing` = `email`, `google_play` (`credentials`, `track`), `slack`...
+  * `scripts` = ordered build steps (`name` + `script`), run before `artifacts`
+  * `triggering` = `events` (`push`/`pull_request`/`tag`), with `branch_patterns`/`tag_patterns`
+
+### GUI Menus
+
+* **Applications** = edit application configuration, start new build
+  * *codemagic.yaml* = versioned config-as-code alternative to [Workflow Editor](#gui-workflow-editor) (workflows, scripts, triggers, publishing), committed at repo root
+  * *Environment variables* = per-app/group variables & secrets, injected in build, secrets are encrypted & can be shared across apps via groups
+  * *Caching* = dependency cache paths kept between builds (eg `$HOME/.pub-cache`, `$HOME/.gradle/caches`), 3GB max
+  * *Webhooks* = URL to register in git provider (eg GitHub) so push/PR/tag events trigger builds, recent deliveries history/log
+  * *Scheduled builds* = cron-like recurring builds (eg nightly) on chosen branch/workflow
+  * *Repository settings* = application name, icon, **archive/delete**
+* **Builds** = view & restart all past/ongoing builds, download AAB/APK artifacts
+* **Settings**
+  * *General settings*
+  * *codemagic.yaml settings*
+    * *Code signing identities* = where you setup [Android Code Signing](https://docs.codemagic.io/flutter-code-signing/android-code-signing)
+      * Local app signing setup (keystore, *key.properties*, *build.gradle.kts*): see [Flutter](Flutter.md#android-code-signing)
+      * *upload-keystore.jks* file gets uploaded as-is, but not *key.properties*: its values are simply filled in GUI fields, and Codemagic regenerates the file at build time (so it must not be committed)
+      * *build.gradle.kts* must use the variable names from Flutter's signing docs, as Codemagic relies on them (with `codemagic.yaml`, it exposes `CM_KEYSTORE_PATH`/`CM_KEYSTORE_PASSWORD`/`CM_KEY_ALIAS`/`CM_KEY_PASSWORD` env vars instead)
+      * Note that in *GitHub Settings > Actions > Repository secrets*, a  keystore file appears as base-64 encoded (write-only secret) text
+  * *Danger zone* = delete account
 
 ### GUI Workflow Editor
 

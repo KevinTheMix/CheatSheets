@@ -1,6 +1,8 @@
 # Android Gradle Plugin
 
-Gradle plugin (AGP) adding Android-specific build logic (compile, resources, dexing, shrinking, packaging, signing) to turn sources into *.apk*/*.aab* files.
+Gradle plugin (AGP) orchestrating Android build toolchain (*javac*/*kotlinc*, *AAPT2*, *D8*/*R8*, signing) to produce *.apk*/*.aab* files.
+Gradle itself is a generic task runner and knows nothing about Android or compilation.
+AGP registers Android-specific tasks, and each task calls a real tool (Java and/or Kotlin compiling/linking, dexing/shrinking, resources, signing/packaging).
 
 ## Quick Tips
 
@@ -23,29 +25,31 @@ Gradle plugin (AGP) adding Android-specific build logic (compile, resources, dex
 
 ## Glossary
 
+* *mapping.txt* = produced by R8 (or ProGuard via `-printmapping`) to de-obfuscate Java/Kotlin stack traces (upload to Play Console/Crashlytics/Sentry), found in *build/outputs/mapping/\<variant>/*
 * **AAPT2** (Android Asset Packaging Tool) = compiles & links resources (*res/*, *AndroidManifest.xml*) into binary format & generates `R` class
 * `androidComponents` = variant API (replacing `applicationVariants`, removed in AGP 9.0) to customize variants/artifacts/tasks from plugins
 * **Build Tools** = SDK component (`buildToolsVersion`) bundling AAPT2, D8, `zipalign`, `apksigner`, selected by AGP (minimum depends on AGP version)
 * **Build Type** = build configuration variant (eg `debug`, `release`) setting minification, signing, debuggable flag, etc
 * **BuildConfig** = generated class exposing build-time constants (eg `DEBUG`, `VERSION_NAME`); generation is opt-in since AGP 8.0 (`buildFeatures { buildConfig = true }`)
 * **D8** = dexer converting Java bytecode (*.class*) to DEX (Dalvik Executable, executed by ART), replacing DX
+* **Dexing** = converting Java bytecode (*.class*) to DEX (*classes.dex*), done by D8 (or R8 when shrinking)
+  * Single DEX file is limited to 65,536 methods: beyond that, code is split into several files (multidex, native since `minSdk` 21)
 * **Dynamic Feature Module** = module delivered on demand via an *.aab* (plugin `com.android.dynamic-feature`)
 * **Flavor** (product flavor) = variant dimension for different versions of an app (eg `free`/`paid`, `dev`/`prod`)
   * A **build variant** is a build type × flavor(s) combination (eg `devDebug`), each with its own tasks (eg `assembleDevDebug`)
 * **Namespace** = package for generated `R`/`BuildConfig` classes, set by `namespace` in build file (replaces `package` attribute of *AndroidManifest.xml*, mandatory since AGP 8.0)
-* **ProGuard** = open source CLI to shrink/optimize/obfuscate Java code (distributed as part of Android SDK), superseded by R8 in AGP but its rules files (*proguard-rules.pro*) are still read (see [Android Gradle Plugin](<Android Gradle Plugin.md>))
-* **R8** = default shrinker/obfuscator/optimizer (also does dexing, replacing ProGuard, see [Android](Android.md)), enabled via `isMinifyEnabled = true` (Flutter release builds do by default, see `--no-shrink` in [Flutter](<Flutter/Flutter.md>))
+* **ProGuard** = open source CLI to shrink/optimize/obfuscate Java code (distributed as part of Android SDK), superseded by R8 in AGP but its rules files (*proguard-rules.pro*)
+* **R8** = default shrinker/obfuscator/optimizer (also does dexing, replacing ProGuard), enabled via `isMinifyEnabled = true` (Flutter release builds do by default, see `--no-shrink` in [Flutter](<Flutter/Flutter.md>))
   * Removes unused code (& resources with `isShrinkResources = true`), reads ProGuard-format *proguard-rules.pro* (keep rules)
-  * Produces *mapping.txt* to de-obfuscate stack traces (upload to Play Console/Crashlytics/Sentry)
 * **Version Catalog** = *gradle/libs.versions.toml* centralizing dependency & plugin versions (including AGP), referenced as `libs.<alias>`
 
 ### Plugins
 
 * `com.android.application` = builds an app (*.apk*/*.aab*)
-* `com.android.library` = builds a library (*.aar*, Android ARchive: code, resources & manifest)
 * `com.android.dynamic-feature` = on-demand feature module
-* `com.android.test` = separate test module (eg instrumentation/macrobenchmark)
 * `com.android.kotlin.multiplatform.library` = Android target of a Kotlin Multiplatform library module
+* `com.android.library` = builds a library (*.aar*, Android ARchive: code, resources & manifest)
+* `com.android.test` = separate test module (eg instrumentation/macrobenchmark)
 
 ### Versions
 
@@ -59,16 +63,16 @@ Gradle plugin (AGP) adding Android-specific build logic (compile, resources, dex
 
 ## Environment
 
-### Files
+### Folder Structure
 
-* *settings.gradle(.kts)* = declares modules (`include(":app")`) & plugin/dependency repositories (`google()`, `mavenCentral()`), plugin versions in `pluginManagement`/`plugins`
-* *build.gradle(.kts)* (root) = plugin versions for all modules (eg `id("com.android.application") version "9.4.0" apply false`)
-* *app/build.gradle(.kts)* = module config (`android { namespace, compileSdk, defaultConfig, buildTypes, productFlavors }`, `dependencies`)
+* **app/**
+  * *build.gradle(.kts)* = module config (`android { namespace, compileSdk, defaultConfig, buildTypes, productFlavors }`, `dependencies`)
+* **gradle/wrapper/** > *gradle-wrapper.properties* = Gradle version (`distributionUrl`)
+* *build.gradle(.kts)* (root) = build settings shared by all modules (eg plugin versions `id("com.android.application") version "9.4.0" apply false`)
 * *gradle.properties* = Gradle/AGP flags (eg `org.gradle.jvmargs`, `android.useAndroidX`)
 * *local.properties* = machine-specific `sdk.dir` (not committed)
-* *gradle/libs.versions.toml* = version catalog
-* *gradle/wrapper/gradle-wrapper.properties* = Gradle version (`distributionUrl`)
 * *proguard-rules.pro* = R8 keep rules
+* *settings.gradle(.kts)* = declares modules (`include(":app")`) & plugin/dependency repositories (`google()`, `mavenCentral()`), plugin versions in `pluginManagement`/`plugins`
 
 ### CLI (`gradlew`)
 

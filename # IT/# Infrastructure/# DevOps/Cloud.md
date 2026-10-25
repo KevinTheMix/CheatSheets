@@ -61,7 +61,7 @@
 
 ### Delivery & Deployment
 
-* **Feature Flags** = individual switches that control activation of newly added functionalities so they can be turned on/off (always off first in production) until cleaned up when ready, piloted remotely (eg Firebase Remote Config)
+* **Feature Flags** = individual switches that control activation of newly added functionalities so they can be gradually rolled out/toggled (always off first in production) until cleaned up when ready, piloted remotely (eg Firebase Remote Config)
 
 * **AppVeyor** = desktop CI/CD service used to build/test projects hosted on GitHub & co (GitLab, BitBucket)
 * **Fastlane** = open source CLI automation toolkit for mobile app tasks (screenshots, beta, app stores, code signing), part of CI/CD pipeline (acquired by Google)
