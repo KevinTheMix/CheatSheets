@@ -179,6 +179,7 @@ See <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statement
 * **Lodash** = extension toolkit (eg LINQ-style collection manipulation methods, deep cloning, debouncing, etc.)
 * [Mermaid](https://mermaid.js.org) = open-source library for text-based diagrams (often used with Markdown eg on GitHub)
 * **Moment.js** = dates library
+* **pako** = zlib port to pure JavaScript (deflate/inflate/gzip)
 * **Polymer** = open-source JavaScript library (by Google) for building web applications using Web Components standard model (custom elements, shadow DOM, HTML templates)
 * **Redux** = open-source state management JS library (written in TypeScript)
 * **Socket.IO** = bi-directional client-server communication (via WebSocket or HTTP long-polling as a fallback)

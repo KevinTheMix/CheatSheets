@@ -1,5 +1,11 @@
 # Autism
 
+## Quick Tips
+
+* [Set old reddit as default](https://www.reddit.com/r/help/comments/1n779ww/comments/npty8uy)
+  * Add a new *redesign_optout* cookie (in reddit.com, not old.reddit.com) with Value *true* & Expires one year from now
+  * Or [register to beta test features]( https://www.reddit.com/r/help/comments/1n779ww/comments/nt2qj69)
+
 ## Threads
 
 * [Definitive Guide to Confidence](https://www.reddit.com/r/seduction/comments/s9m4b)
@@ -65,13 +71,13 @@
 * [Rules for appartment rental](https://www.reddit.com/r/LifeProTips/comments/2rwneo/comment/cnk9wj7)
 * [Sell your (cyber) experience](https://www.reddit.com/r/cybersecurity/comments/lxurtt/comment/gpp7m8g)
 * [Sex in mismatched libido couples](https://np.reddit.com/r/sexover30/comments/538uat/comment/d7r5hys)
-* [Sexual Fantasy](https://www.reddit.com/r/AskReddit/comments/111huh/comment/c6ih7fa) (2012.10.06) = _nothing fancy, but just hot_
+* [Sexual Fantasy](https://www.reddit.com/r/AskReddit/comments/111huh/comment/c6ih7fa) (2012.10.06) = *nothing fancy, but just hot*
 * [Steps to improving](https://www.reddit.com/r/AskReddit/comments/d1oq82/comment/ezp8opb/?context=3)
 * [Suicide not](https://www.reddit.com/r/atheism/comments/rr0bl/comment/c47zg09)
 * [Tinnitus](https://www.reddit.com/r/AskReddit/comments/dsnyvs/comment/f6rf05m/?context=3) = white noise, clock ticking, tapping on walls
 * [Ulysses Bucket list](https://www.reddit.com/r/AskReddit/comments/258w8s/comment/chex9eq) = ask strangers a thing they have done or want to do
 * [Wake up like a goddamn bull](https://www.reddit.com/r/DoesAnybodyElse/comments/cm06w/comment/c0tiy0q) (Warlizard)
-* [What’s the hottest thing your bf/gf has said during sex?](https://www.reddit.com/r/AskReddit/comments/1ch8jxg) (2024.05.01) = _I know, I just like sucking your dick_
+* [What’s the hottest thing your bf/gf has said during sex?](https://www.reddit.com/r/AskReddit/comments/1ch8jxg) (2024.05.01) = *I know, I just like sucking your dick*
 * [Why do you hate rap?](https://www.reddit.com/r/Music/comments/h6wv5/comment/c1t2199)
 * [Why you need 4TB of porn](https://www.reddit.com/r/politics/comments/no6pr/comment/c3anr8q/?context=3)
 * [WOMAN](https://www.reddit.com/r/AskReddit/comments/2676wn/comment/chocz53) = LOVEMAKING DEN
@@ -85,9 +91,9 @@
 
 ## Quotes
 
-* _Whenever you read something you don't understand, that's the only chance you're ever given to recognize the opportunity to learn something new._
+* *Whenever you read something you don't understand, that's the only chance you're ever given to recognize the opportunity to learn something new.*
   * [Source](https://www.reddit.com/r/AskReddit/comments/avhh3/reddit_have_you_ever_read_a_book_that_changed/c0jm5tf)
-* _The grass is not greener on the other side, it's green where you water it_
+* *The grass is not greener on the other side, it's green where you water it*
   * [Source](https://www.reddit.com/r/AITAH/comments/19agrbx/comment/kil0gw4)
 
 ### IamA 17 year old blind guy who was shot by his father AMA

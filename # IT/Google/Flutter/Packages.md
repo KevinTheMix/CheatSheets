@@ -95,7 +95,7 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
 * **google_maps_flutter** (*@flutter.dev*)
 * **google_sign_in** (*@flutter.dev*)
 * **image_picker** (*@flutter.dev*) = pick image from library or take a new one with camera
-* **in_app_purchase** (*@flutter.dev*) = storefront-independent API for purchases
+* **in_app_purchase** (*@flutter.dev*) = storefront-agnostic (eg Google/iOS) API for purchases
 * **ios_platform_images** (*@flutter.dev*) = share images between Flutter and iOS
 * **local_auth** (*@flutter.dev*) = local on-device authentication (fingerprint reader, touch/face ID)
 * **path_parsing** (*@flutter.dev*) = create & manipulate paths, parse Path from SVG data string
@@ -216,15 +216,17 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
 * **searchfield** (*@maheshjamdade.com*) = simple customizable autocomplete search widget
 * **sentry** (*@sentry.io*) = Sentry SDK for pure Dart ([Sentry](https://sentry.io) performance monitoring & error tracking)
 * **sentry_dart_plugin** (*@sentry.io*) = build-time tool uploading debug symbols/sources/source maps to Sentry (`dart run sentry_dart_plugin`, see [Sentry](Sentry.md) & [setup](https://docs.sentry.io/platforms/dart/guides/flutter/debug-symbols/dart-plugin), [config file](https://github.com/getsentry/sentry-dart-plugin/tree/main))
-  * Separate dev dependency, also added by Sentry Wizard (see *sentry_flutter*), but not by *sentry_flutter* alone (manual setup = add it yourself)
-  * Reads settings from several places, highest priority wins (not read by SDK embedded in app, that one uses `options` in `SentryFlutter.init`)
-    * Environment variables (**SENTRY_PROJECT**, **SENTRY_ORG**, **SENTRY_AUTH_TOKEN**, **SENTRY_RELEASE**)
-    * `--sentry-define=<key>=<value>` command-line argument (eg `dart run sentry_dart_plugin --sentry-define=release=my-app@1.0.0`)
-    * *pubspec.yaml* (eg `sentry: key: value`)
-    * *sentry.properties* (eg `key=value` and **don't append trailing comments**, holds **auth_token**, git-ignored)
+  * Plugin uploads *.symbols* (Dart debug information file) & *obfuscation.map.json* (Dart symbol obfuscation map), via `dart run sentry_dart_plugin` (after `flutter build`)
+  * Settings are read from several places by priority:
+    1. Environment variables (**SENTRY_DSN**, **SENTRY_ORG**, **SENTRY_PROJECT**, **SENTRY_RELEASE**, **SENTRY_AUTH_TOKEN**)
+    2. CLI (ie `dart run sentry_dart_plugin --sentry-define=<key>=<value>` eg `release=my-app@1.0.0`)
+    3. *pubspec.yaml*
+    4. *sentry.properties* = git-ignored sensitive file (appropriate for holding **auth_token**), created by Sentry Wizard, read by Sentry Dart Plugin
+  * `options` (in `SentryFlutter.init()`) = runtime SDK settings, separate from Plugin settings (eg `dsn`, `release`, `environment`, `enableLogs`, `sendDefaultPii`, `tracesSampleRate`)
+    * `release` should match Plugin's **release** (default *name@version* from *pubspec.yaml*) so uploaded symbols/source maps apply to reported events
   * Properties
     * **auth_token** = token required for using Sentry CLI administrative tool
-    * **build_path** = folder holding debug files to upload (apparently can be used as workaround if upload fails for some debug information files)
+    * **build_path** = base build directory (default *build*)
     * **dart_symbol_map_path** = path to Dart obfuscation map file to upload (for Android/iOS, as generated via `--extra-gen-snapshot-options=--save-obfuscation-map`)
     * **log_level** = logging level (ie *trace*, *debug*, *info*, *warn*, *error*)
     * **org** = organization slug
@@ -234,12 +236,14 @@ From Dart's point of view, Flutter is actually a package like any other (ie it's
     * **upload_source_maps** (web applications only) = translates minified (Javascript) code back to original source code
     * **upload_sources** = helps display source code snippets in stack traces (aka Source Context)
 * **sentry_flutter** (*@sentry.io*) = Sentry SDK for Flutter (see [Sentry](Sentry.md))
-  * Install via Sentry Wizard = `npx @sentry/wizard@latest -i flutter` (or `brew`/standalone binary, see [docs](https://docs.sentry.io/platforms/dart/guides/flutter/#install))
+  * Install via Sentry Wizard (which also installs **sentry_dart_plugin**)
     * Adds *sentry_flutter* & *sentry_dart_plugin* (dev dependency, see above) to *pubspec.yaml*
     * Creates git-ignored *sentry.properties* holding **auth_token**
     * Patches *main.dart* with `SentryFlutter.init`
     * Prompts for optional features (tracing, session replay, logs)
     * Adds a sample error (to remove afterwards)
+  * [sqflite integration](https://docs.sentry.io/platforms/dart/guides/flutter/integrations/sqflite-instrumentation)
+  * [Troubleshooting](https://docs.sentry.io/platforms/dart/guides/flutter/troubleshooting)
 * **slang** (*@tienisto.com*) = simplify L10n, breaks down large translation files into smaller ones (via namespaces), access values via nested keys (à la jQuery)
 * **sliver_tools** (*@pietervanloon.com*) = missing sliver package (related: [SliverFooter](https://stackoverflow.com/a/49621060/3559724) by Rémy Rousselet)
 * **system_tray** (-) = design a system tray menu for desktop (Linux, macOS, Windows) opening from the system tray app icon

@@ -13,6 +13,11 @@ GitHub is a web platform hosting (mostly software) projects using Git.
 
 ## Glossary
 
+* **Dependabot** = (user created, now GitHub-maintained) bot that opens pull requests to update vulnerable/outdated dependencies (eg npm, pip, Maven, NuGet, Docker, GitHub Actions)
+  * *.github\dependabot.yml* = **optional** config for **version updates** (ecosystem, directory, schedule), read from default branch
+  * **Alerts** = notify about vulnerable dependencies (enabled in *Settings > Advanced Security*)
+  * **Security updates** = automatic pull requests fixing alerted dependencies, no config file needed
+  * **Version updates** = scheduled pull requests keeping dependencies current, need *dependabot.yml*
 * **Deploy Keys** = a SSH key attached to a single GitHub repo that grants read/write access to that repo only, without requiring a personal user account (mostly intended for CI/CD, servers, bots)
   * *~/.ssh/config* = file that tells SSH which private key to use for which host/alias
   * Generate a public/private pair of SSH keys in a *.ssh* folder via `ssh-keygen -t ed25519 -f ~\.ssh\<key_name> -C <public_key_comment>` (`mkdir .ssh` if it does not exist yet)

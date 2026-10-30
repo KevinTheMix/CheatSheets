@@ -25,13 +25,11 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 ## Glossary
 
 * [Alias](https://githowto.com/aliases) = single term shorthand for a longer command (defined in any config file under the *alias* section)
-* **Branch** = a reference pointing to the *latest commit in that branch*
-  * A branch is *not* a chain of commits; even though commits can be said to be *on* a branch, branches play no role in a commits (self-sufficient) chain/history
-  * It's true that a branch can be made to point to an earlier commit (via `reset`), but that just means that the earlier commit becomes the latest one for that branch
-  * Creating a branch equates creating a new pointer to the current commit (multiple branches can point to the same commit, notably in the case of a branch creation)
-  * **Tip of a branch** = the specific (latest) commit that the branch points to
+* **Branch** = movable reference to a single commit (ie that branch's **tip**); history is whatever is reachable by following that commit's ancestors
+  * Creating a branch = creating a new pointer to current commit (several branches can point to same commit)
+  * New commits/`reset` only move pointer; commits don't belong to a branch
   * **Remote-Tracking Branch** = local reference (not a real branch you can work on) to state of remote branch, ie readonly/immutable copy of last known state of remote branches (updated via `git fetch`/`git pull`)
-    * Reside as refs in *refs/remotes/origin/**, where they can technically be modified (don't do that)
+    * Resides as refs in *refs/remotes/origin/**, where they can technically be modified (don't do that)
   * See [Branchig & Merging](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging)
 * **Cache** = another term for the staging area
 * **Cherry picking** = applying specific commit(s) from one branch onto another without merging full branch history (eg applying a *main* fix to an older *release* branch)
@@ -59,8 +57,9 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * A dedicated *release* branch is created from *develop* once enough features have accumulated in it, which can receive bug fixes or release-oriented changes
   * Once finalized, *release* is merged into both *main* (tagged) and *develop* (to integrate latest bugfixes & releases changes), then deleted
   * *hotfix* branches can be created off *main* for quick production patches, they are merged into both *main* and *develop* (or the current *release*)
-* **HEAD** = a special reference (stored in the `.git/HEAD` file) to either a branch (via a symbolic reference eg `ref: refs/heads/main`, hence its last commit) or directly a specific commit (then said to be in a **detached HEAD** state)
-  * **Detached HEAD** is useful to make experimental changes and create easily discardable **detached/orphaned commits** (ie that don't belong to any branch)
+* **HEAD** = a special reference (stored in the `.git/HEAD` file, ie one per worktree) to either a branch (via a symbolic reference eg `ref: refs/heads/main`, hence its last commit) or directly a specific commit (then said to be in a **detached HEAD** state)
+  * **Detached HEAD** = when *HEAD* points to a commit
+  * **Detached/Orphaned Commits** = commits made from a detached head belonging to no branch, become unreachable & eventually garbage collected once *HEAD* moves away (unless a branch/tag is created on them)
 * **Hooks** = set of dedicated files (in *.git/hooks/*) that can be edited to perform some scripted treatments at some specific lifecycle events (eg *pre-commit*, *pre-push*, *pre-rebase*)
 * **Index** = another term for the staging area
 * **Merge** = combines changes from a given branch into current branch (usually main/master branch), with any conflicts pausing operation until user has manually resolved all of them
@@ -147,6 +146,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * `git log` = lists commits history in anti-chronological order (ie last first)
   * `<branch>` = lists commits history (parental ancestry) for that branch (*HEAD* by default, if a tag has same name use full branch namespace eg `refs/heads/<branch>`)
   * `<tag>` = lists commits history for that tag (if tag has same name as a branch, Git complains and displays tag commits history)
+  * `-<n>` = n last commits
   * `--all` = includes all commits (not just the ancestors of currently checked-out)
   * `--author="<name>"`
   * `--date=<format>` = formats all dates (eg `short`, `iso`, `local`, `relative` eg "2 hours ago")
@@ -179,6 +179,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * `-c <branch>` = copies existing branch to new branch name (does not check it out, to create & switch use `git switch -c <branch>` or older `git checkout -b <branch>`)
   * `-d <branch>` = delete a local branch (safe delete ie blocksgit if branch contains commits that haven't been merged)
   * `-D <branch>` = delete a local branch (force delete)
+  * `-f <branch> <commit>` = repoints existing branch to a commit (can't target a branch checked out in any worktree; for current one use `git reset`)
   * `-m|-M (<old>) <new>` = rename a branch (current branch if *old* not provided)
   * `-r(remote)` = lists remote-tracking branches (ie local read-only pointers/references to state of branches on a remote, eg *origin/main*)
   * `-u <remote>/<branch>` (or `--set-upstream-to <remote>/<branch>`) = links local branch to remote branch (adds (max one, previous gets replaced) *branch* section in `.git/config`)

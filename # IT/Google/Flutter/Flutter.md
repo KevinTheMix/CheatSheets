@@ -268,15 +268,15 @@ Use commands with either long/short names (eg `flutter --option=value` or just `
     * *canvaskit* & *skwasm* both draw to a single HTML `<canva>`, can handle complex visual games/presentations
     * *html* maps component to native HTML/CSS/JS elements (eg images as `<img>`), can handle basic CSS animations, better for SEO
   * `--build-name=<x.y.z>` & `--build-number=<n>` = override build version (name) & build number, respectively
-  * `--dart-define=<VAR>=<value>` = define a compile-time constant (eg `BUILD_MS=$(date +%s000)`, read via `int.fromEnvironment('<VAR>', defaultValue: <value>)`)
+  * `--dart-define=<VAR>=<value>` = define a compile-time constant (eg `BUILD_MS=$(date +%s000)`, read via `int|String.fromEnvironment('<VAR>', defaultValue: <value>)`)
     * Not a process environment variable: value is baked into binary at build time (not read from device env at runtime)
     * [Read This Before Using --dart-define in Your Flutter Build](https://medium.com/@ogbonnaijeoma871/d464159d96e4) = don't store sensitive information here
-  * `--extra-gen-snapshot-options=<options>` = pass raw options to Dart AOT compiler (aka *gen_snapshot*, ie last compile step of a profile/release build, which includes obfuscation, not used in debug, see [Dart](<../Dart.md>))
-    * `--save-obfuscation-map=<file>` = write Dart JSON obfuscation map (eg *build/app/obfuscation.map.json*, needed by Sentry's `dart_symbol_map_path`)
-      * Json contains an array of original/obfuscated name pairs (eg `["MaterialApp","ex"]`) to look up obfuscated names (only useful with `--obfuscate`)
+  * `--extra-gen-snapshot-options=<options>` = pass raw options to Dart AOT compiler (*gen_snapshot*) as last compile step (with optional obfuscation) of a profile/release build (ie not used in debug)
+    * `--save-obfuscation-map=<file>` = Dart symbol obfuscation map (ie original/obfuscated name pairs, eg *obfuscation.map.json*, needed by Sentry's `dart_symbol_map_path`)
   * `--no-shrink` = disable R8 (Android) to check whether release-only crashes come from it (else add keep rules, see [Android Gradle Plugin](<../Android Gradle Plugin.md>))
-  * `--obfuscate` = obfuscate Dart code (requires `--split-debug-info` to later de-obfuscate by extracting debug information into a separate *.symbols* file)
+  * `--obfuscate` = obfuscate Dart code (requires `--split-debug-info` to later de-obfuscate)
   * `--release` = build in *build/app/outputs/*
+  * `--split-debug-info` = extracts debug information into a separate *.symbols* file (à la C# *.pdb*), **mandatory** for readable stack traces of obfuscated builds
   * `--split-per-abi` = produces multiple APK, each optimized to a specific [Application Binary Interface (ABI)](../Android.md#glossary)
   * `--verbose`
 * `flutter channel [stable|beta|main]` = by inverse order of finalization (*stable* = production release, *beta* = latest finalized/tested release, *main* = ongoing dev)

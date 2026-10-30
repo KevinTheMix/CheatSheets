@@ -15,7 +15,7 @@
 * Content is mostly bullet lists using `*`, nested with 2-space indentation
 * Format: `* **Element** (acronym) = definition`
   * Element in bold, acronym in parentheses right after it, then ` = `
-  * File names and UI items/product examples in italics (eg `*_helpers.tpl*` or `*Traefik*`, but old runs of italics using underscores may exist eg `_old_`; not to be emulated)
+  * File names and UI items/product examples in italics (eg `*_helpers.tpl*` or `*Traefik*`, older underscore italics such as `_old_` should not be emulated)
   * CLI commands/options in backticks, with options nested under their command (eg `--debug` under `helm upgrade`)
   * Command placeholders use chevrons (eg `kubectl logs <pod>`), even if the file already uses curly braces elsewhere
 * Keep alphabetical order when possible
@@ -23,14 +23,18 @@
   * CLI/API commands & their nested options (eg `-Force` before `-Recurse`)
 * Terse style: no trailing periods, `&` instead of "and", `eg`/`ie` without dots, `/` for alternatives (eg "create/manage")
 * Avoid article "the" whenever possible, even if not strictly grammatical: drop it, or replace with "a"/"that" (eg "trust OS store" / "use a PEM file")
-* Keep one-liner bullets ideally ≤ 180 chars; move extra detail into nested sub-bullets
+* Keep one-liner bullets ideally ≤ 180 chars, and move extra detail into nested sub-bullets
 * Sheets are for quick scanning, not deep dives: favor terseness, drop anything a header/parent entry already says
 * Verified info only: check claims against official docs (or tool `--help`) & drop/flag anything unverified (eg no "untested" remarks)
-* One definition per concept, in the sheet where it belongs; link from other sheets only when it's a useful shortcut, preferably to a specific section (eg `[Link](<File.md#header>)`) rather than a whole file (cross-links pad text, Ctrl+F is enough most of the time)
+* One definition per concept, in the sheet where it belongs
+  * Link from other sheets only when it's a useful shortcut, preferably to a specific section (eg `[Link](<File.md#header>)`) rather than a whole file, since cross-links pad text and Ctrl+F is usually enough
 * Files get their own italic entries (`* *<file>* = …`) listed before alphabetical bold entries, stating **mandatory**/**optional** & which tool produces/consumes them
 * Separate commands/options get separate entries (eg `--obfuscate` vs `--split-debug-info`), never combined
-* Use official spelling/casing of names (eg *ProGuard*); after removing/renaming a section, fix links pointing to it
+* Use official spelling/casing of names (eg *ProGuard*)
+  * After removing/renaming a section, fix links pointing to it
 
 ## Markdown
 
 * Every header line is followed by one blank line before content
+* Do not use semicolons in Markdown
+  * Use commas, parentheses, or list sub-items instead to separate clauses or additional details

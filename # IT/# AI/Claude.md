@@ -39,6 +39,10 @@
 
 * `/compact` = discard existing context window and replace it with a shorter summary (to avoid context rot)
 * `/init` = analyzes project (architecture) & adds a _CLAUDE.md_ file
+* `/login`
+* `/tui` = print active terminal renderer
+  * `/tui default` = switch to classic renderer (relaunches with conversation intact)
+  * `/tui fullscreen` = switch to flicker-free alt-screen renderer (research preview; saves `tui` setting)
 * `#` = create a memory
 * `!` = enter bash mode (add command to context sent with next request)
 * `@` = add a file/folder to context

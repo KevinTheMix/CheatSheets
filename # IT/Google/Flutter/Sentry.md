@@ -19,6 +19,7 @@
 * **OpenTelemetry Protocol** (OTLP) = vendor-neutral standard/protocol for emitting traces/logs/metrics (Sentry accepts them via its OTLP endpoint)
 * **PII** (Personaly Identifiable Information) = request headers and IP for users (see <https://docs.sentry.io/platforms/dart/data-management/data-collected>)
 * **Sentry CLI** = administrative tool (eg to upload symbols/sources/maps or delete projects)
+* [Sentry Wizard](https://github.com/getsentry/sentry-wizard) = helps setup React Native, Flutter, Apple, Android, Cordova, Electron, Next.js, Nuxt, Remix or SvelteKit projects
 * **Source Context** = sources uploaded to display inline context (surrounding code snippets) in stack traces (by setting  **upload_sources** to true)
   * Uploading sources *after* errors were already sent to Sentry (without sources) retroactively add sources to those exceptions
 * **Stack Frame** = each entry in a call stack (ie active non-inline function calls/hops)
@@ -48,13 +49,4 @@
 
 ### Flutter
 
-* *.symbols* (Debug Information File) = Dart debug info from `--split-debug-info` (**mandatory** for readable stack traces of obfuscated builds), uploaded by Sentry Dart Plugin
 * *mapping.txt* = R8/ProGuard mapping for Android Java/Kotlin stack traces (**mandatory** only if R8/ProGuard enabled, ie Flutter release default), uploaded by Sentry Android Gradle Plugin (see [Android Gradle Plugin](<../Android Gradle Plugin.md>))
-* *obfuscation.map.json* (Dart Symbol Map) = Dart name pairs from `--save-obfuscation-map` for readable obfuscated issue titles (**optional**), set via `dart_symbol_map_path`
-* *sentry.properties* = git-ignored file holding secret **auth_token** (**optional**, alternative = `SENTRY_AUTH_TOKEN` env variable), created by Sentry Wizard, read by Sentry Dart Plugin
-* **DSN** setting = `options.dsn` in `SentryFlutter.init`, hardcoded (or set at build time via `--dart-define=<KEY>=<dsn>` + `const String.fromEnvironment('<KEY>')` combo)
-  * If `options.dsn` is unset, SDK reads `SENTRY_DSN` env variable (not applicable in runtimes without process env, eg browser), else sends no events
-* **Install** via Sentry Wizard & configure Sentry Dart Plugin (symbol uploads, see *sentry_flutter* & *sentry_dart_plugin* in [Packages](Packages.md))
-  * Plugin uploads *.symbols* & *obfuscation.map.json*, run via `dart run sentry_dart_plugin` after `flutter build`
-* [sqflite integration](https://docs.sentry.io/platforms/dart/guides/flutter/integrations/sqflite-instrumentation)
-* [Troubleshooting](https://docs.sentry.io/platforms/dart/guides/flutter/troubleshooting)
