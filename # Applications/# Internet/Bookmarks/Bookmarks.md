@@ -6,6 +6,7 @@
 * [I won't forget you Marco](https://www.buzzfeed.com/jtes/how-to-deal-with-an-unruly-passenger-on-a-cross)
 * [Obsessive-compulsive personality disorder](https://en.wikipedia.org/wiki/Obsessive%E2%80%93compulsive_personality_disorder)
 * [Physical assault by McDonald's for wearing Digital Eye Glass](https://eyetap.blogspot.com/2012/07/physical-assault-by-mcdonalds-for.html)
+* [Reuters: Inside Ukraine's Kill Zone](https://www.reuters.com/graphics/UKRAINE-CRISIS/KILL-ZONE/znpnojmknvl)
 
 ## PU & Sex
 

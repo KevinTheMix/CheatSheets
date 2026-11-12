@@ -2,24 +2,30 @@
 
 ## Quick Tips
 
-* Change video resolution via Settings > Video Mode > Custom
+* Last version to support Windows 7 & 8 is *22.12.21*
+* [Release Notes](https://www.shotcut.org/download/releasenotes)
 * Use built-in Keyframes tab for simple effects transitions (no need for Glaxnimate)
 * Transition effect for crossfaded Timeline clips can be modified in that crossfade clip's Properties
 
 ## Glossary
 
-* **Clip** = a unit of video on either the playlist or timeline
+* **Clip** = a unit of video on either playlist (ie a video file) or timeline
 * **LUT** (Look-Up Table) = color grading
+* **Playlist** = source video files
 * **Project** = Timeline
 * **Scrub While Dragging** = live preview below at dragged clip beginning
 * **Source** = Playlist
 
 ## Menu
 
-* File
-  * _Open Other…_ (top menu button)
+* **File**
+  * *Open Other…* (top menu button)
     * Text = generate a fixed text video clip
-  * _Export > Video_ = can export as GIF animation
+  * *Export > Video* = can export as GIF animation
+* **Settings**
+  * Video Mode > Custom = set custom video resolution
+  * Proxy = pre-generate proxy files (in *%LOCALAPPDATA%\Meltytech\Shotcut\proxies*)
+    * Proxies only speed up timeline edits (does nothing for stabilization analysis, so skip if it's the only change)
 
 ## Shortcuts
 
@@ -30,7 +36,7 @@
 * `F4` = use proxy (Settings > Proxy)
 * `Ctrl + E` = Export
 
-* Views (top-right links)
+* Views (top-right text buttons)
   * `Alt + 1` = Derushing
   * `Alt + 2` = Editing
   * `Alt + 3` = FX
@@ -57,7 +63,7 @@
 * `Ctrl + Shift + Up/Down` = Move Up/Down
 * `Shift + C` = copy playlist clip
 * `Shift + V` = paste
-* `Shift + X` = delete (no cut)
+* `Shift + X` = delete (ie not cut)
 
 ### Player/Preview
 

@@ -44,12 +44,12 @@
 * **OEM** (Original Equipment Manufacturer) = a company that constructed an original component sold to end users by another company
 * **OHA** (Open Handset Alliance) = consortium (eg HTC, Sony, Dell, Motorola, Samgsung, LG) led by Google that develops Android
 * **OTA Updates** = Over-the-air updates, the upgrades to the current OS
+* **Recovery** = disk/partition management (wipe/format), download/apply OS update, (un)mount drives/volumes, factory reset
 * **ROM** (aka Firmware) = basically the OS installed on the device, in its read-only memory. It is a bit ambiguous whether this refers to all images (most likely), or just the *system* one
   * Stock ROM = orginal factory OEM ROM
   * Custom ROM = ROM not emitted by OEM. Usually contains but a subset of all images (i.e. most importantly a *system* image), and reuse pre-existing (e.g. stock) images for non-system partitions
 * **Rooting** = how users can attain privileged control (aka *root access*, or *superuser*) over various subsystems
   * Systemless Rooting = lighter rooting that does not require modifying system or boot partition
-* **Recovery** = disk/partition management (wipe/format), download/apply OS update, (un)mount drives/volumes, factory reset
 * **SafetyNet** = feature by which an App required higher security (eg banking) can enforce the device is trustworthy
   * Ie checks the device is not rooted & bootloader is locked
   * Circumventable via microG DroidGuard Helper

@@ -5,7 +5,7 @@ Uses thin/minimal easily cache-able shell templates, whilst all logic belongs to
 
 ## Quick Tips
 
-* Check Angular version via `@angular/core` in _packages.json_
+* Check Angular version via `@angular/core` in *packages.json*
 * Use `Ctrl + T` in Visual Studio Code to jump from markup (HTML) to definition (TypeScript)
 * Angular apps don't require a backend: all code is downloaded into client browser upfront (from any static content server)
 * Previously, Angular apps were client-heavy (minimal shell plus Angular runtime plus asset bundles), until SSR apps became mainstream
@@ -16,8 +16,8 @@ Uses thin/minimal easily cache-able shell templates, whilst all logic belongs to
 * **Angular CDK** (Component Dev Kit) = set of low-level utilities provided by Angular to build UI components (eg overlays, drag & drop, accessibility, utilities, virtual scrolling, etc) without pre-built styled components
 * **Angular Material** = UI components library of ready-made accessible responsive components (eg buttons, dialogs, tabs, form fields) following Material Design & built using CDK
 * **Bootstrapping** = initialization process/step during which Angular loads root module & component to start an application
-  1. Load root module (usually **AppModule**, in _main.ts_)
-  2. That module specifies a root component (usually **AppComponent**) in its _bootstrap_ array
+  1. Load root module (usually **AppModule**, in *main.ts*)
+  2. That module specifies a root component (usually **AppComponent**) in its *bootstrap* array
   3. Create & render that root component inside HTML element that matches its selector (eg `<app-root>`)
 * **Component** = reusable UI element encapsulating its own HTML, CSS, and TypeScript, making it easier to manage and test individual pieces of an application
   * Components are rendered from a root component down in a hierarchical nested fashion (à la DOM tree), each responsible for rendition of its own HTML fragment (à la WPF UserControl)
@@ -28,7 +28,7 @@ Uses thin/minimal easily cache-able shell templates, whilst all logic belongs to
 * **Directive** = Angular runtime construct that provides functionality or attaches behavior to DOM elements (can be applied to existing elements using selectors à la CSS)
   * They can be HTML (`<elem directive>` eg `<input matInput>`) or TypeScript `@Directive`
   * **Attribute** = change appearance/behavior of an existing element (eg `ngClass`, `ngStyle`, custom)
-    * Eg `<element [ngClass]="{'movies': medium==='Movies', 'series': medium==='Series'}" />` (where _movies_ & _series_ are CSS classes)
+    * Eg `<element [ngClass]="{'movies': medium==='Movies', 'series': medium==='Series'}" />` (where *movies* & *series* are CSS classes)
   * **Structural** = special syntax to add/remove/reshape DOM/layout elements (eg `*ngIf`/`*ngFor`/`*ngSwitchCase`/`*matTreeNodeDef`)
 * **Guard** = functions/classes to control whether a user can navigate to/from a route, typically for auth, acting as checkpoint before activating/deactivating/matching routes
   * CanActivate (class `implements CanActivate`) = decide if a route can be entered
@@ -37,16 +37,16 @@ Uses thin/minimal easily cache-able shell templates, whilst all logic belongs to
   * CanMatch = decide if a route should match before activation
 * **Injector Tree** = hierarchical structure that Angular uses to resolve/provide dependencies (services) at runtime
   * Dependencies are looked up (lazyily) bottom-up (starting at component that requires it, up to root), so multiple scoped instances of same service can exist in different parts of app
-* **Module** = class grouping related functionality (ie components/directives/pipes/services) together (_deprecated_ since Angular 14+, standalone component are recommended)
+* **Module** = class grouping related functionality (ie components/directives/pipes/services) together (*deprecated* since Angular 14+, standalone component are recommended)
   * **BrowserModule** = imported in root module (**AppModule**) when building applications running in a web browser
-  * **CommonModule** = built-in Angular module (part of _@angular/common_) that includes all basic directives (eg `NgIf`, `NgForOf`) & pipes (eg `DecimalPipe`), also re-exported by BrowserModule
+  * **CommonModule** = built-in Angular module (part of *@angular/common*) that includes all basic directives (eg `NgIf`, `NgForOf`) & pipes (eg `DecimalPipe`), also re-exported by BrowserModule
 * **Pipes** = feature to transform data directly in templates (à la WPF converters & formatters), returning a new value without mutating original, built-in or custom
-  * Built-ins = _currency_ (eg `currency:'EUR'`), _date_ (eg `date:'longDate`), _json_, _lower/uppercase_, _percent_, _slice_, _keyvalue_
+  * Built-ins = *currency* (eg `currency:'EUR'`), *date* (eg `date:'longDate`), *json*, *lower/uppercase*, *percent*, *slice*, *keyvalue*
   * Pure pipes (default) run only when input changes (fast, recommended), while impure pipes run every change detection cycle (use sparingly)
 * **Selector** = string that tells Angular where a directive/component should be applied in HTML (ie element `<koko>`, attribute `<div koko>`, class `<div class="koko"`, combination `button[koko]` or `[koko][kontan]`)
 * **Service** = reusable singleton instance holding shared logic/data to be injected where needed (eg shared state, business logic, data/HTTP access, transversal logging/analytics/caching, à la helpers + data layer)
 * **Template** = Angular-augmented HTML that defines a component's view (rendered in browser)
-* **TypeScript** (_Microsoft_) = a typed (Classes via decorators, Modules, Strong typing) superset of JavaScript that gets transpiled to JS
+* **TypeScript** (*Microsoft*) = a typed (Classes via decorators, Modules, Strong typing) superset of JavaScript that gets transpiled to JS
 
 ### Ecosystem
 
@@ -54,55 +54,55 @@ Uses thin/minimal easily cache-able shell templates, whilst all logic belongs to
   * Router Tree = maps application's routes as Angular sees them
   * Transfer State = tab to examine SSR/state hydration behavior
 * **Angular Universal** = enables SSR for Angular applications (lets server generate initial HTML for a page before sending it to user's browser)
-* **AngularJS** (_discontinued_) = FOSS pure JS declarative MVC/MvvM framework for developing SPAs using a fatter view, with model changes propagated to views without any manual DOM manipulation
+* **AngularJS** (*discontinued*) = FOSS pure JS declarative MVC/MvvM framework for developing SPAs using a fatter view, with model changes propagated to views without any manual DOM manipulation
   * Application = entire SPA, using HTML as template language initialized by bootstrapping AngularJS (via `ng-app`)
   * Controller = connects view (HTML) to model (data) in a MVC pattern, holds view logic, exposes data & behavior, responds to user interactions, updates model
   * Directive = extends HTML with custom elements/attributes/behaviors
   * Expression = snipped of code placed inside `{{…}}` in templates to bind data, perform calculations, display values in view layer
   * Filter = format/transform data before it appears on screen, applied to expressions or directives using `|` pipe character
   * Service = reusable singleton object (via DI) used for shared data/BL/functionality across controllers/directives/other components
-* **Augury** (_discontinued_) = Chrome/Firefox Angular applications debugging extension
+* **Augury** (*discontinued*) = Chrome/Firefox Angular applications debugging extension
 * **Jasmine** = BDD test framework & syntax (eg `describe()`, `it()`, `expect()`) for JS
 * **Karma** = test runner developed by Angular team to execute unit tests written in Jasmine or other frameworks in real browsers (launches browsers, watches files & reruns on changes, shows results in console or browser)
-* **Protractor** (_deprecated_, replaced with **Cyrpress** or **Playwright**) = end-to-end testing framework designed for Angular (originally AngularJS) apps, simulates real user interactions in a browser to test entire flow
+* **Protractor** (*deprecated*, replaced with **Cyrpress** or **Playwright**) = end-to-end testing framework designed for Angular (originally AngularJS) apps, simulates real user interactions in a browser to test entire flow
 
 ### Project Structure
 
 * **e2e/** = test project
 * **src/** = actual application code
   * **app/** = Angular components, modules, services (real app logic)
-    * _app-routing.module.ts_ = app routes definition
-    * _app.component.ts_ = app root component
-    * _app.module.ts_ = app root module (bootstraps **AppComponent** ie `bootstrap: [AppComponent]`)
-    * _main.ts_ = app entry point (bootstraps **AppModule**)
+    * *app-routing.module.ts* = app routes definition
+    * *app.component.ts* = app root component
+    * *app.module.ts* = app root module (bootstraps **AppComponent** ie `bootstrap: [AppComponent]`)
+    * *main.ts* = app entry point (bootstraps **AppModule**)
   * **assets/** = static files (images, fonts, JSON configs)
-  * **environnements/** = environment-specific configs (_environment.ts_ dev, _environment.prod.ts_ prod, contains `production: true/false` flag)
-  * _favicon.ico_ = browser tab icon
-  * _index.html_ = single page/shell Angular bootstraps into (hosts `<app-root>`)
-  * _main.ts_ = bootstraps (entrypoint into) Angular app by calling `bootstrapApplication()` or `platformBrowserDynamic()`
-  * _manifest.webmanifest_ = PWA metadata (icons, name, theme colors)
-  * _polyfills.ts_ = browser compability shims (rarely touched now)
-  * _styles.(s)css_ = standard global styles for whole app
-  * _theme.scss_ = not standard but very common/convention-based stylesheet file for organizing theming (especially with Angular Material, eg colors/typography/variables)
-  * _test.ts_ = entry point for running unit tests (Jasmine/Karma setup)
-* _.browserslistrc_ = defines browser support targets for builds (affects JS polyfills & CSS)
-* _.editor.config_ = editor formatting conventions (indent size, charset)
-* _.htaccess_ (_optional_ for Apache deployments) = routing roules for SPAs, caching, etc
-* _.node-version_ = pinned Node.js version (for tools like **nvm** or **nodenv**)
-* _.prettierignore_ & _.prettierrc.json_ = Prettier formatting config
-* _angular.json_ = central Angular build configuration (app entry points, build options, file replacements, assets/styles/scripts, test configurations)
-* _ngsw-config.json_ = Angular Service Worker configuration file, containing settings to turn an app into a PWA (with offline support & caching)
-  * _installMode_ & _updateMode_ = prefetch (cache everything during app install) or lazy (cache only when first requested)
-  * _strategy_ = _freshness_ (prefer network, fallback to cache) or _performance_ (prefer cache first)
-* _azure-pipelines.yml_ = Azure DevOps pipeline config for builds/tests/deployments
-* _karma.conf.js_ = test runner config (if project still uses Karma)
-* _package.json_ = define app name & version, npm scripts (command aliases run via `npm run <alias>`, eg `ng build/serve`), (dev) dependencies, tool configs
-* _package-lock.json_ = exact dependency tree for reproducible installs
-* _tsconfig.json_ = TypeScript default configuration file, automatically looked for by compiler
-* _tsconfig.base.json_ = Angular CLI shared configuration for entire workspace (other files extend this one)
-* _tsconfig.app.json_ = Angular CLI application build/serve configuration
-* _tsconfig.spec.json_ = Angular CLI unit test configuration
-* _tslint.json_ (_deprecated_) = legacy linter config (moved to ESLint)
+  * **environnements/** = environment-specific configs (*environment.ts* dev, *environment.prod.ts* prod, contains `production: true/false` flag)
+  * *favicon.ico* = browser tab icon
+  * *index.html* = single page/shell Angular bootstraps into (hosts `<app-root>`)
+  * *main.ts* = bootstraps (entrypoint into) Angular app by calling `bootstrapApplication()` or `platformBrowserDynamic()`
+  * *manifest.webmanifest* = PWA metadata (icons, name, theme colors)
+  * *polyfills.ts* = browser compability shims (rarely touched now)
+  * *styles.(s)css* = standard global styles for whole app
+  * *theme.scss* = not standard but very common/convention-based stylesheet file for organizing theming (especially with Angular Material, eg colors/typography/variables)
+  * *test.ts* = entry point for running unit tests (Jasmine/Karma setup)
+* *.browserslistrc* = defines browser support targets for builds (affects JS polyfills & CSS)
+* *.editor.config* = editor formatting conventions (indent size, charset)
+* *.htaccess* (*optional* for Apache deployments) = routing roules for SPAs, caching, etc
+* *.node-version* = pinned Node.js version (for tools like **nvm** or **nodenv**)
+* *.prettierignore* & *.prettierrc.json* = Prettier formatting config
+* *angular.json* = central Angular build configuration (app entry points, build options, file replacements, assets/styles/scripts, test configurations)
+* *ngsw-config.json* = Angular Service Worker configuration file, containing settings to turn an app into a PWA (with offline support & caching)
+  * *installMode* & *updateMode* = prefetch (cache everything during app install) or lazy (cache only when first requested)
+  * *strategy* = *freshness* (prefer network, fallback to cache) or *performance* (prefer cache first)
+* *azure-pipelines.yml* = Azure DevOps pipeline config for builds/tests/deployments
+* *karma.conf.js* = test runner config (if project still uses Karma)
+* *package.json* = define app name & version, npm scripts (command aliases run via `npm run <alias>`, eg `ng build/serve`), (dev) dependencies, tool configs
+* *package-lock.json* = exact dependency tree for reproducible installs
+* *tsconfig.json* = TypeScript default configuration file, automatically looked for by compiler
+* *tsconfig.base.json* = Angular CLI shared configuration for entire workspace (other files extend this one)
+* *tsconfig.app.json* = Angular CLI application build/serve configuration
+* *tsconfig.spec.json* = Angular CLI unit test configuration
+* *tslint.json* (*deprecated*) = legacy linter config (moved to ESLint)
 
 ## Lifecycle Hooks
 
@@ -123,12 +123,12 @@ Let component implement interfaces (`@Component(…) class LoginDialogComponent 
 * `ng g(enerate)` = scaffolds something
   * `c(omponent)` = creates a Component class, and imports & declares it in the AppModule
   * `cl(ass)` = creates a Model class
-  * `guard <name>` = generates a _guard.ts_ file (in /src/app)
-  * `m(odule)` = creates a Module (`--flat` puts file in src/app instead of own folder, `--module=app` also registers module in _imports_ array of AppModule)
+  * `guard <name>` = generates a *guard.ts* file (in /src/app)
+  * `m(odule)` = creates a Module (`--flat` puts file in src/app instead of own folder, `--module=app` also registers module in *imports* array of AppModule)
   * `s(ervice)` = creates a Service
 * `ng new koko-app` = scaffold a new project
 * `ng serve` = hosts a project (at <http://localhost:4200>)
-  * `-c <config>` = serves using a named build configuration from _angular.json_ (eg `-c production`)
+  * `-c <config>` = serves using a named build configuration from *angular.json* (eg `-c production`)
   * `-o (--open)` = hosts a project at <http://localhost:4200> & opens a browser
 
 ## API
@@ -141,7 +141,7 @@ Let component implement interfaces (`@Component(…) class LoginDialogComponent 
 * `bootstrapApplication(AppComponent, {providers: […]});` = modern recommended application bootstrapping (bootstrap a component directly without **AppModule** needed)
 * `@Component({standalone: true, imports: [CommonModule, ChildComponent]}) export class ParentComponent {}` = modern standalone component registration (listing its own imports)
 
-* `$event` = represents payload of any event binding (note: _$_ is a valid JS variable name character, also used for observables by convention in RxJS)
+* `$event` = represents payload of any event binding (note: *$* is a valid JS variable name character, also used for observables by convention in RxJS)
 * `{{ expression }}` = interpolation
 * `[property]="value"` = property binding
 * `(event)="handler()"` = event binding
@@ -149,15 +149,15 @@ Let component implement interfaces (`@Component(…) class LoginDialogComponent 
 * `ng-container` = invisible wrapper (no DOM element produced)
 * `*ng…` (directives) = syntactic sugar for more elaborate expression with `[ng…]` selectors as outer element (eg `<ng-template [ngIf]="expression"><div></div></ng-template>`)
   * `*ngIf` = false when empty/null/undefined
-  * `*ngIf="data; else loading"` = using custom _#loading_ template while there is no data
-  * `*ngIf="foo, let x"` = displays foo (if true) under name of _x_
+  * `*ngIf="data; else loading"` = using custom *#loading* template while there is no data
+  * `*ngIf="foo, let x"` = displays foo (if true) under name of *x*
   * `*ngFor="let item of collection"` = duplicate element for each item in collection
   * `$ngSwitchCase`
 * `<ng-template>` = ng-template element, does not render anything itself, holds markup to be added elsewhere (eg **ngIf** & **ngFor** as themselves, **ngTemplateOutlet** as custom)
 * `<ng-template #errorTpl let-msg="message"><p class="error">{{ msg }}</p></ng-template>`
-  * _#errorTpl_ = template reference variable
-  * _message_ = template context property, provided from outside, either fixed (eg `*ngIf`/`*ngFor`) or custom (eg `ngTemplateOutletContext`)
-  * _msg_ = template input variable
+  * *#errorTpl* = template reference variable
+  * *message* = template context property, provided from outside, either fixed (eg `*ngIf`/`*ngFor`) or custom (eg `ngTemplateOutletContext`)
+  * *msg* = template input variable
   * Eg `<div [ngTemplateOutlet]="errorTpl" [ngTemplateOutletContext]="{ message: errorMsg }"></div>`
 
 ### Angular Material
@@ -169,7 +169,7 @@ Let component implement interfaces (`@Component(…) class LoginDialogComponent 
 * `mat-date-picker` & `mat-datepicker-input` = date selection (supports different date adapters eg Moment, Luxon, native)
 * `mat-option` = single selectable item among multi-select components (eg `mat-select`, `mat-autocomplete`)
 * `mat-radio-button` & `mat-radio-group` = single-choice options
-* `mat-select` = dropdown for picking one/multiple values (_value_, _disabled_)
+* `mat-select` = dropdown for picking one/multiple values (*value*, *disabled*)
 * `mat-slide-toggle` = switch-style boolean input
 * `mat-slider` = select numeric values by sliding
 

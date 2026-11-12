@@ -42,6 +42,6 @@
 * `Ctrl + Alt + L` = rotate left & save (lossless)
 * `Ctrl + Alt + R` = rotate right & save (lossless)
 * `Ctrl + Alt + V` = flip vertically & save (lossless)
-* `Ctrl + Drag` = select area (and zoom into it if in Normal mode in _Edit > Selection_ which unselects it)
+* `Ctrl + Drag` = select area (and zoom into it if in Normal mode in *Edit > Selection* which unselects it)
 * `Ctrl + Shift + O` = blur selection (does not work in Normal mode, see `Ctrl + Drag`)
 * `Shift + G` = quick 50% rescale

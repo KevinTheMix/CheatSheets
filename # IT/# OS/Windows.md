@@ -149,8 +149,9 @@
 
 * `Ctrl + Shift + Enter` = Run as administrator
 * _%APPDATA%_ = `C:\Users\<user>\AppData\Roaming\`
-* _%userprofile%_ or simply `.` = user folder
-* _%windir%_ = Windows folder
+* _%LOCALAPPDATA%_ = `C:\Users\<user>\AppData\Local\`
+* _%USERPROFILE%_ or simply `.` = user folder
+* _%WINDIR%_ = Windows folder
 
 * `appwiz.cpl` = Programs & Features (add/uninstall an application)
 * `certmgr.msc` = Certificates (Current User)
@@ -197,7 +198,9 @@
 Commands are fully case-insensitive.
 
 * `@` = suppresses command echoing (_obsolete_, eg in old scripts, `@echo off` was used to prevent displaying _echo off_ once before command effect applies)
-* `echo [on|off]` = turns prompt on/off
+
+* `arp` = display/modify IP-to-Physical (ie MAC) address translatin tables used by Address Resolution Protocol (ARP)
+  * `-a` = display current ARP entries
 * `cd` or `chdir` = change directory (`\` for root folders, hit tab to cycle)
 * `certutil -hashfile <file> [MD5|SHA256]` = generates checksum for given file using provided algorithm
 * `chkdsk (<volume>)` (_as admin_) = check (current if none specified) disk
@@ -222,7 +225,10 @@ Commands are fully case-insensitive.
   * `select partition <#>`
   * `select volume <#|letter>`
   * `delete partition override` (**Warning: Danger**)
-* `echo koko` or `echo %<VAR>%` = outputs a value or variable
+* `echo` = indicate whether prompt is on/off
+  * `<on|off>` = toggles prompt on/off
+  * `<value>` = display a value
+  * `%<variable>%` = display a variable
 * `for %i in (<pattern>) do <statement>` (pattern can be files/strings of fixed words eg `(Debug Release)` or matching expression eg `(*.json)`)
 * `format <volume>` (_as admin_) = format volume (`/FS:<filesystem>` uses given filesystem ie FAT, FAT32, exFAT, NTFS, UDF, ReFS)
 * `goto <label>` goes to `:<label>`

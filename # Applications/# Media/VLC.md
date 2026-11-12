@@ -33,6 +33,7 @@
 * `Ctrl + I` = current media (General, Metadata, Codec, Statistics) information
 * `Ctrl + L` = toggle Playlist
 * `Ctrl + R` = convert & save
+* `Ctrl + T` = Go to Time
 * `Ctrl + Wheel` = subtitle size
 
 ## Settings

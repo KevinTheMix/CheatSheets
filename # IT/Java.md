@@ -20,11 +20,14 @@ Java basé sur OAK et Smalltalk (et C++ interagit pour amélioration)
 * No class destructor
 * Défintion membres function directement dans la classe.
 
+## Quick Tips
+
 ## Glossary
 
 * **JVM** (Java Virtual Machine) = machine-specific install, runs portable bytecode
 * *.class* file = portable, compiled IL bytecode
 * **AWT** (Abstract Window Toolkit) = API to develop platform-dependent (calling the native platform/OS to create GUI components) GUI/windows-based applications
+* Duke = Java mascot
 * **JFC** (Java Foundation Classes)
 * **Garbage Collection** = reaps orphan objects (ie without references left) in heap, non-deterministic (so not ideal for real-time applications) but can be tuned via CLI or using dedicated reference types (see below)
 * **Reference Type** = object saved on heap with heap memory address saved on stack

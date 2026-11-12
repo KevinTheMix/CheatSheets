@@ -105,13 +105,14 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 
 ## API/CLI
 
-* `--` = see <https://stackoverflow.com/a/22750480/3559724>
-* [Practical Git - Cheat Sheet](https://practicalgit.com/cheat-sheet)
-* `git <command> --help` = opens local HTML manual page (or `man git-<command>` on Unix)
+* On Windows, use double quotes (`"`) instead of single quotes (`'`), especially relevant when Git suggest a command fix (containing single quotes)
+* `--` = in general, separates options from parameters (see <https://stackoverflow.com/a/22750480/3559724>)
 * `<commit>~(n=1)` = nth ancestor following only first parent links
 * `<commit>^(n=1)` = nth parent of a commit, mainly relevant for merge commits
 * `<reflog>@<n>` = the (zero-based) nth before latest reflog entry for a given branch (eg `master@{1}` or `HEAD@{-1}` or `@{1}` just for special default *HEAD*)
-* On Windows, use double quotes (`"`) instead of single quotes (`'`), especially relevant when Git suggest a command fix (containing single quotes)
+
+* `git <command> --help` = opens local HTML manual page (or `man git-<command>` on Unix)
+* `git svn clone <URL>` = clone SVN repository
 
 ### Configuration
 

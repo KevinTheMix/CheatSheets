@@ -7,13 +7,14 @@
 ### Community
 
 * [Infinite recursion in SentrySqfliteDatabaseFactory](https://github.com/issues/created?issue=getsentry%7Csentry-dart%7C3229) (**Fixed** by *buenaflor*)
-  * (obsolete: You may need to specify `databaseFactory = SentrySqfliteDatabaseFactory(databaseFactory: databaseFactory);` instead to work around a known recursion bug (version 9.6.0) causing a stack overflow.)
+  * (obsolete: You may need to specify `databaseFactory = SentrySqfliteDatabaseFactory(databaseFactory: databaseFactory);` instead to work around a known recursion bug (version 9.6.0) causing a stack overflow)
 * [Clarifying how to get to transactions page](https://github.com/getsentry/sentry-docs/pull/14802)
 
 ## Glossary
 
+* **Auth Token** = secret token sent as `Authorization: Bearer <token>` used for API/CLI (uploading source maps & debug symbols, creating releases, querying data)
 * **Debug Symbol** = symbol necessary to parse stack trace
-* **DSN** (Data Source Name) = write-only URL endpoint towards which relevant information is sent (no authentication required for logging), safe to hardcode/commit
+* **DSN** (Data Source Name) = write-only public-facing URL endpoint towards which relevant information is sent (no authentication required for logging, safe to hardcode/commit)
 * **dSYM** (debug SYMbol) = Apple debug symbols
 * **In-App** = application code vs **Not In-App** = framework, SDK, system libraries
 * **OpenTelemetry Protocol** (OTLP) = vendor-neutral standard/protocol for emitting traces/logs/metrics (Sentry accepts them via its OTLP endpoint)

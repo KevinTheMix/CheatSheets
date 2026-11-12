@@ -2,6 +2,7 @@
 
 ## Quick Tips
 
+* [PatternFly](https://www.patternfly.org)
 * It's ok to try design ideas & redesign later (alpha spirit)
 * Choose your defaults wisely (as they are what most users will use forever)
 * Use Conventions = allow minimal input to perform an action, and default-set the rest
@@ -44,6 +45,7 @@
 * **Motion Design** = broad discipline including motion graphics, animation, cinematography, graphic design
 * **Motion Graphics** = animated graphics elements (text, shapes, icons)
 * **Mouseover** = mouse is over an element (just a state, no inherent associated animation/visuals)
+* **Overflow Menu** = 3 vertical dots to display additional sub-menu (eg on mobile, when those options could be displayed in full on desktop)
 * **Reactivity** = how UI responds to changes in underlying data (aka `UI = f(state`)
   * Reacting to (input) change in real-time in a very clear, visible fashion, and possibly impacting several parts of an application
 * **Responsive** = responding to screen size change

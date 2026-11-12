@@ -32,6 +32,7 @@
 * `about:config`
   * `general.smoothScroll`
   * `browser.ctrlTab.sortByRecentlyUsed` = tabs cycling strategy (_1-2-3_ or _1-2 1-2_)
+  * `security.tls.version.enable-deprecated` = allow older TLS certificates
 
 ## Shortcuts
 

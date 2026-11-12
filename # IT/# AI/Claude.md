@@ -5,12 +5,15 @@
 * [Claude Skills](https://claude.com/skills)
 * [Docs](https://platform.claude.com/docs/en/intro)
 * [Security](https://code.claude.com/docs/en/security)
+* [Claude 101](https://academy.claude.com/courses/claude-101)
 * [Anthropic Academy](https://anthropic.skilljar.com) = courses
 * [Claude in Excel Add-in](https://marketplace.microsoft.com/en-us/product/saas/wa200009404)
 * [Claude: Choosing the right Claude model](https://claude.com/resources/tutorials/choosing-the-right-claude-model)
 * [Mastering Claude Code in 30 minutes](https://www.youtube.com/watch?v=6eBSHbLKuN0) (Boris Cherny, member of technical staff)
 * [Awesome Claude subagents](https://github.com/VoltAgent/awesome-claude-code-subagents)
   * Claude Code was designed as a CLI to be future-proof & agnostic of any particular currently popular IDE solution
+* [Google Workspace Marketplace: Claude](https://workspace.google.com/u/1/marketplace/app/claude/12459801340?hl=fr&pageId=none) = draft/edit/read Google Docs, Sheets and Slides
+* [u/Sictir1: My full Claude Code setup after months of daily use — context discipline, MCPs, memory, subagents](https://www.reddit.com/r/claude/comments/1spef7j)
 
 ## Glossary
 
@@ -18,7 +21,7 @@
 * **Agent SDK** = call Claude Code agents as a library (eg Python library _claude\_agent\_sdk_) to use in code/script
 * **Claude Code** = coding CLI for agentic workflows
 * **Claude.ai** = web-based chat (à la ChatGPT, also exists as desktop app with access to MCP servers, Chrome extension, Excel plugin)
-* **Cowork** = (Claude Desktop) personal assistant for filesystem tasks or web-based tasks via Chrome Claude extension
+* **Cowork** (initially a separate product, integrated to chat in 09/2026) = task-oriented work using connectors & skills
 * **Hook** = Claude lifecycle command (eg block reading a sensitive file by writing to stderr before a read/grep tool call)
 * **MCP Connector** = connection from Claude to an MCP server
   * Locally = via a Claude Desktop extension (as MCP client), better for data privacy as you control what is effectively sent to Claude

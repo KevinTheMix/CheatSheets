@@ -50,8 +50,8 @@ Features:
 
 ### [Android Code Signing](https://docs.flutter.dev/deployment/android#sign-the-app)
 
-* Keystore (*upload-keystore.jks*) generation (via `keytool` / Android Studio dialog, see [Android Studio](<../Android Studio.md>))
-* Reference it from a *key.properties* file (in *android* folder)
+* Generate a *upload-keystore.jks* keystore file (via `keytool` / Android Studio dialog, see [Android Studio](<../Android Studio.md>))
+* Reference it from a *key.properties* file (in *android* folder), which also holds passwords (typically same password twice) to open both store & upload private key inside
 * Modify *android/app/build.gradle.kts* to use signing for release (ie when executing `flutter build apk --release`)
 * `/!\` **both** *upload-keystore.jks* & *key.properties* files must be excluded from git public source version control
 * The upload key is atually also used to sign locally built `--release` artifacts (so they can't update a Play-installed app, different signature)

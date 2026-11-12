@@ -19,22 +19,26 @@ Inkscape is a FOSS vector graphics editor, serving as alternative to Adobe Illus
 * **Path** = basic vector object
 * **Stroke** = surrounding line color, part of path (can be straight/rounded, colored, widened)
 
-## Menus
+## GUI
 
-* File > **Document Properties** = set canvas width, height, background color
-* Edit > **Settings** (_Show Welcome dialog_)
-* **Toolbox** (left) = Tools
-* **Tool Control Bar** (top) = contextual (depends on chosen tool)
-* **Command Bar** (right) = Quick actions (open, save, cut/copy)
-* **Palette** (bottom)
-  * `Click` = set Fill color, Shift + Click` = set Stroke color
-* **Status Bar** (bottom) = contextual information (number of selected objects, scaling factor, rotation angle)
+* Top
+  * Menus
+    * **File** > *Document Properties* = set canvas width, height, background color
+    * **Edit** > *Settings* (*Show Welcome dialog*)
+    * **Object** = (un)group, raise/lower, rotate, flip
+  * **Tool Control Bar** = contextual (depends on chosen tool)
+* Left = Toolbox
+* Right = **Command Bar** = Quick actions (open, save, cut/copy)
+* Bottom
+  * **Palette**
+    * `Click` = set Fill color, Shift + Click` = set Stroke color
+  * **Status Bar** = contextual information (number of selected objects, scaling factor, rotation angle)
 
 ## Shortcuts
 
 * `Ctrl + Shift + 4` = center view on page
 * `Ctrl + Shift + A` = Align & Distribute
-  * `Click` object to align first, then `Shift + Click` target second, then choose relative to _Last selected_
+  * `Click` object to align first, then `Shift + Click` target second, then choose relative to *Last selected*
 * `Ctrl + Shift + C` = object to path
 * `Ctrl + Shift + D` = Document Properties
 * `Ctrl + Shift + E` = Export (Document, Page, Selection, Custom)
@@ -59,6 +63,8 @@ Inkscape is a FOSS vector graphics editor, serving as alternative to Adobe Illus
 * `4` = zoom on content
 * `5` = zoom on page
 * `6` = zoom on page width
+* `H` = flip selection horizontally
+* `V` = flip selection vertically
 
 ### Tools
 
@@ -79,7 +85,7 @@ Inkscape is a FOSS vector graphics editor, serving as alternative to Adobe Illus
 * `N` (Nodes) = manipulate individual/**multiple** nodes of a path
   * Make selected nodes hard (click twice to reset), soft, symmetric, automatic
   * Manually adjust smoothness of curves, or enlarge some nodes as a group
-* `R` (Rectangle) = draw rectangle shapes (drag circle handle to round corners, click _Make corners sharp_ to reset)
+* `R` (Rectangle) = draw rectangle shapes (drag circle handle to round corners, click *Make corners sharp* to reset)
 * `S` (Select)
   * `Click` = toggle between scaling & rotating/skewing handles (Status Bar shows angle/scale)
   * `Drag + Space` = Duplicate dragged object at current location
