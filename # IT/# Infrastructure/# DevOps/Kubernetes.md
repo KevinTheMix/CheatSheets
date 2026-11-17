@@ -37,7 +37,7 @@ Based on an internal Google product called Borg open-sourced in 2014.
     * **Built-in Resource** = resource type shipped natively with Kubernetes & understood by every cluster out of the box, whether in the core group or a named one (eg Deployment, Job, Ingress are built-in but not in the core group) — as opposed to Custom Resource Definitions (CRD) which extend the API with new resource types
   * **Controller Manager** = runs controllers managing cluster state
     * **Deployment Controller** = manages rolling update & rollback of deployments
-    * **Ingress Controller** = software that reads ingress resources & implements routing (eg _Traefik_, _Nginx Ingress Controller_)
+    * **Ingress Controller** = software that reads ingress resources & implements routing (eg *Traefik*, *Nginx Ingress Controller*)
     * **Replication Controller** = ensures designed number of pod replicas are running
 * **CronJob** = a built-in K8s workload resource that creates/starts jobs on a repeated schedule
 * **Deployment** = API object that manages a set of (replicated) Pods to run an application workload, usually one that doesn't maintain state (can be configured programmatically via Helm charts)
@@ -75,6 +75,8 @@ Based on an internal Google product called Borg open-sourced in 2014.
 * **Service Mesh** = infrastructure layer that handls service-to-service communication and provides features like traffic management, observability, mutual TLS (eg Istio, Linkerd)
 * **Volume** = directory containing data, accessible to containers in a pod to access/share data via filesystem
 
+### Tools
+
 * **Azure Kubernetes Service** (AKS) = Microsoft's managed Kubernetes service
 * **ArgoCD** = blue-green
 * **Argo Rollouts** = Kubernetes controller that provides advanced progressive deployment strategies (canary, blue-green), replacing standard Deployment resource with custom Rollout resource
@@ -88,29 +90,44 @@ Based on an internal Google product called Borg open-sourced in 2014.
 * **Rancher** = open-source Kubernetes-as-a-service (eg to pilot AKS) management platform/GUI/API (on-prem, edge or cloud), with cluster lifecycle management, RBAC (role-based access control) & authentication, centralized upgrades
 * **Spinnaker** = blue-green
 
-## CLI
+## CLI (`kubectl`)
 
-* `kubectl` = CLI for communicating with a cluster's control plane using Kubernetes API
-  * `apply -f configmap.yaml` = deploy a configuration to a cluster so it matches its description
-  * `describe` = show detailed state of a resource, including its recent events
-    * `pod <pod>` = describe a pod (eg status, restarts, probes, events)
-      * `-n <namespace>` = namespace of the pod
-    * `node <node>` = describe a node (eg capacity, allocated resources, conditions, pods running on it)
-  * `drain <node>` = evicts (ie rescheduled to other nodes if there are replicas) all pods from it so node can be taken offline for maintenance/upgrade/decommissioning/OS update
-  * `get` = list resources
-    * `pods` = list pods
-      * `-A` = all namespaces
-      * `-n <namespace>` = restrict to a given namespace
-      * `-o wide` = add extra columns (eg pod IP, node it runs on)
-      * `--field-selector spec.nodeName=<node>` = keep only pods running on a given node
-    * `events` = list events
-      * `-n <namespace>` = restrict to a given namespace
-      * `--sort-by=.lastTimestamp` = order chronologically (most recent last), useful to troubleshoot scheduling/startup failures
-  * `logs <pod>` = print a pod's container logs
-    * `-n <namespace>` = namespace of the pod
-    * `--previous` = logs of the previous (eg crashed) container instance
-    * `| Select-String <text>` = filter log lines containing text (PowerShell)
-  * `rollout restart deployment <app>` = restart all pods belonging to a Deployment called _app_
-  * `rollout undo deployment <app>` = roll back a previous rollout
-  * `top pod` = show pods CPU/memory usage (requires Metrics Server)
+CLI for communicating with a cluster's control plane using Kubernetes API.
+
+* `apply -f configmap.yaml` = deploy a configuration to a cluster so it matches its description
+* `create` = create a resource imperatively (fails if it already exists, unlike `apply`)
+  * `-f <file>` = create from a manifest file
+  * `-n <namespace>` = namespace of a resource
+  * `--dry-run=client -o yaml` = print generated manifest without creating it (handy to bootstrap a YAML file)
+  * `deployment <name> --image=<image>` = create a Deployment running a given image
+  * `secret generic <name> --from-literal=<key>=<value>` = create a Secret from a key/value pair
+* `describe` = show detailed state of a resource, including its recent events
+  * `pod <pod>` = describe a pod (eg status, restarts, probes, events)
+    * `-n <namespace>` = namespace of a pod
+  * `node <node>` = describe a node (eg capacity, allocated resources, conditions, pods running on it)
+* `drain <node>` = evicts (ie rescheduled to other nodes if there are replicas) all pods from it so node can be taken offline for maintenance/upgrade/decommissioning/OS update
+* `edit <resource> <name>` = open a live resource's manifest in default editor (`KUBE_EDITOR`/`EDITOR` env var), changes are applied on save/quit
+  * `-n <namespace>` = namespace of a resource
+* `exec <pod> -- <command>` = run a command inside a pod's container (eg `exec -it <pod> -- sh` for an interactive shell)
+  * `-c <container>` = target container (defaults to first one in multi-container pods)
+  * `-i` = keep stdin open
+  * `-n <namespace>` = namespace of a pod
+  * `-t` = allocate a TTY
+* `get` = list resources
+  * `pods` = list pods
+    * `-A` = all namespaces
     * `-n <namespace>` = restrict to a given namespace
+    * `-o wide` = add extra columns (eg pod IP, node it runs on)
+    * `--field-selector spec.nodeName=<node>` = keep only pods running on a given node
+  * `events` = list events
+    * `-n <namespace>` = restrict to a given namespace
+    * `--sort-by=.lastTimestamp` = order chronologically (most recent last), useful to troubleshoot scheduling/startup failures
+* `logs <pod>` = print a pod's container logs
+  * `-n <namespace>` = namespace of the pod
+  * `--previous` = logs of the previous (eg crashed) container instance
+  * `| Select-String <text>` = filter log lines containing text (PowerShell)
+* `rollout` = manage rollouts of a resource (eg Deployment)
+  * `restart deployment <deployment>` = restart all pods belonging to a Deployment
+  * `undo deployment <deployment>` = roll back a previous rollout
+* `top pod` = show pods CPU/memory usage (requires Metrics Server)
+  * `-n <namespace>` = restrict to a given namespace

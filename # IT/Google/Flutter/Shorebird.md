@@ -6,7 +6,7 @@ Supports Android, iOS, macOS, Windows & Linux (requires Flutter ≥ 3.27).
 
 ## Quick Tips
 
-* iOS patches only run on physical devices (not on simulators)
+* iOS patches only run on physical devices (not on iOS Simulator)
 * Mostly intended to push quick emergency patches without app store latency
 * Can only patch Dart code (ie app code/generated code/Dart dependencies without native code)
 * Cannot patch native code, assets (images, fonts) & Flutter version (needs a new store release)
@@ -14,6 +14,8 @@ Supports Android, iOS, macOS, Windows & Linux (requires Flutter ≥ 3.27).
   * Hence 2 launches are needed to see a patch: 1st downloads/installs it, 2nd boots from it
   * `auto_update: false` in *shorebird.yaml* + `package:shorebird_code_push` = manual control of when updates are checked/installed
 * Only active in release builds: `flutter run` (debug/profile) disables it, use `shorebird preview` to test a release/patch locally
+  * Local phone equivalent of `flutter run --release` = `shorebird release android` then `shorebird preview` (installs & starts it on selected device)
+  * Sideload instead = `shorebird release android --artifact apk` then `adb install`
 * [Shorebird Console](https://console.shorebird.dev)
   * Delete a registered application (with all its builds/releases)
   * Create [API Keys](https://console.shorebird.dev/account/api-keys) & set it as Codemagic secret `SHOREBIRD_TOKEN` environment variable

@@ -40,6 +40,7 @@
 * [3-jars easy/medium/hard TODO list system](https://www.reddit.com/r/AskReddit/comments/lm3w8z/comment/gnutdxa/?context=2)
 * [5 years in a Zen monastery](https://www.reddit.com/r/zen/comments/1jumpc/comment/cbiosfn) (@Fallopian_tuba)
 * [Autism & Asperger](https://www.reddit.com/r/AskReddit/comments/ezmtgu/comment/fgovu0w)
+* [Because China](https://www.reddit.com/r/mylittlepony/comments/obiy1/comment/c3g52rb?context=2)
 * [Better to cry for two months](https://old.reddit.com/r/AskWomenOver30/comments/129ojh4/comment/jeq74l9) = than the rest of your life
 * [Billiards](https://np.reddit.com/r/billiards/comments/6antdh/comment/dhgq4v0)
 * [Brave (browser) sucks](https://old.reddit.com/r/explainitpeter/comments/1vfmyaf/comment/p1s2nds)

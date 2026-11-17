@@ -3,9 +3,15 @@
 ## Quick Tips
 
 * Firefox supports full application-layer SOCKS4/SOCKS5 proxy protocol
+* You can block requests to URL or domains, which is useful to debug OAuth callbacks and obtain a one-time authorization code without consuming it immediately
+
+### Troubleshooting
+
+* [Drag&Drop URLs to Windows not working](https://support.mozilla.org/en-US/kb/windows-administrator-launcher-process-error-fix)
 
 ## Glossary
 
+* *.har* (HTTP Archive) = JSON-based network log format that can be exported & imported (for inspection), supported by most browsers (Network tab)
 * **Brave** = FOSS Chromium-based browser marketed as privacy-focused (built-in ad block, fingerprinting protection, Tor-powered private browsing)
 * **Firefox Beta** = to test about-to-be-released features
 * **Firefox Developer Edition** = more features for web development (JavaScript debugger, CSS Grid virtualization, shape path editor, element font information)
@@ -26,13 +32,23 @@
     * Eyedropper = color picker
   * Settings
     * Privacy & Security > Logins & Passwords >
-      * _Saved Logins_ = view/delete saved logins & passwords
-      * _Use a Primary Password_ = encrypts FF stored logins & passwords
-  * Help > More troubleshooting information > _Refresh Firefox…_ (also when initiating Uninstall) = reset extensions & customizations
+      * *Saved Logins* = view/delete saved logins & passwords
+      * *Use a Primary Password* = encrypts FF stored logins & passwords
+  * Help > More troubleshooting information > *Refresh Firefox…* (also when initiating Uninstall) = reset extensions & customizations
 * `about:config`
   * `general.smoothScroll`
-  * `browser.ctrlTab.sortByRecentlyUsed` = tabs cycling strategy (_1-2-3_ or _1-2 1-2_)
+  * `browser.ctrlTab.sortByRecentlyUsed` = tabs cycling strategy (*1-2-3* or *1-2 1-2*)
   * `security.tls.version.enable-deprecated` = allow older TLS certificates
+
+### Browser Toolbox
+
+* (Page) Inspector
+* Console
+* Debugger
+* Style Editor
+* Performance
+* Network
+* ...
 
 ## Shortcuts
 
@@ -40,7 +56,7 @@
 * `F7` = Toggle Caret Browsing (displays text cursor that is usually hidden)
 * `F12`== `Ctrl + Shift + I`  = Web Developer Tools
 
-* `Backspace` = Go back (_note: this was changed in Firefox 86 to prevent loss of input data, but can be manually re-enabled_)
+* `Backspace` = Go back (*note: this was changed in Firefox 86 to prevent loss of input data, but can be manually re-enabled*)
 * `Alt + Left/Right` =  = Navigate back/forward
 * `Alt + Mouse Scroll` = Navigate back/forward
 
@@ -81,9 +97,9 @@
 * **Google Container** = isolates Google
 * Honey = finds online shopping coupon codes
 * Hoxx VPN Proxy = browser proxy
-* HTTPS Everywhere (_discontinued_) = use HTTPS for websites that support it
+* HTTPS Everywhere (*discontinued*) = use HTTPS for websites that support it
 * **I still don't care about cookies** = gets rid of most websites' cookie warnings
-  * Avoid the original (_I don't care about cookies_) which was apparently sold to a data mining company (Avast?)
+  * Avoid the original (*I don't care about cookies*) which was apparently sold to a data mining company (Avast?)
 * Kee - Password Manager = KeePass
 * Keep or Delete Bookmarks = clean up bookmarks
 * **LeechBlock NG** = block time-wasting websites (eg `.*reddit\.com/r/pleiade.*`)
@@ -93,14 +109,14 @@
 * **Privacy Badger** = blocks trackers
 * Redirector = user-defined rules redirections
   * Facebook
-    * Description = _Facebook redirect_
-    * Example URL = _facebook.com_
+    * Description = *Facebook redirect*
+    * Example URL = *facebook.com*
     * Include pattern = `*facebook.com`
     * Redirect to = <https://www.facebook.com/?sk=h_chr>
     * Pattern type = Wildcard
     * Pattern Description = <https://lifehacker.com/how-to-force-a-chronological-feed-in-facebooks-new-desi-1842426847>
   * Reddit
-    * Description = _Reddit front page_
+    * Description = *Reddit front page*
     * Example URL = <https://www.reddit.com>
     * Include pattern = `*reddit.com`
     * Redirect to = <https://www.reuters.com>
@@ -111,24 +127,20 @@
 * SponsorBlock = skip YouTube video sponsors
 * The Stream Detector = download streams
 * **uBlock Origin** = blocks ads
-  * Filter lists (according to [Reddit Piracy](https://old.reddit.com/r/GenP/wiki/index)), click _Update now_ after checking:
+  * Filter lists (according to [Reddit Piracy](https://old.reddit.com/r/GenP/wiki/index)), click *Update now* after checking:
     * Built-in = 5/5
     * Ads = 3/3
     * Privacy = 4/4
     * Malware protection, security = 2/2
-    * Multipurpose = 1/2 (_Peter Lowe_)
+    * Multipurpose = 1/2 (*Peter Lowe*)
     * Cookie notice = 4/4
     * (Social widgets = 0/3)
     * Annoyances = 9/9
 * Video DownloadHelper = download HTTP videos (& images)
-  * [DownloadHelper CoApp](https://github.com/aclap-dev/vdhcoapp) = cross-platform companion application enabling file writing, video player launcher, _ffmpeg_
+  * [DownloadHelper CoApp](https://github.com/aclap-dev/vdhcoapp) = cross-platform companion application enabling file writing, video player launcher, *ffmpeg*
 * Video Scrubber for Instagram = displays Instagram video player controls
 * **Video Speed Controller** = HTML5 video speed controls & keyboard shortcuts
   * `S` = faster
   * `D` = slower
   * `V` = toggle display
   * `G` = toggle 180% speed
-
-## Troubleshooting
-
-* [Drag&Drop URLs to Windows not working](https://support.mozilla.org/en-US/kb/windows-administrator-launcher-process-error-fix)

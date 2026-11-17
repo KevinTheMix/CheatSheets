@@ -29,8 +29,8 @@
 * **Scale-to-Zero** = no active compute instances when there are no incoming requests/executions (so nothing to pay during that time)
 * **Serverless** = cloud provider fully manages server provisioning, lifecycle & horizontal scaling as needed, while customer only pays for actual execution/usage
 * **Service Level Agreement** (SLA) = formal agreement between a service provider (eg Microsoft) & a customer of a service's availability
-  * **Composite SLA** = combined (ie not per-service) SLA of all components in your application (eg web server + DB), for a _AND_ formula of `availability S1 * availability S2`
-  * When components are duplicated for redundancy, SLA formula becomes a logical _OR_ `100% - (unavailability S1 * unavailability S2)`
+  * **Composite SLA** = combined (ie not per-service) SLA of all components in your application (eg web server + DB), for a *AND* formula of `availability S1 * availability S2`
+  * When components are duplicated for redundancy, SLA formula becomes a logical *OR* `100% - (unavailability S1 * unavailability S2)`
 * **Shared Responsibility Model** = splitting upkeep responsabilities between cloud provider (eg physical security, power, cooling, network connectivity) & customer (data itself & its accesses)
 * **Spot Pricing** = pay for temporary unused datacenter VMs capacity (ideal for non-critical interruptable workloads) at a significant discount, which can be taken away at any time without notice as Microsoft needs it back
 * **Stock Keeping Unit** (SKU) = inventory management unique reference (eg ID, barcode) common to identical items, or a dedicated license for a given software product (billed independently)
@@ -94,11 +94,11 @@
 * **Appwrite** = open-source BaaS, all-in-one development platform (built-in backend infrastructure & web hosting)
 * **Cloudflare** = CDN (global content caching), cloud cybersecurity, DNS provider, DDoS mitigation, ICANN domain registration services, reverse proxy
 * **Couchbase** = NoSQL Cloud Database
-* **DigitalOcean** = cloud IaaS/PaaS platform, where _Droplet_ is a (Linux) VM
-* **Heroku** = cloud PaaS supporting several programming languages (ie _polyglot_, eg Node.js, Ruby, Java, PHP, Python, Go, Scala, Clojure, and others eg Elixir via Buildpacks)
+* **DigitalOcean** = cloud IaaS/PaaS platform, where *Droplet* is a (Linux) VM
+* **Heroku** = cloud PaaS supporting several programming languages (ie *polyglot*, eg Node.js, Ruby, Java, PHP, Python, Go, Scala, Clojure, and others eg Elixir via Buildpacks)
 * **Honeycode** = Amazon's no-code mobile/web app development platform
 * [Hostinger VPS](https://www.hostinger.com/fr/vps)
-* **Hystrix** = Netflix's microservices defensive circuitry (_not actively maintained_)
+* **Hystrix** = Netflix's microservices defensive circuitry (*not actively maintained*)
 * **Lemon Squeezy** = online payment, handles local taxes
 * **Linode** = Linux machines (over SSH, $0.01/hour)
 * [MacinCloud](https://www.macincloud.com) = rent a Mac in the Cloud
@@ -110,6 +110,6 @@
 * **Slack** = online text/mediasharing/videocalls team communication platform (à la Discord/Teams, by Salesforce)
 * **Stripe** = online payment
 * **Supabase** = open-source Firebase alternative (Postrgres DB, Authentication, instan APIs, Edge Functions, Realtime subscriptions, Storage, Vector embeddings)
-* **Terraform** (_Hashicorp_) = infrastructure/cloud APIs as code (ie declarative configuration files)
+* **Terraform** (*Hashicorp*) = infrastructure/cloud APIs as code (ie declarative configuration files)
 * **Twilio** = CPaaS (Communications Platform as a Service), APIs for 2FA, SMS, voice, video, authentication
 * **Webflow** = SF-based no-code website development & hosting SaaS

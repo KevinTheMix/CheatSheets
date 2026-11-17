@@ -38,3 +38,4 @@
 * Every header line is followed by one blank line before content
 * Do not use semicolons in Markdown
   * Use commas, parentheses, or list sub-items instead to separate clauses or additional details
+* Watch newlines when editing: `old_str`/`new_str` must keep the line break between a bullet & the next one (recurring mistake: a sub-bullet glued onto the next entry), then re-check the edited lines

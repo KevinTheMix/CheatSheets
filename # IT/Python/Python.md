@@ -28,6 +28,7 @@ High-level general purpose dynamically type-checked garbage-collected programmin
 * **Cython** = optimizing static compiler & superset of Python that translates (optionally C-type-annotated) Python code into C/C++ extension modules (*.pyd*/*.so*), for near-C speed in CPU-bound code & easy wrapping of C libraries (not to be confused with CPython, the interpreter)
 * **Decorator** = any callable that takes a function/class and returns/replaces it with another function/class (ie syntactic sugar for `f = decorator(f)`)
   * Decorators with parameters (hence parentheses) are expressions evaluated immediately (with *None* func parameter), yet **applied** later at same time argument-free would
+* **Docstring** = string literal that documents a module/class/function/method, placed as first statement in body (eg runtime `"""doc"""`, à la compiled C# `///`)
 * **Duck Typing** = runtime structural typing/polymorphism, where an object is accepted based on the methods/attributes it provides rather than on explicit inheritance or interface implementation (ie nominal typing, its opposite)
 * **Dunder** (Double under) = special reserved names with double leading & trailing underscores used to implement certain behaviors
   * Although not recommended, custom attributes can also use that format (eg for metadata-type variables like `__version__`, `__project_name__`)
@@ -72,6 +73,7 @@ High-level general purpose dynamically type-checked garbage-collected programmin
 * **pyright** = static (compile-time) type checker by Microsoft (faster than mypy, better integrated with IDEs)
 * **pylance** = Microsoft's Python language support extension for Visual Studio Code (autocomplete, type checking, error detection, code navigation, auto-imports, parameter hints)
 * **PySide** = Python bindings for Qt framework (more permissive license, officially supported by Qt)
+* **Streamlit** = open-source Python framework to turn scripts into interactive web apps (data/ML dashboards)
 
 ### Modules
 
@@ -151,11 +153,11 @@ Collection of modules & packages bundled with Python (ie no need to install).
 * **flask** = lightweight Python web microframework
 * **flask-cors**
 * **flask_csv** = CSV export helper for flask routes
-* **flask-restx** = Flask extension for quickly building REST apis in a structured self-documenting way with minimal setup & automatically generated swagger docs
+* **flask-restx** = Flask extension for simply/quickly building REST APIs in a structured self-documenting way (automatically generates Swagger docs)
   * `reqparse` (*deprecated*) = request argument parsing & validating (considered legacy, use marshmallow + apispec or model-based validation with @api.expect() for new projects)
 * **http.server** = basic HTTP server
 * **httpx** = modern HTTP client with sync & async APIs, HTTP/2 support (`requests`-like interface)
-* **jinja2** = template engine library used to generate text (HTML, config files, YAML, etc) dynamically using variables, logic & templates
+* **jinja2** (used to render HTML served by Flask) = standalone template engine library that renders text (eg HTML/config files/YAML/emails) from templates (with variables/conditionals/loops)
 * **krb5** = wraps Kerberos 5 C API
 * **matplotlib** = create static, animated, interactive visualizations (`matplotlib.pyplot`)
 * **NumPy** (Numerical Python) = arrays manipulation
@@ -460,6 +462,7 @@ Returned by libraries such as SQL libraries (eg `fetchone()` & `fetchall()`).
 * `def koko(): …` = definition
 * `def koko(): return 1,2` = functions can return (a tuple of) multiple values or objects
 * `def koko(*args, **kwargs)` = function with argument unpacking operators (use eg `kwargs["key"]`)
+* `def koko(a, *, b)` = `*` makes all following parameters keyword-only (eg `koko(1, b=2)` while `koko(1, 2)` raises `TypeError`)
 
 ### Files
 

@@ -44,8 +44,25 @@ GitHub is a web platform hosting (mostly software) projects using Git.
 * **Rulesets** = configure global rights to create/merge/delete certain branches
 * **Webhooks** (*Settings > Webhooks*) = notify external services when certain events happen (via POST request)
 
-### Copilot
+## GUI
 
-* **Chat** = IDE-integrated chat
-* **CLI** = terminal to answer questions, write/debug code, interact with GitHub.com (eg make changes & create a pull request)
-* **Spaces** = include repositories/code/pull requests/issues/free-text/images/files as additional shareable context
+* **Code**
+* **Issues**
+* **Pull requests**
+* **Actions**
+* **Projects**
+* **Wiki**
+* **Security**
+* **Insights**
+* **Settings**
+  * *General*
+    * *Default branch*
+    * *Releases*
+    * *Features*
+    * *Pull Requests* = allow merge/squash/rebase, configure merging messages
+      * Default squash merging message = PR title + squashed commits messages (or commit message if single commit)
+        * Alternatives = PR title only, PR title + description, PR title + commit details
+    * *Commits*
+    * *Pushes*
+    * *Issues*
+    * *Danger Zone*

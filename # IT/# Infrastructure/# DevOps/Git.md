@@ -106,7 +106,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 ## API/CLI
 
 * On Windows, use double quotes (`"`) instead of single quotes (`'`), especially relevant when Git suggest a command fix (containing single quotes)
-* `--` = in general, separates options from parameters (see <https://stackoverflow.com/a/22750480/3559724>)
+* `--` = in general, separates options from parameters (see <https://stackoverflow.com/a/22750480/3559724>) (ie end of options, everything after are parameters)
 * `<commit>~(n=1)` = nth ancestor following only first parent links
 * `<commit>^(n=1)` = nth parent of a commit, mainly relevant for merge commits
 * `<reflog>@<n>` = the (zero-based) nth before latest reflog entry for a given branch (eg `master@{1}` or `HEAD@{-1}` or `@{1}` just for special default *HEAD*)
@@ -139,11 +139,11 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * `git blame` = displays one file with additional information per line (author, commit, last modification date, line number)
 * `git diff` = shows differences between versions of files (`Page Up/Down` to scroll, `q` to exit)
   * *no argument* = working directory vs staged files
+  * `<a>` = changes in a specific state (branch/commit/file) compared to working directory (eg `git diff HEAD` = all uncommitted changes, staged or not)
+  * `<a> <b>` = changes between two git states (ie branches/commits/files, eg `git diff HEAD~1 HEAD`)
+  * `--no-index <f1> <f2>` = changes between two arbitrary files
   * `--staged` = staged changes vs to be committed
   * `--stat` = summary of changes instead of full line-by-line diff
-  * `<file>` = changes in a specific file
-  * `--no-index <f1> <f2>` = changes between two arbitrary files
-  * `<a> <b>` = changes between two git states (ie files/commits/branches, eg `git diff HEAD~1 HEAD`)
 * `git log` = lists commits history in anti-chronological order (ie last first)
   * `<branch>` = lists commits history (parental ancestry) for that branch (*HEAD* by default, if a tag has same name use full branch namespace eg `refs/heads/<branch>`)
   * `<tag>` = lists commits history for that tag (if tag has same name as a branch, Git complains and displays tag commits history)
@@ -152,17 +152,22 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * `--author="<name>"`
   * `--date=<format>` = formats all dates (eg `short`, `iso`, `local`, `relative` eg "2 hours ago")
   * `--decorate` = show branch & tag names
+  * `--format=<format>` = controls commit output format (where built-in `format` is *full|fuller|medium|oneline|reference|short*, with default *medium*)
+    * `--format=format:\"<custom>\"` = custom format (eg `%ad` author date, `%an` author, `%cd` date, `%d` references if any, `%h` hash, `%s` comment, `%n` newline)
   * `--graph` = draws Ascii tree of commits
   * `--max-count=10` = limits output
   * `--oneline` = compact one-line-per-commit format (eg `git log --oneline master..develop` shows simple commits diff between two branches)
-  * `--pretty=<format>` = where built-in *format* is `oneline`, `short`, `medium` (default), `full`, `fuller` by increasing length, or `reference`, etc.
-  * `--pretty=format:\"<custom>\"` = custom format (eg `%ad` author date, `%an` author, `%cd` date, `%d` references if any, `%h` hash, `%s` comment, `%n` newline)
+  * `--pretty=<format>` = alias for `--format=<format>`
   * `--since="5 minutes ago"` = after
   * `--until="5 minutes ago"` = before
   * Eg `git log --oneline --graph --all --decorate`
 * `git reflog (show) <reference>` = display reflog of a reference (eg `git reflog HEAD`)
 * `git rev-list <commit(s)> (--count)` = commit information (& count) in reverse chronological order
+* `git show <commit>` = shows commit details, message & diff
+  * `--stat` = shows a summary of changed files & insertions/deletions instead of full diff
+  * `-- <path>` = shows only changes to specified file/path
 * `git status` = information about the working tree state (staged changes, unstaged changes, untracked files)
+  * `--s(hort)` = compact 1 line per file (eg `??` = untracked) instead of verbose output
 
 ## Local
 
@@ -178,8 +183,8 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
 * `git branch` = lists local branches (with current branch highlighted)
   * `-a(ll)` = lists both local & remote-tracking branches
   * `-c <branch>` = copies existing branch to new branch name (does not check it out, to create & switch use `git switch -c <branch>` or older `git checkout -b <branch>`)
-  * `-d <branch>` = delete a local branch (safe delete ie blocksgit if branch contains commits that haven't been merged)
-  * `-D <branch>` = delete a local branch (force delete)
+  * `-d <branch>` = delete a local branch (safe delete, ie blocks git if branch contains commits that haven't been merged)
+  * `-D <branch>` = delete a local branch (force delete, eg useful after a merge rebase where you're sure every commit was merged)
   * `-f <branch> <commit>` = repoints existing branch to a commit (can't target a branch checked out in any worktree; for current one use `git reset`)
   * `-m|-M (<old>) <new>` = rename a branch (current branch if *old* not provided)
   * `-r(remote)` = lists remote-tracking branches (ie local read-only pointers/references to state of branches on a remote, eg *origin/main*)
@@ -215,7 +220,7 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * `--no-squash` (default) = regular merge that commits the result, keeping the branch's commits in history (only useful to override `--squash`)
   * `--squash` = applies branch's combined changes (not its commits) to working tree & index without committing (then commit manually; branch not recorded as merged)
 * `git mv <old> <new>` = renames/moves a tracked file (or directory) and stages change (equivalent to `mv` + `git add <old> <new>`)
-  * Preferred over OS-level rename/move + separate `add`/`rm`, since better detects rename (preserving `git log`/`git blame` history) when operation is recorded as a single staged change
+  * Preferred over OS-level move, better detects rename (eg lower/uppercase only changes), records a single change, preserves `git log`/`git blame` history
 * `git rebase` = reapplies a branch's commit on top of another base commit to create a cleaner linear commit history
   * `-i` = edit, reorder, squash, split, or remove commits interactively while replaying them onto a new base (eg `git rebase -i HEAD~2`), rewriting commit history before sharing it
 * `git reset` = moves current branch's HEAD to a specific commit, optionally modyifying staging area & working directory to match it
@@ -276,7 +281,12 @@ In Git all operations are atomic: either they succeed as whole, or they fail wit
   * `prune <remote>` = removes local branches that no longer exist on the remote repo
   * `show <remote>` = detailed information about remote repo
 * `git ls-remote <remote>` = list all remote references (including branches)
-* `git pull <remote> <branch>` = `git fetch` + `git merge`
+* `git pull` = `git fetch` + integrates fetched commits into current branch (`git merge` by default)
+  * `<remote> <branch>` = pulls specified branch instead of tracked upstream
+  * `--autostash` = stashes local changes before & reapplies after (avoids "local changes would be overwritten" error)
+  * `--ff-only` = fails unless fast-forward is possible (never creates a merge commit)
+  * `--rebase` = replays local commits (if any) on top of fetched ones instead of merging (linear history)
+  * Config: `git config --global pull.rebase true` makes `--rebase` default, `rebase.autoStash true` makes `--autostash` default
 * `git push` = pushes changes to remote branch linked with current branch
   * `<remote> <branch>` = pushes changes to a remote repo branch
   * `[-u | --set-upstream] <remote> <branch>` (eg `origin kokobranch`) = one-time link current local branch to a remote branch (create it if not exist), then pushes changes to it

@@ -70,30 +70,32 @@
 
 ### Versions
 
-| Year | #  | Name        | Major | API |
-| ---- | -- | ----        | ----- | --- |
-| 2010 | 7  | Gingerbread | 2.3   | 9   |
-| 2011 | 8  | Honeycomb   | 3.2   | 13  |
-| 2011 | 9  | ICS         | 4     | 14  |
-| 2012 | 10 | Jelly Bean  | 4.1   | 16  |
-| 2012 | 10 | Jelly Bean  | 4.2   | 17  |
-| 2013 | 10 | Jelly Bean  | 4.3   | 18  |
-| 2013 | 10 | Jelly Bean  | 4.3.1 | 18  |
-| 2013 | 11 | KitKat      | 4.4   | 19  |
-| 2014 | 12 | Lollipop    | 5     | 21  |
-| 2015 | 13 | Marshmallow | 6     | 23  |
-| 2016 | 14 | Nougat      | 7     | 24  |
-| 2017 | 15 | Oreo        | 8     | 26  |
-| 2018 | 16 | Pie         | 9     | 28  |
-| 2019 | 17 | Q           | 10    | 29  |
-| 2020 | 18 | Android 11  | 11    | 30  |
-| 2021 | 19 | Android 12  | 12    | 31  |
-| 2022 | 19 | Android 12L | 12.1  | 32  |
-| 2022 | 20 | Android 13  | 13    | 33  |
-| 2023 | 21 | Android 14  | 14    | 34  |
-| 2024 | 22 | Android 15  | 15    | 35  |
-| 2025 | 23 | Android 16  | 16    | 36  |
-| 2026 | 24 | Android 17  | 17    | 37  |
+| Year | #  | Name          | Codename            | Major | API |   2026 |
+| ---- | -- | ------------- | ------------------- | ----- | --- | ------ |
+| 2010 | 7  | Android 2.3   | Gingerbread         | 2.3   |  9  |      - |
+| 2011 | 8  | Android 3.2   | Honeycomb           | 3.2   | 13  |      - |
+| 2011 | 9  | Android 4     | Ice Cream Sandwich  | 4     | 14  |      - |
+| 2012 | 10 | Android 4.1   | Jelly Bean          | 4.1   | 16  |      - |
+| 2012 | 10 | Android 4.2   | Jelly Bean          | 4.2   | 17  |      - |
+| 2013 | 10 | Android 4.3   | Jelly Bean          | 4.3   | 18  |      - |
+| 2013 | 10 | Android 4.3.1 | Jelly Bean          | 4.3.1 | 18  |      - |
+| 2013 | 11 | Android 4.4   | KitKat              | 4.4   | 19  |  0.03% |
+| 2014 | 12 | Android 5     | Lollipop            | 5     | 21  |  0.14% |
+| 2015 | 13 | Android 6     | Marshmallow         | 6     | 23  |  0.19% |
+| 2016 | 14 | Android 7     | Nougat              | 7     | 24  |  0.27% |
+| 2017 | 15 | Android 8     | Oreo                | 8     | 26  |  1.06% |
+| 2018 | 16 | Android 9     | Pie                 | 9     | 28  |  1.58% |
+| 2019 | 17 | Android 10    | Quince Tart         | 10    | 29  |  3.12% |
+| 2020 | 18 | Android 11    | Red Velvet Cake     | 11    | 30  |  6.08% |
+| 2021 | 19 | Android 12    | Snow Cone           | 12    | 31  |  7.11% |
+| 2022 | 19 | Android 12L   | Snow Cone v2        | 12.1  | 32  |      - |
+| 2022 | 20 | Android 13    | Tiramisu            | 13    | 33  | 10.98% |
+| 2023 | 21 | Android 14    | Upside Down Cake    | 14    | 34  | 11.45% |
+| 2024 | 22 | Android 15    | Vanilla Ice Cream   | 15    | 35  | 16.33% |
+| 2025 | 23 | Android 16    | Baklava             | 16    | 36  | 37.62% |
+| 2026 | 24 | Android 17    | Cinnamon Bun        | 17    | 37  |  3.98% |
+
+* [Android Version Market Share Worldwide](https://gs.statcounter.com/android-version-market-share/mobile-tablet/worldwide) (Share = Oct 2026, `-` = <0.01% or unlisted)
 
 ### [Partitions](https://source.android.com/devices/bootloader/partitions)
 

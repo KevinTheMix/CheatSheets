@@ -6,7 +6,7 @@
 * [PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings) = list of payloads/bypasses
 * **Bypass company firewall** (2014.04)
   * Remote desktop to home computer
-  * SSH Tunnel + Proxy Socks via PuTTY (_Laurent D'Havé_ & _Frédéric Branger_)
+  * SSH Tunnel + Proxy Socks via PuTTY (*Laurent D'Havé* & *Frédéric Branger*)
   * [Warning: following this advice may get you fired](https://old.reddit.com/r/bestof/comments/d4hl1/comment/c0xibzi)
 * [Sticky notes for pentesting](https://exploit-notes.hdks.org)
 * [Active Directory Security](https://adsecurity.org)
@@ -33,8 +33,8 @@
 * **Ransomware-as-a-Service** (RaaS) = provides ransomware services to affiliates (via subscription fees, gains sharing)
 * **Ransomware** = encrypt and/or steal data for money
 * **Reverse shell** = remote shell execution, from target to attacker thus bypassing protection measures blocking ingoing-only requests (eg firewalls, IDS, IPS)
-  * Precondition = attacker has access to target's shell, launching an interactive `bash` listening to commands served by attacker (via _ncat_)
-* **Rootkit** (_root_ as in Unix superuser account) = embeds itself as part of OS kernel, so near invisible to antiviruses & OS itself (eg TaskManager)
+  * Precondition = attacker has access to target's shell, launching an interactive `bash` listening to commands served by attacker (via *ncat*)
+* **Rootkit** (*root* as in Unix superuser account) = embeds itself as part of OS kernel, so near invisible to antiviruses & OS itself (eg TaskManager)
   * UEFI Secure Boot mitigated this by detecting OS has been modified
 * **Spyware** = advertises, captures, monitors, spies, steals
 * **Supply Chain Attack** = targets less secure (software or hardware) elements in supply chain, ie compromising external providers/manufacturing/distribution of a product by installing malware or hardware spying components
@@ -44,7 +44,7 @@
 * **Vulnerability** = known or unknown flaw/weakness in a system's design/implementation/management that can be exploited
 * **Worm** = standalone program that replicates itself and spreads to other computers
 * **Zero-Day** = vulnerability that has not been detected/published and that attackers may keep to themselves
-  * Eg remote code execution in Java-based logging utility _Apache Log4j_ used on million of servers around the world (introduced in 2013, dormant for 8 years until 2021)
+  * Eg remote code execution in Java-based logging utility *Apache Log4j* used on million of servers around the world (introduced in 2013, dormant for 8 years until 2021)
 
 ### Groups
 
@@ -53,7 +53,7 @@
 * **LockBit** = RaaS
 * **REvil** (aka Sodinokibi) = was a Russia RaaS
 * **Stormous** = pro-russia RaaS (eg Duvel)
-* **Wizard Spider** = Russia-based using _Conti_ malware (now a full-fledged RaaS)
+* **Wizard Spider** = Russia-based using *Conti* malware (now a full-fledged RaaS)
 
 ### Social Engineering
 
@@ -74,7 +74,7 @@ In person or electronic.
 * **Hack This Site** = old
 * **Hacksplaining** = free, comprehensive security training for web developers (fake bank)
 * **OverTheWire** = bandit, natas, …
-* **picoCTF** (_Carnegie Mellong University_) = CTFs courses & competitions
+* **picoCTF** (*Carnegie Mellong University*) = CTFs courses & competitions
 * **TryHackMe** = CTFs (more beginner friendly than HTB)
 * **WebGoat** (OWASP) = deliberately insecure application to test for vulnerabilities
 
@@ -83,15 +83,15 @@ In person or electronic.
 * [Bash Bunny](https://shop.hak5.org/products/bash-bunny) = multi-vector payload attacks USB Key ($200)
 * **DartComet-RAT** (Remote Access Trojan) = keylogger
 * **Dirty COW** (Copy-On-Write) = copy-on-write vulnerability existing in older (created before 2018) Linux kernels (eg Android earlier than version 7 Nougat)
-* **KON-BOOT** = Bypass Windows/Mac logon (_active_)
-* **Pegasus** = spyware designed to be covertly & remotely installed on iOS/Android mobile phones, developed by Israeli cyber-arms company _NSO Group_
+* **KON-BOOT** = Bypass Windows/Mac logon (*active*)
+* **Pegasus** = spyware designed to be covertly & remotely installed on iOS/Android mobile phones, developed by Israeli cyber-arms company *NSO Group*
 * **PwnKit** = Linux systems' `pkexec` utilty privilege escalation vulnerability
 * **Teensy** = a programmable USB board that can spoof any USB type of device (eg emulate a keyboard)
 
 ### Cracking
 
 * **Cain & Abel** = password cracking/recovery
-* **ihashgpu** = Hash (MD4, MD5, SHA1) cracking CLI (_discontinued_)
+* **ihashgpu** = Hash (MD4, MD5, SHA1) cracking CLI (*discontinued*)
 * **hashcat** = fastest hash/password cracking & recovery, (CPU & GPU) hardware-accelerated, works on 200+ hash algos
 * **Hydra** (THC Hydra) = parallelized login cracking (brute force, dictionary attack)
 * [John the Ripper](http://www.openwall.com/john) = FOSS fast password cracker, brute force, common passwords, dic attacks, 20+ (human) languages
@@ -119,20 +119,20 @@ In person or electronic.
   * `ndiff` = compare scan results
   * `ning` = packet generation & response analysis
   * **Zenmap** = result viewer GUI
-* **NukeNabber** = commonly attacked TCP/UDP ports listener (Windows XP _discontinued_)
+* **NukeNabber** = commonly attacked TCP/UDP ports listener (Windows XP *discontinued*)
 * **PCAP** (Packet Capture) = API for capturing network traffic (packet sniffing)
   * **libpcap** = Unix implementation of pcap API (base driver)
-  * **WinPcap** = Windows port of libpcap (_discontinued_)
+  * **WinPcap** = Windows port of libpcap (*discontinued*)
   * **Npcap** = Windows 7 port of libpcap
-* **Pwnagotchi** (for _Raspberry Pi Zero W_) = WiFi cracking (via AI + bettercap, [Guide](https://www.reddit.com/r/pwnagotchi/comments/sl2rv1/guerrilla_guide_to_pwnagotchi_v1552022))
-* **tcpdump** = Unix Packet analyzer (uses _libcap_, ie privilege controls)
+* **Pwnagotchi** (for *Raspberry Pi Zero W*) = WiFi cracking (via AI + bettercap, [Guide](https://www.reddit.com/r/pwnagotchi/comments/sl2rv1/guerrilla_guide_to_pwnagotchi_v1552022))
+* **tcpdump** = Unix Packet analyzer (uses *libcap*, ie privilege controls)
 * **TMeter** = free network packet traffic analyzer with built-in firewall & NAT capabilities
 * **WiFi Pineapple** = pentesting router (monitoring, AP spoofing, targeted captive portals, [Guide](https://www.troyhunt.com/the-beginners-guide-to-breaking-website))
 * **WinDump** = Windows port of tcpdump (uses WinPcap)
 
 ### Pentesting & Vulnerabilities
 
-* **Burp Suite** (by _PortSwigger_) = proprietary software for security assessment & penetration testing (eg brute-force boolean SQLi)
+* **Burp Suite** (by *PortSwigger*) = proprietary software for security assessment & penetration testing (eg brute-force boolean SQLi)
 * **Kali Linux** = professional penetration testing (ie hacking) OS, with built-in [tools](https://www.kali.org/tools)
 * **Metasploit** = security testing & vulnerability management framework, provides information about find/exploit/validate vulnerabilities & pentesting, security auditing
 * **Nessus** = (OS, network, hypervisors, DB, web servers) vulnerability scanner, plugins written in the Nessus Attack Scripting (NAS) language

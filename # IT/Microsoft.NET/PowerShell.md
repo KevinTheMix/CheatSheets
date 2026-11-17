@@ -16,6 +16,7 @@
 * `Remove-Item <path1>, <path2>` (aka `rm`, `del`) = delete files/folders (wildcards allowed)
   * `-Force` = also delete hidden/read-only items
   * `-Recurse` = include folder content without confirmation prompt
+* `Resolve-DnsName <host>` = query DNS records for a host (eg IP addresses)
 * `Select-Object <prop1>, <prop2>` (aka `select`) = pick properties from piped objects (`*` for all)
   * `-ExpandProperty <prop>` = output property value itself instead of object wrapping it
   * `-First <n>` / `-Last <n>` = keep only first/last n objects

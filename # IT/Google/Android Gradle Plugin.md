@@ -34,6 +34,8 @@ AGP registers Android-specific tasks, and each task calls a real tool (Java and/
 * **D8** = dexer converting Java bytecode (*.class*) to DEX (Dalvik Executable, executed by ART), replacing DX
 * **Dexing** = converting Java bytecode (*.class*) to DEX (*classes.dex*), done by D8 (or R8 when shrinking)
   * Single DEX file is limited to 65,536 methods: beyond that, code is split into several files (multidex, native since `minSdk` 21)
+* **DSL** (Domain-Specific Language) = `android { }` block syntax in build files (Groovy/Kotlin script) configuring AGP (eg `compileSdk`, `buildTypes`)
+  * AGP 9.0 removed old DSL interfaces, only new ones remain (can be opted out until AGP 10.0 drops via `android.newDsl=false` in *gradle.properties*)
 * **Dynamic Feature Module** = module delivered on demand via an *.aab* (plugin `com.android.dynamic-feature`)
 * **Flavor** (product flavor) = variant dimension for different versions of an app (eg `free`/`paid`, `dev`/`prod`)
   * A **build variant** is a build type × flavor(s) combination (eg `devDebug`), each with its own tasks (eg `assembleDevDebug`)

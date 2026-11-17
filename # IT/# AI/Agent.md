@@ -1,8 +1,11 @@
-# Large Language Model
+# Agent
+
+Agent = LLM + persistent local memory/storage + tools to give it capabilities + a loop-like process to "run" it and solve complex tasks.
 
 ## Quick Tips
 
 * Don't create skills yourself
+* Configure Agents with specific subset of tools
 * Provide concrete examples rather than abstract principles (show, don't tell)
 * Submit whole screenshots instead of painfully describing UI for troubleshooting
 * *Let ChatGPT write it*, *Shit in, shit out*, *How hard can it be?* -- William Verhaeghe
@@ -10,6 +13,7 @@
 * Product-specific notes: [Claude](Claude.md), [GitHub Copilot](GitHub%20Copilot.md)
 * Architecture: IDE extension <-> harness (MCP host, with one MCP client per MCP server) <-> LLM
   * LLM only requests tool calls via (structured JSON) text, the harness executes them (built-in tools or MCP)
+* Sub-agents help with context isolation (do not pollute parent), parallelism, independent review (fresh unbiased context), specialization (eg narrower toolset), but add overhead for simple tasks or continous reasoning chains
 
 ## Glossary
 
@@ -31,6 +35,7 @@
 * **GPT** (Generative Pre-trained Transformer) = deep learning generative large language model created by OpenAI that can process complex questions & generate text/code
 * **Harness** = software layer that runs an agent session & communicates with an LLM (usually via an HTTP API carrying structured JSON): builds context, aggregate availables tools (built-in & MCP), executes tool calls & loops until done, handles approvals & session state
 * **Hook** = command executed at a configured point in an agent lifecycle (eg before/after a tool call)
+* **Large Language Model** (LLM)
 * **Model Context Protocol** (MCP, originally created by Anthropic) = client-server protocol standardizing how AI applications connect to external capabilities
   * **MCP Client** = component inside the host holding a 1:1 connection to one server (JSON-RPC over stdio/HTTP): lists its capabilities (`tools/list`) & forwards the model's tool calls (`tools/call`)
     * Client configuration is stored in JSON files (*%USERPROFILE%\.copilot\mcp-config.json* for VS Code, *%APPDATA%\Local\github-copilot\intellij\mcp.json* for PyCharm)

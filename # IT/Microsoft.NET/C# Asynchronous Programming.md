@@ -1,36 +1,49 @@
 # Asynchronous Programming
 
-Asynchronous programming enables I/O-bound operations to yield control, up to any parent caller that does not require their immediate result and can continue running in the meantime.
+Asynchronous programming enables I/O-bound operations to yield control, up to any parent caller that does not require their immediate result and can continue running in the meantime. That design is especially instrumental in keeping the GUI responsive and not freezing.
 **Tasks** are the basic building block of concurrent programming in C#.
 
-## Explanation
+## Quick Tips
 
-The `async` & `await` keywords abstract much of the complexity of breaking the synchronicity of the flow and resuminging it eventually **synchronously** via callback.
-Note that it all happens **synchronously** (it is not concurrent):
+* Encountering an (incomplete) await, a thread stops then & there, leaves a bookmark and return to thread pool to chill or carry on other work
+  * Later on, any suitable thread can pick up that bookmark & continue
+* Top caller can be ASP.NET Core request handling, UI event handler (WPF, WinForms, MAUI), background service, Main() itself (if defined *async*)
+* `async` & `await` abstract complexity of breaking flow synchronicity and eventually resuming it **synchronously** (via callback)
+* Note that it all happens **synchronously** (it is not concurrent):
+  * The passing of control back to the parent is performed **synchronously** (so was calling the `async` child method)
+  * The resuming of control is performed via **synchronous** event callback (or various mechanisms eg CPU interrupt, OS Proc Call to notify completion)
+    * Since we use callbacks, we may no longer be in the same original thread, so we need to address **thread affinity**
+  * => Contrary to popular belief, [async-await does not create any additional threads](https://stackoverflow.com/q/37419572)
+* Note that [in Windows, all I/O is asynchronous; synchronous APIs are just a convenient abstraction](https://stackoverflow.com/a/12484535).
 
-* The passing of control back to the parent is performed **synchronously** (so was calling the `async` child method)
-* The resuming of control is performed via **synchronous** event callback (or various mechanisms eg CPU interrupt, OS Proc Call to notify completion)
-  * Since we use callbacks, we may no longer be in the same original thread, so we need to address **thread affinity**
-* => Contrary to popular belief, [async-await does not create any additional threads](https://stackoverflow.com/q/37419572)
+### Links
 
-That design is especially instrumental in keeping the GUI responsive and not freezing.
-Note that [in Windows, all I/O is asynchronous; synchronous APIs are just a convenient abstraction](https://stackoverflow.com/a/12484535).
+* [Microsoft - Asynchronous programming scenarios](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async)
+* [Microsoft - Best Practices in Asynchronous Programming](https://msdn.microsoft.com/en-us/magazine/jj991977.aspx)
+  * **Avoid async void**, **Async all the way**, `ConfigureAwait(false)`, *A Common Deadlock Problem When Blocking on Async Code*
+  * Using `Task.Result/Wait()` in **synchronous** code causes it to fully pause/block its (Synchronization)Context, so when inner **async** await (callback part) resumes, it can't
+* [Stephen Cleary - There is no thread](http://blog.stephencleary.com/2013/11/there-is-no-thread.html)
+* [Stephen Cleary - Don't block on async code](http://blog.stephencleary.com/2012/07/dont-block-on-async-code.html)
+* [Stephen Cleary - SynchronizationContext](https://docs.microsoft.com/en-us/archive/msdn-magazine/2011/february/msdn-magazine-parallel-computing-it-s-all-about-the-synchronizationcontext)
+* [Stephen Toub - Deadlocks](https://devblogs.microsoft.com/pfxteam/await-and-ui-and-deadlocks-oh-my)
+* [.NET Parallel Programming](https://devblogs.microsoft.com/pfxteam) (@Stephen Toub)
+* [Use ConfigureAwait(false)](https://medium.com/bynder-tech/c-why-you-should-use-configureawait-false-in-your-library-code-d7837dce3d7f)
+  * **Deadlocks**, `SynchronizationContext`, `ConfigureAwait(false)`
 
 ## Glossary
 
 * `async` = defines an asynchronous method which returns a `Task<T>` immediately but whose actual result will be available later
-  * The entire call stack must be marked `async`, up to an (`async void`) event handler, _main_/Domain, `Task.Run()`, a WebAPI controller
+  * The entire call stack must be marked `async`, up to an (`async void`) event handler, *main*/Domain, `Task.Run()`, a WebAPI controller
   * Never define `async void` methods, unless [subscribing to events](https://stackoverflow.com/a/38241969/3559724)
 * `await` = suspends current context & non-blockingly yields control back to caller whilst waiting for an asynchronous operation to conclude (a Task result)
-  * If awaited task is already completed (or is _extremely fast_), current context is not captured and execution continues immediately/synchronously
+  * If awaited task is already completed (or is *extremely fast*), current context is not captured and execution continues immediately/synchronously
   * When a task completes, its captured context is restored and remaining code is executed within that context
   * There may be no statements left in its method, but it **still needs execution time to exit**, hence potential deadlocks if that captured context is blocking
   * Any code before first await is executed **synchronously** as (background) asynchrony only starts then (compiler will complain if no awaits are found, making method synchronous instead)
   * Forgetting an `await` when calling an `async` method will start that method but jump to next statement immediately (ie fire & forget, similar to `Task.Run()` but less deliberate)
   * Forgetting all `await`s within an `async` method will run its bodys synchronously until completion but still returns a `Task`
   * [A method with multiple await statements will pause itself and resume its caller multiple times](https://stackoverflow.com/a/18445829)
-* `lock` = renders a portion of code atomic, providing thread-safety for sets of indivisible operations in a _concurrent_ context (or usually more complex shared memory configuration)
-
+* `lock` = renders a portion of code atomic, providing thread-safety for sets of indivisible operations in a *concurrent* context (or usually more complex shared memory configuration)
 * **AggregateException** = multiple exceptions into a single exception instance
 * **Asynchrony** = occurrence of (concurrent) events independent of the main program flow and ways to deal with such events (asynchronously as to not block the program)
 when CPU control can be yielded while a low-level time-consuming operation is being executed, eg to let GUI refresh reactively/responsively during event handling (eg button click)
@@ -44,7 +57,7 @@ when CPU control can be yielded while a low-level time-consuming operation is be
 * **IO-bound** = a thread that spends most of its time waiting for (usually low-level) I/O operations (eg (web) service call, Windows I/O call, DB fetching) to complete
 * [Message loop in Microsoft Windows](https://en.wikipedia.org/wiki/Message_loop_in_Microsoft_Windows)
 * **Multitasking** = concurrent (but not necessarily parallel) execution of multiple tasks over a certain period of time
-* **Multithreading** = concurrent execution of two or more threads (within the same process) _on a single CPU (or CPU core)_, for better responsiveness & resource utilization
+* **Multithreading** = concurrent execution of two or more threads (within the same process) *on a single CPU (or CPU core)*, for better responsiveness & resource utilization
 * **Mutual Exclusion** = concurrency control in which one thread cannot enter a critical section while another concurrent thread is already accessing it
 * **Parallel computing** = when multiple operations can be executed at the exact same instant, enabled by multi-core CPUs (& supercomputers), impossible on a single core CPU
   * Can be used to speed up a treatment that can be neatly broken down into parts, or even perform **speculative multithreading**
@@ -63,47 +76,33 @@ when CPU control can be yielded while a low-level time-consuming operation is be
 * **Thread** = a smaller unit of execution started by/within a **process**, sharing memory with other threads
     Threads are the basic building block of concurrent programming in C#
   * **Foreground Thread** = maintains the application alive while it is running
-  * **Background Thread** = terminates abruptly as soon as the application closes (default, unless _IsBackground_ property is modified)
+  * **Background Thread** = terminates abruptly as soon as the application closes (default, unless *IsBackground* property is modified)
 * **Thread Affinity** = a constraint placed on UI elements which can only be accessed/modified from the thread that created them
   * In WPF, `Dispatcher.BeginInvoke(delegate)` queues a (possibly non-UI) delegate for execution on the UI thread
   * IN .NET, `SynchronizationContext` send/post methods forward the execution of a delegate to a specific SynchronizationContext
 * **Thread Pool** = a set of usable & recyclable threads usable within a process that can be allocated to run incoming queued up operations
-  * This design alleviates the need to create and destroy Threads on demand, a costly operation when it's done with too high a frequence, by recycling a collection of usable pre-instantiated Threads
+  * This design alleviates costly on-demand threads creation/destruction by recycling a collection of ready-to-go pre-instantiated Threads
 * **UI Thread**
   * In Winform, the thread on which the first form is created is known as the UI thread
   * UI-based applications (WinForms, WPF, Silverlight) all place restriction on which threads can access/modify UI controls (ie the ones that created them)
   * Not a 'special' thread (although not in the pool) but is dedicated to reacting to UI events (by reading a message loop infinitely) & repaint stuff accordingly
 
-## Links
-
-* [Microsoft - Asynchronous programming scenarios](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async)
-* [Microsoft - Best Practices in Asynchronous Programming](https://msdn.microsoft.com/en-us/magazine/jj991977.aspx)
-  * **Avoid async void**, **Async all the way**, `ConfigureAwait(false)`, _A Common Deadlock Problem When Blocking on Async Code_
-  * Using `Task.Result/Wait()` in **synchronous** code causes it to fully pause/block its (Synchronization)Context, so when inner **async** await (callback part) resumes, it can't
-* [Stephen Cleary - There is no thread](http://blog.stephencleary.com/2013/11/there-is-no-thread.html)
-* [Stephen Cleary - Don't block on async code](http://blog.stephencleary.com/2012/07/dont-block-on-async-code.html)
-* [Stephen Cleary - SynchronizationContext](https://docs.microsoft.com/en-us/archive/msdn-magazine/2011/february/msdn-magazine-parallel-computing-it-s-all-about-the-synchronizationcontext)
-* [Stephen Toub - Deadlocks](https://devblogs.microsoft.com/pfxteam/await-and-ui-and-deadlocks-oh-my)
-* [.NET Parallel Programming](https://devblogs.microsoft.com/pfxteam) (@Stephen Toub)
-* [Use ConfigureAwait(false)](https://medium.com/bynder-tech/c-why-you-should-use-configureawait-false-in-your-library-code-d7837dce3d7f)
-  * **Deadlocks**, `SynchronizationContext`, `ConfigureAwait(false)`
-
 ## API
 
 * `await task.Delay(1000)` = resume after one second in the capture context
 * `await Task.Delay(0)` = [not actually asynchronous](https://stackoverflow.com/a/33407181/3559724) as it resolves immediately
-* `await Task.FromResult(koko)` = call _sync_ code (or already available async data) from _async_ method
-  * Eg: getting a value from a **ConcurrentDictionary** in an _async_ method, if the key is already present, _return_ `Task.FromResult()` immediately
+* `await Task.FromResult(koko)` = call *sync* code (or already available async data) from *async* method
+  * Eg: getting a value from a **ConcurrentDictionary** in an *async* method, if the key is already present, *return* `Task.FromResult()` immediately
 * `await Task.Yield()` = voluntarily yields control to calling thread's scheduler
 * `await foreach (var item in asyncSequence)`
   * Eg read from a gRPC stream `await foreach (var response in call.ResponseStream.ReadAllAsync()) { … }`
 
 * `Task.Run()`
 
-* `task.Wait()` = blocking call making the completion of a task _synchronous_ (and returns its result), throws **AggregateException**
+* `task.Wait()` = blocking call making the completion of a task *synchronous* (and returns its result), throws **AggregateException**
 * `task.Result` = blocking call only if the task is not already completed, otherwise return immediately without blocking
 * `task.ConfigureAwait(continueOnCapturedContext: true|false)` = controls context in which continuation/resuming of a task is executed
-  * `task.ConfigureAwait(false)` = often used in UI applications to avoid deadlocks, letting framework know it is safe to execute continuation on any available thread from pool rather than original context (hence _not capturing_ UI context)
+  * `task.ConfigureAwait(false)` = often used in UI applications to avoid deadlocks, letting framework know it is safe to execute continuation on any available thread from pool rather than original context (hence *not capturing* UI context)
   * Configuring this in callee does not affect caller (those two methods' contexts are independant)
   * It can also be useful when gradually converting an application from synchronous to asynchronous
   * It won't actually be called if task completes too quickly

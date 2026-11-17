@@ -244,7 +244,7 @@ Commands are fully case-insensitive.
   * `/J` = directory junction (ie a symbolic link for directories)
   * `/H` = hard link (not symbolic)
 * `netstat - ano` = affiche les connexions réseaux actives
-* `nslookup` = DNS lookup (eg `nslookup example.com`)
+* `nslookup (<host|ip> (<dns resolver up))` = query any (CNAME, NS, SOA, TXT) DNS records (interactve mode without arguments)
 * `pause`
 * `powercfg` = power system settings (eg `/A` lists available sleep states)
 * `rd` or `rmdir` = remove directory

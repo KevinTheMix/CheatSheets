@@ -5,6 +5,7 @@ GitHub's AI development platform and agent runtimes, connecting IDE/CLI experien
 ## Quick Tips
 
 * Use *Generate Commit Message* in VS Code
+* In VS Code, setting *Chat: Default Configuration* controls default mode & permissions for new chats
 * Context/customizations are normally scoped to the current folder/workspace (discovery can be enabled for monorepos)
 * **Try asking agents to work as experts** (which they are), as that apparently activates deep neurons and surfaces their expertise
 * GPT is supposedly better for functional specs, Claude for architecture/technical specs (but model strengths and availability evolve)
@@ -30,6 +31,8 @@ GitHub's AI development platform and agent runtimes, connecting IDE/CLI experien
 * **Prompt file** = reusable Copilot *.prompt.md* prompt invoked manually; supported by the Local harness (deprecated in favor of skills for Agent Host sessions)
 * **Sandboxing** = security mechanism that limits what an AI agent can access or modify on your machine while it runs commands
 * **Slash command** = Copilot command entered with `/`; it may invoke a built-in action, prompt or skill (eg `/create-agent` and `/yolo` are commands, not skills)
+* [Space](https://docs.github.com/en/copilot/concepts/prompting-and-context/spaces) = curated context (repos, code, PRs, issues, notes, images, uploads) that grounds Copilot Chat answers on GitHub, shareable with team/public
+  * GitHub sources stay in sync, usable from an IDE via GitHub MCP server
 * [Tool](https://code.visualstudio.com/docs/agents/reference/tools-reference) = toggable agent capability, of 3 types:
   * *Built-in* = provided by VS Code/Copilot (eg access devtools, browse web, `edit` files/folders, execute code, manage todo, read, search, `agent` toolset to delegate tasks to subagents)
   * *MCP* = provided by a Model Context Protocol server (eg Pylance MCP Server, GitHub, Playwright, databases, external APIs)
@@ -44,7 +47,7 @@ GitHub's AI development platform and agent runtimes, connecting IDE/CLI experien
 * `Ctrl + Shift + I` = switch to Agent mode
 * Use the Command Palette or configure a keybinding for the Agents Window and switching agent roles; bindings can vary by version/profile
 
-### Chat
+### Chat (IDE-integrated)
 
 * `Alt` = toggle **Send to New Chat**
 * `Ctrl + :` = **Add Context…** to attach extra information (eg file/folder, instruction, screenshot, source control, lint problems, chat session, PR, tools)
@@ -70,16 +73,24 @@ GitHub's AI development platform and agent runtimes, connecting IDE/CLI experien
 
 ## Copilot CLI
 
+* Terminal AI agent (`copilot`) to answer questions, write/debug code & interact with GitHub.com (eg make changes & create a pull request)
 * `copilot --yolo` = start a Copilot CLI session with all permissions pre-approved (OS permissions, policies, explicit deny rules and sandboxing can still restrict it)
 
 * `/fleet` = enable parallel sub-agents
 * `/init` = explore a repository then initialize/customize its AI capabilities (eg create/update an *AGENTS.md* file)
+* `/mcp` = manage MCP server configuration
+  * `disable`/`enable` = disable/re-enable a server
+  * `list` = server list
+  * `reload` = reload all server configurations
+  * `show` = show details for a server
 * `/remote <on|off>` = access sessions remotely (eg from phone)
 * `/sandbox (policy)`
 
 ## Customization Prompts
 
 * Generate multiple sub-agents for architecture, development, functional (product owner), an orchestrator (via prompts or `/create-agent` command in Local agent session)
+* Evaluate harness load = *I feel like I've overconfigured my harness with too many instructions & tool definitions, but I've cleaned up lots of them. Since this is the first prompt of a new discussion, can you tell me whether we're leaning on the heavy side for new context?*
+
 * Generate project-wide instructions in *.github/copilot-instructions.md* and other relevant documentation files (personal always-on Copilot instructions use *~/.copilot/copilot-instructions.md*):
 
     Help me setup the global copilot instruction file for my project
